@@ -2,7 +2,7 @@
 id: ALEPH-17
 status: dsh实测有问题
 type: 缺陷
-remote_issue: null
+remote_issue: https://github.com/hapenia/aleph-research/issues/23
 pull_request: null
 ---
 
@@ -16,7 +16,7 @@ Host 调用项目的评估命令，通过 `ALEPH_SOLUTION_DIR` 读取研究代�
 
 现有超时处理只直接约束 Host 启动的进程，没有终止完整进程树的处理。超时错误发生后，Host 进入清理流程，强制移除本次创建的临时 Git 工作区。若工作进程没有随着入口进程退出，实际评分仍可能运行，而读取的研究目录已经被删除；研究代理自有工作区会保留，但遗留计算仍可能继续。建议优先级为 P2。
 
-最新上游 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 已完成正式核查。67 个有效自动行为点中，60 个通过、7 个失败；实际 DSH 的 67 项观察全部符合复现条件。远端议题及拉取请求链接待补充。
+最新上游 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 已完成正式核查。67 个有效自动行为点中，60 个通过、7 个失败；实际 DSH 的 67 项观察全部符合复现条件。上游议题为 [#23](https://github.com/hapenia/aleph-research/issues/23)，修复拉取请求待补充。
 
 ## 使用例子
 
@@ -113,3 +113,8 @@ python3 tests/issues/dsh/current-evaluation-timeout.py --source /home/paulus-cha
 原始记录见[实际 DSH 输出](evidence/17-current-real-dsh-evaluation-timeout.txt)、[完整进程与时间证据](evidence/17-current-real-dsh-evaluation-timeout.json)和[实际 Host 期限匹配](evidence/17-current-real-dsh-adapter.jsonl)。夹具最后按进程启动身份清理全部活跃评分进程，各场景 `remainingActive` 均为空；隔离 Host 的进程 `290792` 已退出，进程编号不存在。
 
 早期缺少产品测试加载器、初始字段读取与快速成功观察时机错误均单独保留为测试脚本调整记录，没有计作产品失败。实际 DSH 首次读取评估历史时使用了错误的公共快照层级，已在正式运行前修正为 `project.evaluations`；该中断另存于 `17-current-real-dsh-shape-attempt.*`。最终实际脚本完整通过。
+
+
+## 远端发布
+
+B 已将问题上传至上游 [#23](https://github.com/hapenia/aleph-research/issues/23)，发布后逐字核验正文并确认议题开放。固定原始证据提交为 `aa6b230333eebf55253ca6fff423a91ea24866cf`。远端正文已移除 YAML 管理头及前导管理注释，本地完整保留。修复实现与后续验收尚待完成。
