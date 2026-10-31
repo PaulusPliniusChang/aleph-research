@@ -1,0 +1,559 @@
+# Migration to the project, mission and batch architecture
+
+## Review status
+
+This migration note distinguishes mainline
+`785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` from independently tested repair
+branches. Its snapshot is 2026-10-31, after all 16 existing independent issues
+completed current-architecture investigation with automated behavior checks
+and actual DSH verification. Every automated suite contains at least 30 distinct
+effective behavior points; parent test containers do not count as points.
+
+Completed investigation does not mean every issue is fixed. PR24 through PR31
+are published and unmerged; PR30 integrates the earlier PR26 controls and PR29
+restart follow-up. PR31 supplies the independently accepted Composer Infra-tool
+permission repair for #9. The descriptions below refer to
+mainline unless a section explicitly names a repair. Historical evidence cannot
+be presented as a result for a replacement implementation.
+
+The immutable [full review and raw evidence](https://github.com/PaulusPliniusChang/aleph-research/tree/f29705de3c32efb04512c720bc8b8799b4559e90/tests/issues)
+records all 16 dispositions and the published repair acceptances used here.
+
+The [upstream review](STATUS.md#upstream-review) says that earlier pull requests
+were closed because their base preceded the current refactor. Accepted behavior
+was reimplemented in the current tree. This does not mean that the original pull
+requests were merged, or that all previously collected evidence applies to the
+replacement implementation.
+
+Source inspection, an upstream issue closure, a scope decision, a reproduced
+defect, a tested fix and an upstream merge are different outcomes. Local manual
+status fields can preserve a historical disposition; this document does not
+change those fields or use them as proof of a current fix.
+
+See [architecture.md](architecture.md) and the [README](../README.md) for the
+current project model. Historical reports use the earlier campaign model; their
+triggers must be translated into current operations before current behavior can
+be judged. ALEPH identifiers below are local document identifiers; GitHub issue
+and pull-request numbers belong to separate number sequences. ALEPH-03 was
+merged into ALEPH-02 and is not a seventeenth independent issue.
+
+## Existing issue disposition
+
+The current-investigation column refers to `785a7e9`, not the earlier
+`66885994` implementation. Passing observations in a defect-reproduction run
+confirm the defect, while passing repair assertions confirm only the tested
+repair source and range.
+
+| Local record | Upstream issue | Mainline change or scope decision | Current investigation and next action |
+| --- | --- | --- | --- |
+| ALEPH-01 | [#3](https://github.com/hapenia/aleph-research/issues/3) | Upstream defers the old multi-machine capacity requirement, but mainline still admits overlapping batches on one local machine. | Baseline: 54 automatic points, 5 failed protection assertions; 66 actual observations reproduce duplicate computation. PR26 passed 54 automatic and 59 actual protection points; PR30 now integrates its guard. Multi-machine requirements remain outside that repair. |
+| ALEPH-02, including former ALEPH-03 | [#4](https://github.com/hapenia/aleph-research/issues/4) | Numerical campaign budget fields were removed; upstream defers numerical budgets to the multi-machine scope. | Current applicability passed 30 automatic and 30 actual points. Approval and machine reservation work in the tested range; neither enforces money or accumulated-compute quotas. Record the removed contract without claiming a budget implementation. |
+| ALEPH-04 | [#5](https://github.com/hapenia/aleph-research/issues/5) | Evaluation history, `best` and explicit selection replace automatic `sota/main` promotion. | No old promotion race reproduced in the tested single-Host path. The shared #5/#11 suite passed 172 automatic and 172 actual points, uniquely allocated as 21 to #5 and 151 to #11. Multi-machine SOTA remains outside this evidence. |
+| ALEPH-05 | [#6](https://github.com/hapenia/aleph-research/issues/6) | Mainline startup reconciliation leaves live-interruption follow-up and forming ownership residuals. Old PR13 was closed without merging. | PR29 passed 66 independent automatic and 66 actual points. PR30 integrates it with controls and passed 105 automatic and 105 actual points. Ordinary restart preserves live computation; explicit cancellation uses the stop protocol. |
+| ALEPH-06 | [#7](https://github.com/hapenia/aleph-research/issues/7) | Mainline independently adopted expected-tip result delivery. Old PR21 was closed without merging. | Current mainline passed 159 automatic and 149 actual points: valid pre-batch changes are captured; post-batch branch advancement is safely refused during delivery and later commits remain. No current defect reproduced in this range. |
+| ALEPH-07 | [#8](https://github.com/hapenia/aleph-research/issues/8) | Research objectives, prompts and mission contents replace L0–L3 labels. | Current context propagation passed 34 automatic and 34 actual points. Updated objectives reach new researchers without rewriting existing activation context. The shared #4/#8 suite has 64 points; old strategy labels are not restored. |
+| ALEPH-08 | [#9](https://github.com/hapenia/aleph-research/issues/9) | Persistent Composer receives queue notifications, but its actual mainline tool list omits `aleph_run_infra`. | Baseline: 40 automatic points with 1 failure; 40 actual points with 7 failures. PR31's minimal role-permission repair passed 38 new effective product points, 40 independent automatic points and 40 actual points. Actual Composer ran direct, Infra and later queued work. PR31 is published and unmerged; busy-machine preparation and full multi-machine behavior remain unverified. |
+| ALEPH-09 | [#10](https://github.com/hapenia/aleph-research/issues/10) | Mainline still lacks durable project controls. | PR26 passed 75 independent automatic points, 77 actual observations and 12 restart persistence checks shared with #14. PR30 integrates controls with non-destructive ordinary restart and passed 105 automatic and 105 actual points. Both are published and unmerged. |
+| ALEPH-10 | [#11](https://github.com/hapenia/aleph-research/issues/11) | History and report access work in the tested range; mainline lacks automatic completion feedback to the parent. | History checks contribute 151 uniquely allocated points to the shared 172-point suite. PR28's native parent-completion notification passed 58 independent automatic and 51 actual points. It does not add persistent retry when the original parent is unavailable. |
+| ALEPH-11 | [#12](https://github.com/hapenia/aleph-research/issues/12) | Upstream independently added the operator `select-best` route, but moving a checked-out branch leaves its files and index at a different revision. | Current residual confirmed by 95 effective automatic points and 95 actual defect/control observations. C's repair passed 85 product items; B's independent automatic and actual DSH repair acceptance each passed 116 points. PR27 is published at `eb386d8` and unmerged. |
+| ALEPH-12 | [#1](https://github.com/hapenia/aleph-research/issues/1) | Mainline independently adopted the no-project empty state. Old PR2 was closed without merging. | Current automatic 37 and actual browser 41 points passed: initial load, refresh, reopening, narrow viewport, project creation, polling and error recovery. No original defect reproduced; wide project tables are outside the scope. |
+| ALEPH-13 | [#14](https://github.com/hapenia/aleph-research/issues/14) | Mainline role exclusion starts after the destructive directory-preparation window. | Baseline: 36 automatic points with 4 failures and actual controlled Git/DSH reproduction. PR26 reserves execution before directory changes; acceptance counts are shared with #10. PR30 integrates that protection and restart behavior. |
+| ALEPH-14 | [#16](https://github.com/hapenia/aleph-research/issues/16) | Mainline independently adopted activation-specific settlement. Old PR18 was closed without merging. | Current automatic 50 and actual 31 points passed: an earlier completion leaves the other researcher running with its own summary. Failure/isolation variants have automatic coverage; actual overlap uses successful completions. Parent notification belongs to #11. |
+| ALEPH-15 | [#19](https://github.com/hapenia/aleph-research/issues/19) | Upstream independently added pinned report commits, independent refs and branch compare-and-swap. Old PR20 was closed without merging, but owned-worktree input can still change independently of the recorded commit. | Current residual confirmed. The user chose commit-before-evaluation and a fixed snapshot. PR25 now includes this repair at `95a5d61`; B's independent input acceptance passed 146 automatic points and 146 actual observations, with separate timeout integration acceptance of 69 automatic and 69 actual points. PR25 is published and unmerged. |
+| ALEPH-16 | [#22](https://github.com/hapenia/aleph-research/issues/22) | Mainline client reads the wrong location for agent records. | Current defect confirmed. PR24 fixes the snapshot input; B's independent automated and actual DSH browser repair acceptance passed. PR24 is published and unmerged. |
+| ALEPH-17 | [#23](https://github.com/hapenia/aleph-research/issues/23) | Mainline timeout can leave evaluation descendants alive while deleting the temporary input directory. | Current defect confirmed. Published PR25 fixes evaluation process-group cleanup and now includes #19 at `95a5d61`. B's combined-head timeout integration acceptance passed 69 automatic and 69 actual points. Earlier `4057d00` results remain historical evidence for that earlier head. |
+
+## Published repairs
+
+These pull requests are separate branches, not a combined release. None is
+recorded here as merged. PR30 integrates PR26 and PR29; their earlier commits
+remain available as independently tested history. Other repair combinations
+have not been claimed as one tested release.
+
+| Repair | Published source | Acceptance and limits |
+| --- | --- | --- |
+| [PR24](https://github.com/hapenia/aleph-research/pull/24), #22 | `693f966`, `fix/aleph-16-console-agent-records` | B's independent automated checks passed. Actual DSH browser acceptance passed 23 observations, including a real researcher, completion polling, reload and desktop/mobile views. This repairs agent-record display; it does not redesign the wide table. Evidence is fixed at [`0ae4e12`](https://github.com/PaulusPliniusChang/aleph-research/tree/0ae4e12/tests/issues). |
+| [PR25](https://github.com/hapenia/aleph-research/pull/25), #19 and #23 | `95a5d61dd810659fec3df65323ce31a877429771`, `fix/aleph-17-evaluation-processes` | Product tests passed 152 Node items, including 48 new effective input points and 88 existing process points. B's independent input acceptance passed 146 automatic points and 146 actual observations; separate timeout integration acceptance passed 69 automatic and 69 actual points. Selected dirty source is rejected with paths and commit-before-retry guidance; accepted input uses a detached snapshot. Evaluation confirms ordinary owned process-group descendants have stopped before removing the snapshot. Observation uncertainty retains the directory and blocks fresh evaluation until cleanup succeeds. These are shared counts for the combined head, not separate counts per issue. Evidence is fixed at [`5704aa8270d01f73f8da49224e4e16709130386a`](https://github.com/PaulusPliniusChang/aleph-research/tree/5704aa8270d01f73f8da49224e4e16709130386a/tests/issues). |
+| [PR26](https://github.com/hapenia/aleph-research/pull/26), #10 and #14 | `b1f9f048ae8cc7569e6a9e36dcafe119f2c02783`, `fix/aleph-09-project-controls` | Product tests passed 167 Node items; B's independent automated checks passed 75 effective points; actual DSH passed 77 observations, with 12 additional Host-restart persistence checks. These are combined-suite counts, not separate counts for each issue. Execution reservation precedes Infra directory preparation. Exact activation disposal and owned process-group exit are confirmed before successful cancellation and machine release. |
+| [PR27](https://github.com/hapenia/aleph-research/pull/27), #12 | `eb386d8f6a9b2d35deb36fb22c7cfac8d9a6cdc2`, `fix/aleph-11-safe-best-selection`; B's imported files match the frozen C file hashes | Product tests passed 85 Node items, including 73 new effective behavior points. B's independent automatic acceptance passed 116 points and actual DSH acceptance passed 116 observations. A checked-out target requiring movement is rejected before mutation; an unchanged target remains a successful no-op, and an unoccupied branch retains expected-tip reference updates. The repair remains unmerged. |
+| [PR28](https://github.com/hapenia/aleph-research/pull/28), #11 | `b82a72217cc74c8a1dbbc8849c248ea241047082`, `fix/aleph-10-parent-feedback` | Product tests passed 50 Node items, including 37 new effective points. Independent automatic 58 and actual DSH 51 points passed. DSH sends the real completion text to the original available parent; the Host later persists the matching activation state. Parent replacement, loss and failed-delivery retry are outside the guarantee. |
+| [PR29](https://github.com/hapenia/aleph-research/pull/29), #6 | `96226147cd18f67ea9920f0e714532259295bdce`, `fix/aleph-05-restart-followup` | Product tests passed 56 Node items, including 41 new effective points. Independent automatic 66 and actual DSH 66 points passed. The existing timer observes initially interrupted computation until exit, retains results and frees only its machine. PR30 is the tested combination with controls. |
+| [PR30](https://github.com/hapenia/aleph-research/pull/30), #3/#6/#10/#14 | `a85ccea4a6e7da7f2c56708627cbd1a873b7493a`, `fix/project-controls-restart-combination` | Product tests passed 262 Node items: 232 effective points and 30 parent containers. Independent automatic 105 and actual DSH 105 points passed after forced Host termination and restart with the same persistent storage. Ordinary recovery preserves running computation and later reconciles exit; explicit cancellation stops the owned computation. Paused, finishing, forming and already-delivered controls retain their semantics. |
+| [PR31](https://github.com/hapenia/aleph-research/pull/31), #9 | `12325013bec147895a6b8e58c3b910bc239b78f9`, `fix/aleph-08-composer-infra` | Product tests passed 47 Node items: 38 new effective points, 2 parent containers and 7 existing tests. Independent automatic 40 and actual DSH 40 points passed. Real Composer's visible tools include Infra dispatch; native Infra Bash, handoff and later queue continuation succeed. Mainline is unchanged until merge. Evidence is fixed at [`f29705de3c32efb04512c720bc8b8799b4559e90`](https://github.com/PaulusPliniusChang/aleph-research/tree/f29705de3c32efb04512c720bc8b8799b4559e90/tests/issues). |
+
+The actual DSH checks use installed sessions, registered tools, persistent
+storage, Git and operating-system processes. Deterministic local model
+responses control researcher or optimizer actions where disclosed. Automated
+DSH storage/session substitutes are not actual-session evidence. PR25 timeout
+acceptance shortened only the deadline in an isolated copy; production retains
+ten minutes. PR26 actual checks configured Composer's installed subagent backend
+as `spawn`; that isolated configuration did not replace product lifecycle code.
+
+The process guarantees cover one Host on Linux with readable `/proc` and
+ordinary descendants remaining in the owned process group. Detached sessions,
+external compute services and multiple Hosts are outside the tested guarantees.
+PR25 cleanup ownership is in memory and is not recovered after Host restart.
+PR26 persists control intent and conservatively retains uncertain ownership;
+terminal-state restart acceptance is not a claim of recovering every active
+external computation. No control-page buttons were added by PR26.
+
+## Mainline objects and responsibilities
+
+| Object or role | Current responsibility |
+| --- | --- |
+| Project | Associates one workspace with separate research and mission repositories, machine records, missions, batches, agents, evaluation history and a highest-score record in the `aleph_project` storage domain. |
+| Researcher | Uses its assigned research branch and worktree; expresses research intent in the project brief, research code and mission contents; proposes expensive computation as missions and waits only for its owned missions. |
+| Leader | Initializes and scaffolds the project, starts researchers, approves proposals and starts the queue manager. |
+| Mission | Records a mission branch, manifest, owner, approval state, batch membership, source tip and result commit. |
+| MissionComposer | Acts as the persistent queue manager. The Host notifies it when missions are approved and batches finish. Its prompt directs immediate dispatch on idle capacity and preparation of future batches while the machine is busy. |
+| Batch | Combines mission branches from the packaging template and identifies the machine for one entrypoint execution. |
+| InfraOptimizer | Optimizes a merged batch for its target machine; the Host commits the optimization and executes the batch. Project budgets and queue policy remain outside this role. |
+| Result delivery | Produces per-mission result commits and uses an expected branch tip when advancing a mission branch. |
+| Research evaluation | Reads research code through `ALEPH_SOLUTION_DIR`, creates a report tied to the recorded research commit, stores an independent evaluation reference, records history and updates the highest score when appropriate. |
+
+The mission template is a packaging base. It is separate from the research
+commit recorded as the highest-scoring result. Selecting a research commit does
+not turn that commit into a mission template or automatically rewrite mission
+history.
+
+InfraOptimizer controls the implementation of batch computation and its output
+handling within the current contract. The default runner's directory layout
+does not establish the retention requirements of every optimized batch.
+
+## Mainline workflow
+
+1. `aleph_init_project` creates separate `research/` and `missions/` repositories
+   and the local machine record. The project brief carries research objectives.
+2. `aleph_run_researcher` or `aleph_run_researchers` starts researchers with
+   separate branches and worktrees. The default researcher count is four.
+3. For expensive computation, a researcher uses `aleph_start_mission` or creates
+   a mission branch from `template`, adds the manifest, code, dependency project
+   and entrypoint, commits, and calls `aleph_propose_mission`.
+4. `aleph_approve_mission` admits a proposal to the approved queue and notifies
+   Composer. Approval is a scheduling admission decision, not a numerical cost
+   reservation.
+5. Composer uses `aleph_form_batch`. Its persistent dispatch instructions call
+   for `aleph_run_batch` immediately when the machine is idle. While the machine
+   is busy, Composer may prepare another batch and invoke `aleph_run_infra`.
+6. The Host executes the batch, delivers per-mission results and notifies
+   Composer that the batch finished. A notification is input to the agent's
+   dispatch policy; source presence alone does not prove successful continued
+   dispatch in a real DSH session.
+7. `aleph_evaluate` returns `waiting` while the calling researcher's owned
+   missions remain proposed, approved, batched or running. A failed mission is
+   terminal for this waiting check, so evaluation readiness does not mean that
+   all owned missions succeeded.
+8. Once ready, the evaluator runs in `evalRoot` or the project workspace and
+   reads code from `ALEPH_SOLUTION_DIR`. That path is either the researcher's
+   existing worktree or a temporary worktree created for the selected revision.
+   Only the temporary worktree is removed by evaluation cleanup.
+9. Successful evaluation creates a report commit and
+   `refs/aleph/evaluations/<evaluation-id>`. A compare-and-swap attempts to advance
+   the recorded research branch. If the branch moved, the independent reference
+   still preserves the report. Evaluation metadata and the highest-score record
+   are updated in project storage.
+10. The operator route `POST /api/aleph/select-best` points an existing research
+    branch at the stored highest-scoring research commit. It is an HTTP route,
+    not a registered `aleph_select_best` model tool.
+
+## Removed interfaces and changed mainline meanings
+
+The current Host does not register `aleph_start_campaign`, `aleph_run_next`,
+`aleph_run_available` or the old `aleph_compose_batch`. Their old parameters and
+side effects cannot be inferred from the names of current tools. Legacy prompt
+text and unused client components do not register removed Host operations.
+
+| Earlier concept | Current representation | Migration boundary |
+| --- | --- | --- |
+| Campaign and campaign queue | Workspace project, mission proposals and approved queue | Research and mission repositories are separate; admission uses explicit approval. |
+| `budget` and `spent` quota counters | No corresponding numerical project quota fields | Approval and mission resource hints do not enforce a monetary or compute budget. |
+| `maxParallel` dispatch limit | Local machine and batch records | The architecture states one running batch per machine. That intention does not establish that overlapping public calls are safely serialized. |
+| L0–L3 strategy labels | Research brief, researcher instructions and mission code | There is no current L0–L3 strategy enum or per-launch strategy argument. Upstream considers the current prompt and mission contract the supported way to express strategy. |
+| Automatic promotion to `sota/main` | Evaluation history, `best`, report references and an explicit selection route | The highest-score record now exists, but evaluation does not automatically promote a shared `sota/main` branch. |
+| Campaign continuation loop | Persistent Composer plus queue-change notifications | Continued dispatch relies on the live agent and its policy; it is not the earlier campaign scheduler. |
+| Campaign pause, resume, cancel or finish | No corresponding durable project operation surface | Project, mission and batch state do not implement the earlier controls. |
+
+## Historical issues and current alternatives
+
+### #3: Concurrent dispatch and machine capacity
+
+[Issue #3](https://github.com/hapenia/aleph-research/issues/3) and its earlier
+reproduction concern dispatch capacity. Upstream places that requirement in the
+future multi-machine scope. The current architecture describes one local
+machine and one running batch per machine.
+
+That scope decision does not establish an atomic capacity guard. Current
+`785a7e9` verification still reproduces overlapping public `aleph_form_batch`
+calls, overwritten ownership and duplicate real computation. The 54-point
+automatic suite has five failed protection assertions, while 66 actual
+observations confirm the defect and its controls. Expected-tip delivery stops
+the later duplicate result from replacing an earlier result, but computation
+has already been duplicated. PR26's existing project-operation guard passed
+54 automatic and 59 actual protection points; PR30 integrates that guard with
+restart handling. Those results cover one Host and one project, without
+establishing a multi-machine or cross-Host capacity protocol.
+
+### #4: Budget enforcement
+
+[Issue #4](https://github.com/hapenia/aleph-research/issues/4) uses the earlier
+budget, spent counters and dispatch tools. Upstream places concurrency and
+budget limits in the multi-machine model.
+
+The current Leader can leave a mission unapproved. Once a persistent Composer
+is managing the queue, approval may lead to dispatch without another explicit
+Leader start call. Approval therefore supplies admission control, not a hard
+quota or a reliable way to delay an already approved mission.
+
+The current schema does not expose consumed-quota accounting, active-work
+reservations or a numerical budget setter. Mission resource hints and the
+researcher's instruction to keep exploration bounded do not provide those
+mechanisms. Verification must record the current absence and upstream scope
+decision separately from any future requirement to bound cost. Current
+applicability verification passed 30 automatic and 30 actual DSH points.
+Unapproved work cannot form a batch, approval alone does not run computation,
+and normal batch admission and completion retain and release the machine as
+observed. The combined #4/#8 suite has 64 distinct points; those quota checks
+do not establish Composer autonomy because its batch tools were explicitly
+called by the check script.
+
+### #5: Concurrent promotion and highest-score consistency
+
+[Issue #5](https://github.com/hapenia/aleph-research/issues/5) describes concurrent
+promotion that left an earlier best score and `sota/main` inconsistent.
+
+The current Host now accumulates evaluation metadata and updates `best` when a
+new numeric score exceeds the previous score. Each record identifies the
+scored research commit, report commit and independent evaluation reference.
+The selection route separately moves an existing research branch to
+`best.commit`. This differs from automatic promotion to the earlier SOTA branch.
+
+Upstream assigns the older concurrency requirement to the multi-machine scope.
+That disposition does not prove concurrent evaluation, selection and storage
+updates are safe under all current call patterns. Verification should check
+score-to-commit association, lower and equal scores, concurrent completion,
+branch movement and the independent report reference. The current service's
+serialized storage mutation must not be described as cross-process exclusion.
+
+B's combined #5/#11 current gate passed 172 effective automatic points and 172
+actual DSH observations. Each observation is assigned once: 21 belong to #5 and
+151 to #11. The #5 subset confirms single-Host score-to-source/report/reference
+correspondence when higher and lower scores finish in either order, equal scores
+arrive and an evaluation has no numeric score. It does not restore or verify the
+old multi-machine SOTA promotion. This completes the current applicability
+investigation while preserving that deferred requirement. The combined count
+must not be repeated as each issue's independent acceptance range.
+
+### #8: Strategy information in researcher instructions
+
+[Issue #8](https://github.com/hapenia/aleph-research/issues/8) describes earlier
+L0–L3 strategy labels that did not reach the researcher prompt. Upstream considers
+strategy text carried by the current mission prompt sufficient for the current
+scope.
+
+The actual researcher prompt includes the project brief, assigned research
+branch and worktree, repository history, mission reuse, packaging requirements,
+resource guidance and evaluation instructions. Research and mission code express
+the chosen implementation. Current mission records do not retain the earlier
+strategy enum, and the launch tool does not accept a per-launch L0–L3 selector.
+
+Current context propagation passed 34 automatic and 34 actual DSH points.
+The actual researcher receives the research objective, branch, worktree and
+mission/evaluation requirements. An objective update reaches newly started
+researchers without mutating the initial context of an existing activation.
+These observations validate the current prompt contract, without restoring
+the removed labels or establishing that every research strategy was exercised.
+
+### #9: Automatic continuation
+
+[Issue #9](https://github.com/hapenia/aleph-research/issues/9) describes work that
+stopped advancing after capacity became available. The current Host has a
+persistent Composer, notification on approval and notification after a batch
+finishes. Its prompt requires immediate dispatch when the local machine is
+idle and preparation of later work while the machine is busy.
+
+The earlier claim that the Host never notifies or restarts Composer after a
+batch is obsolete. Upstream considers persistent Composer the current answer
+to continuation. Actual progress still depends on a live parent, message
+delivery, agent decisions and successful tool calls. Researcher polling of
+`aleph_evaluate` is not the queue dispatcher.
+
+Current investigation found a concrete permission mismatch: Composer's prompt
+requires `aleph_run_infra`, but mainline registers that tool for Leader alone.
+The independent automatic suite has 40 effective points with one failure;
+actual DSH has 40 points with seven failed assertions along the unavailable
+Infra path. A separately disclosed direct-execution control completes later
+queued work; it cannot establish that Infra optimization is available.
+
+The repair published in PR31 allows only Leader and Composer to receive `aleph_run_infra`.
+Researcher and InfraOptimizer permissions stay within their existing roles.
+Its 38 new effective product points exercise the registered visibility filters
+before direct, Infra and subsequent queue dispatch; including two parent
+containers and seven existing tests, the product run passed 47 Node items.
+Sessions and model decisions are substituted in product tests. Independent
+automatic 40 and actual DSH 40 points passed on the imported repair. The real
+Composer called `aleph_run_batch` twice and `aleph_run_infra` once; the native
+InfraOptimizer executed Bash and completed its handoff. No missing-tool
+fallback was used. The actual Host exited and is no longer running. Published
+head `12325013bec147895a6b8e58c3b910bc239b78f9` remains unmerged.
+Busy-machine preparation and complete multi-machine behavior have not been
+verified. Persistent Composer does not restore old budget or target-score
+policies.
+
+### #10: Mainline gap and accepted project-control repair
+
+[Issue #10](https://github.com/hapenia/aleph-research/issues/10) requests durable
+pause, resume, queued cancellation, running termination and completion controls.
+Upstream explicitly lists this operation surface as missing.
+
+Leaving a proposal unapproved can prevent admission. It does not withdraw an
+approved mission, pause persistent Composer or stop an active batch. The current
+project has no persisted pause or finish state; mission and batch enums have
+no cancelled state, and registered Aleph tools do not provide these controls.
+
+DSH session controls, a failed batch or stopping the Host do not by themselves
+constitute durable Aleph cancellation. PR26 now supplies an independently
+accepted control implementation, while mainline still lacks that surface.
+Pause prevents new dispatch and lets admitted computation continue. Finish
+closes dispatch and waits for admitted work; explicit cancellation separately
+stops a queued mission or an entire batch. A mission in an active batch is not
+independently killed within that shared execution.
+
+Cancellation persists intent before stopping the exact activation and owned
+execution group. It retains worktrees and diagnostics, and does not release the
+machine as successfully cancelled until stop is confirmed. Uncertain stop
+returns `complete:false` and retains cancelling/busy state. Previously delivered
+mission results remain delivered. These semantics belong to PR26, not the
+unmodified mainline or an assertion that all forms of external computation can
+be stopped. PR30 is the independently accepted combination with restart
+follow-up: ordinary restart does not cancel live computation, while explicit
+persisted cancellation retains its stop protocol. This distinction prevents a
+control implementation from treating every Host restart as a cancel request.
+
+### #11: Result and evaluation feedback
+
+[Issue #11](https://github.com/hapenia/aleph-research/issues/11) concerns evaluation
+feedback and historical results. Upstream reports adoption of evaluation history
+and highest-score tracking. The current project stores up to 200 evaluation
+records, and snapshots expose the most recent 20 records plus `best`.
+
+The score, source commit, report commit and report reference are retained in
+metadata. Evaluation returns bounded stdout and stderr. The report commit
+message contains up to 4,000 characters from trimmed stdout. Metadata does not
+contain the full stdout, stderr or a complete structured arbitrary report.
+Researchers can inspect the referenced Git report and per-mission result commits.
+The agent list also now exposes branch, worktree and a bounded summary preview.
+
+Verification must distinguish retained report references from complete report
+content, check access after branch movement, and observe actual parent-session
+feedback. An issue closure does not establish full report delivery or unlimited
+history retention.
+
+The shared #5/#11 gate passed 172 automatic points and 172 actual observations;
+151 points belong uniquely to #11. Those checks cover retained report access,
+source reachability, report-parent correspondence, history ordering and fields,
+tool stdout/stderr, extra report fields and preservation of the main worktree.
+The observed output limits are 8,000 characters for returned stdout and 4,000
+for stdout copied into the report commit message. These results document bounded
+retrieval, not unlimited report content.
+
+The dedicated current parent-feedback investigation reproduced the missing
+automatic completion message. PR28 switches researcher completion delivery to
+DSH's native `parent` mode and asks the researcher to cite actual evaluation
+fields in its final text. Independent automatic 58 and actual DSH 51 points
+passed: a real researcher evaluates, returns a summary containing the real
+score and report identifiers, and the original Leader receives that native
+completion message without an explicit send tool. Another overlapping
+researcher remains running and later receives its own settlement and message.
+
+Native delivery precedes the Host result callback, so persisted state can
+briefly remain running. Actual verification identifies a notification by its
+message identifier across inbox and displayed session history to avoid counting
+one message twice. No durable retry is provided if the original parent is
+missing, replaced or delivery fails. The Host does not synthesize a structured
+report, and prompt wording does not guarantee arbitrary model output.
+
+### #12: Select or revisit a previous best result
+
+[Issue #12](https://github.com/hapenia/aleph-research/issues/12) requested historical
+selection and rollback. The current `POST /api/aleph/select-best` route accepts
+`project_id` or `projectId`, with an optional `branch` defaulting to `main`. It
+requires a stored best commit and an existing target branch, and uses an
+expected old reference when updating the branch.
+
+The response identifies the selected commit, score and previous branch tip.
+The route selects the current recorded best; it does not accept an arbitrary
+historical evaluation identifier, expose a dedicated rollback operation, or
+automatically restore an earlier evaluation environment. Ordinary Git operations
+can create a branch from a retained historical research commit, but that does
+not update the `best` record.
+
+Upstream reports this route as the current response to selection. Verification
+must check the selected source tree, branch races, checked-out or dirty
+worktrees, invalid references and the relation to later researcher startup.
+The presence of compare-and-swap alone does not prove worktree file consistency
+or safe inheritance by every future researcher.
+
+B's current automatic gate has 95 effective points: 85 pass and 10 fail on the
+checked-out-branch movement and worktree-consistency assertions. Actual DSH
+produces 95 successful defect/control observations. These actual observations
+confirm reproduction; they do not mean the baseline passes repair acceptance.
+For example, selecting committed algorithm `10` after committed algorithm `20`
+returns success and moves `HEAD` to `10`, while the index and files retain `20`.
+A formerly clean worktree becomes staged modification. Dirty and untracked
+content remains present; these observations do not establish file loss.
+
+PR27 rejects movement when the target branch is checked out in the main or a
+linked worktree, reports the exact worktree paths and asks that changes be saved
+or committed and the affected worktrees switched away before retrying. A target
+already at `best.commit` returns a successful no-op without altering dirty
+files. Unoccupied targets retain expected-tip updates. Enumeration failures and
+reference races are rejected; the repair does not implicitly reset, stage,
+stash or remove research files. C's product tests passed 85 Node items, including
+73 new effective behavior points. B independently passed 116 automatic points
+and 116 actual DSH observations before publication at `eb386d8`. Worktree
+enumeration and the Git reference transaction are separate operations; this
+single-Host repair does not claim a cross-process checkout lock.
+
+### #14: Activation exclusion and the preparation window
+
+Upstream's same-role activation guard rejects a duplicate after the running
+agent record is persisted. Current automated and actual DSH evidence shows that
+the first request prepares the fixed Infra worktree before that record exists.
+A second request can delete the first directory, fail its own Git creation and
+leave the first request unable to start its optimizer. The defect evidence uses
+real Git creation with its response delayed at that exact boundary. No optimizer
+model started in that baseline scenario, so it does not prove deletion of
+model-authored optimization code.
+
+PR26 claims the batch execution before changing directories. Its accepted
+repair checks show duplicate rejection without a second creation or removal of
+the first directory. A later actual optimizer writes a file through Bash;
+cancellation disposes the activation and retains that file and worktree. This
+closes the preparation window in the repair branch without relying on the old,
+closed PR15 or treating the upstream role guard as sufficient protection.
+The preparation-window baseline contains 36 effective automatic points with
+four failures. PR30 integrates the accepted guard with ordinary-restart
+preservation; it does not expand the ownership boundary to multiple Hosts.
+
+### #19: Report identity and actual evaluation input
+
+The upstream replacement fixes the earlier shared-branch report attribution
+path: it pins report trees, creates independent refs and uses branch
+compare-and-swap. B nevertheless reproduced a residual on `785a7e9` because
+owned researcher evaluation reads the mutable owned worktree directly.
+
+For example, committed `algorithm.txt=3` can be edited to `7` without a commit.
+The evaluator scores `7`, while its recorded commit and report still contain
+`3`. An untracked input can also affect the score without appearing in the
+report. A later commit made before the evaluator reads the source changes the
+actual input even though the initial recorded commit stays fixed. Preserving
+that later branch commit correctly does not repair the score-to-input mismatch.
+
+B's current independent automatic check has 69 effective points, with 66
+passing and 3 failing input/report assertions. Actual DSH has 69 successful
+defect/control observations. Successful defect observations mean reproduction,
+not repair acceptance. Evidence is fixed at
+[`b40407ba4f51365d61c16aaf8417212b38831662`](https://github.com/PaulusPliniusChang/aleph-research/tree/b40407ba4f51365d61c16aaf8417212b38831662/tests/issues).
+
+The user chose commit-before-evaluation and a fixed submitted commit. PR25's
+published increment rejects tracked, staged and untracked changes in the selected
+source worktree, preserving normal Git ignores. Dirty unrelated worktrees do
+not block a clean selected branch. Accepted input always uses a separate
+detached snapshot, while reports keep independent refs and expected-tip branch
+updates. The source worktree is not automatically staged, committed, stashed,
+cleaned or removed. PR25's accepted process cleanup is retained.
+
+The combined head `95a5d61dd810659fec3df65323ce31a877429771` passed 152 product
+items, including 48 new effective input points and 88 existing process points.
+B's independent input checks passed 146 automatic points and 146 actual DSH
+observations. Separate timeout integration passed 69 automatic points and 69
+actual observations on this combined source. These counts apply to the shared
+#19/#23 head. The isolated timeout copy changes only the evaluation deadline from
+600,000 to 1,200 milliseconds; production retains ten minutes. Public evidence
+is fixed at
+[`5704aa8270d01f73f8da49224e4e16709130386a`](https://github.com/PaulusPliniusChang/aleph-research/tree/5704aa8270d01f73f8da49224e4e16709130386a/tests/issues).
+
+### #22 and #23: New current defects remain separate from migration decisions
+
+The agent-list display defect in #22 and evaluation-process defect in #23 were
+confirmed against the replacement architecture. They are not old campaign
+triggers made inapplicable by removing an interface. Their independent repair
+acceptance supports PR24 and the combined #19/#23 head of PR25 respectively, within
+the limits recorded above. Both pull requests remain unmerged in this snapshot.
+
+## Current verification and remaining delivery
+
+This note does not implement an importer for old campaign state, quota counters,
+strategy labels or SOTA pointers. Historical evidence remains useful for tracing
+the earlier behavior, but must not be relabeled as a test of the replacement.
+
+All 16 independent issues now have current outcomes supported by automated
+behavior checks and actual DSH verification. Shared-suite points are assigned
+once: #5/#11 contributes 21/151 points to its 172-point suite, and #4/#8
+contributes 30/34 points to its 64-point suite. This does not reduce the
+minimum of 30 effective points per automated suite or turn a shared suite into
+multiple independent runs. Published repairs require a fresh source comparison
+and relevant verification if upstream changes before integration. No earlier
+passing result transfers automatically to a rewrite or another repair
+combination.
+
+The current mainline gates for #7, #16 and #1 did not reproduce the original
+defects. #7 passed 159 automatic and 149 actual points across source capture
+and delivery after branch advancement. #16 passed 50 automatic and 31 actual
+points for researcher callback ownership. #1 passed 37 automatic and 41 actual
+browser points for no-project loading, reload, reopening, project creation and
+polling. These outcomes apply to the described current ranges; they do not
+mean the old closed PR21, PR18 or PR2 was merged.
+
+The remaining publication is this migration note. Repair PR24 through PR31 remain
+unmerged, and PR30 integrates only PR26 and PR29. Deferred multi-machine
+budgets, old strategy labels, unlimited reporting, durable parent-delivery
+retry and full busy-machine preparation are not implemented by this document.
+
+Each record should identify the source revision, registered tool and operator
+route catalogue, actual state transitions and relevant process or Git behavior.
+It should distinguish:
+
+- an old trigger that no longer exists;
+- an upstream decision to defer a capability;
+- a supported replacement with independently observed behavior;
+- a current reproduced residual under an upstream-adopted requirement;
+- a tested repair branch awaiting merge;
+- any remaining request or failure requiring further work within the existing
+  issue.
+
+Suggested checks include overlapping batch admission, budget-field absence and
+approval effects, actual researcher context, persistent Composer continuation,
+evaluation-to-source association, report access, history retention, highest-score
+selection and operation controls. Source inspection and existing upstream tests
+help define those checks. The accepted evidence above supports only its named
+source and range; this note does not declare all historical requirements
+implemented.
+
+## Evidence locations for maintenance
+
+The independent `aleph-tests` worktree maintains the issue documents and raw
+records below. Paths in this section are evidence-worktree paths; they do not
+assert that this product document imports those files. YAML management fields
+and leading local comments remain in local documents. Published GitHub issue
+bodies omit that management header and leading comments.
+
+| Scope | Evidence-worktree locations | Acceptance and limits |
+| --- | --- | --- |
+| #3/#6/#10/#14, PR26/PR29/PR30 | `tests/issues/01-run-next-concurrency.md`, `05-restart-recovery.md`, `09-campaign-controls.md`, `13-infra-duplicate-start.md`; `evidence/09-combined-independent.{json,txt}`, `09-combined-real-dsh.{json,txt}`, `09-combined-product.txt`, `09-combined-source-manifest.json`; earlier `01-latest-*`, `05-fixed-*` and `09-fixed-*` records | PR30 product 262 items, automatic 105 points and actual 105 points passed. Preserve ordinary-restart versus explicit-cancel semantics, same-Host limits, shared control counts, deterministic-model/configuration disclosure and fixture history. Earlier PR26/PR29 acceptance is separate from the combination. |
+| #4/#8 | `tests/issues/02-run-next-budget.md`, `07-research-strategy-instructions.md`; `evidence/02-07-current-automatic.{json,txt}`, `02-07-current-real-dsh.{json,txt}` | The combined 64-point suite passed both gates, uniquely allocated as 30 budget-applicability and 34 context-propagation points. Preserve the absent numerical-budget/strategy fields and explicit operator dispatch disclosure. |
+| #5/#11 history | `tests/issues/04-sota-promotion-race.md`, `10-mission-reports.md`; `evidence/04-10-current-evaluation-history.{json,txt}`, `04-10-current-real-dsh-evaluation-history.{json,txt}`, `04-10-current-mapping.json` | The shared 172 automatic and 172 actual points passed, assigned once as 21 to #5 and 151 to #11. Preserve source/report correspondence and output limits. Old multi-machine SOTA is outside this range; dedicated parent feedback is recorded separately below. |
+| #11 parent feedback, PR28 | `tests/issues/10-mission-reports.md`; `evidence/10-fixed-parent-delivery.{json,txt}`, `10-fixed-real-dsh-parent-feedback.{json,txt}`, `10-fixed-parent-feedback-source-manifest.json` | Automatic 58 and actual 51 points passed. Preserve native notification ordering, inbox/session identifier deduplication, the original available-parent requirement and failed fixture logs. |
+| #7 source and delivery | `tests/issues/06-mission-base-consistency.md`; `evidence/06-latest-base-consistency.{json,txt}`, `06-latest-real-dsh-base.json`, `06-latest-post-batch-branch.{json,txt}`, `06-latest-real-dsh-post-batch.json` | Latest mainline passed 159 automatic and 149 actual points across pre-batch source capture and post-batch advancement. Keep the latest-source results distinct from historical old-mainline reproduction and closed PR21 acceptance. |
+| #9 continuation, PR31 | `tests/issues/08-continuous-research.md`; `evidence/08-current-automatic.{json,txt}`, `08-current-real-dsh.{json,txt}`, `08-fixed-composer-product.txt`, `08-fixed-composer-independent.{json,txt}`, `08-fixed-composer-real-dsh.{json,txt}` | Current mainline has 1 failed automatic assertion out of 40 and 7 failed actual assertions out of 40 for missing Composer Infra authority. The direct-execution control does not establish Infra availability. PR31 passed 40 independent automatic and 40 actual points with real Infra activation; source and public evidence revisions are fixed above. |
+| #16 callback ownership | `tests/issues/14-researcher-callback-ownership.md`; `evidence/14-latest-researcher-ownership.{json,txt}`, `14-latest-real-dsh-ownership.json` | Latest mainline automatic 50 and actual 31 points passed. Distinguish automatic failure/isolation coverage from actual overlapping successful completion; preserve disposal/login fixture history. |
+| #1 empty-state console | `tests/issues/12-console-no-campaign-empty-state.md`; `evidence/12-current-automatic-observations.json`, `12-current-automatic.txt`, `12-current-real-dsh.{json,txt}`, `12-current-empty-desktop.png`, `12-current-empty-mobile.png` | Latest mainline automatic 37 and actual browser 41 points passed. Preserve initial native no-project response, creation/polling interaction, error recovery and viewport screenshots. Existing wide tables remain outside the scope. |
+| #12, PR27 | `tests/issues/11-sota-selection-rollback.md`; `evidence/11-current-select-best.{json,txt}`, `11-current-real-dsh-select-best.{json,txt}`, `11-fixed-product.txt`, `11-fixed-independent.{json,txt}`, `11-fixed-real-dsh.{json,txt}`, `11-fixed-source-manifest.json` | Current reproduction and repair acceptance passed their respective gates. Preserve the distinction between 95 baseline defect/control observations and 116 fixed-source observations, exact worktree-path coverage and the external-checkout race limitation. Preserve the initial wrong-command-directory log as fixture history. |
+| #19 residual, combined PR25 | `tests/issues/15-evaluation-report-attribution.md`; `evidence/15-current-owned-baseline.{json,txt}`, `15-current-real-dsh-owned.{json,txt}`, `15-fixed-owned-product.txt`, `15-fixed-owned-independent.{json,txt}`, `15-fixed-real-dsh-owned.{json,txt}`, `15-fixed-owned-source-manifest.json` | Repair acceptance passed on published head `95a5d61`. Preserve 146 automatic/146 actual input points, clean committed fixtures, explicit HTTP branch selection, immutable snapshots and the original fixture-correction logs. Public evidence is fixed at `5704aa8270d01f73f8da49224e4e16709130386a`. |
+| #22, PR24 | `tests/issues/16-console-agent-records.md`; `evidence/16-console-agents-fixed-independent.{json,txt}`, `16-fixed-real-dsh-console-agents.json`, `16-fixed-*.png` | Repair acceptance passed. Preserve browser screenshots and the limited scope of mobile table verification. |
+| #23, combined PR25 | `tests/issues/17-evaluation-timeout-processes.md`; `evidence/15-fixed-owned-timeout-independent.{json,txt}`, `15-fixed-real-dsh-owned-timeout.{json,txt}`, `15-fixed-owned-deadline-adaptation.{json,diff}`; earlier `17-fixed-*` records | Combined-head timeout integration passed 69 automatic and 69 actual points, alongside the input acceptance above. Preserve the isolated 1,200-millisecond adaptation, production ten-minute deadline and process-group limits. Earlier `4057d00` results are historical, not a substitute for the combined-head evidence. |
+| Full current review | `tests/issues/ARCHITECTURE-REVIEW-2026-10-31.md` and the 16 linked local issue records | All 16 current investigations are complete. Preserve the distinctions between no reproduced defect, deferred requirement, reproduced residual, accepted repair, publication and merge. Manual status fields and historical `VALIDATION-2026-10-31.md` are not current-source test results. |
+
+This document revision performed no product testing, actual DSH run, source-code
+repair or repository publication. Its new work is the disposition and evidence
+mapping; the test outcomes belong to the existing records identified above.
