@@ -93,3 +93,7 @@ python3 tests/issues/dsh/current-restart.py \
 ## 验证
 
 DSH `0.2.2-alpha.2` 隔离环境实测确认，覆盖进程异常退出场景。证据见 [重启记录](evidence/05-real-dsh-restart.json)，被测版本与自动测试见 [验证记录](VALIDATION-2026-10-31.md)。正常运行时的人工控制另见 [ALEPH-09](09-campaign-controls.md)。
+
+## 公开证据
+
+议题文档、复跑脚本与验收记录已经发布到派生仓库的独立证据分支 `evidence/2026-10-31-validation`，固定提交为 `23f4c0f67f78c39639c9d3a877b337e3907b7499`，入口见[公开证据目录](https://github.com/PaulusPliniusChang/aleph-research/tree/23f4c0f67f78c39639c9d3a877b337e3907b7499/tests/issues)。该分支以当前 `main` 为基础，仅加入已经提交的 `tests/issues` 文件，没有加入旧测试分支的产品实现或用户未提交测试改动。本地管理字段和注释保持，GitHub 议题正文不包含管理头和前导注释。
