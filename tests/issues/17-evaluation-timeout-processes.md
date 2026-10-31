@@ -3,7 +3,7 @@ id: ALEPH-17
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/23
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/25
 ---
 
 <!-- 本地管理说明：用户于北京时间 2026-10-31 18:20 接纳该候选，要求先登记为“可疑”。B 已在最新上游 785a7e9c 完成 67 个有效自动行为点和真实 DSH 核查，确认超时后存在活跃评分后代。GitHub 正文应移除管理头及本段前导注释，本地文件保留完整内容。 -->
@@ -145,4 +145,4 @@ B 在正式发布前再次串行获取上游和派生仓库，并对干净主分
 
 该实现要求 Linux 及可读取的 `/proc` 元数据。主动调用 `setsid`、更换进程组或提交到外部服务的计算不在终止保证范围内。Host 重启后的进程归属恢复、显卡或远端计算清理未纳入本次修复。非 Linux 平台启动前返回明确错误，该分支没有在其他操作系统实测。清理记录只保存在当前 Host 内存中。
 
-修复拉取请求待发布。议题状态保留原核查状态，是否合并或关闭由上游维护者决定。
+修复代码 `4057d00` 已推送至派生仓库，上游拉取请求为 [#25](https://github.com/hapenia/aleph-research/pull/25)，当前开放且尚未合并。固定修复验收证据提交为 `a4faa93`。议题状态保留原核查状态，是否合并或关闭由上游维护者决定。
