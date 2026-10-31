@@ -28,11 +28,16 @@ from a source directory.
 | `aleph_run_next` | Start the next queued researcher subagent. |
 | `aleph_compose_batch` | Compose a multi-mission batch with mixed strategies. |
 | `aleph_run_available` | Dispatch queued missions up to the concurrency limit. |
+| `aleph_run_composer` | Start the Composer role agent. |
+| `aleph_run_infra` | Start the InfraOptimizer role agent. |
+| `aleph_set_parallel` | Set the concurrency limit chosen by InfraOptimizer. |
 | `aleph_infra_status` | Refresh CPU, GPU, memory, disk and concurrency capacity. |
 | `aleph_set_exploration` | Change the campaign exploration level. |
 | `aleph_set_budget` | Set or clear the campaign mission budget. |
 
-Tools are visible only in the `aleph` preset.
+Leader tools are visible in `aleph`; planning and capacity tools are also
+visible to `aleph-composer` and `aleph-infra`. The bundle declares four presets:
+`aleph`, `aleph-researcher`, `aleph-composer` and `aleph-infra`.
 
 ## HTTP routes
 

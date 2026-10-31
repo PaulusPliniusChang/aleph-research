@@ -62,6 +62,23 @@
 - SOTA 更新为 `sota/main`，worktree 均已回收，已花费为 2
 - 控制台截图见 `docs/assets/aleph-console.png`
 
+## Composer 与 InfraOptimizer agent
+
+两者已改为独立 DSH agent，而不是 Host 辅助函数：
+
+- `aleph_run_infra` 启动 `aleph-infra` 子代理，检查容量并设置并发与预算。
+- `aleph_run_composer` 启动 `aleph-composer` 子代理，检查状态并创建批次。
+- 角色 agent 的 child session、状态与摘要记录在 campaign 中，并显示在控制台
+  “编排 agent”区域。
+
+在战役 `c-73eb500a` 上验证：
+
+- InfraOptimizer 子会话 `2c5a2579-fd6e-4f82-ab5e-6b118377fcf8`，保持并发 2，
+  设置预算 12。
+- Composer 子会话 `9867adc4-5f11-4f8b-ad86-08b354d0f913`，创建批次
+  `b-75bf349d`，包含 L3、L2、L1、L0 任务各一。
+- 角色 agent 状态均为 done，控制台显示摘要与批次。
+
 ## 限制
 
 - 控制台只读，最新战役之外的选择尚未提供。

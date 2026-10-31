@@ -11,9 +11,10 @@ a separate `~/.aleph` directory or an external daemon.
   handoff, evaluation, SOTA promotion and worktree reclamation.
 - Leader tools: campaign lifecycle, single missions, Composer batches,
   parallel dispatch, InfraOptimizer capacity and exploration/budget controls.
-- Multi-agent execution: Composer batches mix L0 to L3 strategies and
-  `aleph_run_available` dispatches several researcher subagents concurrently up
-  to the InfraOptimizer limit.
+- Multi-agent execution: Composer and InfraOptimizer are separate DSH agents
+  with their own presets and child sessions. Composer batches mix L0 to L3
+  strategies; InfraOptimizer chooses concurrency and budget;
+  `aleph_run_available` dispatches researchers up to that limit.
 - Modes: `Aleph Research` for the Leader and `Aleph Researcher` for one mission.
 - Console: a read-only `Aleph` sidebar panel reading the Host API.
 - Persistence: the `aleph_research` domain opened through `ctx.storageDomain`.
@@ -51,7 +52,9 @@ Host command. It does not touch the current DSH profile.
    command, optional visible-data path, hidden-testset path and submission
    interpreter. If the workspace has no `research/` repository, the tool creates
    an `initialize` branch and `sota/main`.
-4. Call `aleph_enqueue_mission`, then `aleph_run_next`.
+4. Call `aleph_run_infra` to let InfraOptimizer choose concurrency and budget.
+5. Call `aleph_run_composer` to let Composer design a strategy-mixed batch.
+6. Call `aleph_run_available` to dispatch researchers.
 
 The campaign workspace must be the DSH session workspace or a directory inside
 it. The researcher runs under the session's workspace-write sandbox, so a

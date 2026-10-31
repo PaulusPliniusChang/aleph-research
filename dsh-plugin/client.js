@@ -43,6 +43,15 @@ window.__ModuleLoader__.load({
         'section.branches': 'Branches',
         'section.infra': 'InfraOptimizer',
         'section.batches': 'Composer batches',
+        'section.agents': 'Orchestration agents',
+        'field.role': 'Role',
+        'field.agentStatus': 'Agent status',
+        'field.child': 'Child session',
+        'field.summary': 'Summary',
+        'field.updated': 'Updated',
+        'role.composer': 'Composer',
+        'role.infra': 'InfraOptimizer',
+        'empty.agents': 'No Composer or InfraOptimizer run yet.',
         'field.parallel': 'Parallel limit',
         'field.activeAgents': 'Active agents',
         'field.cpu': 'CPU cores',
@@ -110,6 +119,15 @@ window.__ModuleLoader__.load({
         'section.branches': '分支',
         'section.infra': 'InfraOptimizer',
         'section.batches': 'Composer 批次',
+        'section.agents': '编排 agent',
+        'field.role': '角色',
+        'field.agentStatus': 'Agent 状态',
+        'field.child': '子会话',
+        'field.summary': '摘要',
+        'field.updated': '更新时间',
+        'role.composer': 'Composer',
+        'role.infra': 'InfraOptimizer',
+        'empty.agents': '尚未运行 Composer 或 InfraOptimizer。',
         'field.parallel': '并发上限',
         'field.activeAgents': '活动 agent',
         'field.cpu': 'CPU 核数',
@@ -589,6 +607,25 @@ window.__ModuleLoader__.load({
       );
     }
 
+    /** Composer and InfraOptimizer agent runs. */
+    function agentSection(t, campaign) {
+      const agents = Array.isArray(campaign?.agents) ? campaign.agents : [];
+      const roleName = (role) => t('role.' + role);
+      const columns = [
+        { label: t('field.role'), width: 'minmax(110px, 0.9fr)', primary: true, render: (agent) => roleName(agent.role) ?? agent.role ?? '—' },
+        { label: t('field.agentStatus'), width: '96px', render: (agent) => statusPill(t, agent.status) },
+        { label: t('field.child'), width: 'minmax(150px, 1.4fr)', mono: true, render: (agent) => agent.childId ?? '—' },
+        { label: t('field.updated'), width: 'minmax(140px, 1fr)', render: (agent) => formatDate(agent.updatedAt) ?? '—' },
+        { label: t('field.summary'), width: 'minmax(220px, 2.6fr)', render: (agent) => { const text = typeof agent.summary === 'string' ? agent.summary : ''; return h('span', { title: text || undefined }, text.length > 240 ? text.slice(0, 240) + '…' : text || '—'); } },
+      ];
+      return h(
+        'section',
+        { style: styles.card },
+        h('h2', { style: styles.sectionTitle }, t('section.agents')),
+        table(t, columns, agents.slice(-8), t('empty.agents')),
+      );
+    }
+
     /** Composer batch card. */
     function batchSection(t, snapshot, batches) {
       const columns = [
@@ -706,6 +743,7 @@ window.__ModuleLoader__.load({
         h('div', { style: styles.twoCards }, campaignCard, sotaCard),
         countsCard,
         infraSection(t, campaign),
+        agentSection(t, campaign),
         batchSection(t, snapshot, batches),
         h(
           'section',

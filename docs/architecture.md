@@ -11,7 +11,7 @@ and researcher dispatch use DSH services directly.
 | `ctx.tools` | Leader tools for campaign start, status, enqueue, batch composition, parallel dispatch, InfraOptimizer and exploration/budget controls. |
 | `ctx.subagents.startActivation` | One `aleph-researcher` child per mission. |
 | `ctx.sessions` | Resolve the Leader workspace from the session header `cwd`. |
-| `ctx.agentPresets` | Show tools only in the `aleph` preset. |
+| `ctx.agentPresets` | Host `aleph`, `aleph-researcher`, `aleph-composer` and `aleph-infra` presets. |
 | `ctx.webServer` | Read-only state routes and workspace creation route. |
 | Client panel | `Aleph` sidebar entry polling `/api/aleph/snapshot`. |
 
@@ -66,12 +66,25 @@ id, error and reclamation flag.
 - The evaluator receives `ALEPH_TESTSET` when a testset path is configured and
   `ALEPH_SUBMISSION_PYTHON` when a submission interpreter is configured.
 
-## Composer
+## Role agents
+
+Composer and InfraOptimizer are DSH agents, not Host helper functions:
+
+- `aleph_run_composer` starts an `aleph-composer` child. The child inspects
+  campaign status and capacity, then calls `aleph_compose_batch` to create a
+  strategy-mixed batch.
+- `aleph_run_infra` starts an `aleph-infra` child. The child calls
+  `aleph_infra_status`, `aleph_set_parallel` and `aleph_set_budget` to choose a
+  safe capacity and budget.
+- Both runs are recorded in `campaign.agents` with role, child session id,
+  status and summary, and shown in the console.
+
+## Composer batches
 
 `aleph_compose_batch` creates one batch record and several queued missions that
 share a brief but rotate through L0 to L3. A batch is visible in the console and
-on each mission as a `batch` id. Composer handles queue composition and budget
-guarding; it does not call an LLM itself.
+on each mission as a `batch` id. The Composer agent supplies the brief; the tool
+handles queue composition and budget guarding.
 
 ## InfraOptimizer
 

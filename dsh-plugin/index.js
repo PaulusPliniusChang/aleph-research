@@ -76,6 +76,13 @@ const campaignSchema = z.object({
     memoryTotalBytes: z.number().nullable(),
     checkedAt: z.string(),
   }).optional(),
+  agents: z.array(z.object({
+    role: z.enum(['composer', 'infra']),
+    childId: z.string().nullable(),
+    status: z.enum(['running', 'done', 'failed']),
+    summary: z.string().nullable(),
+    updatedAt: z.string(),
+  })).optional(),
 });
 
 const campaignDomain = defineDomain({
@@ -167,6 +174,7 @@ function snapshot(campaign) {
       active_agents: campaign.missions.filter((mission) => mission.status === 'running').length,
       infra: campaign.infra ?? null,
       batches: campaign.batches ?? [],
+      agents: campaign.agents ?? [],
     },
     missions: campaign.missions.map((mission) => ({
       id: mission.id,
@@ -356,6 +364,7 @@ class AlephService {
       maxParallel: infra.maxParallel,
       batches: [],
       infra,
+      agents: [],
     };
     await this.table.put(campaignId, campaign);
     return campaign;
@@ -414,6 +423,106 @@ class AlephService {
         batches: [...(campaign.batches ?? []), batch],
       };
     });
+  }
+
+  async setParallel({ campaignId, maxParallel }) {
+    const value = Math.max(1, Math.min(8, Math.floor(Number(maxParallel) || 1)));
+    return this.mutate(campaignId, (campaign) => ({
+      ...campaign,
+      maxParallel: value,
+      infra: campaign.infra ? { ...campaign.infra, maxParallel: value, checkedAt: now() } : campaign.infra,
+    }));
+  }
+
+  async runAgent({ campaignId, role, agent }) {
+    if (!agent) throw new Error('a calling Agent is required to start a role agent');
+    if (!this.subagents) throw new Error('subagent service is unavailable');
+    const campaign = this.table.get(campaignId);
+    if (!campaign) throw new Error(`campaign not found: ${campaignId}`);
+    this.assertWorkspace(agent, campaign.workspace);
+    const active = (campaign.agents ?? []).find((item) => item.role === role && item.status === 'running');
+    if (active) throw new Error(`${role} agent is already running: ${active.childId ?? 'starting'}`);
+    const isComposer = role === 'composer';
+    const prompt = isComposer
+      ? [
+          'You are Composer, an AlephResearch planning agent.',
+          `Campaign: ${campaign.id} "${campaign.title}" in ${campaign.workspace}.`,
+          `Current SOTA: ${campaign.sotaBranch ?? 'none'} (${campaign.sotaScore}). Exploration: ${campaign.exploration}. Budget: ${campaign.budget ?? 'unset'}. Spent: ${campaign.spent}.`,
+          'Inspect status and infrastructure, then compose the next batch of at most 4 missions with mixed L0 to L3 strategies.',
+          'Use aleph_status, aleph_infra_status and aleph_compose_batch. Do not start researchers and do not edit research files.',
+          'Return a short batch plan: mission count, strategy mix, rationale and the created batch id.',
+        ].join('\n')
+      : [
+          'You are InfraOptimizer, an AlephResearch resource agent.',
+          `Campaign: ${campaign.id} "${campaign.title}" in ${campaign.workspace}.`,
+          `Current concurrency limit: ${campaign.maxParallel ?? 1}. Budget: ${campaign.budget ?? 'unset'}. Spent: ${campaign.spent}.`,
+          'Inspect current CPU, GPU, memory and disk capacity with aleph_infra_status.',
+          'Choose a safe concurrency limit and, when useful, set a budget with aleph_set_parallel and aleph_set_budget. Do not start researchers.',
+          'Return a short capacity decision: concurrency, budget, bottleneck and rationale.',
+        ].join('\n');
+    const abort = new AbortController();
+    this.activations.add(abort);
+    let activation;
+    try {
+      activation = await this.subagents.startActivation({
+        provider: 'spawn',
+        label: `aleph ${role} ${campaign.id}`,
+        delivery: 'caller',
+        signal: abort.signal,
+        request: {
+          parent: agent,
+          cwd: campaign.workspace,
+          agentPreset: `aleph-${role}`,
+          prompt: [{ type: 'text', text: prompt }],
+        },
+      });
+    } catch (error) {
+      await this.mutate(campaignId, (current) => ({
+        ...current,
+        agents: [...(current.agents ?? []), {
+          role, childId: null, status: 'failed', summary: error instanceof Error ? error.message : String(error), updatedAt: now(),
+        }],
+      }));
+      this.activations.delete(abort);
+      throw error;
+    }
+    await this.mutate(campaignId, (current) => ({
+      ...current,
+      agents: [...(current.agents ?? []), {
+        role, childId: activation.childId ?? null, status: 'running', summary: null, updatedAt: now(),
+      }],
+    }));
+    try {
+      const result = await activation.result;
+      const summary = (result?.output ?? [])
+        .filter((block) => block?.type === 'text' && typeof block.text === 'string')
+        .map((block) => block.text)
+        .join('\n')
+        .trim()
+        .slice(0, 4000) || '(no summary)';
+      await this.mutate(campaignId, (current) => ({
+        ...current,
+        agents: (current.agents ?? []).map((item) => (
+          item.role === role && item.status === 'running'
+            ? { ...item, status: 'done', summary, updatedAt: now() }
+            : item
+        )),
+      }));
+      return { campaignId, role, childId: activation.childId ?? null, summary };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      await this.mutate(campaignId, (current) => ({
+        ...current,
+        agents: (current.agents ?? []).map((item) => (
+          item.role === role && item.status === 'running'
+            ? { ...item, status: 'failed', summary: message, updatedAt: now() }
+            : item
+        )),
+      }));
+      throw error;
+    } finally {
+      this.activations.delete(abort);
+    }
   }
 
   async setExploration({ campaignId, exploration }) {
@@ -631,11 +740,14 @@ export async function apply(ctx) {
   const workspaceRegistry = ctx.get('workspaceRegistry');
   const service = new AlephService(ctx, domain, { sessions, subagents, agentPresets });
 
-  const isAleph = (agent) => {
-    if (!sessions || !agentPresets) return false;
+  const presetOf = (agent) => {
+    if (!sessions || !agentPresets) return null;
     const session = sessions.get(agent?.id);
-    return session ? agentPresets.presetForSession(session) === 'aleph' : false;
+    return session ? agentPresets.presetForSession(session) : null;
   };
+  const ALEPH_PRESETS = new Set(['aleph', 'aleph-composer', 'aleph-infra']);
+  const isAleph = (agent) => ALEPH_PRESETS.has(presetOf(agent));
+  const isLeader = (agent) => presetOf(agent) === 'aleph';
 
   const workspaceParameters = {
     workspace: { type: 'string', description: 'Absolute leader workspace path; defaults to the calling session cwd' },
@@ -665,7 +777,7 @@ export async function apply(ctx) {
           submissionPython: args.submission_python,
         });
       },
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_status',
       'Return AlephResearch campaign and mission status from the DSH storage domain.',
@@ -696,7 +808,7 @@ export async function apply(ctx) {
       'Start a queued researcher through the DSH subagent service and return its child session id.',
       campaignParameter,
       async (args, exec) => service.runNext({ campaignId: args.campaign_id, agent: exec.agent }),
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_compose_batch',
       'Compose a batch of missions across L0 to L3 so several researchers can be dispatched concurrently.',
@@ -718,12 +830,33 @@ export async function apply(ctx) {
       'Dispatch queued missions until the campaign maxParallel limit is reached.',
       campaignParameter,
       async (args, exec) => service.runAvailable({ campaignId: args.campaign_id, agent: exec.agent }),
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_infra_status',
       'Refresh and return InfraOptimizer capacity: CPU, GPU, disk, memory and the campaign concurrency limit.',
       campaignParameter,
       async (args) => service.infraStatus({ campaignId: args.campaign_id }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_run_composer',
+      'Start the Composer agent to inspect the campaign and compose the next strategy-mixed batch.',
+      campaignParameter,
+      async (args, exec) => service.runAgent({ campaignId: args.campaign_id, role: 'composer', agent: exec.agent }),
+    ), { when: ({ agent }) => isLeader(agent) }),
+    ctx.tools.register(tool(
+      'aleph_run_infra',
+      'Start the InfraOptimizer agent to inspect capacity and set a safe concurrency/budget.',
+      campaignParameter,
+      async (args, exec) => service.runAgent({ campaignId: args.campaign_id, role: 'infra', agent: exec.agent }),
+    ), { when: ({ agent }) => isLeader(agent) }),
+    ctx.tools.register(tool(
+      'aleph_set_parallel',
+      'Set the campaign concurrency limit chosen by InfraOptimizer.',
+      {
+        ...campaignParameter,
+        max_parallel: { type: 'integer', required: true, description: 'Concurrency limit from 1 to 8' },
+      },
+      async (args) => service.setParallel({ campaignId: args.campaign_id, maxParallel: args.max_parallel }),
     ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
       'aleph_set_budget',
