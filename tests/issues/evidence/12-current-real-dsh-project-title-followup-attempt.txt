@@ -1,0 +1,49 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-4ac3l87t", "url": "http://127.0.0.1:52301"}
+native server returns no-project HTTP404
+native server identifies non-success envelope
+page URL belongs to isolated actual Host
+actual page title identifies DSH
+actual panel is meaningful and nonblank
+native no-project renders empty title
+native no-project renders current initialization instruction
+native no-project does not render failure heading
+reload recovers native empty state
+return control closes the Aleph panel
+reopening panel recovers native empty guidance
+mobile empty heading remains visible
+mobile empty guidance remains readable
+mobile empty document has no horizontal overflow
+other404 renders failure
+other404 recovers through actual native response
+missingCode404 renders failure
+missingCode404 recovers through actual native response
+unauthorized401 renders failure
+unauthorized401 recovers through actual native response
+forbidden403 renders failure
+forbidden403 recovers through actual native response
+noProject500 renders failure
+noProject500 recovers through actual native response
+html503 renders failure
+html503 recovers through actual native response
+networkAbort renders failure
+networkAbort recovers through actual native response
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('heading', { name: 'Aleph Research 项目 · p-45604e53', exact: true }) to be visible[22m
+
+    at /home/paulus-chang/项目/aleph-tests/tests/issues/dsh/console-empty-browser.mjs:79:19 {
+  log: [
+    "  - waiting for getByRole('heading', { name: 'Aleph Research 项目 · p-45604e53', exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v26.12.1
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/current-console-empty.py", line 68, in <module>
+    raise RuntimeError('browser observation failed; inspect saved evidence')
+RuntimeError: browser observation failed; inspect saved evidence

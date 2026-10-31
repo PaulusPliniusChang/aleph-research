@@ -1,0 +1,628 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-ir6d82pf",
+    "workspace": "/tmp/aleph-project-dsh-ir6d82pf/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/tmp/aleph-current-migration-validation-source",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "source_commit": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "dirty": ""
+  },
+  "url": "http://127.0.0.1:42085",
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-console-empty.py",
+    "--source",
+    "/tmp/aleph-current-migration-validation-source",
+    "--output",
+    "tests/issues/evidence/12-current-real-dsh.json"
+  ],
+  "browser_fallback": "Browser plugin not available",
+  "events": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 544746,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "browser": {
+    "flow": "Actual DSH Aleph panel -> native no-project -> refresh/reopen/mobile -> actual project initialization -> native poll update; injected HTTP/network error controls separately identified",
+    "browserFallback": "Browser plugin not available",
+    "checks": [
+      {
+        "name": "native server returns no-project HTTP404",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "native server identifies non-success envelope",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "page URL belongs to isolated actual Host",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "actual page title identifies DSH",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "actual panel is meaningful and nonblank",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "native no-project renders empty title",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "native no-project renders current initialization instruction",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "native no-project does not render failure heading",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "reload recovers native empty state",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "return control closes the Aleph panel",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "reopening panel recovers native empty guidance",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "mobile empty heading remains visible",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "mobile empty guidance remains readable",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "mobile empty document has no horizontal overflow",
+        "passed": true,
+        "kind": "actual"
+      },
+      {
+        "name": "other404 renders failure",
+        "passed": true,
+        "kind": "injected"
+      },
+      {
+        "name": "other404 recovers through actual native response",
+        "passed": true,
+        "kind": "actual-recovery"
+      },
+      {
+        "name": "missingCode404 renders failure",
+        "passed": true,
+        "kind": "injected"
+      },
+      {
+        "name": "missingCode404 recovers through actual native response",
+        "passed": true,
+        "kind": "actual-recovery"
+      },
+      {
+        "name": "unauthorized401 renders failure",
+        "passed": true,
+        "kind": "injected"
+      },
+      {
+        "name": "unauthorized401 recovers through actual native response",
+        "passed": true,
+        "kind": "actual-recovery"
+      },
+      {
+        "name": "forbidden403 renders failure",
+        "passed": true,
+        "kind": "injected"
+      },
+      {
+        "name": "forbidden403 recovers through actual native response",
+        "passed": true,
+        "kind": "actual-recovery"
+      },
+      {
+        "name": "noProject500 renders failure",
+        "passed": true,
+        "kind": "injected"
+      },
+      {
+        "name": "noProject500 recovers through actual native response",
+        "passed": true,
+        "kind": "actual-recovery"
+      },
+      {
+        "name": "html503 renders failure",
+        "passed": true,
+        "kind": "injected"
+      },
+      {
+        "name": "html503 recovers through actual native response",
+        "passed": true,
+        "kind": "actual-recovery"
+      },
+      {
+        "name": "networkAbort renders failure",
+        "passed": true,
+        "kind": "injected"
+      },
+      {
+        "name": "networkAbort recovers through actual native response",
+        "passed": true,
+        "kind": "actual-recovery"
+      }
+    ],
+    "events": [
+      {
+        "name": "empty-desktop",
+        "screenshot": "12-current-empty-desktop.png",
+        "body": "DSH \u672c\u5730\u6784\u5efa\n0.2.2-alpha.2-f3803c9-dirty\n\u65b0\u4f1a\u8bdd\n\u63d2\u4ef6\n\u81ea\u52a8\u5316\u4efb\u52a1\nAleph\n\u66f4\u591a\n\u5de5\u4f5c\u533a\n\u9ed8\u8ba4\u5de5\u4f5c\u533a\n\u65b0\u4f1a\u8bdd\n\u66f4\u591a\nAleph Research \u9879\u76ee\n\n\u53ea\u8bfb\u5c55\u793a DSH \u9879\u76ee\u3001mission\u3001batch \u4e0e\u673a\u5668\u72b6\u6001\u3002\n\n\u6700\u540e\u66f4\u65b0: 22:00:25\n\u8fd4\u56de\u5bf9\u8bdd\n\u6682\u65e0\u6218\u5f79\u5feb\u7167\n\n\u5c1a\u65e0\u9879\u76ee\uff1b\u5728 Leader \u6a21\u5f0f\u4f7f\u7528 aleph_init_project \u521b\u5efa\u3002\n\naleph/no-project"
+      },
+      {
+        "name": "empty-mobile",
+        "screenshot": "12-current-empty-mobile.png",
+        "body": "DSH \u672c\u5730\u6784\u5efa\n0.2.2-alpha.2-f3803c9-dirty\n\u65b0\u4f1a\u8bdd\n\u63d2\u4ef6\n\u81ea\u52a8\u5316\u4efb\u52a1\nAleph\n\u66f4\u591a\n\u5de5\u4f5c\u533a\n\u9ed8\u8ba4\u5de5\u4f5c\u533a\n\u65b0\u4f1a\u8bdd\n\u66f4\u591a\nAleph Research \u9879\u76ee\n\n\u53ea\u8bfb\u5c55\u793a DSH \u9879\u76ee\u3001mission\u3001batch \u4e0e\u673a\u5668\u72b6\u6001\u3002\n\n\u6700\u540e\u66f4\u65b0: 22:00:26\n\u8fd4\u56de\u5bf9\u8bdd\n\u6682\u65e0\u6218\u5f79\u5feb\u7167\n\n\u5c1a\u65e0\u9879\u76ee\uff1b\u5728 Leader \u6a21\u5f0f\u4f7f\u7528 aleph_init_project \u521b\u5efa\u3002\n\naleph/no-project"
+      },
+      {
+        "name": "actual-tool",
+        "request": {
+          "action": "parent",
+          "cwd": "/tmp/aleph-project-dsh-ir6d82pf/workspace"
+        },
+        "result": {
+          "sessionId": "session-3793cecc-7d2b-45ec-87ed-d656c60d95db",
+          "agentPreset": "aleph"
+        }
+      },
+      {
+        "name": "actual-tool",
+        "request": {
+          "action": "tool",
+          "sessionId": "session-3793cecc-7d2b-45ec-87ed-d656c60d95db",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-ir6d82pf/workspace"
+          }
+        },
+        "result": {
+          "id": "p-daac569f",
+          "workspace": "/tmp/aleph-project-dsh-ir6d82pf/workspace",
+          "researchRoot": "/tmp/aleph-project-dsh-ir6d82pf/workspace/research",
+          "missionRoot": "/tmp/aleph-project-dsh-ir6d82pf/workspace/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T14:01:05.148Z",
+          "updatedAt": "2026-10-31T14:01:05.148Z"
+        }
+      }
+    ],
+    "pageErrors": [],
+    "consoleLogs": [
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "other404"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "missingCode404"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "unauthorized401"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "forbidden403"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "noProject500"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "html503"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "networkAbort"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "networkAbort"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "networkAbort"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "networkAbort"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "networkAbort"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "networkAbort"
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "mode": "native"
+      }
+    ],
+    "failedResponses": [
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "other404"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "missingCode404"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 401,
+        "mode": "unauthorized401"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 403,
+        "mode": "forbidden403"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 500,
+        "mode": "noProject500"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 503,
+        "mode": "html503"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      },
+      {
+        "url": "http://127.0.0.1:42085/api/aleph/snapshot",
+        "status": 404,
+        "mode": "native"
+      }
+    ],
+    "nativeNoProject": {
+      "status": 404,
+      "body": {
+        "ok": false,
+        "error": {
+          "code": "aleph/no-project"
+        }
+      }
+    },
+    "error": {
+      "name": "TimeoutError",
+      "message": "locator.waitFor: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: /p-daac569f/ }) to be visible\u001b[22m\n",
+      "stack": "locator.waitFor: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: /p-daac569f/ }) to be visible\u001b[22m\n\n    at /home/paulus-chang/\u9879\u76ee/aleph-tests/tests/issues/dsh/console-empty-browser.mjs:79:19"
+    },
+    "failureBody": "DSH \u672c\u5730\u6784\u5efa\n0.2.2-alpha.2-f3803c9-dirty\n\u65b0\u4f1a\u8bdd\n\u63d2\u4ef6\n\u81ea\u52a8\u5316\u4efb\u52a1\nAleph\n\u66f4\u591a\n\u5de5\u4f5c\u533a\n\u9ed8\u8ba4\u5de5\u4f5c\u533a\n\u65b0\u4f1a\u8bdd\n\u66f4\u591a\nAleph Research \u9879\u76ee \u00b7 workspace\n\n\u53ea\u8bfb\u5c55\u793a DSH \u9879\u76ee\u3001mission\u3001batch \u4e0e\u673a\u5668\u72b6\u6001\u3002\n\n\u8fd0\u884c\u4e2d\n\u6700\u540e\u66f4\u65b0: 22:01:12\n\u8fd4\u56de\u5bf9\u8bdd\n\u9879\u76ee\n\u9879\u76ee\np-daac569f\n\u72b6\u6001\n\u8fd0\u884c\u4e2d\nTemplate \u5206\u652f\ntemplate\n\u751f\u6210\u65f6\u95f4\n2026/10/31 22:01:12\n\u5de5\u4f5c\u533a\n/tmp/aleph-project-dsh-ir6d82pf/workspace\n\u7814\u7a76\u4ed3\u5e93\n/tmp/aleph-project-dsh-ir6d82pf/workspace/research\nMission \u4ed3\u5e93\n/tmp/aleph-project-dsh-ir6d82pf/workspace/missions\n\u8bc4\u6d4b\u547d\u4ee4\npython3 eval/run_eval.py\nResearcher \u6570\u91cf\n4\n\u6700\u4f73\u5206\u6570\n\u2014\n\u6700\u4f73\u63d0\u4ea4\n\u2014\n\u8bc4\u6d4b\u6b21\u6570\n0\n\u7814\u7a76\u5de5\u7a0b\nno\n\u5171\u4eab Python\n\u2014\n\u63d0\u4f9b\u7684\u6570\u636e\n\u2014\n\u9690\u85cf\u6d4b\u8bd5\u96c6\n\u2014\n\u63d0\u4ea4\u7528 Python\n\u2014\nwatchdog \u8fdd\u89c4\n0\n\u673a\u5668\n\u673a\u5668\n\u72b6\u6001\n\u6279\u6b21\nlocal\n\u7a7a\u95f2\n\u2014\n\u4efb\u52a1\u8ba1\u6570\n0\n\u6392\u961f\n0\n\u8fd0\u884c\n0\n\u5b8c\u6210\n0\n\u5931\u8d25\n\u7f16\u6392 agent\n\u89d2\u8272\nAgent \u72b6\u6001\n\u5b50\u4f1a\u8bdd\n\u5206\u652f\n\u5de5\u4f5c\u76ee\u5f55\n\u66f4\u65b0\u65f6\u95f4\n\u6458\u8981\n\u5c1a\u672a\u8fd0\u884c Composer \u6216 InfraOptimizer\u3002\nComposer \u6279\u6b21\n\u6279\u6b21\n\u72b6\u6001\n\u673a\u5668\n\u4efb\u52a1\u6570\n\u5206\u652f\n\u521b\u5efa\u65f6\u95f4\n\u6682\u65e0 Composer \u6279\u6b21\u3002\n\u4efb\u52a1\n\u72b6\u6001\n\u4efb\u52a1\nOwner \u4f1a\u8bdd\n\u5206\u652f\n\u6279\u6b21\nPre-batch tip\n\u7ed3\u679c\u63d0\u4ea4\n\u5165\u53e3\u811a\u672c\n\u9519\u8bef\n\u6682\u65e0\u4efb\u52a1\u8bb0\u5f55\u3002\nGit \u6811\n/tmp/aleph-project-dsh-ir6d82pf/workspace/research\n\u5206\u652f\n\u5206\u652f\n\u63d0\u4ea4\n\u8bf4\u660e\n\u65e5\u671f\nmain\n9f389ce\ninitialize\n2026-10-31\nWorktrees\n\u5de5\u4f5c\u76ee\u5f55\n\u5206\u652f\nHEAD\n/tmp/aleph-project-dsh-ir6d82pf/workspace/research\nmain\n9f389cef\nCommits\n\u63d0\u4ea4\n\u5f15\u7528\n\u8bf4\u660e\n\u65e5\u671f\n9f389ce\n(HEAD -> main\ninitialize\n2026-10-31\n/tmp/aleph-project-dsh-ir6d82pf/workspace/missions\n\u5206\u652f\n\u5206\u652f\n\u63d0\u4ea4\n\u8bf4\u660e\n\u65e5\u671f\ntemplate\ndd9beea\ninitialize\n2026-10-31\nWorktrees\n\u5de5\u4f5c\u76ee\u5f55\n\u5206\u652f\nHEAD\n/tmp/aleph-project-dsh-ir6d82pf/workspace/missions\ntemplate\ndd9beea9\nCommits\n\u63d0\u4ea4\n\u5f15\u7528\n\u8bf4\u660e\n\u65e5\u671f\ndd9beea\n(HEAD -> template\ninitialize\n2026-10-31\n\u8fd0\u884c\u65f6\u8fdd\u89c4\n\u6682\u65e0\u8fdd\u89c4\u8bb0\u5f55\u3002\n\u751f\u6210\u65f6\u95f4: 2026/10/31 22:01:12\nschema 2\nmissions: 0 \u00b7 batches: 0"
+  },
+  "browser_exit": 1
+}

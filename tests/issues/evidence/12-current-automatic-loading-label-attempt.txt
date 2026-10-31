@@ -1,0 +1,73 @@
+▶ current #1 no-project snapshot contract
+  ✖ initial state renders loading before request (1.219652ms)
+  ✔ native no-project 404 becomes empty (0.152671ms)
+  ✔ native no-project clears snapshot (0.110767ms)
+  ✔ native empty records correct error identity (0.09537ms)
+  ✔ native empty has successful fetch timestamp (0.683961ms)
+  ✔ Chinese empty title is rendered (10.695474ms)
+  ✔ Chinese empty guidance names current initializer (0.201595ms)
+  ✔ English empty guidance describes current project (0.16002ms)
+  ✔ empty state does not render failure heading (0.197946ms)
+  ✔ poll requests current snapshot endpoint (0.133523ms)
+  ✔ poll bypasses HTTP cache (0.081753ms)
+  ✔ poll explicitly accepts JSON (0.064218ms)
+  ✔ poll continues at two second interval (0.052288ms)
+  ✔ unrelated 404 renders failure rather than native empty (1.00603ms)
+  ✔ missing code 404 renders failure rather than native empty (0.846839ms)
+  ✔ unauthorized renders failure rather than native empty (0.917414ms)
+  ✔ forbidden renders failure rather than native empty (0.824925ms)
+  ✔ server failure with no-project code renders failure rather than native empty (0.881809ms)
+  ✔ unavailable server renders failure rather than native empty (0.883343ms)
+  ✔ unparseable failing response renders failure rather than native empty (1.286942ms)
+  ✔ network interruption renders failure rather than native empty (1.031071ms)
+  ✔ successful poll replaces empty phase with ready (0.072058ms)
+  ✔ successful poll displays current project title (1.007045ms)
+  ✔ successful poll clears no-project marker (0.064883ms)
+  ✔ failed update retains ready phase (0.069287ms)
+  ✔ failed update preserves exact prior snapshot (0.053092ms)
+  ✔ failed update preserves successful timestamp (0.043017ms)
+  ✔ failed update renders stale warning (0.297303ms)
+  ✔ failed update retains visible project identity (0.302084ms)
+  ✔ subsequent success clears stale warning (0.291972ms)
+  ✔ native no-project clears previously ready snapshot (0.057265ms)
+  ✔ native no-project removes prior project title (0.080202ms)
+  ✔ native no-project restores creation guidance (0.064996ms)
+  ✔ network error after empty becomes failure (0.063048ms)
+  ✔ native response recovers failure without reload (0.046929ms)
+  ✔ unmount clears actual scheduled timer (0.044379ms)
+  ✔ late pending response does not update unmounted view (0.03482ms)
+✖ current #1 no-project snapshot contract (35.673134ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 36
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95.187453
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-console-empty.test.mjs:36:39
+✖ initial state renders loading before request (1.219652ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /正在读取/. Input:
+  
+  'Aleph Research 项目\n只读展示 DSH 项目、mission、batch 与机器状态。\n\n\n返回对话\n\n正在加载战役快照…\n\n'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-console-empty.test.mjs:38:76
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-console-empty.test.mjs:36:70)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-console-empty.test.mjs:36:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-console-empty.test.mjs:38:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Aleph Research 项目\n只读展示 DSH 项目、mission、batch 与机器状态。\n\n\n返回对话\n\n正在加载战役快照…\n\n',
+    expected: /正在读取/,
+    operator: 'match',
+    diff: 'simple'
+  }

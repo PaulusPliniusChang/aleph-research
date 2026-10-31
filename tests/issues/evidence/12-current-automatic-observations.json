@@ -1,0 +1,156 @@
+{
+  "source": "/tmp/aleph-current-migration-validation-source",
+  "source_sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "boundary": "Actual existing client hook and complete ConsoleView in isolated VM; React hooks, fetch, interval and virtual element tree replaced. No actual DSH/browser claim; actual rendered validation separately.",
+  "effective_points": 37,
+  "observations": [
+    {
+      "name": "initial state renders loading before request",
+      "passed": true
+    },
+    {
+      "name": "native no-project 404 becomes empty",
+      "passed": true
+    },
+    {
+      "name": "native no-project clears snapshot",
+      "passed": true
+    },
+    {
+      "name": "native empty records correct error identity",
+      "passed": true
+    },
+    {
+      "name": "native empty has successful fetch timestamp",
+      "passed": true
+    },
+    {
+      "name": "Chinese empty title is rendered",
+      "passed": true
+    },
+    {
+      "name": "Chinese empty guidance names current initializer",
+      "passed": true
+    },
+    {
+      "name": "English empty guidance describes current project",
+      "passed": true
+    },
+    {
+      "name": "empty state does not render failure heading",
+      "passed": true
+    },
+    {
+      "name": "poll requests current snapshot endpoint",
+      "passed": true
+    },
+    {
+      "name": "poll bypasses HTTP cache",
+      "passed": true
+    },
+    {
+      "name": "poll explicitly accepts JSON",
+      "passed": true
+    },
+    {
+      "name": "poll continues at two second interval",
+      "passed": true
+    },
+    {
+      "name": "unrelated 404 renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "missing code 404 renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "unauthorized renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "forbidden renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "server failure with no-project code renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "unavailable server renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "unparseable failing response renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "network interruption renders failure rather than native empty",
+      "passed": true
+    },
+    {
+      "name": "successful poll replaces empty phase with ready",
+      "passed": true
+    },
+    {
+      "name": "successful poll displays current project title",
+      "passed": true
+    },
+    {
+      "name": "successful poll clears no-project marker",
+      "passed": true
+    },
+    {
+      "name": "failed update retains ready phase",
+      "passed": true
+    },
+    {
+      "name": "failed update preserves exact prior snapshot",
+      "passed": true
+    },
+    {
+      "name": "failed update preserves successful timestamp",
+      "passed": true
+    },
+    {
+      "name": "failed update renders stale warning",
+      "passed": true
+    },
+    {
+      "name": "failed update retains visible project identity",
+      "passed": true
+    },
+    {
+      "name": "subsequent success clears stale warning",
+      "passed": true
+    },
+    {
+      "name": "native no-project clears previously ready snapshot",
+      "passed": true
+    },
+    {
+      "name": "native no-project removes prior project title",
+      "passed": true
+    },
+    {
+      "name": "native no-project restores creation guidance",
+      "passed": true
+    },
+    {
+      "name": "network error after empty becomes failure",
+      "passed": true
+    },
+    {
+      "name": "native response recovers failure without reload",
+      "passed": true
+    },
+    {
+      "name": "unmount clears actual scheduled timer",
+      "passed": true
+    },
+    {
+      "name": "late pending response does not update unmounted view",
+      "passed": true
+    }
+  ]
+}

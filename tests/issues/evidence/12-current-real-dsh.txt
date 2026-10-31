@@ -1,0 +1,42 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-m88k0szj", "url": "http://127.0.0.1:33457"}
+native server returns no-project HTTP404
+native server identifies non-success envelope
+page URL belongs to isolated actual Host
+actual page title identifies DSH
+actual panel is meaningful and nonblank
+native no-project renders empty title
+native no-project renders current initialization instruction
+native no-project does not render failure heading
+reload recovers native empty state
+return control closes the Aleph panel
+reopening panel recovers native empty guidance
+mobile empty heading remains visible
+mobile empty guidance remains readable
+mobile empty document has no horizontal overflow
+other404 renders failure
+other404 recovers through actual native response
+missingCode404 renders failure
+missingCode404 recovers through actual native response
+unauthorized401 renders failure
+unauthorized401 recovers through actual native response
+forbidden403 renders failure
+forbidden403 recovers through actual native response
+noProject500 renders failure
+noProject500 recovers through actual native response
+html503 renders failure
+html503 recovers through actual native response
+networkAbort renders failure
+networkAbort recovers through actual native response
+registered initializer creates real project record
+native successful poll replaces empty page with actual project
+actual project snapshot remains free of fabricated mission records
+injected update failure preserves actual project
+injected update failure explains stale snapshot
+actual successful response clears stale warning
+injected no-project clears previously displayed real project
+actual existing project recovers after no-project control
+reload preserves actual project state from Host
+mobile actual project identity remains visible
+no framework error overlay exists
+no uncaught browser script errors exist
+console warnings and errors are limited to explained snapshot failures

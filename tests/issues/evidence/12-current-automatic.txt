@@ -1,0 +1,47 @@
+▶ current #1 no-project snapshot contract
+  ✔ initial state renders loading before request (0.750259ms)
+  ✔ native no-project 404 becomes empty (0.115402ms)
+  ✔ native no-project clears snapshot (0.092244ms)
+  ✔ native empty records correct error identity (0.13583ms)
+  ✔ native empty has successful fetch timestamp (0.774741ms)
+  ✔ Chinese empty title is rendered (10.545546ms)
+  ✔ Chinese empty guidance names current initializer (0.190752ms)
+  ✔ English empty guidance describes current project (0.156409ms)
+  ✔ empty state does not render failure heading (0.203797ms)
+  ✔ poll requests current snapshot endpoint (0.136303ms)
+  ✔ poll bypasses HTTP cache (0.072436ms)
+  ✔ poll explicitly accepts JSON (0.064896ms)
+  ✔ poll continues at two second interval (0.050502ms)
+  ✔ unrelated 404 renders failure rather than native empty (0.978554ms)
+  ✔ missing code 404 renders failure rather than native empty (0.886156ms)
+  ✔ unauthorized renders failure rather than native empty (0.893465ms)
+  ✔ forbidden renders failure rather than native empty (0.852958ms)
+  ✔ server failure with no-project code renders failure rather than native empty (0.987364ms)
+  ✔ unavailable server renders failure rather than native empty (0.901674ms)
+  ✔ unparseable failing response renders failure rather than native empty (1.333181ms)
+  ✔ network interruption renders failure rather than native empty (1.237222ms)
+  ✔ successful poll replaces empty phase with ready (0.199153ms)
+  ✔ successful poll displays current project title (1.518891ms)
+  ✔ successful poll clears no-project marker (0.082815ms)
+  ✔ failed update retains ready phase (0.090562ms)
+  ✔ failed update preserves exact prior snapshot (0.106851ms)
+  ✔ failed update preserves successful timestamp (0.057911ms)
+  ✔ failed update renders stale warning (0.343536ms)
+  ✔ failed update retains visible project identity (0.417579ms)
+  ✔ subsequent success clears stale warning (0.372852ms)
+  ✔ native no-project clears previously ready snapshot (0.06263ms)
+  ✔ native no-project removes prior project title (0.128718ms)
+  ✔ native no-project restores creation guidance (0.091043ms)
+  ✔ network error after empty becomes failure (0.072418ms)
+  ✔ native response recovers failure without reload (0.04477ms)
+  ✔ unmount clears actual scheduled timer (0.047755ms)
+  ✔ late pending response does not update unmounted view (0.035576ms)
+✔ current #1 no-project snapshot contract (36.683803ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 97.003805

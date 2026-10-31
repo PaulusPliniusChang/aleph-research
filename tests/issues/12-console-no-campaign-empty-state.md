@@ -8,6 +8,33 @@ pull_request: https://github.com/hapenia/aleph-research/pull/2
 
 # 无战役时控制台显示快照读取失败，未展示空状态引导
 
+## 最新主分支正式核查（2026-10-31）
+
+当前主分支为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。B 在正式检查前串行同步上游与派生仓库，并通过仅快进同步确认主工作区保持最新。当前客户端已经将 HTTP `404` 与 `aleph/no-project` 识别为空状态；本轮不复现最初的无项目读取失败。旧拉取请求 #2 已关闭且未合并，后文旧版实现和验证仅作历史记录。本地人工管理状态继续保留。
+
+[独立自动检查](dsh/current-console-empty.test.mjs)包含 **37 个有效行为点，全部通过**；Node 额外计算父测试容器，共 38 项通过。检查执行当前客户端的完整轮询钩子和页面函数，替代 React 钩子、网络响应、定时器和虚拟元素收集器。该阶段覆盖无项目识别、创建引导、其他 HTTP 错误、网络错误、已有项目的失败更新与恢复，以及卸载后禁止迟到响应更新状态，不属于实际浏览器证据。
+
+[实际 DSH 启动器](dsh/current-console-empty.py)与[浏览器脚本](dsh/console-empty-browser.mjs)在 DSH `0.2.2-alpha.2` 中打开真实控制台。浏览器插件在当前会话中不可用，因此使用现有 Playwright 与 Chrome，记录的原因是 `Browser plugin not available`。桌面视口为 `1440 × 1000`，窄屏视口为 `390 × 844`，窄屏检查通过浏览器视口完成。实际检查共 41 项，全部通过。
+
+| 检查范围 | 结果 |
+| --- | --- |
+| 真实无项目接口与页面 | 接口返回 HTTP `404` 与 `aleph/no-project`；页面显示“暂无战役快照”和 `aleph_init_project` 创建说明，没有读取失败标题。 |
+| 页面交互 | 刷新后重新打开 Aleph，空状态仍然正常；点击“返回对话”并再次打开，创建说明仍然显示。 |
+| 真实项目创建 | 通过实际注册的 `aleph_init_project` 创建项目，页面在后续轮询中显示真实项目编号；刷新后仍能读取。项目成功响应没有由浏览器伪造。 |
+| 明确标注的请求拦截 | 其他 `404`、缺少代码的 `404`、`401`、`403`、携带无项目代码的 `500`、HTML `503` 及网络中断均显示失败；移除拦截后，通过真实无项目响应恢复。 |
+| 原快照与恢复 | 有真实项目时模拟 `503`，页面保留原项目并说明旧快照；真实响应恢复后清除说明。模拟无项目响应会清除旧项目，随后真实响应恢复原项目。 |
+| 页面运行情况 | 页面身份正确、内容非空，没有框架错误遮罩，也没有未捕获脚本异常。浏览器资源错误均对应无项目接口和明确模拟的快照失败，没有其他错误或警告。 |
+| 视口范围 | 桌面和窄屏空状态均正常显示，窄屏空状态没有文档横向溢出。有项目页面沿用宽表布局，部分卡片列超出初始视口；本轮没有声称完成整个控制台的响应式布局改造。 |
+
+原始结果见[自动结构化记录](evidence/12-current-automatic-observations.json)、[自动输出](evidence/12-current-automatic.txt)、[实际 DSH 结构化记录](evidence/12-current-real-dsh.json)与[实际输出](evidence/12-current-real-dsh.txt)。截图包括[桌面空状态](evidence/12-current-empty-desktop.png)、[窄屏空状态](evidence/12-current-empty-mobile.png)、[真实项目](evidence/12-current-project-desktop.png)、[旧快照提示](evidence/12-current-stale-project.png)与[窄屏项目](evidence/12-current-project-mobile.png)。隔离 Host `545923` 已正常退出，记录确认该进程编号不存在。
+
+首次自动脚本误用“正在读取”匹配当前“正在加载战役快照”的文案，[原始断言记录](evidence/12-current-automatic-loading-label-attempt.txt)单独保留。实际脚本曾误认为项目内部编号会出现在标题中，但当前标题使用工作区名称；[首次定位记录](evidence/12-current-real-dsh-project-title-attempt.json)和[后续定位记录](evidence/12-current-real-dsh-project-title-followup-attempt.json)单独保留。实际页面在这些尝试中已经成功更新为新项目，上述中断属于检查脚本定位错误，不计作产品缺陷。
+
+```bash
+ALEPH_CURRENT_SOURCE=/path/to/current-source ALEPH_EMPTY_OBSERVATIONS=/tmp/empty-auto.json node --test tests/issues/dsh/current-console-empty.test.mjs
+python3 tests/issues/dsh/current-console-empty.py --source /path/to/current-source --output /tmp/empty-real.json
+```
+
 ## 问题
 
 在 DSH 中没有战役时，`/api/aleph/snapshot` 返回 HTTP `404`，响应代码为 `aleph/no-campaign`。客户端轮询逻辑先依据非成功 HTTP 状态抛出异常，因此不会读取该错误码。控制台最终显示快照读取失败，而不是暂无战役的空状态和创建引导。
