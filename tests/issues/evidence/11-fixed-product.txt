@@ -1,0 +1,117 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:429935) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (456.602632ms)
+(node:429936) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ selection refuses occupied target branches without altering research state
+  ✔ main-clean: refuses before changing the checked-out target (0.591473ms)
+  ✔ main-clean: diagnostic returns the exact Unicode, space and newline path (0.57063ms)
+  ✔ main-clean: diagnostic identifies the exact full branch ref (0.107388ms)
+  ✔ main-clean: message gives reversible save and switch instructions (0.37486ms)
+  ✔ main-clean: target HEAD and symbolic branch remain unchanged (20.683205ms)
+  ✔ main-clean: tracked files, staged tree and untracked inputs remain byte-identical (18.642236ms)
+  ✔ main-clean: other checked-out main repository remains unchanged (17.23701ms)
+  ✔ main-clean: all branch and report references remain unchanged (4.650006ms)
+  ✔ main-clean: best, history and complete project state remain unchanged (0.352813ms)
+  ✔ main-dirty: refuses before changing the checked-out target (0.223236ms)
+  ✔ main-dirty: diagnostic returns the exact Unicode, space and newline path (0.059792ms)
+  ✔ main-dirty: diagnostic identifies the exact full branch ref (0.034068ms)
+  ✔ main-dirty: message gives reversible save and switch instructions (0.056946ms)
+  ✔ main-dirty: target HEAD and symbolic branch remain unchanged (17.809503ms)
+  ✔ main-dirty: tracked files, staged tree and untracked inputs remain byte-identical (18.165849ms)
+  ✔ main-dirty: other checked-out main repository remains unchanged (16.676211ms)
+  ✔ main-dirty: all branch and report references remain unchanged (4.656331ms)
+  ✔ main-dirty: best, history and complete project state remain unchanged (0.157665ms)
+  ✔ linked-clean: refuses before changing the checked-out target (0.202044ms)
+  ✔ linked-clean: diagnostic returns the exact Unicode, space and newline path (0.078926ms)
+  ✔ linked-clean: diagnostic identifies the exact full branch ref (0.032747ms)
+  ✔ linked-clean: message gives reversible save and switch instructions (0.049326ms)
+  ✔ linked-clean: target HEAD and symbolic branch remain unchanged (23.477644ms)
+  ✔ linked-clean: tracked files, staged tree and untracked inputs remain byte-identical (19.131023ms)
+  ✔ linked-clean: other checked-out main repository remains unchanged (22.604919ms)
+  ✔ linked-clean: all branch and report references remain unchanged (4.969046ms)
+  ✔ linked-clean: best, history and complete project state remain unchanged (0.247324ms)
+  ✔ linked-dirty: refuses before changing the checked-out target (0.277624ms)
+  ✔ linked-dirty: diagnostic returns the exact Unicode, space and newline path (0.094037ms)
+  ✔ linked-dirty: diagnostic identifies the exact full branch ref (0.070182ms)
+  ✔ linked-dirty: message gives reversible save and switch instructions (0.074951ms)
+  ✔ linked-dirty: target HEAD and symbolic branch remain unchanged (22.237602ms)
+  ✔ linked-dirty: tracked files, staged tree and untracked inputs remain byte-identical (22.448321ms)
+  ✔ linked-dirty: other checked-out main repository remains unchanged (22.180306ms)
+  ✔ linked-dirty: all branch and report references remain unchanged (5.007762ms)
+  ✔ linked-dirty: best, history and complete project state remain unchanged (0.16084ms)
+✔ selection refuses occupied target branches without altering research state (850.154977ms)
+▶ selection at the best tip is a no-op even for occupied dirty worktrees
+  ✔ main no-op: succeeds without requiring an enumeration or clean input (0.173371ms)
+  ✔ main no-op: keeps response branch, previous tip and score (0.107993ms)
+  ✔ main no-op: keeps dirty index, file bytes, HEAD and untracked input (19.587002ms)
+  ✔ main no-op: does not write any branch or report ref (4.366162ms)
+  ✔ main no-op: preserves project metadata without a timestamp mutation (0.199263ms)
+  ✔ linked no-op: succeeds without requiring an enumeration or clean input (0.154284ms)
+  ✔ linked no-op: keeps response branch, previous tip and score (0.056809ms)
+  ✔ linked no-op: keeps dirty index, file bytes, HEAD and untracked input (19.514102ms)
+  ✔ linked no-op: does not write any branch or report ref (4.842479ms)
+  ✔ linked no-op: preserves project metadata without a timestamp mutation (0.095761ms)
+✔ selection at the best tip is a no-op even for occupied dirty worktrees (341.786733ms)
+▶ unoccupied selection uses exact branch refs and preserves unrelated worktrees
+  ✔ prefix-similar occupied branch does not block exact target (0.211493ms)
+  ✔ only the selected local branch moves to the recorded best input (9.440728ms)
+  ✔ result records exact selected branch, old tip and score (0.480974ms)
+  ✔ unrelated dirty main worktree is preserved (22.90595ms)
+  ✔ prefix-similar dirty linked worktree is preserved (17.554727ms)
+  ✔ independent evaluation report ref is preserved (4.753396ms)
+  ✔ unrelated tag is preserved (4.401364ms)
+  ✔ best, evaluation history and all project metadata are preserved (0.171261ms)
+  ✔ default main selection succeeds when only detached HEAD uses that commit (0.180076ms)
+  ✔ detached HEAD is not mistaken for an occupied branch (9.750314ms)
+  ✔ detached files, staged tree and HEAD are preserved (15.871337ms)
+✔ unoccupied selection uses exact branch refs and preserves unrelated worktrees (277.306392ms)
+▶ enumeration failure and expected-tip conflicts cannot silently move a branch
+  ✔ enumeration command failure rejects instead of assuming no worktrees (0.294101ms)
+  ✔ enumeration failure leaves the unoccupied target intact (4.502271ms)
+  ✔ enumeration failure preserves source files and index (18.000162ms)
+  ✔ enumeration failure preserves report references and metadata (8.913271ms)
+  ✔ real Git compare-and-swap refuses a tip changed after initial capture (0.320985ms)
+  ✔ concurrent writer tip survives the failed selection transaction (4.778458ms)
+  ✔ CAS conflict keeps unrelated source files and index (17.99872ms)
+  ✔ CAS conflict keeps best and history unchanged (0.229361ms)
+✔ enumeration failure and expected-tip conflicts cannot silently move a branch (349.352145ms)
+▶ invalid selections fail without repurposing tags or creating missing branches
+  ✔ explicit tag ref is refused as a non-branch target (0.588112ms)
+  ✔ tag ref stays unchanged after invalid selection (4.62681ms)
+  ✔ missing branch produces an actionable error (14.87111ms)
+  ✔ missing branch is not implicitly created (7.542752ms)
+  ✔ missing project is refused (0.190996ms)
+  ✔ no evaluated best rejects before branch changes (0.107872ms)
+  ✔ all invalid selections keep HEAD, working input and staged tree (40.239906ms)
+  ✔ invalid selections preserve evaluation history and independent report (8.24468ms)
+✔ invalid selections fail without repurposing tags or creating missing branches (202.569693ms)
+(node:429937) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (106.157221ms)
+✔ an activation without a child identity fails instead of writing a null record (67.501354ms)
+✔ an evaluation report stays attached to the commit it scored (184.469472ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (312.962136ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (132.984348ms)
+✔ evaluations accumulate and the best result follows the highest score (366.135255ms)
+ℹ tests 85
+ℹ suites 0
+ℹ pass 85
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2194.654125

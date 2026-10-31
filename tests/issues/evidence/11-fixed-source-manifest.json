@@ -1,0 +1,56 @@
+{
+  "status": "FROZEN",
+  "source": "/tmp/aleph-11-fix-source",
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "files": [
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "baseline_sha256": "7b2cca925247bee65b84c88d400ece2a831e1091d89e43cea476960c206aafac",
+      "sha256": "7d4641054bb90339d59c78ed7e757a90b954538b29f5cd56363a3551e789fbf9"
+    },
+    {
+      "path": "dsh-plugin/README.md",
+      "baseline_sha256": "ace9714b5d07ef5287005e67bda529906e9984fee38ecad16511a995667eaf3d",
+      "sha256": "94a668b0124f8340f08a887e5c814d6301d8b4e5b9d32e7167c3f21a85101c54"
+    },
+    {
+      "path": "docs/architecture.md",
+      "baseline_sha256": "95810543fae444d944224367c346af21a036c33821e06820ebf3b2cc6c6f5036",
+      "sha256": "2919bbe39e279317f00706e91e3667372ff72909e6515f7560cee633cacb6ce3"
+    },
+    {
+      "path": "dsh-plugin/test/select-best.test.mjs",
+      "baseline_sha256": null,
+      "sha256": "0ff65bb83c2d3fe72927de1a84cd60d66eadda3775754441d5985bc05d636e4f"
+    }
+  ],
+  "product_tests": {
+    "log": "/tmp/aleph-11-c-product-tests.txt",
+    "sha256": "d749c4dd9259425e0df2b592524d6225f0360a36c48f4af851c9488c30056d30",
+    "node_pass": 85,
+    "effective_new_points": 73,
+    "containers": 5,
+    "existing_tests": 7,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "patch": {
+    "path": "/tmp/aleph-11-c-changes.patch",
+    "sha256": "4ac3b4ed7bf46a0b2c6aa0b83a2bd9dbe589e2d93991e91964a356d248ea355d"
+  },
+  "actual_dsh_acceptance": "not performed by C; B independently owns acceptance",
+  "limits": "single Host; occupancy inspection and Git ref CAS are separate; no exclusion of independent Git checkout after inspection",
+  "official_source": "/home/paulus-chang/项目/aleph-fix-select-best",
+  "product_commit": "eb386d8f6a9b2d35deb36fb22c7cfac8d9a6cdc2",
+  "manifest_sha256": "d9626f1ef194775742dfd1050509ea5322e18d571651219074ec75a10edae9ea",
+  "verification": {
+    "product_node": 85,
+    "independent_effective": 116,
+    "actual_dsh_effective": 116,
+    "host": 437679,
+    "host_pid_absent": true,
+    "verified_after_tests": true,
+    "deps_link_removed": true
+  }
+}
