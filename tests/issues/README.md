@@ -21,6 +21,7 @@
 | ALEPH-12 | [无战役时控制台显示快照读取失败，未展示空状态引导](12-console-no-campaign-empty-state.md) |
 | ALEPH-13 | [同一批次重复启动 InfraOptimizer 会删除正在使用的工作目录](13-infra-duplicate-start.md) |
 | ALEPH-14 | [一个研究代理结束时，可能批量改写其他研究代理的状态与摘要](14-researcher-callback-ownership.md) |
+| ALEPH-15 | [评估期间研究分支发生变化，评分报告可能写入另一条分支](15-evaluation-report-attribution.md) |
 
 原议题 `ALEPH-03`，文件 `03-composer-running-budget.md`，已经并入 [ALEPH-02](02-run-next-budget.md)。原有运行任务预算占用问题、复现步骤和自动测试均已保留，编号 `ALEPH-03` 不再复用。
 

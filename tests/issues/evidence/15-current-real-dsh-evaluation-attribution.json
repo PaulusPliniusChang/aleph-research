@@ -1,0 +1,468 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-66c9tm9z",
+    "workspace": "/tmp/aleph-project-dsh-66c9tm9z/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "66885994ceadad83a237a27c1fc7de6419889c14",
+    "dirty": "",
+    "dsh_version": "0.2.2-alpha.2"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-evaluation-attribution.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/15-current-real-dsh-evaluation-attribution.json"
+  ],
+  "events": [
+    {
+      "name": "real-parent-session",
+      "monotonic": 55637.7623895,
+      "value": {
+        "header": {
+          "version": 4,
+          "id": "session-a332ca37-5275-4fb1-9d5a-197013ca530f",
+          "createdAt": 1793439959621,
+          "cwd": "/tmp/aleph-project-dsh-66c9tm9z/workspace",
+          "isSeeded": false,
+          "agentPreset": "aleph"
+        },
+        "events": []
+      }
+    },
+    {
+      "name": "stable-actual-evaluation",
+      "monotonic": 55637.930980262,
+      "value": {
+        "algorithm": "algorithm-a",
+        "cwd": "/tmp/aleph-project-dsh-66c9tm9z/workspace/stable/.aleph/evaluations/eval-59e55642",
+        "solution": "/tmp/aleph-project-dsh-66c9tm9z/workspace/stable/.aleph/evaluations/eval-59e55642"
+      }
+    },
+    {
+      "name": "stable-final-report",
+      "monotonic": 55638.037883879,
+      "value": {
+        "captured": "f27d527bcb8c71b4210f565c0547690cd7786b0a",
+        "other": "f6c24ca6709dbfd73b52eac4303f19dfe302d45b",
+        "advanced": null,
+        "evaluated": {
+          "algorithm": "algorithm-a",
+          "cwd": "/tmp/aleph-project-dsh-66c9tm9z/workspace/stable/.aleph/evaluations/eval-59e55642",
+          "solution": "/tmp/aleph-project-dsh-66c9tm9z/workspace/stable/.aleph/evaluations/eval-59e55642"
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-16e799a8",
+          "score": 11,
+          "researchCommit": "bbf8a0799f99b5ca360c33a94efd61b3ccb7a36b",
+          "stdout": "{\"score\": 11, \"algorithm\": \"algorithm-a\"}\n",
+          "stderr": ""
+        },
+        "parent": "f27d527bcb8c71b4210f565c0547690cd7786b0a",
+        "returnedAlgorithm": "algorithm-a",
+        "report": "research evaluation: 11\n\nAleph-Project: p-16e799a8\nAleph-Evaluation: 11\n\n{\"score\": 11, \"algorithm\": \"algorithm-a\"}",
+        "public": {
+          "schema": 2,
+          "generated_at": "2026-10-31T09:45:59.911Z",
+          "project": {
+            "id": "p-16e799a8",
+            "title": "stable",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-66c9tm9z/workspace/stable",
+            "research_root": "/tmp/aleph-project-dsh-66c9tm9z/workspace/stable/research",
+            "mission_root": "/tmp/aleph-project-dsh-66c9tm9z/workspace/stable/missions",
+            "template_branch": "template",
+            "eval_command": "python3 /tmp/aleph-project-dsh-66c9tm9z/stable-gate/evaluate.py"
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "switch-actual-evaluation",
+      "monotonic": 55638.314849075,
+      "value": {
+        "algorithm": "algorithm-a",
+        "cwd": "/tmp/aleph-project-dsh-66c9tm9z/workspace/switch/.aleph/evaluations/eval-8568c708",
+        "solution": "/tmp/aleph-project-dsh-66c9tm9z/workspace/switch/.aleph/evaluations/eval-8568c708"
+      }
+    },
+    {
+      "name": "switch-final-report",
+      "monotonic": 55638.420322652,
+      "value": {
+        "captured": "c1735d678921a9c5982b18d253a8c5df7190ea83",
+        "other": "b4f593057fc1c7e63c28fb72d6cb1bdf34a41f86",
+        "advanced": null,
+        "evaluated": {
+          "algorithm": "algorithm-a",
+          "cwd": "/tmp/aleph-project-dsh-66c9tm9z/workspace/switch/.aleph/evaluations/eval-8568c708",
+          "solution": "/tmp/aleph-project-dsh-66c9tm9z/workspace/switch/.aleph/evaluations/eval-8568c708"
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-894200c9",
+          "score": 11,
+          "researchCommit": "78aeb909e8a537e82f95108629a404e116b7b294",
+          "stdout": "{\"score\": 11, \"algorithm\": \"algorithm-a\"}\n",
+          "stderr": ""
+        },
+        "parent": "b4f593057fc1c7e63c28fb72d6cb1bdf34a41f86",
+        "returnedAlgorithm": "algorithm-b",
+        "report": "research evaluation: 11\n\nAleph-Project: p-894200c9\nAleph-Evaluation: 11\n\n{\"score\": 11, \"algorithm\": \"algorithm-a\"}",
+        "public": {
+          "schema": 2,
+          "generated_at": "2026-10-31T09:46:00.294Z",
+          "project": {
+            "id": "p-894200c9",
+            "title": "switch",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-66c9tm9z/workspace/switch",
+            "research_root": "/tmp/aleph-project-dsh-66c9tm9z/workspace/switch/research",
+            "mission_root": "/tmp/aleph-project-dsh-66c9tm9z/workspace/switch/missions",
+            "template_branch": "template",
+            "eval_command": "python3 /tmp/aleph-project-dsh-66c9tm9z/switch-gate/evaluate.py"
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "advance-actual-evaluation",
+      "monotonic": 55638.78178167,
+      "value": {
+        "algorithm": "algorithm-a",
+        "cwd": "/tmp/aleph-project-dsh-66c9tm9z/workspace/advance/.aleph/evaluations/eval-0799f9f9",
+        "solution": "/tmp/aleph-project-dsh-66c9tm9z/workspace/advance/.aleph/evaluations/eval-0799f9f9"
+      }
+    },
+    {
+      "name": "advance-final-report",
+      "monotonic": 55638.934873055,
+      "value": {
+        "captured": "97ce4cef29b3d18f48c57f8db2046789d9b063ac",
+        "other": "c719ced776fc6d5300c1c5f1c3e291215d607b5d",
+        "advanced": "cdc38a15d54749be4d73d7052b877b8831c34a2a",
+        "evaluated": {
+          "algorithm": "algorithm-a",
+          "cwd": "/tmp/aleph-project-dsh-66c9tm9z/workspace/advance/.aleph/evaluations/eval-0799f9f9",
+          "solution": "/tmp/aleph-project-dsh-66c9tm9z/workspace/advance/.aleph/evaluations/eval-0799f9f9"
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-a7f69363",
+          "score": 11,
+          "researchCommit": "9cf5d15eb2fd9cbb33f631bd19dadf643b63def6",
+          "stdout": "{\"score\": 11, \"algorithm\": \"algorithm-a\"}\n",
+          "stderr": ""
+        },
+        "parent": "cdc38a15d54749be4d73d7052b877b8831c34a2a",
+        "returnedAlgorithm": "algorithm-a-revised",
+        "report": "research evaluation: 11\n\nAleph-Project: p-a7f69363\nAleph-Evaluation: 11\n\n{\"score\": 11, \"algorithm\": \"algorithm-a\"}",
+        "public": {
+          "schema": 2,
+          "generated_at": "2026-10-31T09:46:00.808Z",
+          "project": {
+            "id": "p-a7f69363",
+            "title": "advance",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-66c9tm9z/workspace/advance",
+            "research_root": "/tmp/aleph-project-dsh-66c9tm9z/workspace/advance/research",
+            "mission_root": "/tmp/aleph-project-dsh-66c9tm9z/workspace/advance/missions",
+            "template_branch": "template",
+            "eval_command": "python3 /tmp/aleph-project-dsh-66c9tm9z/advance-gate/evaluate.py"
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "isolated-dsh-stopped",
+      "monotonic": 55639.070408506,
+      "value": {
+        "pid": 229754,
+        "exit": 0,
+        "pid_exists": false
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "real project storage is registered",
+      "passed": true
+    },
+    {
+      "name": "stable: actual evaluator reads algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: actual evaluator uses solution directory",
+      "passed": true
+    },
+    {
+      "name": "stable: actual worktree is independently detached",
+      "passed": true
+    },
+    {
+      "name": "stable: actual worktree points to captured code",
+      "passed": true
+    },
+    {
+      "name": "stable: actual shared repo initially on research a",
+      "passed": true
+    },
+    {
+      "name": "stable: tool returns successful result",
+      "passed": true
+    },
+    {
+      "name": "stable: real evaluator score belongs to algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: actual stdout identifies algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: successful evaluation has no stderr",
+      "passed": true
+    },
+    {
+      "name": "stable: returned object is a real Git commit",
+      "passed": true
+    },
+    {
+      "name": "stable: report records matching numeric score",
+      "passed": true
+    },
+    {
+      "name": "stable: report identifies evaluated algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: evaluation worktree is cleaned",
+      "passed": true
+    },
+    {
+      "name": "stable: actual worktree registration is cleaned",
+      "passed": true
+    },
+    {
+      "name": "stable: real project still has no compute missions",
+      "passed": true
+    },
+    {
+      "name": "stable: report parent matches evaluated code",
+      "passed": true
+    },
+    {
+      "name": "stable: report tree contains evaluated algorithm",
+      "passed": true
+    },
+    {
+      "name": "stable: unrelated branch remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "switch: actual evaluator reads algorithm a",
+      "passed": true
+    },
+    {
+      "name": "switch: actual evaluator uses solution directory",
+      "passed": true
+    },
+    {
+      "name": "switch: actual worktree is independently detached",
+      "passed": true
+    },
+    {
+      "name": "switch: actual worktree points to captured code",
+      "passed": true
+    },
+    {
+      "name": "switch: actual shared repo initially on research a",
+      "passed": true
+    },
+    {
+      "name": "switch: tool returns successful result",
+      "passed": true
+    },
+    {
+      "name": "switch: real evaluator score belongs to algorithm a",
+      "passed": true
+    },
+    {
+      "name": "switch: actual stdout identifies algorithm a",
+      "passed": true
+    },
+    {
+      "name": "switch: successful evaluation has no stderr",
+      "passed": true
+    },
+    {
+      "name": "switch: returned object is a real Git commit",
+      "passed": true
+    },
+    {
+      "name": "switch: report records matching numeric score",
+      "passed": true
+    },
+    {
+      "name": "switch: report identifies evaluated algorithm a",
+      "passed": true
+    },
+    {
+      "name": "switch: evaluation worktree is cleaned",
+      "passed": true
+    },
+    {
+      "name": "switch: actual worktree registration is cleaned",
+      "passed": true
+    },
+    {
+      "name": "switch: real project still has no compute missions",
+      "passed": true
+    },
+    {
+      "name": "defect switch: report parent is other algorithm commit",
+      "passed": true
+    },
+    {
+      "name": "defect switch: returned report tree contains algorithm b",
+      "passed": true
+    },
+    {
+      "name": "defect switch: unrelated branch receives algorithm a report",
+      "passed": true
+    },
+    {
+      "name": "defect switch: original evaluated branch receives no report",
+      "passed": true
+    },
+    {
+      "name": "advance: actual evaluator reads algorithm a",
+      "passed": true
+    },
+    {
+      "name": "advance: actual evaluator uses solution directory",
+      "passed": true
+    },
+    {
+      "name": "advance: actual worktree is independently detached",
+      "passed": true
+    },
+    {
+      "name": "advance: actual worktree points to captured code",
+      "passed": true
+    },
+    {
+      "name": "advance: actual shared repo initially on research a",
+      "passed": true
+    },
+    {
+      "name": "advance: tool returns successful result",
+      "passed": true
+    },
+    {
+      "name": "advance: real evaluator score belongs to algorithm a",
+      "passed": true
+    },
+    {
+      "name": "advance: actual stdout identifies algorithm a",
+      "passed": true
+    },
+    {
+      "name": "advance: successful evaluation has no stderr",
+      "passed": true
+    },
+    {
+      "name": "advance: returned object is a real Git commit",
+      "passed": true
+    },
+    {
+      "name": "advance: report records matching numeric score",
+      "passed": true
+    },
+    {
+      "name": "advance: report identifies evaluated algorithm a",
+      "passed": true
+    },
+    {
+      "name": "advance: evaluation worktree is cleaned",
+      "passed": true
+    },
+    {
+      "name": "advance: actual worktree registration is cleaned",
+      "passed": true
+    },
+    {
+      "name": "advance: real project still has no compute missions",
+      "passed": true
+    },
+    {
+      "name": "defect advance: report parent is revised untested code",
+      "passed": true
+    },
+    {
+      "name": "defect advance: report tree contains revised untested algorithm",
+      "passed": true
+    },
+    {
+      "name": "advance: new code remains reachable",
+      "passed": true
+    }
+  ],
+  "boundary": "Original isolated DSH registered tools, real parent session, persistent storage, research Git branches, detached evaluation worktrees, and actual Python evaluator. Diagnostic bridge invokes tools without models. Evaluator waits on a release file to allow real branch switch/advance. No source edits, mocked Git, or external model.",
+  "defect_reproduced": true
+}

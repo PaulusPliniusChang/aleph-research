@@ -1,0 +1,82 @@
+{
+  "source": "/home/paulus-chang/项目/aleph",
+  "source_sha": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "boundary": "Actual registered tools, ProjectService, Git research repositories, detached worktrees, real Python evaluator and commits. In-memory storage and caller/session services replace DSH services. Evaluator pause only controls time for real branch switch/advance. No product source modification.",
+  "observations": [
+    {
+      "scope": "stable",
+      "root": "/tmp/aleph-evaluation-stable-5Mtm44",
+      "project": "p-ba4e0584",
+      "captured": "4f716d33d1ddb93a83646ed7a15577ae2813366d",
+      "other": "3c5733ac8d300d98a4d9a0c8bfbbd3478df9f627",
+      "advanced": null,
+      "evaluated": {
+        "algorithm": "algorithm-a",
+        "cwd": "/tmp/aleph-evaluation-stable-5Mtm44/workspace/.aleph/evaluations/eval-0dbaf822",
+        "solution": "/tmp/aleph-evaluation-stable-5Mtm44/workspace/.aleph/evaluations/eval-0dbaf822"
+      },
+      "branchDuring": "research/a",
+      "result": {
+        "status": "done",
+        "projectId": "p-ba4e0584",
+        "score": 11,
+        "researchCommit": "9d1b53ba32d7f234bedc98ab644dd6888ba568a9",
+        "stdout": "{\"score\": 11, \"algorithm\": \"algorithm-a\"}\n",
+        "stderr": ""
+      },
+      "report": "research evaluation: 11\n\nAleph-Project: p-ba4e0584\nAleph-Evaluation: 11\n\n{\"score\": 11, \"algorithm\": \"algorithm-a\"}",
+      "parent": "4f716d33d1ddb93a83646ed7a15577ae2813366d",
+      "returnedAlgorithm": "algorithm-a"
+    },
+    {
+      "scope": "switch",
+      "root": "/tmp/aleph-evaluation-switch-cNZWdz",
+      "project": "p-fa31f246",
+      "captured": "4f716d33d1ddb93a83646ed7a15577ae2813366d",
+      "other": "3c5733ac8d300d98a4d9a0c8bfbbd3478df9f627",
+      "advanced": null,
+      "evaluated": {
+        "algorithm": "algorithm-a",
+        "cwd": "/tmp/aleph-evaluation-switch-cNZWdz/workspace/.aleph/evaluations/eval-9acb7465",
+        "solution": "/tmp/aleph-evaluation-switch-cNZWdz/workspace/.aleph/evaluations/eval-9acb7465"
+      },
+      "branchDuring": "research/b",
+      "result": {
+        "status": "done",
+        "projectId": "p-fa31f246",
+        "score": 11,
+        "researchCommit": "67907d49023756deda964bcac02a31eff9cff143",
+        "stdout": "{\"score\": 11, \"algorithm\": \"algorithm-a\"}\n",
+        "stderr": ""
+      },
+      "report": "research evaluation: 11\n\nAleph-Project: p-fa31f246\nAleph-Evaluation: 11\n\n{\"score\": 11, \"algorithm\": \"algorithm-a\"}",
+      "parent": "3c5733ac8d300d98a4d9a0c8bfbbd3478df9f627",
+      "returnedAlgorithm": "algorithm-b"
+    },
+    {
+      "scope": "advance",
+      "root": "/tmp/aleph-evaluation-advance-i08wPy",
+      "project": "p-f7c55fc4",
+      "captured": "00fc0ed9ac46feb20f835d9afa71085ee90f6580",
+      "other": "517e74e844f4b8be3fd295703d3ad636333cbe2f",
+      "advanced": "10e7167eb0736d75cde59965fbe59ea4cb778b27",
+      "evaluated": {
+        "algorithm": "algorithm-a",
+        "cwd": "/tmp/aleph-evaluation-advance-i08wPy/workspace/.aleph/evaluations/eval-f17e561a",
+        "solution": "/tmp/aleph-evaluation-advance-i08wPy/workspace/.aleph/evaluations/eval-f17e561a"
+      },
+      "branchDuring": "research/a",
+      "result": {
+        "status": "done",
+        "projectId": "p-f7c55fc4",
+        "score": 11,
+        "researchCommit": "15c4d12bdb5c04385dc79819f5dbb08f8e03e30a",
+        "stdout": "{\"score\": 11, \"algorithm\": \"algorithm-a\"}\n",
+        "stderr": ""
+      },
+      "report": "research evaluation: 11\n\nAleph-Project: p-f7c55fc4\nAleph-Evaluation: 11\n\n{\"score\": 11, \"algorithm\": \"algorithm-a\"}",
+      "parent": "10e7167eb0736d75cde59965fbe59ea4cb778b27",
+      "returnedAlgorithm": "algorithm-a-revised"
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+(node:227899) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'research/a'
+Switched to a new branch 'research/b'
+Switched to branch 'research/a'
+▶ ALEPH-15 evaluation scores and report commits retain actual evaluated source
+  ✔ stable/input: actual evaluator reads algorithm a (0.670206ms)
+  ✔ stable/input: actual evaluator runs in solution worktree (0.109547ms)
+  ✔ stable/input: evaluation directory differs from shared repository (0.141656ms)
+  ✔ stable/input: evaluation snapshot is captured original commit (4.958297ms)
+  ✔ stable/input: evaluation worktree is detached (4.1786ms)
+  ✔ stable/report: tool records completed evaluation (0.233181ms)
+  ✔ stable/report: tool returns same project identity (0.125393ms)
+  ✔ stable/report: score comes from actual algorithm a (0.098776ms)
+  ✔ stable/report: stdout identifies actual algorithm a (0.110475ms)
+  ✔ stable/report: successful evaluation emits no stderr (0.101854ms)
+  ✔ stable/report: returned research commit exists (4.474287ms)
+  ✔ stable/report: report contains matching score trailer (0.233363ms)
+  ✔ stable/report: report contains evaluated algorithm identity (0.064244ms)
+  ✔ stable/report: report parent is actual evaluated source (0.042459ms)
+  ✔ stable/report: returned report tree contains actual evaluated algorithm (0.042192ms)
+  ✔ stable/report: unrelated research b receives no evaluation commit (4.227177ms)
+  ✔ stable/report: evaluation worktree is removed after completion (0.112756ms)
+  ✔ stable/report: Git worktree registration is removed (4.074111ms)
+  ✔ stable/report: evaluation does not create compute missions (0.505227ms)
+Switched to a new branch 'research/a'
+Switched to a new branch 'research/b'
+Switched to branch 'research/a'
+Switched to branch 'research/b'
+  ✔ switch/input: actual evaluator reads algorithm a (0.180727ms)
+  ✔ switch/input: actual evaluator runs in solution worktree (0.070944ms)
+  ✔ switch/input: evaluation directory differs from shared repository (0.043906ms)
+  ✔ switch/input: evaluation snapshot is captured original commit (4.445086ms)
+  ✔ switch/input: evaluation worktree is detached (4.121219ms)
+  ✔ switch/report: tool records completed evaluation (0.154014ms)
+  ✔ switch/report: tool returns same project identity (0.057061ms)
+  ✔ switch/report: score comes from actual algorithm a (0.02668ms)
+  ✔ switch/report: stdout identifies actual algorithm a (0.030621ms)
+  ✔ switch/report: successful evaluation emits no stderr (0.018311ms)
+  ✔ switch/report: returned research commit exists (3.735435ms)
+  ✔ switch/report: report contains matching score trailer (0.043495ms)
+  ✔ switch/report: report contains evaluated algorithm identity (0.034216ms)
+  ✖ switch/report: report parent is actual evaluated source (1.012665ms)
+  ✖ switch/report: returned report tree contains actual evaluated algorithm (0.160534ms)
+  ✖ switch/report: unrelated research b receives no evaluation commit (3.931239ms)
+  ✔ switch/report: evaluation worktree is removed after completion (0.056364ms)
+  ✔ switch/report: Git worktree registration is removed (3.898419ms)
+  ✔ switch/report: evaluation does not create compute missions (0.091955ms)
+Switched to a new branch 'research/a'
+Switched to a new branch 'research/b'
+Switched to branch 'research/a'
+  ✔ advance/input: actual evaluator reads algorithm a (0.15828ms)
+  ✔ advance/input: actual evaluator runs in solution worktree (0.055171ms)
+  ✔ advance/input: evaluation directory differs from shared repository (0.041297ms)
+  ✔ advance/input: evaluation snapshot is captured original commit (4.364144ms)
+  ✔ advance/input: evaluation worktree is detached (3.979767ms)
+  ✔ advance/report: tool records completed evaluation (0.14676ms)
+  ✔ advance/report: tool returns same project identity (0.036684ms)
+  ✔ advance/report: score comes from actual algorithm a (0.034857ms)
+  ✔ advance/report: stdout identifies actual algorithm a (0.036076ms)
+  ✔ advance/report: successful evaluation emits no stderr (0.023062ms)
+  ✔ advance/report: returned research commit exists (3.964717ms)
+  ✔ advance/report: report contains matching score trailer (0.042264ms)
+  ✔ advance/report: report contains evaluated algorithm identity (0.031618ms)
+  ✖ advance/report: report parent is actual evaluated source (0.154636ms)
+  ✖ advance/report: returned report tree contains actual evaluated algorithm (0.105233ms)
+  ✔ advance/report: unrelated research b receives no evaluation commit (3.7111ms)
+  ✔ advance/report: evaluation worktree is removed after completion (0.077714ms)
+  ✔ advance/report: Git worktree registration is removed (4.756385ms)
+  ✔ advance/report: evaluation does not create compute missions (0.106273ms)
+  ✔ advance/preservation: new research commit remains reachable from own branch (4.227657ms)
+  ✔ advance/preservation: new research working file is preserved (0.153879ms)
+✖ ALEPH-15 evaluation scores and report commits retain actual evaluated source (565.207799ms)
+ℹ tests 60
+ℹ suites 0
+ℹ pass 54
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 687.212366
+
+✖ failing tests:
+
+test at tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89
+✖ switch/report: report parent is actual evaluated source (1.012665ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '3c5733ac8d300d98a4d9a0c8bfbbd3478df9f627'
+  - '4f716d33d1ddb93a83646ed7a15577ae2813366d'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:75:67)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:66:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '3c5733ac8d300d98a4d9a0c8bfbbd3478df9f627',
+    expected: '4f716d33d1ddb93a83646ed7a15577ae2813366d',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89
+✖ switch/report: returned report tree contains actual evaluated algorithm (0.160534ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'algorithm-b'
+  - 'algorithm-a'
+               ^
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:76:83)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:66:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'algorithm-b',
+    expected: 'algorithm-a',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89
+✖ switch/report: unrelated research b receives no evaluation commit (3.931239ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '67907d49023756deda964bcac02a31eff9cff143'
+  - '3c5733ac8d300d98a4d9a0c8bfbbd3478df9f627'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:77:77)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:66:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '67907d49023756deda964bcac02a31eff9cff143',
+    expected: '3c5733ac8d300d98a4d9a0c8bfbbd3478df9f627',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89
+✖ advance/report: report parent is actual evaluated source (0.154636ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '10e7167eb0736d75cde59965fbe59ea4cb778b27'
+  - '00fc0ed9ac46feb20f835d9afa71085ee90f6580'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:75:67)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:66:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '10e7167eb0736d75cde59965fbe59ea4cb778b27',
+    expected: '00fc0ed9ac46feb20f835d9afa71085ee90f6580',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89
+✖ advance/report: returned report tree contains actual evaluated algorithm (0.105233ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'algorithm-a-revised'
+  - 'algorithm-a'
+                ^
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:76:83)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:42:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-attribution-acceptance.test.mjs:66:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'algorithm-a-revised',
+    expected: 'algorithm-a',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

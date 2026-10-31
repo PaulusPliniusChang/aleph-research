@@ -1,0 +1,181 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-24txxalu",
+    "workspace": "/tmp/aleph-project-dsh-24txxalu/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "66885994ceadad83a237a27c1fc7de6419889c14",
+    "dirty": "",
+    "dsh_version": "0.2.2-alpha.2"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-evaluation-attribution.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/15-current-real-dsh-evaluation-attribution.json"
+  ],
+  "events": [
+    {
+      "name": "real-parent-session",
+      "monotonic": 55611.982977302,
+      "value": {
+        "header": {
+          "version": 4,
+          "id": "session-9b806bfb-ad34-4a4a-abf4-716606f586b1",
+          "createdAt": 1793439933842,
+          "cwd": "/tmp/aleph-project-dsh-24txxalu/workspace",
+          "isSeeded": false,
+          "agentPreset": "aleph"
+        },
+        "events": []
+      }
+    },
+    {
+      "name": "stable-actual-evaluation",
+      "monotonic": 55612.122280288,
+      "value": {
+        "algorithm": "algorithm-a",
+        "cwd": "/tmp/aleph-project-dsh-24txxalu/workspace/stable/.aleph/evaluations/eval-83bf93b8",
+        "solution": "/tmp/aleph-project-dsh-24txxalu/workspace/stable/.aleph/evaluations/eval-83bf93b8"
+      }
+    },
+    {
+      "name": "stable-final-report",
+      "monotonic": 55612.176739634,
+      "value": {
+        "captured": "fc23eecc1f7d088d792ea947f99afc16cab749ee",
+        "other": "cd9b939cd9f9179e60763793134c9f2f2db7b431",
+        "advanced": null,
+        "evaluated": {
+          "algorithm": "algorithm-a",
+          "cwd": "/tmp/aleph-project-dsh-24txxalu/workspace/stable/.aleph/evaluations/eval-83bf93b8",
+          "solution": "/tmp/aleph-project-dsh-24txxalu/workspace/stable/.aleph/evaluations/eval-83bf93b8"
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-d1ae75fb",
+          "score": 11,
+          "researchCommit": "581bc0ed49aba61fe9c749664b89df8f684fd01f",
+          "stdout": "{\"score\": 11, \"algorithm\": \"algorithm-a\"}\n",
+          "stderr": ""
+        },
+        "parent": "fc23eecc1f7d088d792ea947f99afc16cab749ee",
+        "returnedAlgorithm": "algorithm-a",
+        "report": "research evaluation: 11\n\nAleph-Project: p-d1ae75fb\nAleph-Evaluation: 11\n\n{\"score\": 11, \"algorithm\": \"algorithm-a\"}",
+        "public": {
+          "schema": 2,
+          "generated_at": "2026-10-31T09:45:34.050Z",
+          "project": {
+            "id": "p-d1ae75fb",
+            "title": "stable",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-24txxalu/workspace/stable",
+            "research_root": "/tmp/aleph-project-dsh-24txxalu/workspace/stable/research",
+            "mission_root": "/tmp/aleph-project-dsh-24txxalu/workspace/stable/missions",
+            "template_branch": "template",
+            "eval_command": "python3 /tmp/aleph-project-dsh-24txxalu/stable-gate/evaluate.py"
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "error",
+      "monotonic": 55612.186977361,
+      "value": {
+        "type": "KeyError",
+        "message": "'missions'"
+      }
+    },
+    {
+      "name": "isolated-dsh-stopped",
+      "monotonic": 55612.300867444,
+      "value": {
+        "pid": 229457,
+        "exit": 0,
+        "pid_exists": false
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "real project storage is registered",
+      "passed": true
+    },
+    {
+      "name": "stable: actual evaluator reads algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: actual evaluator uses solution directory",
+      "passed": true
+    },
+    {
+      "name": "stable: actual worktree is independently detached",
+      "passed": true
+    },
+    {
+      "name": "stable: actual worktree points to captured code",
+      "passed": true
+    },
+    {
+      "name": "stable: actual shared repo initially on research a",
+      "passed": true
+    },
+    {
+      "name": "stable: tool returns successful result",
+      "passed": true
+    },
+    {
+      "name": "stable: real evaluator score belongs to algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: actual stdout identifies algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: successful evaluation has no stderr",
+      "passed": true
+    },
+    {
+      "name": "stable: returned object is a real Git commit",
+      "passed": true
+    },
+    {
+      "name": "stable: report records matching numeric score",
+      "passed": true
+    },
+    {
+      "name": "stable: report identifies evaluated algorithm a",
+      "passed": true
+    },
+    {
+      "name": "stable: evaluation worktree is cleaned",
+      "passed": true
+    },
+    {
+      "name": "stable: actual worktree registration is cleaned",
+      "passed": true
+    }
+  ],
+  "boundary": "Original isolated DSH registered tools, real parent session, persistent storage, research Git branches, detached evaluation worktrees, and actual Python evaluator. Diagnostic bridge invokes tools without models. Evaluator waits on a release file to allow real branch switch/advance. No source edits, mocked Git, or external model."
+}
