@@ -738,6 +738,7 @@ export async function apply(ctx) {
   const sessions = ctx.get('sessions');
   const subagents = ctx.get('subagents');
   const agentPresets = ctx.get('agentPresets');
+  const workspaceRegistry = ctx.get('workspaceRegistry');
   const service = new ProjectService(ctx, domain, { sessions, subagents, agentPresets });
 
   const presetOf = (agent) => {
@@ -848,6 +849,45 @@ export async function apply(ctx) {
     path: '/api/aleph/projects',
     handler(req, res) {
       return sendJson(res, 200, { projects: service.list().map(snapshot) });
+    },
+  });
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/init',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const project = await service.init({
+          workspace: args.workspace,
+          evalCommand: args.evalCommand ?? args.eval_command,
+          visibleData: args.visibleData ?? args.visible_data,
+          testsetPath: args.testset ?? args.testsetPath,
+          submissionPython: args.submissionPython ?? args.submission_python,
+        });
+        return sendJson(res, 200, snapshot(project));
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/init-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/workspace',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      if (!workspaceRegistry) return sendJson(res, 503, { ok: false, error: { code: 'aleph/workspace-unavailable' } });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const workspace = await workspaceRegistry.create(args.path);
+        return sendJson(res, 200, { workspace: { id: workspace.workspaceId, path: workspace.path, title: workspace.title } });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/workspace-failed', message: String(error?.message ?? error) } });
+      }
     },
   });
   ctx.webServer.register({

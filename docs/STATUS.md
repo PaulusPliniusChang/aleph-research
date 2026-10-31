@@ -53,3 +53,20 @@
 - 多机接口。
 - 更完整的 Composer 冲突解决与结果归因。
 - 旧 client 中未使用代码清理。
+
+
+## 2026-10-31 测试案例重建
+
+旧测试案例目录 `/tmp/aleph-dsh-lab2` 已删除，新案例位于：
+
+- `DSH_HOME=/tmp/aleph-case-lab`
+- 项目工作区：`/tmp/aleph-case-lab/leader`
+- 项目 id：`p-65b9c1a3`
+
+只复制了 `problem/` 与 `data/` 中受控的原始数据内容；没有复制 `.venv`、notebooks、
+outputs、catboost_info、aleph-case 或其他工程产物。`data/research` 与
+`data/rerun` 属于派生内容，未复制。原工程
+`/home/hapenia/Projects/kunlungpt-comp` 未写入。
+
+项目初始化创建了 `research/` 与 `missions/` 仓库，以及模板分支；`problem/` 和
+`data/` 位于项目根目录。
