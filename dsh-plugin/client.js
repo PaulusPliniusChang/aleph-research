@@ -732,8 +732,9 @@ window.__ModuleLoader__.load({
     }
 
     function missionDisplayStatus(status) {
-      if (status === 'proposed' || status === 'approved') return 'queued';
-      if (status === 'batched' || status === 'running') return 'running';
+      // A batched mission waits inside the batch; one batch entrypoint runs missions in order.
+      if (status === 'proposed' || status === 'approved' || status === 'batched') return 'queued';
+      if (status === 'running') return 'running';
       if (status === 'done' || status === 'failed') return status;
       return 'unknown';
     }

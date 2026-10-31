@@ -12,6 +12,7 @@ import { readdirSync, readFileSync, readlinkSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
+import os from 'node:os';
 import { promisify } from 'node:util';
 
 import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain';
@@ -47,6 +48,7 @@ const batchSchema = z.object({
   id: z.string(),
   machineId: z.string(),
   status: z.enum(['forming', 'running', 'done', 'failed']),
+  infra: z.any().optional(),
   missionIds: z.array(z.string()),
   branch: z.string(),
   baseTip: z.string().nullable().optional(),
@@ -477,6 +479,39 @@ class ProjectService {
     }));
   }
 
+  async prepareBatchRuntime({ project, batch, missionRecords, batchWorktree }) {
+    const cores = Math.max(1, Number(os.cpus().length) || 1);
+    // One mission runs at a time, so it may use most of the machine without starving the desktop.
+    const threads = Math.max(1, Math.min(cores - 2, 16));
+    const uvCache = join(batchWorktree, '.uv-cache');
+    const env = {
+      ALEPH_THREADS: String(threads),
+      OMP_NUM_THREADS: String(threads),
+      OPENBLAS_NUM_THREADS: String(threads),
+      MKL_NUM_THREADS: String(threads),
+      NUMEXPR_NUM_THREADS: String(threads),
+      UV_CACHE_DIR: uvCache,
+      UV_PYTHON_DOWNLOADS: 'never',
+    };
+    const prepared = [];
+    for (const mission of missionRecords) {
+      const dir = mission.manifestPath ? join(batchWorktree, mission.manifestPath.split('/').slice(0, 2).join('/')) : null;
+      if (!dir) continue;
+      const manifest = join(dir, 'pyproject.toml');
+      if (!(await pathExists(manifest))) { prepared.push({ mission: mission.id, status: 'no-pyproject' }); continue; }
+      try {
+        // Dependencies come from the mission's own pyproject; the shared runtime is the fallback.
+        await run('uv', ['sync', '--quiet', '--project', dir], { cwd: batchWorktree, env, timeout: 300_000 });
+        prepared.push({ mission: mission.id, status: 'synced' });
+      } catch (error) {
+        prepared.push({ mission: mission.id, status: 'sync-failed', error: String(error?.message ?? error).slice(0, 400) });
+      }
+    }
+    const infra = { cores, threads, missions: prepared, runner: project.pythonPath ?? 'python3' };
+    await writeFile(join(batchWorktree, 'infra.json'), JSON.stringify(infra, null, 2), 'utf8').catch(() => undefined);
+    return { ...infra, env };
+  }
+
   async runBatch({ projectId, batchId }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
@@ -491,7 +526,12 @@ class ProjectService {
     await git(project.missionRoot, ['worktree', 'add', '--detach', batchWorktree, batch.branch]);
     // The Host owns the runner so runner upgrades do not depend on each mission repo copy.
     await writeFile(join(batchWorktree, '.aleph_batch_runner.py'), TEMPLATE_BATCH_RUNNER, 'utf8');
+    const infra = await this.prepareBatchRuntime({ project, batch, missionRecords, batchWorktree });
     const startedAt = now();
+    await this.mutate(projectId, (current) => ({
+      ...current,
+      batches: current.batches.map((item) => (item.id === batch.id ? { ...item, status: 'running', startedAt, infra } : item)),
+    }));
     let runnerError = null;
     try {
       await run(project.pythonPath || 'python3', ['.aleph_batch_runner.py'], {
@@ -499,6 +539,7 @@ class ProjectService {
         timeout: 900_000,
         env: {
           ...(project.pythonPath ? { PATH: `${dirname(project.pythonPath)}:${process.env.PATH ?? ''}` } : {}),
+          ...infra.env,
           ALEPH_WORKSPACE: project.workspace,
           ...(project.visibleData ? { ALEPH_VISIBLE_DATA: project.visibleData } : {}),
           ...(project.pythonPath ? { ALEPH_PYTHON: project.pythonPath } : {}),
@@ -1205,14 +1246,16 @@ function snapshot(project) {
       base_tip: batch.baseTip ?? null,
       created_at: batch.createdAt,
       started_at: batch.startedAt ?? null,
+      infra: batch.infra ?? null,
       finished_at: batch.finishedAt ?? null,
       summary: batch.summary ?? null,
     })),
     machines: project.machines,
     agents: project.agents ?? [],
     counts: {
-      queued: project.missions.filter((mission) => ['proposed', 'approved'].includes(mission.status)).length,
-      running: project.missions.filter((mission) => ['batched', 'running'].includes(mission.status)).length,
+      // Batched missions wait inside their batch; one batch entrypoint runs them in order.
+      queued: project.missions.filter((mission) => ['proposed', 'approved', 'batched'].includes(mission.status)).length,
+      running: project.missions.filter((mission) => mission.status === 'running').length,
       done: project.missions.filter((mission) => mission.status === 'done').length,
       failed: project.missions.filter((mission) => mission.status === 'failed').length,
     },
