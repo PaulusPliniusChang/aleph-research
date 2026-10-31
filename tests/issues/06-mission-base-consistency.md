@@ -70,3 +70,7 @@ python3 tests/issues/dsh/current-base-consistency.py \
 ## 验证
 
 DSH `0.2.2-alpha.2` 隔离环境实测确认。原始任务记录与真实 Git 提交关系见 [起点实测记录](evidence/06-real-dsh-base-consistency.json)，被测版本与自动测试见 [验证记录](VALIDATION-2026-10-31.md)。
+
+## 本轮公开证据
+
+当前架构核查的文档、脚本与原始记录已经发布到派生仓库的独立证据分支，固定提交为 `a12a2b43e9d14ba623f492b45abfec86ae0148f1`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/a12a2b43e9d14ba623f492b45abfec86ae0148f1/tests/issues)。上游 #7 已补充当前结果与固定证据链接，正文不包含本地管理头和前导注释，议题仍然开放。

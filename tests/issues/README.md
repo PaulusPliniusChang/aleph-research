@@ -24,3 +24,5 @@
 原议题 `ALEPH-03`，文件 `03-composer-running-budget.md`，已经并入 [ALEPH-02](02-run-next-budget.md)。原有运行任务预算占用问题、复现步骤和自动测试均已保留，编号 `ALEPH-03` 不再复用。
 
 已发布的脚本与证据见[固定提交目录](https://github.com/PaulusPliniusChang/aleph-research/tree/23f4c0f67f78c39639c9d3a877b337e3907b7499/tests/issues)。该公开分支仅发布议题相关文件，当前状态仍以本地独立议题文件开头的 `status` 为准。
+
+ALEPH-06 的当前架构核查另见[固定证据目录](https://github.com/PaulusPliniusChang/aleph-research/tree/a12a2b43e9d14ba623f492b45abfec86ae0148f1/tests/issues)。该轮自动行为测试与真实 DSH 核查均通过，已测范围、历史状态说明和远端处理记录保存在独立议题文档中。
