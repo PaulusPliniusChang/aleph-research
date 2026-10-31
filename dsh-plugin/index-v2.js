@@ -10,7 +10,7 @@
 import { execFile } from 'node:child_process';
 import { readdirSync, readFileSync, readlinkSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
-import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 
@@ -561,6 +561,14 @@ class ProjectService {
         await git(project.missionRoot, ['worktree', 'add', '--detach', resultWorktree, batch.branch]);
         const target = join(resultWorktree, 'results', manifestId);
         await mkdir(target, { recursive: true });
+        // Persist every produced file so later researchers can reuse artifacts and metrics.
+        if (missionDir) {
+          const produced = join(batchWorktree, 'results', missionDir);
+          for (const entry of await readdir(produced).catch(() => [])) {
+            if (entry === 'result.json') continue;
+            await cp(join(produced, entry), join(target, entry), { recursive: true, force: true }).catch(() => undefined);
+          }
+        }
         await writeFile(join(target, 'result.json'), JSON.stringify(envelope, null, 2), 'utf8');
         await git(resultWorktree, ['add', '-A']);
         await git(resultWorktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m',
