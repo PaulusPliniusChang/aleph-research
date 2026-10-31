@@ -9,7 +9,7 @@
  */
 import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, realpath, rm, stat, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 
@@ -20,6 +20,21 @@ import { z } from 'zod';
 const execFileAsync = promisify(execFile);
 const DOMAIN_NAME = 'aleph_project';
 const HANDOFF_FILE = 'ALEPH_HANDOFF.md';
+// Composition uses the repository's shared checkout. Keep selection, Git work,
+// publication and rollback together, including across service instances in a Host.
+const batchCompositions = new Map();
+
+async function withBatchComposition(missionRoot, compose) {
+  const key = await realpath(missionRoot);
+  const previous = batchCompositions.get(key) ?? Promise.resolve();
+  const pending = previous.catch(() => undefined).then(compose);
+  batchCompositions.set(key, pending);
+  try {
+    return await pending;
+  } finally {
+    if (batchCompositions.get(key) === pending) batchCompositions.delete(key);
+  }
+}
 
 const missionSchema = z.object({
   id: z.string(),
@@ -637,45 +652,90 @@ class ProjectService {
   async formBatch({ projectId, machineId = 'local' }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
+    return withBatchComposition(project.missionRoot, () => this.#composeBatch({ projectId, machineId }));
+  }
+
+  async #composeBatch({ projectId, machineId }) {
+    // Re-read after acquiring the repository guard: a preceding composition may
+    // have reserved either this machine or the missions selected by this call.
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
     const machine = project.machines.find((item) => item.id === machineId);
     if (!machine) throw new Error(`machine not found: ${machineId}`);
-    if (machine.status !== 'idle') throw new Error(`machine ${machineId} is busy`);
+    if (machine.status !== 'idle' || machine.batchId != null) throw new Error(`machine ${machineId} is busy`);
     const approved = project.missions.filter((mission) => mission.status === 'approved');
     if (approved.length === 0) throw new Error('no approved missions');
     const batchId = newId('b');
     const batchBranch = `batch/${batchId}`;
-    const baseTip = (await git(project.missionRoot, ['rev-parse', project.templateBranch])).stdout.trim();
-    await git(project.missionRoot, ['switch', '-c', batchBranch, project.templateBranch]);
     const preBatch = {};
-    for (const mission of approved) {
-      preBatch[mission.id] = (await git(project.missionRoot, ['rev-parse', mission.branch])).stdout.trim();
-      try {
-        await git(project.missionRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'merge', '--no-ff', '-m', `merge mission ${mission.id}`, mission.branch]);
-      } catch (error) {
-        await git(project.missionRoot, ['merge', '--abort']).catch(() => undefined);
-        await git(project.missionRoot, ['switch', project.templateBranch]);
-        throw new Error(`merge conflict for mission ${mission.id}; Composer must resolve it before batching`);
+    let branchCreated = false;
+    let restored = false;
+    try {
+      const baseTip = (await git(project.missionRoot, ['rev-parse', project.templateBranch])).stdout.trim();
+      await git(project.missionRoot, ['switch', '-c', batchBranch, baseTip]);
+      branchCreated = true;
+      for (const mission of approved) {
+        preBatch[mission.id] = (await git(project.missionRoot, ['rev-parse', mission.branch])).stdout.trim();
+        try {
+          await git(project.missionRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'merge', '--no-ff', '-m', `merge mission ${mission.id}`, preBatch[mission.id]]);
+        } catch (error) {
+          throw new Error(`merge conflict for mission ${mission.id}; Composer must resolve it before batching`, { cause: error });
+        }
       }
+      await git(project.missionRoot, ['switch', project.templateBranch]);
+      restored = true;
+      return await this.mutate(projectId, (current) => {
+        const currentMachine = current.machines.find((item) => item.id === machineId);
+        if (!currentMachine) throw new Error(`machine not found: ${machineId}`);
+        if (currentMachine.status !== 'idle' || currentMachine.batchId != null) throw new Error(`machine ${machineId} is busy`);
+        for (const selected of approved) {
+          const mission = current.missions.find((item) => item.id === selected.id);
+          if (!mission || mission.status !== 'approved' || mission.batchId != null || mission.branch !== selected.branch) {
+            throw new Error(`mission ${selected.id} changed during batch composition`);
+          }
+        }
+        return {
+          ...current,
+          machines: current.machines.map((item) => item.id === machineId ? { ...item, status: 'busy', batchId } : item),
+          missions: current.missions.map((mission) => (
+            approved.some((item) => item.id === mission.id)
+              ? { ...mission, status: 'batched', batchId, preBatchTip: preBatch[mission.id] }
+              : mission
+          )),
+          batches: [...current.batches, {
+            id: batchId,
+            machineId,
+            status: 'forming',
+            missionIds: approved.map((mission) => mission.id),
+            branch: batchBranch,
+            baseTip,
+            createdAt: now(),
+          }],
+        };
+      });
+    } catch (error) {
+      // A storage adapter can fail after persisting. Never remove a branch that
+      // is already referenced by a published batch, even when put rejected.
+      if (branchCreated && !this.get(projectId)?.batches.some((item) => item.id === batchId)) {
+        const cleanupErrors = [];
+        if (!restored) {
+          await git(project.missionRoot, ['merge', '--abort']).catch(() => undefined);
+          try {
+            await git(project.missionRoot, ['switch', project.templateBranch]);
+            restored = true;
+          } catch (cleanupError) {
+            cleanupErrors.push(cleanupError.message);
+          }
+        }
+        if (restored) {
+          await git(project.missionRoot, ['branch', '-D', batchBranch]).catch((cleanupError) => cleanupErrors.push(cleanupError.message));
+        }
+        if (cleanupErrors.length) {
+          throw new Error(`${error.message}; batch cleanup failed: ${cleanupErrors.join('; ')}`, { cause: error });
+        }
+      }
+      throw error;
     }
-    await git(project.missionRoot, ['switch', project.templateBranch]);
-    return this.mutate(projectId, (current) => ({
-      ...current,
-      machines: current.machines.map((item) => item.id === machineId ? { ...item, status: 'busy', batchId } : item),
-      missions: current.missions.map((mission) => (
-        approved.some((item) => item.id === mission.id)
-          ? { ...mission, status: 'batched', batchId, preBatchTip: preBatch[mission.id] }
-          : mission
-      )),
-      batches: [...current.batches, {
-        id: batchId,
-        machineId,
-        status: 'forming',
-        missionIds: approved.map((mission) => mission.id),
-        branch: batchBranch,
-        baseTip,
-        createdAt: now(),
-      }],
-    }));
   }
 }
 
