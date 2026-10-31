@@ -1,0 +1,156 @@
+(node:349553) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ current owned evaluation inputs correspond to reported research commits
+  ✔ clean: evaluator really reads the owned research worktree (0.859171ms)
+  ✔ clean: evaluator runs outside the solution directory (1.082713ms)
+  ✔ clean: owned worktree remains registered after evaluation (4.539528ms)
+  ✔ clean: owned input remains available after evaluation (0.273175ms)
+  ✔ clean: score matches actual Python-read files (0.233187ms)
+  ✔ clean: evaluation captures the starting commit (0.207778ms)
+  ✔ clean: report is an actual Git commit (5.699211ms)
+  ✔ clean: independent evaluation reference preserves report (5.316078ms)
+  ✔ clean: report parent identifies the captured commit (6.434542ms)
+  ✔ clean: history stores actual returned score (0.353672ms)
+  ✔ clean: history stores same evaluated source commit (0.233366ms)
+  ✔ clean: best source pointer matches returned source pointer (0.298085ms)
+  ✔ clean: report tracked input matches actual scored file (0.22677ms)
+  ✔ clean: report includes actual additional scored input (0.222938ms)
+  ✔ clean: report tree equals advertised evaluated tree (9.009612ms)
+  ✔ clean: report message contains actual evaluation score (4.779909ms)
+  ✔ clean: research branch points at returned report (4.577418ms)
+  ✔ tracked-dirty: evaluator really reads the owned research worktree (0.424287ms)
+  ✔ tracked-dirty: evaluator runs outside the solution directory (0.244626ms)
+  ✔ tracked-dirty: owned worktree remains registered after evaluation (4.318536ms)
+  ✔ tracked-dirty: owned input remains available after evaluation (0.364103ms)
+  ✔ tracked-dirty: score matches actual Python-read files (0.222629ms)
+  ✔ tracked-dirty: evaluation captures the starting commit (0.165802ms)
+  ✔ tracked-dirty: report is an actual Git commit (4.330016ms)
+  ✔ tracked-dirty: independent evaluation reference preserves report (4.442896ms)
+  ✔ tracked-dirty: report parent identifies the captured commit (4.802811ms)
+  ✔ tracked-dirty: history stores actual returned score (0.249333ms)
+  ✔ tracked-dirty: history stores same evaluated source commit (0.187756ms)
+  ✔ tracked-dirty: best source pointer matches returned source pointer (1.07242ms)
+  ✖ tracked-dirty: report tracked input matches actual scored file (1.097336ms)
+  ✔ tracked-dirty: report includes actual additional scored input (0.217114ms)
+  ✔ tracked-dirty: report tree equals advertised evaluated tree (8.445882ms)
+  ✔ tracked-dirty: report message contains actual evaluation score (4.405671ms)
+  ✔ tracked-dirty: research branch points at returned report (4.304588ms)
+  ✔ untracked: evaluator really reads the owned research worktree (0.428225ms)
+  ✔ untracked: evaluator runs outside the solution directory (0.271975ms)
+  ✔ untracked: owned worktree remains registered after evaluation (5.343242ms)
+  ✔ untracked: owned input remains available after evaluation (0.413882ms)
+  ✔ untracked: score matches actual Python-read files (0.491294ms)
+  ✔ untracked: evaluation captures the starting commit (1.299101ms)
+  ✔ untracked: report is an actual Git commit (8.099061ms)
+  ✔ untracked: independent evaluation reference preserves report (7.617789ms)
+  ✔ untracked: report parent identifies the captured commit (5.434699ms)
+  ✔ untracked: history stores actual returned score (0.328475ms)
+  ✔ untracked: history stores same evaluated source commit (0.241194ms)
+  ✔ untracked: best source pointer matches returned source pointer (1.099778ms)
+  ✔ untracked: report tracked input matches actual scored file (0.240828ms)
+  ✖ untracked: report includes actual additional scored input (0.497472ms)
+  ✔ untracked: report tree equals advertised evaluated tree (13.021706ms)
+  ✔ untracked: report message contains actual evaluation score (12.165748ms)
+  ✔ untracked: research branch points at returned report (10.029646ms)
+  ✔ advance-during-evaluation: evaluator really reads the owned research worktree (0.553323ms)
+  ✔ advance-during-evaluation: evaluator runs outside the solution directory (0.449931ms)
+  ✔ advance-during-evaluation: owned worktree remains registered after evaluation (5.526449ms)
+  ✔ advance-during-evaluation: owned input remains available after evaluation (0.255345ms)
+  ✔ advance-during-evaluation: score matches actual Python-read files (0.220642ms)
+  ✔ advance-during-evaluation: evaluation captures the starting commit (0.197332ms)
+  ✔ advance-during-evaluation: report is an actual Git commit (5.526343ms)
+  ✔ advance-during-evaluation: independent evaluation reference preserves report (5.686094ms)
+  ✔ advance-during-evaluation: report parent identifies the captured commit (5.453778ms)
+  ✔ advance-during-evaluation: history stores actual returned score (0.960359ms)
+  ✔ advance-during-evaluation: history stores same evaluated source commit (1.179735ms)
+  ✔ advance-during-evaluation: best source pointer matches returned source pointer (0.351415ms)
+  ✖ advance-during-evaluation: report tracked input matches actual scored file (0.551141ms)
+  ✔ advance-during-evaluation: report includes actual additional scored input (0.327233ms)
+  ✔ advance-during-evaluation: report tree equals advertised evaluated tree (13.334226ms)
+  ✔ advance-during-evaluation: report message contains actual evaluation score (9.043362ms)
+  ✔ advance-during-evaluation: concurrent research commit is retained by branch CAS (8.269533ms)
+  ✔ advance-during-evaluation: report correctly says branch was not advanced (0.513731ms)
+✖ current owned evaluation inputs correspond to reported research commits (1133.496651ms)
+ℹ tests 70
+ℹ suites 0
+ℹ pass 66
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1226.989445
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-owned-evaluation.test.mjs:21:38
+✖ tracked-dirty: report tracked input matches actual scored file (1.097336ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  '3' !== '7'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:51:329
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:21:79)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:51:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '3',
+    expected: '7',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-owned-evaluation.test.mjs:21:38
+✖ untracked: report includes actual additional scored input (0.497472ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== '11'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:52:229
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:21:79)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:52:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: '11',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-owned-evaluation.test.mjs:21:38
+✖ advance-during-evaluation: report tracked input matches actual scored file (0.551141ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  '3' !== '19'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:51:329
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:21:79)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-owned-evaluation.test.mjs:51:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '3',
+    expected: '19',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

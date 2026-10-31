@@ -10,6 +10,41 @@ pull_request: https://github.com/hapenia/aleph-research/pull/20
 
 # 评估期间研究分支发生变化，评分报告可能写入另一条分支
 
+## 最新架构复核（2026-10-31 19:51 北京时间）
+
+B 在发布边界依次获取上游与派生仓库更新，并对干净主工作区执行仅快进拉取。本地与上游仍为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。上游已通过 `524ae28` 调整报告归属，并关闭原议题；旧 [PR #20](https://github.com/hapenia/aleph-research/pull/20) 已关闭且未合并。后文关于旧基线和旧拉取请求打开状态的记录属于历史，不代表当前状态。
+
+最新 Host 为研究代理分配独立工作树，记录评估开始时的提交，并使用该提交的代码树生成报告；分支引用更新也增加了比较检查。这些变化处理了原来的共享分支切换问题。当前仍有同一归属要求下的残留：研究代理调用评估时，Host 直接把可修改的研究工作树作为 `ALEPH_SOLUTION_DIR`，实际评分输入可以包含未提交、未跟踪或评估开始后变化的代码，报告与 `evaluatedCommit`、`best.commit` 却仍指向开始时的提交。
+
+例如，已提交的 `algorithm.txt` 内容为 `3`，研究代理将文件改成 `7` 后尚未提交。评估程序实际读取 `7`，工具返回评分 `7`，报告提交中的文件却仍为 `3`。此时评分、报告和最优代码指针虽然相互保存了同一组编号，该组编号仍不能还原实际评分输入。
+
+### 最新自动与实际 DSH 证据
+
+[独立自动脚本](dsh/current-owned-evaluation.test.mjs)包含 69 个有效行为点，66 个通过、3 个失败；Node 计入父容器为 70 项、66 项通过、4 项失败。[结构化记录](evidence/15-current-owned-baseline.json)与[原始输出](evidence/15-current-owned-baseline.txt)保存完整结果。失败均为实际评分输入与报告内容不一致的行为断言。
+
+[实际 DSH 脚本](dsh/current-owned-evaluation.py)通过注册工具启动真实研究代理，使用实际会话、持久存储、独立研究工作树、Git 和 Python 评估程序；仅研究代理模型使用本地确定性响应。脚本没有修改产品源码或缩短评估期限。[实际记录](evidence/15-current-real-dsh-owned.json)的 69 项观察全部符合预期，[原始输出](evidence/15-current-real-dsh-owned.txt)计入父容器为 70 项，表示以下缺陷已经复现：
+
+| 场景 | 实际评分输入及评分 | 报告中的代码 | 结果 |
+| --- | --- | --- | --- |
+| 被评分输入保持已提交内容 | `algorithm.txt=3`，评分 `3` | `algorithm.txt=3` | 对照正常 |
+| 已跟踪文件未提交 | `algorithm.txt=7`，评分 `7` | `algorithm.txt=3` | 评分与代码不一致 |
+| 评估读取未跟踪文件 | `algorithm.txt=3`、`extra.txt=11`，评分 `14` | `algorithm.txt=3`，没有 `extra.txt` | 报告缺少实际评分输入 |
+| 评估开始后推进研究提交 | 评估等待期间提交 `algorithm.txt=19`，随后评分 `19` | `algorithm.txt=3` | 评分与报告起点不一致 |
+
+实际对照工作树含研究代理生成的无关标记文件，因此对照只表示被评分的输入保持已提交内容，不表示整个工作树没有未跟踪文件。推进提交场景中，Host 正确保留了后来的研究提交，并返回 `researchBranchUpdated=false`；该保护不能解决实际输入与旧报告树不一致的问题。隔离 Host 进程 `350625` 已正常退出，记录确认进程不存在。
+
+预期行为是 Host 固定实际接受评分的代码，并使报告树、评估提交和最优代码指针均能还原该输入。实现可以在评估前要求提交并固定独立快照，或明确拒绝无法稳定关联的输入；不得静默把可变工作树的评分登记到另一份已提交代码。应保留独立报告引用、分支比较更新和研究工作文件，不覆盖评估期间新增的提交。当前复核沿用原 #19，不新建相近议题，管理状态保留 `dsh实测有问题`。
+
+```bash
+ALEPH_OWNED_EVALUATION_OUTPUT=tests/issues/evidence/15-current-owned-baseline.json \
+node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/current-owned-evaluation.test.mjs
+
+python3 tests/issues/dsh/current-owned-evaluation.py \
+  --source /home/paulus-chang/项目/aleph \
+  --output tests/issues/evidence/15-current-real-dsh-owned.json
+```
+
 ## 当前情况
 
 研究代理提交研究代码后，通过 `aleph_evaluate` 请求评估。Host 从研究仓库当时的 `HEAD` 创建独立评估目录，评估命令在该目录中运行。评估结束后，Host 在共享研究仓库的当前分支提交评分报告，并返回当前提交作为 `researchCommit`。

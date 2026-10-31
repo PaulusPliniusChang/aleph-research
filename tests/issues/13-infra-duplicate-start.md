@@ -8,6 +8,8 @@ pull_request: https://github.com/hapenia/aleph-research/pull/15
 
 # 同一批次重复启动 InfraOptimizer 会删除正在使用的工作目录
 
+
+原始准备窗口记录的 `probe.boundary` 误写为启动真实研究代理；该场景实际使用真实父会话与任务工作树工具，没有启动研究代理或基础设施优化模型。原始记录保持不变，说明更正见[边界更正记录](evidence/13-current-preparation-boundary-correction.json)。
 ## 最新上游复核：准备阶段仍存在重复启动窗口
 
 本地“已解决”是先前人工维护状态，按状态规则继续保留；该字段不代表当前上游准备阶段已经修复。当前复核证据及待修复范围以下文为准。

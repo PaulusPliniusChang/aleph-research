@@ -10,7 +10,7 @@ const cfg=actual?JSON.parse(readFileSync(process.env.ALEPH_INFRA_PREPARATION_ACT
 const source=resolve(cfg.source||process.env.ALEPH_CURRENT_SOURCE||'/home/paulus-chang/项目/aleph');
 const gate=process.env.ALEPH_INFRA_PREPARATION_GATE;
 const output=cfg.output||process.env.ALEPH_INFRA_PREPARATION_OUTPUT;
-const r={source,sha:execFileSync('/usr/bin/git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),actual,checks:[],events:[],boundary:'Only the first exact infra worktree-add response is delayed after real Git completes. Filesystem operations, subsequent Git commands and DSH tools/storage are real. Automatic substitutes storage/session/presets/activation services; actual starts a genuine researcher for a Git/session control, with deterministic model responses. The infra preparation failure happens before an infra model starts.'};
+const r={source,sha:execFileSync('/usr/bin/git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),actual,checks:[],events:[],boundary:'Only the first exact infra worktree-add response is delayed after real Git completes. Filesystem operations, subsequent Git commands and DSH tools/storage are real. Automatic substitutes storage/session/presets/activation services; actual uses genuine parent sessions and mission worktree tools, with deterministic model responses configured. The infra preparation failure happens before an infra model starts.'};
 const save=()=>output&&writeFileSync(output,JSON.stringify(r,null,2));
 const git=(repo,...args)=>execFileSync('/usr/bin/git',['-C',repo,...args],{encoding:'utf8'}).trim();
 const sleep=ms=>new Promise(f=>setTimeout(f,ms));
