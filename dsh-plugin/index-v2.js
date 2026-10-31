@@ -726,51 +726,77 @@ class ProjectService {
       return { status: 'waiting', projectId, pending: pending.map((mission) => ({ id: mission.id, branch: mission.branch, status: mission.status })) };
     }
     const agentRecord = (project.agents ?? []).find((item) => item.role === 'researcher' && item.childId === owner && item.worktree);
-    let worktree;
+    const evaluationId = newId('eval');
+    const worktreeRoot = join(project.workspace, '.aleph', 'evaluations');
+    let worktree = null;
     let temporary = false;
+    let targetRef = null;
+    let evaluatedCommit;
     if (!branch && agentRecord?.worktree && await pathExists(agentRecord.worktree)) {
+      // Evaluate the researcher's own worktree, but pin the commit so the report
+      // keeps pointing at the code that was actually scored.
       worktree = agentRecord.worktree;
+      const symbolic = await git(worktree, ['symbolic-ref', '--quiet', 'HEAD']).catch(() => ({ stdout: '' }));
+      targetRef = symbolic.stdout.trim() || null;
+      evaluatedCommit = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
     } else {
       const rev = branch ?? 'HEAD';
       const exists = branch
         ? await git(project.researchRoot, ['rev-parse', '--verify', branch]).then(() => true).catch(() => false)
         : true;
       if (!exists) throw new Error(`research branch not found: ${branch}`);
-      const worktreeRoot = join(project.workspace, '.aleph', 'evaluations');
-      worktree = join(worktreeRoot, newId('eval'));
+      const symbolic = await git(project.researchRoot, ['symbolic-ref', '--quiet', 'HEAD']).catch(() => ({ stdout: '' }));
+      targetRef = branch ? (branch.startsWith('refs/') ? branch : `refs/heads/${branch}`) : (symbolic.stdout.trim() || null);
+      evaluatedCommit = (await git(project.researchRoot, ['rev-parse', '--verify', rev])).stdout.trim();
       await mkdir(worktreeRoot, { recursive: true });
-      await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, rev]);
+      worktree = join(worktreeRoot, evaluationId);
+      await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, evaluatedCommit]);
       temporary = true;
     }
+    const evaluatedTree = (await git(project.researchRoot, ['rev-parse', `${evaluatedCommit}^{tree}`])).stdout.trim();
     const env = {
       ALEPH_WORKSPACE: project.workspace,
       ALEPH_SOLUTION_DIR: worktree,
       ...(project.visibleData ? { ALEPH_VISIBLE_DATA: project.visibleData } : {}),
       ...(project.testsetPath ? { ALEPH_TESTSET: project.testsetPath } : {}),
       ...(project.submissionPython ? { ALEPH_SUBMISSION_PYTHON: project.submissionPython } : {}),
+      ...(project.pythonPath ? { ALEPH_PYTHON: project.pythonPath } : {}),
     };
     let score = null;
     let stdout = '';
     let stderr = '';
     try {
-      // The evaluator lives with the project, not inside the research worktree; it reads the
-      // branch under test through ALEPH_SOLUTION_DIR.
+      // The evaluator lives beside the project; it reads the scored branch through ALEPH_SOLUTION_DIR.
       const result = await run('bash', ['-lc', project.evalCommand], { cwd: project.evalRoot || project.workspace, env, timeout: 600_000 });
       stdout = result.stdout;
       stderr = result.stderr;
-      const parsed = parseScore(stdout);
-      score = parsed?.score ?? null;
+      score = parseScore(stdout)?.score ?? null;
     } finally {
-      if (temporary) {
+      if (temporary && worktree) {
         await git(project.researchRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
         await rm(worktree, { recursive: true, force: true }).catch(() => undefined);
       }
     }
-    const message = `research evaluation: ${score ?? 'no score'}\n\nAleph-Project: ${project.id}\nAleph-Evaluation: ${score ?? 'none'}\n\n${stdout.trim().slice(0, 4000)}`;
-    const commitRoot = temporary ? project.researchRoot : (agentRecord?.worktree ?? project.researchRoot);
-    await git(commitRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m', message]);
-    const researchCommit = (await git(commitRoot, ['rev-parse', 'HEAD'])).stdout.trim();
-    return { status: 'done', projectId, score, researchCommit, stdout: stdout.slice(0, 8000), stderr: stderr.slice(0, 4000) };
+    const message = `research evaluation: ${score ?? 'no score'}\n\nAleph-Project: ${project.id}\nAleph-Evaluation: ${score ?? 'none'}\nAleph-Research-Commit: ${evaluatedCommit}\n\n${stdout.trim().slice(0, 4000)}`;
+    // Build the report from the evaluated tree so files the evaluator generated never enter the branch.
+    const researchCommit = (await git(project.researchRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost',
+      'commit-tree', evaluatedTree, '-p', evaluatedCommit, '-m', message])).stdout.trim();
+    const evaluationRef = `refs/aleph/evaluations/${evaluationId}`;
+    await git(project.researchRoot, ['update-ref', evaluationRef, researchCommit, '']);
+    let researchBranchUpdated = false;
+    if (targetRef) {
+      try {
+        // Compare-and-swap: commits made while the evaluation ran are never replaced.
+        await git(project.researchRoot, ['update-ref', targetRef, researchCommit, evaluatedCommit]);
+        researchBranchUpdated = true;
+      } catch {
+        // The branch moved on; the evaluation ref still preserves this report.
+      }
+    }
+    return {
+      status: 'done', projectId, score, researchCommit, evaluatedCommit, evaluationRef, researchBranchUpdated,
+      stdout: stdout.slice(0, 8000), stderr: stderr.slice(0, 4000),
+    };
   }
 
   async startResearcher({ projectId, agent }) {
