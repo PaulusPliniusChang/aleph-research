@@ -42,7 +42,13 @@ case "$step" in
     post /api/aleph/run "{\"project_id\":\"$project\",\"batch_id\":\"$batch_id\"}" | tee "$run_root/run-result.json"
     ;;
   evaluate)
-    post /api/aleph/evaluate "{\"project_id\":\"$project\",\"session_id\":\"$session_id\"}" | tee "$run_root/eval.json"
+    # ALEPH_BRANCH evaluates a named research branch; otherwise the owner session worktree is used.
+    branch="${ALEPH_BRANCH:-}"
+    if [ -n "$branch" ]; then
+      post /api/aleph/evaluate "{\"project_id\":\"$project\",\"branch\":\"$branch\"}" | tee "$run_root/eval.json"
+    else
+      post /api/aleph/evaluate "{\"project_id\":\"$project\",\"session_id\":\"$session_id\"}" | tee "$run_root/eval.json"
+    fi
     ;;
   all)
     post /api/aleph/scaffold "{\"project_id\":\"$project\",\"title\":\"$project\",\"data\":[\"$visible\"],\"python\":\"$runtime_python\"}"

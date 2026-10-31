@@ -622,7 +622,7 @@ class ProjectService {
     }));
   }
 
-  async evaluate({ projectId, agent }) {
+  async evaluate({ projectId, agent, branch = null }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const owner = agent?.id ?? null;
@@ -635,13 +635,18 @@ class ProjectService {
     const agentRecord = (project.agents ?? []).find((item) => item.role === 'researcher' && item.childId === owner && item.worktree);
     let worktree;
     let temporary = false;
-    if (agentRecord?.worktree && await pathExists(agentRecord.worktree)) {
+    if (!branch && agentRecord?.worktree && await pathExists(agentRecord.worktree)) {
       worktree = agentRecord.worktree;
     } else {
+      const rev = branch ?? 'HEAD';
+      const exists = branch
+        ? await git(project.researchRoot, ['rev-parse', '--verify', branch]).then(() => true).catch(() => false)
+        : true;
+      if (!exists) throw new Error(`research branch not found: ${branch}`);
       const worktreeRoot = join(project.workspace, '.aleph', 'evaluations');
       worktree = join(worktreeRoot, newId('eval'));
       await mkdir(worktreeRoot, { recursive: true });
-      await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, 'HEAD']);
+      await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, rev]);
       temporary = true;
     }
     const env = {
@@ -669,7 +674,7 @@ class ProjectService {
       }
     }
     const message = `research evaluation: ${score ?? 'no score'}\n\nAleph-Project: ${project.id}\nAleph-Evaluation: ${score ?? 'none'}\n\n${stdout.trim().slice(0, 4000)}`;
-    const commitRoot = agentRecord?.worktree && await pathExists(agentRecord.worktree) ? agentRecord.worktree : project.researchRoot;
+    const commitRoot = temporary ? project.researchRoot : (agentRecord?.worktree ?? project.researchRoot);
     await git(commitRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m', message]);
     const researchCommit = (await git(commitRoot, ['rev-parse', 'HEAD'])).stdout.trim();
     return { status: 'done', projectId, score, researchCommit, stdout: stdout.slice(0, 8000), stderr: stderr.slice(0, 4000) };
@@ -1489,7 +1494,7 @@ export async function apply(ctx) {
         const args = body ? JSON.parse(body) : {};
         const projectId = args.project_id ?? args.projectId;
         const agent = args.session_id ? { id: args.session_id } : null;
-        const result = await service.evaluate({ projectId, agent });
+        const result = await service.evaluate({ projectId, agent, branch: args.branch ?? null });
         return sendJson(res, 200, result);
       } catch (error) {
         return sendJson(res, 500, { ok: false, error: { code: 'aleph/evaluate-failed', message: String(error?.message ?? error) } });
