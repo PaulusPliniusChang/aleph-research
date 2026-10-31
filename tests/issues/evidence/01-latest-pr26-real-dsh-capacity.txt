@@ -1,0 +1,7 @@
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+{"output": "tests/issues/evidence/01-latest-pr26-real-dsh-capacity.json", "root": "/tmp/aleph-project-dsh-j1mnybwn", "checks": 59, "protection_validated": true, "defect_reproduced": false}

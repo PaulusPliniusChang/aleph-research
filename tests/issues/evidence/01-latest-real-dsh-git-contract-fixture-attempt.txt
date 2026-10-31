@@ -1,0 +1,13 @@
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/latest-machine-capacity.py", line 261, in <module>
+    check('all actual Git commands finish without lock or script errors', all(r['returncode'] == 0 for r in git_records))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/latest-machine-capacity.py", line 58, in check
+    raise AssertionError(name)
+AssertionError: all actual Git commands finish without lock or script errors

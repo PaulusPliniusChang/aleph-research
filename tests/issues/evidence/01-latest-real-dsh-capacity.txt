@@ -1,0 +1,7 @@
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+Switched to a new branch 'mission/work'
+Switched to branch 'template'
+{"output": "tests/issues/evidence/01-latest-real-dsh-capacity.json", "root": "/tmp/aleph-project-dsh-8ktuq5uv", "checks": 66, "protection_validated": false, "defect_reproduced": true}

@@ -1,0 +1,2432 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-gfhxg9u_",
+    "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "dirty": "",
+    "dsh_version": "0.2.2-alpha.2"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/latest-machine-capacity.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/01-latest-real-dsh-capacity.json"
+  ],
+  "events": [
+    {
+      "name": "authenticated-host",
+      "monotonic": 67788.513058335,
+      "value": {
+        "origin": "http://127.0.0.1:38655",
+        "cookie_present": true
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67788.705742633,
+      "value": {
+        "entered": 67788.531291459,
+        "completed": 67788.705739539,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control"
+          }
+        },
+        "value": {
+          "id": "p-d56d59fa",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:30.579Z",
+          "updatedAt": "2026-10-31T13:08:30.579Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67788.85544378,
+      "value": {
+        "entered": 67788.715190332,
+        "completed": 67788.855441852,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_propose_mission",
+          "args": {
+            "project_id": "p-d56d59fa",
+            "branch": "mission/work"
+          }
+        },
+        "value": {
+          "id": "p-d56d59fa",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [
+            {
+              "id": "m-3bc23ece",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "proposed",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": null,
+              "preBatchTip": null,
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:30.703Z",
+              "approvedAt": null,
+              "finishedAt": null
+            }
+          ],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:30.579Z",
+          "updatedAt": "2026-10-31T13:08:30.703Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67788.867874713,
+      "value": {
+        "entered": 67788.855894272,
+        "completed": 67788.867872419,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_approve_mission",
+          "args": {
+            "project_id": "p-d56d59fa",
+            "mission_id": "m-3bc23ece"
+          }
+        },
+        "value": {
+          "id": "p-d56d59fa",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [
+            {
+              "id": "m-3bc23ece",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "approved",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": null,
+              "preBatchTip": null,
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:30.703Z",
+              "approvedAt": "2026-10-31T13:08:30.731Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:30.579Z",
+          "updatedAt": "2026-10-31T13:08:30.731Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67789.018341801,
+      "value": {
+        "entered": 67788.868760549,
+        "completed": 67789.018339584,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-d56d59fa"
+          }
+        },
+        "value": {
+          "id": "p-d56d59fa",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "busy",
+              "batchId": "b-1ea87ed7"
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:30.741Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-3bc23ece",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "batched",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-1ea87ed7",
+              "preBatchTip": "268037d62005260caca9328491e349946f01314e",
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:30.703Z",
+              "approvedAt": "2026-10-31T13:08:30.731Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-1ea87ed7",
+              "machineId": "local",
+              "status": "forming",
+              "missionIds": [
+                "m-3bc23ece"
+              ],
+              "branch": "batch/b-1ea87ed7",
+              "baseTip": "0bd77fbc7c1bbe11e487936c59021b679512058c",
+              "createdAt": "2026-10-31T13:08:30.891Z"
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:30.579Z",
+          "updatedAt": "2026-10-31T13:08:30.891Z"
+        }
+      }
+    },
+    {
+      "name": "success-control-sequential-request",
+      "monotonic": 67789.021622363,
+      "value": {
+        "entered": 67789.020170728,
+        "completed": 67789.021542889,
+        "ok": false,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-d56d59fa"
+          }
+        },
+        "http_status": 500,
+        "error": "{\"ok\":false,\"error\":\"Error: machine local is busy\",\"stack\":\"Error: machine local is busy\\n    at ProjectService.formBatch (file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1370:42)\\n    at file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1623:31\\n    at Object.execute (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-tools/lib/index.js:341:11)\\n    at Object.handler (file:///tmp/aleph-project-dsh-gfhxg9u_/bridge/index.mjs:23:37)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\\n    at async handle (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-host-webserver/lib/index.js:471:9)\"}"
+      }
+    },
+    {
+      "name": "success-control-active-request",
+      "monotonic": 67789.088026231,
+      "value": {
+        "entered": 67789.086997868,
+        "completed": 67789.08797062,
+        "ok": false,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-d56d59fa"
+          }
+        },
+        "http_status": 500,
+        "error": "{\"ok\":false,\"error\":\"Error: machine local is busy\",\"stack\":\"Error: machine local is busy\\n    at ProjectService.formBatch (file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1370:42)\\n    at file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1623:31\\n    at Object.execute (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-tools/lib/index.js:341:11)\\n    at Object.handler (file:///tmp/aleph-project-dsh-gfhxg9u_/bridge/index.mjs:23:37)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\\n    at async handle (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-host-webserver/lib/index.js:471:9)\"}"
+      }
+    },
+    {
+      "name": "success-control-run-response",
+      "monotonic": 67789.459902298,
+      "value": {
+        "entered": 67789.024258595,
+        "completed": 67789.459857726,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_run_batch",
+          "args": {
+            "project_id": "p-d56d59fa",
+            "batch_id": "b-1ea87ed7"
+          }
+        },
+        "value": {
+          "id": "p-d56d59fa",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:30.741Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-3bc23ece",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "done",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-1ea87ed7",
+              "preBatchTip": "268037d62005260caca9328491e349946f01314e",
+              "resultCommit": "6f239900ac00d10b6cb79a80061f0d25233293e0",
+              "error": null,
+              "createdAt": "2026-10-31T13:08:30.703Z",
+              "approvedAt": "2026-10-31T13:08:30.731Z",
+              "finishedAt": "2026-10-31T13:08:31.333Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-1ea87ed7",
+              "machineId": "local",
+              "status": "done",
+              "missionIds": [
+                "m-3bc23ece"
+              ],
+              "branch": "batch/b-1ea87ed7",
+              "baseTip": "0bd77fbc7c1bbe11e487936c59021b679512058c",
+              "createdAt": "2026-10-31T13:08:30.891Z",
+              "startedAt": "2026-10-31T13:08:30.931Z",
+              "infra": {
+                "cores": 12,
+                "threads": 10,
+                "missions": [
+                  {
+                    "mission": "m-3bc23ece",
+                    "status": "no-pyproject"
+                  }
+                ],
+                "runner": "python3",
+                "timeout_ms": 21600000,
+                "env": {
+                  "ALEPH_THREADS": "10",
+                  "OMP_NUM_THREADS": "10",
+                  "OPENBLAS_NUM_THREADS": "10",
+                  "MKL_NUM_THREADS": "10",
+                  "NUMEXPR_NUM_THREADS": "10",
+                  "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/.aleph/batches/b-1ea87ed7/.uv-cache",
+                  "UV_PYTHON_DOWNLOADS": "never"
+                }
+              },
+              "finishedAt": "2026-10-31T13:08:31.333Z",
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-3bc23ece",
+                    "manifestId": "work",
+                    "manifestPath": "missions/work/mission.json",
+                    "status": "done",
+                    "resultCommit": "6f239900ac00d10b6cb79a80061f0d25233293e0"
+                  }
+                ]
+              }
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:30.579Z",
+          "updatedAt": "2026-10-31T13:08:31.333Z"
+        }
+      }
+    },
+    {
+      "name": "success-control-terminal-public",
+      "monotonic": 67789.461293761,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:08:31.335Z",
+        "project": {
+          "id": "p-d56d59fa",
+          "title": "success-control",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control",
+          "research_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/research",
+          "mission_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-3bc23ece",
+            "owner_session": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+            "status": "done",
+            "branch": "mission/work",
+            "manifest_id": "work",
+            "manifest_path": "missions/work/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-1ea87ed7",
+            "pre_batch_tip": "268037d62005260caca9328491e349946f01314e",
+            "result_commit": "6f239900ac00d10b6cb79a80061f0d25233293e0",
+            "error": null,
+            "created_at": "2026-10-31T13:08:30.703Z",
+            "approved_at": "2026-10-31T13:08:30.731Z",
+            "finished_at": "2026-10-31T13:08:31.333Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-1ea87ed7",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-3bc23ece"
+            ],
+            "branch": "batch/b-1ea87ed7",
+            "base_tip": "0bd77fbc7c1bbe11e487936c59021b679512058c",
+            "created_at": "2026-10-31T13:08:30.891Z",
+            "started_at": "2026-10-31T13:08:30.931Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-3bc23ece",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/success-control/.aleph/batches/b-1ea87ed7/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:08:31.333Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-3bc23ece",
+                  "manifestId": "work",
+                  "manifestPath": "missions/work/mission.json",
+                  "status": "done",
+                  "resultCommit": "6f239900ac00d10b6cb79a80061f0d25233293e0"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": null,
+            "status": "failed",
+            "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:08:30.741Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 1,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67789.62972532,
+      "value": {
+        "entered": 67789.463047203,
+        "completed": 67789.629723381,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control"
+          }
+        },
+        "value": {
+          "id": "p-87357801",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:31.503Z",
+          "updatedAt": "2026-10-31T13:08:31.503Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67789.78244532,
+      "value": {
+        "entered": 67789.63776981,
+        "completed": 67789.782442634,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_propose_mission",
+          "args": {
+            "project_id": "p-87357801",
+            "branch": "mission/work"
+          }
+        },
+        "value": {
+          "id": "p-87357801",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [
+            {
+              "id": "m-49aba8aa",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "proposed",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": null,
+              "preBatchTip": null,
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:31.627Z",
+              "approvedAt": null,
+              "finishedAt": null
+            }
+          ],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:31.503Z",
+          "updatedAt": "2026-10-31T13:08:31.627Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67789.790479809,
+      "value": {
+        "entered": 67789.783140155,
+        "completed": 67789.790477233,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_approve_mission",
+          "args": {
+            "project_id": "p-87357801",
+            "mission_id": "m-49aba8aa"
+          }
+        },
+        "value": {
+          "id": "p-87357801",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [
+            {
+              "id": "m-49aba8aa",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "approved",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": null,
+              "preBatchTip": null,
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:31.627Z",
+              "approvedAt": "2026-10-31T13:08:31.658Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:31.503Z",
+          "updatedAt": "2026-10-31T13:08:31.658Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67789.935009858,
+      "value": {
+        "entered": 67789.791239559,
+        "completed": 67789.934998032,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-87357801"
+          }
+        },
+        "value": {
+          "id": "p-87357801",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "busy",
+              "batchId": "b-60b5aa9f"
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:31.664Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-49aba8aa",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "batched",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-60b5aa9f",
+              "preBatchTip": "7944f1fd25db1c730dcca71560b9663404c4db52",
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:31.627Z",
+              "approvedAt": "2026-10-31T13:08:31.658Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-60b5aa9f",
+              "machineId": "local",
+              "status": "forming",
+              "missionIds": [
+                "m-49aba8aa"
+              ],
+              "branch": "batch/b-60b5aa9f",
+              "baseTip": "3a1af12eaded8003c155e26d17e138e3d9cd2339",
+              "createdAt": "2026-10-31T13:08:31.808Z"
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:31.503Z",
+          "updatedAt": "2026-10-31T13:08:31.808Z"
+        }
+      }
+    },
+    {
+      "name": "failure-control-sequential-request",
+      "monotonic": 67789.939166731,
+      "value": {
+        "entered": 67789.937812628,
+        "completed": 67789.939063233,
+        "ok": false,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-87357801"
+          }
+        },
+        "http_status": 500,
+        "error": "{\"ok\":false,\"error\":\"Error: machine local is busy\",\"stack\":\"Error: machine local is busy\\n    at ProjectService.formBatch (file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1370:42)\\n    at file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1623:31\\n    at Object.execute (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-tools/lib/index.js:341:11)\\n    at Object.handler (file:///tmp/aleph-project-dsh-gfhxg9u_/bridge/index.mjs:23:37)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\\n    at async handle (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-host-webserver/lib/index.js:471:9)\"}"
+      }
+    },
+    {
+      "name": "failure-control-active-request",
+      "monotonic": 67790.005568485,
+      "value": {
+        "entered": 67790.004540913,
+        "completed": 67790.005490383,
+        "ok": false,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-87357801"
+          }
+        },
+        "http_status": 500,
+        "error": "{\"ok\":false,\"error\":\"Error: machine local is busy\",\"stack\":\"Error: machine local is busy\\n    at ProjectService.formBatch (file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1370:42)\\n    at file:///tmp/aleph-project-dsh-gfhxg9u_/plugin/index-v2.js:1623:31\\n    at Object.execute (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-tools/lib/index.js:341:11)\\n    at Object.handler (file:///tmp/aleph-project-dsh-gfhxg9u_/bridge/index.mjs:23:37)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\\n    at async handle (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-host-webserver/lib/index.js:471:9)\"}"
+      }
+    },
+    {
+      "name": "failure-control-run-response",
+      "monotonic": 67790.391330255,
+      "value": {
+        "entered": 67789.941163817,
+        "completed": 67790.39127536,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_run_batch",
+          "args": {
+            "project_id": "p-87357801",
+            "batch_id": "b-60b5aa9f"
+          }
+        },
+        "value": {
+          "id": "p-87357801",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:31.664Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-49aba8aa",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "failed",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-60b5aa9f",
+              "preBatchTip": "7944f1fd25db1c730dcca71560b9663404c4db52",
+              "resultCommit": "77b1b272d25f98d835d49cd8f48f3a61696f233a",
+              "error": "mission entrypoint exited with 7; see run.log",
+              "createdAt": "2026-10-31T13:08:31.627Z",
+              "approvedAt": "2026-10-31T13:08:31.658Z",
+              "finishedAt": "2026-10-31T13:08:32.264Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-60b5aa9f",
+              "machineId": "local",
+              "status": "failed",
+              "missionIds": [
+                "m-49aba8aa"
+              ],
+              "branch": "batch/b-60b5aa9f",
+              "baseTip": "3a1af12eaded8003c155e26d17e138e3d9cd2339",
+              "createdAt": "2026-10-31T13:08:31.808Z",
+              "startedAt": "2026-10-31T13:08:31.846Z",
+              "infra": {
+                "cores": 12,
+                "threads": 10,
+                "missions": [
+                  {
+                    "mission": "m-49aba8aa",
+                    "status": "no-pyproject"
+                  }
+                ],
+                "runner": "python3",
+                "timeout_ms": 21600000,
+                "env": {
+                  "ALEPH_THREADS": "10",
+                  "OMP_NUM_THREADS": "10",
+                  "OPENBLAS_NUM_THREADS": "10",
+                  "MKL_NUM_THREADS": "10",
+                  "NUMEXPR_NUM_THREADS": "10",
+                  "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/.aleph/batches/b-60b5aa9f/.uv-cache",
+                  "UV_PYTHON_DOWNLOADS": "never"
+                }
+              },
+              "finishedAt": "2026-10-31T13:08:32.264Z",
+              "summary": {
+                "runnerError": "Command failed: python3 .aleph_batch_runner.py\n",
+                "missions": [
+                  {
+                    "missionId": "m-49aba8aa",
+                    "manifestId": "work",
+                    "manifestPath": "missions/work/mission.json",
+                    "status": "failed",
+                    "resultCommit": "77b1b272d25f98d835d49cd8f48f3a61696f233a"
+                  }
+                ]
+              }
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:31.503Z",
+          "updatedAt": "2026-10-31T13:08:32.264Z"
+        }
+      }
+    },
+    {
+      "name": "failure-control-terminal-public",
+      "monotonic": 67790.39282587,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:08:32.267Z",
+        "project": {
+          "id": "p-87357801",
+          "title": "failure-control",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control",
+          "research_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/research",
+          "mission_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-49aba8aa",
+            "owner_session": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+            "status": "failed",
+            "branch": "mission/work",
+            "manifest_id": "work",
+            "manifest_path": "missions/work/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-60b5aa9f",
+            "pre_batch_tip": "7944f1fd25db1c730dcca71560b9663404c4db52",
+            "result_commit": "77b1b272d25f98d835d49cd8f48f3a61696f233a",
+            "error": "mission entrypoint exited with 7; see run.log",
+            "created_at": "2026-10-31T13:08:31.627Z",
+            "approved_at": "2026-10-31T13:08:31.658Z",
+            "finished_at": "2026-10-31T13:08:32.264Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-60b5aa9f",
+            "machine_id": "local",
+            "status": "failed",
+            "mission_ids": [
+              "m-49aba8aa"
+            ],
+            "branch": "batch/b-60b5aa9f",
+            "base_tip": "3a1af12eaded8003c155e26d17e138e3d9cd2339",
+            "created_at": "2026-10-31T13:08:31.808Z",
+            "started_at": "2026-10-31T13:08:31.846Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-49aba8aa",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/failure-control/.aleph/batches/b-60b5aa9f/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:08:32.264Z",
+            "summary": {
+              "runnerError": "Command failed: python3 .aleph_batch_runner.py\n",
+              "missions": [
+                {
+                  "missionId": "m-49aba8aa",
+                  "manifestId": "work",
+                  "manifestPath": "missions/work/mission.json",
+                  "status": "failed",
+                  "resultCommit": "77b1b272d25f98d835d49cd8f48f3a61696f233a"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": null,
+            "status": "failed",
+            "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:08:31.664Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 1
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67790.577493308,
+      "value": {
+        "entered": 67790.394549876,
+        "completed": 67790.577491137,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent"
+          }
+        },
+        "value": {
+          "id": "p-3154c1b8",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:32.451Z",
+          "updatedAt": "2026-10-31T13:08:32.451Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67790.725522155,
+      "value": {
+        "entered": 67790.588009131,
+        "completed": 67790.725519817,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_propose_mission",
+          "args": {
+            "project_id": "p-3154c1b8",
+            "branch": "mission/work"
+          }
+        },
+        "value": {
+          "id": "p-3154c1b8",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [
+            {
+              "id": "m-808b5523",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "proposed",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": null,
+              "preBatchTip": null,
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:32.572Z",
+              "approvedAt": null,
+              "finishedAt": null
+            }
+          ],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:32.451Z",
+          "updatedAt": "2026-10-31T13:08:32.572Z"
+        }
+      }
+    },
+    {
+      "name": "tool",
+      "monotonic": 67790.73375518,
+      "value": {
+        "entered": 67790.726680173,
+        "completed": 67790.733752868,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_approve_mission",
+          "args": {
+            "project_id": "p-3154c1b8",
+            "mission_id": "m-808b5523"
+          }
+        },
+        "value": {
+          "id": "p-3154c1b8",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [
+            {
+              "id": "m-808b5523",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "approved",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": null,
+              "preBatchTip": null,
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:32.572Z",
+              "approvedAt": "2026-10-31T13:08:32.602Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:32.451Z",
+          "updatedAt": "2026-10-31T13:08:32.602Z"
+        }
+      }
+    },
+    {
+      "name": "first-concurrent-response",
+      "monotonic": 67790.877617266,
+      "value": {
+        "entered": 67790.735543898,
+        "completed": 67790.877566464,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-3154c1b8"
+          }
+        },
+        "value": {
+          "id": "p-3154c1b8",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "busy",
+              "batchId": "b-cb9f8a67"
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:32.607Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-808b5523",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "batched",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-cb9f8a67",
+              "preBatchTip": "f25068cec745256a2ea5bcfd1c9fb05b39d3e62a",
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:32.572Z",
+              "approvedAt": "2026-10-31T13:08:32.602Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-cb9f8a67",
+              "machineId": "local",
+              "status": "forming",
+              "missionIds": [
+                "m-808b5523"
+              ],
+              "branch": "batch/b-cb9f8a67",
+              "baseTip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+              "createdAt": "2026-10-31T13:08:32.751Z"
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:32.451Z",
+          "updatedAt": "2026-10-31T13:08:32.751Z"
+        }
+      }
+    },
+    {
+      "name": "first-persisted-before-second-release",
+      "monotonic": 67790.879637683,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:08:32.753Z",
+        "project": {
+          "id": "p-3154c1b8",
+          "title": "concurrent",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "research_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "mission_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-808b5523",
+            "owner_session": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+            "status": "batched",
+            "branch": "mission/work",
+            "manifest_id": "work",
+            "manifest_path": "missions/work/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-cb9f8a67",
+            "pre_batch_tip": "f25068cec745256a2ea5bcfd1c9fb05b39d3e62a",
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:08:32.572Z",
+            "approved_at": "2026-10-31T13:08:32.602Z",
+            "finished_at": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-cb9f8a67",
+            "machine_id": "local",
+            "status": "forming",
+            "mission_ids": [
+              "m-808b5523"
+            ],
+            "branch": "batch/b-cb9f8a67",
+            "base_tip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+            "created_at": "2026-10-31T13:08:32.751Z",
+            "started_at": null,
+            "infra": null,
+            "finished_at": null,
+            "summary": null
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-cb9f8a67"
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": null,
+            "status": "failed",
+            "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:08:32.607Z"
+          }
+        ],
+        "counts": {
+          "queued": 1,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "second-concurrent-response",
+      "monotonic": 67791.016059778,
+      "value": {
+        "entered": 67790.766866076,
+        "completed": 67791.016017859,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-3154c1b8"
+          }
+        },
+        "value": {
+          "id": "p-3154c1b8",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "busy",
+              "batchId": "b-a87f877c"
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:32.607Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-808b5523",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "batched",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-a87f877c",
+              "preBatchTip": "f25068cec745256a2ea5bcfd1c9fb05b39d3e62a",
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T13:08:32.572Z",
+              "approvedAt": "2026-10-31T13:08:32.602Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-cb9f8a67",
+              "machineId": "local",
+              "status": "forming",
+              "missionIds": [
+                "m-808b5523"
+              ],
+              "branch": "batch/b-cb9f8a67",
+              "baseTip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+              "createdAt": "2026-10-31T13:08:32.751Z"
+            },
+            {
+              "id": "b-a87f877c",
+              "machineId": "local",
+              "status": "forming",
+              "missionIds": [
+                "m-808b5523"
+              ],
+              "branch": "batch/b-a87f877c",
+              "baseTip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+              "createdAt": "2026-10-31T13:08:32.889Z"
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:32.451Z",
+          "updatedAt": "2026-10-31T13:08:32.889Z"
+        }
+      }
+    },
+    {
+      "name": "actual-project-after-both-compositions",
+      "monotonic": 67791.019869643,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:08:32.893Z",
+        "project": {
+          "id": "p-3154c1b8",
+          "title": "concurrent",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "research_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "mission_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-808b5523",
+            "owner_session": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+            "status": "batched",
+            "branch": "mission/work",
+            "manifest_id": "work",
+            "manifest_path": "missions/work/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-a87f877c",
+            "pre_batch_tip": "f25068cec745256a2ea5bcfd1c9fb05b39d3e62a",
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:08:32.572Z",
+            "approved_at": "2026-10-31T13:08:32.602Z",
+            "finished_at": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-cb9f8a67",
+            "machine_id": "local",
+            "status": "forming",
+            "mission_ids": [
+              "m-808b5523"
+            ],
+            "branch": "batch/b-cb9f8a67",
+            "base_tip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+            "created_at": "2026-10-31T13:08:32.751Z",
+            "started_at": null,
+            "infra": null,
+            "finished_at": null,
+            "summary": null
+          },
+          {
+            "id": "b-a87f877c",
+            "machine_id": "local",
+            "status": "forming",
+            "mission_ids": [
+              "m-808b5523"
+            ],
+            "branch": "batch/b-a87f877c",
+            "base_tip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+            "created_at": "2026-10-31T13:08:32.889Z",
+            "started_at": null,
+            "infra": null,
+            "finished_at": null,
+            "summary": null
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-a87f877c"
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": null,
+            "status": "failed",
+            "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:08:32.607Z"
+          }
+        ],
+        "counts": {
+          "queued": 1,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "simultaneous-task-starts",
+      "monotonic": 67791.163650293,
+      "value": [
+        "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-cb9f8a67/results/work",
+        "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-a87f877c/results/work"
+      ]
+    },
+    {
+      "name": "b-cb9f8a67-run-response",
+      "monotonic": 67791.560393175,
+      "value": {
+        "entered": 67791.030507684,
+        "completed": 67791.560349867,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_run_batch",
+          "args": {
+            "project_id": "p-3154c1b8",
+            "batch_id": "b-cb9f8a67"
+          }
+        },
+        "value": {
+          "id": "p-3154c1b8",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:32.607Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-808b5523",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "done",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-a87f877c",
+              "preBatchTip": "f25068cec745256a2ea5bcfd1c9fb05b39d3e62a",
+              "resultCommit": "c9d43ff32743e2432516861925f1b935630e10db",
+              "error": null,
+              "createdAt": "2026-10-31T13:08:32.572Z",
+              "approvedAt": "2026-10-31T13:08:32.602Z",
+              "finishedAt": "2026-10-31T13:08:33.433Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-cb9f8a67",
+              "machineId": "local",
+              "status": "done",
+              "missionIds": [
+                "m-808b5523"
+              ],
+              "branch": "batch/b-cb9f8a67",
+              "baseTip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+              "createdAt": "2026-10-31T13:08:32.751Z",
+              "startedAt": "2026-10-31T13:08:32.939Z",
+              "infra": {
+                "cores": 12,
+                "threads": 10,
+                "missions": [
+                  {
+                    "mission": "m-808b5523",
+                    "status": "no-pyproject"
+                  }
+                ],
+                "runner": "python3",
+                "timeout_ms": 21600000,
+                "env": {
+                  "ALEPH_THREADS": "10",
+                  "OMP_NUM_THREADS": "10",
+                  "OPENBLAS_NUM_THREADS": "10",
+                  "MKL_NUM_THREADS": "10",
+                  "NUMEXPR_NUM_THREADS": "10",
+                  "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-cb9f8a67/.uv-cache",
+                  "UV_PYTHON_DOWNLOADS": "never"
+                }
+              },
+              "finishedAt": "2026-10-31T13:08:33.433Z",
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-808b5523",
+                    "manifestId": "work",
+                    "manifestPath": "missions/work/mission.json",
+                    "status": "done",
+                    "resultCommit": "c9d43ff32743e2432516861925f1b935630e10db"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "b-a87f877c",
+              "machineId": "local",
+              "status": "running",
+              "missionIds": [
+                "m-808b5523"
+              ],
+              "branch": "batch/b-a87f877c",
+              "baseTip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+              "createdAt": "2026-10-31T13:08:32.889Z",
+              "startedAt": "2026-10-31T13:08:33.010Z",
+              "infra": {
+                "cores": 12,
+                "threads": 10,
+                "missions": [
+                  {
+                    "mission": "m-808b5523",
+                    "status": "no-pyproject"
+                  }
+                ],
+                "runner": "python3",
+                "timeout_ms": 21600000,
+                "env": {
+                  "ALEPH_THREADS": "10",
+                  "OMP_NUM_THREADS": "10",
+                  "OPENBLAS_NUM_THREADS": "10",
+                  "MKL_NUM_THREADS": "10",
+                  "NUMEXPR_NUM_THREADS": "10",
+                  "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-a87f877c/.uv-cache",
+                  "UV_PYTHON_DOWNLOADS": "never"
+                }
+              }
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:32.451Z",
+          "updatedAt": "2026-10-31T13:08:33.433Z"
+        }
+      }
+    },
+    {
+      "name": "b-a87f877c-run-response",
+      "monotonic": 67791.942918112,
+      "value": {
+        "entered": 67791.101917923,
+        "completed": 67791.942886933,
+        "ok": true,
+        "request": {
+          "action": "tool",
+          "sessionId": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+          "name": "aleph_run_batch",
+          "args": {
+            "project_id": "p-3154c1b8",
+            "batch_id": "b-a87f877c"
+          }
+        },
+        "value": {
+          "id": "p-3154c1b8",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "researchRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "missionRoot": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": null,
+              "status": "failed",
+              "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T13:08:32.607Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-808b5523",
+              "ownerSession": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+              "branch": "mission/work",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "failed",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-a87f877c",
+              "preBatchTip": "f25068cec745256a2ea5bcfd1c9fb05b39d3e62a",
+              "resultCommit": "ee753634a1dbbcaf5986944a0d36b112da59770d",
+              "error": "Command failed: git -C /tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions update-ref -m mission result m-808b5523 refs/heads/mission/work ee753634a1dbbcaf5986944a0d36b112da59770d f25068cec745256a2ea5bcfd1c9fb05b39d3e62a\nfatal: update_ref failed for ref 'refs/heads/mission/work': cannot lock ref 'refs/heads/mission/work': is at c9d43ff32743e2432516861925f1b935630e10db but expected f25068cec745256a2ea5bcfd1c9fb05b39d3e62a\n",
+              "createdAt": "2026-10-31T13:08:32.572Z",
+              "approvedAt": "2026-10-31T13:08:32.602Z",
+              "finishedAt": "2026-10-31T13:08:33.816Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-cb9f8a67",
+              "machineId": "local",
+              "status": "done",
+              "missionIds": [
+                "m-808b5523"
+              ],
+              "branch": "batch/b-cb9f8a67",
+              "baseTip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+              "createdAt": "2026-10-31T13:08:32.751Z",
+              "startedAt": "2026-10-31T13:08:32.939Z",
+              "infra": {
+                "cores": 12,
+                "threads": 10,
+                "missions": [
+                  {
+                    "mission": "m-808b5523",
+                    "status": "no-pyproject"
+                  }
+                ],
+                "runner": "python3",
+                "timeout_ms": 21600000,
+                "env": {
+                  "ALEPH_THREADS": "10",
+                  "OMP_NUM_THREADS": "10",
+                  "OPENBLAS_NUM_THREADS": "10",
+                  "MKL_NUM_THREADS": "10",
+                  "NUMEXPR_NUM_THREADS": "10",
+                  "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-cb9f8a67/.uv-cache",
+                  "UV_PYTHON_DOWNLOADS": "never"
+                }
+              },
+              "finishedAt": "2026-10-31T13:08:33.433Z",
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-808b5523",
+                    "manifestId": "work",
+                    "manifestPath": "missions/work/mission.json",
+                    "status": "done",
+                    "resultCommit": "c9d43ff32743e2432516861925f1b935630e10db"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "b-a87f877c",
+              "machineId": "local",
+              "status": "failed",
+              "missionIds": [
+                "m-808b5523"
+              ],
+              "branch": "batch/b-a87f877c",
+              "baseTip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+              "createdAt": "2026-10-31T13:08:32.889Z",
+              "startedAt": "2026-10-31T13:08:33.010Z",
+              "infra": {
+                "cores": 12,
+                "threads": 10,
+                "missions": [
+                  {
+                    "mission": "m-808b5523",
+                    "status": "no-pyproject"
+                  }
+                ],
+                "runner": "python3",
+                "timeout_ms": 21600000,
+                "env": {
+                  "ALEPH_THREADS": "10",
+                  "OMP_NUM_THREADS": "10",
+                  "OPENBLAS_NUM_THREADS": "10",
+                  "MKL_NUM_THREADS": "10",
+                  "NUMEXPR_NUM_THREADS": "10",
+                  "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-a87f877c/.uv-cache",
+                  "UV_PYTHON_DOWNLOADS": "never"
+                }
+              },
+              "finishedAt": "2026-10-31T13:08:33.816Z",
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-808b5523",
+                    "manifestId": "work",
+                    "manifestPath": "missions/work/mission.json",
+                    "status": "failed",
+                    "resultCommit": "ee753634a1dbbcaf5986944a0d36b112da59770d"
+                  }
+                ]
+              }
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T13:08:32.451Z",
+          "updatedAt": "2026-10-31T13:08:33.816Z"
+        }
+      }
+    },
+    {
+      "name": "final-public-project",
+      "monotonic": 67791.945119488,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:08:33.819Z",
+        "project": {
+          "id": "p-3154c1b8",
+          "title": "concurrent",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent",
+          "research_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/research",
+          "mission_root": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-808b5523",
+            "owner_session": "session-cde7a820-bb95-4bd3-b290-bae6f0eab356",
+            "status": "failed",
+            "branch": "mission/work",
+            "manifest_id": "work",
+            "manifest_path": "missions/work/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-a87f877c",
+            "pre_batch_tip": "f25068cec745256a2ea5bcfd1c9fb05b39d3e62a",
+            "result_commit": "ee753634a1dbbcaf5986944a0d36b112da59770d",
+            "error": "Command failed: git -C /tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/missions update-ref -m mission result m-808b5523 refs/heads/mission/work ee753634a1dbbcaf5986944a0d36b112da59770d f25068cec745256a2ea5bcfd1c9fb05b39d3e62a\nfatal: update_ref failed for ref 'refs/heads/mission/work': cannot lock ref 'refs/heads/mission/work': is at c9d43ff32743e2432516861925f1b935630e10db but expected f25068cec745256a2ea5bcfd1c9fb05b39d3e62a\n",
+            "created_at": "2026-10-31T13:08:32.572Z",
+            "approved_at": "2026-10-31T13:08:32.602Z",
+            "finished_at": "2026-10-31T13:08:33.816Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-cb9f8a67",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-808b5523"
+            ],
+            "branch": "batch/b-cb9f8a67",
+            "base_tip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+            "created_at": "2026-10-31T13:08:32.751Z",
+            "started_at": "2026-10-31T13:08:32.939Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-808b5523",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-cb9f8a67/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:08:33.433Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-808b5523",
+                  "manifestId": "work",
+                  "manifestPath": "missions/work/mission.json",
+                  "status": "done",
+                  "resultCommit": "c9d43ff32743e2432516861925f1b935630e10db"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b-a87f877c",
+            "machine_id": "local",
+            "status": "failed",
+            "mission_ids": [
+              "m-808b5523"
+            ],
+            "branch": "batch/b-a87f877c",
+            "base_tip": "c18fcce583490ac0d2f391588b6df2d0193c7ecd",
+            "created_at": "2026-10-31T13:08:32.889Z",
+            "started_at": "2026-10-31T13:08:33.010Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-808b5523",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-project-dsh-gfhxg9u_/workspace/concurrent/.aleph/batches/b-a87f877c/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:08:33.816Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-808b5523",
+                  "manifestId": "work",
+                  "manifestPath": "missions/work/mission.json",
+                  "status": "failed",
+                  "resultCommit": "ee753634a1dbbcaf5986944a0d36b112da59770d"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": null,
+            "status": "failed",
+            "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:08:32.607Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 1
+        }
+      }
+    },
+    {
+      "name": "stopped-isolated-dsh",
+      "monotonic": 67792.110459833,
+      "value": {
+        "pid": 484624,
+        "returncode": 0,
+        "pid_exists": false
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "actual DSH project storage is registered",
+      "passed": true
+    },
+    {
+      "name": "success-control: one actual machine exists",
+      "passed": true
+    },
+    {
+      "name": "success-control: machine starts idle",
+      "passed": true
+    },
+    {
+      "name": "success-control: proposal has real caller ownership",
+      "passed": true
+    },
+    {
+      "name": "success-control: approval persisted",
+      "passed": true
+    },
+    {
+      "name": "success-control: composition reserves machine",
+      "passed": true
+    },
+    {
+      "name": "success-control: machine names formed batch",
+      "passed": true
+    },
+    {
+      "name": "success-control: real batch Git includes mission ancestor",
+      "passed": true
+    },
+    {
+      "name": "success-control: reserved machine rejects sequential composition",
+      "passed": true
+    },
+    {
+      "name": "success-control: refusal adds no actual batch",
+      "passed": true
+    },
+    {
+      "name": "success-control: compute actually active",
+      "passed": true
+    },
+    {
+      "name": "success-control: actual task starts once",
+      "passed": true
+    },
+    {
+      "name": "success-control: actual compute retains machine reservation",
+      "passed": true
+    },
+    {
+      "name": "success-control: active compute rejects new composition",
+      "passed": true
+    },
+    {
+      "name": "success-control: registered run call completes normally",
+      "passed": true
+    },
+    {
+      "name": "success-control: batch records actual compute outcome",
+      "passed": true
+    },
+    {
+      "name": "success-control: terminal task releases machine",
+      "passed": true
+    },
+    {
+      "name": "success-control: terminal task clears owner",
+      "passed": true
+    },
+    {
+      "name": "failure-control: one actual machine exists",
+      "passed": true
+    },
+    {
+      "name": "failure-control: machine starts idle",
+      "passed": true
+    },
+    {
+      "name": "failure-control: proposal has real caller ownership",
+      "passed": true
+    },
+    {
+      "name": "failure-control: approval persisted",
+      "passed": true
+    },
+    {
+      "name": "failure-control: composition reserves machine",
+      "passed": true
+    },
+    {
+      "name": "failure-control: machine names formed batch",
+      "passed": true
+    },
+    {
+      "name": "failure-control: real batch Git includes mission ancestor",
+      "passed": true
+    },
+    {
+      "name": "failure-control: reserved machine rejects sequential composition",
+      "passed": true
+    },
+    {
+      "name": "failure-control: refusal adds no actual batch",
+      "passed": true
+    },
+    {
+      "name": "failure-control: compute actually active",
+      "passed": true
+    },
+    {
+      "name": "failure-control: actual task starts once",
+      "passed": true
+    },
+    {
+      "name": "failure-control: actual compute retains machine reservation",
+      "passed": true
+    },
+    {
+      "name": "failure-control: active compute rejects new composition",
+      "passed": true
+    },
+    {
+      "name": "failure-control: registered run call completes normally",
+      "passed": true
+    },
+    {
+      "name": "failure-control: batch records actual compute outcome",
+      "passed": true
+    },
+    {
+      "name": "failure-control: terminal task releases machine",
+      "passed": true
+    },
+    {
+      "name": "failure-control: terminal task clears owner",
+      "passed": true
+    },
+    {
+      "name": "concurrent: one actual machine exists",
+      "passed": true
+    },
+    {
+      "name": "concurrent: machine starts idle",
+      "passed": true
+    },
+    {
+      "name": "concurrent: proposal has real caller ownership",
+      "passed": true
+    },
+    {
+      "name": "concurrent: approval persisted",
+      "passed": true
+    },
+    {
+      "name": "first composition remains in progress when second public request begins",
+      "passed": true
+    },
+    {
+      "name": "first actual public composition succeeds",
+      "passed": true
+    },
+    {
+      "name": "first actual persisted batch owns local machine before release",
+      "passed": true
+    },
+    {
+      "name": "actual public request lifetimes overlap",
+      "passed": true
+    },
+    {
+      "name": "defect second composition also succeeds",
+      "passed": true
+    },
+    {
+      "name": "both calls entered actual Git before first response",
+      "passed": true
+    },
+    {
+      "name": "actual unfinished batch count matches observed protected or defective capacity",
+      "passed": true
+    },
+    {
+      "name": "all actual batches target same local machine",
+      "passed": true
+    },
+    {
+      "name": "actual machine owner names last formed batch",
+      "passed": true
+    },
+    {
+      "name": "actual mission owner names last formed batch",
+      "passed": true
+    },
+    {
+      "name": "b-cb9f8a67: real batch Git descends from actual mission tip",
+      "passed": true
+    },
+    {
+      "name": "b-cb9f8a67: batch records the same actual mission",
+      "passed": true
+    },
+    {
+      "name": "b-a87f877c: real batch Git descends from actual mission tip",
+      "passed": true
+    },
+    {
+      "name": "b-a87f877c: batch records the same actual mission",
+      "passed": true
+    },
+    {
+      "name": "b-cb9f8a67: actual task is active before release",
+      "passed": true
+    },
+    {
+      "name": "b-a87f877c: actual task is active before release",
+      "passed": true
+    },
+    {
+      "name": "actual simultaneous starts match persisted runnable batches",
+      "passed": true
+    },
+    {
+      "name": "every actual start uses a distinct actual batch worktree",
+      "passed": true
+    },
+    {
+      "name": "actual concurrent tasks remain pending together",
+      "passed": true
+    },
+    {
+      "name": "b-cb9f8a67: actual run tool finishes normally",
+      "passed": true
+    },
+    {
+      "name": "b-a87f877c: actual run tool finishes normally",
+      "passed": true
+    },
+    {
+      "name": "all actual batch tasks reach done",
+      "passed": false
+    }
+  ],
+  "boundary": "Real isolated DSH registered tools/storage/Git/runner and shell tasks. Transparent Git wrapper delays only second initial rev-parse template until first composition is persisted. Controlled request interleaving, not natural frequency. No model calls, fake project records or modified product."
+}

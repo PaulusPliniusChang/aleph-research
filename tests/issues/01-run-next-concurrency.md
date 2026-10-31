@@ -3,10 +3,44 @@ id: ALEPH-01
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/3
-pull_request: https://github.com/hapenia/aleph-research/pull/17
+pull_request: https://github.com/hapenia/aleph-research/pull/26
 ---
 
 # 单任务派发可以绕过并发上限
+
+## 最新主分支正式核查与现有修复验收（2026-10-31）
+
+本次正式核查以最新主分支 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 为准。B 在验收前依次同步上游与派生仓库，并以仅快进方式确认本地主分支保持最新。旧[拉取请求 #17](https://github.com/hapenia/aleph-research/pull/17) 已关闭且未合并，旧修复验收仅作历史记录。上游保留的多机器需求与本次单台机器的并发保护分别记录。
+
+当前主分支仍能在重叠的 `aleph_form_batch` 调用中重复分配同一台机器。真实任务在2 个独立批次工作目录中同时执行，机器和任务的持久归属被后续编排覆盖。现行结果交付已经包含 Git 引用检查：首个批次交付成功后，重复批次的交付明确失败，先前报告提交得以保留。该保护避免报告被覆盖，但重复计算已经发生。
+
+现有[拉取请求 #26](https://github.com/hapenia/aleph-research/pull/26) 的产品提交 `b1f9f048ae8cc7569e6a9e36dcafe119f2c02783` 已经包含项目操作互斥。本次直接验收该提交，没有新增产品修改。并发的后续请求在改动 Git 或归属前被拒绝，实际只形成并运行一个批次；顺序拒绝、计算期间拒绝、成功与失败后的释放以及再次使用机器均正常。
+
+| 验证对象 | 自动行为检查 | 实际 DSH 核查 |
+| --- | --- | --- |
+| 当前主分支 | 54 个有效行为点中 49 个通过、5 个保护断言失败；含父测试容器的 Node 报告为 55 项。 | 66 项缺陷观察全部通过，表示重复分配与实际重复计算已经复现。 |
+| PR26 的现有提交 | 54 个有效行为点全部通过；含父测试容器的 Node 报告为 55 项全部通过。 | 59 项保护观察全部通过，实际只有一个批次运行，归属保持正确。 |
+
+自动核查调用真实服务、Git、批次运行器和 shell 任务，通过磁盘适配器替代宿主持久存储。实际核查运行已安装的 DSH `0.2.2-alpha.2`，使用真实注册工具、持久存储、Git 与实际任务，不调用模型。透明 Git 调度脚本只控制后续请求初次读取模板的时机，用于稳定安排已经重叠的公共调用，不能用于估算自然发生频率。该结论限于一个 Host 内的同一项目，不证明跨 Host 或多台机器调度的完整契约。
+
+自动证据见[当前基线报告](evidence/01-latest-machine-capacity.txt)、[基线结构化记录](evidence/01-latest-machine-capacity.json)、[PR26 报告](evidence/01-latest-pr26-capacity.txt)和[PR26 结构化记录](evidence/01-latest-pr26-capacity.json)。实际证据见[当前基线记录](evidence/01-latest-real-dsh-capacity.json)和[PR26 保护记录](evidence/01-latest-pr26-real-dsh-capacity.json)，对应[实际核查脚本](dsh/latest-machine-capacity.py)与[自动核查脚本](dsh/machine-capacity-acceptance.test.mjs)。隔离 Host 的进程编号分别为 `485635` 与 `487286`，正常退出后均已确认不存在。
+
+本次实际夹具原先沿用了“重复执行全部交付成功”与“所有 Git 命令均返回零”的旧假设，现行引用保护使这些假设不成立。相关[终态假设中断](evidence/01-latest-real-dsh-terminal-contract-fixture-attempt.json)与[Git 返回值假设中断](evidence/01-latest-real-dsh-git-contract-fixture-attempt.json)均单独保留，正式核查明确要求重复报告被引用检查拒绝，并确认没有其他 Git 失败。PR26 自动夹具首次缺少 `zod`，未进入行为检查；[原始依赖中断报告](evidence/01-latest-pr26-dependency-fixture-attempt.txt)单独保留。临时依赖链接已经移除，产品提交没有变化。
+
+PR26 尚未合并，本地状态保留 `dsh实测有问题`，上游议题 #3 保持开放。PR26 与重启修复 PR29 的组合尚未独立验收，本节不将单独通过的结果扩展到组合版本。
+
+复现命令如下；检验 PR26 时，将自动命令的源码目录切换为该工作树，并为实际命令加上 `--expect-protection`。
+
+```bash
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph \
+ALEPH_CAPACITY_OBSERVATIONS=tests/issues/evidence/01-latest-machine-capacity.json \
+node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/machine-capacity-acceptance.test.mjs
+
+python3 tests/issues/dsh/latest-machine-capacity.py \
+  --source /home/paulus-chang/项目/aleph \
+  --output tests/issues/evidence/01-latest-real-dsh-capacity.json
+```
 
 ## 当前并发修复与独立验收（2026-10-31）
 
@@ -60,7 +94,7 @@ python3 tests/issues/dsh/current-machine-capacity.py \
 4. 核对两次请求响应、实际批次记录、机器归属、任务归属，以及批次分支包含原任务提交的 Git 祖先关系。
 5. 通过实际 `aleph_run_batch` 分别运行已形成的批次，保持首个任务计算未结束，再启动后续批次。检查真实任务启动记录和不同的输出目录，然后释放测试任务并完成清理。
 
-两次并发编排均成功，持久记录包含同一台 `local` 机器上的两个 `forming` 批次，后续请求覆盖机器和任务归属。真实任务同时运行于不同批次工作目录；全部 Git 命令返回零，没有 Git 锁冲突或测试脚本异常。该调度用于稳定复现已经进入公共接口的并发请求，不用于推算自然发生概率。
+两次并发编排均成功，持久记录包含同一台 `local` 机器上的2 个 `forming` 批次，后续请求覆盖机器和任务归属。真实任务同时运行于不同批次工作目录；全部 Git 命令返回零，没有 Git 锁冲突或测试脚本异常。该调度用于稳定复现已经进入公共接口的并发请求，不用于推算自然发生概率。
 
 ### 当前验收要求与边界
 
@@ -95,13 +129,13 @@ python3 tests/issues/dsh/current-machine-capacity.py \
 
 ## 复现
 
-1. 设置 `ALEPH_MAX_PARALLEL=1`，创建研究活动并排队两个任务。
+1. 设置 `ALEPH_MAX_PARALLEL=1`，创建研究活动并排队 2 个任务。
 2. 调用 `aleph_run_next`，保持首个任务运行。
 3. 再次调用 `aleph_run_next`，查询 `aleph_status`。
 
 ## 实际结果
 
-第二个研究代理成功启动。状态返回 `max_parallel: 1`、`active_agents: 2`、`counts.running: 2`。
+后续研究代理成功启动。状态返回 `max_parallel: 1`、`active_agents: 2`、`counts.running: 2`。
 
 ## 预期结果
 

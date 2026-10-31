@@ -12,7 +12,7 @@
 
 | 本地议题 | 上游议题 | 当前适用性与剩余核查 |
 | --- | --- | --- |
-| ALEPH-01 | [#3](https://github.com/hapenia/aleph-research/issues/3) | 当前并发编排已双阶段复现：54 个自动行为点中 49 个通过、5 个失败，实际 DSH 的 63 项观测确认同一机器形成不同批次并同时启动计算。顺序拒绝与成功、失败后释放对照通过；详见独立文档。 |
+| ALEPH-01 | [#3](https://github.com/hapenia/aleph-research/issues/3) | 已正式核查最新主分支 `785a7e9`：54 个自动行为点有 5 个保护断言失败，实际 DSH 的 66 项观察确认单台机器重复计算。现有 PR26 的同一提交已通过 54 个独立自动行为点与 59 项实际保护观察。PR26 未合并，多机器范围继续保留，详见独立文档。 |
 | ALEPH-02 | [#4](https://github.com/hapenia/aleph-research/issues/4) | 旧预算模型未沿用；当前预算需求需要重新确认。 |
 | ALEPH-04 | [#5](https://github.com/hapenia/aleph-research/issues/5) | 旧 SOTA 晋升路径未沿用；旧竞态证据不适用于当前结果交付路径。 |
 | ALEPH-05 | [#6](https://github.com/hapenia/aleph-research/issues/6) | 当前版本已经独立复现；修复 [PR #13](https://github.com/hapenia/aleph-research/pull/13) 已创建，67 个独立验收点、52 项产品测试与真实 DSH 完成后重启、活跃计算重启检查均通过。详见独立议题文档。 |
