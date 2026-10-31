@@ -46,6 +46,7 @@ const batchSchema = z.object({
   id: z.string(),
   machineId: z.string(),
   status: z.enum(['forming', 'running', 'done', 'failed']),
+  phase: z.enum(['infra', 'batch']).nullable().optional(),
   missionIds: z.array(z.string()),
   branch: z.string(),
   baseTip: z.string().nullable().optional(),
@@ -283,6 +284,7 @@ class ProjectService {
     this.writeChain = Promise.resolve();
     this.recoveringBatches = new Map();
     this.stopped = false;
+    this.batchRuns = new Map();
   }
 
   list() {
@@ -421,34 +423,84 @@ class ProjectService {
     }));
   }
 
-  async runBatch({ projectId, batchId }) {
-    const existing = this.get(projectId);
-    if (!existing) throw new Error(`project not found: ${projectId}`);
-    const oldBatch = existing.batches.find((item) => item.id === batchId);
-    if (!oldBatch) throw new Error(`batch not found: ${batchId}`);
-    const worktree = join(existing.workspace, '.aleph', 'batches', batchId);
-    // A legacy run may have no execution record. Its worktree must be inspected,
-    // never removed and recreated by a retry.
-    if (oldBatch.status === 'running' || (oldBatch.status === 'forming' && await pathExists(worktree))) {
+  async #withBatchRun({ projectId, batchId }, phase, execute) {
+    // Owners serialize both public entrypoints for this service lifetime. The
+    // persisted phase keeps optimizer sessions out of runner recovery. Runner
+    // recovery remains available after losing the original Host observer.
+    const key = JSON.stringify([projectId, batchId]);
+    if (this.batchRuns.has(key)) throw new Error(`batch ${batchId} is not runnable: already has an active execution`);
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    const owner = Symbol(batchId);
+    const execution = { runnerStarted: false, startGuard: `${project.workspace}:${batchId}`, ownsStartGuard: true };
+    if (startingBatches.has(execution.startGuard)) throw new Error(`batch ${batchId} is not runnable: already has an active execution`);
+    this.batchRuns.set(key, owner);
+    // Register before the claim can become visible to any recovery observer.
+    // The guard spans optimizer handoff and ends after runner publication.
+    startingBatches.add(execution.startGuard);
+    let claimed = false;
+    try {
+      await this.mutate(projectId, (project) => {
+        const batch = project.batches.find((item) => item.id === batchId);
+        if (!batch) throw new Error(`batch not found: ${batchId}`);
+        if (batch.status !== 'forming') throw new Error(`batch ${batchId} is not runnable (status ${batch.status})`);
+        return {
+          ...project,
+          batches: project.batches.map((item) => item.id === batchId ? { ...item, status: 'running', phase } : item),
+        };
+      });
+      claimed = true;
+      return await execute(execution);
+    } catch (error) {
+      if (claimed && !execution.runnerStarted && this.batchRuns.get(key) === owner) {
+        await this.mutate(projectId, (project) => ({
+          ...project,
+          batches: project.batches.map((item) => item.id === batchId && item.status === 'running'
+            ? { ...item, status: 'forming', phase: null } : item),
+        }));
+      }
+      throw error;
+    } finally {
+      if (execution.ownsStartGuard) startingBatches.delete(execution.startGuard);
+      if (this.batchRuns.get(key) === owner) this.batchRuns.delete(key);
+    }
+  }
+
+  async runBatch(args) {
+    const { projectId, batchId } = args;
+    const key = JSON.stringify([projectId, batchId]);
+    if (this.batchRuns.has(key)) throw new Error(`batch ${batchId} is not runnable: already has an active execution`);
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    const batch = project.batches.find((item) => item.id === batchId);
+    if (!batch) throw new Error(`batch not found: ${batchId}`);
+    if (batch.phase === 'infra') throw new Error(`batch ${batchId} is not runnable: infrastructure execution requires inspection`);
+    const worktree = join(project.workspace, '.aleph', 'batches', batchId);
+    // Legacy and orphan executions are observed without preparing directories
+    // or starting another runner. Recheck ownership after the filesystem await.
+    if (batch.status === 'running' || (batch.status === 'forming' && await pathExists(worktree))) {
+      if (this.batchRuns.has(key)) throw new Error(`batch ${batchId} is not runnable: already has an active execution`);
       await this.recoverBatch(projectId, batchId);
       return this.get(projectId);
     }
-    const key = `${existing.workspace}:${batchId}`;
+    return this.#withBatchRun(args, 'batch', (execution) => this.#executeBatch(args, execution));
+  }
+
+  async #executeBatch({ projectId, batchId }, ownerExecution) {
+    const existing = this.get(projectId);
+    const worktree = join(existing.workspace, '.aleph', 'batches', batchId);
     const execution = { id: randomUUID(), worktree, stateFile: `${worktree}.execution.json` };
     let claimed = false;
-    let ownsStartGuard = false;
     try {
       const project = await this.mutate(projectId, (current) => {
         const batch = current.batches.find((item) => item.id === batchId);
-        if (batch?.status !== 'forming') throw new Error(`batch ${batchId} is not runnable (status ${batch?.status})`);
+        if (batch?.status !== 'running') throw new Error(`batch ${batchId} is not runnable (status ${batch?.status})`);
         if (!current.machines.some((item) => item.id === batch.machineId && item.batchId === batchId && item.status === 'busy')) {
           throw new Error(`batch ${batchId} does not own its machine`);
         }
-        startingBatches.add(key);
-        ownsStartGuard = true;
         return {
           ...current,
-          batches: current.batches.map((item) => item.id === batchId ? { ...item, status: 'running', startedAt: now(), execution } : item),
+          batches: current.batches.map((item) => item.id === batchId ? { ...item, phase: 'batch', startedAt: now(), execution } : item),
           missions: current.missions.map((item) => batch.missionIds.includes(item.id) && item.status === 'batched' ? { ...item, status: 'running' } : item),
         };
       });
@@ -460,6 +512,7 @@ class ProjectService {
       const child = spawn('python3', [supervisor, execution.stateFile, execution.id], {
         cwd: worktree, detached: true, stdio: 'ignore',
       });
+      ownerExecution.runnerStarted = true;
       await new Promise((resolveSpawn, rejectSpawn) => {
         child.once('spawn', resolveSpawn);
         child.once('error', rejectSpawn);
@@ -475,7 +528,10 @@ class ProjectService {
       await this.failBatch(projectId, batchId, `batch startup failed: ${error.message}`);
       return this.get(projectId);
     } finally {
-      if (ownsStartGuard) startingBatches.delete(key);
+      if (ownerExecution.ownsStartGuard) {
+        startingBatches.delete(ownerExecution.startGuard);
+        ownerExecution.ownsStartGuard = false;
+      }
     }
     while (!this.stopped && this.get(projectId).batches.find((item) => item.id === batchId)?.status === 'running') {
       await this.recoverBatch(projectId, batchId);
@@ -524,6 +580,10 @@ class ProjectService {
     const project = this.get(projectId);
     const batch = project?.batches.find((item) => item.id === batchId);
     if (!batch || !['forming', 'running'].includes(batch.status)) return;
+    // A missing runner record is expected while an optimizer owns the batch.
+    // DSH child-session recovery needs separate handling; preserve the machine
+    // reservation and optimizer files instead of fabricating runner failure.
+    if (batch.phase === 'infra') return;
     if (startingBatches.has(`${project.workspace}:${batchId}`)) return;
     const worktree = join(project.workspace, '.aleph', 'batches', batchId);
     const state = await executionState(`${worktree}.execution.json`, batch.execution?.id);
@@ -804,14 +864,19 @@ class ProjectService {
     }
   }
 
-  async runInfra({ projectId, batchId, agent }) {
+  async runInfra(args) {
+    if (!args.agent) throw new Error('a calling Agent is required to start InfraOptimizer');
+    if (!this.subagents) throw new Error('subagent service is unavailable');
+    return this.#withBatchRun(args, 'infra', (execution) => this.#executeInfra(args, execution));
+  }
+
+  async #executeInfra({ projectId, batchId, agent }, execution) {
     if (!agent) throw new Error('a calling Agent is required to start InfraOptimizer');
     if (!this.subagents) throw new Error('subagent service is unavailable');
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const batch = project.batches.find((item) => item.id === batchId);
     if (!batch) throw new Error(`batch not found: ${batchId}`);
-    if (batch.status !== 'forming') throw new Error(`batch ${batchId} is not forming`);
     const worktreeRoot = join(project.workspace, '.aleph', 'infra');
     const worktree = join(worktreeRoot, batchId);
     await mkdir(worktreeRoot, { recursive: true });
@@ -849,10 +914,10 @@ class ProjectService {
         const tip = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
         await git(project.missionRoot, ['branch', '-f', batch.branch, tip]);
       }
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'infra' && item.status === 'running' ? { ...item, status: 'done', summary, branch: batch.branch, updatedAt: now() } : item) }));
-      return this.runBatch({ projectId, batchId });
+      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'infra' && item.childId === (activation.childId ?? null) && item.branch === batch.branch && item.status === 'running' ? { ...item, status: 'done', summary, branch: batch.branch, updatedAt: now() } : item) }));
+      return await this.#executeBatch({ projectId, batchId }, execution);
     } catch (error) {
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'infra' && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) }));
+      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'infra' && item.childId === (activation.childId ?? null) && item.branch === batch.branch && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) }));
       throw error;
     } finally {
       await git(project.missionRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
@@ -938,6 +1003,7 @@ function snapshot(project) {
       id: batch.id,
       machine_id: batch.machineId,
       status: batch.status,
+      phase: batch.phase ?? null,
       mission_ids: batch.missionIds,
       branch: batch.branch,
       base_tip: batch.baseTip ?? null,
