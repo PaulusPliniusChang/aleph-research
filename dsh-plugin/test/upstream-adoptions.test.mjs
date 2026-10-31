@@ -174,3 +174,47 @@ test('result delivery refuses to overwrite commits pushed after batching', async
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test('a Host restart frees the machine and fails interrupted work', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'aleph-recovery-'));
+  try {
+    const workspace = join(root, 'workspace');
+    await mkdir(workspace, { recursive: true });
+    const records = table();
+    const service = new ProjectService({}, { table: () => records }, {});
+    const project = await service.init({ workspace });
+    const missionRepo = project.missionRoot;
+    const branch = 'missions/slow';
+    git(missionRepo, ['switch', '-c', branch, 'template']);
+    await mkdir(join(missionRepo, 'missions', 'slow'), { recursive: true });
+    await writeFile(join(missionRepo, 'missions', 'slow', 'mission.json'), JSON.stringify({ id: 'slow', entrypoint: 'run.sh' }));
+    await writeFile(join(missionRepo, 'missions', 'slow', 'run.sh'), '#!/usr/bin/env bash\nsleep 30\n');
+    git(missionRepo, ['add', '-A']);
+    git(missionRepo, [...identity(missionRepo), 'commit', '-m', 'slow mission']);
+    git(missionRepo, ['switch', 'template']);
+
+    let current = await service.propose({ projectId: project.id, branch, agent: { id: 'researcher' } });
+    const missionId = current.missions[0].id;
+    await service.approve({ projectId: project.id, missionId });
+    current = await service.formBatch({ projectId: project.id });
+    const batchId = current.batches[0].id;
+
+    // Simulate the state a restart leaves behind: the batch says running, the machine is busy.
+    await service.mutate(project.id, (state) => ({
+      ...state,
+      machines: state.machines.map((machine) => ({ ...machine, status: 'busy', batchId })),
+      batches: state.batches.map((batch) => (batch.id === batchId ? { ...batch, status: 'running' } : batch)),
+    }));
+
+    await service.recoverAfterRestart();
+    const recovered = service.get(project.id);
+    assert.equal(recovered.batches[0].status, 'failed');
+    assert.match(recovered.batches[0].summary.runnerError, /restart/);
+    assert.equal(recovered.missions[0].status, 'failed');
+    assert.match(recovered.missions[0].error, /restart/);
+    assert.equal(recovered.machines[0].status, 'idle');
+    assert.equal(recovered.machines[0].batchId, null);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});

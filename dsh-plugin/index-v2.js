@@ -931,6 +931,68 @@ class ProjectService {
       .catch(() => undefined);
   }
 
+  /**
+   * A Host restart ends every live activation and any batch runner, but storage still
+   * describes them as running. Reconcile that once at startup so the machine is usable.
+   */
+  async recoverAfterRestart() {
+    const nowText = now();
+    for (const project of this.list()) {
+      const batchesRoot = join(project.workspace, '.aleph', 'batches');
+      const running = (project.batches ?? []).filter((batch) => batch.status === 'running');
+      const interrupted = new Set();
+      for (const batch of running) {
+        const live = this.hasProcessUnder(join(batchesRoot, batch.id));
+        if (live) continue;
+        interrupted.add(batch.id);
+      }
+      const idleMachine = (project.machines ?? []).every((machine) => machine.status === 'idle');
+      if (interrupted.size === 0 && idleMachine) {
+        // Nothing was left mid-flight; only stale agent records may need closing.
+        const staleAgents = (project.agents ?? []).filter((item) => item.status === 'running');
+        if (staleAgents.length === 0) continue;
+      }
+      await this.mutate(project.id, (current) => ({
+        ...current,
+        machines: (current.machines ?? []).map((machine) => (
+          interrupted.has(machine.batchId ?? '') || (machine.status === 'busy' && !(current.batches ?? []).some((batch) => batch.id === machine.batchId && batch.status === 'running' && !interrupted.has(batch.id)))
+            ? { ...machine, status: 'idle', batchId: null }
+            : machine
+        )),
+        batches: (current.batches ?? []).map((batch) => (
+          interrupted.has(batch.id)
+            ? { ...batch, status: 'failed', finishedAt: nowText, summary: { ...(batch.summary ?? {}), runnerError: 'interrupted by Host restart' } }
+            : batch
+        )),
+        missions: (current.missions ?? []).map((mission) => (
+          mission.batchId && interrupted.has(mission.batchId) && ['batched', 'running'].includes(mission.status)
+            ? { ...mission, status: 'failed', error: 'interrupted by Host restart', finishedAt: nowText }
+            : mission
+        )),
+        agents: (current.agents ?? []).map((item) => (
+          item.status === 'running'
+            ? { ...item, status: 'failed', summary: 'interrupted by Host restart', updatedAt: nowText }
+            : item
+        )),
+        violations: [...(current.violations ?? []), `${nowText} recovered from restart: ${interrupted.size} interrupted batch(es)`].slice(-50),
+      })).catch(() => undefined);
+    }
+  }
+
+  hasProcessUnder(rootPath) {
+    const root = resolve(rootPath);
+    let entries = [];
+    try { entries = readdirSync('/proc'); } catch { return false; }
+    for (const entry of entries) {
+      if (!/^\d+$/.test(entry)) continue;
+      try {
+        const cwd = readlinkSync(`/proc/${entry}/cwd`);
+        if (cwd === root || cwd.startsWith(`${root}/`)) return true;
+      } catch { /* process vanished */ }
+    }
+    return false;
+  }
+
   checkProcesses() {
     const hasBwrapAncestor = (pid) => {
       let current = pid;
@@ -1441,6 +1503,7 @@ export async function apply(ctx) {
   const workspaceRegistry = ctx.get('workspaceRegistry');
   const service = new ProjectService(ctx, domain, { sessions, subagents, agentPresets });
   ctx.effect(() => { const timer = setInterval(() => service.checkProcesses(), 5000); timer.unref?.(); return () => clearInterval(timer); });
+  service.recoverAfterRestart().catch(() => undefined);
 
   const presetOf = (agent) => {
     if (!sessions || !agentPresets) return null;
