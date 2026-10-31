@@ -525,18 +525,26 @@ class ProjectService {
         provider: 'spawn', label: `aleph researcher ${project.id}`, delivery: 'caller', signal: abort.signal,
         request: { parent: agent, cwd: project.researchRoot, agentPreset: 'aleph-researcher', prompt: [{ type: 'text', text: prompt }] },
       });
+      // DSH activations must identify their child. Never let a missing identity
+      // match unrelated legacy records whose childId is also null.
+      if (typeof activation.childId !== 'string' || !activation.childId.trim()) {
+        void activation.result.catch(() => undefined);
+        abort.abort();
+        throw new Error('researcher activation did not return a child ID');
+      }
     } catch (error) {
       await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: null, status: 'failed', summary: String(error), branch: null, updatedAt: now() }] }));
       throw error;
     }
-    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: activation.childId ?? null, status: 'running', summary: null, branch: null, updatedAt: now() }] }));
+    const childId = activation.childId;
+    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId, status: 'running', summary: null, branch: null, updatedAt: now() }] }));
     activation.result.then(async (result) => {
       const summary = (result?.output ?? []).filter((block) => block?.type === 'text').map((block) => block.text).join('\n').trim().slice(0, 8000) || '(no summary)';
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'done', summary, updatedAt: now() } : item) })).catch(() => undefined);
+      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.childId === childId && item.status === 'running' ? { ...item, status: 'done', summary, updatedAt: now() } : item) })).catch(() => undefined);
     }, async (error) => {
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) })).catch(() => undefined);
+      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.childId === childId && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) })).catch(() => undefined);
     });
-    return { projectId, role: 'researcher', childId: activation.childId ?? null };
+    return { projectId, role: 'researcher', childId };
   }
 
   async runComposer({ projectId, agent }) {
