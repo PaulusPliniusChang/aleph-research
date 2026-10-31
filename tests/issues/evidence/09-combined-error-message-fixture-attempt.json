@@ -1,0 +1,2418 @@
+{
+  "sha": "b1f9f048ae8cc7569e6a9e36dcafe119f2c02783",
+  "actual": false,
+  "checks": [
+    {
+      "scope": "forming",
+      "name": "same project identity persists",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "same batch identity persists",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "same mission identity persists",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "pre-batch source commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "unexecuted batch remains forming",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "unexecuted mission remains batched",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "startup launches no task",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "startup does not move mission source",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "forming reservation remains busy",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "forming reservation retains exact batch owner",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "same reserved machine rejects another batch",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "rejected formation adds no second batch",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "original batch still remains runnable",
+      "passed": true
+    },
+    {
+      "scope": "forming",
+      "name": "original machine owner survives rejected formation",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "same project identity persists",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "same batch identity persists",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "same mission identity persists",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "pre-batch source commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "runner finished successfully while Host was absent",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "startup explicitly marks batch interrupted",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "startup explicitly marks mission interrupted",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "startup records restart interruption reason",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "startup releases stopped workload machine",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "startup releases exact reservation",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "completed output remains preserved",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "restart does not repeat completed computation",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "restart does not forge successful delivery",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "mission source branch remains intact",
+      "passed": true
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "explicit retry refuses terminal interrupted batch",
+      "passed": false,
+      "error": "The input did not match the regular expression /not runnable/. Input:\n\n'Error: batch b-9d2551bb has active execution or status failed'\n"
+    },
+    {
+      "scope": "completed-before-restart",
+      "name": "refused retry preserves completed output",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "ordinary restart preserves exact execution id",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "ordinary restart preserves active execution",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "ordinary restart preserves exact machine execution owner",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "ordinary restart creates no stop fence",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "ordinary restart creates no cancellation intent",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "original computation still runs after startup",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "same project identity persists",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "same batch identity persists",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "same mission identity persists",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "pre-batch source commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "actual orphan process survives first Host crash",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "live restart preserves running batch",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "live restart preserves machine occupancy",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "live restart preserves exact machine owner",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "live restart does not move source branch",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "live restart does not execute twice",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "live restart preserves active worktree",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "pause after recovery persists paused state",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "pause after recovery keeps workload alive",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "finish after recovery drains existing workload",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "finish after recovery sends no stop fence",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "natural exit completes finishing project",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "actual orphan runner produces done result",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "all actual workload processes have exited",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit monitor marks orphan batch interrupted",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit monitor releases orphan machine",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit mission is explicitly interrupted",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit interruption has accurate reason",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit exact machine owner is released",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "actual post-exit observation covers monitor interval",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit mission has no result commit",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit branch remains input commit",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "post-exit completed result is preserved",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "second restart keeps batch interruption stable",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "second restart keeps machine released",
+      "passed": true
+    },
+    {
+      "scope": "active-at-restart",
+      "name": "second restart does not repeat compute",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "ordinary restart preserves exact execution id",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "ordinary restart preserves active execution",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "ordinary restart preserves exact machine execution owner",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "ordinary restart creates no stop fence",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "ordinary restart creates no cancellation intent",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "original computation still runs after startup",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "same project identity persists",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "same batch identity persists",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "same mission identity persists",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "pre-batch source commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "operator cancellation confirms exact group stopped",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel leaves no owned computation",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel creates stop fences for recorded commands",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel stores terminal batch state",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel stores terminal mission state",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel marks original execution inactive",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel retains original execution identity",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel releases machine",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel clears exact batch owner",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel clears exact execution owner",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel retains source branch",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel retains worktree diagnostics",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancel has no false result commit",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "repeated cancellation keeps operation identity",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "subsequent restart preserves cancelled batch",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "subsequent restart preserves cancelled mission",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "subsequent restart leaves released machine idle",
+      "passed": true
+    },
+    {
+      "scope": "active-then-cancel",
+      "name": "cancelled computation never repeats",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "same project identity persists",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "same batch identity persists",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "same mission identity persists",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "pre-batch source commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "already delivered batch remains done",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "already delivered mission remains done",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "already delivered result commit is stable",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "delivered commit remains mission tip",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "completed machine remains idle",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "restart repeats no normal computation",
+      "passed": true
+    },
+    {
+      "scope": "already-delivered",
+      "name": "delivered result is readable from Git",
+      "passed": true
+    }
+  ],
+  "scenarios": [
+    {
+      "mode": "forming",
+      "root": "/tmp/aleph-reconcile-forming-GAQHJE",
+      "project": "p-b51eb897",
+      "batch": "b-52d4e2e6",
+      "mission": "m-ae45c041",
+      "tip": "3dc6c8ab0636842fabd28b15dbbddd3562395677",
+      "after": {
+        "id": "p-b51eb897",
+        "workspace": "/tmp/aleph-reconcile-forming-GAQHJE/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-forming-GAQHJE/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-forming-GAQHJE/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-52d4e2e6"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-ae45c041",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "batched",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-52d4e2e6",
+            "preBatchTip": "3dc6c8ab0636842fabd28b15dbbddd3562395677",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:35.629Z",
+            "approvedAt": "2026-10-31T13:27:35.635Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-52d4e2e6",
+            "machineId": "local",
+            "status": "forming",
+            "missionIds": [
+              "m-ae45c041"
+            ],
+            "branch": "batch/b-52d4e2e6",
+            "baseTip": "1d2edf06c0279a5610ee43acc9f6e0d753fcb83f",
+            "createdAt": "2026-10-31T13:27:35.663Z"
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:35.586Z",
+        "updatedAt": "2026-10-31T13:27:35.669Z"
+      },
+      "second": {
+        "id": "p-b51eb897",
+        "workspace": "/tmp/aleph-reconcile-forming-GAQHJE/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-forming-GAQHJE/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-forming-GAQHJE/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-52d4e2e6"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-ae45c041",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "batched",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-52d4e2e6",
+            "preBatchTip": "3dc6c8ab0636842fabd28b15dbbddd3562395677",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:35.629Z",
+            "approvedAt": "2026-10-31T13:27:35.635Z",
+            "finishedAt": null
+          },
+          {
+            "id": "m-f8d46716",
+            "ownerSession": "owner",
+            "branch": "mission/second",
+            "manifestId": "second",
+            "manifestPath": "missions/second/mission.json",
+            "status": "approved",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": null,
+            "preBatchTip": null,
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:35.761Z",
+            "approvedAt": "2026-10-31T13:27:35.765Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-52d4e2e6",
+            "machineId": "local",
+            "status": "forming",
+            "missionIds": [
+              "m-ae45c041"
+            ],
+            "branch": "batch/b-52d4e2e6",
+            "baseTip": "1d2edf06c0279a5610ee43acc9f6e0d753fcb83f",
+            "createdAt": "2026-10-31T13:27:35.663Z"
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:35.586Z",
+        "updatedAt": "2026-10-31T13:27:35.765Z"
+      },
+      "admissionError": "Error: machine local is busy"
+    },
+    {
+      "mode": "completed-before-restart",
+      "root": "/tmp/aleph-reconcile-completed-before-restart-QjSydI",
+      "project": "p-23a69e7c",
+      "batch": "b-9d2551bb",
+      "mission": "m-9cc73d4e",
+      "tip": "fdccd1347eef14a0ef57ba2fd3aeaaef630be62c",
+      "before": {
+        "id": "p-23a69e7c",
+        "workspace": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-9d2551bb",
+            "executionId": "batch-6c71778a-7635-481a-887a-d08fa60f90da"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9cc73d4e",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-9d2551bb",
+            "preBatchTip": "fdccd1347eef14a0ef57ba2fd3aeaaef630be62c",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:35.852Z",
+            "approvedAt": "2026-10-31T13:27:35.857Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-9d2551bb",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-9cc73d4e"
+            ],
+            "branch": "batch/b-9d2551bb",
+            "baseTip": "1d2edf06c0279a5610ee43acc9f6e0d753fcb83f",
+            "createdAt": "2026-10-31T13:27:35.881Z",
+            "execution": {
+              "id": "batch-6c71778a-7635-481a-887a-d08fa60f90da",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-29dd593b-3954-44fe-a92c-3ed3b84942c9",
+              "phase": "command",
+              "commands": [
+                {
+                  "id": "batch-6c71778a-7635-481a-887a-d08fa60f90da-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/.aleph/executions/batch-6c71778a-7635-481a-887a-d08fa60f90da/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/.aleph/batches/b-9d2551bb"
+            },
+            "startedAt": "2026-10-31T13:27:36.016Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9cc73d4e",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/.aleph/batches/b-9d2551bb/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:35.815Z",
+        "updatedAt": "2026-10-31T13:27:36.017Z"
+      },
+      "beforeProcesses": [
+        528689,
+        528707,
+        528708,
+        528709
+      ],
+      "afterCrashProcesses": [
+        528689,
+        528707,
+        528708,
+        528709
+      ],
+      "after": {
+        "id": "p-23a69e7c",
+        "workspace": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9cc73d4e",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "failed",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-9d2551bb",
+            "preBatchTip": "fdccd1347eef14a0ef57ba2fd3aeaaef630be62c",
+            "resultCommit": null,
+            "error": "interrupted by Host restart",
+            "createdAt": "2026-10-31T13:27:35.852Z",
+            "approvedAt": "2026-10-31T13:27:35.857Z",
+            "finishedAt": "2026-10-31T13:27:36.125Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-9d2551bb",
+            "machineId": "local",
+            "status": "failed",
+            "missionIds": [
+              "m-9cc73d4e"
+            ],
+            "branch": "batch/b-9d2551bb",
+            "baseTip": "1d2edf06c0279a5610ee43acc9f6e0d753fcb83f",
+            "createdAt": "2026-10-31T13:27:35.881Z",
+            "execution": {
+              "id": "batch-6c71778a-7635-481a-887a-d08fa60f90da",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-29dd593b-3954-44fe-a92c-3ed3b84942c9",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-6c71778a-7635-481a-887a-d08fa60f90da-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/.aleph/executions/batch-6c71778a-7635-481a-887a-d08fa60f90da/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/.aleph/batches/b-9d2551bb"
+            },
+            "startedAt": "2026-10-31T13:27:36.016Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9cc73d4e",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-completed-before-restart-QjSydI/workspace/.aleph/batches/b-9d2551bb/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finishedAt": "2026-10-31T13:27:36.125Z",
+            "summary": {
+              "runnerError": "interrupted by Host restart"
+            }
+          }
+        ],
+        "violations": [
+          "2026-10-31T13:27:36.125Z recovered from restart: batch b-9d2551bb interrupted"
+        ],
+        "createdAt": "2026-10-31T13:27:35.815Z",
+        "updatedAt": "2026-10-31T13:27:36.126Z"
+      },
+      "result": {
+        "schema": 1,
+        "mission_id": "first",
+        "status": "done",
+        "exit_code": 0,
+        "artifacts": [
+          "results/first/run.log"
+        ],
+        "metrics": {},
+        "logs": [
+          "results/first/run.log"
+        ],
+        "error": null
+      }
+    },
+    {
+      "mode": "active-at-restart",
+      "root": "/tmp/aleph-reconcile-active-at-restart-ee019A",
+      "project": "p-46de8a2c",
+      "batch": "b-0ca8ad12",
+      "mission": "m-9a9655d2",
+      "tip": "532cd07bcb4e2047dfcf67964d77beba423e3621",
+      "before": {
+        "id": "p-46de8a2c",
+        "workspace": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-0ca8ad12",
+            "executionId": "batch-708264cd-090e-460e-81a5-c01eac9560e3"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9a9655d2",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-0ca8ad12",
+            "preBatchTip": "532cd07bcb4e2047dfcf67964d77beba423e3621",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:36.244Z",
+            "approvedAt": "2026-10-31T13:27:36.249Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0ca8ad12",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-9a9655d2"
+            ],
+            "branch": "batch/b-0ca8ad12",
+            "baseTip": "0d482995cff8540700774aa0acd32bf14f480fca",
+            "createdAt": "2026-10-31T13:27:36.279Z",
+            "execution": {
+              "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-1a551f3b-a995-4eed-b0dc-409803ee5837",
+              "phase": "command",
+              "commands": [
+                {
+                  "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/executions/batch-708264cd-090e-460e-81a5-c01eac9560e3/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12"
+            },
+            "startedAt": "2026-10-31T13:27:36.438Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9a9655d2",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:36.207Z",
+        "updatedAt": "2026-10-31T13:27:36.439Z"
+      },
+      "beforeProcesses": [
+        528933,
+        528951,
+        528952,
+        528953
+      ],
+      "afterCrashProcesses": [
+        528933,
+        528951,
+        528952,
+        528953
+      ],
+      "after": {
+        "id": "p-46de8a2c",
+        "workspace": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-0ca8ad12",
+            "executionId": "batch-708264cd-090e-460e-81a5-c01eac9560e3"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9a9655d2",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-0ca8ad12",
+            "preBatchTip": "532cd07bcb4e2047dfcf67964d77beba423e3621",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:36.244Z",
+            "approvedAt": "2026-10-31T13:27:36.249Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0ca8ad12",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-9a9655d2"
+            ],
+            "branch": "batch/b-0ca8ad12",
+            "baseTip": "0d482995cff8540700774aa0acd32bf14f480fca",
+            "createdAt": "2026-10-31T13:27:36.279Z",
+            "execution": {
+              "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-1a551f3b-a995-4eed-b0dc-409803ee5837",
+              "phase": "command",
+              "commands": [
+                {
+                  "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/executions/batch-708264cd-090e-460e-81a5-c01eac9560e3/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12"
+            },
+            "startedAt": "2026-10-31T13:27:36.438Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9a9655d2",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:36.207Z",
+        "updatedAt": "2026-10-31T13:27:36.515Z"
+      },
+      "paused": {
+        "id": "p-46de8a2c",
+        "workspace": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-0ca8ad12",
+            "executionId": "batch-708264cd-090e-460e-81a5-c01eac9560e3"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9a9655d2",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-0ca8ad12",
+            "preBatchTip": "532cd07bcb4e2047dfcf67964d77beba423e3621",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:36.244Z",
+            "approvedAt": "2026-10-31T13:27:36.249Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0ca8ad12",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-9a9655d2"
+            ],
+            "branch": "batch/b-0ca8ad12",
+            "baseTip": "0d482995cff8540700774aa0acd32bf14f480fca",
+            "createdAt": "2026-10-31T13:27:36.279Z",
+            "execution": {
+              "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-1a551f3b-a995-4eed-b0dc-409803ee5837",
+              "phase": "command",
+              "commands": [
+                {
+                  "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/executions/batch-708264cd-090e-460e-81a5-c01eac9560e3/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12"
+            },
+            "startedAt": "2026-10-31T13:27:36.438Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9a9655d2",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:36.207Z",
+        "updatedAt": "2026-10-31T13:27:36.602Z",
+        "control": {
+          "state": "paused",
+          "revision": 1,
+          "changedAt": "2026-10-31T13:27:36.602Z",
+          "reason": "",
+          "operationId": "pause-3d518110-4a61-4b8c-9b5c-a51bdc302232"
+        }
+      },
+      "finishing": {
+        "id": "p-46de8a2c",
+        "workspace": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-0ca8ad12",
+            "executionId": "batch-708264cd-090e-460e-81a5-c01eac9560e3"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9a9655d2",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-0ca8ad12",
+            "preBatchTip": "532cd07bcb4e2047dfcf67964d77beba423e3621",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:36.244Z",
+            "approvedAt": "2026-10-31T13:27:36.249Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0ca8ad12",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-9a9655d2"
+            ],
+            "branch": "batch/b-0ca8ad12",
+            "baseTip": "0d482995cff8540700774aa0acd32bf14f480fca",
+            "createdAt": "2026-10-31T13:27:36.279Z",
+            "execution": {
+              "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-1a551f3b-a995-4eed-b0dc-409803ee5837",
+              "phase": "command",
+              "commands": [
+                {
+                  "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/executions/batch-708264cd-090e-460e-81a5-c01eac9560e3/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12"
+            },
+            "startedAt": "2026-10-31T13:27:36.438Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9a9655d2",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:36.207Z",
+        "updatedAt": "2026-10-31T13:27:36.607Z",
+        "control": {
+          "state": "finishing",
+          "revision": 2,
+          "changedAt": "2026-10-31T13:27:36.607Z",
+          "reason": "",
+          "operationId": "finish-74052183-eef2-4438-976c-cdce64ab5c3f"
+        }
+      },
+      "confirmedExitAt": "2026-10-31T13:27:36.634Z",
+      "postExitWindowStarted": 1793453256634,
+      "postExitObservedMs": 6101,
+      "afterExit": {
+        "id": "p-46de8a2c",
+        "workspace": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9a9655d2",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "failed",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-0ca8ad12",
+            "preBatchTip": "532cd07bcb4e2047dfcf67964d77beba423e3621",
+            "resultCommit": null,
+            "error": "interrupted by Host restart",
+            "createdAt": "2026-10-31T13:27:36.244Z",
+            "approvedAt": "2026-10-31T13:27:36.249Z",
+            "finishedAt": "2026-10-31T13:27:41.570Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0ca8ad12",
+            "machineId": "local",
+            "status": "failed",
+            "missionIds": [
+              "m-9a9655d2"
+            ],
+            "branch": "batch/b-0ca8ad12",
+            "baseTip": "0d482995cff8540700774aa0acd32bf14f480fca",
+            "createdAt": "2026-10-31T13:27:36.279Z",
+            "execution": {
+              "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-1a551f3b-a995-4eed-b0dc-409803ee5837",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/executions/batch-708264cd-090e-460e-81a5-c01eac9560e3/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12"
+            },
+            "startedAt": "2026-10-31T13:27:36.438Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9a9655d2",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finishedAt": "2026-10-31T13:27:41.570Z",
+            "summary": {
+              "runnerError": "interrupted by Host restart"
+            }
+          }
+        ],
+        "violations": [
+          "2026-10-31T13:27:41.570Z recovered from restart: batch b-0ca8ad12 interrupted"
+        ],
+        "createdAt": "2026-10-31T13:27:36.207Z",
+        "updatedAt": "2026-10-31T13:27:41.570Z",
+        "control": {
+          "state": "finished",
+          "revision": 2,
+          "changedAt": "2026-10-31T13:27:41.570Z",
+          "reason": "",
+          "operationId": "finish-74052183-eef2-4438-976c-cdce64ab5c3f"
+        }
+      },
+      "result": {
+        "schema": 1,
+        "mission_id": "first",
+        "status": "done",
+        "exit_code": 0,
+        "artifacts": [
+          "results/first/run.log"
+        ],
+        "metrics": {},
+        "logs": [
+          "results/first/run.log"
+        ],
+        "error": null
+      },
+      "secondRestart": {
+        "id": "p-46de8a2c",
+        "workspace": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-9a9655d2",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "failed",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-0ca8ad12",
+            "preBatchTip": "532cd07bcb4e2047dfcf67964d77beba423e3621",
+            "resultCommit": null,
+            "error": "interrupted by Host restart",
+            "createdAt": "2026-10-31T13:27:36.244Z",
+            "approvedAt": "2026-10-31T13:27:36.249Z",
+            "finishedAt": "2026-10-31T13:27:41.570Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0ca8ad12",
+            "machineId": "local",
+            "status": "failed",
+            "missionIds": [
+              "m-9a9655d2"
+            ],
+            "branch": "batch/b-0ca8ad12",
+            "baseTip": "0d482995cff8540700774aa0acd32bf14f480fca",
+            "createdAt": "2026-10-31T13:27:36.279Z",
+            "execution": {
+              "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-1a551f3b-a995-4eed-b0dc-409803ee5837",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-708264cd-090e-460e-81a5-c01eac9560e3-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/executions/batch-708264cd-090e-460e-81a5-c01eac9560e3/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12"
+            },
+            "startedAt": "2026-10-31T13:27:36.438Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-9a9655d2",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-at-restart-ee019A/workspace/.aleph/batches/b-0ca8ad12/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finishedAt": "2026-10-31T13:27:41.570Z",
+            "summary": {
+              "runnerError": "interrupted by Host restart"
+            }
+          }
+        ],
+        "violations": [
+          "2026-10-31T13:27:41.570Z recovered from restart: batch b-0ca8ad12 interrupted"
+        ],
+        "createdAt": "2026-10-31T13:27:36.207Z",
+        "updatedAt": "2026-10-31T13:27:42.761Z",
+        "control": {
+          "state": "finished",
+          "revision": 2,
+          "changedAt": "2026-10-31T13:27:41.570Z",
+          "reason": "",
+          "operationId": "finish-74052183-eef2-4438-976c-cdce64ab5c3f"
+        }
+      }
+    },
+    {
+      "mode": "active-then-cancel",
+      "root": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y",
+      "project": "p-2282c0c3",
+      "batch": "b-3b67850f",
+      "mission": "m-830be764",
+      "tip": "9471261c237075f2a7c6f19a3fb986cf2b0fc3e2",
+      "before": {
+        "id": "p-2282c0c3",
+        "workspace": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-3b67850f",
+            "executionId": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-830be764",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-3b67850f",
+            "preBatchTip": "9471261c237075f2a7c6f19a3fb986cf2b0fc3e2",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:42.878Z",
+            "approvedAt": "2026-10-31T13:27:42.884Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-3b67850f",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-830be764"
+            ],
+            "branch": "batch/b-3b67850f",
+            "baseTip": "c07e72d1b049751599271044ea2852fc7b1d8e6d",
+            "createdAt": "2026-10-31T13:27:42.940Z",
+            "execution": {
+              "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-f0602c13-c9b4-451a-8ffe-bc531dc6fc3b",
+              "phase": "command",
+              "commands": [
+                {
+                  "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/executions/batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f"
+            },
+            "startedAt": "2026-10-31T13:27:43.101Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-830be764",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:42.835Z",
+        "updatedAt": "2026-10-31T13:27:43.102Z"
+      },
+      "beforeProcesses": [
+        529198,
+        529216,
+        529217,
+        529218
+      ],
+      "afterCrashProcesses": [
+        529198,
+        529216,
+        529217,
+        529218
+      ],
+      "after": {
+        "id": "p-2282c0c3",
+        "workspace": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-3b67850f",
+            "executionId": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-830be764",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-3b67850f",
+            "preBatchTip": "9471261c237075f2a7c6f19a3fb986cf2b0fc3e2",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:42.878Z",
+            "approvedAt": "2026-10-31T13:27:42.884Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-3b67850f",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-830be764"
+            ],
+            "branch": "batch/b-3b67850f",
+            "baseTip": "c07e72d1b049751599271044ea2852fc7b1d8e6d",
+            "createdAt": "2026-10-31T13:27:42.940Z",
+            "execution": {
+              "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-f0602c13-c9b4-451a-8ffe-bc531dc6fc3b",
+              "phase": "command",
+              "commands": [
+                {
+                  "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/executions/batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f"
+            },
+            "startedAt": "2026-10-31T13:27:43.101Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-830be764",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:42.835Z",
+        "updatedAt": "2026-10-31T13:27:43.186Z"
+      },
+      "cancellation": {
+        "projectId": "p-2282c0c3",
+        "complete": true,
+        "batch": {
+          "id": "b-3b67850f",
+          "machineId": "local",
+          "status": "cancelled",
+          "missionIds": [
+            "m-830be764"
+          ],
+          "branch": "batch/b-3b67850f",
+          "baseTip": "c07e72d1b049751599271044ea2852fc7b1d8e6d",
+          "createdAt": "2026-10-31T13:27:42.940Z",
+          "execution": {
+            "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88",
+            "role": "batch",
+            "active": false,
+            "hostId": "host-f0602c13-c9b4-451a-8ffe-bc531dc6fc3b",
+            "phase": "stopped",
+            "commands": [
+              {
+                "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88-1",
+                "phase": "starting",
+                "receiptPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/executions/batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88/1.json"
+              }
+            ],
+            "worktree": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f"
+          },
+          "startedAt": "2026-10-31T13:27:43.101Z",
+          "infra": {
+            "cores": 12,
+            "threads": 10,
+            "missions": [
+              {
+                "mission": "m-830be764",
+                "status": "no-pyproject"
+              }
+            ],
+            "runner": "python3",
+            "timeout_ms": 21600000,
+            "env": {
+              "ALEPH_THREADS": "10",
+              "OMP_NUM_THREADS": "10",
+              "OPENBLAS_NUM_THREADS": "10",
+              "MKL_NUM_THREADS": "10",
+              "NUMEXPR_NUM_THREADS": "10",
+              "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f/.uv-cache",
+              "UV_PYTHON_DOWNLOADS": "never"
+            }
+          },
+          "cancellation": {
+            "operationId": "cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96",
+            "reason": "B explicit cancel after ordinary restart",
+            "requestedAt": "2026-10-31T13:27:43.257Z",
+            "complete": true,
+            "confirmedAt": "2026-10-31T13:27:43.335Z",
+            "diagnosticPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/diagnostics/cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96",
+            "cleanupError": null
+          },
+          "finishedAt": "2026-10-31T13:27:43.335Z"
+        }
+      },
+      "cancelled": {
+        "id": "p-2282c0c3",
+        "workspace": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-830be764",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "cancelled",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-3b67850f",
+            "preBatchTip": "9471261c237075f2a7c6f19a3fb986cf2b0fc3e2",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:42.878Z",
+            "approvedAt": "2026-10-31T13:27:42.884Z",
+            "finishedAt": "2026-10-31T13:27:43.335Z",
+            "cancelledAt": "2026-10-31T13:27:43.335Z",
+            "cancelReason": "B explicit cancel after ordinary restart",
+            "cancelOperationId": "cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-3b67850f",
+            "machineId": "local",
+            "status": "cancelled",
+            "missionIds": [
+              "m-830be764"
+            ],
+            "branch": "batch/b-3b67850f",
+            "baseTip": "c07e72d1b049751599271044ea2852fc7b1d8e6d",
+            "createdAt": "2026-10-31T13:27:42.940Z",
+            "execution": {
+              "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-f0602c13-c9b4-451a-8ffe-bc531dc6fc3b",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/executions/batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f"
+            },
+            "startedAt": "2026-10-31T13:27:43.101Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-830be764",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "cancellation": {
+              "operationId": "cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96",
+              "reason": "B explicit cancel after ordinary restart",
+              "requestedAt": "2026-10-31T13:27:43.257Z",
+              "complete": true,
+              "confirmedAt": "2026-10-31T13:27:43.335Z",
+              "diagnosticPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/diagnostics/cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96",
+              "cleanupError": null
+            },
+            "finishedAt": "2026-10-31T13:27:43.335Z"
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:42.835Z",
+        "updatedAt": "2026-10-31T13:27:43.335Z"
+      },
+      "cancelledRestart": {
+        "id": "p-2282c0c3",
+        "workspace": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-830be764",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "cancelled",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-3b67850f",
+            "preBatchTip": "9471261c237075f2a7c6f19a3fb986cf2b0fc3e2",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:42.878Z",
+            "approvedAt": "2026-10-31T13:27:42.884Z",
+            "finishedAt": "2026-10-31T13:27:43.335Z",
+            "cancelledAt": "2026-10-31T13:27:43.335Z",
+            "cancelReason": "B explicit cancel after ordinary restart",
+            "cancelOperationId": "cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-3b67850f",
+            "machineId": "local",
+            "status": "cancelled",
+            "missionIds": [
+              "m-830be764"
+            ],
+            "branch": "batch/b-3b67850f",
+            "baseTip": "c07e72d1b049751599271044ea2852fc7b1d8e6d",
+            "createdAt": "2026-10-31T13:27:42.940Z",
+            "execution": {
+              "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-f0602c13-c9b4-451a-8ffe-bc531dc6fc3b",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88-1",
+                  "phase": "starting",
+                  "receiptPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/executions/batch-bed9cd58-d8a3-43b7-bdef-9158206f2b88/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f"
+            },
+            "startedAt": "2026-10-31T13:27:43.101Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-830be764",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/batches/b-3b67850f/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "cancellation": {
+              "operationId": "cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96",
+              "reason": "B explicit cancel after ordinary restart",
+              "requestedAt": "2026-10-31T13:27:43.257Z",
+              "complete": true,
+              "confirmedAt": "2026-10-31T13:27:43.335Z",
+              "diagnosticPath": "/tmp/aleph-reconcile-active-then-cancel-mIoi5y/workspace/.aleph/diagnostics/cancel-batch-d80c9850-7d94-42ca-9e56-0352d6b0ae96",
+              "cleanupError": null
+            },
+            "finishedAt": "2026-10-31T13:27:43.335Z"
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:42.835Z",
+        "updatedAt": "2026-10-31T13:27:43.389Z"
+      }
+    },
+    {
+      "mode": "already-delivered",
+      "root": "/tmp/aleph-reconcile-already-delivered-QqtIoo",
+      "project": "p-0feb2cf5",
+      "batch": "b-6955ccb8",
+      "mission": "m-ba19a752",
+      "tip": "19ff2fcee4b65276fde917c32637761174203aef",
+      "before": {
+        "id": "p-0feb2cf5",
+        "workspace": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-6955ccb8",
+            "executionId": "batch-52381031-869b-48f9-afed-f93f7040efba"
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-ba19a752",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "running",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-6955ccb8",
+            "preBatchTip": "19ff2fcee4b65276fde917c32637761174203aef",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:27:43.518Z",
+            "approvedAt": "2026-10-31T13:27:43.524Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-6955ccb8",
+            "machineId": "local",
+            "status": "running",
+            "missionIds": [
+              "m-ba19a752"
+            ],
+            "branch": "batch/b-6955ccb8",
+            "baseTip": "cc2d1295d3c39e8bc9fcb3956bb23ef5a25b8452",
+            "createdAt": "2026-10-31T13:27:43.555Z",
+            "execution": {
+              "id": "batch-52381031-869b-48f9-afed-f93f7040efba",
+              "role": "batch",
+              "active": true,
+              "hostId": "host-8ece0f82-812a-4981-bf65-1902dc93634d",
+              "phase": "between-commands",
+              "commands": [
+                {
+                  "id": "batch-52381031-869b-48f9-afed-f93f7040efba-1",
+                  "phase": "stopped",
+                  "receiptPath": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/executions/batch-52381031-869b-48f9-afed-f93f7040efba/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/batches/b-6955ccb8"
+            },
+            "startedAt": "2026-10-31T13:27:43.704Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-ba19a752",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/batches/b-6955ccb8/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:43.470Z",
+        "updatedAt": "2026-10-31T13:27:43.775Z"
+      },
+      "beforeProcesses": [],
+      "delivered": {
+        "id": "p-0feb2cf5",
+        "workspace": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-ba19a752",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "done",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-6955ccb8",
+            "preBatchTip": "19ff2fcee4b65276fde917c32637761174203aef",
+            "resultCommit": "0d622d9b9599fe316ec74634614ee14991e0fb72",
+            "error": null,
+            "createdAt": "2026-10-31T13:27:43.518Z",
+            "approvedAt": "2026-10-31T13:27:43.524Z",
+            "finishedAt": "2026-10-31T13:27:43.849Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-6955ccb8",
+            "machineId": "local",
+            "status": "done",
+            "missionIds": [
+              "m-ba19a752"
+            ],
+            "branch": "batch/b-6955ccb8",
+            "baseTip": "cc2d1295d3c39e8bc9fcb3956bb23ef5a25b8452",
+            "createdAt": "2026-10-31T13:27:43.555Z",
+            "execution": {
+              "id": "batch-52381031-869b-48f9-afed-f93f7040efba",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-8ece0f82-812a-4981-bf65-1902dc93634d",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-52381031-869b-48f9-afed-f93f7040efba-1",
+                  "phase": "stopped",
+                  "receiptPath": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/executions/batch-52381031-869b-48f9-afed-f93f7040efba/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/batches/b-6955ccb8"
+            },
+            "startedAt": "2026-10-31T13:27:43.704Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-ba19a752",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/batches/b-6955ccb8/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finishedAt": "2026-10-31T13:27:43.861Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-ba19a752",
+                  "manifestId": "first",
+                  "manifestPath": "missions/first/mission.json",
+                  "status": "done",
+                  "resultCommit": "0d622d9b9599fe316ec74634614ee14991e0fb72"
+                }
+              ]
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:43.470Z",
+        "updatedAt": "2026-10-31T13:27:43.867Z"
+      },
+      "after": {
+        "id": "p-0feb2cf5",
+        "workspace": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace",
+        "researchRoot": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/research",
+        "missionRoot": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [],
+        "missions": [
+          {
+            "id": "m-ba19a752",
+            "ownerSession": "owner",
+            "branch": "mission/first",
+            "manifestId": "first",
+            "manifestPath": "missions/first/mission.json",
+            "status": "done",
+            "entrypoint": "run.sh",
+            "outputs": [],
+            "resource": null,
+            "batchId": "b-6955ccb8",
+            "preBatchTip": "19ff2fcee4b65276fde917c32637761174203aef",
+            "resultCommit": "0d622d9b9599fe316ec74634614ee14991e0fb72",
+            "error": null,
+            "createdAt": "2026-10-31T13:27:43.518Z",
+            "approvedAt": "2026-10-31T13:27:43.524Z",
+            "finishedAt": "2026-10-31T13:27:43.849Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-6955ccb8",
+            "machineId": "local",
+            "status": "done",
+            "missionIds": [
+              "m-ba19a752"
+            ],
+            "branch": "batch/b-6955ccb8",
+            "baseTip": "cc2d1295d3c39e8bc9fcb3956bb23ef5a25b8452",
+            "createdAt": "2026-10-31T13:27:43.555Z",
+            "execution": {
+              "id": "batch-52381031-869b-48f9-afed-f93f7040efba",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-8ece0f82-812a-4981-bf65-1902dc93634d",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-52381031-869b-48f9-afed-f93f7040efba-1",
+                  "phase": "stopped",
+                  "receiptPath": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/executions/batch-52381031-869b-48f9-afed-f93f7040efba/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/batches/b-6955ccb8"
+            },
+            "startedAt": "2026-10-31T13:27:43.704Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-ba19a752",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-reconcile-already-delivered-QqtIoo/workspace/.aleph/batches/b-6955ccb8/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finishedAt": "2026-10-31T13:27:43.861Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-ba19a752",
+                  "manifestId": "first",
+                  "manifestPath": "missions/first/mission.json",
+                  "status": "done",
+                  "resultCommit": "0d622d9b9599fe316ec74634614ee14991e0fb72"
+                }
+              ]
+            }
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:27:43.470Z",
+        "updatedAt": "2026-10-31T13:27:43.883Z"
+      }
+    }
+  ],
+  "hosts": [],
+  "boundary": "Combined PR26 controls and PR29 restart acceptance; current startup reconciliation with real Git, batch runner, gated shell task and real SIGKILL of only the owning Host. Automatic uses on-disk storage adapter and real product startup apply. Actual uses real DSH storage/tools and restarts with same DSH_HOME. No product source or deadline changes. A bounded six-second post-exit observation covers at least one configured five-second process-monitor interval; it does not claim an unlimited wait.",
+  "complete": true,
+  "failed": 1,
+  "effective": 105,
+  "defect_reproduced": false,
+  "protection_validated": true
+}

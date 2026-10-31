@@ -1,0 +1,144 @@
+(node:528189) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-controls-restart-combined/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-controls-restart-combined/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ B independent combination preserves live workload then natural drain or explicit cancellation
+  ✔ forming: same project identity persists (3.439142ms)
+  ✔ forming: same batch identity persists (0.528308ms)
+  ✔ forming: same mission identity persists (0.371307ms)
+  ✔ forming: pre-batch source commit remains reachable (5.417361ms)
+  ✔ forming: unexecuted batch remains forming (0.358896ms)
+  ✔ forming: unexecuted mission remains batched (0.357415ms)
+  ✔ forming: startup launches no task (0.293292ms)
+  ✔ forming: startup does not move mission source (5.862482ms)
+  ✔ forming: forming reservation remains busy (0.325186ms)
+  ✔ forming: forming reservation retains exact batch owner (0.357119ms)
+  ✔ forming: same reserved machine rejects another batch (0.612176ms)
+  ✔ forming: rejected formation adds no second batch (0.443617ms)
+  ✔ forming: original batch still remains runnable (0.260363ms)
+  ✔ forming: original machine owner survives rejected formation (1.366022ms)
+  ✔ completed-before-restart: same project identity persists (0.421604ms)
+  ✔ completed-before-restart: same batch identity persists (0.193056ms)
+  ✔ completed-before-restart: same mission identity persists (0.163877ms)
+  ✔ completed-before-restart: pre-batch source commit remains reachable (4.586811ms)
+  ✔ completed-before-restart: runner finished successfully while Host was absent (0.282749ms)
+  ✔ completed-before-restart: startup explicitly marks batch interrupted (0.212945ms)
+  ✔ completed-before-restart: startup explicitly marks mission interrupted (0.86392ms)
+  ✔ completed-before-restart: startup records restart interruption reason (0.336998ms)
+  ✔ completed-before-restart: startup releases stopped workload machine (0.202339ms)
+  ✔ completed-before-restart: startup releases exact reservation (0.192382ms)
+  ✔ completed-before-restart: completed output remains preserved (0.281602ms)
+  ✔ completed-before-restart: restart does not repeat completed computation (0.208881ms)
+  ✔ completed-before-restart: restart does not forge successful delivery (0.185268ms)
+  ✔ completed-before-restart: mission source branch remains intact (4.418344ms)
+  ✖ completed-before-restart: explicit retry refuses terminal interrupted batch (0.954432ms)
+  ✔ completed-before-restart: refused retry preserves completed output (0.504518ms)
+  ✔ active-at-restart: ordinary restart preserves exact execution id (0.586472ms)
+  ✔ active-at-restart: ordinary restart preserves active execution (0.318706ms)
+  ✔ active-at-restart: ordinary restart preserves exact machine execution owner (0.297044ms)
+  ✔ active-at-restart: ordinary restart creates no stop fence (1.198454ms)
+  ✔ active-at-restart: ordinary restart creates no cancellation intent (0.3407ms)
+  ✔ active-at-restart: original computation still runs after startup (3.670715ms)
+  ✔ active-at-restart: same project identity persists (0.230981ms)
+  ✔ active-at-restart: same batch identity persists (0.264114ms)
+  ✔ active-at-restart: same mission identity persists (1.124795ms)
+  ✔ active-at-restart: pre-batch source commit remains reachable (4.794095ms)
+  ✔ active-at-restart: actual orphan process survives first Host crash (0.395475ms)
+  ✔ active-at-restart: live restart preserves running batch (0.297082ms)
+  ✔ active-at-restart: live restart preserves machine occupancy (0.23728ms)
+  ✔ active-at-restart: live restart preserves exact machine owner (0.233653ms)
+  ✔ active-at-restart: live restart does not move source branch (4.776958ms)
+  ✔ active-at-restart: live restart does not execute twice (0.416888ms)
+  ✔ active-at-restart: live restart preserves active worktree (1.394712ms)
+  ✔ active-at-restart: pause after recovery persists paused state (0.307336ms)
+  ✔ active-at-restart: pause after recovery keeps workload alive (4.017011ms)
+  ✔ active-at-restart: finish after recovery drains existing workload (0.321833ms)
+  ✔ active-at-restart: finish after recovery sends no stop fence (0.314245ms)
+  ✔ active-at-restart: natural exit completes finishing project (1.542887ms)
+  ✔ active-at-restart: actual orphan runner produces done result (0.673509ms)
+  ✔ active-at-restart: all actual workload processes have exited (4.177534ms)
+  ✔ active-at-restart: post-exit monitor marks orphan batch interrupted (0.530446ms)
+  ✔ active-at-restart: post-exit monitor releases orphan machine (0.403528ms)
+  ✔ active-at-restart: post-exit mission is explicitly interrupted (1.126509ms)
+  ✔ active-at-restart: post-exit interruption has accurate reason (2.562489ms)
+  ✔ active-at-restart: post-exit exact machine owner is released (0.288265ms)
+  ✔ active-at-restart: actual post-exit observation covers monitor interval (0.303931ms)
+  ✔ active-at-restart: post-exit mission has no result commit (0.259414ms)
+  ✔ active-at-restart: post-exit branch remains input commit (6.902803ms)
+  ✔ active-at-restart: post-exit completed result is preserved (4.880806ms)
+  ✔ active-at-restart: second restart keeps batch interruption stable (0.608007ms)
+  ✔ active-at-restart: second restart keeps machine released (0.34513ms)
+  ✔ active-at-restart: second restart does not repeat compute (0.413263ms)
+  ✔ active-then-cancel: ordinary restart preserves exact execution id (0.577727ms)
+  ✔ active-then-cancel: ordinary restart preserves active execution (0.319404ms)
+  ✔ active-then-cancel: ordinary restart preserves exact machine execution owner (0.310508ms)
+  ✔ active-then-cancel: ordinary restart creates no stop fence (0.300841ms)
+  ✔ active-then-cancel: ordinary restart creates no cancellation intent (0.261091ms)
+  ✔ active-then-cancel: original computation still runs after startup (8.554877ms)
+  ✔ active-then-cancel: same project identity persists (0.39024ms)
+  ✔ active-then-cancel: same batch identity persists (0.305781ms)
+  ✔ active-then-cancel: same mission identity persists (0.272042ms)
+  ✔ active-then-cancel: pre-batch source commit remains reachable (5.123428ms)
+  ✔ active-then-cancel: operator cancellation confirms exact group stopped (0.690063ms)
+  ✔ active-then-cancel: cancel leaves no owned computation (3.486275ms)
+  ✔ active-then-cancel: cancel creates stop fences for recorded commands (6.461791ms)
+  ✔ active-then-cancel: cancel stores terminal batch state (0.450097ms)
+  ✔ active-then-cancel: cancel stores terminal mission state (0.39787ms)
+  ✔ active-then-cancel: cancel marks original execution inactive (11.203103ms)
+  ✔ active-then-cancel: cancel retains original execution identity (0.737235ms)
+  ✔ active-then-cancel: cancel releases machine (0.84423ms)
+  ✔ active-then-cancel: cancel clears exact batch owner (8.742634ms)
+  ✔ active-then-cancel: cancel clears exact execution owner (0.704598ms)
+  ✔ active-then-cancel: cancel retains source branch (9.418287ms)
+  ✔ active-then-cancel: cancel retains worktree diagnostics (0.548552ms)
+  ✔ active-then-cancel: cancel has no false result commit (0.540593ms)
+  ✔ active-then-cancel: repeated cancellation keeps operation identity (8.161851ms)
+  ✔ active-then-cancel: subsequent restart preserves cancelled batch (0.699655ms)
+  ✔ active-then-cancel: subsequent restart preserves cancelled mission (0.730551ms)
+  ✔ active-then-cancel: subsequent restart leaves released machine idle (0.698356ms)
+  ✔ active-then-cancel: cancelled computation never repeats (8.578662ms)
+  ✔ already-delivered: same project identity persists (0.714751ms)
+  ✔ already-delivered: same batch identity persists (0.643132ms)
+  ✔ already-delivered: same mission identity persists (11.886094ms)
+  ✔ already-delivered: pre-batch source commit remains reachable (5.704391ms)
+  ✔ already-delivered: already delivered batch remains done (61.789544ms)
+  ✔ already-delivered: already delivered mission remains done (0.705885ms)
+  ✔ already-delivered: already delivered result commit is stable (0.562299ms)
+  ✔ already-delivered: delivered commit remains mission tip (5.843084ms)
+  ✔ already-delivered: completed machine remains idle (189.619028ms)
+  ✔ already-delivered: restart repeats no normal computation (0.740095ms)
+  ✔ already-delivered: delivered result is readable from Git (5.954436ms)
+✖ B independent combination preserves live workload then natural drain or explicit cancellation (8683.98932ms)
+ℹ tests 106
+ℹ suites 0
+ℹ pass 104
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8846.918276
+
+✖ failing tests:
+
+test at ../aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39
+✖ completed-before-restart: explicit retry refuses terminal interrupted batch (0.954432ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /not runnable/. Input:
+  
+  'Error: batch b-9d2551bb has active execution or status failed'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:168:85
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:168:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Error: batch b-9d2551bb has active execution or status failed',
+    expected: /not runnable/,
+    operator: 'match',
+    diff: 'simple'
+  }

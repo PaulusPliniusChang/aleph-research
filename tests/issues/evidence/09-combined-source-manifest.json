@@ -1,0 +1,68 @@
+{
+  "status": "FROZEN",
+  "source": "/tmp/aleph-controls-restart-combined-source",
+  "base_pr": 26,
+  "base_head": "b1f9f048ae8cc7569e6a9e36dcafe119f2c02783",
+  "recovery_pr": 29,
+  "recovery_head": "96226147cd18f67ea9920f0e714532259295bdce",
+  "files": [
+    {
+      "path": "docs/architecture.md",
+      "baseline_sha256": "3bbdcf394b982856937eba346a12ed8dc3604d52ee90a5449af8efd4f4127c41",
+      "sha256": "fdf50979f03317110033a5e5cdc8cde410c29acd7b3af7d77f37d18973bbc912"
+    },
+    {
+      "path": "dsh-plugin/README.md",
+      "baseline_sha256": "eb6b26601275eb52dd750bd2b9f36334dcc91d4beae706184816f3cb92e6f1da",
+      "sha256": "7c091765d15b6dc6301982ca2e56eb02c40a0938735e52d0651ac60a7e6d119c"
+    },
+    {
+      "path": "dsh-plugin/execution-owner.mjs",
+      "baseline_sha256": "d34da8d9c96edae25ff52f77878a469266964fdedc05c5292075a40db57e5841",
+      "sha256": "35349a739a69a2b631d7da6c635b8c7b9ac8c899b917612d4d018b9d161f0e38"
+    },
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "baseline_sha256": "16df3b8552082b082f5d9a4d266929a2ba93926aeff2137fdbb31bfd6b2035dd",
+      "sha256": "98cd9c6f5bfee2713dd37287d8114e5a15497fcdc47a842cadc3555d8f559013"
+    },
+    {
+      "path": "dsh-plugin/project-controls.mjs",
+      "baseline_sha256": "88281bb00d15c8be35bcdc8ce2a4b5159ad40d161c21bf2afaa22a40d7423a69",
+      "sha256": "3c73a32ab89e45d45e96ccd019472fc9d95eda61631cbac919c6e82e9ab13866"
+    },
+    {
+      "path": "dsh-plugin/test/controls-restart-combination.test.mjs",
+      "baseline_sha256": null,
+      "sha256": "d05ad02a6486d0d2019bd2c3a144835b496c9db50181954686e5a6a77adaca2b"
+    },
+    {
+      "path": "dsh-plugin/test/restart-followup.test.mjs",
+      "baseline_sha256": null,
+      "sha256": "8458d3942db9e79d06799907c0248870f386b271c80420c9bee7d65b58e6f553"
+    }
+  ],
+  "test_result": {
+    "total": 262,
+    "pass": 262,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "new_combination_effective": 40,
+    "ported_recovery_effective": 41,
+    "existing_effective_including_original_top_level": 151,
+    "parent_containers": 30,
+    "command": "npm test",
+    "log": "/tmp/aleph-controls-restart-combined-product-tests-run2.txt",
+    "log_sha256": "d7369df3973143cef8621d456849b070a928edc3a39abe0aaed97c56128daf92"
+  },
+  "patch": "/tmp/aleph-controls-restart-combined-changes.patch",
+  "patch_sha256": "690d14bda08e0e78d00e3e6cb2b872061fa8f2cb252d8ac6c5e3cf324f4dd34a",
+  "limitations": [
+    "single Host writer",
+    "ordinary descendants must remain in the owned process group",
+    "legacy processes observed only through readable /proc cwd",
+    "InfraOptimizer activation receipt cannot be reconstructed; retain uncertain reservation",
+    "no automatic delivery or rerun during restart recovery"
+  ]
+}

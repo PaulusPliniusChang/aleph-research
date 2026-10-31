@@ -8,6 +8,26 @@ pull_request: https://github.com/hapenia/aleph-research/pull/26
 
 # 研究过程缺少暂停、恢复、取消和结束操作
 
+
+## 项目控制与重启恢复的组合验收（2026-10-31）
+
+组合补丁以 PR #26 的准确提交 `b1f9f048ae8cc7569e6a9e36dcafe119f2c02783` 为基础，整合 PR #29 的启动恢复与持续收尾行为。普通启动仅观察持久执行回执，不创建停止文件或取消意图；明确取消仍执行停止协议。原有五秒定时器仅跟踪首次启动捕获的执行，计算自然结束后记录中断、保留输出并释放准确机器归属；项目已经处于结束等待状态时，随后进入结束状态。
+
+| 验收范围 | 结果与证据 |
+| --- | --- |
+| 完整产品测试 | Node 262／262 通过，包含 232 个有效行为点与 30 个父测试容器。见[产品输出](evidence/09-combined-product.txt)。 |
+| B 独立自动验收 | 105 个有效行为点全部通过；Node 连同父容器为 106 项。见[结构化记录](evidence/09-combined-independent.json)和[原始输出](evidence/09-combined-independent.txt)。 |
+| 实际 DSH | 105 个有效观察点全部通过；Node 连同父容器为 106 项。见[实际记录](evidence/09-combined-real-dsh.json)和[原始输出](evidence/09-combined-real-dsh.txt)。 |
+
+实际流程使用真实注册工具、持久存储、Git 工作树及 Python 批次运行器，直接对原 Host 发送 `SIGKILL`，再使用相同 `DSH_HOME` 启动。计算进程在恢复后继续存在，机器与执行身份保持准确，批次不能重复计算。暂停和结束等待均不停止该计算。计算自然退出后，脚本等待至少 6100 毫秒，由产品原有五秒定时器完成收尾，任务结果及源码仍可检查。另一场景在普通恢复后明确取消批次，确认停止文件存在、原计算退出、取消终态持久化、机器准确释放、工作树和诊断保留；再次重启仍保持取消状态。已交付成果和未运行批次分别作为正常对照。
+
+独立脚本沿用磁盘存储适配器及真实插件启动，实际阶段使用原始 DSH，没有调用模型、改变产品期限或直接调用收尾方法。冻结产品文件在验收后逐项核对摘要一致。[冻结清单](evidence/09-combined-source-manifest.json)与[交接说明](evidence/09-combined-source-handoff.md)保留。所有实际 Host 的进程编号均已确认不存在。
+
+首次独立夹具错误读取顶层项目状态，另有终态拒绝信息沿用旧预期；相关记录分别保存在[状态路径尝试](evidence/09-combined-state-contract-fixture-attempt.json)和[拒绝信息尝试](evidence/09-combined-error-message-fixture-attempt.json)，原始输出均一并保存。最终夹具使用 `control.state` 与当前明确拒绝契约，105 个有效点全部通过。这些尝试属于夹具修正，不计作产品缺陷。
+
+复跑使用[独立脚本](dsh/combined-controls-restart.test.mjs)和[实际启动脚本](dsh/combined-controls-restart.py)。支持范围保持单 Host 写入、Linux 可读进程信息及留在所属进程组中的普通后代；恢复不新增自动成果交付、重复计算或跨 Host 执行服务。原人工管理状态及已发布历史证据继续保留。
+
+
 ## 当前修复验收
 
 上游拉取请求为 [PR #26](https://github.com/hapenia/aleph-research/pull/26)，尚未合并。修复提交为 `b1f9f048ae8cc7569e6a9e36dcafe119f2c02783`，派生分支为 `fix/aleph-09-project-controls`，基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。修复提供 Leader 正式工具及经过 DSH 外层登录认证的 HTTP 操作：项目暂停、恢复、结束，排队任务取消，以及整批运行取消。暂停阻止新派发，已有计算继续执行；结束关闭派发并等待已接纳工作完成；取消确认实际停止后才释放机器，保留工作树、原任务分支及诊断。尚不能确认停止时，操作保持 `complete:false`、取消中及机器占用状态。

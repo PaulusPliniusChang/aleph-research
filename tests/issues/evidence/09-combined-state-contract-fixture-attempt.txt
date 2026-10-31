@@ -1,0 +1,222 @@
+(node:526513) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-controls-restart-combined/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-controls-restart-combined/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ B independent combination preserves live workload then natural drain or explicit cancellation
+  ✔ forming: same project identity persists (0.955716ms)
+  ✔ forming: same batch identity persists (0.228648ms)
+  ✔ forming: same mission identity persists (0.196263ms)
+  ✔ forming: pre-batch source commit remains reachable (5.983125ms)
+  ✔ forming: unexecuted batch remains forming (0.285591ms)
+  ✔ forming: unexecuted mission remains batched (0.23047ms)
+  ✔ forming: startup launches no task (0.227136ms)
+  ✔ forming: startup does not move mission source (5.543918ms)
+  ✔ forming: forming reservation remains busy (0.397455ms)
+  ✔ forming: forming reservation retains exact batch owner (0.304705ms)
+  ✔ forming: same reserved machine rejects another batch (0.686312ms)
+  ✔ forming: rejected formation adds no second batch (0.328932ms)
+  ✔ forming: original batch still remains runnable (0.285363ms)
+  ✔ forming: original machine owner survives rejected formation (0.23663ms)
+  ✔ completed-before-restart: same project identity persists (0.750248ms)
+  ✔ completed-before-restart: same batch identity persists (0.436703ms)
+  ✔ completed-before-restart: same mission identity persists (0.184662ms)
+  ✔ completed-before-restart: pre-batch source commit remains reachable (4.868244ms)
+  ✔ completed-before-restart: runner finished successfully while Host was absent (0.302621ms)
+  ✔ completed-before-restart: startup explicitly marks batch interrupted (0.830245ms)
+  ✔ completed-before-restart: startup explicitly marks mission interrupted (0.208981ms)
+  ✔ completed-before-restart: startup records restart interruption reason (0.193601ms)
+  ✔ completed-before-restart: startup releases stopped workload machine (0.174352ms)
+  ✔ completed-before-restart: startup releases exact reservation (0.169626ms)
+  ✔ completed-before-restart: completed output remains preserved (0.246485ms)
+  ✔ completed-before-restart: restart does not repeat completed computation (0.186824ms)
+  ✔ completed-before-restart: restart does not forge successful delivery (0.162506ms)
+  ✔ completed-before-restart: mission source branch remains intact (4.552044ms)
+  ✖ completed-before-restart: explicit retry refuses terminal interrupted batch (0.957026ms)
+  ✔ completed-before-restart: refused retry preserves completed output (0.274148ms)
+  ✔ active-at-restart: ordinary restart preserves exact execution id (0.591645ms)
+  ✔ active-at-restart: ordinary restart preserves active execution (0.352226ms)
+  ✔ active-at-restart: ordinary restart preserves exact machine execution owner (0.306939ms)
+  ✔ active-at-restart: ordinary restart creates no stop fence (0.747162ms)
+  ✔ active-at-restart: ordinary restart creates no cancellation intent (0.268776ms)
+  ✔ active-at-restart: original computation still runs after startup (3.522934ms)
+  ✔ active-at-restart: same project identity persists (0.259315ms)
+  ✔ active-at-restart: same batch identity persists (0.216421ms)
+  ✔ active-at-restart: same mission identity persists (0.195111ms)
+  ✔ active-at-restart: pre-batch source commit remains reachable (4.410251ms)
+  ✔ active-at-restart: actual orphan process survives first Host crash (0.299565ms)
+  ✔ active-at-restart: live restart preserves running batch (0.257247ms)
+  ✔ active-at-restart: live restart preserves machine occupancy (0.222363ms)
+  ✔ active-at-restart: live restart preserves exact machine owner (0.260443ms)
+  ✔ active-at-restart: live restart does not move source branch (4.692835ms)
+  ✔ active-at-restart: live restart does not execute twice (0.444652ms)
+  ✔ active-at-restart: live restart preserves active worktree (0.362601ms)
+  ✖ active-at-restart: pause after recovery persists paused state (0.892166ms)
+  ✔ active-at-restart: pause after recovery keeps workload alive (3.853915ms)
+  ✖ active-at-restart: finish after recovery drains existing workload (0.611742ms)
+  ✔ active-at-restart: finish after recovery sends no stop fence (0.452798ms)
+  ✖ active-at-restart: natural exit completes finishing project (0.918666ms)
+  ✔ active-at-restart: actual orphan runner produces done result (0.628632ms)
+  ✔ active-at-restart: all actual workload processes have exited (5.681019ms)
+  ✔ active-at-restart: post-exit monitor marks orphan batch interrupted (0.418572ms)
+  ✔ active-at-restart: post-exit monitor releases orphan machine (0.286421ms)
+  ✔ active-at-restart: post-exit mission is explicitly interrupted (0.280108ms)
+  ✔ active-at-restart: post-exit interruption has accurate reason (1.03077ms)
+  ✔ active-at-restart: post-exit exact machine owner is released (0.265254ms)
+  ✔ active-at-restart: actual post-exit observation covers monitor interval (0.24574ms)
+  ✔ active-at-restart: post-exit mission has no result commit (0.315385ms)
+  ✔ active-at-restart: post-exit branch remains input commit (6.534288ms)
+  ✔ active-at-restart: post-exit completed result is preserved (0.511885ms)
+  ✔ active-at-restart: second restart keeps batch interruption stable (0.682975ms)
+  ✔ active-at-restart: second restart keeps machine released (0.525643ms)
+  ✔ active-at-restart: second restart does not repeat compute (0.400867ms)
+  ✔ active-then-cancel: ordinary restart preserves exact execution id (0.582918ms)
+  ✔ active-then-cancel: ordinary restart preserves active execution (0.357534ms)
+  ✔ active-then-cancel: ordinary restart preserves exact machine execution owner (0.328967ms)
+  ✔ active-then-cancel: ordinary restart creates no stop fence (0.467271ms)
+  ✔ active-then-cancel: ordinary restart creates no cancellation intent (0.35003ms)
+  ✔ active-then-cancel: original computation still runs after startup (3.833309ms)
+  ✔ active-then-cancel: same project identity persists (0.494539ms)
+  ✔ active-then-cancel: same batch identity persists (0.332264ms)
+  ✔ active-then-cancel: same mission identity persists (0.573356ms)
+  ✔ active-then-cancel: pre-batch source commit remains reachable (4.946434ms)
+  ✔ active-then-cancel: operator cancellation confirms exact group stopped (59.742341ms)
+  ✔ active-then-cancel: cancel leaves no owned computation (3.746808ms)
+  ✔ active-then-cancel: cancel creates stop fences for recorded commands (49.37707ms)
+  ✔ active-then-cancel: cancel stores terminal batch state (0.949251ms)
+  ✔ active-then-cancel: cancel stores terminal mission state (0.377819ms)
+  ✔ active-then-cancel: cancel marks original execution inactive (0.314234ms)
+  ✔ active-then-cancel: cancel retains original execution identity (0.395171ms)
+  ✔ active-then-cancel: cancel releases machine (0.393544ms)
+  ✔ active-then-cancel: cancel clears exact batch owner (0.318023ms)
+  ✔ active-then-cancel: cancel clears exact execution owner (0.295458ms)
+  ✔ active-then-cancel: cancel retains source branch (4.620189ms)
+  ✔ active-then-cancel: cancel retains worktree diagnostics (0.47386ms)
+  ✔ active-then-cancel: cancel has no false result commit (0.350562ms)
+  ✔ active-then-cancel: repeated cancellation keeps operation identity (0.431884ms)
+  ✔ active-then-cancel: subsequent restart preserves cancelled batch (30.77829ms)
+  ✔ active-then-cancel: subsequent restart preserves cancelled mission (6.756514ms)
+  ✔ active-then-cancel: subsequent restart leaves released machine idle (0.571974ms)
+  ✔ active-then-cancel: cancelled computation never repeats (0.473872ms)
+  ✔ already-delivered: same project identity persists (1.845862ms)
+  ✔ already-delivered: same batch identity persists (0.479208ms)
+  ✔ already-delivered: same mission identity persists (0.804378ms)
+  ✔ already-delivered: pre-batch source commit remains reachable (5.348218ms)
+  ✔ already-delivered: already delivered batch remains done (0.469715ms)
+  ✔ already-delivered: already delivered mission remains done (0.410737ms)
+  ✔ already-delivered: already delivered result commit is stable (0.378544ms)
+  ✔ already-delivered: delivered commit remains mission tip (5.787256ms)
+  ✔ already-delivered: completed machine remains idle (0.605754ms)
+  ✔ already-delivered: restart repeats no normal computation (0.445397ms)
+  ✔ already-delivered: delivered result is readable from Git (5.153502ms)
+✖ B independent combination preserves live workload then natural drain or explicit cancellation (8506.387717ms)
+ℹ tests 106
+ℹ suites 0
+ℹ pass 101
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8648.747777
+
+✖ failing tests:
+
+test at ../aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39
+✖ completed-before-restart: explicit retry refuses terminal interrupted batch (0.957026ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /not runnable/. Input:
+  
+  'Error: batch b-0dbad3ea has active execution or status failed'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:168:85
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:168:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Error: batch b-0dbad3ea has active execution or status failed',
+    expected: /not runnable/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at ../aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39
+✖ active-at-restart: pause after recovery persists paused state (0.892166ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'paused'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:132:78
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:132:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'paused',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39
+✖ active-at-restart: finish after recovery drains existing workload (0.611742ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'finishing'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:136:82
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:136:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'finishing',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39
+✖ active-at-restart: natural exit completes finishing project (0.918666ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'finished'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:139:137
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:40:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/combined-controls-restart.test.mjs:139:72)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'finished',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

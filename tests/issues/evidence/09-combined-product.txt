@@ -1,0 +1,359 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:511317) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ordinary restart retains an owned command outside its former cwd and finishing drains it
+  ✔ the command leaves the worktree while its launcher and owned group remain active (6.075046ms)
+  ✔ receipt observation sees the real owned process group without stopping it (54.549777ms)
+  ✔ ordinary startup preserves exact execution and machine ownership (0.509879ms)
+  ✔ ordinary startup writes no stop fence or cancellation intent (0.205372ms)
+  ✔ repeated startup does not recapture newly running agents (0.690545ms)
+  ✔ live batch cannot be run a second time (53.414437ms)
+  ✔ live batch cannot be reopened by InfraOptimizer (1.067686ms)
+  ✔ pause survives recovery and blocks new dispatch (0.310718ms)
+  ✔ pause and follow-up preserve the active computation (115.718738ms)
+  ✔ finish waits for the captured computation instead of stopping it (112.745388ms)
+  ✔ finishing project rejects fresh work and cannot resume (0.603465ms)
+  ✔ natural exit closes only the captured batch and execution (0.469451ms)
+  ✔ natural exit releases the exact machine and clears execution ownership (0.245047ms)
+  ✔ natural exit finishes the previously finishing project (0.76649ms)
+  ✔ delivered mission history survives while undelivered work is explicitly interrupted (0.300591ms)
+  ✔ computed output and original receipt remain untouched for inspection (1.150799ms)
+  ✔ later ticks preserve new agent state and publish a single interruption (0.365038ms)
+✔ ordinary restart retains an owned command outside its former cwd and finishing drains it (580.816835ms)
+▶ explicit cancellation after ordinary recovery still stops the exact durable command
+  ✔ explicit cancellation confirms the owned group has stopped (0.567781ms)
+  ✔ explicit cancellation persists a durable stop fence (0.235043ms)
+  ✔ explicit cancellation reaches cancelled and inactive state (0.203066ms)
+  ✔ explicit cancellation releases its exact machine (0.150484ms)
+  ✔ explicit cancellation preserves delivered results and cancels undelivered work (0.144413ms)
+  ✔ cancellation diagnostics preserve the original worktree path (1.118099ms)
+  ✔ repeated cancellation retains the first operation identifier (0.288021ms)
+  ✔ stale recovery tick cannot turn cancelled into failed (0.221518ms)
+✔ explicit cancellation after ordinary recovery still stops the exact durable command (312.972561ms)
+▶ startup resumes a persisted explicit cancellation while ordinary observations remain read only
+  ✔ persisted cancellation is completed during startup (0.492832ms)
+  ✔ persisted cancellation stops the live group and writes its fence (0.615464ms)
+  ✔ startup retains the operator cancellation identity and reason (0.202799ms)
+  ✔ persisted cancellation allows the finishing project to settle (0.115164ms)
+✔ startup resumes a persisted explicit cancellation while ordinary observations remain read only (373.432021ms)
+▶ unverifiable command ownership retains busy execution until observation becomes trustworthy
+  ✔ changed process start identity retains active batch and machine (0.319195ms)
+  ✔ uncertain ordinary recovery cannot create cancellation intent or a stop fence (0.167725ms)
+  ✔ a receipt belonging to another execution stays tracked even after its processes exit (0.905594ms)
+  ✔ restoring trustworthy ownership permits the next tick to settle without a restart (7.233177ms)
+✔ unverifiable command ownership retains busy execution until observation becomes trustworthy (136.233956ms)
+▶ ordinary infra recovery preserves uncertainty and explicit cancellation keeps its receipt boundary
+  ✔ unreconstructed InfraOptimizer activation stays active with the machine occupied (0.324358ms)
+  ✔ ordinary infra recovery creates neither cancellation nor stop fences (0.167603ms)
+  ✔ uncertain infra recovery prevents a duplicate activation (0.293466ms)
+  ✔ explicit infra cancellation remains incomplete without the exact activation receipt (0.669043ms)
+✔ ordinary infra recovery preserves uncertainty and explicit cancellation keeps its receipt boundary (136.619601ms)
+▶ recovered settlement respects execution replacements and newer machine owners
+  ✔ execution-id (163.748318ms)
+  ✔ execution-host (163.781363ms)
+  ✔ machine-execution (165.587516ms)
+✔ recovered settlement respects execution replacements and newer machine owners (494.01797ms)
+(node:511318) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ persistent admission, queued cancellation, and retained research
+  ✔ legacy projects are running without migration (1.245378ms)
+  ✔ pause persists control and reason (0.194563ms)
+  ✔ snapshot reports actual paused state (0.230257ms)
+  ✔ repeated pause retains revision and operation (0.285394ms)
+  ✔ pause blocks mission workspace creation (0.741731ms)
+  ✔ pause blocks proposals before Git inspection (0.261035ms)
+  ✔ pause blocks direct batch composition without new branch (14.044523ms)
+  ✔ pause blocks research activation before worktree creation (0.353357ms)
+  ✔ pause blocks researcher group before side effects (0.488648ms)
+  ✔ pause blocks Composer startup (0.284935ms)
+  ✔ paused approval admits queued mission (0.132556ms)
+  ✔ paused approval sends no dispatch notification (0.091306ms)
+  ✔ resume opens admission with incremented revision (0.136735ms)
+  ✔ resume reports notification failure honestly (0.629859ms)
+  ✔ duplicate resume sends no additional message (0.193254ms)
+  ✔ queued cancellation persists cancelled status (0.079588ms)
+  ✔ cancelled mission branch remains unchanged (6.279593ms)
+  ✔ cancelled mission excluded from queued and counted separately (0.274248ms)
+  ✔ repeated cancellation retains operation id (0.238044ms)
+  ✔ approval cannot revive cancelled mission (0.228312ms)
+  ✔ Composer cannot select cancelled work (0.473485ms)
+  ✔ empty project finishes immediately (0.102786ms)
+  ✔ finished project cannot resume (0.223059ms)
+  ✔ finished project rejects approval (0.178251ms)
+  ✔ finished project preserves evaluation access (108.862393ms)
+  ✔ finished state survives recovery (0.275782ms)
+  ✔ cancelled branch and evaluation history survive recovery (6.775895ms)
+✔ persistent admission, queued cancellation, and retained research (310.481721ms)
+▶ formed batch controls and restart launch fence
+  ✔ paused formed batch cannot run (0.659598ms)
+  ✔ paused formed batch cannot start InfraOptimizer (0.67569ms)
+  ✔ batched mission cancellation returns batch conflict (0.232702ms)
+  ✔ forming batch cancellation confirms completion (0.164471ms)
+  ✔ forming batch cancellation cancels undelivered mission (0.117657ms)
+  ✔ forming batch cancellation releases matching machine (0.088013ms)
+  ✔ cancelled batch cannot be started (0.398934ms)
+  ✔ cancellation diagnostics are retained (1.052463ms)
+  ✔ duplicate batch cancellation remains cancelled (0.190215ms)
+  ✔ pause survives Host recovery (0.143733ms)
+  ✔ cancelled batch survives Host recovery (0.086261ms)
+✔ formed batch controls and restart launch fence (199.79914ms)
+▶ real running batch cancellation preserves work and precise machine ownership
+  ✔ active runner is a real process (0.569716ms)
+  ✔ running mission is reflected in snapshot (0.38986ms)
+  ✔ duplicate batch start is rejected before directory mutation (0.643389ms)
+  ✔ running cancellation confirms owned computation stopped (0.326397ms)
+  ✔ cancelled running batch never becomes done (0.185424ms)
+  ✔ cancelled mission has no fabricated result commit (0.100398ms)
+  ✔ cancelled worktree remains available for diagnosis (0.679757ms)
+  ✔ cancelled mission original branch remains intact (5.340129ms)
+  ✔ machine releases only after cancellation confirmation (0.191455ms)
+✔ real running batch cancellation preserves work and precise machine ownership (376.216192ms)
+▶ pause and finish drain existing compute without new dispatch
+  ✔ pause leaves running computation alive (0.459129ms)
+  ✔ pause does not convert running batch into cancelled (0.22187ms)
+  ✔ finish reports draining while compute remains (0.142218ms)
+  ✔ finish allows already running process to continue (0.690008ms)
+  ✔ draining batch delivers normal results (0.294508ms)
+  ✔ last batch settles project to finished (0.115486ms)
+  ✔ finished batch sends no new dispatch notification (0.073646ms)
+✔ pause and finish drain existing compute without new dispatch (434.441806ms)
+▶ InfraOptimizer exact ownership: paused
+  ✔ duplicate Infra startup is rejected without erasing edits (0.543076ms)
+  ✔ existing optimization can commit after dispatch closes (4.805152ms)
+  ✔ closed dispatch prevents Infra completion starting compute (0.178189ms)
+  ✔ Infra completion closes only its own activation record (0.099702ms)
+✔ InfraOptimizer exact ownership: paused (221.899598ms)
+▶ InfraOptimizer exact ownership: cancel-before-receipt
+  ✔ duplicate Infra startup is rejected without erasing edits (0.485798ms)
+  ✔ cancelled activation receives exact receipt disposal (0.308487ms)
+  ✔ late successful result never advances batch branch (5.356227ms)
+  ✔ cancelled optimization edits remain in original directory (0.820466ms)
+  ✔ cancel before receipt publication completes without running batch (0.292043ms)
+✔ InfraOptimizer exact ownership: cancel-before-receipt (191.894479ms)
+▶ InfraOptimizer exact ownership: dispose-failure
+  ✔ duplicate Infra startup is rejected without erasing edits (0.390962ms)
+  ✔ cancelled activation receives exact receipt disposal (0.157188ms)
+  ✔ late successful result never advances batch branch (4.834808ms)
+  ✔ cancelled optimization edits remain in original directory (0.360505ms)
+  ✔ failed dispose does not report cancellation complete (0.17832ms)
+  ✔ failed dispose retains cancelling and busy machine (0.139269ms)
+✔ InfraOptimizer exact ownership: dispose-failure (181.655234ms)
+▶ InfraOptimizer exact ownership: finished
+  ✔ duplicate Infra startup is rejected without erasing edits (0.436366ms)
+  ✔ existing optimization can commit after dispatch closes (5.097425ms)
+  ✔ closed dispatch prevents Infra completion starting compute (0.154705ms)
+  ✔ Infra completion closes only its own activation record (0.074005ms)
+  ✔ finished project retains unstarted optimized batch (0.133111ms)
+✔ InfraOptimizer exact ownership: finished (199.638516ms)
+▶ cancellation and result publication share one short transaction
+  ✔ cancel intent before publishing blocks mission result reference (0.178323ms)
+  ✔ cancel intent before publishing preserves branch tip (5.450006ms)
+✔ cancellation and result publication share one short transaction (231.91916ms)
+▶ restart reconciles a command reserved before spawn without false ownership
+  ✔ pre-spawn crash recovery settles persisted cancellation (0.228002ms)
+  ✔ pre-spawn crash recovery releases verified unadmitted machine (0.131615ms)
+  ✔ pre-spawn recovery writes durable delayed-launch fence (0.47471ms)
+✔ restart reconciles a command reserved before spawn without false ownership (186.452572ms)
+▶ Composer cleanup never waits on the tool currently calling finish
+  ✔ finish tool returns while exact Composer disposal awaits caller (0.161159ms)
+  ✔ finish reports Composer cleanup pending separately (0.055968ms)
+  ✔ Composer cleanup completes after caller releases (0.196309ms)
+✔ Composer cleanup never waits on the tool currently calling finish (58.6538ms)
+▶ registered control tools enforce Leader authority; HTTP operator routes use same controls
+  ✔ pause_project tool is registered (0.161441ms)
+  ✔ resume_project tool is registered (0.035798ms)
+  ✔ finish_project tool is registered (0.022996ms)
+  ✔ cancel_mission tool is registered (0.017907ms)
+  ✔ cancel_batch tool is registered (0.016961ms)
+  ✔ non-Leader execution is rejected even when directly invoked (0.223566ms)
+  ✔ Leader from another workspace cannot control project (0.120507ms)
+  ✔ authorized Leader control uses persisted service state (0.060915ms)
+  ✔ operator route rejects GET state change (0.231252ms)
+  ✔ operator route rejects malformed JSON (0.186484ms)
+  ✔ operator resume shares persisted control implementation (0.303196ms)
+  ✔ operator route missing project reports 404 (0.198412ms)
+✔ registered control tools enforce Leader authority; HTTP operator routes use same controls (58.42122ms)
+▶ real dependency preparation is owned and cancellable before the batch runner
+  ✔ dependency setup starts a real owned process (0.229758ms)
+  ✔ preparation phase retains forming status before runner (0.139933ms)
+  ✔ preparation identity is durable before cancellation (0.086348ms)
+  ✔ preparation cancellation confirms process termination (0.356875ms)
+  ✔ cancelled preparation never dispatches batch runner (0.170939ms)
+  ✔ cancelled preparation retains dependency worktree (0.266459ms)
+✔ real dependency preparation is owned and cancellable before the batch runner (286.669702ms)
+▶ delivery published before cancellation remains done while remaining work is cancelled
+  ✔ result publication and persisted done state precede cancel acquisition (0.259132ms)
+  ✔ already published mission remains done after whole-batch cancel (0.245514ms)
+  ✔ already published result reference remains readable (6.506485ms)
+  ✔ remaining unpublished mission becomes cancelled (0.217005ms)
+  ✔ unpublished second branch stays at original mission commit (5.549878ms)
+  ✔ partial delivery still ends whole batch as cancelled (0.197499ms)
+✔ delivery published before cancellation remains done while remaining work is cancelled (429.74352ms)
+▶ Infra preparation reservation precedes a delayed real worktree-add return
+  ✔ first actual worktree exists while add return is delayed (30.418811ms)
+  ✔ second same-batch Infra request is rejected in preparation gap (0.233953ms)
+  ✔ rejected request preserves first real worktree and contents (0.365517ms)
+  ✔ duplicate preparation request starts no Infra model activation (0.096477ms)
+  ✔ original preparation resumes and exact activation completes (0.165381ms)
+  ✔ original preparation modifications survive into optimized branch (35.509318ms)
+✔ Infra preparation reservation precedes a delayed real worktree-add return (471.609803ms)
+(node:511319) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ owned batch commands: real processes, signals, durable receipts and launch fences
+  ✔ stdout is captured (101.153723ms)
+  ✔ stderr is captured independently (91.20016ms)
+  ✔ UTF8 stdout survives byte boundaries (92.268028ms)
+  ✔ custom environment reaches user command (91.418141ms)
+  ✔ cwd is honored (99.872856ms)
+  ✔ nonzero exit remains an error (106.712573ms)
+  ✔ failing command retains stderr (87.418855ms)
+  ✔ missing user executable fails cleanly (55.953014ms)
+  ✔ missing cwd fails without unknown ownership (12.241197ms)
+  ✔ timeout terminates real running command (217.450014ms)
+  ✔ pre-aborted request never runs code (0.972548ms)
+  ✔ running abort stops owned command (124.93175ms)
+  ✔ repeated abort remains one cleanup (157.164336ms)
+  ✔ stdout overflow is bounded and stops computation (180.93232ms)
+  ✔ stderr overflow is bounded independently (125.122523ms)
+  ✔ successful receipt records detached group and session (76.542698ms)
+  ✔ successful receipt records boot and start identity (75.37236ms)
+  ✔ recovery after ordinary exit confirms stopped (72.428055ms)
+  ✔ recovery stops a currently live owned group (153.893523ms)
+  ✔ wrong execution identity refuses recovery signal (156.696456ms)
+  ✔ reused PID start identity fails closed (138.884423ms)
+  ✔ previous boot receipt requires no signal (0.579464ms)
+  ✔ invalid group receipt fails closed (65.528161ms)
+  ✔ missing receipt before spawn is fenced without claiming an unknown PID (0.648248ms)
+  ✔ go without receipt is inconsistent and fails closed (0.526292ms)
+  ✔ delayed launcher after recovery fence cannot run user code (29.56743ms)
+  ✔ launcher writes receipt but never starts without Host go (60.40931ms)
+  ✔ TERM-ignoring descendants receive escalation (899.088798ms)
+  ✔ entry exit still cleans ordinary background descendants (838.381241ms)
+  ✔ same-directory unrelated process survives managed timeout (161.631675ms)
+  ✔ one owned group survives cancellation of another (220.687604ms)
+  ✔ missing execution identity is rejected before spawn (0.228919ms)
+✔ owned batch commands: real processes, signals, durable receipts and launch fences (4505.714031ms)
+(node:511320) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (608.343035ms)
+(node:511326) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Switched to a new branch 'mission/second'
+▶ restart preserves a legitimate unexecuted forming reservation
+  ✔ forming batch remains forming with the original identity (0.84861ms)
+  ✔ batched mission keeps its batch ownership (0.192811ms)
+  ✔ machine remains busy for the original forming batch (0.253226ms)
+  ✔ startup neither executes compute nor moves the mission branch (6.12455ms)
+Switched to branch 'template'
+  ✔ another batch cannot steal the reserved machine (1.747241ms)
+  ✔ periodic follow-up does not expire an unexecuted forming batch (0.202967ms)
+  ✔ the original forming batch can still run and deliver its own result (0.327402ms)
+✔ restart preserves a legitimate unexecuted forming reservation (470.075127ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Preparing worktree (detached HEAD abb7240)
+▶ startup captures a real live runner and later reconciles its exit without another restart
+  ✔ live runner is detected under its actual worktree (3.442612ms)
+  ✔ live startup preserves running batch and exact machine reservation (1.135994ms)
+  ✔ startup closes only its stale agent snapshot (0.287755ms)
+  ✔ live follow-up preserves new agents and does not duplicate computation (4.233291ms)
+  ✔ a repeated startup call is idempotent and does not recapture agents (0.130929ms)
+  ✔ explicit live rerun is refused before altering the worktree (4.866456ms)
+  ✔ post-exit follow-up marks the captured batch interrupted with a completion time (0.229827ms)
+  ✔ the blocked mission reaches explicit failed state without a forged result commit (0.109676ms)
+  ✔ only the exact completed reservation is released (0.078123ms)
+  ✔ actual output and registered worktree remain available for inspection (11.050427ms)
+  ✔ terminal rerun is rejected and completed output is not erased (0.304902ms)
+  ✔ subsequent follow-up and another Host recovery preserve the terminal record (0.401481ms)
+✔ startup captures a real live runner and later reconciles its exit without another restart (249.501877ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ recovery does not take ownership of new, replaced or already terminal work
+  ✔ a changed startedAt prevents an old observation from settling a replacement (144.240412ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a changed branch prevents an old observation from settling a replacement (157.050712ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a changed machineId prevents an old observation from settling a replacement (177.25641ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ new running work after startup is never added to orphan tracking (159.470502ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a newer machine owner is not released by an old batch completion (142.511942ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a normally settled record wins over a stale restart observation (134.302404ms)
+✔ recovery does not take ownership of new, replaced or already terminal work (916.271279ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ uncertainty, failed writes and overlapping ticks retain safe recovery ownership
+  ✔ an unknown observation preserves busy running state for a future tick (0.213338ms)
+  ✔ a failed durable write keeps the original reservation and tracked batch (0.087645ms)
+  ✔ overlapping ticks share one pending reconciliation (0.227067ms)
+  ✔ a later successful write closes the batch and preserves earlier summary fields (0.091362ms)
+  ✔ retry and overlap produce only one interruption diagnostic (0.122611ms)
+✔ uncertainty, failed writes and overlapping ticks retain safe recovery ownership (137.577952ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ already delivered results and invalid reservations remain stable across startup
+  ✔ done batch and mission retain the delivered commit (5.382734ms)
+  ✔ done output stays readable from Git without another computation (4.644769ms)
+  ✔ a busy reservation pointing to a missing batch is released at startup (0.32868ms)
+  ✔ a batch assigned to another machine cannot justify this machine reservation (0.239046ms)
+✔ already delivered results and invalid reservations remain stable across startup (298.840533ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ plugin startup waits for recovery before tool admission and disposes its follow-up timer
+  ✔ no product tool is registered while the startup durable write is pending (0.168186ms)
+  ✔ tool admission begins only after stale records settle with the forming reservation retained (0.08564ms)
+✔ plugin startup waits for recovery before tool admission and disposes its follow-up timer (120.709544ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Preparing worktree (detached HEAD 9e4af62)
+▶ completed orphan output remains preserved when the first restart observes no live runner
+  ✔ the stopped batch and mission are explicitly interrupted on initial recovery (0.253518ms)
+  ✔ successful compute output stays readable without claiming a delivered result (4.800887ms)
+  ✔ explicit rerun and repeated recovery cannot repeat the completed compute (0.392653ms)
+✔ completed orphan output remains preserved when the first restart observes no live runner (184.52154ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Preparing worktree (detached HEAD c4c2d68)
+▶ the actual plugin timer eventually closes only the startup runner after natural exit
+  ✔ the five-second interval reaches terminal state and releases the owned machine (0.519276ms)
+  ✔ the interval preserves new agents, compute output and one execution count (0.402172ms)
+✔ the actual plugin timer eventually closes only the startup runner after natural exit (5234.147392ms)
+(node:511327) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (130.911664ms)
+✔ an activation without a child identity fails instead of writing a null record (89.60898ms)
+✔ an evaluation report stays attached to the commit it scored (259.259001ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (369.917463ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (161.664042ms)
+✔ evaluations accumulate and the best result follows the highest score (456.345389ms)
+ℹ tests 262
+ℹ suites 0
+ℹ pass 262
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7826.881261
