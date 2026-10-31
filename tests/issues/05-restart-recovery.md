@@ -8,6 +8,31 @@ pull_request: https://github.com/hapenia/aleph-research/pull/13
 
 # DSH 重启后未完成任务缺少后续处理
 
+
+## 最新架构正式复核（2026-10-31）
+
+当前上游基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。原 [PR #13](https://github.com/hapenia/aleph-research/pull/13) 已关闭且没有合并，上游使用启动时对账替代原方案。后文的旧修复与验收仅作为历史记录；本地“已解决”管理状态保持原值，不表示当前残留已经修复。
+
+当前实现能够在启动时把没有实际计算进程的遗留 `running` 批次明确标为中断，释放机器，并保留完成结果供排查。该行为符合原议题允许明确中断并保留依据的范围，本次不要求所有已经完成的结果自动交付。正常交付完成的批次重启后也保持完成、提交稳定，不重复计算。当前残留集中在合法待运行批次的机器占用，以及首次启动时仍活跃的遗留计算结束后的后续收尾。
+
+### 已证实的残留
+
+尚未启动的 `forming` 批次已经占用本地机器。重启后，Host 保留该批次的可运行状态和任务归属，却将机器改为空闲并清除占用批次。随后另一个已批准任务能够形成新批次，并再次占用同一台机器，原批次仍可运行。该过程说明批次状态与机器占用已经不一致；本轮没有同时启动原批次和新批次，不据此声称已经观察到计算资源超配。
+
+如果批次正在计算时 Host 异常退出，实际 runner 和任务进程能够继续运行。第一次重启会正确保留 `running` 批次和机器占用。但是实际计算随后完成，runner 写出 `done` 结果且相关进程全部退出，等待 6100 毫秒、经过至少一个当前 5000 毫秒进程监控周期后，批次仍为 `running`，机器仍为 `busy`，任务没有结果提交。再次重启才会将该批次标为中断并释放机器。本轮有界观察证实该窗口内没有收尾，结合启动恢复只调用一次的源码路径，不能把当前进程监控视为持续恢复。
+
+预期行为是保留合法待运行批次的机器占用，或显式撤销其可运行资格并准确处理归属；对首次启动保留下来的实际计算，Host 应在计算退出后收敛终态并释放占用。定时处理应只跟踪本次启动遗留的执行，避免把后续新启动的研究代理当作旧代理中断。无法自动交付时可以明确记录中断并保留结果，不要求重建旧版监督与交付架构。
+
+### 当前双阶段核查
+
+[独立自动脚本](dsh/current-restart-reconcile.test.mjs)使用磁盘存储适配器、真实 Git、真实 runner、受控任务以及单独执行进程的 `SIGKILL`，并调用真实产品启动入口。[自动记录](evidence/05-latest-restart-reconcile.json)及[原始输出](evidence/05-latest-restart-reconcile.txt)包含 62 个有效观察点，全部符合缺陷与正常对照预期；Node 包含父容器为 63 项。观察通过表示残留已复现，不表示修复通过验收。
+
+[实际 DSH 启动脚本](dsh/current-restart-reconcile.py)在相同 `DSH_HOME` 中重启真实 Host，使用实际注册工具、持久存储、认证接口、Git、Python runner 和任务进程。[实际记录](evidence/05-latest-real-dsh-restart-reconcile.json)及[原始输出](evidence/05-latest-real-dsh-restart-reconcile.txt)同样包含 62 个有效观察点，全部符合预期。检查覆盖未执行批次、Host 缺席期间完成、首次重启时仍活跃，以及原本已经正常交付的批次。真实 Host 与测试启动的后续 Host 均已停止，没有重复启动任务。脚本没有调用模型、修改产品源码或改变产品期限。
+
+完成但尚未交付的场景中，任务结果被保留，明确的中断原因可见，终态重试被拒绝且没有删除结果；该部分作为正常对照。当前场景只使用准确工作目录下的真实进程，没有注入无法确认归属的进程，不声称覆盖该边界。
+
+首次自动夹具错误打开了工作目录下的空存储，相关[路径错误记录](evidence/05-latest-reconcile-table-path-fixture-attempt.json)与[原始输出](evidence/05-latest-reconcile-table-path-fixture-attempt.txt)单独保留。首次实际夹具把尚未被 Python 父进程回收的已退出僵尸进程当作活跃 Host，相关[进程观察错误记录](evidence/05-latest-real-dsh-reconcile-zombie-fixture-attempt.json)与[原始输出](evidence/05-latest-real-dsh-reconcile-zombie-fixture-attempt.txt)单独保留。最终夹具按实际 `/proc` 状态区分进程退出与回收，正式轮次完整通过；首次尝试均不计作产品失败。来源与准确范围见[当前来源记录](evidence/05-latest-reconcile-source-manifest.json)。
+
 ## 修复与复测（2026-10-31）
 
 修复提交为 `f057a84`，已经推送到派生仓库分支 `fix/aleph-05-project-restart-recovery`，上游 [PR #13](https://github.com/hapenia/aleph-research/pull/13) 尚未合并。按现有规则，已有拉取请求即可设置“已解决”；该状态不表示上游已经发布修复。

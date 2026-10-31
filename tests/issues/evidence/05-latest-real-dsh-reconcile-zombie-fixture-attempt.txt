@@ -1,0 +1,25 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-glblw4eg", "url": "http://127.0.0.1:58327"}
+✖ B current restart reconciliation covers forming, completed, active and stable work (24330.83834ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24387.255744
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-restart-reconcile.test.mjs:38:2
+✖ B current restart reconciliation covers forming, completed, active and stable work (24330.83834ms)
+  Error: fixture timeout old actual Host exits
+      at until (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:15:107)
+      at async restart (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:29:107)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:69:4)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/current-restart-reconcile.py", line 63, in <module>
+    raise RuntimeError('actual process observation failed; inspect saved evidence')
+RuntimeError: actual process observation failed; inspect saved evidence

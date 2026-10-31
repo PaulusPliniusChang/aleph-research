@@ -1,0 +1,85 @@
+(node:448058) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ B current restart reconciliation covers forming, completed, active and stable work
+  ✔ forming: same project identity persists (0.972203ms)
+  ✔ forming: same batch identity persists (0.263538ms)
+  ✔ forming: same mission identity persists (0.237561ms)
+  ✔ forming: pre-batch source commit remains reachable (4.863329ms)
+  ✔ forming: unexecuted batch remains forming (0.309808ms)
+  ✔ forming: unexecuted mission remains batched (0.208234ms)
+  ✔ forming: startup launches no task (0.253051ms)
+  ✔ forming: startup does not move mission source (4.390961ms)
+  ✖ forming: forming reservation unexpectedly becomes idle (1.245714ms)
+  ✖ forming: forming reservation unexpectedly loses batch owner (0.426771ms)
+✖ B current restart reconciliation covers forming, completed, active and stable work (200.794065ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 8
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 333.509735
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-restart-reconcile.test.mjs:39:39
+✖ forming: forming reservation unexpectedly becomes idle (1.245714ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'busy' !== 'idle'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:80:81
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:39:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:39:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:80:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'busy',
+    expected: 'idle',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-restart-reconcile.test.mjs:39:39
+✖ forming: forming reservation unexpectedly loses batch owner (0.426771ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'b-ace33a68'
+  - null
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:81:86
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:39:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:39:39)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:81:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'b-ace33a68',
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-restart-reconcile.test.mjs:38:2
+✖ B current restart reconciliation covers forming, completed, active and stable work (200.794065ms)
+  Error: machine local is busy
+      at ProjectService.formBatch (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/index-v2.js:1370:42)
+      at Object.aleph_form_batch (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:46:376)
+      at invoke (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:46:510)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-restart-reconcile.test.mjs:82:52)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

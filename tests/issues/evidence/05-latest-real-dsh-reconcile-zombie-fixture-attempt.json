@@ -1,0 +1,55 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-glblw4eg",
+    "workspace": "/tmp/aleph-project-dsh-glblw4eg/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "source_commit": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "dirty": ""
+  },
+  "url": "http://127.0.0.1:58327",
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-restart-reconcile.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/05-latest-real-dsh-restart-reconcile.json"
+  ],
+  "boundary": "Real DSH sessions, registered init/evaluation tools, persistent storage, Git linked worktrees, actual Python scoring and authenticated evaluation HTTP. No model calls, product edits or deadline adaptation.",
+  "events": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 449434,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "probe": {
+    "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "actual": true,
+    "checks": [],
+    "scenarios": [
+      {
+        "mode": "forming",
+        "root": "/tmp/aleph-project-dsh-glblw4eg/workspace/forming",
+        "project": "p-4c4a6775",
+        "batch": "b-11f15440",
+        "mission": "m-c35ed40d",
+        "tip": "b1c95250e3cf71dde432f2a2b227b2258debe0b9"
+      }
+    ],
+    "hosts": [],
+    "boundary": "Current startup reconciliation with real Git, batch runner, gated shell task and real SIGKILL of only the owning Host. Automatic uses on-disk storage adapter and real product startup apply. Actual uses real DSH storage/tools and restarts with same DSH_HOME. No product source or deadline changes. A bounded six-second post-exit observation covers at least one configured five-second process-monitor interval; it does not claim an unlimited wait."
+  },
+  "probe_exit": 1
+}
