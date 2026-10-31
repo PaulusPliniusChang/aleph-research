@@ -9,7 +9,7 @@
   "action.back": "返回对话",
   "state.loading": "正在加载战役快照…",
   "state.empty.title": "暂无战役快照",
-  "state.empty.detail": "aleph 运行时尚未为绑定的工作区写入 .aleph/dashboard.json。",
+  "state.empty.detail": "Host 服务尚无战役；在 Leader 模式使用 aleph_start_campaign 创建。",
   "state.error.title": "无法读取战役快照",
   "state.error.detail": "控制台每 2 秒自动重试。",
   "state.stale": "正在显示最后一次快照；最近一次轮询失败。",

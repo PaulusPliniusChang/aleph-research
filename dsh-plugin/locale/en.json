@@ -9,7 +9,7 @@
   "action.back": "Back to conversation",
   "state.loading": "Loading campaign snapshot…",
   "state.empty.title": "No campaign snapshot yet",
-  "state.empty.detail": "The aleph runtime has not written .aleph/dashboard.json for the bound workspace.",
+  "state.empty.detail": "The Host service has no campaign yet. Start one from Leader mode with aleph_start_campaign.",
   "state.error.title": "Cannot read the campaign snapshot",
   "state.error.detail": "The console keeps retrying every 2 seconds.",
   "state.stale": "Showing the last snapshot; the latest poll failed.",

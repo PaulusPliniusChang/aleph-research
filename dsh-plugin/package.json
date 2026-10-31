@@ -1,9 +1,16 @@
 {
   "name": "@local/dsh-aleph-research",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "AlephResearch DSH bundle: the aleph agent presets and a read-only research console over the aleph runtime state.",
+  "description": "DSH-native AlephResearch Host plugin: storageDomain campaign state, Leader tools, researcher subagents and a read-only console.",
   "type": "module",
+  "dependencies": {
+    "zod": "4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-storage-domain": "*",
+    "@deepseek-ai/dsh-tools": "*"
+  },
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",

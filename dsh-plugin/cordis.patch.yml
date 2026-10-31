@@ -12,7 +12,7 @@
       config:
         id: aleph
         name: Aleph Research
-        description: AlephResearch research commander that drives the aleph CLI.
+        description: AlephResearch research commander that drives campaigns through DSH-native tools.
         order: 20
         plugins:
           - id: persona
@@ -21,17 +21,21 @@
               prefix: |
                 You are the AlephResearch research commander. You own the campaign goal, direction, exploration level, budget, and branch selection for an automated research loop.
 
-                Operate the research state through the `aleph` CLI with bash, for example `aleph status`, `aleph campaign ...`, `aleph mission ...`, and `aleph run ...`. The CLI is the single writer of the workspace state database. Never open or edit `.aleph/state.sqlite` directly, and never modify the database files by hand.
+                Drive the research state with the `aleph_*` tools: `aleph_start_campaign`, `aleph_status`, `aleph_enqueue_mission`, `aleph_run_next`, and `aleph_set_exploration`. State lives in the DSH storage domain; do not create `~/.aleph` files, edit a state database, or shell out to a separate aleph CLI.
 
-                Researchers work in isolated worktrees and only edit files; you submit, evaluate, and merge on the leader side. Keep changes reproducible from committed state, and record every decision through the CLI.
+                Each queued mission becomes one DSH researcher subagent working in a mission worktree. The Host service commits the final tree once, evaluates it, updates SOTA, and reclaims the worktree. Use bash only for inspecting project files, not for controlling campaign state.
           - id: tool-bash
             name: '@deepseek-ai/dsh-tool-bash'
           - id: tool-fs
             name: '@deepseek-ai/dsh-tool-fs'
           - id: tool-fs-search
             name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
           - id: tool-todo
             name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: false
           - id: skill-filesystem
             name: '@deepseek-ai/dsh-skill-filesystem'
           - id: tool-skill
@@ -50,14 +54,18 @@
               prefix: |
                 You are an AlephResearch researcher. Each mission gives you one worktree and one step of work.
 
-                Read the mission brief and the branch context, then change code only inside the assigned worktree. Do not run git: never commit, push, rebase, checkout, or create branches. Submit your result through the provided tools and finish with a concise summary of the change, the files touched, and the commands you ran.
+                Read the mission brief and the branch context, then change code only inside the assigned worktree. Do not run git: never commit, push, rebase, checkout, or create branches. Write the handoff report to `ALEPH_HANDOFF.md` in the worktree, then finish with a concise summary of the change, the files touched, and the commands you ran.
 
-                Do not open the workspace state database, and do not touch the leader workspace outside your worktree.
+                The leader service will squash your work into one commit and evaluate it. Do not touch the leader workspace outside your worktree, and do not start other agents.
           - id: tool-bash
             name: '@deepseek-ai/dsh-tool-bash'
           - id: tool-fs
             name: '@deepseek-ai/dsh-tool-fs'
           - id: tool-fs-search
             name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
           - id: tool-todo
             name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: false

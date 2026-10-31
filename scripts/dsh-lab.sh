@@ -8,13 +8,11 @@ port="${2:-39871}"
 
 export DSH_HOME="$lab"
 export HOME="$lab/home"
-export ALEPH_HOME="$HOME/.aleph"
-mkdir -p "$HOME"
+mkdir -p "$HOME" "$lab/leader"
 
 dsh --profile aleph-lab --from-default-profile web --help >/dev/null
+(cd "$repo/dsh-plugin" && npm install --no-save --silent)
 dsh plugin --profile aleph-lab add "$repo/dsh-plugin" >/dev/null
-"$repo/aleph" init "$lab/leader" --title "Lab campaign" --json >/dev/null
-"$repo/aleph" run --workspace "$lab/leader" --max 3 --json >/dev/null
 
 echo "isolated DSH_HOME: $DSH_HOME"
 echo "leader workspace:  $lab/leader"

@@ -1,121 +1,100 @@
 # AlephResearch
 
-An automated research loop for DeepSeek Harness: a Leader plans, ephemeral
-researchers edit code in isolated git worktrees, and a leader-side evaluator
-scores submissions. SQLite holds campaign state; git holds code and branches.
+AlephResearch is a DSH-native research plugin. A Leader session runs campaigns,
+dispatches researchers as DSH subagents, evaluates their single commit, and
+promotes the best branch. Campaign state lives in the DSH storage domain, not in
+a separate `~/.aleph` directory or an external daemon.
 
-## What is in this repository
+## What is in the bundle
 
-- `runtime/` — Python runtime and `aleph` CLI (first runnable version).
-- `dsh-plugin/` — DSH plugin: `Aleph Research` mode, console panel and a
-  read-only snapshot API.
-- `docs/` — requirements, topology and strategy design notes.
-- `aleph` — launcher for the runtime from this checkout.
+- Host service: campaign queue, strategy sampling, git worktrees, single-commit
+  handoff, evaluation, SOTA promotion and worktree reclamation.
+- Leader tools: `aleph_start_campaign`, `aleph_status`,
+  `aleph_enqueue_mission`, `aleph_run_next`, `aleph_set_exploration`.
+- Modes: `Aleph Research` for the Leader and `Aleph Researcher` for one mission.
+- Console: a read-only `Aleph` sidebar panel reading the Host API.
+- Persistence: the `aleph_research` domain opened through `ctx.storageDomain`.
 
-## Quick start (toy campaign)
+The plugin writes no `~/.aleph` pointer, dashboard file or SQLite sidecar.
+Project worktrees and run artifacts stay under the selected workspace at
+`.aleph/`; campaign state stays in DSH storage.
 
-```bash
-./aleph init /tmp/aleph-demo --json
-./aleph status --workspace /tmp/aleph-demo
-./aleph run --workspace /tmp/aleph-demo --max 3
-./aleph status --workspace /tmp/aleph-demo
-```
-
-`init` creates a leader workspace with:
-
-- `eval/run_eval.py` — toy evaluator.
-- `testsets/hidden.json` — hidden target value (not exposed to researchers).
-- `research/` — nested git repository with `initialize`, `sota/main` and demo
-  branches `exp/a`, `exp/b`, `exp/c`.
-- `.aleph/state.sqlite` — campaign state (gitignored).
-- `.aleph/dashboard.json` — snapshot consumed by the DSH console.
-
-`run` claims queued missions, creates a worktree for each candidate branch,
-commits any researcher changes, evaluates the submission in the leader
-workspace, and promotes the best score to `sota/main`.
-
-## Commands
+## Install
 
 ```bash
-./aleph init PATH [--title T] [--no-demo] [--force]
-./aleph mission add --branch exp/a [--strategy auto|L0|L1|L2|L3] [--description D]
-./aleph mission list
-./aleph tick
-./aleph run --max N
-./aleph status [--json]
+cd /path/to/aleph-research
+npm install --prefix dsh-plugin
+dsh plugin --profile web add "$PWD/dsh-plugin"
 ```
 
-Mission commands run inside the mission worktree; evaluators run in the
-leader workspace with `ALEPH_SOLUTION_DIR`, `ALEPH_TESTSET` and
-`ALEPH_SUBMISSION`.
+Reload the Web UI, open a workspace, and choose `Aleph Research` in the mode
+picker. The `Aleph` entry in the sidebar opens the console. Installation in the
+current profile requires the normal plugin approval.
 
-## Tests
+For an isolated test profile:
 
 ```bash
-PYTHONPATH=runtime python3 -m unittest discover -s runtime/tests -v
+./scripts/dsh-lab.sh
 ```
 
-## Researcher lifecycle
+The script creates a private `DSH_HOME`, installs the bundle and prints the Web
+Host command. It does not touch the current DSH profile.
 
-One researcher mission owns one worktree and one commit. The runtime passes
-`ALEPH_HANDOFF_PATH` and `ALEPH_RESEARCHER_HOME`, requires a non-empty handoff
-report for researcher missions, and only after the researcher command exits
-successfully collapses every researcher commit into a single commit whose
-parent is the mission base. The handoff is embedded in the commit message with `Aleph-Mission`, `Aleph-Campaign`, `Aleph-Strategy` and
-`Aleph-Base-Commit` trailers. The worktree and per-mission researcher home are
-removed afterwards; only the commit, handoff log and evaluation remain.
+## Start a campaign
 
-## Observability
+1. Open or create a DSH workspace. Empty directories are allowed.
+2. Select `Aleph Research` for the session.
+3. Ask the Leader to call `aleph_start_campaign` with a title, an evaluator
+   command and optional visible-data path. If the workspace has no `research/`
+   repository, the tool creates an `initialize` branch and `sota/main`.
+4. Call `aleph_enqueue_mission`, then `aleph_run_next`.
 
-The runtime exports OpenTelemetry traces and metrics over OTLP HTTP/protobuf,
-with a no-op fallback when the SDK or endpoint is absent. Install
-`runtime/requirements-otel.txt`, set `OTEL_EXPORTER_OTLP_ENDPOINT`, and use
-`aleph telemetry` to inspect the configuration. Spans cover CLI invocations,
-missions, worktrees, LFS CoW, researcher commands, commits, evaluation and SOTA
-promotion; metrics cover mission counts and durations, eval scores, branch
-scores, strategy samples, budget spend and disk usage. Trace context is passed
-to researcher and evaluator subprocesses through `TRACEPARENT`.
+`aleph_start_campaign` keeps campaign state in DSH storage and creates
+`research/` and `.aleph/` inside the workspace. The evaluator command runs in
+the workspace and must print one JSON line containing a numeric `score`.
 
-See `docs/observability.md` for signal names, environment variables and the
-future expansion points.
+The researcher subagent edits only the mission worktree. It writes
+`ALEPH_HANDOFF.md`; the Host service then:
 
-## Git LFS
+- squashes every researcher commit into one commit whose parent is the mission
+  base;
+- embeds the handoff in the commit message with `Aleph-Mission`,
+  `Aleph-Campaign`, `Aleph-Strategy` and `Aleph-Base-Commit` trailers;
+- runs the evaluator, updates SOTA when the score improves, and removes the
+  worktree and per-mission directory.
 
-Research repositories and the leader workspace default to Git LFS for large
-binary artifacts (`.cbm`, `.pt`, `.safetensors`, `.npz`, `.parquet`, archives
-and similar). `aleph init` and local case setups run `git lfs install --local`
-and commit a `.gitattributes`; small text data and hidden testsets stay in
-normal Git objects. If `git-lfs` is not installed, setup falls back to normal
-Git objects.
+## Console
 
-Model artifacts are committed as LFS pointers and restored on checkout. Mission
-and evaluation worktrees then replace the checked-out copy with a reflink to
-the local LFS object (`cp --reflink=auto`), so the worktree shares the object's
-extents instead of duplicating them. Filesystems without reflink fall back to a
-normal copy.
+The `Aleph` sidebar panel reads `/api/aleph/snapshot` and shows the latest
+campaign, missions, branches and counts. The panel is read-only; all control is
+through Leader tools.
 
-## Isolated DSH experiment
+![AlephResearch console](docs/assets/aleph-console.png)
 
-`scripts/dsh-lab.sh` builds a private DSH home (`/tmp/aleph-dsh-lab` by default),
-creates a web profile, installs the plugin bundle there, initializes a toy
-campaign and prints the command that starts the Web Host. The current DSH
-profile is untouched.
+## Evaluation contract
 
-![Aleph Research console](docs/assets/aleph-console.png)
+The evaluator receives:
 
-## DSH plugin
+| Variable | Value |
+| --- | --- |
+| `ALEPH_WORKSPACE` | Leader workspace path |
+| `ALEPH_SOLUTION_DIR` | Mission worktree path |
+| `ALEPH_SUBMISSION` | Committed submission SHA |
+| `ALEPH_VISIBLE_DATA` | Optional visible-data path configured on the campaign |
 
-The plugin directory is installable with the DSH plugin manager
-(`install_bundle` with the absolute `dsh-plugin` path). It registers the
-`aleph` and `aleph-researcher` modes, a full-page console and
-`/api/aleph/snapshot`; the console reads
-`<workspace>/.aleph/dashboard.json` through `~/.aleph/current_workspace`.
-Installation and live UI verification happen in DSH; see
-`dsh-plugin/README.md`.
+The command must emit a JSON object with a numeric `score` on its last JSON
+line, for example:
 
-## Status and limits
+```bash
+python3 eval/run_eval.py
+# {"score": 72.9076, "rows": 1000}
+```
 
-This is a first vertical slice: the runtime is a CLI loop, the console is
-read-only, and the toy evaluator is deliberately small. The design notes in
-`docs/` describe the intended evolution (batch scheduling, strategy sampling
-details, infrastructure optimization, researcher subagents).
+## Status
+
+The Host plugin, two presets, tools, storage-domain state, console and one
+end-to-end researcher dispatch have been exercised in an isolated DSH. See
+`docs/STATUS.md` and `docs/architecture.md`.
+
+The old Python control plane has been removed. The browser UI, storage schema
+and researcher tools are the only supported control surface.

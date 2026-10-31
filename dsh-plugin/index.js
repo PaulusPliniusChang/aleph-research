@@ -1,129 +1,662 @@
 /**
- * Host half of the AlephResearch plugin bundle.
+ * AlephResearch Host plugin (DSH-native control plane).
  *
- * Exposes two read-only GET routes over the Web host server:
- *   - /api/aleph/health   liveness probe for the console
- *   - /api/aleph/snapshot the campaign snapshot written by the `aleph` runtime
- *
- * The snapshot route reads the workspace pointer at ~/.aleph/current_workspace
- * and then returns <workspace>/.aleph/dashboard.json verbatim. No database is
- * opened, no Remote method is registered, and nothing is written to disk.
- *
- * The routes use the web server's node-style `handler` form. The Fetch
- * `resource` form is advertised by the server package, but in this runtime it
- * returns 400 before the handler runs; the node form is stable here.
+ * Campaign, mission and branch state lives in the DSH storage domain
+ * `aleph-research`; no `~/.aleph` pointer, SQLite sidecar or external daemon is
+ * used. Leader tools create campaigns and dispatch one researcher per mission
+ * through `ctx.subagents.startActivation` with the `aleph-researcher` preset.
+ * Mission worktrees and logs stay inside the selected DSH workspace.
  */
-import { readFile } from 'node:fs/promises';
-import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { execFile } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
+import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+import { promisify } from 'node:util';
 
-const PLUGIN_VERSION = '0.1.0';
-const NO_STORE = { 'cache-control': 'no-store' };
+import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain';
+import { defineTool } from '@deepseek-ai/dsh-tools';
+import { z } from 'zod';
 
-/** Send a JSON response through the node HTTP response. */
-function sendJson(res, status, body) {
-  const text = JSON.stringify(body);
-  res.writeHead(status, {
-    'content-type': 'application/json; charset=utf-8',
-    'content-length': Buffer.byteLength(text),
-    ...NO_STORE,
+const execFileAsync = promisify(execFile);
+const DOMAIN_NAME = 'aleph_research';
+const HANDOFF_FILE = 'ALEPH_HANDOFF.md';
+
+const missionSchema = z.object({
+  id: z.string(),
+  description: z.string(),
+  status: z.enum(['queued', 'running', 'done', 'failed']),
+  strategy: z.string(),
+  baseBranch: z.string(),
+  branch: z.string(),
+  baseCommit: z.string().nullable(),
+  commit: z.string().nullable(),
+  score: z.number().nullable(),
+  error: z.string().nullable(),
+  childId: z.string().nullable(),
+  createdAt: z.string(),
+  finishedAt: z.string().nullable(),
+  reclaimed: z.boolean(),
+});
+
+const campaignSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  workspace: z.string(),
+  status: z.enum(['running', 'paused', 'draft']),
+  exploration: z.number(),
+  budget: z.number(),
+  spent: z.number(),
+  sotaBranch: z.string().nullable(),
+  sotaScore: z.number(),
+  evalCommand: z.string(),
+  researchRoot: z.string(),
+  visibleData: z.string().nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  missions: z.array(missionSchema),
+});
+
+const campaignDomain = defineDomain({
+  name: DOMAIN_NAME,
+  version: 1,
+  tables: { campaigns: domainTable(campaignSchema) },
+});
+
+const STRATEGIES = ['L0', 'L1', 'L2', 'L3'];
+const PRIORS = { L0: 0.9, L1: 0.85, L2: 0.75, L3: 0.6 };
+const FLOOR = 0.03;
+
+function now() {
+  return new Date().toISOString();
+}
+
+function newId(prefix) {
+  return `${prefix}-${randomUUID().slice(0, 8)}`;
+}
+
+function sampleStrategy(exploration, seed = Date.now()) {
+  const value = Math.min(1, Math.max(0, exploration));
+  const tau = 0.15 + 0.45 * value;
+  const exps = {};
+  let total = 0;
+  for (const name of STRATEGIES) {
+    exps[name] = Math.exp(PRIORS[name] / tau);
+    total += exps[name];
+  }
+  // Deterministic per-mission randomness is enough for the first Host slice.
+  let roll = (seed % 10000) / 10000;
+  let chosen = STRATEGIES[STRATEGIES.length - 1];
+  for (const name of STRATEGIES) {
+    const probability = Math.max(FLOOR, exps[name] / total);
+    roll -= probability;
+    if (roll <= 0) {
+      chosen = name;
+      break;
+    }
+  }
+  return chosen;
+}
+
+function baseBranch(campaign) {
+  return campaign.sotaBranch || 'initialize';
+}
+
+function countStatuses(missions) {
+  const counts = { queued: 0, running: 0, done: 0, failed: 0 };
+  for (const mission of missions) counts[mission.status] = (counts[mission.status] ?? 0) + 1;
+  return counts;
+}
+
+function snapshot(campaign) {
+  const branches = new Map();
+  for (const mission of campaign.missions) {
+    if (!mission.branch || !mission.commit) continue;
+    branches.set(mission.branch, {
+      name: mission.branch,
+      score: mission.score,
+      parent: mission.baseBranch,
+      mission: mission.id,
+      is_sota: false,
+    });
+  }
+  if (campaign.sotaBranch) {
+    branches.set(campaign.sotaBranch, {
+      name: campaign.sotaBranch,
+      score: campaign.sotaScore,
+      parent: null,
+      mission: null,
+      is_sota: true,
+    });
+  }
+  return {
+    schema: 1,
+    generated_at: now(),
+    workspace: campaign.workspace,
+    campaign: {
+      id: campaign.id,
+      title: campaign.title,
+      status: campaign.status,
+      exploration: campaign.exploration,
+      sota_branch: campaign.sotaBranch,
+      sota_score: campaign.sotaScore,
+      budget: campaign.budget,
+      spent: campaign.spent,
+    },
+    missions: campaign.missions.map((mission) => ({
+      id: mission.id,
+      status: mission.status,
+      strategy: mission.strategy,
+      branch: mission.branch,
+      score: mission.score,
+      description: mission.description,
+      created_at: mission.createdAt,
+      finished_at: mission.finishedAt,
+    })),
+    branches: [...branches.values()],
+    counts: countStatuses(campaign.missions),
+  };
+}
+
+function parseScore(stdout) {
+  const lines = String(stdout ?? '').split(/\r?\n/).reverse();
+  for (const line of lines) {
+    const text = line.trim();
+    if (!text.startsWith('{')) continue;
+    try {
+      const value = JSON.parse(text);
+      if (value && typeof value.score === 'number') return value;
+    } catch {
+      // Keep scanning; evaluators may print other JSON lines.
+    }
+  }
+  return null;
+}
+
+async function run(command, args, options = {}) {
+  const result = await execFileAsync(command, args, {
+    timeout: options.timeout ?? 600_000,
+    maxBuffer: 32 * 1024 * 1024,
+    cwd: options.cwd,
+    env: { ...process.env, ...(options.env ?? {}) },
   });
-  res.end(text);
+  return result;
 }
 
-/** A JSON response carrying a stable machine-readable error code. */
-function failure(res, code, message, status = 200) {
-  const error = { code };
-  if (typeof message === 'string' && message !== '') error.message = message;
-  sendJson(res, status, { ok: false, error });
+async function git(repo, args, timeout = 120_000) {
+  return run('git', ['-C', repo, ...args], { timeout });
 }
 
-/** Describe an unknown thrown value without leaking a stack trace. */
-function describe(error) {
-  if (error instanceof Error) return error.message;
-  return String(error);
-}
-
-/**
- * Read the campaign snapshot:
- *   ~/.aleph/current_workspace -> <workspace>/.aleph/dashboard.json
- */
-async function readSnapshot() {
-  const pointerPath = join(homedir(), '.aleph', 'current_workspace');
-
-  let workspace;
+async function pathExists(path) {
   try {
-    workspace = (await readFile(pointerPath, 'utf8')).trim();
-  } catch (error) {
-    return { code: 'aleph/no-workspace', message: `cannot read ${pointerPath}: ${describe(error)}` };
+    await stat(path);
+    return true;
+  } catch {
+    return false;
   }
-  if (workspace === '') {
-    return { code: 'aleph/no-workspace', message: `${pointerPath} is empty` };
-  }
-
-  const dashboardPath = join(workspace, '.aleph', 'dashboard.json');
-  let text;
-  try {
-    text = await readFile(dashboardPath, 'utf8');
-  } catch (error) {
-    return { code: 'aleph/read-failed', message: `cannot read ${dashboardPath}: ${describe(error)}` };
-  }
-  try {
-    JSON.parse(text);
-  } catch (error) {
-    return { code: 'aleph/read-failed', message: `invalid JSON in ${dashboardPath}: ${describe(error)}` };
-  }
-  return { text };
 }
 
-/** Host plugin export: registers both routes and releases them on dispose. */
-export function apply(ctx) {
-  ctx.effect(() => {
-    const disposeHealth = ctx.webServer.register({
-      kind: 'exact',
-      path: '/api/aleph/health',
-      handler(req, res) {
-        if (req.method !== 'GET' && req.method !== 'HEAD') {
-          res.writeHead(405, { allow: 'GET, HEAD' });
-          res.end();
-          return;
-        }
-        sendJson(res, 200, { ok: true, version: PLUGIN_VERSION });
-      },
-    });
+/** Host-side service shared by tools and HTTP routes. */
+class AlephService {
+  constructor(ctx, domain, deps) {
+    this.ctx = ctx;
+    this.domain = domain;
+    this.table = domain.table('campaigns');
+    this.sessions = deps.sessions;
+    this.subagents = deps.subagents;
+    this.agentPresets = deps.agentPresets;
+    this.writeChain = Promise.resolve();
+    this.activations = new Set();
+  }
 
-    const disposeSnapshot = ctx.webServer.register({
-      kind: 'exact',
-      path: '/api/aleph/snapshot',
-      async handler(req, res) {
-        if (req.method !== 'GET' && req.method !== 'HEAD') {
-          res.writeHead(405, { allow: 'GET, HEAD' });
-          res.end();
-          return;
-        }
-        try {
-          const result = await readSnapshot();
-          if ('text' in result) {
-            res.writeHead(200, {
-              'content-type': 'application/json; charset=utf-8',
-              'content-length': Buffer.byteLength(result.text),
-              ...NO_STORE,
-            });
-            res.end(req.method === 'HEAD' ? undefined : result.text);
-            return;
-          }
-          failure(res, result.code, result.message);
-        } catch (error) {
-          failure(res, 'aleph/read-failed', describe(error), 500);
-        }
-      },
-    });
+  list() {
+    return [...this.table.entries()].map(([, campaign]) => campaign);
+  }
 
-    return () => {
-      disposeSnapshot();
-      disposeHealth();
+  get(id) {
+    return this.table.get(id);
+  }
+
+  async mutate(campaignId, update) {
+    const operation = async () => {
+      const current = this.table.get(campaignId);
+      if (!current) throw new Error(`campaign not found: ${campaignId}`);
+      const next = { ...update(current), updatedAt: now() };
+      await this.table.put(campaignId, next);
+      return next;
     };
-  }, 'aleph-research: read-only snapshot routes');
+    const queued = this.writeChain.then(operation, operation);
+    this.writeChain = queued.catch(() => undefined);
+    return queued;
+  }
+
+  sessionFor(agent) {
+    return this.sessions?.get(agent?.id);
+  }
+
+  workspaceFor(agent, explicit) {
+    if (typeof explicit === 'string' && explicit.trim() !== '') return resolve(explicit.trim());
+    const session = this.sessionFor(agent);
+    const cwd = session?.header?.cwd;
+    if (typeof cwd === 'string' && cwd !== '') return resolve(cwd);
+    throw new Error('workspace is required when the calling session has no cwd');
+  }
+
+  async create({ workspace, title, evalCommand = 'python3 eval/run_eval.py', visibleData = null }) {
+    const target = resolve(workspace);
+    if (!(await pathExists(target))) throw new Error(`workspace does not exist: ${target}`);
+    const campaignId = newId('c');
+    const researchRoot = join(target, 'research');
+    if (!(await pathExists(join(researchRoot, '.git')))) {
+      await mkdir(researchRoot, { recursive: true });
+      await git(researchRoot, ['init', '-b', 'initialize']);
+      await writeFile(join(researchRoot, 'README.md'), '# Research repository\n', 'utf8');
+      await git(researchRoot, ['add', '-A']);
+      await git(researchRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', 'initialize contract']);
+      await git(researchRoot, ['branch', 'sota/main', 'initialize']);
+    }
+    await mkdir(join(target, '.aleph'), { recursive: true });
+    const stamp = now();
+    const campaign = {
+      id: campaignId,
+      title: typeof title === 'string' && title.trim() ? title.trim() : target.split('/').pop() || 'Aleph campaign',
+      workspace: target,
+      status: 'running',
+      exploration: 0.7,
+      budget: 100,
+      spent: 0,
+      sotaBranch: null,
+      sotaScore: -999999,
+      evalCommand,
+      researchRoot,
+      visibleData: typeof visibleData === 'string' && visibleData ? resolve(visibleData) : null,
+      createdAt: stamp,
+      updatedAt: stamp,
+      missions: [],
+    };
+    await this.table.put(campaignId, campaign);
+    return campaign;
+  }
+
+  async enqueue({ campaignId, description = '', strategy = 'auto' }) {
+    return this.mutate(campaignId, (campaign) => {
+      const chosen = strategy !== 'auto' && STRATEGIES.includes(strategy)
+        ? strategy
+        : sampleStrategy(campaign.exploration, Date.now() + campaign.missions.length);
+      const branch = baseBranch(campaign);
+      const mission = {
+        id: newId('m'),
+        description: description || 'researcher mission',
+        status: 'queued',
+        strategy: chosen,
+        baseBranch: branch,
+        branch,
+        baseCommit: null,
+        commit: null,
+        score: null,
+        error: null,
+        childId: null,
+        createdAt: now(),
+        finishedAt: null,
+        reclaimed: false,
+      };
+      return { ...campaign, missions: [...campaign.missions, mission] };
+    });
+  }
+
+  async setExploration({ campaignId, exploration }) {
+    if (!(exploration >= 0 && exploration <= 1)) throw new Error('exploration must be between 0 and 1');
+    return this.mutate(campaignId, (campaign) => ({ ...campaign, exploration }));
+  }
+
+  missionUpdate(campaign, missionId, updater) {
+    return {
+      ...campaign,
+      missions: campaign.missions.map((mission) => (mission.id === missionId ? updater(mission) : mission)),
+    };
+  }
+
+  async runNext({ campaignId, agent }) {
+    if (!agent) throw new Error('a calling Agent is required to dispatch a researcher');
+    if (!this.subagents) throw new Error('subagent service is unavailable');
+    const campaign = this.table.get(campaignId);
+    if (!campaign) throw new Error(`campaign not found: ${campaignId}`);
+    const mission = campaign.missions.find((item) => item.status === 'queued');
+    if (!mission) throw new Error('no queued mission');
+
+    const worktreeRoot = join(campaign.workspace, '.aleph', 'worktrees', campaign.id);
+    const worktree = join(worktreeRoot, mission.id);
+    await mkdir(worktreeRoot, { recursive: true });
+    const branch = mission.branch;
+    const base = baseBranch(campaign);
+    await git(campaign.researchRoot, ['worktree', 'add', '--detach', worktree, branch]);
+    const baseCommit = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
+
+    await this.mutate(campaignId, (current) => this.missionUpdate(current, mission.id, (item) => ({
+      ...item,
+      status: 'running',
+      baseBranch: base,
+      baseCommit,
+    })));
+
+    const handoffPath = join(worktree, HANDOFF_FILE);
+    const prompt = [
+      'You are an AlephResearch researcher. Work only inside the current git worktree.',
+      `Mission: ${mission.id}. Description: ${mission.description}.`,
+      `The leader workspace is ${campaign.workspace}. Visible training data: ${campaign.visibleData ?? '(not configured)'}.`,
+      'Edit code and run bounded experiments. Do not run git commit, git push, checkout, rebase, or create branches.',
+      `Write a handoff report to ${handoffPath}: approach, files changed, validation signal, and next step.`,
+      'Finish with a short summary. The leader commits, evaluates, and reclaims the worktree afterwards.',
+    ].join('\n');
+
+    const abort = new AbortController();
+    this.activations.add(abort);
+    let activation;
+    try {
+      activation = await this.subagents.startActivation({
+        provider: 'spawn',
+        label: `aleph ${campaign.id} ${mission.id}`,
+        delivery: 'caller',
+        signal: abort.signal,
+        request: {
+          parent: agent,
+          cwd: worktree,
+          agentPreset: 'aleph-researcher',
+          prompt: [{ type: 'text', text: prompt }],
+        },
+      });
+    } catch (error) {
+      await this.failMission(campaignId, mission.id, worktree, error instanceof Error ? error.message : String(error));
+      throw error;
+    }
+
+    await this.mutate(campaignId, (current) => this.missionUpdate(current, mission.id, (item) => ({
+      ...item,
+      childId: activation.childId ?? null,
+    })));
+
+    activation.result.then(
+      (result) => this.completeMission(campaignId, mission.id, worktree, baseCommit, result),
+      (error) => this.failMission(campaignId, mission.id, worktree, error instanceof Error ? error.message : String(error)),
+    ).finally(() => this.activations.delete(abort));
+    return { campaignId, missionId: mission.id, childId: activation.childId ?? null, worktree };
+  }
+
+  async completeMission(campaignId, missionId, worktree, baseCommit, result) {
+    let campaign = this.table.get(campaignId);
+    try {
+      const handoff = await readFile(join(worktree, HANDOFF_FILE), 'utf8').catch(() => '');
+      const fallback = (result?.output ?? [])
+        .filter((block) => block?.type === 'text' && typeof block.text === 'string')
+        .map((block) => block.text)
+        .join('\n')
+        .trim();
+      const report = (handoff || fallback).trim();
+      if (!report) throw new Error('researcher handoff report missing');
+      const mission = campaign.missions.find((item) => item.id === missionId);
+      if (!mission) throw new Error(`mission not found: ${missionId}`);
+
+      await git(worktree, ['add', '-A']);
+      await git(worktree, ['reset', '--soft', baseCommit]);
+      const message = `${mission.description}\n\nHandoff:\n${report}\n\nAleph-Mission: ${mission.id}\nAleph-Campaign: ${campaign.id}\nAleph-Strategy: ${mission.strategy}\nAleph-Base-Commit: ${baseCommit}`;
+      await git(worktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m', message]);
+      const commit = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
+      const evaluation = await this.evaluate(campaign, worktree, commit);
+      const score = Number(evaluation.score);
+      if (!Number.isFinite(score)) throw new Error('evaluator did not return a numeric score');
+      const finishedAt = now();
+      const branch = `exp/${campaign.id}/${mission.id}`;
+      await git(campaign.researchRoot, ['branch', '-f', branch, commit]);
+      const promoted = score > campaign.sotaScore;
+      if (promoted) {
+        await git(campaign.researchRoot, ['branch', '-f', 'sota/main', commit]);
+      }
+      campaign = await this.mutate(campaignId, (current) => {
+        let next = this.missionUpdate(current, missionId, (item) => ({
+          ...item, status: 'done', score, commit, branch, finishedAt, error: null, reclaimed: true,
+        }));
+        if (promoted) {
+          next = { ...next, sotaBranch: 'sota/main', sotaScore: score };
+        }
+        return { ...next, spent: next.spent + 1 };
+      });
+    } catch (error) {
+      await this.failMission(campaignId, missionId, worktree, error instanceof Error ? error.message : String(error));
+      return;
+    }
+    await cleanupWorktree(campaign, worktree);
+  }
+
+  async evaluate(campaign, worktree, commit) {
+    const env = {
+      ALEPH_WORKSPACE: campaign.workspace,
+      ALEPH_SOLUTION_DIR: worktree,
+      ALEPH_SUBMISSION: commit,
+      ...(campaign.visibleData ? { ALEPH_VISIBLE_DATA: campaign.visibleData } : {}),
+    };
+    const result = await run('bash', ['-lc', campaign.evalCommand], {
+      cwd: campaign.workspace,
+      env,
+    });
+    const parsed = parseScore(result.stdout);
+    if (!parsed) throw new Error('evaluator did not emit a JSON score');
+    return parsed;
+  }
+
+  async failMission(campaignId, missionId, worktree, message) {
+    const campaign = this.table.get(campaignId);
+    if (!campaign) return;
+    await this.mutate(campaignId, (current) => this.missionUpdate(current, missionId, (item) => ({
+      ...item, status: 'failed', error: message, finishedAt: now(), reclaimed: true,
+    })));
+    await cleanupWorktree(campaign, worktree).catch(() => undefined);
+  }
 }
 
-export const inject = ['webServer'];
+async function cleanupWorktree(campaign, worktree) {
+  try {
+    await git(campaign.researchRoot, ['worktree', 'remove', '--force', worktree]);
+  } catch {
+    await rm(worktree, { recursive: true, force: true });
+  }
+  await rm(worktree, { recursive: true, force: true });
+  await rm(join(campaign.workspace, '.aleph', 'researchers', worktree.split('/').pop()), { recursive: true, force: true }).catch(() => undefined);
+}
+
+function toolOutput(renderValue = (value) => [{ type: 'text', text: JSON.stringify(value, null, 2) }]) {
+  return { schema: { type: 'json' }, render: (_args, value) => renderValue(value) };
+}
+
+function tool(name, description, parameters, execute) {
+  return defineTool({ name, description, parameters, output: toolOutput(), execute });
+}
+
+export const inject = ['storageDomain', 'tools', 'webServer'];
+
+export async function apply(ctx) {
+  const domain = await ctx.storageDomain.open(campaignDomain);
+  ctx.effect(() => () => { void domain.close(); });
+  const sessions = ctx.get('sessions');
+  const subagents = ctx.get('subagents');
+  const agentPresets = ctx.get('agentPresets');
+  const workspaceRegistry = ctx.get('workspaceRegistry');
+  const service = new AlephService(ctx, domain, { sessions, subagents, agentPresets });
+
+  const isAleph = (agent) => {
+    if (!sessions || !agentPresets) return false;
+    const session = sessions.get(agent?.id);
+    return session ? agentPresets.presetForSession(session) === 'aleph' : false;
+  };
+
+  const workspaceParameters = {
+    workspace: { type: 'string', description: 'Absolute leader workspace path; defaults to the calling session cwd' },
+    title: { type: 'string', description: 'Campaign title' },
+    eval_command: { type: 'string', description: 'Leader-side evaluator command; prints JSON with a numeric score' },
+    visible_data: { type: 'string', description: 'Optional absolute visible-data directory for researchers' },
+  };
+
+  const campaignParameter = { campaign_id: { type: 'string', required: true, description: 'Campaign id' } };
+
+  const disposers = [
+    ctx.tools.register(tool(
+      'aleph_start_campaign',
+      'Create an AlephResearch campaign inside a DSH workspace. State is stored in the DSH storage domain; no ~/.aleph files are written.',
+      workspaceParameters,
+      async (args, exec) => service.create({
+        workspace: service.workspaceFor(exec.agent, args.workspace),
+        title: args.title,
+        evalCommand: args.eval_command,
+        visibleData: args.visible_data,
+      }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_status',
+      'Return AlephResearch campaign and mission status from the DSH storage domain.',
+      { campaign_id: { type: 'string', description: 'Optional campaign id; omitted lists every campaign' } },
+      async (args) => {
+        const campaigns = args.campaign_id
+          ? [service.get(args.campaign_id)].filter(Boolean)
+          : service.list();
+        return campaigns.map(snapshot);
+      },
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_enqueue_mission',
+      'Queue a researcher mission on the campaign SOTA branch.',
+      {
+        ...campaignParameter,
+        description: { type: 'string' },
+        strategy: { type: 'string', enum: ['auto', ...STRATEGIES], description: 'L0 to L3, or auto for Boltzmann sampling' },
+      },
+      async (args) => service.enqueue({
+        campaignId: args.campaign_id,
+        description: args.description,
+        strategy: args.strategy ?? 'auto',
+      }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_run_next',
+      'Start a queued researcher through the DSH subagent service and return its child session id.',
+      campaignParameter,
+      async (args, exec) => service.runNext({ campaignId: args.campaign_id, agent: exec.agent }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_set_exploration',
+      'Set the campaign exploration level used by the next strategy sample.',
+      {
+        ...campaignParameter,
+        exploration: { type: 'number', required: true, description: 'Value in [0, 1]' },
+      },
+      async (args) => service.setExploration({ campaignId: args.campaign_id, exploration: args.exploration }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+  ];
+  ctx.effect(() => () => { for (const dispose of disposers) dispose(); });
+
+  const sendJson = (res, status, body) => {
+    const text = JSON.stringify(body);
+    res.writeHead(status, {
+      'content-type': 'application/json; charset=utf-8',
+      'content-length': Buffer.byteLength(text),
+      'cache-control': 'no-store',
+    });
+    res.end(text);
+  };
+
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/snapshot',
+    handler(req, res) {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return sendJson(res, 405, { ok: false });
+      const campaigns = service.list().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+      const campaign = campaigns[0];
+      if (!campaign) return sendJson(res, 404, { ok: false, error: { code: 'aleph/no-campaign' } });
+      return sendJson(res, 200, snapshot(campaign));
+    },
+  });
+
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/campaigns',
+    handler(req, res) {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return sendJson(res, 405, { ok: false });
+      return sendJson(res, 200, { campaigns: service.list().map(snapshot) });
+    },
+  });
+
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/start',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const campaign = await service.create({
+          workspace: args.workspace ?? process.cwd(),
+          title: args.title,
+          evalCommand: args.evalCommand ?? args.eval_command,
+          visibleData: args.visibleData ?? args.visible_data,
+        });
+        return sendJson(res, 200, snapshot(campaign));
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/start-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+
+
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/workspace',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      if (!workspaceRegistry) return sendJson(res, 503, { ok: false, error: { code: 'aleph/workspace-unavailable' } });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const workspace = await workspaceRegistry.create(args.path);
+        return sendJson(res, 200, { workspace: { id: workspace.workspaceId, path: workspace.path, title: workspace.title } });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/workspace-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/enqueue',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const campaign = await service.enqueue({
+          campaignId: args.campaign_id ?? args.campaignId,
+          description: args.description,
+          strategy: args.strategy ?? 'auto',
+        });
+        return sendJson(res, 200, snapshot(campaign));
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/enqueue-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/health',
+    async handler(req, res) {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return sendJson(res, 405, { ok: false });
+      const presets = agentPresets ? await agentPresets.list() : [];
+      return sendJson(res, 200, {
+        ok: true,
+        version: '0.2.0',
+        storage: DOMAIN_NAME,
+        presets: presets.map((preset) => ({ id: preset.id, name: preset.name, broken: preset.broken })),
+      });
+    },
+  });
+
+}
