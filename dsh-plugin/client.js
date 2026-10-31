@@ -796,6 +796,7 @@ window.__ModuleLoader__.load({
         { style: styles.frame },
         projectCard,
         h('div', { style: styles.twoCards }, machineCard, countsCard),
+        agentSection(t, project),
         batchCard,
         missionCard,
         h(
