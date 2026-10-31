@@ -3,7 +3,7 @@ id: ALEPH-16
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/22
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/24
 ---
 
 <!-- 本地管理说明：用户于北京时间 2026-10-31 17:54 接纳该候选，要求先登记为“可疑”。B 已在最新上游 785a7e9c 完成 41 个自动行为检查点与真实 DSH 浏览器核查，确认该问题仍然存在。GitHub 正文应移除管理头及本段前导注释，本地文件保留完整内容。 -->
@@ -16,7 +16,7 @@ Host 保存研究代理、Composer 和 InfraOptimizer 的记录，并在快照�
 
 表格读取传入对象的 `.agents` 字段时，只能得到缺失值，随后使用空数组并显示“尚未运行 Composer 或 InfraOptimizer。”即使后端已经存在正确记录，页面也可能无法展示。建议优先级为 P2。
 
-最新上游 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 已完成自动和实际 DSH 核查。自动检查包含 41 个有效行为点，其中 17 个通过、24 个失败；真实浏览器的 23 项观察全部符合复现条件。上游议题为 [#22](https://github.com/hapenia/aleph-research/issues/22)，修复拉取请求待补充。
+最新上游 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 已完成自动和实际 DSH 核查。自动检查包含 41 个有效行为点，其中 17 个通过、24 个失败；真实浏览器的 23 项观察全部符合复现条件。上游议题为 [#22](https://github.com/hapenia/aleph-research/issues/22)，修复拉取请求为 [#24](https://github.com/hapenia/aleph-research/pull/24)，尚未合并。
 
 ## 使用例子
 
@@ -131,3 +131,8 @@ python3 tests/issues/dsh/current-console-agents.py --source /home/paulus-chang/�
 - [修复后手机运行页面](evidence/16-fixed-running-mobile.png)与[手机完成页面](evidence/16-fixed-done-mobile.png)
 
 新工作树首次运行缺少依赖链接，B 配置已有依赖后完成正式验收；该环境错误保存在 `16-console-agents-fixed-product-dependency-attempt.txt`，没有计为产品失败。原始缺陷证据及截图保持保留。
+
+
+## 修复提交与远端链接
+
+B 将通过双阶段验收的产品修改提交为 `693f966`，推送至派生仓库分支 `fix/aleph-16-console-agent-records`，并创建上游拉取请求 [#24](https://github.com/hapenia/aleph-research/pull/24)。该请求关联议题 #22，尚未合并；本地当前状态继续遵守人工维护规则。修复验收原始证据固定于公共提交 `0ae4e12`。提交前再次同步于北京时间 `2026-10-31T19:26:09+08:00` 完成，上游和主工作区仍为 `785a7e9c`，主工作区干净。
