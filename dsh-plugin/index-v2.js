@@ -813,16 +813,30 @@ class ProjectService {
       await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: null, status: 'failed', summary: String(error), branch, worktree, updatedAt: now() }] }));
       throw error;
     }
-    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: activation.childId ?? null, status: 'running', summary: null, branch, worktree, updatedAt: now() }] }));
+    // A missing identity would make the completion callback match every record with a null child.
+    if (typeof activation.childId !== 'string' || !activation.childId.trim()) {
+      void activation.result.catch(() => undefined);
+      abort.abort();
+      throw new Error('researcher activation did not return a child ID');
+    }
+    const childId = activation.childId;
+    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId, status: 'running', summary: null, branch, worktree, updatedAt: now() }] }));
     this.parentAgents ??= new Map();
-    if (activation.childId && agent) this.parentAgents.set(activation.childId, agent);
+    if (agent) this.parentAgents.set(childId, agent);
+    // Ownership is exact: only this activation may settle its own record.
+    const settle = (status, summary) => this.mutate(projectId, (current) => ({
+      ...current,
+      agents: (current.agents ?? []).map((item) => (item.role === 'researcher' && item.childId === childId && item.status === 'running'
+        ? { ...item, status, summary, updatedAt: now() }
+        : item)),
+    })).catch(() => undefined);
     activation.result.then(async (result) => {
       const summary = (result?.output ?? []).filter((block) => block?.type === 'text').map((block) => block.text).join('\n').trim().slice(0, 8000) || '(no summary)';
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'done', summary, updatedAt: now() } : item) })).catch(() => undefined);
+      await settle('done', summary);
     }, async (error) => {
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) })).catch(() => undefined);
+      await settle('failed', String(error));
     });
-    return { projectId, role: 'researcher', childId: activation.childId ?? null, branch, worktree };
+    return { projectId, role: 'researcher', childId, branch, worktree };
   }
 
   async startResearchers({ projectId, count = null, agent }) {
