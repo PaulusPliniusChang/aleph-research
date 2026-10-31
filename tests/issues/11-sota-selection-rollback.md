@@ -3,14 +3,14 @@ id: ALEPH-11
 status: dsh实测有问题
 type: 功能缺项
 remote_issue: https://github.com/hapenia/aleph-research/issues/12
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/27
 ---
 
 # 最优结果缺少人工选择和回退操作
 
 ## 当前修复验收（2026-10-31）
 
-修复代码已推送至派生仓库分支 `fix/aleph-11-safe-best-selection`，产品提交为 `eb386d8f6a9b2d35deb36fb22c7cfac8d9a6cdc2`，上游基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。本次修改只包含 Host、插件说明、架构说明和选择操作测试。修复仅处理原 #12 中已证实的已检出分支一致性残留，当前选择仍指向记录中的最优结果，没有新增任意历史结果选择需求。
+修复已提交上游 [PR #27](https://github.com/hapenia/aleph-research/pull/27)，处于打开状态。代码已推送至派生仓库分支 `fix/aleph-11-safe-best-selection`，产品提交为 `eb386d8f6a9b2d35deb36fb22c7cfac8d9a6cdc2`，上游基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。本次修改只包含 Host、插件说明、架构说明和选择操作测试。修复仅处理原 #12 中已证实的已检出分支一致性残留，当前选择仍指向记录中的最优结果，没有新增任意历史结果选择需求。
 
 Host 在需要移动目标时枚举实际 Git 工作树，发现主目录或关联目录已经检出该分支，就在更新引用前拒绝，并给出准确目录及保存、提交后切换分支的说明。路径按 NUL 分隔读取，能够保留中文、空格和换行。枚举失败时拒绝更新；未检出的目标继续比较更新。目标已经等于最优提交时直接成功，不要求清理未提交文件。显式非分支引用不能被用作选择目标。产品不会隐式重置、暂存或清理研究文件。
 
