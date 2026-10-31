@@ -68,6 +68,7 @@ const projectSchema = z.object({
   missionRoot: z.string(),
   templateBranch: z.string(),
   evalCommand: z.string(),
+  brief: z.string().optional(),
   researcherCount: z.number().int().optional(),
   visibleData: z.string().nullable().optional(),
   testsetPath: z.string().nullable().optional(),
@@ -254,13 +255,13 @@ class ProjectService {
     }
   }
 
-  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null, researchers = 4, agent = null }) {
+  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null, researchers = 4, brief = '', agent = null }) {
     const target = resolve(workspace);
     if (!(await pathExists(target))) throw new Error(`workspace does not exist: ${target}`);
     if (agent) this.assertWorkspace(agent, target);
     const existing = this.byWorkspace(target);
     if (existing) {
-      return this.mutate(existing.id, (current) => ({ ...current, researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : (current.researcherCount ?? 4) }));
+      return this.mutate(existing.id, (current) => ({ ...current, researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : (current.researcherCount ?? 4), brief: brief || current.brief || '' }));
     }
     const researchRoot = join(target, 'research');
     await ensureRepo(researchRoot, 'main', { 'README.md': '# Research repository\n' });
@@ -279,6 +280,7 @@ class ProjectService {
       missionRoot,
       templateBranch: 'template',
       evalCommand,
+      brief,
       researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : 4,
       visibleData: visibleData ? resolve(visibleData) : null,
       testsetPath: testsetPath ? resolve(testsetPath) : null,
@@ -535,7 +537,8 @@ class ProjectService {
     await git(project.researchRoot, ['worktree', 'add', '-b', branch, worktree, 'HEAD']);
     const prompt = [
       'You are an AlephResearch researcher.',
-      `Project: ${project.id}. Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
+      `Project: ${project.id}. Research brief: ${project.brief || '(no extra brief)'}.`,
+      `Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
       `Canonical read-only visible data: ${project.visibleData ?? '(none configured)'}. Read it directly; do not copy or extract it into the project or your worktree.`,
       'Do not install packages outside the mission uv project and do not write outside your assigned research worktree or mission repo branch.',
       'Do not read /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH state. Run commands from your worktree, not from the project root; use the canonical visible data directly.' ,
@@ -837,6 +840,7 @@ function snapshot(project) {
       mission_root: project.missionRoot,
       template_branch: project.templateBranch,
       eval_command: project.evalCommand,
+      brief: project.brief ?? '',
       researcher_count: project.researcherCount ?? 4,
     },
     missions: project.missions.map((mission) => ({
@@ -908,6 +912,7 @@ export async function apply(ctx) {
         testset: { type: 'string' },
         submission_python: { type: 'string' },
         researchers: { type: 'integer', description: 'Default researcher count (default 4)' },
+        brief: { type: 'string', description: 'Research objective for researcher prompts' },
       },
       async (args, exec) => service.init({
         workspace: service.workspaceFor(exec.agent, args.workspace),
@@ -916,6 +921,7 @@ export async function apply(ctx) {
         testsetPath: args.testset,
         submissionPython: args.submission_python,
         researchers: args.researchers ?? 4,
+        brief: args.brief ?? '',
         agent: exec.agent,
       }),
     ), { when: ({ agent }) => isLeader(agent) }),
@@ -1022,6 +1028,7 @@ export async function apply(ctx) {
           testsetPath: args.testset ?? args.testsetPath,
           submissionPython: args.submissionPython ?? args.submission_python,
           researchers: args.researchers ?? 4,
+          brief: args.brief ?? '',
         });
         return sendJson(res, 200, snapshot(project));
       } catch (error) {
