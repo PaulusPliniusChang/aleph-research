@@ -706,8 +706,8 @@ window.__ModuleLoader__.load({
     }
 
     /** Composer and InfraOptimizer agent runs. */
-    function agentSection(t, campaign) {
-      const agents = Array.isArray(campaign?.agents) ? campaign.agents : [];
+    function agentSection(t, snapshot) {
+      const agents = Array.isArray(snapshot?.agents) ? snapshot.agents : [];
       const roleName = (role) => t('role.' + role);
       const columns = [
         { label: t('field.role'), width: 'minmax(110px, 0.9fr)', primary: true, render: (agent) => roleName(agent.role) ?? agent.role ?? '—' },
@@ -908,7 +908,7 @@ window.__ModuleLoader__.load({
         { style: styles.frame },
         projectCard,
         h('div', { style: styles.twoCards }, machineCard, countsCard),
-        agentSection(t, project),
+        agentSection(t, snapshot),
         batchCard,
         missionCard,
         gitSection(t, snapshot),
