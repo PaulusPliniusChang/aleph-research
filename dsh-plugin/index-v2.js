@@ -8,6 +8,7 @@
  * back to the pre-batch mission branch.
  */
 import { execFile } from 'node:child_process';
+import { readdirSync, readFileSync, readlinkSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
@@ -83,6 +84,7 @@ const projectSchema = z.object({
   })).optional(),
   missions: z.array(missionSchema),
   batches: z.array(batchSchema),
+  violations: z.array(z.string()).optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -285,6 +287,7 @@ class ProjectService {
       agents: [],
       missions: [],
       batches: [],
+      violations: [],
       createdAt: stamp,
       updatedAt: stamp,
     };
@@ -572,6 +575,67 @@ class ProjectService {
     return { projectId, requested, started };
   }
 
+  checkProcesses() {
+    const projects = this.list();
+    const nowMs = Date.now();
+    for (const project of projects) {
+      const workspace = resolve(project.workspace);
+      const allowed = [
+        join(workspace, '.aleph', 'researchers'),
+        join(workspace, '.aleph', 'batches'),
+        join(workspace, '.aleph', 'evals'),
+      ];
+      let entries = [];
+      try { entries = readdirSync('/proc'); } catch { continue; }
+      for (const entry of entries) {
+        if (!/^\d+$/.test(entry)) continue;
+        const pid = Number(entry);
+        if (pid === process.pid) continue;
+        let cwd = '';
+        let cmd = '';
+        try {
+          cwd = readlinkSync(`/proc/${entry}/cwd`);
+          cmd = readFileSync(`/proc/${entry}/cmdline`).toString('utf8').replace(/\0/g, ' ');
+        } catch { continue; }
+        if (!cwd.startsWith(workspace)) continue;
+        const isPython = /\.venv|python|conda|lightgbm|catboost|xgboost|torch/i.test(cmd);
+        if (!isPython) continue;
+        const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
+        if (!underAllowed) {
+          if (cwd === workspace) continue; // Host-side evaluation runs in the workspace root.
+          try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+          this.mutate(project.id, (current) => ({
+            ...current,
+            violations: [...(current.violations ?? []), `${now()} killed out-of-worktree process ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
+          })).catch(() => undefined);
+          continue;
+        }
+        // Inside a researcher worktree, kill sustained multi-core compute.
+        try {
+          const stat = readFileSync(`/proc/${entry}/stat`, 'utf8');
+          const fields = stat.split(' ');
+          const ticks = Number(fields[13]) + Number(fields[14]);
+          const key = `${project.id}:${pid}`;
+          const prior = this.cpuSamples?.get?.(key);
+          this.cpuSamples ??= new Map();
+          if (prior && prior.ticks > 0) {
+            const delta = ticks - prior.ticks;
+            if (delta > 1000) {
+              process.kill(pid, 'SIGKILL');
+              this.mutate(project.id, (current) => ({
+                ...current,
+                violations: [...(current.violations ?? []), `${now()} killed sustained heavy compute ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
+              })).catch(() => undefined);
+              this.cpuSamples.delete(key);
+              continue;
+            }
+          }
+          this.cpuSamples.set(key, { ticks, at: nowMs });
+        } catch { /* process exited */ }
+      }
+    }
+  }
+
   async runComposer({ projectId, agent }) {
     if (!agent) throw new Error('a calling Agent is required to start Composer');
     if (!this.subagents) throw new Error('subagent service is unavailable');
@@ -774,6 +838,7 @@ export async function apply(ctx) {
   const agentPresets = ctx.get('agentPresets');
   const workspaceRegistry = ctx.get('workspaceRegistry');
   const service = new ProjectService(ctx, domain, { sessions, subagents, agentPresets });
+  ctx.effect(() => { const timer = setInterval(() => service.checkProcesses(), 5000); timer.unref?.(); return () => clearInterval(timer); });
 
   const presetOf = (agent) => {
     if (!sessions || !agentPresets) return null;
