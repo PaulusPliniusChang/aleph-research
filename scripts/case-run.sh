@@ -136,6 +136,11 @@ json.dump(info, open(f"{run_root}/run.json", "w"), indent=2)
 print(json.dumps(info, indent=2))
 PY
 
+# Open the panel so the run can be watched while it proceeds.
+if [ "${ALEPH_NO_OPEN:-0}" != "1" ] && command -v google-chrome-stable >/dev/null 2>&1; then
+  nohup google-chrome-stable --new-tab "$url" >/dev/null 2>&1 &
+fi
+
 cat <<EOF
 
 case run ready
