@@ -29,8 +29,9 @@ for path in "$source_root/problem" "$src_case/leader/eval" "$src_case/leader/tes
 done
 
 if [ -d "$dest" ]; then
-  echo "template already exists: $dest"
-  echo "remove it first to rebuild"
+  echo "template already exists: $dest (refreshing metadata only)"
+  cp -a "$src_case/leader/eval/." "$template/eval/"
+  echo "refreshed eval from $src_case/leader/eval"
 else
   mkdir -p "$template"
   cp -a "$source_root/problem" "$template/problem"
