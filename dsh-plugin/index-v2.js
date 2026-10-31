@@ -660,11 +660,19 @@ class ProjectService {
         await git(resultWorktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m',
           `mission result ${mission.id}\n\nAleph-Mission: ${mission.id}\nAleph-Batch: ${batch.id}\nAleph-Machine: ${batch.machineId}`]);
         resultCommit = (await git(resultWorktree, ['rev-parse', 'HEAD'])).stdout.trim();
-        await git(project.missionRoot, ['worktree', 'add', '--detach', missionWorktree, mission.preBatchTip ?? mission.branch]);
+        const missionRef = mission.branch.startsWith('refs/heads/') ? mission.branch : `refs/heads/${mission.branch}`;
+        const expectedTip = mission.preBatchTip
+          ?? (await git(project.missionRoot, ['rev-parse', '--verify', missionRef])).stdout.trim();
+        await git(project.missionRoot, ['worktree', 'add', '--detach', missionWorktree, expectedTip]);
         await git(missionWorktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'cherry-pick', resultCommit]);
         const newTip = (await git(missionWorktree, ['rev-parse', 'HEAD'])).stdout.trim();
         resultCommit = newTip;
-        await git(project.missionRoot, ['branch', '-f', mission.branch, newTip]);
+        const occupied = (await git(project.missionRoot, ['worktree', 'list', '--porcelain'])).stdout
+          .split(/\r?\n/).some((line) => line.trim() === `branch ${missionRef}` || line.trim() === `branch ${mission.branch}`);
+        if (occupied) throw new Error(`cannot deliver result: mission branch ${mission.branch} is checked out in a worktree`);
+        // Compare-and-swap instead of branch -f: a commit pushed to the mission branch after
+        // the batch was formed is never discarded by result delivery.
+        await git(project.missionRoot, ['update-ref', '-m', `mission result ${mission.id}`, missionRef, newTip, expectedTip]);
       } catch (error) {
         envelope.status = 'failed';
         envelope.error = error instanceof Error ? error.message : String(error);
