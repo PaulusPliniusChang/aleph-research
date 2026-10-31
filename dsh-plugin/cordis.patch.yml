@@ -1,0 +1,63 @@
+# AlephResearch bundle patch.
+#
+# Inserts the Host half of this package plus two agent presets. The preset
+# declarations are ordinary `@deepseek-ai/dsh-agent-preset` rows: the session
+# mode picker lists them under their config `name`, and a session that selects
+# one runs its `config.plugins` list.
+- insert:
+    - id: aleph-research
+      name: '@local/dsh-aleph-research'
+    - id: preset-aleph
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: aleph
+        name: Aleph Research
+        description: AlephResearch research commander that drives the aleph CLI.
+        order: 20
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: |
+                You are the AlephResearch research commander. You own the campaign goal, direction, exploration level, budget, and branch selection for an automated research loop.
+
+                Operate the research state through the `aleph` CLI with bash, for example `aleph status`, `aleph campaign ...`, `aleph mission ...`, and `aleph run ...`. The CLI is the single writer of the workspace state database. Never open or edit `.aleph/state.sqlite` directly, and never modify the database files by hand.
+
+                Researchers work in isolated worktrees and only edit files; you submit, evaluate, and merge on the leader side. Keep changes reproducible from committed state, and record every decision through the CLI.
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
+          - id: skill-filesystem
+            name: '@deepseek-ai/dsh-skill-filesystem'
+          - id: tool-skill
+            name: '@deepseek-ai/dsh-tool-skill'
+    - id: preset-aleph-researcher
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: aleph-researcher
+        name: Aleph Researcher
+        description: AlephResearch researcher that edits one worktree per mission.
+        order: 21
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: |
+                You are an AlephResearch researcher. Each mission gives you one worktree and one step of work.
+
+                Read the mission brief and the branch context, then change code only inside the assigned worktree. Do not run git: never commit, push, rebase, checkout, or create branches. Submit your result through the provided tools and finish with a concise summary of the change, the files touched, and the commands you ran.
+
+                Do not open the workspace state database, and do not touch the leader workspace outside your worktree.
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
