@@ -17,6 +17,7 @@ import urllib.request
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=Path, required=True)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--expect-protection', action='store_true')
 args = parser.parse_args()
 spec = importlib.util.spec_from_file_location('launcher', Path(__file__).with_name('launch-project.py'))
 launcher = importlib.util.module_from_spec(spec)
@@ -198,11 +199,20 @@ try:
             check(scope + ': actual branch contained change before delivery', before_delivery == advanced)
             check(scope + ': later commit object remains recoverable by id', git(repo, 'cat-file', '-t', advanced) == 'commit')
         if scope in ['before-run', 'during-run']:
-            check('defect ' + scope + ': delivery silently reports task done', mission['status'] == 'done' and mission['error'] is None)
-            check('defect ' + scope + ': batch silently reports done', final_batch['status'] == 'done')
-            check('defect ' + scope + ': later commit exits mission branch history', not ancestor(repo, advanced, tip))
-            check('defect ' + scope + ': branch file resets to original source', branch_source == 'source-original')
-            check('defect ' + scope + ': branch points at old-base result', tip == mission['resultCommit'] and git(repo, 'rev-parse', tip + '^') == captured)
+            if args.expect_protection:
+                check('protected ' + scope + ': changed branch delivery is explicitly refused', mission['status'] == 'failed' and bool(mission['error']))
+                check('protected ' + scope + ': batch records delivery failure', final_batch['status'] == 'failed')
+                check('protected ' + scope + ': later commit stays in mission branch history', ancestor(repo, advanced, tip))
+                check('protected ' + scope + ': branch file preserves revised source', branch_source == 'source-revised')
+                check('protected ' + scope + ': exact advanced branch tip remains unchanged', tip == advanced)
+                check('protected ' + scope + ': undelivered result still identifies actual computation', git(repo, 'rev-parse', mission['resultCommit'] + '^') == captured)
+                check('protected ' + scope + ': refusal identifies reference comparison failure', 'ref' in mission['error'].lower() and ('expected' in mission['error'].lower() or 'lock' in mission['error'].lower()))
+            else:
+                check('defect ' + scope + ': delivery silently reports task done', mission['status'] == 'done' and mission['error'] is None)
+                check('defect ' + scope + ': batch silently reports done', final_batch['status'] == 'done')
+                check('defect ' + scope + ': later commit exits mission branch history', not ancestor(repo, advanced, tip))
+                check('defect ' + scope + ': branch file resets to original source', branch_source == 'source-original')
+                check('defect ' + scope + ': branch points at old-base result', tip == mission['resultCommit'] and git(repo, 'rev-parse', tip + '^') == captured)
         elif scope == 'checked-out':
             check('control checked-out: Git refuses update explicitly', mission['status'] == 'failed' and bool(mission['error']))
             check('control checked-out: actual Git error explains checked-out branch', 'checked out' in mission['error'] or 'used by worktree' in mission['error'])
@@ -213,7 +223,8 @@ try:
             check('control unchanged: task completes successfully', mission['status'] == 'done')
             check('control unchanged: branch contains actual result commit', tip == mission['resultCommit'])
             check('control unchanged: source stays original', branch_source == 'source-original')
-    records['defect_reproduced'] = True
+    records['defect_reproduced'] = not args.expect_protection
+    records['protection_validated'] = args.expect_protection
 except Exception as error:
     event('error', {'type': type(error).__name__, 'message': str(error)})
     raise

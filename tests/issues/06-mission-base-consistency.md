@@ -151,3 +151,53 @@ DSH `0.2.2-alpha.2` 隔离环境实测确认。原始任务记录与真实 Git �
 ## 新增场景公开证据
 
 批次形成后分支推进场景的核查文档、脚本与原始记录固定于提交 `943195c48597b5bf13edb7b1a20773cc4953bc4c`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/943195c48597b5bf13edb7b1a20773cc4953bc4c/tests/issues)。该场景沿用上游 #7，当前没有修复拉取请求。
+
+
+## 当前修复与独立验收（2026-10-31）
+
+C 的冻结修复已由 B 导入独立工作树 `/home/paulus-chang/项目/aleph-fix-delivery`，产品提交为 `8b15e0dc1798748db07d7e2e75889c764868502e`，分支为 `fix/aleph-06-result-delivery`，基线仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。产品只修改 Host 入口并新增结果交付测试。
+
+Host 仍从批次记录的任务起点创建结果提交。更新任务分支前，Host 检查该分支是否被工作目录检出，再通过 `git update-ref <ref> <new> <expected>` 原子比较原始任务起点。分支已经推进、删除或移动到其他提交时，Host 明确拒绝交付并保留分支；任务和批次报告失败，机器恢复空闲。结果提交编号仍保存在任务记录中，便于检查计算结果。
+
+### 验收结果
+
+| 验收范围 | 结果 | 原始证据 |
+| --- | --- | --- |
+| 产品完整测试 | Node 143/143，新增 141 个有效子行为点全部通过。 | [产品报告](evidence/06-fixed-product.txt) |
+| B 独立原有编排前变更范围 | 76 个有效行为点全部通过，Node 77/77。 | [自动报告](evidence/06-fixed-base-consistency.txt)、[结构化记录](evidence/06-fixed-base-consistency.json) |
+| B 独立新增编排后变更范围 | 83 个有效行为点全部通过，Node 84/84。 | [自动报告](evidence/06-fixed-post-batch-branch.txt)、[结构化记录](evidence/06-fixed-post-batch-branch.json) |
+| 实际 DSH 编排前变更范围 | 61 项检查全部通过。 | [实际记录](evidence/06-fixed-real-dsh-base-consistency.json) |
+| 实际 DSH 编排后变更保护 | 88 项检查全部通过，`protection_validated=true`、`defect_reproduced=false`。 | [实际记录](evidence/06-fixed-real-dsh-post-batch-branch.json) |
+
+实际 DSH 使用原始注册工具、真实父会话、持久存储、Git 仓库和真实批次 shell 任务，诊断接口只负责调用工具，没有模型请求。分支未变更时结果正常交付；启动前推进和计算期间推进场景均保留新增提交及修改文件，任务与批次明确报告交付失败；保持检出的分支也保留原提交和文件。原有 alpha、beta 编排前推进场景保持正常。隔离 Host 均已退出。
+
+B 验后重新核对[冻结摘要](evidence/06-fixed-frozen-content.json)，入口和新增产品测试均与 C 的冻结文件一致。产品测试另覆盖关联工作目录检出、任务分支删除、结果构造期间的真实引用事务及缺少 `preBatchTip` 的旧记录。实际 DSH 未逐项重复这些额外边界。工作目录检出检查与 Git 引用事务并非同一事务，不声称已经验证另一个进程恰好在检查后检出的情况。失败交付产生的结果仍通过任务记录保存提交编号，本轮没有验证长期垃圾回收后的保留。
+
+### 复跑命令
+
+```bash
+cd /home/paulus-chang/项目/aleph-fix-delivery/dsh-plugin
+npm test
+
+cd /home/paulus-chang/项目/aleph-tests
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph-fix-delivery \
+ALEPH_BASE_OBSERVATIONS=tests/issues/evidence/06-fixed-base-consistency.json \
+node --experimental-loader /home/paulus-chang/项目/aleph-fix-delivery/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/base-consistency-acceptance.test.mjs
+
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph-fix-delivery \
+ALEPH_POST_BATCH_OBSERVATIONS=tests/issues/evidence/06-fixed-post-batch-branch.json \
+node --experimental-loader /home/paulus-chang/项目/aleph-fix-delivery/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/post-batch-branch-acceptance.test.mjs
+
+python3 tests/issues/dsh/current-base-consistency.py \
+  --source /home/paulus-chang/项目/aleph-fix-delivery \
+  --output tests/issues/evidence/06-fixed-real-dsh-base-consistency.json
+
+python3 tests/issues/dsh/current-post-batch-branch.py \
+  --source /home/paulus-chang/项目/aleph-fix-delivery \
+  --output tests/issues/evidence/06-fixed-real-dsh-post-batch-branch.json \
+  --expect-protection
+```
+
+发布前于北京时间 `2026-10-31T18:36:25+08:00` 串行同步上游与派生仓库，干净主工作区仅快进拉取后仍为原基线。代码已推派生仓库，修复拉取请求待创建；管理状态保留历史实测结论。

@@ -1,0 +1,13 @@
+{
+  "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-delivery",
+  "baseline": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "sha256": {
+    "dsh-plugin/index-v2.js": "e83ef2deddf8eef3ab59b809cd0b5ba58845c6bf7d3ccecd03646062cb4e0b72",
+    "dsh-plugin/test/result-delivery.test.mjs": "89d5840a624216991c15ede39704aa0714c2a4cf577dbc5f5656892602d469bd"
+  },
+  "product_node_checks": 143,
+  "independent_precomposition_checks": 76,
+  "independent_postcomposition_checks": 83,
+  "actual_dsh_precomposition_checks": 61,
+  "actual_dsh_postcomposition_checks": 88
+}
