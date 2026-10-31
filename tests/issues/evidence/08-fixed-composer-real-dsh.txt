@@ -1,0 +1,50 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (1.09961ms)
+  ✔ current explicit Composer tool is registered (0.26857ms)
+  ✔ current mission approval is registered (0.203779ms)
+  ✔ initial project has no Composer records (0.242143ms)
+  ✔ proposal alone creates no batch (4.703528ms)
+  ✔ proposal alone starts no Composer (3.209456ms)
+  ✔ proposal alone runs no computation (0.356998ms)
+  ✔ first approval starts a Composer identity (0.496802ms)
+  ✔ Composer can access the Infra dispatch tool required by its prompt (3.280641ms)
+  ✔ first computation needs no Leader dispatch (0.445566ms)
+  ✔ first batch owns busy machine (0.259398ms)
+  ✔ unapproved second mission remains proposed (0.243518ms)
+  ✔ unapproved second computation has not started (0.269533ms)
+  ✔ approval while busy keeps second mission approved (0.56815ms)
+  ✔ busy approval preserves existing machine owner (0.320342ms)
+  ✔ busy approval does not duplicate Composer (0.288892ms)
+  ✔ busy approval does not start second calculation early (0.292292ms)
+  ✔ first mission finishes successfully (0.638898ms)
+  ✔ second queued mission finishes without Leader dispatch (2.654814ms)
+  ✔ distinct batches execute queued work (0.430036ms)
+  ✔ both finished batches retain done state (0.343166ms)
+  ✔ completion releases machine capacity (0.360723ms)
+  ✔ completion clears exact machine batch owner (1.010232ms)
+  ✔ first task computes once (0.522608ms)
+  ✔ second task computes once (0.358167ms)
+  ✔ first result belongs to first mission branch (4.831563ms)
+  ✔ second result belongs to second mission branch (4.795182ms)
+  ✔ third unapproved mission stays untouched (0.452343ms)
+  ✔ second dispatch uses an Infra activation (0.308783ms)
+  ✔ Infra static inspection completes successfully (0.330412ms)
+  ✔ Infra handoff persists in optimized batch history (4.726603ms)
+  ✔ later approval dispatches third work without Leader command (0.587707ms)
+  ✔ later approval reuses same Composer identity (2.675183ms)
+  ✔ all three task branches have distinct result commits (0.368547ms)
+  ✔ later work is computed exactly once (0.408024ms)
+  ✔ final state has no approved work left (0.344765ms)
+  ✔ actual Composer issues direct execution tools (0.672258ms)
+  ✔ actual Composer issues Infra execution tool (0.522315ms)
+  ✔ actual Composer receives queue change notifications (2.054261ms)
+  ✔ actual Infra calls bash (0.352004ms)
+✔ B current persistent Composer continuation (1289.580067ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 41
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1350.620134

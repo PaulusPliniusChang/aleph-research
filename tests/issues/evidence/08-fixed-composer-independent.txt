@@ -1,0 +1,50 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (1.020311ms)
+  ✔ current explicit Composer tool is registered (0.485808ms)
+  ✔ current mission approval is registered (0.385301ms)
+  ✔ initial project has no Composer records (0.300177ms)
+  ✔ proposal alone creates no batch (0.870229ms)
+  ✔ proposal alone starts no Composer (0.349715ms)
+  ✔ proposal alone runs no computation (0.260145ms)
+  ✔ first approval starts a Composer identity (0.544389ms)
+  ✔ Composer can access the Infra dispatch tool required by its prompt (1.166139ms)
+  ✔ first computation needs no Leader dispatch (0.49914ms)
+  ✔ first batch owns busy machine (0.356702ms)
+  ✔ unapproved second mission remains proposed (0.286612ms)
+  ✔ unapproved second computation has not started (0.206766ms)
+  ✔ approval while busy keeps second mission approved (0.290783ms)
+  ✔ busy approval preserves existing machine owner (0.216949ms)
+  ✔ busy approval does not duplicate Composer (0.201801ms)
+  ✔ busy approval does not start second calculation early (0.204124ms)
+  ✔ first mission finishes successfully (0.686197ms)
+  ✔ second queued mission finishes without Leader dispatch (0.666827ms)
+  ✔ distinct batches execute queued work (0.498658ms)
+  ✔ both finished batches retain done state (0.427675ms)
+  ✔ completion releases machine capacity (0.29152ms)
+  ✔ completion clears exact machine batch owner (0.32613ms)
+  ✔ first task computes once (0.306077ms)
+  ✔ second task computes once (0.310975ms)
+  ✔ first result belongs to first mission branch (5.499646ms)
+  ✔ second result belongs to second mission branch (5.200306ms)
+  ✔ third unapproved mission stays untouched (0.362914ms)
+  ✔ second dispatch uses an Infra activation (0.431389ms)
+  ✔ Infra static inspection completes successfully (0.412842ms)
+  ✔ Infra handoff persists in optimized batch history (6.215475ms)
+  ✔ later approval dispatches third work without Leader command (0.61876ms)
+  ✔ later approval reuses same Composer identity (0.856153ms)
+  ✔ all three task branches have distinct result commits (0.369224ms)
+  ✔ later work is computed exactly once (0.329705ms)
+  ✔ final state has no approved work left (0.321212ms)
+  ✔ activation uses one persistent Composer (0.343425ms)
+  ✔ completion posts exact queue event to Composer (1.855985ms)
+  ✔ later approval posts queue event to same Composer (0.34592ms)
+  ✔ deterministic automatic model has no tool errors (0.269943ms)
+✔ B current persistent Composer continuation (897.036483ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 41
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 959.416947

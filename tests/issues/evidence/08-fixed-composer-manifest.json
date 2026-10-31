@@ -1,0 +1,36 @@
+{
+  "status": "FROZEN",
+  "base": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "source": "/tmp/aleph-08-composer-infra-fix-source",
+  "files": [
+    {
+      "path": "dsh-plugin/README.md",
+      "baseline_sha256": "ace9714b5d07ef5287005e67bda529906e9984fee38ecad16511a995667eaf3d",
+      "sha256": "c3d0a729fdfdd30ba5de62c3922a92da25740071140df3903b17102e67092612"
+    },
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "baseline_sha256": "7b2cca925247bee65b84c88d400ece2a831e1091d89e43cea476960c206aafac",
+      "sha256": "8ccdb00ec6d681fd82559d1faa9affa37208f13ce29f9f2dfbb21c673ff491bc"
+    },
+    {
+      "path": "dsh-plugin/test/composer-infra-tools.test.mjs",
+      "baseline_sha256": null,
+      "sha256": "baea2461a7a95e936dc93eb728bf642ae8d45bb1b20a70aa324750fda96a411d"
+    }
+  ],
+  "product": {
+    "tests": 47,
+    "passed": 47,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "new_effective": 38,
+    "parents": 2,
+    "existing": 7,
+    "log": "/tmp/aleph-08-composer-infra-product-tests.txt",
+    "log_sha256": "a9fa8074de221224866cdef7fbd88f1209642c04472dac041460b30e04e3e51c"
+  },
+  "patch": "/tmp/aleph-08-composer-infra-changes.patch",
+  "patch_sha256": "2e537814ed7fbac0d8d8911f60f4b53e2732f03acf242141ce23d2edd88394c2"
+}

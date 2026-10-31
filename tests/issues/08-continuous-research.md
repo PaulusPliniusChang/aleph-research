@@ -3,10 +3,22 @@ id: ALEPH-08
 status: dsh实测有问题
 type: 功能缺项
 remote_issue: https://github.com/hapenia/aleph-research/issues/9
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/31
 ---
 
 # 任务完成后未自动继续剩余研究任务
+
+## 当前修复与验收（2026-10-31）
+
+[PR31](https://github.com/hapenia/aleph-research/pull/31) 已发布，准确修复提交为 `12325013bec147895a6b8e58c3b910bc239b78f9`，基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。本轮只允许 Leader 的 `aleph` 和 Composer 的 `aleph-composer` 预设调用 `aleph_run_infra`，并补充角色说明及产品测试。其他工具的角色条件继续保持原有范围。修复提交已经推送到派生仓库，拉取请求尚未合并。
+
+**产品测试 47 项全部通过；B 的独立自动验收 40 个有效行为点全部通过，实际 DSH 验收 40 个有效行为点全部通过。** 产品结果包括 38 个新增有效行为点、2 个父测试容器及 7 项既有测试；独立自动与实际验收各有 1 个父测试容器另计。产品与独立检查没有重复相加。
+
+实际模型输入已经包含 Infra 派发工具。Composer 实际调用 `aleph_run_batch` 两次、`aleph_run_infra` 一次；原生 Infra 子会话调用 `bash`，保存批次交接后完成计算。全部任务各计算一次，结果提交分别归属原任务分支。忙碌时批准的任务保留排队和原机器归属，完成后继续执行，后续审批复用原 Composer。实际模型记录没有 `missingRequiredInfra` 标志，本轮未采用缺少工具时的直接执行回退。
+
+独立检查沿用下方入口。自动检查实际注册的权限谓词，服务流程使用替代存储、会话和确定性激活，Git、工作树、计算命令真实执行；实际检查使用已安装 DSH、原生子会话、持久存储和真实工具执行，本地确定性模型根据真实返回决定动作。隔离 YAML 仅为 Composer 子代理传输补充 `provider: spawn`，未改动产品 JavaScript。该验收验证 Host 的权限、路由和队列继续执行，不能代表外部模型的自主规划质量、忙碌机器的提前编排策略或多机器完整执行。最后实际 Host `557035` 正常退出，进程编号不存在。
+
+证据：[产品日志](evidence/08-fixed-composer-product.txt)、[独立自动报告](evidence/08-fixed-composer-independent.json)及[日志](evidence/08-fixed-composer-independent.txt)、[实际 DSH 报告与模型调用](evidence/08-fixed-composer-real-dsh.json)及[日志](evidence/08-fixed-composer-real-dsh.txt)、[冻结文件清单](evidence/08-fixed-composer-manifest.json)、[修复补丁](evidence/08-fixed-composer-changes.patch)、[C 的冻结交接](evidence/08-fixed-composer-handoff.md)。清单与报告中的版本是修复前准确基线，B 导入后核对全部冻结文件哈希，再创建上述修复提交。原议题状态、失败证据和旧版历史继续保留。
 
 ## 最新架构正式核查（2026-10-31）
 

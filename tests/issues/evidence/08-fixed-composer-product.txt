@@ -1,0 +1,76 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:551266) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ Infra dispatch visibility follows the current session preset with Leader controls isolated
+  ✔ Composer receives the Infra dispatch tool (0.863542ms)
+  ✔ Leader retains the Infra dispatch tool (0.197491ms)
+  ✔ researchers do not receive the Infra dispatch tool (0.152439ms)
+  ✔ InfraOptimizer cannot recursively dispatch another optimizer (0.130795ms)
+  ✔ ordinary presets do not receive the Infra dispatch tool (0.094338ms)
+  ✔ a session without a preset receives no Infra dispatch authority (0.145585ms)
+  ✔ a missing session cannot acquire Infra dispatch authority (0.113335ms)
+  ✔ preset changes remove previously granted Composer Infra authority (0.145054ms)
+  ✔ restoring the Composer preset restores Infra availability (0.195935ms)
+  ✔ Composer retains the existing direct batch execution route (0.173311ms)
+  ✔ Composer retains batch formation (0.078462ms)
+  ✔ Composer still cannot approve proposals (0.100674ms)
+  ✔ Composer still cannot start researchers (0.054358ms)
+  ✔ Composer still cannot start another Composer (0.074803ms)
+  ✔ denied caller never reaches the Infra activation route (0.589424ms)
+✔ Infra dispatch visibility follows the current session preset with Leader controls isolated (58.169119ms)
+▶ persistent Composer completes direct, Infra and subsequent queue dispatch using only visible tools
+  ✔ unapproved proposals neither dispatch work nor start Composer (0.572622ms)
+  ✔ approval starts exactly one persistent Composer (0.258479ms)
+  ✔ the actual Composer request asks for the now available Infra tool (0.482391ms)
+  ✔ the first batch runs directly as the Composer session (0.095318ms)
+  ✔ running work owns its exact local machine (0.043534ms)
+  ✔ busy approval preserves queued work and the original machine owner (0.236095ms)
+  ✔ second queued work reaches done through registered Infra dispatch (0.284992ms)
+  ✔ InfraOptimizer starts once with the Composer as its parent (0.085116ms)
+  ✔ InfraOptimizer uses its own batch worktree (0.089116ms)
+  ✔ Host records successful Infra completion and handoff (5.208044ms)
+  ✔ both execution routes finish separate batches (0.123809ms)
+  ✔ Infra execution releases machine capacity (0.04861ms)
+  ✔ the direct mission output belongs to its original mission branch (4.524995ms)
+  ✔ the Infra mission output belongs to its original mission branch (4.657201ms)
+  ✔ direct and Infra work each compute exactly once (1.29261ms)
+  ✔ unapproved third work remains untouched through both executions (0.217358ms)
+  ✔ completion events notify the original Composer (0.091411ms)
+  ✔ later approval wakes the existing Composer without a Leader dispatch command (0.457484ms)
+  ✔ all dispatch commands originate in the Composer session (0.871112ms)
+  ✔ later work uses the existing direct route exactly once (0.734809ms)
+  ✔ each mission retains a distinct result commit (0.212336ms)
+  ✔ completed continuation leaves no approved queue or occupied machine (0.105901ms)
+  ✔ registered visibility never requires a hidden-tool or Leader fallback (0.168146ms)
+✔ persistent Composer completes direct, Infra and subsequent queue dispatch using only visible tools (826.544861ms)
+(node:551267) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (439.593067ms)
+(node:551268) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (106.847887ms)
+✔ an activation without a child identity fails instead of writing a null record (66.116151ms)
+✔ an evaluation report stays attached to the commit it scored (194.495465ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (269.604161ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (115.25579ms)
+✔ evaluations accumulate and the best result follows the highest score (365.709752ms)
+ℹ tests 47
+ℹ suites 0
+ℹ pass 47
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1284.776984

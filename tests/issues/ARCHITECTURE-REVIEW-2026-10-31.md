@@ -18,7 +18,7 @@
 | [ALEPH-05](05-restart-recovery.md) | [#6](https://github.com/hapenia/aleph-research/issues/6) | 当前重启收尾残留已经复现，原自动恢复修复不能代替本轮结论。 | PR29 已通过独立自动与实际各 66 点，PR30 再与控制修复整合。普通重启继续保留仍在运行的计算，显式取消执行停止协议。 |
 | [ALEPH-06](06-mission-base-consistency.md) | [#7](https://github.com/hapenia/aleph-research/issues/7) | 最新主分支自动 159 点、实际 149 项全部通过。编排前合法修改被捕获，编排后推进明确拒绝不安全交付并保留后续提交。 | 当前已测范围不复现旧缺陷。旧 PR21 已关闭且未合并。 |
 | [ALEPH-07](07-research-strategy-instructions.md) | [#8](https://github.com/hapenia/aleph-research/issues/8) | 当前研究目标和上下文传递的自动 34 点、实际 34 点全部通过，联合预算套件共 64 点。后续目标更新传给新研究代理，不改写原代理初始上下文。 | 当前任务策略保存在任务清单，不存在旧 L0 至 L3 结构化机制；通过迁移说明记录。 |
-| [ALEPH-08](08-continuous-research.md) | [#9](https://github.com/hapenia/aleph-research/issues/9) | 当前自动 40 点有 1 点失败，实际 40 点有 7 点失败，同一根因为 Composer 的实际工具列表缺少 `aleph_run_infra`。直接运行路径可连续处理后续任务。 | C 正在修复工具权限；尚待 B 独立验收和修复拉取请求。忙碌预编排与多机器完整行为未验证。 |
+| [ALEPH-08](08-continuous-research.md) | [#9](https://github.com/hapenia/aleph-research/issues/9) | 当前自动 40 点有 1 点失败，实际 40 点有 7 点失败，同一根因为 Composer 的实际工具列表缺少 `aleph_run_infra`。直接运行路径可连续处理后续任务。 | PR31 已通过产品 47 项、独立自动与实际各 40 个有效点；实际 Composer 调用 Infra，未使用缺工具回退。忙碌预编排与多机器完整行为未验证。 |
 | [ALEPH-09](09-campaign-controls.md) | [#10](https://github.com/hapenia/aleph-research/issues/10) | 当前项目控制缺项已经复现；旧 campaign 控制接口不适合作为当前验收入口。 | PR26 提供暂停、继续、结束和取消，并通过独立自动 75 点、实际 77 项及重启 12 项；这些数量与 #14 的准备窗口共享，现由 PR30 整合。 |
 | [ALEPH-10](10-mission-reports.md) | [#11](https://github.com/hapenia/aleph-research/issues/11) | 当前报告与历史查询可以定位真实评分、源码及报告引用；自动父会话反馈仍有残留，已经独立实测。 | PR28 通过独立自动 58 点和实际 51 项，保留原父会话的原生自动结束通知。父会话丢失后的持久补投不在范围内。 |
 | [ALEPH-11](11-sota-selection-rollback.md) | [#12](https://github.com/hapenia/aleph-research/issues/12) | 当前已有选择最优接口，但移动已检出分支会使文件与引用不一致；自动 95 点有 10 点失败，实际 95 项确认。 | PR27 通过独立自动与实际各 116 点，移动前拒绝已检出目标并给出准确保存与切换说明。 |
@@ -33,11 +33,11 @@
 
 ## 已发布修复与尚未交付的工作
 
-当前 [PR24](https://github.com/hapenia/aleph-research/pull/24)、[PR25](https://github.com/hapenia/aleph-research/pull/25)、[PR26](https://github.com/hapenia/aleph-research/pull/26)、[PR27](https://github.com/hapenia/aleph-research/pull/27)、[PR28](https://github.com/hapenia/aleph-research/pull/28)、[PR29](https://github.com/hapenia/aleph-research/pull/29) 与 [PR30](https://github.com/hapenia/aleph-research/pull/30) 共 7 份请求开放，均未合并。PR30 整合 PR26 与 PR29，前序请求保持原提交，仅在正文说明整合关系。
+当前 [PR24](https://github.com/hapenia/aleph-research/pull/24)、[PR25](https://github.com/hapenia/aleph-research/pull/25)、[PR26](https://github.com/hapenia/aleph-research/pull/26)、[PR27](https://github.com/hapenia/aleph-research/pull/27)、[PR28](https://github.com/hapenia/aleph-research/pull/28)、[PR29](https://github.com/hapenia/aleph-research/pull/29) 、[PR30](https://github.com/hapenia/aleph-research/pull/30) 与 [PR31](https://github.com/hapenia/aleph-research/pull/31) 共 8 份请求开放，均未合并。PR30 整合 PR26 与 PR29，前序请求保持原提交，仅在正文说明整合关系。
 
 PR30 的准确提交为 `a85ccea4a6e7da7f2c56708627cbd1a873b7493a`，产品 Node 测试 262 项通过，其中有效行为点 232 个、父容器 30 个；B 独立自动和实际 DSH 各 105 个有效点通过。实际检查包括强制停止 Host 后保留原计算、原有定时器观察自然结束、准确释放及明确取消，支持范围继续限定为单 Host 写入。
 
-当前仍需交付 #9 的工具权限修复与正式独立验收，以及汇总最新架构差异的迁移说明拉取请求。迁移说明将记录已移除的旧接口、当前替代流程及尚未覆盖的需求，不以文档代替功能实现。上游关闭议题、关闭旧拉取请求或本轮通过测试，均不能自动表示全部需求已经解决。
+PR31 的准确提交为 `12325013bec147895a6b8e58c3b910bc239b78f9`，解决 #9 的 Composer 工具权限缺口。当前仍需交付汇总最新架构差异的迁移说明拉取请求。迁移说明将记录已移除的旧接口、当前替代流程及尚未覆盖的需求，不以文档代替功能实现。上游关闭议题、关闭旧拉取请求或本轮通过测试，均不能自动表示全部需求已经解决。
 
 ## 状态与历史维护
 
