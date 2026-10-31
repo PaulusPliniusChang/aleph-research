@@ -19,6 +19,7 @@
   },
   "files": [
     "index-v2.js",
+    "batch-process.py",
     "client.js",
     "cordis.patch.yml",
     "locale/*.json",

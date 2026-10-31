@@ -7,11 +7,12 @@
  * optimized and run by InfraOptimizer, and their results are cherry-picked
  * back to the pre-batch mission branch.
  */
-import { execFile } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, readlink, rm, stat, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
+import { fileURLToPath } from 'node:url';
 
 import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain';
 import { defineTool } from '@deepseek-ai/dsh-tools';
@@ -20,6 +21,7 @@ import { z } from 'zod';
 const execFileAsync = promisify(execFile);
 const DOMAIN_NAME = 'aleph_project';
 const HANDOFF_FILE = 'ALEPH_HANDOFF.md';
+const startingBatches = new Set();
 
 const missionSchema = z.object({
   id: z.string(),
@@ -51,6 +53,11 @@ const batchSchema = z.object({
   startedAt: z.string().nullable().optional(),
   finishedAt: z.string().nullable().optional(),
   summary: z.unknown().nullable().optional(),
+  execution: z.object({
+    id: z.string(),
+    worktree: z.string(),
+    stateFile: z.string(),
+  }).nullable().optional(),
 });
 
 const machineSchema = z.object({
@@ -194,6 +201,78 @@ function parseScore(stdout) {
   return null;
 }
 
+// The cwd check also finds legacy runners which predate execution records. A
+// numeric PID alone is insufficient after a restart because PIDs are reused.
+async function batchProcesses(worktree, execution) {
+  const identified = execution?.cwd === worktree && Number.isSafeInteger(execution.pid) && execution.startTicks;
+  if (identified) {
+    try {
+      const raw = await readFile(`/proc/${execution.pid}/stat`, 'utf8');
+      const fields = raw.slice(raw.lastIndexOf(')') + 2).split(' ');
+      if (fields[19] === execution.startTicks && !['Z', 'X'].includes(fields[0])) {
+        const cwd = await readlink(`/proc/${execution.pid}/cwd`);
+        if (cwd.replace(/ \(deleted\)$/, '') === worktree) {
+          return { active: [{ pid: execution.pid, startTicks: fields[19], cwd }], uncertain: null };
+        }
+      }
+    } catch (error) {
+      if (!['ENOENT', 'ESRCH'].includes(error.code)) {
+        return { active: [], uncertain: `cannot inspect recorded batch process ${execution.pid}: ${error.message}` };
+      }
+    }
+    // A normal supervisor exit is written only after its batch runner exits.
+    if (execution.status === 'finished') return { active: [], uncertain: null };
+  }
+  let entries;
+  try {
+    entries = await readdir('/proc');
+  } catch {
+    return { active: [], uncertain: 'cannot inspect local batch processes on this platform' };
+  }
+  const active = [];
+  let uncertain = null;
+  for (const pid of entries.filter((entry) => /^\d+$/.test(entry))) {
+    try {
+      const info = await stat(`/proc/${pid}`);
+      if (typeof process.getuid === 'function' && info.uid !== process.getuid()) continue;
+      const raw = await readFile(`/proc/${pid}/stat`, 'utf8');
+      const fields = raw.slice(raw.lastIndexOf(')') + 2).split(' ');
+      if (['Z', 'X'].includes(fields[0])) continue;
+      let cwd;
+      try {
+        cwd = await readlink(`/proc/${pid}/cwd`);
+      } catch (error) {
+        if (!['EACCES', 'EPERM'].includes(error.code)) throw error;
+        // Desktop/session services can share our uid but deny cwd inspection.
+        // Their readable argv can exclude them without blocking every legacy
+        // batch. Keep uncertainty for runners or an unreadable command line.
+        const args = (await readFile(`/proc/${pid}/cmdline`, 'utf8')).split('\0');
+        const relevant = args.some((arg) => arg === worktree || arg.startsWith(`${worktree}/`)
+          || /(^|\/)batch(?:_runner\.py|-process\.py)$/.test(arg));
+        if (!relevant) continue;
+        throw error;
+      }
+      const normalized = cwd.replace(/ \(deleted\)$/, '');
+      if (normalized !== worktree && !normalized.startsWith(`${worktree}/`)) continue;
+      active.push({ pid: Number(pid), startTicks: fields[19], cwd });
+    } catch (error) {
+      if (!identified && !['ENOENT', 'ESRCH'].includes(error.code)) uncertain = `cannot inspect local process ${pid}: ${error.message}`;
+    }
+  }
+  return { active, uncertain };
+}
+
+async function executionState(file, executionId) {
+  try {
+    const state = JSON.parse(await readFile(file, 'utf8'));
+    return !executionId || state.id === executionId ? state : null;
+  } catch {
+    return null;
+  }
+}
+
+const pause = (milliseconds) => new Promise((resolvePause) => setTimeout(resolvePause, milliseconds));
+
 class ProjectService {
   constructor(ctx, domain, deps) {
     this.ctx = ctx;
@@ -202,6 +281,8 @@ class ProjectService {
     this.subagents = deps.subagents;
     this.agentPresets = deps.agentPresets;
     this.writeChain = Promise.resolve();
+    this.recoveringBatches = new Map();
+    this.stopped = false;
   }
 
   list() {
@@ -341,28 +422,164 @@ class ProjectService {
   }
 
   async runBatch({ projectId, batchId }) {
-    const project = this.get(projectId);
-    if (!project) throw new Error(`project not found: ${projectId}`);
-    const batch = project.batches.find((item) => item.id === batchId);
-    if (!batch) throw new Error(`batch not found: ${batchId}`);
-    if (batch.status !== 'forming') throw new Error(`batch ${batchId} is not runnable (status ${batch.status})`);
-    const missionRecords = project.missions.filter((mission) => batch.missionIds.includes(mission.id));
-    const worktreesRoot = join(project.workspace, '.aleph', 'batches');
-    const batchWorktree = join(worktreesRoot, batchId);
-    await mkdir(worktreesRoot, { recursive: true });
-    await rm(batchWorktree, { recursive: true, force: true });
-    await git(project.missionRoot, ['worktree', 'add', '--detach', batchWorktree, batch.branch]);
-    const startedAt = now();
-    let runnerError = null;
-    try {
-      await run('python3', ['batch_runner.py'], { cwd: batchWorktree, timeout: 900_000 });
-      runnerError = null;
-    } catch (error) {
-      runnerError = error instanceof Error ? error.message : String(error);
+    const existing = this.get(projectId);
+    if (!existing) throw new Error(`project not found: ${projectId}`);
+    const oldBatch = existing.batches.find((item) => item.id === batchId);
+    if (!oldBatch) throw new Error(`batch not found: ${batchId}`);
+    const worktree = join(existing.workspace, '.aleph', 'batches', batchId);
+    // A legacy run may have no execution record. Its worktree must be inspected,
+    // never removed and recreated by a retry.
+    if (oldBatch.status === 'running' || (oldBatch.status === 'forming' && await pathExists(worktree))) {
+      await this.recoverBatch(projectId, batchId);
+      return this.get(projectId);
     }
+    const key = `${existing.workspace}:${batchId}`;
+    const execution = { id: randomUUID(), worktree, stateFile: `${worktree}.execution.json` };
+    let claimed = false;
+    let ownsStartGuard = false;
+    try {
+      const project = await this.mutate(projectId, (current) => {
+        const batch = current.batches.find((item) => item.id === batchId);
+        if (batch?.status !== 'forming') throw new Error(`batch ${batchId} is not runnable (status ${batch?.status})`);
+        if (!current.machines.some((item) => item.id === batch.machineId && item.batchId === batchId && item.status === 'busy')) {
+          throw new Error(`batch ${batchId} does not own its machine`);
+        }
+        startingBatches.add(key);
+        ownsStartGuard = true;
+        return {
+          ...current,
+          batches: current.batches.map((item) => item.id === batchId ? { ...item, status: 'running', startedAt: now(), execution } : item),
+          missions: current.missions.map((item) => batch.missionIds.includes(item.id) && item.status === 'batched' ? { ...item, status: 'running' } : item),
+        };
+      });
+      claimed = true;
+      const batch = project.batches.find((item) => item.id === batchId);
+      await mkdir(join(project.workspace, '.aleph', 'batches'), { recursive: true });
+      await git(project.missionRoot, ['worktree', 'add', '--detach', worktree, batch.branch]);
+      const supervisor = fileURLToPath(new URL('./batch-process.py', import.meta.url));
+      const child = spawn('python3', [supervisor, execution.stateFile, execution.id], {
+        cwd: worktree, detached: true, stdio: 'ignore',
+      });
+      await new Promise((resolveSpawn, rejectSpawn) => {
+        child.once('spawn', resolveSpawn);
+        child.once('error', rejectSpawn);
+      });
+      child.unref();
+      // Keep the start guard until the supervisor has published its identity.
+      for (let attempt = 0; attempt < 100; attempt++) {
+        if (await executionState(execution.stateFile, execution.id)) break;
+        await pause(20);
+      }
+    } catch (error) {
+      if (!claimed) throw error;
+      await this.failBatch(projectId, batchId, `batch startup failed: ${error.message}`);
+      return this.get(projectId);
+    } finally {
+      if (ownsStartGuard) startingBatches.delete(key);
+    }
+    while (!this.stopped && this.get(projectId).batches.find((item) => item.id === batchId)?.status === 'running') {
+      await this.recoverBatch(projectId, batchId);
+      if (this.get(projectId).batches.find((item) => item.id === batchId)?.status === 'running') await pause(250);
+    }
+    return this.get(projectId);
+  }
 
+  async failBatch(projectId, batchId, error) {
+    return this.mutate(projectId, (current) => {
+      const batch = current.batches.find((item) => item.id === batchId);
+      return {
+        ...current,
+        batches: current.batches.map((item) => item.id === batchId ? {
+          ...item, status: 'failed', finishedAt: now(), summary: { ...item.summary, runnerError: error },
+        } : item),
+        missions: current.missions.map((item) => batch.missionIds.includes(item.id) && !['done', 'failed'].includes(item.status) ? {
+          ...item, status: 'failed', error, finishedAt: now(),
+        } : item),
+        machines: current.machines.map((item) => item.batchId === batchId ? { ...item, status: 'idle', batchId: null } : item),
+      };
+    });
+  }
+
+  async recoverBatches() {
+    if (this.stopped) return;
+    for (const project of this.list()) {
+      for (const batch of project.batches) {
+        if (!['forming', 'running'].includes(batch.status)) continue;
+        const worktree = join(project.workspace, '.aleph', 'batches', batch.id);
+        if (batch.status === 'running' || batch.execution || await pathExists(worktree)) await this.recoverBatch(project.id, batch.id);
+      }
+    }
+  }
+
+  async recoverBatch(projectId, batchId) {
+    const key = `${projectId}:${batchId}`;
+    if (this.recoveringBatches.has(key)) return this.recoveringBatches.get(key);
+    const pending = this.reconcileBatch(projectId, batchId);
+    this.recoveringBatches.set(key, pending);
+    try { return await pending; }
+    finally { this.recoveringBatches.delete(key); }
+  }
+
+  async reconcileBatch(projectId, batchId) {
+    const project = this.get(projectId);
+    const batch = project?.batches.find((item) => item.id === batchId);
+    if (!batch || !['forming', 'running'].includes(batch.status)) return;
+    if (startingBatches.has(`${project.workspace}:${batchId}`)) return;
+    const worktree = join(project.workspace, '.aleph', 'batches', batchId);
+    const state = await executionState(`${worktree}.execution.json`, batch.execution?.id);
+    const processes = await batchProcesses(worktree, state);
+    if (processes.active.length || processes.uncertain) {
+      const recovery = processes.uncertain || 'original batch processes are still running; observing without restarting';
+      if (batch.status !== 'running' || batch.summary?.recovery !== recovery) {
+        await this.mutate(projectId, (current) => ({
+          ...current,
+          batches: current.batches.map((item) => item.id === batchId ? { ...item, status: 'running', summary: { ...item.summary, recovery } } : item),
+        }));
+      }
+      return;
+    }
+    const completed = state?.status === 'finished';
+    const legacyComplete = !batch.execution && await pathExists(join(worktree, 'results', 'batch.json'));
+    let runnerError = completed
+      ? (state.exitCode === 0 ? null : state.error || `batch runner exited with code ${state.exitCode}`)
+      : (legacyComplete ? null : 'batch execution interrupted before completion; preserved execution files require inspection');
+    try {
+      await this.deliverBatch(project, batch, worktree, runnerError);
+    } catch (error) {
+      await this.failBatch(projectId, batchId, `batch recovery failed: ${error.message}`);
+    }
+  }
+
+  async retainedWorktree(project, directory, ref) {
+    if (!(await pathExists(directory))) {
+      await git(project.missionRoot, ['worktree', 'add', '--detach', directory, ref]);
+    } else {
+      const actual = (await git(directory, ['rev-parse', '--show-toplevel'])).stdout.trim();
+      if (resolve(actual) !== resolve(directory)) throw new Error(`unrecognized retained worktree: ${directory}`);
+    }
+  }
+
+  async deliveredResult(project, mission, batch, manifestId) {
+    try {
+      const resultPath = `results/${manifestId}/result.json`;
+      const raw = await git(project.missionRoot, ['show', `${mission.branch}:${resultPath}`]);
+      const envelope = JSON.parse(raw.stdout);
+      if (envelope.batch_id !== batch.id || envelope.mission_id !== manifestId) return null;
+      const resultCommit = (await git(project.missionRoot, ['log', '-1', '--format=%H', mission.branch, '--', resultPath])).stdout.trim();
+      return { resultCommit, envelope };
+    } catch { return null; }
+  }
+
+  async deliverBatch(project, batch, batchWorktree, runnerError) {
+    const missionRecords = this.get(project.id).missions.filter((mission) => batch.missionIds.includes(mission.id));
+    const worktreesRoot = join(project.workspace, '.aleph', 'batches');
     const outcomes = [];
     for (const mission of missionRecords) {
+      if (mission.resultCommit && ['done', 'failed'].includes(mission.status)) {
+        outcomes.push({ missionId: mission.id, manifestId: mission.manifestId, manifestPath: mission.manifestPath,
+          status: mission.status, resultCommit: mission.resultCommit, envelope: { error: mission.error } });
+        continue;
+      }
       let manifestPath = mission.manifestPath;
       let manifestId = mission.manifestId;
       if (!manifestPath) {
@@ -386,7 +603,7 @@ class ProjectService {
         batch_id: batch.id,
         machine_id: batch.machineId,
         status: runnerError ? 'failed' : 'done',
-        started_at: startedAt,
+        started_at: batch.startedAt ?? batch.createdAt,
         finished_at: now(),
         metrics: {},
         artifacts: [],
@@ -411,53 +628,63 @@ class ProjectService {
       const resultWorktree = join(worktreesRoot, `${batch.id}-${mission.id}-result`);
       const missionWorktree = join(worktreesRoot, `${batch.id}-${mission.id}-mission`);
       try {
-        await git(project.missionRoot, ['worktree', 'add', '--detach', resultWorktree, batch.branch]);
-        const target = join(resultWorktree, 'results', manifestId);
-        await mkdir(target, { recursive: true });
-        await writeFile(join(target, 'result.json'), JSON.stringify(envelope, null, 2), 'utf8');
-        await git(resultWorktree, ['add', '-A']);
-        await git(resultWorktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m',
-          `mission result ${mission.id}\n\nAleph-Mission: ${mission.id}\nAleph-Batch: ${batch.id}\nAleph-Machine: ${batch.machineId}`]);
-        resultCommit = (await git(resultWorktree, ['rev-parse', 'HEAD'])).stdout.trim();
-        await git(project.missionRoot, ['worktree', 'add', '--detach', missionWorktree, mission.preBatchTip ?? mission.branch]);
-        await git(missionWorktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'cherry-pick', resultCommit]);
-        const newTip = (await git(missionWorktree, ['rev-parse', 'HEAD'])).stdout.trim();
-        resultCommit = newTip;
-        await git(project.missionRoot, ['branch', '-f', mission.branch, newTip]);
+        const delivered = await this.deliveredResult(project, mission, batch, manifestId);
+        if (delivered) {
+          resultCommit = delivered.resultCommit;
+          envelope = delivered.envelope;
+        } else {
+          await this.retainedWorktree(project, resultWorktree, batch.branch);
+          const target = join(resultWorktree, 'results', manifestId);
+          await mkdir(target, { recursive: true });
+          const resultPath = `results/${manifestId}/result.json`;
+          let prepared = false;
+          try {
+            const old = JSON.parse((await git(resultWorktree, ['show', `HEAD:${resultPath}`])).stdout);
+            const message = (await git(resultWorktree, ['log', '-1', '--format=%B'])).stdout;
+            prepared = old.batch_id === batch.id && old.mission_id === manifestId && message.includes(`Aleph-Mission: ${mission.id}`);
+            if (prepared) envelope = old;
+          } catch { /* No result commit was prepared before interruption. */ }
+          if (!prepared) {
+            await writeFile(join(target, 'result.json'), JSON.stringify(envelope, null, 2), 'utf8');
+            await git(resultWorktree, ['add', '--', resultPath]);
+            await git(resultWorktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m',
+              `mission result ${mission.id}\n\nAleph-Mission: ${mission.id}\nAleph-Batch: ${batch.id}\nAleph-Machine: ${batch.machineId}`]);
+          }
+          const preparedCommit = (await git(resultWorktree, ['rev-parse', 'HEAD'])).stdout.trim();
+          const oldTip = mission.preBatchTip ?? (await git(project.missionRoot, ['rev-parse', mission.branch])).stdout.trim();
+          await this.retainedWorktree(project, missionWorktree, oldTip);
+          const missionTip = (await git(missionWorktree, ['rev-parse', 'HEAD'])).stdout.trim();
+          if (missionTip === oldTip) {
+            await git(missionWorktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'cherry-pick', preparedCommit]);
+          } else {
+            const retained = JSON.parse((await git(missionWorktree, ['show', `HEAD:${resultPath}`])).stdout);
+            if (retained.batch_id !== batch.id || retained.mission_id !== manifestId) throw new Error('retained mission result does not match batch');
+          }
+          const newTip = (await git(missionWorktree, ['rev-parse', 'HEAD'])).stdout.trim();
+          await git(project.missionRoot, ['update-ref', `refs/heads/${mission.branch}`, newTip, oldTip]);
+          resultCommit = newTip;
+        }
       } catch (error) {
         envelope.status = 'failed';
         envelope.error = error instanceof Error ? error.message : String(error);
-      } finally {
-        await git(project.missionRoot, ['worktree', 'remove', '--force', resultWorktree]).catch(() => undefined);
-        await git(project.missionRoot, ['worktree', 'remove', '--force', missionWorktree]).catch(() => undefined);
-        await rm(resultWorktree, { recursive: true, force: true }).catch(() => undefined);
-        await rm(missionWorktree, { recursive: true, force: true }).catch(() => undefined);
       }
       outcomes.push({ missionId: mission.id, manifestId, manifestPath, status: envelope.status, resultCommit, envelope });
+      await this.mutate(project.id, (current) => ({
+        ...current,
+        missions: current.missions.map((item) => item.id === mission.id ? {
+          ...item, manifestId, manifestPath, status: envelope.status === 'done' ? 'done' : 'failed',
+          resultCommit, error: envelope.error ?? null, finishedAt: now(),
+        } : item),
+      }));
     }
 
-    await git(project.missionRoot, ['worktree', 'remove', '--force', batchWorktree]).catch(() => undefined);
-    await rm(batchWorktree, { recursive: true, force: true }).catch(() => undefined);
-    return this.mutate(projectId, (current) => ({
+    return this.mutate(project.id, (current) => ({
       ...current,
-      machines: current.machines.map((item) => item.id === batch.machineId ? { ...item, status: 'idle', batchId: null } : item),
-      missions: current.missions.map((mission) => {
-        const outcome = outcomes.find((item) => item.missionId === mission.id);
-        if (!outcome) return mission;
-        return {
-          ...mission,
-          manifestId: outcome.manifestId,
-          manifestPath: outcome.manifestPath,
-          status: outcome.status === 'done' ? 'done' : 'failed',
-          resultCommit: outcome.resultCommit,
-          error: outcome.envelope.error ?? null,
-          finishedAt: now(),
-        };
-      }),
+      machines: current.machines.map((item) => item.batchId === batch.id ? { ...item, status: 'idle', batchId: null } : item),
       batches: current.batches.map((item) => item.id === batch.id ? {
         ...item,
         status: runnerError ? 'failed' : (outcomes.every((outcome) => outcome.status === 'done') ? 'done' : 'failed'),
-        startedAt,
+        startedAt: item.startedAt ?? batch.createdAt,
         finishedAt: now(),
         summary: { runnerError, missions: outcomes.map(({ envelope, ...rest }) => rest) },
       } : item),
@@ -739,6 +966,24 @@ export async function apply(ctx) {
   const subagents = ctx.get('subagents');
   const agentPresets = ctx.get('agentPresets');
   const service = new ProjectService(ctx, domain, { sessions, subagents, agentPresets });
+  await service.recoverBatches();
+  let recoveryPending = null;
+  let recoveryStopped = false;
+  const recoveryTimer = setInterval(async () => {
+    if (recoveryPending || recoveryStopped) return;
+    recoveryPending = service.recoverBatches();
+    try { await recoveryPending; }
+    catch (error) { ctx.logger?.warn?.(`Aleph batch recovery failed: ${error.message}`); }
+    finally { recoveryPending = null; }
+  }, 1000);
+  recoveryTimer.unref();
+  ctx.effect(() => async () => {
+    recoveryStopped = true;
+    service.stopped = true;
+    clearInterval(recoveryTimer);
+    if (recoveryPending) await recoveryPending.catch(() => undefined);
+    for (const pending of service.recoveringBatches.values()) await pending.catch(() => undefined);
+  });
 
   const presetOf = (agent) => {
     if (!sessions || !agentPresets) return null;
