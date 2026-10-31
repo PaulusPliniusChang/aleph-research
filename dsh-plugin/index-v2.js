@@ -14,6 +14,7 @@ import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promi
 import { dirname, join, resolve } from 'node:path';
 import os from 'node:os';
 import { promisify } from 'node:util';
+import { runEvaluation } from './evaluation-process.mjs';
 
 import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain';
 import { defineTool } from '@deepseek-ai/dsh-tools';
@@ -239,6 +240,7 @@ class ProjectService {
     this.subagents = deps.subagents;
     this.agentPresets = deps.agentPresets;
     this.writeChain = Promise.resolve();
+    this.evaluationCleanup = new Map();
   }
 
   list() {
@@ -741,6 +743,8 @@ class ProjectService {
   async evaluate({ projectId, agent, branch = null }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
+    for (const cleanup of this.evaluationCleanup.get(projectId) ?? []) await cleanup();
+    this.evaluationCleanup.delete(projectId);
     const owner = agent?.id ?? null;
     const pending = project.missions.filter((mission) => (
       mission.ownerSession === owner && ['proposed', 'approved', 'batched', 'running'].includes(mission.status)
@@ -788,14 +792,27 @@ class ProjectService {
     let score = null;
     let stdout = '';
     let stderr = '';
+    let evaluationStopped = false;
     try {
       // The evaluator lives beside the project; it reads the scored branch through ALEPH_SOLUTION_DIR.
-      const result = await run('bash', ['-lc', project.evalCommand], { cwd: project.evalRoot || project.workspace, env, timeout: 600_000 });
+      const result = await runEvaluation('bash', ['-lc', project.evalCommand], { cwd: project.evalRoot || project.workspace, env, timeout: 600_000 });
+      evaluationStopped = true;
       stdout = result.stdout;
       stderr = result.stderr;
       score = parseScore(stdout)?.score ?? null;
+    } catch (error) {
+      evaluationStopped = error.evaluationStopped === true;
+      if (!evaluationStopped) {
+        if (typeof error.retryCleanup === 'function') {
+          const cleanups = this.evaluationCleanup.get(projectId) ?? new Set();
+          cleanups.add(error.retryCleanup);
+          this.evaluationCleanup.set(projectId, cleanups);
+        }
+        error.message += `; research worktree retained at ${worktree}`;
+      }
+      throw error;
     } finally {
-      if (temporary && worktree) {
+      if (temporary && worktree && evaluationStopped) {
         await git(project.researchRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
         await rm(worktree, { recursive: true, force: true }).catch(() => undefined);
       }

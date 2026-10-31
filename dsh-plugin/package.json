@@ -19,6 +19,7 @@
   },
   "files": [
     "index-v2.js",
+    "evaluation-process.mjs",
     "client.js",
     "cordis.patch.yml",
     "locale/*.json",
