@@ -93,6 +93,8 @@ const projectSchema = z.object({
   missions: z.array(missionSchema),
   batches: z.array(batchSchema),
   violations: z.array(z.string()).optional(),
+  evaluations: z.array(z.any()).optional(),
+  best: z.any().nullable().optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -338,6 +340,19 @@ class ProjectService {
     };
     await this.table.put(project.id, project);
     return project;
+  }
+
+  /** Point a research branch at the best evaluated commit, so a later iteration starts from it. */
+  async selectBest({ projectId, branch = 'main' }) {
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    const best = project.best;
+    if (!best?.commit) throw new Error('no evaluated best result yet');
+    const ref = branch.startsWith('refs/') ? branch : `refs/heads/${branch}`;
+    const current = (await git(project.researchRoot, ['rev-parse', '--verify', ref]).catch(() => ({ stdout: '' }))).stdout.trim();
+    if (!current) throw new Error(`research branch not found: ${branch}`);
+    await git(project.researchRoot, ['update-ref', '-m', `select best ${best.commit}`, ref, best.commit, current]);
+    return { projectId, branch, commit: best.commit, score: best.score, previous: current };
   }
 
   async setPython({ projectId, pythonPath }) {
@@ -801,8 +816,22 @@ class ProjectService {
         // The branch moved on; the evaluation ref still preserves this report.
       }
     }
+    const record = {
+      id: evaluationId, branch: targetRef ? targetRef.replace(/^refs\/heads\//, '') : null,
+      evaluatedCommit, researchCommit, evaluationRef, score, at: now(),
+    };
+    const updated = await this.mutate(projectId, (current) => {
+      const best = current.best ?? null;
+      const better = typeof score === 'number' && (!best || typeof best.score !== 'number' || score > best.score);
+      return {
+        ...current,
+        evaluations: [...(current.evaluations ?? []), record].slice(-200),
+        best: better ? { score, branch: record.branch, commit: evaluatedCommit, researchCommit, evaluationRef, at: record.at } : best,
+      };
+    });
     return {
       status: 'done', projectId, score, researchCommit, evaluatedCommit, evaluationRef, researchBranchUpdated,
+      best: updated.best ?? null,
       stdout: stdout.slice(0, 8000), stderr: stderr.slice(0, 4000),
     };
   }
@@ -1442,6 +1471,8 @@ function snapshot(project) {
       template_branch: project.templateBranch,
       eval_command: project.evalCommand,
       eval_root: project.evalRoot ?? null,
+      best: project.best ?? null,
+      evaluations: (project.evaluations ?? []).slice(-20),
       brief: project.brief ?? '',
       researcher_count: project.researcherCount ?? 4,
       prepared: project.prepared === true,
@@ -1795,6 +1826,22 @@ export async function apply(ctx) {
   });
   // Retry a terminal batch: failed missions go back to the approved queue and a fresh
   // batch is formed from the same mission branches.
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/select-best',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const result = await service.selectBest({ projectId: args.project_id ?? args.projectId, branch: args.branch ?? 'main' });
+        return sendJson(res, 200, { ok: true, ...result });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/select-best-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
   ctx.webServer.register({
     kind: 'exact',
     path: '/api/aleph/retry',

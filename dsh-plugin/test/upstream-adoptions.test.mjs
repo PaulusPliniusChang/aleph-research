@@ -218,3 +218,45 @@ test('a Host restart frees the machine and fails interrupted work', async () => 
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test('evaluations accumulate and the best result follows the highest score', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'aleph-best-'));
+  try {
+    const workspace = join(root, 'workspace');
+    await mkdir(workspace, { recursive: true });
+    const service = new ProjectService({}, { table: () => table() }, {});
+    const project = await service.init({
+      workspace,
+      // The evaluator scores from a file the branch carries, so two branches can differ.
+      // The evaluator runs beside the project and reads the scored branch from ALEPH_SOLUTION_DIR.
+      evalCommand: "python3 -c \"import json,os,pathlib;root=pathlib.Path(os.environ['ALEPH_SOLUTION_DIR']);print(json.dumps({'score': float((root/'score.txt').read_text())}))\"",
+    });
+    const research = project.researchRoot;
+    await writeFile(join(research, 'score.txt'), '1\n');
+    git(research, ['add', '-A']);
+    git(research, [...identity(research), 'commit', '-m', 'score 1']);
+    const low = await service.evaluate({ projectId: project.id, branch: 'main' });
+    assert.equal(low.score, 1);
+
+    await writeFile(join(research, 'score.txt'), '3\n');
+    git(research, ['add', '-A']);
+    git(research, [...identity(research), 'commit', '-m', 'score 3']);
+    const high = await service.evaluate({ projectId: project.id, branch: 'main' });
+    assert.equal(high.score, 3);
+
+    const state = service.get(project.id);
+    assert.equal(state.evaluations.length, 2);
+    assert.equal(state.best.score, 3);
+    assert.equal(state.best.commit, high.evaluatedCommit);
+
+    // A weaker later evaluation must not displace the best result.
+    await writeFile(join(research, 'score.txt'), '2\n');
+    git(research, ['add', '-A']);
+    git(research, [...identity(research), 'commit', '-m', 'score 2']);
+    await service.evaluate({ projectId: project.id, branch: 'main' });
+    assert.equal(service.get(project.id).best.score, 3);
+    assert.equal(service.get(project.id).evaluations.length, 3);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
