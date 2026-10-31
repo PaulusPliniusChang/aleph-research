@@ -1379,6 +1379,77 @@ export async function apply(ctx) {
       return sendJson(res, 200, { ok: true, version: '0.3.0', storage: DOMAIN_NAME });
     },
   });
+  // Operator automation: drive the mission pipeline without an LLM turn, so a case can be
+  // replayed headlessly. Only missions whose branch has no terminal mission are approved.
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/approve',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const projectId = args.project_id ?? args.projectId;
+        const project = service.get(projectId);
+        if (!project) return sendJson(res, 404, { ok: false, error: { code: 'aleph/no-project' } });
+        const terminalBranches = new Set(project.missions.filter((mission) => ['done', 'failed', 'batched'].includes(mission.status)).map((mission) => mission.branch));
+        const wanted = args.mission_id ? [args.mission_id] : project.missions.filter((mission) => mission.status === 'proposed').map((mission) => mission.id);
+        const approved = [];
+        const skipped = [];
+        for (const id of wanted) {
+          const mission = project.missions.find((item) => item.id === id);
+          if (!mission || mission.status !== 'proposed') { skipped.push({ id, reason: 'not proposed' }); continue; }
+          if (terminalBranches.has(mission.branch)) { skipped.push({ id, reason: 'branch already has a terminal mission' }); continue; }
+          await service.approve({ projectId, missionId: id });
+          approved.push({ id, branch: mission.branch });
+        }
+        return sendJson(res, 200, { ok: true, approved, skipped });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/approve-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/batch',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const projectId = args.project_id ?? args.projectId;
+        const formed = await service.formBatch({ projectId, machineId: args.machine_id ?? 'local' });
+        const batch = formed.batches[formed.batches.length - 1];
+        return sendJson(res, 200, { ok: true, batch: { id: batch.id, mission_ids: batch.missionIds, branch: batch.branch } });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/batch-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/run',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const projectId = args.project_id ?? args.projectId;
+        const ran = await service.runBatch({ projectId, batchId: args.batch_id ?? args.batchId });
+        const batch = ran.batches.find((item) => item.id === (args.batch_id ?? args.batchId));
+        return sendJson(res, 200, {
+          ok: batch?.status === 'done',
+          batch: { id: batch?.id, status: batch?.status },
+          missions: ran.missions.map((mission) => ({ id: mission.id, status: mission.status, result_commit: mission.resultCommit, error: mission.error })),
+        });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/run-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
 }
 
 export { ProjectService, snapshot };
