@@ -864,12 +864,13 @@ class ProjectService {
       'Small work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.',
       'After proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.',
       'When all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state.',
+      'In your final message, summarize the research outcome and quote the actual final aleph_evaluate return fields: status, score, researchCommit, evaluatedCommit and evaluationRef. If evaluation did not complete, report its actual status or error instead of inventing a score or report reference.',
     ].join('\n');
     const abort = new AbortController();
     let activation;
     try {
       activation = await this.subagents.startActivation({
-        provider: 'spawn', label: `aleph researcher ${project.id}`, delivery: 'caller', signal: abort.signal,
+        provider: 'spawn', label: `aleph researcher ${project.id}`, delivery: 'parent', signal: abort.signal,
         request: { parent: agent, cwd: worktree, agentPreset: 'aleph-researcher', prompt: [{ type: 'text', text: prompt }] },
       });
     } catch (error) {

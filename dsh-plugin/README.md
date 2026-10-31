@@ -14,6 +14,17 @@ subagents. The client entry adds the `Aleph` project console.
 - `aleph-composer`: batch composition and conflict handling.
 - `aleph-infra`: machine-specific batch code optimization.
 
+Researcher activations use DSH's native `parent` delivery so the original Leader
+receives a settlement notice with the researcher's closing message, even when
+the researcher does not call `send_message`. The prompt asks the researcher to
+include the actual final evaluation status, score and commit/report references;
+these fields depend on the researcher's output. Aleph separately records the
+researcher's status and summary from `activation.result`.
+
+The native notice can arrive before that status write completes. Delivery
+requires the original parent Agent to remain available; Aleph does not retry
+unavailable or replaced parents, or create an additional completion message.
+
 ## Install
 
 ```bash

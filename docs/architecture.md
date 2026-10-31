@@ -65,6 +65,21 @@ The researcher waits only for missions owned by its session. When those missions
 are done, `aleph_evaluate` evaluates the research branch; the Host writes the
 evaluation report into the research commit message and the researcher finishes.
 
+Researcher activations select DSH's native `delivery: 'parent'`. After child
+cleanup, DSH sends its settlement notice to the original parent Agent, including
+the closing text (or noting a result already sent explicitly). This return does
+not depend on the researcher calling `send_message`. The researcher prompt asks
+for the final evaluation's actual `status`, `score`, `researchCommit`,
+`evaluatedCommit` and `evaluationRef`; the Host does not synthesize these fields
+into the closing text or guarantee that the model includes them.
+
+Aleph's separate `activation.result` callback updates only that child's running
+record. The native notification precedes this callback, so the Leader may see
+the notice before the stored completion status. DSH delivers only to the
+captured live parent Agent, not a replacement with the same identifier; a
+missing parent or delivery error has no Aleph retry or outbox guarantee.
+Composer and InfraOptimizer continue to use caller delivery.
+
 ## Current boundaries
 
 - One local machine; multi-machine is an interface extension.
