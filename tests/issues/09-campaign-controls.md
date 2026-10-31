@@ -3,14 +3,14 @@ id: ALEPH-09
 status: dsh实测有问题
 type: 功能缺项
 remote_issue: https://github.com/hapenia/aleph-research/issues/10
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/26
 ---
 
 # 研究过程缺少暂停、恢复、取消和结束操作
 
 ## 当前修复验收
 
-修复提交为 `b1f9f048ae8cc7569e6a9e36dcafe119f2c02783`，派生分支为 `fix/aleph-09-project-controls`，基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。修复提供 Leader 正式工具及经过 DSH 外层登录认证的 HTTP 操作：项目暂停、恢复、结束，排队任务取消，以及整批运行取消。暂停阻止新派发，已有计算继续执行；结束关闭派发并等待已接纳工作完成；取消确认实际停止后才释放机器，保留工作树、原任务分支及诊断。尚不能确认停止时，操作保持 `complete:false`、取消中及机器占用状态。
+上游拉取请求为 [PR #26](https://github.com/hapenia/aleph-research/pull/26)，尚未合并。修复提交为 `b1f9f048ae8cc7569e6a9e36dcafe119f2c02783`，派生分支为 `fix/aleph-09-project-controls`，基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。修复提供 Leader 正式工具及经过 DSH 外层登录认证的 HTTP 操作：项目暂停、恢复、结束，排队任务取消，以及整批运行取消。暂停阻止新派发，已有计算继续执行；结束关闭派发并等待已接纳工作完成；取消确认实际停止后才释放机器，保留工作树、原任务分支及诊断。尚不能确认停止时，操作保持 `complete:false`、取消中及机器占用状态。
 
 批次执行权在目录操作之前取得，因此同一修复同时覆盖原议题 #14 的 InfraOptimizer 准备窗口。该窗口尚未启动优化模型；后续独立阶段另外启动真实优化模型、通过 Bash 写入文件并验证取消后文件保留，准备与活动阶段的证据分别记录。
 
