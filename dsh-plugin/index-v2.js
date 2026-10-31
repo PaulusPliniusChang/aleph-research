@@ -67,6 +67,7 @@ const projectSchema = z.object({
   missionRoot: z.string(),
   templateBranch: z.string(),
   evalCommand: z.string(),
+  researcherCount: z.number().int().optional(),
   visibleData: z.string().nullable().optional(),
   testsetPath: z.string().nullable().optional(),
   submissionPython: z.string().nullable().optional(),
@@ -77,6 +78,7 @@ const projectSchema = z.object({
     status: z.enum(['running', 'done', 'failed']),
     summary: z.string().nullable(),
     branch: z.string().nullable().optional(),
+    worktree: z.string().nullable().optional(),
     updatedAt: z.string(),
   })).optional(),
   missions: z.array(missionSchema),
@@ -250,12 +252,14 @@ class ProjectService {
     }
   }
 
-  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null, agent = null }) {
+  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null, researchers = 4, agent = null }) {
     const target = resolve(workspace);
     if (!(await pathExists(target))) throw new Error(`workspace does not exist: ${target}`);
     if (agent) this.assertWorkspace(agent, target);
     const existing = this.byWorkspace(target);
-    if (existing) return existing;
+    if (existing) {
+      return this.mutate(existing.id, (current) => ({ ...current, researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : (current.researcherCount ?? 4) }));
+    }
     const researchRoot = join(target, 'research');
     await ensureRepo(researchRoot, 'main', { 'README.md': '# Research repository\n' });
     const missionRoot = join(target, 'missions');
@@ -273,6 +277,7 @@ class ProjectService {
       missionRoot,
       templateBranch: 'template',
       evalCommand,
+      researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : 4,
       visibleData: visibleData ? resolve(visibleData) : null,
       testsetPath: testsetPath ? resolve(testsetPath) : null,
       submissionPython: submissionPython || null,
@@ -474,10 +479,18 @@ class ProjectService {
     if (pending.length > 0) {
       return { status: 'waiting', projectId, pending: pending.map((mission) => ({ id: mission.id, branch: mission.branch, status: mission.status })) };
     }
-    const worktreeRoot = join(project.workspace, '.aleph', 'evaluations');
-    const worktree = join(worktreeRoot, newId('eval'));
-    await mkdir(worktreeRoot, { recursive: true });
-    await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, 'HEAD']);
+    const agentRecord = (project.agents ?? []).find((item) => item.role === 'researcher' && item.childId === owner && item.worktree);
+    let worktree;
+    let temporary = false;
+    if (agentRecord?.worktree && await pathExists(agentRecord.worktree)) {
+      worktree = agentRecord.worktree;
+    } else {
+      const worktreeRoot = join(project.workspace, '.aleph', 'evaluations');
+      worktree = join(worktreeRoot, newId('eval'));
+      await mkdir(worktreeRoot, { recursive: true });
+      await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, 'HEAD']);
+      temporary = true;
+    }
     const env = {
       ALEPH_WORKSPACE: project.workspace,
       ALEPH_SOLUTION_DIR: worktree,
@@ -495,12 +508,15 @@ class ProjectService {
       const parsed = parseScore(stdout);
       score = parsed?.score ?? null;
     } finally {
-      await git(project.researchRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
-      await rm(worktree, { recursive: true, force: true }).catch(() => undefined);
+      if (temporary) {
+        await git(project.researchRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
+        await rm(worktree, { recursive: true, force: true }).catch(() => undefined);
+      }
     }
     const message = `research evaluation: ${score ?? 'no score'}\n\nAleph-Project: ${project.id}\nAleph-Evaluation: ${score ?? 'none'}\n\n${stdout.trim().slice(0, 4000)}`;
-    await git(project.researchRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m', message]);
-    const researchCommit = (await git(project.researchRoot, ['rev-parse', 'HEAD'])).stdout.trim();
+    const commitRoot = agentRecord?.worktree && await pathExists(agentRecord.worktree) ? agentRecord.worktree : project.researchRoot;
+    await git(commitRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m', message]);
+    const researchCommit = (await git(commitRoot, ['rev-parse', 'HEAD'])).stdout.trim();
     return { status: 'done', projectId, score, researchCommit, stdout: stdout.slice(0, 8000), stderr: stderr.slice(0, 4000) };
   }
 
@@ -510,20 +526,24 @@ class ProjectService {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     this.assertWorkspace(agent, project.workspace);
+    const branch = `research/r-${randomUUID().slice(0, 8)}`;
+    const worktree = join(project.workspace, '.aleph', 'researchers', newId('r'));
+    await mkdir(join(project.workspace, '.aleph', 'researchers'), { recursive: true });
+    await git(project.researchRoot, ['worktree', 'add', '-b', branch, worktree, 'HEAD']);
     const prompt = [
       'You are an AlephResearch researcher.',
-      `Project: ${project.id}. Research repo: ${project.researchRoot}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
-      'Work on the research repo, maintain your own research branches, and commit research changes when appropriate.',
+      `Project: ${project.id}. Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
+      'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'Small work can be done directly. For work with significant hardware cost, create a mission branch from the mission template, add missions/<id>/mission.json plus code and an uv project, commit the branch, and call aleph_propose_mission.',
       'After proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.',
-      'When all your missions are done, call aleph_evaluate once more so the Host evaluates the research branch and writes the report into the research commit, then finish. Do not modify project queue, batch or machine state.',
+      'When all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state.',
     ].join('\n');
     const abort = new AbortController();
     let activation;
     try {
       activation = await this.subagents.startActivation({
         provider: 'spawn', label: `aleph researcher ${project.id}`, delivery: 'caller', signal: abort.signal,
-        request: { parent: agent, cwd: project.researchRoot, agentPreset: 'aleph-researcher', prompt: [{ type: 'text', text: prompt }] },
+        request: { parent: agent, cwd: worktree, agentPreset: 'aleph-researcher', prompt: [{ type: 'text', text: prompt }] },
       });
     } catch (error) {
       await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: null, status: 'failed', summary: String(error), branch: null, updatedAt: now() }] }));
@@ -536,7 +556,18 @@ class ProjectService {
     }, async (error) => {
       await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) })).catch(() => undefined);
     });
-    return { projectId, role: 'researcher', childId: activation.childId ?? null };
+    return { projectId, role: 'researcher', childId: activation.childId ?? null, branch, worktree };
+  }
+
+  async startResearchers({ projectId, count = null, agent }) {
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    const requested = Math.max(1, Math.min(16, Number(count) || project.researcherCount || 4));
+    const started = [];
+    for (let index = 0; index < requested; index += 1) {
+      started.push(await this.startResearcher({ projectId, agent }));
+    }
+    return { projectId, requested, started };
   }
 
   async runComposer({ projectId, agent }) {
@@ -692,6 +723,7 @@ function snapshot(project) {
       mission_root: project.missionRoot,
       template_branch: project.templateBranch,
       eval_command: project.evalCommand,
+      researcher_count: project.researcherCount ?? 4,
     },
     missions: project.missions.map((mission) => ({
       id: mission.id,
@@ -760,6 +792,7 @@ export async function apply(ctx) {
         visible_data: { type: 'string' },
         testset: { type: 'string' },
         submission_python: { type: 'string' },
+        researchers: { type: 'integer', description: 'Default researcher count (default 4)' },
       },
       async (args, exec) => service.init({
         workspace: service.workspaceFor(exec.agent, args.workspace),
@@ -767,6 +800,7 @@ export async function apply(ctx) {
         visibleData: args.visible_data,
         testsetPath: args.testset,
         submissionPython: args.submission_python,
+        researchers: args.researchers ?? 4,
         agent: exec.agent,
       }),
     ), { when: ({ agent }) => isLeader(agent) }),
@@ -808,6 +842,12 @@ export async function apply(ctx) {
       'Start a researcher subagent in the research repo; it proposes missions and waits only for its own missions.',
       { ...projectIdParam },
       async (args, exec) => service.startResearcher({ projectId: args.project_id, agent: exec.agent }),
+    ), { when: ({ agent }) => isLeader(agent) }),
+    ctx.tools.register(tool(
+      'aleph_run_researchers',
+      'Start the project default number of researcher subagents, each with its own research worktree and branch.',
+      { ...projectIdParam, count: { type: 'integer', description: 'Optional count; defaults to the project researcher count' } },
+      async (args, exec) => service.startResearchers({ projectId: args.project_id, count: args.count, agent: exec.agent }),
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_run_composer',
@@ -866,6 +906,7 @@ export async function apply(ctx) {
           visibleData: args.visibleData ?? args.visible_data,
           testsetPath: args.testset ?? args.testsetPath,
           submissionPython: args.submissionPython ?? args.submission_python,
+          researchers: args.researchers ?? 4,
         });
         return sendJson(res, 200, snapshot(project));
       } catch (error) {
@@ -878,12 +919,13 @@ export async function apply(ctx) {
     path: '/api/aleph/workspace',
     async handler(req, res) {
       if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
-      if (!workspaceRegistry) return sendJson(res, 503, { ok: false, error: { code: 'aleph/workspace-unavailable' } });
+      const registry = workspaceRegistry ?? ctx.get('workspaceRegistry');
+      if (!registry) return sendJson(res, 503, { ok: false, error: { code: 'aleph/workspace-unavailable' } });
       let body = '';
       for await (const chunk of req) body += chunk;
       try {
         const args = body ? JSON.parse(body) : {};
-        const workspace = await workspaceRegistry.create(args.path);
+        const workspace = await registry.create(args.path);
         return sendJson(res, 200, { workspace: { id: workspace.workspaceId, path: workspace.path, title: workspace.title } });
       } catch (error) {
         return sendJson(res, 500, { ok: false, error: { code: 'aleph/workspace-failed', message: String(error?.message ?? error) } });
