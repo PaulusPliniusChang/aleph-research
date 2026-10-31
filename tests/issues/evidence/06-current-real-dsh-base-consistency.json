@@ -1,0 +1,1104 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-xwboqpih",
+    "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "66885994ceadad83a237a27c1fc7de6419889c14",
+    "dirty": "",
+    "dsh_version": "0.2.2-alpha.2"
+  },
+  "url": "http://127.0.0.1:34319",
+  "events": [
+    {
+      "name": "bridge",
+      "monotonic": 45321.032162853,
+      "value": {
+        "request": {
+          "action": "parent",
+          "cwd": "/tmp/aleph-project-dsh-xwboqpih/workspace"
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+            "agentPreset": "aleph"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 45321.069097541,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-2b4ce7fc",
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [],
+            "batches": [],
+            "createdAt": "2026-10-31T06:54:02.942Z",
+            "updatedAt": "2026-10-31T06:54:02.942Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 45321.110232723,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "name": "aleph_propose_mission",
+          "args": {
+            "project_id": "p-2b4ce7fc",
+            "branch": "mission/alpha"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-2b4ce7fc",
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/alpha",
+                "manifestId": "alpha",
+                "manifestPath": "missions/alpha/mission.json",
+                "status": "proposed",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:02.983Z",
+                "approvedAt": null,
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T06:54:02.942Z",
+            "updatedAt": "2026-10-31T06:54:02.983Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 45321.133153331,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "name": "aleph_approve_mission",
+          "args": {
+            "project_id": "p-2b4ce7fc",
+            "mission_id": "m-9b4a0d38"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-2b4ce7fc",
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/alpha",
+                "manifestId": "alpha",
+                "manifestPath": "missions/alpha/mission.json",
+                "status": "approved",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:02.983Z",
+                "approvedAt": "2026-10-31T06:54:03.007Z",
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T06:54:02.942Z",
+            "updatedAt": "2026-10-31T06:54:03.007Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 45321.172183838,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "name": "aleph_propose_mission",
+          "args": {
+            "project_id": "p-2b4ce7fc",
+            "branch": "mission/beta"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-2b4ce7fc",
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/alpha",
+                "manifestId": "alpha",
+                "manifestPath": "missions/alpha/mission.json",
+                "status": "approved",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:02.983Z",
+                "approvedAt": "2026-10-31T06:54:03.007Z",
+                "finishedAt": null
+              },
+              {
+                "id": "m-9ee405d8",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/beta",
+                "manifestId": "beta",
+                "manifestPath": "missions/beta/mission.json",
+                "status": "proposed",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:03.045Z",
+                "approvedAt": null,
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T06:54:02.942Z",
+            "updatedAt": "2026-10-31T06:54:03.045Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 45321.174743157,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "name": "aleph_approve_mission",
+          "args": {
+            "project_id": "p-2b4ce7fc",
+            "mission_id": "m-9ee405d8"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-2b4ce7fc",
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/alpha",
+                "manifestId": "alpha",
+                "manifestPath": "missions/alpha/mission.json",
+                "status": "approved",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:02.983Z",
+                "approvedAt": "2026-10-31T06:54:03.007Z",
+                "finishedAt": null
+              },
+              {
+                "id": "m-9ee405d8",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/beta",
+                "manifestId": "beta",
+                "manifestPath": "missions/beta/mission.json",
+                "status": "approved",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:03.045Z",
+                "approvedAt": "2026-10-31T06:54:03.048Z",
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T06:54:02.942Z",
+            "updatedAt": "2026-10-31T06:54:03.048Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 45321.232164605,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-2b4ce7fc"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-2b4ce7fc",
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "busy",
+                "batchId": "b-ff82241a"
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/alpha",
+                "manifestId": "alpha",
+                "manifestPath": "missions/alpha/mission.json",
+                "status": "batched",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-ff82241a",
+                "preBatchTip": "b205ab00fedbc6d152e3e6b2fb52fa0a672ba945",
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:02.983Z",
+                "approvedAt": "2026-10-31T06:54:03.007Z",
+                "finishedAt": null
+              },
+              {
+                "id": "m-9ee405d8",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/beta",
+                "manifestId": "beta",
+                "manifestPath": "missions/beta/mission.json",
+                "status": "batched",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-ff82241a",
+                "preBatchTip": "68e69b448634a4f255c7251dd48176ca0ce5cb49",
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T06:54:03.045Z",
+                "approvedAt": "2026-10-31T06:54:03.048Z",
+                "finishedAt": null
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-ff82241a",
+                "machineId": "local",
+                "status": "forming",
+                "missionIds": [
+                  "m-9b4a0d38",
+                  "m-9ee405d8"
+                ],
+                "branch": "batch/b-ff82241a",
+                "baseTip": "37bce1e9a3b85c5ecaa71a14c8aa5feb46b8d207",
+                "createdAt": "2026-10-31T06:54:03.106Z"
+              }
+            ],
+            "createdAt": "2026-10-31T06:54:02.942Z",
+            "updatedAt": "2026-10-31T06:54:03.106Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "formed-public-projects",
+      "monotonic": 45321.237308857,
+      "value": {
+        "projects": [
+          {
+            "schema": 2,
+            "generated_at": "2026-10-31T06:54:03.111Z",
+            "project": {
+              "id": "p-2b4ce7fc",
+              "title": "workspace",
+              "status": "running",
+              "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+              "research_root": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+              "mission_root": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+              "template_branch": "template",
+              "eval_command": "python3 eval/run_eval.py"
+            },
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "owner_session": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "status": "batched",
+                "branch": "mission/alpha",
+                "manifest_id": "alpha",
+                "batch_id": "b-ff82241a",
+                "pre_batch_tip": "b205ab00fedbc6d152e3e6b2fb52fa0a672ba945",
+                "result_commit": null,
+                "error": null,
+                "created_at": "2026-10-31T06:54:02.983Z",
+                "approved_at": "2026-10-31T06:54:03.007Z",
+                "finished_at": null
+              },
+              {
+                "id": "m-9ee405d8",
+                "owner_session": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "status": "batched",
+                "branch": "mission/beta",
+                "manifest_id": "beta",
+                "batch_id": "b-ff82241a",
+                "pre_batch_tip": "68e69b448634a4f255c7251dd48176ca0ce5cb49",
+                "result_commit": null,
+                "error": null,
+                "created_at": "2026-10-31T06:54:03.045Z",
+                "approved_at": "2026-10-31T06:54:03.048Z",
+                "finished_at": null
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-ff82241a",
+                "machine_id": "local",
+                "status": "forming",
+                "mission_ids": [
+                  "m-9b4a0d38",
+                  "m-9ee405d8"
+                ],
+                "branch": "batch/b-ff82241a",
+                "base_tip": "37bce1e9a3b85c5ecaa71a14c8aa5feb46b8d207",
+                "created_at": "2026-10-31T06:54:03.106Z",
+                "started_at": null,
+                "finished_at": null,
+                "summary": null
+              }
+            ],
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "busy",
+                "batchId": "b-ff82241a"
+              }
+            ],
+            "agents": [],
+            "counts": {
+              "queued": 0,
+              "running": 2,
+              "done": 0,
+              "failed": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 45321.580618746,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "name": "aleph_run_batch",
+          "args": {
+            "project_id": "p-2b4ce7fc",
+            "batch_id": "b-ff82241a"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-2b4ce7fc",
+            "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/alpha",
+                "manifestId": "alpha",
+                "manifestPath": "missions/alpha/mission.json",
+                "status": "done",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-ff82241a",
+                "preBatchTip": "b205ab00fedbc6d152e3e6b2fb52fa0a672ba945",
+                "resultCommit": "8e5dba6e505c4bd2920ab15f7c95fef8283752e1",
+                "error": null,
+                "createdAt": "2026-10-31T06:54:02.983Z",
+                "approvedAt": "2026-10-31T06:54:03.007Z",
+                "finishedAt": "2026-10-31T06:54:03.452Z"
+              },
+              {
+                "id": "m-9ee405d8",
+                "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "branch": "mission/beta",
+                "manifestId": "beta",
+                "manifestPath": "missions/beta/mission.json",
+                "status": "done",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-ff82241a",
+                "preBatchTip": "68e69b448634a4f255c7251dd48176ca0ce5cb49",
+                "resultCommit": "3038e2f9eab9c1c99ce3b6f03e2c5a3dbcefc37e",
+                "error": null,
+                "createdAt": "2026-10-31T06:54:03.045Z",
+                "approvedAt": "2026-10-31T06:54:03.048Z",
+                "finishedAt": "2026-10-31T06:54:03.452Z"
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-ff82241a",
+                "machineId": "local",
+                "status": "done",
+                "missionIds": [
+                  "m-9b4a0d38",
+                  "m-9ee405d8"
+                ],
+                "branch": "batch/b-ff82241a",
+                "baseTip": "37bce1e9a3b85c5ecaa71a14c8aa5feb46b8d207",
+                "createdAt": "2026-10-31T06:54:03.106Z",
+                "startedAt": "2026-10-31T06:54:03.141Z",
+                "finishedAt": "2026-10-31T06:54:03.452Z",
+                "summary": {
+                  "runnerError": null,
+                  "missions": [
+                    {
+                      "missionId": "m-9b4a0d38",
+                      "manifestId": "alpha",
+                      "manifestPath": "missions/alpha/mission.json",
+                      "status": "done",
+                      "resultCommit": "8e5dba6e505c4bd2920ab15f7c95fef8283752e1"
+                    },
+                    {
+                      "missionId": "m-9ee405d8",
+                      "manifestId": "beta",
+                      "manifestPath": "missions/beta/mission.json",
+                      "status": "done",
+                      "resultCommit": "3038e2f9eab9c1c99ce3b6f03e2c5a3dbcefc37e"
+                    }
+                  ]
+                }
+              }
+            ],
+            "createdAt": "2026-10-31T06:54:02.942Z",
+            "updatedAt": "2026-10-31T06:54:03.452Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "finished-public-projects",
+      "monotonic": 45321.584062408,
+      "value": {
+        "projects": [
+          {
+            "schema": 2,
+            "generated_at": "2026-10-31T06:54:03.457Z",
+            "project": {
+              "id": "p-2b4ce7fc",
+              "title": "workspace",
+              "status": "running",
+              "workspace": "/tmp/aleph-project-dsh-xwboqpih/workspace",
+              "research_root": "/tmp/aleph-project-dsh-xwboqpih/workspace/research",
+              "mission_root": "/tmp/aleph-project-dsh-xwboqpih/workspace/missions",
+              "template_branch": "template",
+              "eval_command": "python3 eval/run_eval.py"
+            },
+            "missions": [
+              {
+                "id": "m-9b4a0d38",
+                "owner_session": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "status": "done",
+                "branch": "mission/alpha",
+                "manifest_id": "alpha",
+                "batch_id": "b-ff82241a",
+                "pre_batch_tip": "b205ab00fedbc6d152e3e6b2fb52fa0a672ba945",
+                "result_commit": "8e5dba6e505c4bd2920ab15f7c95fef8283752e1",
+                "error": null,
+                "created_at": "2026-10-31T06:54:02.983Z",
+                "approved_at": "2026-10-31T06:54:03.007Z",
+                "finished_at": "2026-10-31T06:54:03.452Z"
+              },
+              {
+                "id": "m-9ee405d8",
+                "owner_session": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+                "status": "done",
+                "branch": "mission/beta",
+                "manifest_id": "beta",
+                "batch_id": "b-ff82241a",
+                "pre_batch_tip": "68e69b448634a4f255c7251dd48176ca0ce5cb49",
+                "result_commit": "3038e2f9eab9c1c99ce3b6f03e2c5a3dbcefc37e",
+                "error": null,
+                "created_at": "2026-10-31T06:54:03.045Z",
+                "approved_at": "2026-10-31T06:54:03.048Z",
+                "finished_at": "2026-10-31T06:54:03.452Z"
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-ff82241a",
+                "machine_id": "local",
+                "status": "done",
+                "mission_ids": [
+                  "m-9b4a0d38",
+                  "m-9ee405d8"
+                ],
+                "branch": "batch/b-ff82241a",
+                "base_tip": "37bce1e9a3b85c5ecaa71a14c8aa5feb46b8d207",
+                "created_at": "2026-10-31T06:54:03.106Z",
+                "started_at": "2026-10-31T06:54:03.141Z",
+                "finished_at": "2026-10-31T06:54:03.452Z",
+                "summary": {
+                  "runnerError": null,
+                  "missions": [
+                    {
+                      "missionId": "m-9b4a0d38",
+                      "manifestId": "alpha",
+                      "manifestPath": "missions/alpha/mission.json",
+                      "status": "done",
+                      "resultCommit": "8e5dba6e505c4bd2920ab15f7c95fef8283752e1"
+                    },
+                    {
+                      "missionId": "m-9ee405d8",
+                      "manifestId": "beta",
+                      "manifestPath": "missions/beta/mission.json",
+                      "status": "done",
+                      "resultCommit": "3038e2f9eab9c1c99ce3b6f03e2c5a3dbcefc37e"
+                    }
+                  ]
+                }
+              }
+            ],
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "counts": {
+              "queued": 0,
+              "running": 0,
+              "done": 2,
+              "failed": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "alpha-delivery",
+      "monotonic": 45321.618845288,
+      "value": {
+        "mission": {
+          "name": "alpha",
+          "branch": "mission/alpha",
+          "id": "m-9b4a0d38",
+          "initial": "c1165c1156e2a37c5e3232accc770cc4807f5927",
+          "expected_tip": "b205ab00fedbc6d152e3e6b2fb52fa0a672ba945",
+          "expected_source": "alpha-after-proposal"
+        },
+        "record": {
+          "id": "m-9b4a0d38",
+          "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "branch": "mission/alpha",
+          "manifestId": "alpha",
+          "manifestPath": "missions/alpha/mission.json",
+          "status": "done",
+          "entrypoint": "run.sh",
+          "outputs": [],
+          "resource": null,
+          "batchId": "b-ff82241a",
+          "preBatchTip": "b205ab00fedbc6d152e3e6b2fb52fa0a672ba945",
+          "resultCommit": "8e5dba6e505c4bd2920ab15f7c95fef8283752e1",
+          "error": null,
+          "createdAt": "2026-10-31T06:54:02.983Z",
+          "approvedAt": "2026-10-31T06:54:03.007Z",
+          "finishedAt": "2026-10-31T06:54:03.452Z"
+        },
+        "parent": "b205ab00fedbc6d152e3e6b2fb52fa0a672ba945",
+        "envelope": {
+          "schema": 1,
+          "mission_id": "alpha",
+          "batch_id": "b-ff82241a",
+          "machine_id": "local",
+          "status": "done",
+          "started_at": "2026-10-31T06:54:03.141Z",
+          "finished_at": "2026-10-31T06:54:03.177Z",
+          "metrics": {},
+          "artifacts": [],
+          "logs": [],
+          "resource": null,
+          "error": null,
+          "exit_code": 0
+        },
+        "batch_tip": "f314c1a4e7419e632878ac150707ae8d9b943478"
+      }
+    },
+    {
+      "name": "beta-delivery",
+      "monotonic": 45321.699548957,
+      "value": {
+        "mission": {
+          "name": "beta",
+          "branch": "mission/beta",
+          "id": "m-9ee405d8",
+          "initial": "2c6ae5f77ec783550b1d60f13938a57c99d60dff",
+          "expected_tip": "68e69b448634a4f255c7251dd48176ca0ce5cb49",
+          "expected_source": "beta-after-approval"
+        },
+        "record": {
+          "id": "m-9ee405d8",
+          "ownerSession": "session-f73cce61-643e-4086-8241-df81f5d0be67",
+          "branch": "mission/beta",
+          "manifestId": "beta",
+          "manifestPath": "missions/beta/mission.json",
+          "status": "done",
+          "entrypoint": "run.sh",
+          "outputs": [],
+          "resource": null,
+          "batchId": "b-ff82241a",
+          "preBatchTip": "68e69b448634a4f255c7251dd48176ca0ce5cb49",
+          "resultCommit": "3038e2f9eab9c1c99ce3b6f03e2c5a3dbcefc37e",
+          "error": null,
+          "createdAt": "2026-10-31T06:54:03.045Z",
+          "approvedAt": "2026-10-31T06:54:03.048Z",
+          "finishedAt": "2026-10-31T06:54:03.452Z"
+        },
+        "parent": "68e69b448634a4f255c7251dd48176ca0ce5cb49",
+        "envelope": {
+          "schema": 1,
+          "mission_id": "beta",
+          "batch_id": "b-ff82241a",
+          "machine_id": "local",
+          "status": "done",
+          "started_at": "2026-10-31T06:54:03.141Z",
+          "finished_at": "2026-10-31T06:54:03.262Z",
+          "metrics": {},
+          "artifacts": [],
+          "logs": [],
+          "resource": null,
+          "error": null,
+          "exit_code": 0
+        },
+        "batch_tip": "f314c1a4e7419e632878ac150707ae8d9b943478"
+      }
+    },
+    {
+      "name": "stopped-isolated-dsh",
+      "monotonic": 45321.870344255,
+      "value": {
+        "pid": 193102,
+        "returncode": 0
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "real DSH current project storage is registered",
+      "passed": true
+    },
+    {
+      "name": "new project has no missions",
+      "passed": true
+    },
+    {
+      "name": "new project has no batches",
+      "passed": true
+    },
+    {
+      "name": "new project machine starts idle",
+      "passed": true
+    },
+    {
+      "name": "alpha proposal records actual branch",
+      "passed": true
+    },
+    {
+      "name": "alpha proposal has no premature captured baseline",
+      "passed": true
+    },
+    {
+      "name": "alpha proposal belongs to real DSH parent session",
+      "passed": true
+    },
+    {
+      "name": "alpha proposal starts proposed",
+      "passed": true
+    },
+    {
+      "name": "alpha source advance creates a distinct Git commit",
+      "passed": true
+    },
+    {
+      "name": "alpha approval after advance is persisted",
+      "passed": true
+    },
+    {
+      "name": "beta proposal records actual branch",
+      "passed": true
+    },
+    {
+      "name": "beta proposal has no premature captured baseline",
+      "passed": true
+    },
+    {
+      "name": "beta proposal belongs to real DSH parent session",
+      "passed": true
+    },
+    {
+      "name": "beta proposal starts proposed",
+      "passed": true
+    },
+    {
+      "name": "beta approval before advance is persisted",
+      "passed": true
+    },
+    {
+      "name": "beta source advance creates a distinct Git commit",
+      "passed": true
+    },
+    {
+      "name": "batch records actual template baseline",
+      "passed": true
+    },
+    {
+      "name": "batch includes both independent mission identities",
+      "passed": true
+    },
+    {
+      "name": "batch reserves the actual machine",
+      "passed": true
+    },
+    {
+      "name": "alpha composition captures latest actual branch tip",
+      "passed": true
+    },
+    {
+      "name": "alpha public captured baseline matches actual tip",
+      "passed": true
+    },
+    {
+      "name": "alpha actual composed Git ancestry includes captured tip",
+      "passed": true
+    },
+    {
+      "name": "alpha composed source includes legitimate precomposition advance",
+      "passed": true
+    },
+    {
+      "name": "alpha actual mission branch remains at captured tip before execution",
+      "passed": true
+    },
+    {
+      "name": "beta composition captures latest actual branch tip",
+      "passed": true
+    },
+    {
+      "name": "beta public captured baseline matches actual tip",
+      "passed": true
+    },
+    {
+      "name": "beta actual composed Git ancestry includes captured tip",
+      "passed": true
+    },
+    {
+      "name": "beta composed source includes legitimate precomposition advance",
+      "passed": true
+    },
+    {
+      "name": "beta actual mission branch remains at captured tip before execution",
+      "passed": true
+    },
+    {
+      "name": "batch finishes successfully",
+      "passed": true
+    },
+    {
+      "name": "public batch reaches done",
+      "passed": true
+    },
+    {
+      "name": "actual machine is released",
+      "passed": true
+    },
+    {
+      "name": "machine reservation is cleared",
+      "passed": true
+    },
+    {
+      "name": "alpha actual runner executes composed batch commit",
+      "passed": true
+    },
+    {
+      "name": "alpha actual runner reads advanced source",
+      "passed": true
+    },
+    {
+      "name": "alpha delivered commit parent equals recorded preBatchTip",
+      "passed": true
+    },
+    {
+      "name": "alpha stored baseline remains actual precomposition tip",
+      "passed": true
+    },
+    {
+      "name": "alpha resultCommit equals actual delivered mission tip",
+      "passed": true
+    },
+    {
+      "name": "alpha public result_commit equals actual delivered commit",
+      "passed": true
+    },
+    {
+      "name": "alpha delivered branch retains captured source",
+      "passed": true
+    },
+    {
+      "name": "alpha delivery adds only own result envelope",
+      "passed": true
+    },
+    {
+      "name": "alpha envelope identifies own mission",
+      "passed": true
+    },
+    {
+      "name": "alpha envelope identifies actual batch",
+      "passed": true
+    },
+    {
+      "name": "alpha real computation succeeded",
+      "passed": true
+    },
+    {
+      "name": "alpha actual task executes once",
+      "passed": true
+    },
+    {
+      "name": "alpha mission reaches done",
+      "passed": true
+    },
+    {
+      "name": "alpha public mission reaches done",
+      "passed": true
+    },
+    {
+      "name": "beta actual runner executes composed batch commit",
+      "passed": true
+    },
+    {
+      "name": "beta actual runner reads advanced source",
+      "passed": true
+    },
+    {
+      "name": "beta delivered commit parent equals recorded preBatchTip",
+      "passed": true
+    },
+    {
+      "name": "beta stored baseline remains actual precomposition tip",
+      "passed": true
+    },
+    {
+      "name": "beta resultCommit equals actual delivered mission tip",
+      "passed": true
+    },
+    {
+      "name": "beta public result_commit equals actual delivered commit",
+      "passed": true
+    },
+    {
+      "name": "beta delivered branch retains captured source",
+      "passed": true
+    },
+    {
+      "name": "beta delivery adds only own result envelope",
+      "passed": true
+    },
+    {
+      "name": "beta envelope identifies own mission",
+      "passed": true
+    },
+    {
+      "name": "beta envelope identifies actual batch",
+      "passed": true
+    },
+    {
+      "name": "beta real computation succeeded",
+      "passed": true
+    },
+    {
+      "name": "beta actual task executes once",
+      "passed": true
+    },
+    {
+      "name": "beta mission reaches done",
+      "passed": true
+    },
+    {
+      "name": "beta public mission reaches done",
+      "passed": true
+    }
+  ],
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-base-consistency.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/06-current-real-dsh-base-consistency.json"
+  ],
+  "boundary": "Real isolated DSH host, registered tools, persistent storage, Git merges and actual shell runner; diagnostic bridge invokes the registered tools without model calls. Independent missions advance before composition (alpha after proposal, beta after approval). No global SOTA inheritance requirement or post-composition branch mutation.",
+  "current_scope_validated": true
+}

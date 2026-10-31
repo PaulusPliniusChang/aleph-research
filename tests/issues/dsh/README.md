@@ -14,6 +14,18 @@ DSH 命令不在环境变量 `PATH` 中时，启动器仍可通过安装版入�
 
 完成验证后，确认目标进程的 `DSH_HOME` 与启动器打印的隔离目录一致，再停止该隔离服务。证据只保留必要请求、响应和版本信息，不包含登录令牌或凭据。
 
+## 当前任务起点一致性核查
+
+ALEPH-06 的[自动验收脚本](base-consistency-acceptance.test.mjs)核对实际服务、Git、runner 和结果交付。实际 DSH 场景单独运行：
+
+```bash
+python3 tests/issues/dsh/current-base-consistency.py \
+  --source /home/paulus-chang/项目/aleph \
+  --output tests/issues/evidence/06-current-real-dsh-base-consistency.json
+```
+
+脚本通过实际注册工具创建项目、提案与审批，分别在提案后和审批后推进独立任务分支，再编排并运行。脚本核对 `preBatchTip`、组合源码、实际运行提交、公共快照、结果提交父节点和执行次数；结构化记录保存版本、命令、检查结果及验证边界，结束时停止隔离服务。当前测试结果与历史问题的关系见 [ALEPH-06](../06-mission-base-consistency.md)。
+
 ## 历史 campaign 架构
 
 本目录使用安装版 DSH 创建隔离状态目录，并加载 `aleph-tests/dsh-plugin` 的副本。诊断插件仅提供真实会话创建、工具调用与观察入口；研究任务由实际 DSH 子代理完成。被测版本与观察结论见 [验证记录](../VALIDATION-2026-10-31.md)。
