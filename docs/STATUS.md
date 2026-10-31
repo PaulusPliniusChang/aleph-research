@@ -92,3 +92,26 @@ Mission scores on the hidden-holdout split, with the floor baseline as reference
 
 The operator API (`/api/aleph/approve`, `/api/aleph/batch`, `/api/aleph/run`,
 `/api/aleph/evaluate`) replays this pipeline without spending a model turn.
+
+## Upstream review
+
+The open issues and pull requests were reviewed against the current project
+model. Pull requests were not merged because their base predates the project
+refactor; the accepted behaviour was reimplemented and covered by tests.
+
+Adopted:
+
+| Upstream | Behaviour now in the tree |
+| --- | --- |
+| PR #18 / issue #16 | one activation only settles its own record; a missing identity is refused |
+| PR #20 / issue #19 | evaluation reports pin the scored commit and keep an independent ref |
+| PR #21 / issue #7 | result delivery advances the mission branch by compare-and-swap |
+| PR #2 / issue #1 | console shows the empty state instead of a snapshot failure |
+| issue #6 | startup reconciles interrupted batches and frees the machine |
+| issues #11, #12 | evaluation history and best-score tracking with a select route |
+| issue #14 | single Composer and InfraOptimizer activation per project |
+
+Deliberately left open: #3, #4, #5 describe concurrency and budget limits that
+belong to a multi-machine model, #8 asks for strategy text that the mission
+prompt already carries, #9 is covered by the persistent Composer, and #10
+(pause, resume, cancel, finish) an operation surface that is still missing.
