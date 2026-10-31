@@ -65,6 +65,30 @@ The researcher waits only for missions owned by its session. When those missions
 are done, `aleph_evaluate` evaluates the research branch; the Host writes the
 evaluation report into the research commit message and the researcher finishes.
 
+## Host restart recovery
+
+Startup reconciliation completes before product tools and routes are registered.
+A machine reserved by its matching `forming` batch remains busy, so another
+batch cannot take its capacity before the original batch runs. Stale agent
+records are closed only from the startup snapshot.
+
+Running batches captured at startup are watched by the existing five-second
+Host monitor. A live process with a readable cwd under the batch worktree keeps
+the batch and its reservation active. Once no such process is observed, the
+captured batch and its waiting missions are marked interrupted (`failed`), and
+only its matching machine reservation is released. Tracking checks the captured
+batch identity, ignores work started after startup and retries failed durable
+writes. It does not periodically repeat full startup reconciliation.
+
+Interrupted output and Git worktrees remain available for inspection. Recovery
+does not rerun compute or automatically deliver orphan results; explicitly
+rerunning a failed batch is refused. Already delivered results remain stable.
+If the `/proc` directory cannot be enumerated, recovery retains the reservation
+for a later check. Observation otherwise retains the existing Linux readable-cwd
+scope; processes with unreadable cwd or work outside that directory are not
+covered by a complete process-ownership guarantee. This is single-Host recovery,
+not an independent execution supervisor or a cross-Host coordination protocol.
+
 ## Current boundaries
 
 - One local machine; multi-machine is an interface extension.

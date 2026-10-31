@@ -960,64 +960,107 @@ class ProjectService {
       .catch(() => undefined);
   }
 
-  /**
-   * A Host restart ends every live activation and any batch runner, but storage still
-   * describes them as running. Reconcile that once at startup so the machine is usable.
-   */
-  async recoverAfterRestart() {
+  /** Startup reconciliation runs once; later ticks watch only its captured runners. */
+  recoverAfterRestart() {
+    this.restartRecovery ??= this.initializeRestartRecovery();
+    return this.restartRecovery;
+  }
+
+  restartBatchIdentity(project, batch) {
+    return JSON.stringify([project.workspace, project.missionRoot, batch.id,
+      batch.machineId, batch.branch, batch.baseTip, batch.createdAt, batch.startedAt]);
+  }
+
+  async initializeRestartRecovery() {
     const nowText = now();
+    this.restartedBatches = new Map();
     for (const project of this.list()) {
-      const batchesRoot = join(project.workspace, '.aleph', 'batches');
-      const running = (project.batches ?? []).filter((batch) => batch.status === 'running');
-      const interrupted = new Set();
-      for (const batch of running) {
-        const live = this.hasProcessUnder(join(batchesRoot, batch.id));
-        if (live) continue;
-        interrupted.add(batch.id);
+      for (const batch of project.batches ?? []) {
+        if (batch.status !== 'running') continue;
+        this.restartedBatches.set(`${project.id}:${batch.id}`, {
+          projectId: project.id, batchId: batch.id,
+          identity: this.restartBatchIdentity(project, batch),
+        });
       }
-      const idleMachine = (project.machines ?? []).every((machine) => machine.status === 'idle');
-      if (interrupted.size === 0 && idleMachine) {
-        // Nothing was left mid-flight; only stale agent records may need closing.
-        const staleAgents = (project.agents ?? []).filter((item) => item.status === 'running');
-        if (staleAgents.length === 0) continue;
-      }
-      await this.mutate(project.id, (current) => ({
+      const staleAgents = new Set((project.agents ?? [])
+        .filter(item => item.status === 'running').map(item => JSON.stringify(item)));
+      if (staleAgents.size === 0 && (project.machines ?? []).every(machine => machine.status === 'idle')) continue;
+      await this.mutate(project.id, current => ({
         ...current,
-        machines: (current.machines ?? []).map((machine) => (
-          interrupted.has(machine.batchId ?? '') || (machine.status === 'busy' && !(current.batches ?? []).some((batch) => batch.id === machine.batchId && batch.status === 'running' && !interrupted.has(batch.id)))
+        // formBatch reserves the machine before execution. Both forming and
+        // running owners are legitimate; never clear an unexecuted reservation.
+        machines: (current.machines ?? []).map(machine => (
+          machine.status === 'busy' && !(current.batches ?? []).some(batch =>
+            batch.id === machine.batchId && batch.machineId === machine.id
+            && ['forming', 'running'].includes(batch.status))
             ? { ...machine, status: 'idle', batchId: null }
             : machine
         )),
-        batches: (current.batches ?? []).map((batch) => (
-          interrupted.has(batch.id)
-            ? { ...batch, status: 'failed', finishedAt: nowText, summary: { ...(batch.summary ?? {}), runnerError: 'interrupted by Host restart' } }
-            : batch
-        )),
-        missions: (current.missions ?? []).map((mission) => (
-          mission.batchId && interrupted.has(mission.batchId) && ['batched', 'running'].includes(mission.status)
-            ? { ...mission, status: 'failed', error: 'interrupted by Host restart', finishedAt: nowText }
-            : mission
-        )),
-        agents: (current.agents ?? []).map((item) => (
-          item.status === 'running'
-            ? { ...item, status: 'failed', summary: 'interrupted by Host restart', updatedAt: nowText }
-            : item
-        )),
-        violations: [...(current.violations ?? []), `${nowText} recovered from restart: ${interrupted.size} interrupted batch(es)`].slice(-50),
-      })).catch(() => undefined);
+        agents: (current.agents ?? []).map(item => staleAgents.has(JSON.stringify(item))
+          ? { ...item, status: 'failed', summary: 'interrupted by Host restart', updatedAt: nowText }
+          : item),
+      }));
+    }
+    await this.checkRecoveredBatches();
+  }
+
+  checkRecoveredBatches() {
+    if (this.restartCheck) return this.restartCheck;
+    this.restartCheck = this.reconcileRestartedBatches().finally(() => { this.restartCheck = null; });
+    return this.restartCheck;
+  }
+
+  async reconcileRestartedBatches() {
+    for (const [key, tracked] of this.restartedBatches ?? []) {
+      const project = this.get(tracked.projectId);
+      const batch = project?.batches?.find(item => item.id === tracked.batchId);
+      const matches = (currentProject, currentBatch) => currentBatch?.status === 'running'
+        && this.restartBatchIdentity(currentProject, currentBatch) === tracked.identity;
+      if (!project || !matches(project, batch)) {
+        this.restartedBatches.delete(key);
+        continue;
+      }
+      const path = join(project.workspace, '.aleph', 'batches', batch.id);
+      // Unknown observations retain the reservation just like a live runner.
+      if (this.hasProcessUnder(path) !== false) continue;
+      const finishedAt = now();
+      try {
+        await this.mutate(project.id, current => {
+          const owned = current.batches.find(item => item.id === tracked.batchId);
+          if (!matches(current, owned)) return current;
+          return {
+            ...current,
+            batches: current.batches.map(item => item.id === owned.id
+              ? { ...item, status: 'failed', finishedAt, summary: { ...(item.summary ?? {}), runnerError: 'interrupted by Host restart' } }
+              : item),
+            missions: current.missions.map(item => item.batchId === owned.id && ['batched', 'running'].includes(item.status)
+              ? { ...item, status: 'failed', error: 'interrupted by Host restart', finishedAt }
+              : item),
+            machines: current.machines.map(machine => machine.id === owned.machineId && machine.batchId === owned.id
+              ? { ...machine, status: 'idle', batchId: null }
+              : machine),
+            violations: [...(current.violations ?? []), `${finishedAt} recovered from restart: batch ${owned.id} interrupted`].slice(-50),
+          };
+        });
+        // Preserve the batch worktree and output for inspection; a failed batch
+        // cannot be rerun through runBatch, so completed compute is not repeated.
+        this.restartedBatches.delete(key);
+      } catch {
+        // A failed durable write keeps this exact runner tracked for the next tick.
+      }
     }
   }
 
   hasProcessUnder(rootPath) {
     const root = resolve(rootPath);
-    let entries = [];
-    try { entries = readdirSync('/proc'); } catch { return false; }
+    let entries;
+    try { entries = readdirSync('/proc'); } catch { return null; }
     for (const entry of entries) {
       if (!/^\d+$/.test(entry)) continue;
       try {
         const cwd = readlinkSync(`/proc/${entry}/cwd`);
         if (cwd === root || cwd.startsWith(`${root}/`)) return true;
-      } catch { /* process vanished */ }
+      } catch { /* vanished or outside the readable cwd observation scope */ }
     }
     return false;
   }
@@ -1533,8 +1576,16 @@ export async function apply(ctx) {
   const agentPresets = ctx.get('agentPresets');
   const workspaceRegistry = ctx.get('workspaceRegistry');
   const service = new ProjectService(ctx, domain, { sessions, subagents, agentPresets });
-  ctx.effect(() => { const timer = setInterval(() => service.checkProcesses(), 5000); timer.unref?.(); return () => clearInterval(timer); });
-  service.recoverAfterRestart().catch(() => undefined);
+  // Establish restart ownership before exposing tools or accepting new work.
+  await service.recoverAfterRestart();
+  ctx.effect(() => {
+    const timer = setInterval(() => {
+      service.checkProcesses();
+      void service.checkRecoveredBatches().catch(() => undefined);
+    }, 5000);
+    timer.unref?.();
+    return () => clearInterval(timer);
+  });
 
   const presetOf = (agent) => {
     if (!sessions || !agentPresets) return null;
