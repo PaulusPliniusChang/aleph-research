@@ -3,7 +3,7 @@ id: ALEPH-14
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/16
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/18
 ---
 
 <!-- 本地管理说明：用户于 2026-10-31 授权先同步远端，候选仍存在时登记为可疑。B 已完成最新源码适用性复核；主代理因 A 的任务消息正文传递异常代为登记。GitHub 正文应移除管理头及本段前导注释，本地文件保留完整内容。 -->
@@ -11,6 +11,8 @@ pull_request: null
 # 一个研究代理结束时，可能批量改写其他研究代理的状态与摘要
 
 ## 修复与独立验收（2026-10-31）
+
+上游[拉取请求 #18](https://github.com/hapenia/aleph-research/pull/18)已创建，当前仍未合并。修复证据固定于[公开提交 `0bd5c63f64b7eaa7d16edb65d05d617839df81d5`](https://github.com/PaulusPliniusChang/aleph-research/tree/0bd5c63f64b7eaa7d16edb65d05d617839df81d5/tests/issues)。本地管理状态保留原缺陷实测记录，没有代替用户设置“已解决”。
 
 修复已提交派生仓库分支 `fix/aleph-14-researcher-ownership`，提交简称为 `93243df`。B 在独立工作树 `/home/paulus-chang/项目/aleph-fix-researcher` 导入 C 冻结的产品文件；[文件摘要](evidence/14-fixed-frozen-content.json)与冻结内容一致。最新上游仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。
 
