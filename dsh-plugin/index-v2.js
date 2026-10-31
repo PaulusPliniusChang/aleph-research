@@ -1012,6 +1012,35 @@ class ProjectService {
   }
 }
 
+async function gitSnapshot(project) {
+  const safe = async (root, args) => {
+    try { return (await git(root, args)).stdout.trim(); } catch { return ''; }
+  };
+  const repo = async (root) => {
+    const branchText = await safe(root, ['for-each-ref', '--format=%(refname:short)	%(objectname:short)	%(subject)	%(committerdate:short)', 'refs/heads']);
+    const branches = branchText.split(/\r?\n/).filter(Boolean).map((line) => {
+      const [name, tip, subject, date] = line.split('\t');
+      return { name, tip, subject, date };
+    });
+    const worktreeText = await safe(root, ['worktree', 'list', '--porcelain']);
+    const worktrees = [];
+    let current = null;
+    for (const line of worktreeText.split(/\r?\n/)) {
+      if (line.startsWith('worktree ')) { if (current) worktrees.push(current); current = { path: line.slice(9), head: '', branch: '' }; }
+      else if (current && line.startsWith('HEAD ')) current.head = line.slice(5);
+      else if (current && line.startsWith('branch ')) current.branch = line.slice(7).replace(/^refs\/heads\//, '');
+    }
+    if (current) worktrees.push(current);
+    const commitText = await safe(root, ['log', '--all', '--date=short', '--format=%h	%d	%s	%ad', '-n', '30']);
+    const commits = commitText.split(/\r?\n/).filter(Boolean).map((line) => {
+      const [hash, refs, subject, date] = line.split('\t');
+      return { hash, refs: refs.replace(/^\(|\)$/g, ''), subject, date };
+    });
+    return { root, branches, worktrees, commits };
+  };
+  return { research: await repo(project.researchRoot), missions: await repo(project.missionRoot) };
+}
+
 function snapshot(project) {
   return {
     schema: 2,
@@ -1216,10 +1245,12 @@ export async function apply(ctx) {
   ctx.webServer.register({
     kind: 'exact',
     path: '/api/aleph/snapshot',
-    handler(req, res) {
+    async handler(req, res) {
       const project = service.list().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))[0];
       if (!project) return sendJson(res, 404, { ok: false, error: { code: 'aleph/no-project' } });
-      return sendJson(res, 200, snapshot(project));
+      const body = snapshot(project);
+      body.git = await gitSnapshot(project);
+      return sendJson(res, 200, body);
     },
   });
   ctx.webServer.register({

@@ -44,6 +44,12 @@ window.__ModuleLoader__.load({
         'field.entrypoint': 'Entrypoint',
         'field.violations': 'Watchdog violations',
         'section.violations': 'Runtime violations',
+        'section.git': 'Git trees',
+        'field.tip': 'Tip',
+        'field.subject': 'Subject',
+        'field.date': 'Date',
+        'field.refs': 'Refs',
+        'empty.git': 'No git repositories yet.',
         'empty.violations': 'No violations recorded.',
         'field.owner': 'Owner session',
         'field.resultCommit': 'Result commit',
@@ -153,6 +159,12 @@ window.__ModuleLoader__.load({
         'field.entrypoint': '入口脚本',
         'field.violations': 'watchdog 违规',
         'section.violations': '运行时违规',
+        'section.git': 'Git 树',
+        'field.tip': '提交',
+        'field.subject': '说明',
+        'field.date': '日期',
+        'field.refs': '引用',
+        'empty.git': '暂无 git 仓库。',
         'empty.violations': '暂无违规记录。',
         'field.owner': 'Owner 会话',
         'field.resultCommit': '结果提交',
@@ -727,6 +739,39 @@ window.__ModuleLoader__.load({
       return ['running', 'done', 'failed'].includes(status) ? status : 'unknown';
     }
 
+    /** Research and mission git trees. */
+    function gitSection(t, snapshot) {
+      const git = snapshot && typeof snapshot.git === 'object' && snapshot.git !== null ? snapshot.git : null;
+      if (!git) return null;
+      const branchColumns = [
+        { label: t('table.branch'), width: 'minmax(150px, 1.6fr)', mono: true, primary: true, render: (item) => item.name ?? '—' },
+        { label: t('field.tip'), width: '90px', mono: true, render: (item) => item.tip ?? '—' },
+        { label: t('field.subject'), width: 'minmax(200px, 2.4fr)', render: (item) => item.subject ?? '—' },
+        { label: t('field.date'), width: '110px', render: (item) => item.date ?? '—' },
+      ];
+      const commitColumns = [
+        { label: t('field.tip'), width: '80px', mono: true, primary: true, render: (item) => item.hash ?? '—' },
+        { label: t('field.refs'), width: 'minmax(120px, 1.4fr)', mono: true, render: (item) => item.refs ?? '—' },
+        { label: t('field.subject'), width: 'minmax(220px, 2.6fr)', render: (item) => item.subject ?? '—' },
+        { label: t('field.date'), width: '110px', render: (item) => item.date ?? '—' },
+      ];
+      const repoBlock = (repo) => {
+        if (!repo) return null;
+        return h('div', { key: repo.root, style: { display: 'grid', gap: '8px' } },
+          h('div', { style: { ...styles.mono, fontSize: '12px', wordBreak: 'break-all' } }, repo.root),
+          h('div', { style: styles.sectionTitle }, t('section.branches')),
+          table(t, branchColumns, Array.isArray(repo.branches) ? repo.branches : [], t('empty.git')),
+          h('div', { style: styles.sectionTitle }, 'Commits'),
+          table(t, commitColumns, Array.isArray(repo.commits) ? repo.commits : [], t('empty.git')),
+        );
+      };
+      return h('div', { style: styles.card },
+        h('h2', { style: styles.sectionTitle }, t('section.git')),
+        repoBlock(git.research),
+        repoBlock(git.missions),
+      );
+    }
+
     /** The project console page body; `snapshot` is untrusted JSON. */
     function consoleBody(t, snapshot) {
       const project = snapshot && typeof snapshot.project === 'object' && snapshot.project !== null ? snapshot.project : {};
@@ -840,6 +885,7 @@ window.__ModuleLoader__.load({
         agentSection(t, project),
         batchCard,
         missionCard,
+        gitSection(t, snapshot),
         violationCard,
         h(
           'div',
