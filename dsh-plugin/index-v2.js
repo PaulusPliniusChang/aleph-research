@@ -1019,11 +1019,15 @@ class ProjectService {
     return this.mutate(projectId, (current) => ({
       ...current,
       machines: current.machines.map((item) => item.id === machineId ? { ...item, status: 'busy', batchId } : item),
-      missions: current.missions.map((mission) => (
-        approved.some((item) => item.id === mission.id)
-          ? { ...mission, status: 'batched', batchId, preBatchTip: preBatch[mission.id] }
-          : mission
-      )),
+      missions: current.missions.map((mission) => {
+        if (approved.some((item) => item.id === mission.id)) {
+          return { ...mission, status: 'batched', batchId, preBatchTip: preBatch[mission.id] };
+        }
+        if (mission.status === 'approved' && approved.some((item) => item.branch === mission.branch)) {
+          return { ...mission, status: 'failed', error: 'duplicate branch already batched', finishedAt: now() };
+        }
+        return mission;
+      }),
       batches: [...current.batches, {
         id: batchId,
         machineId,
