@@ -1,8 +1,8 @@
 {
   "name": "@local/dsh-aleph-research",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "DSH-native AlephResearch Host plugin: storageDomain campaign state, Leader tools, researcher subagents and a read-only console.",
+  "description": "DSH-native AlephResearch Host plugin: project/mission repos, approval queue, machine-bound batches and result cherry-picks.",
   "type": "module",
   "dependencies": {
     "zod": "4.4.3"
@@ -12,7 +12,7 @@
     "@deepseek-ai/dsh-tools": "*"
   },
   "exports": {
-    ".": "./index.js",
+    ".": "./index-v2.js",
     "./client": "./client.js",
     "./locale/*.json": "./locale/*.json",
     "./icon": "./icon.svg"
