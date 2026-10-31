@@ -71,7 +71,6 @@ const projectSchema = z.object({
   brief: z.string().optional(),
   researcherCount: z.number().int().optional(),
   prepared: z.boolean().optional(),
-  sharedAnalysis: z.any().optional(),
   visibleData: z.string().nullable().optional(),
   testsetPath: z.string().nullable().optional(),
   submissionPython: z.string().nullable().optional(),
@@ -336,74 +335,6 @@ class ProjectService {
     return { projectId, commit, prepared: next.prepared, visibleData: next.visibleData };
   }
 
-  async runSharedAnalysis({ projectId }) {
-    const project = this.get(projectId);
-    if (!project) throw new Error(`project not found: ${projectId}`);
-    if (!project.prepared) throw new Error('prepare the research scaffold before shared analysis');
-    const created = await this.startMission({ projectId, name: 'shared-data-analysis' });
-    const { branch, worktree } = created;
-    const missionId = 'shared-data-analysis';
-    const missionDir = join(worktree, 'missions', missionId);
-    await mkdir(missionDir, { recursive: true });
-    await writeFile(join(missionDir, 'mission.json'), JSON.stringify({ id: missionId, entrypoint: 'run.sh', outputs: ['metrics.json'] }, null, 2), 'utf8');
-    await writeFile(join(missionDir, 'run.sh'), '#!/usr/bin/env bash\nset -euo pipefail\npython3 analyze.py\n', 'utf8');
-    await writeFile(join(missionDir, 'analyze.py'), `import csv, glob, json, os, pathlib, statistics
-root = pathlib.Path(os.environ["ALEPH_VISIBLE_DATA"])
-files = sorted(root.glob("*.txt"))
-summary = {"files": len(files), "rows": 0, "columns": {}, "labels": {}, "missing": 0}
-labels = {"POR": [], "PERM": [], "SW": []}
-for path in files:
-    rows = list(csv.reader(open(path, encoding="utf-8", errors="replace")))
-    if len(rows) < 3:
-        continue
-    header = rows[0]
-    data = rows[2:]
-    summary["rows"] += len(data)
-    for name in header:
-        summary["columns"][name] = summary["columns"].get(name, 0) + 1
-    index = {name: i for i, name in enumerate(header)}
-    for row in data:
-        for target in labels:
-            if target not in index or index[target] >= len(row):
-                continue
-            try:
-                value = float(row[index[target]])
-            except Exception:
-                continue
-            if value <= -99999:
-                summary["missing"] += 1
-            else:
-                labels[target].append(value)
-for target, values in labels.items():
-    if values:
-        floors = {"POR": 0.1, "PERM": 0.01, "SW": 99.9}[target]
-        summary["labels"][target] = {
-            "count": len(values),
-            "min": min(values),
-            "max": max(values),
-            "mean": round(statistics.fmean(values), 6),
-            "floor_fraction": round(sum(1 for value in values if abs(value - floors) < 1e-9) / len(values), 6),
-        }
-out = pathlib.Path(os.environ["ALEPH_OUTPUT_DIR"])
-out.mkdir(parents=True, exist_ok=True)
-(out / "metrics.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-print(json.dumps(summary))
-`, 'utf8');
-    await git(worktree, ['add', '-A']);
-    await git(worktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', 'shared data analysis mission']);
-    const proposed = await this.propose({ projectId, branch });
-    const mission = proposed.missions.find((item) => item.branch === branch);
-    if (!mission) throw new Error('shared analysis mission was not registered');
-    await this.approve({ projectId, missionId: mission.id });
-    const batched = await this.formBatch({ projectId });
-    const batch = batched.batches[batched.batches.length - 1];
-    const ran = await this.runBatch({ projectId, batchId: batch.id });
-    const finished = ran.missions.find((item) => item.id === mission.id);
-    const sharedAnalysis = { branch, missionId, resultCommit: finished?.resultCommit ?? null, metrics: finished ? ran.batches.find((item) => item.id === batch.id)?.summary ?? null : null };
-    await this.mutate(projectId, (current) => ({ ...current, sharedAnalysis }));
-    return { projectId, branch, missionId, resultCommit: sharedAnalysis.resultCommit };
-  }
-
   async startMission({ projectId, name = 'mission' }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
@@ -534,10 +465,6 @@ print(json.dumps(summary))
         try {
           const raw = await readFile(join(batchWorktree, 'results', missionDir, 'result.json'), 'utf8');
           envelope = { ...envelope, ...JSON.parse(raw), batch_id: batch.id, machine_id: batch.machineId };
-          try {
-            const metrics = JSON.parse(await readFile(join(batchWorktree, 'results', missionDir, 'metrics.json'), 'utf8'));
-            envelope.metrics = metrics;
-          } catch { /* no metrics file */ }
         } catch {
           envelope.status = 'failed';
           envelope.error = runnerError || 'mission result missing';
@@ -675,7 +602,7 @@ print(json.dumps(summary))
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
       'Before creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.',
-      `Shared data analysis: ${project.sharedAnalysis?.branch ?? '(none)'} / result ${project.sharedAnalysis?.resultCommit ?? '(none)'}. Read that result from the mission repo and do not repeat data profiling locally.`, 'Budget the exploration: keep schema and data sanity checks compact, then create a mission or commit a code increment instead of running exploratory scripts indefinitely.',
+      'Budget the exploration: keep schema and data sanity checks compact, then create a mission or commit a code increment instead of running exploratory scripts indefinitely.',
       'Small work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.',
       'After proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.',
       'When all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state.',
@@ -705,7 +632,6 @@ print(json.dumps(summary))
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     if (!project.prepared) throw new Error('research project not prepared; Leader must call aleph_create_research_scaffold first');
-    if (!project.sharedAnalysis) throw new Error('shared data analysis is required; Leader must call aleph_run_shared_analysis first');
     const requested = Math.max(1, Math.min(16, Number(count) || project.researcherCount || 4));
     await this.mutate(projectId, (current) => ({
       ...current,
@@ -1116,12 +1042,6 @@ export async function apply(ctx) {
       'Leader creates the initial research project before any researcher starts.',
       { ...projectIdParam, title: { type: 'string', description: 'Research project title' }, data: { type: 'array', items: { type: 'string' }, description: 'Data sources to copy into the research project' } },
       async (args) => service.scaffoldResearch({ projectId: args.project_id, title: args.title ?? 'Research project', dataSources: args.data }),
-    ), { when: ({ agent }) => isLeader(agent) }),
-    ctx.tools.register(tool(
-      'aleph_run_shared_analysis',
-      'Leader runs the one shared data-analysis mission before researchers start.',
-      { ...projectIdParam },
-      async (args) => service.runSharedAnalysis({ projectId: args.project_id }),
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_start_mission',
