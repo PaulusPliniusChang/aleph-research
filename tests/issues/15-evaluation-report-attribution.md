@@ -2,7 +2,7 @@
 id: ALEPH-15
 status: dsh实测有问题
 type: 缺陷
-remote_issue: null
+remote_issue: https://github.com/hapenia/aleph-research/issues/19
 pull_request: null
 ---
 
@@ -99,3 +99,7 @@ python3 tests/issues/dsh/current-evaluation-attribution.py \
 ## 远端同步与排重
 
 发布前串行同步于北京时间 `2026-10-31T17:47:25.640846+08:00` 完成，本地、上游和派生仓库主分支仍为 `66885994ceadad83a237a27c1fc7de6419889c14`，主工作区保持干净。B 已检查上游全部议题和拉取请求，没有发现直接覆盖评估代码与报告提交关联错误的修复。上游 #11 关注报告查询与反馈，#7 关注 mission 计算任务起点，#16 关注研究代理回调归属；当前触发条件和验收要求分别独立。
+
+## 远端发布
+
+B 已按用户授权发布上游 [#19](https://github.com/hapenia/aleph-research/issues/19)。原始脚本与证据固定于公开提交 `98d04cc7376c83e7fcba65cf15b61924cfd58fea`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/98d04cc7376c83e7fcba65cf15b61924cfd58fea/tests/issues)。GitHub 正文移除管理字段与前导注释，本地完整保留。当前管理状态保留实际 DSH 验证结论，修复拉取请求待补充。
