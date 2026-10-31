@@ -10,6 +10,10 @@ pull_request: https://github.com/hapenia/aleph-research/pull/25
 
 # 评估超时后，评分子进程可能继续运行，而评估目录已经被删除
 
+## 当前拉取请求增量说明（2026-10-31）
+
+现有 [PR #25](https://github.com/hapenia/aleph-research/pull/25) 已追加原 #19 的固定评估输入保护，最新提交为 `95a5d61dd810659fec3df65323ce31a877429771`。当前产品 152 项测试全部通过。增量后的[B 超时集成自动检查](evidence/15-fixed-owned-timeout-independent.json)与[真实 DSH 检查](evidence/15-fixed-real-dsh-owned-timeout.json)各有 69 个有效行为点，全部通过，确认进程停止后才清理独立快照，并保留研究代理原目录及后续未提交修改。完整输入保护和验收范围见[评估归属文档](15-evaluation-report-attribution.md)。下文原 98 项产品测试和 67 项验收保留为此前提交的历史记录，当前文件摘要采用[本次增量记录](evidence/15-fixed-owned-source-manifest.json)。拉取请求尚未合并，管理状态保持原值。
+
 ## 当前情况
 
 Host 调用项目的评估命令，通过 `ALEPH_SOLUTION_DIR` 读取研究代码，并设置十分钟超时。研究代码可能位于临时评估工作区，也可能位于研究代理自有工作区。评估命令可以启动额外工作进程，例如由入口脚本启动另一个 Python 进程完成实际评分。

@@ -1,0 +1,46 @@
+{
+  "upstream_base": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "pre_increment_head": "4057d00ca0d8dfb3a7c7da3759505d57262b4879",
+  "product_head": "95a5d61dd810659fec3df65323ce31a877429771",
+  "source": "/home/paulus-chang/项目/aleph-fix-evaluation-processes",
+  "files": [
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "sha256": "ba7c1583bbd1b67841503ed5cb82e24b513e23fba3ea0975c338ae89d185cd38"
+    },
+    {
+      "path": "dsh-plugin/README.md",
+      "sha256": "bb2044657612d1e99aae6e9aaeae6932626340e275449bc95b31f4fcae771b8a"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "402942fa967e29fad603ad67835c293e4c076e91d79455a9a03cbb118bd294d6"
+    },
+    {
+      "path": "dsh-plugin/test/evaluation-process.test.mjs",
+      "sha256": "46a1131e55901aafb817f098012cdd881e6922fd4a65e336609603c47085d00c"
+    },
+    {
+      "path": "dsh-plugin/test/evaluation-input.test.mjs",
+      "sha256": "2458673e6cf5b052723c40e9dffb5ed9af0d2125c90ba613c6bba28d05159c57"
+    },
+    {
+      "path": "dsh-plugin/evaluation-process.mjs",
+      "sha256": "6f59392952266581514a0313924c959bb1e14f20e5de93055835ecabdeb531ec"
+    },
+    {
+      "path": "dsh-plugin/package.json",
+      "sha256": "20af62172843a7765da1b3f6c429ef5bbe887eaeb1dd8637e016d4d83f76ba68"
+    },
+    {
+      "path": "dsh-plugin/test/loader.mjs",
+      "sha256": "6435ea7bfb0fc68262339649021f4f6b2ced460b3554c32cfe4b18954a5ad84a"
+    },
+    {
+      "path": "dsh-plugin/test/fixtures/evaluation-process.py",
+      "sha256": "5f664f5a61b292fe7102d96860e178f526b9328dcc0f89003ad96ec664e4e75a"
+    }
+  ],
+  "increment_manifest_sha256": "27f414a29e82d291a2e700b34cc0792f435ec2e437dbdb4ec1f4bfe3cae052e6",
+  "test_evidence_identity": "Recorded source_commit4057d00 is pre-increment HEAD; all runs used the five imported increment files hash-verified here before and after acceptance. Timeout-only copy has a separate adaptation manifest."
+}

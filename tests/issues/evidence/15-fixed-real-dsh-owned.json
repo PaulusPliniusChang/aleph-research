@@ -1,0 +1,1559 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-6mxbkdqm",
+    "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-evaluation-processes",
+    "version": "4057d00ca0d8dfb3a7c7da3759505d57262b4879",
+    "source_commit": "4057d00ca0d8dfb3a7c7da3759505d57262b4879",
+    "dirty": " M docs/architecture.md\n M dsh-plugin/README.md\n M dsh-plugin/index-v2.js\n M dsh-plugin/test/evaluation-process.test.mjs\n"
+  },
+  "url": "http://127.0.0.1:47761",
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/fixed-owned-evaluation.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph-fix-evaluation-processes",
+    "--output",
+    "tests/issues/evidence/15-fixed-real-dsh-owned.json"
+  ],
+  "boundary": "Real DSH sessions, researcher worktrees, persistent storage, Git and Python evaluator; deterministic researcher model only. No source edits or timeout adaptation.",
+  "events": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 410377,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "probe": {
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-evaluation-processes",
+    "sha": "4057d00ca0d8dfb3a7c7da3759505d57262b4879",
+    "actual": true,
+    "checks": [
+      {
+        "scope": "clean",
+        "name": "evaluator uses independent snapshot directory",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "evaluator runs in configured external cwd",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "owned source remains registered",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "stopped snapshot directory is removed",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "stopped snapshot registration is removed",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "score reads exactly the admitted committed input",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "report tracked input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "report additional input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "returned evaluated commit is captured source",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "report parent is captured source commit",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "report tree is admitted committed tree",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "report ref retains independent report",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "history associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "best associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "generated evaluator output never enters original source",
+        "passed": true
+      },
+      {
+        "scope": "clean",
+        "name": "research branch advances to corresponding report",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "uncommitted input rejects before evaluating",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "diagnostic asks for commit before retry",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "diagnostic names exact input file",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "rejection does not launch Python evaluator",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "rejection preserves source status",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "rejection preserves source commit",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "rejection preserves source index",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "rejection preserves actual pending content",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "rejection records no successful history",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "rejection creates no report ref",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "evaluator uses independent snapshot directory",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "evaluator runs in configured external cwd",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "owned source remains registered",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "stopped snapshot directory is removed",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "stopped snapshot registration is removed",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "score reads exactly the admitted committed input",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "report tracked input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "report additional input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "returned evaluated commit is captured source",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "report parent is captured source commit",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "report tree is admitted committed tree",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "report ref retains independent report",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "history associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "best associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "generated evaluator output never enters original source",
+        "passed": true
+      },
+      {
+        "scope": "tracked-dirty",
+        "name": "research branch advances to corresponding report",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "uncommitted input rejects before evaluating",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "diagnostic asks for commit before retry",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "diagnostic names exact input file",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "rejection does not launch Python evaluator",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "rejection preserves source status",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "rejection preserves source commit",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "rejection preserves source index",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "rejection preserves actual pending content",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "rejection records no successful history",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "rejection creates no report ref",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "evaluator uses independent snapshot directory",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "evaluator runs in configured external cwd",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "owned source remains registered",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "stopped snapshot directory is removed",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "stopped snapshot registration is removed",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "score reads exactly the admitted committed input",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "report tracked input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "report additional input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "returned evaluated commit is captured source",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "report parent is captured source commit",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "report tree is admitted committed tree",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "report ref retains independent report",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "history associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "best associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "generated evaluator output never enters original source",
+        "passed": true
+      },
+      {
+        "scope": "untracked",
+        "name": "research branch advances to corresponding report",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "uncommitted input rejects before evaluating",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "diagnostic asks for commit before retry",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "diagnostic names exact input file",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "rejection does not launch Python evaluator",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "rejection preserves source status",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "rejection preserves source commit",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "rejection preserves source index",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "rejection preserves actual pending content",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "rejection records no successful history",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "rejection creates no report ref",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "evaluator uses independent snapshot directory",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "evaluator runs in configured external cwd",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "owned source remains registered",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "stopped snapshot directory is removed",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "stopped snapshot registration is removed",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "score reads exactly the admitted committed input",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "report tracked input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "report additional input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "returned evaluated commit is captured source",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "report parent is captured source commit",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "report tree is admitted committed tree",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "report ref retains independent report",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "history associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "best associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "generated evaluator output never enters original source",
+        "passed": true
+      },
+      {
+        "scope": "staged",
+        "name": "research branch advances to corresponding report",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "evaluator uses independent snapshot directory",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "evaluator runs in configured external cwd",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "owned source remains registered",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "stopped snapshot directory is removed",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "stopped snapshot registration is removed",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "score reads exactly the admitted committed input",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "report tracked input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "report additional input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "returned evaluated commit is captured source",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "report parent is captured source commit",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "report tree is admitted committed tree",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "report ref retains independent report",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "history associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "best associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "generated evaluator output never enters original source",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "later algorithm commit remains on researcher branch",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "later algorithm working file remains untouched",
+        "passed": true
+      },
+      {
+        "scope": "advance-during-evaluation",
+        "name": "CAS accurately reports later branch not advanced",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "evaluator uses independent snapshot directory",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "evaluator runs in configured external cwd",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "owned source remains registered",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "stopped snapshot directory is removed",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "stopped snapshot registration is removed",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "score reads exactly the admitted committed input",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "report tracked input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "report additional input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "returned evaluated commit is captured source",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "report parent is captured source commit",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "report tree is admitted committed tree",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "report ref retains independent report",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "history associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "best associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "generated evaluator output never enters original source",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "research branch advances to corresponding report",
+        "passed": true
+      },
+      {
+        "scope": "explicit-branch",
+        "name": "unrelated dirty branch remains untouched",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "evaluator uses independent snapshot directory",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "evaluator runs in configured external cwd",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "owned source remains registered",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "stopped snapshot directory is removed",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "stopped snapshot registration is removed",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "score reads exactly the admitted committed input",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "report tracked input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "report additional input equals actual Python input",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "returned evaluated commit is captured source",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "report parent is captured source commit",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "report tree is admitted committed tree",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "report ref retains independent report",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "history associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "best associates score with same source",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "generated evaluator output never enters original source",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "research branch advances to corresponding report",
+        "passed": true
+      },
+      {
+        "scope": "ignored-input",
+        "name": "ignored original input stays available outside submitted tree",
+        "passed": true
+      }
+    ],
+    "scenarios": [
+      {
+        "mode": "clean",
+        "project": "p-487d1f18",
+        "owned": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/workspace/.aleph/researchers/r-dd794974",
+        "branch": "research/r-95072065",
+        "startTip": "f89db9650e391b46cffa04fc8203b8265a0394ac",
+        "sourceStatus": "",
+        "entry": {
+          "solution": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/workspace/.aleph/evaluations/eval-8cc21b0c",
+          "cwd": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/workspace",
+          "pid": 410607
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-487d1f18",
+          "score": 3,
+          "researchCommit": "1701628f99a439095a15035180e1eebb43dcd1b7",
+          "evaluatedCommit": "f89db9650e391b46cffa04fc8203b8265a0394ac",
+          "evaluationRef": "refs/aleph/evaluations/eval-8cc21b0c",
+          "researchBranchUpdated": true,
+          "best": {
+            "score": 3,
+            "branch": "research/r-95072065",
+            "commit": "f89db9650e391b46cffa04fc8203b8265a0394ac",
+            "researchCommit": "1701628f99a439095a15035180e1eebb43dcd1b7",
+            "evaluationRef": "refs/aleph/evaluations/eval-8cc21b0c",
+            "at": "2026-10-31T12:09:36.885Z"
+          },
+          "stdout": "{\"algorithm\": \"3\", \"extra\": null, \"score\": 3}\n",
+          "stderr": ""
+        },
+        "read": {
+          "algorithm": "3",
+          "extra": null,
+          "score": 3
+        },
+        "final": {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:09:36.889Z",
+          "project": {
+            "id": "p-487d1f18",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/workspace",
+            "research_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 '/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/evaluate.py'",
+            "eval_root": null,
+            "best": {
+              "score": 3,
+              "branch": "research/r-95072065",
+              "commit": "f89db9650e391b46cffa04fc8203b8265a0394ac",
+              "researchCommit": "1701628f99a439095a15035180e1eebb43dcd1b7",
+              "evaluationRef": "refs/aleph/evaluations/eval-8cc21b0c",
+              "at": "2026-10-31T12:09:36.885Z"
+            },
+            "evaluations": [
+              {
+                "id": "eval-8cc21b0c",
+                "branch": "research/r-95072065",
+                "evaluatedCommit": "f89db9650e391b46cffa04fc8203b8265a0394ac",
+                "researchCommit": "1701628f99a439095a15035180e1eebb43dcd1b7",
+                "evaluationRef": "refs/aleph/evaluations/eval-8cc21b0c",
+                "score": 3,
+                "at": "2026-10-31T12:09:36.885Z"
+              }
+            ],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "9b4ffc84-5fd1-46cf-9812-245d8d4d8e69",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-95072065",
+              "worktree": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/clean/workspace/.aleph/researchers/r-dd794974",
+              "updatedAt": "2026-10-31T12:09:36.612Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        },
+        "reportInput": "3",
+        "reportExtra": null
+      },
+      {
+        "mode": "tracked-dirty",
+        "project": "p-21d078de",
+        "owned": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace/.aleph/researchers/r-fada1e72",
+        "branch": "research/r-faaecdec",
+        "beforeRejection": {
+          "status": "M algorithm.txt",
+          "head": "4f9907e8cd2ea8d68ea563e349718d0569807bec",
+          "index": "5f1d7a0287fc315b42911da5a501735ee7e06be8",
+          "content": "7\n"
+        },
+        "rejection": "{\"ok\":false,\"error\":\"Error: Evaluation requires committed research files in /tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace/.aleph/researchers/r-fada1e72. Commit the listed changes and untracked files, then retry aleph_evaluate. No files were staged, committed or removed. Changes: [{\\\"status\\\":\\\" M\\\",\\\"path\\\":\\\"algorithm.txt\\\"}]. Git-ignored files are excluded from evaluation snapshots.\",\"stack\":\"Error: Evaluation requires committed research files in /tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace/.aleph/researchers/r-fada1e72. Commit the listed changes and untracked files, then retry aleph_evaluate. No files were staged, committed or removed. Changes: [{\\\"status\\\":\\\" M\\\",\\\"path\\\":\\\"algorithm.txt\\\"}]. Git-ignored files are excluded from evaluation snapshots.\\n    at committedResearchOnly (file:///tmp/aleph-project-dsh-6mxbkdqm/plugin/index-v2.js:145:23)\\n    at async ProjectService.evaluate (file:///tmp/aleph-project-dsh-6mxbkdqm/plugin/index-v2.js:797:7)\\n    at async Object.handler (file:///tmp/aleph-project-dsh-6mxbkdqm/bridge/diagnostic-bridge.mjs:23:20)\\n    at async handle (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-host-webserver/lib/index.js:471:9)\"}",
+        "startTip": "d700e054302ec96b8cd683e2be8cae90dff49ec9",
+        "sourceStatus": "",
+        "entry": {
+          "solution": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace/.aleph/evaluations/eval-49617c14",
+          "cwd": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace",
+          "pid": 410977
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-21d078de",
+          "score": 7,
+          "researchCommit": "fef99d28727a7f1c3c98db485e9e5496a9ec9d4f",
+          "evaluatedCommit": "d700e054302ec96b8cd683e2be8cae90dff49ec9",
+          "evaluationRef": "refs/aleph/evaluations/eval-49617c14",
+          "researchBranchUpdated": true,
+          "best": {
+            "score": 7,
+            "branch": "research/r-faaecdec",
+            "commit": "d700e054302ec96b8cd683e2be8cae90dff49ec9",
+            "researchCommit": "fef99d28727a7f1c3c98db485e9e5496a9ec9d4f",
+            "evaluationRef": "refs/aleph/evaluations/eval-49617c14",
+            "at": "2026-10-31T12:09:37.315Z"
+          },
+          "stdout": "{\"algorithm\": \"7\", \"extra\": null, \"score\": 7}\n",
+          "stderr": ""
+        },
+        "read": {
+          "algorithm": "7",
+          "extra": null,
+          "score": 7
+        },
+        "final": {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:09:37.317Z",
+          "project": {
+            "id": "p-21d078de",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace",
+            "research_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 '/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/evaluate.py'",
+            "eval_root": null,
+            "best": {
+              "score": 7,
+              "branch": "research/r-faaecdec",
+              "commit": "d700e054302ec96b8cd683e2be8cae90dff49ec9",
+              "researchCommit": "fef99d28727a7f1c3c98db485e9e5496a9ec9d4f",
+              "evaluationRef": "refs/aleph/evaluations/eval-49617c14",
+              "at": "2026-10-31T12:09:37.315Z"
+            },
+            "evaluations": [
+              {
+                "id": "eval-49617c14",
+                "branch": "research/r-faaecdec",
+                "evaluatedCommit": "d700e054302ec96b8cd683e2be8cae90dff49ec9",
+                "researchCommit": "fef99d28727a7f1c3c98db485e9e5496a9ec9d4f",
+                "evaluationRef": "refs/aleph/evaluations/eval-49617c14",
+                "score": 7,
+                "at": "2026-10-31T12:09:37.315Z"
+              }
+            ],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "da4a3f88-03f2-4067-a9f3-b66b603a7754",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-faaecdec",
+              "worktree": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/tracked-dirty/workspace/.aleph/researchers/r-fada1e72",
+              "updatedAt": "2026-10-31T12:09:37.022Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        },
+        "reportInput": "7",
+        "reportExtra": null
+      },
+      {
+        "mode": "untracked",
+        "project": "p-a48fdfc1",
+        "owned": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace/.aleph/researchers/r-c6d85334",
+        "branch": "research/r-ff8200df",
+        "beforeRejection": {
+          "status": "?? extra.txt",
+          "head": "ae31641991e8b4183a54a959e23bff94fc3b4b55",
+          "index": "bc7e93f11d4080926968da18a94b7b01d9c46a63",
+          "content": "11\n"
+        },
+        "rejection": "{\"ok\":false,\"error\":\"Error: Evaluation requires committed research files in /tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace/.aleph/researchers/r-c6d85334. Commit the listed changes and untracked files, then retry aleph_evaluate. No files were staged, committed or removed. Changes: [{\\\"status\\\":\\\"??\\\",\\\"path\\\":\\\"extra.txt\\\"}]. Git-ignored files are excluded from evaluation snapshots.\",\"stack\":\"Error: Evaluation requires committed research files in /tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace/.aleph/researchers/r-c6d85334. Commit the listed changes and untracked files, then retry aleph_evaluate. No files were staged, committed or removed. Changes: [{\\\"status\\\":\\\"??\\\",\\\"path\\\":\\\"extra.txt\\\"}]. Git-ignored files are excluded from evaluation snapshots.\\n    at committedResearchOnly (file:///tmp/aleph-project-dsh-6mxbkdqm/plugin/index-v2.js:145:23)\\n    at async ProjectService.evaluate (file:///tmp/aleph-project-dsh-6mxbkdqm/plugin/index-v2.js:797:7)\\n    at async Object.handler (file:///tmp/aleph-project-dsh-6mxbkdqm/bridge/diagnostic-bridge.mjs:23:20)\\n    at async handle (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-host-webserver/lib/index.js:471:9)\"}",
+        "startTip": "48aa833ba78bbc7ab19ba09be6777cbd054b08c2",
+        "sourceStatus": "",
+        "entry": {
+          "solution": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace/.aleph/evaluations/eval-e9b5afd2",
+          "cwd": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace",
+          "pid": 411347
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-a48fdfc1",
+          "score": 14,
+          "researchCommit": "c421b972043dd369dfafe5342af4b412680708c9",
+          "evaluatedCommit": "48aa833ba78bbc7ab19ba09be6777cbd054b08c2",
+          "evaluationRef": "refs/aleph/evaluations/eval-e9b5afd2",
+          "researchBranchUpdated": true,
+          "best": {
+            "score": 14,
+            "branch": "research/r-ff8200df",
+            "commit": "48aa833ba78bbc7ab19ba09be6777cbd054b08c2",
+            "researchCommit": "c421b972043dd369dfafe5342af4b412680708c9",
+            "evaluationRef": "refs/aleph/evaluations/eval-e9b5afd2",
+            "at": "2026-10-31T12:09:37.744Z"
+          },
+          "stdout": "{\"algorithm\": \"3\", \"extra\": \"11\", \"score\": 14}\n",
+          "stderr": ""
+        },
+        "read": {
+          "algorithm": "3",
+          "extra": "11",
+          "score": 14
+        },
+        "final": {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:09:37.746Z",
+          "project": {
+            "id": "p-a48fdfc1",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace",
+            "research_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 '/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/evaluate.py'",
+            "eval_root": null,
+            "best": {
+              "score": 14,
+              "branch": "research/r-ff8200df",
+              "commit": "48aa833ba78bbc7ab19ba09be6777cbd054b08c2",
+              "researchCommit": "c421b972043dd369dfafe5342af4b412680708c9",
+              "evaluationRef": "refs/aleph/evaluations/eval-e9b5afd2",
+              "at": "2026-10-31T12:09:37.744Z"
+            },
+            "evaluations": [
+              {
+                "id": "eval-e9b5afd2",
+                "branch": "research/r-ff8200df",
+                "evaluatedCommit": "48aa833ba78bbc7ab19ba09be6777cbd054b08c2",
+                "researchCommit": "c421b972043dd369dfafe5342af4b412680708c9",
+                "evaluationRef": "refs/aleph/evaluations/eval-e9b5afd2",
+                "score": 14,
+                "at": "2026-10-31T12:09:37.744Z"
+              }
+            ],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "862138bf-0ebb-4f48-b8e7-029086ed6df9",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-ff8200df",
+              "worktree": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/untracked/workspace/.aleph/researchers/r-c6d85334",
+              "updatedAt": "2026-10-31T12:09:37.443Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        },
+        "reportInput": "3",
+        "reportExtra": "11"
+      },
+      {
+        "mode": "staged",
+        "project": "p-03750255",
+        "owned": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace/.aleph/researchers/r-f7b5cc16",
+        "branch": "research/r-a3918b04",
+        "beforeRejection": {
+          "status": "M  algorithm.txt",
+          "head": "63f7717fcd26bcc45024ce04e4fda138f2ae4d22",
+          "index": "a33d7372707d42d83048ec332724684334ad2691",
+          "content": "7\n"
+        },
+        "rejection": "{\"ok\":false,\"error\":\"Error: Evaluation requires committed research files in /tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace/.aleph/researchers/r-f7b5cc16. Commit the listed changes and untracked files, then retry aleph_evaluate. No files were staged, committed or removed. Changes: [{\\\"status\\\":\\\"M \\\",\\\"path\\\":\\\"algorithm.txt\\\"}]. Git-ignored files are excluded from evaluation snapshots.\",\"stack\":\"Error: Evaluation requires committed research files in /tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace/.aleph/researchers/r-f7b5cc16. Commit the listed changes and untracked files, then retry aleph_evaluate. No files were staged, committed or removed. Changes: [{\\\"status\\\":\\\"M \\\",\\\"path\\\":\\\"algorithm.txt\\\"}]. Git-ignored files are excluded from evaluation snapshots.\\n    at committedResearchOnly (file:///tmp/aleph-project-dsh-6mxbkdqm/plugin/index-v2.js:145:23)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\\n    at async ProjectService.evaluate (file:///tmp/aleph-project-dsh-6mxbkdqm/plugin/index-v2.js:797:7)\\n    at async Object.handler (file:///tmp/aleph-project-dsh-6mxbkdqm/bridge/diagnostic-bridge.mjs:23:20)\\n    at async handle (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-host-webserver/lib/index.js:471:9)\"}",
+        "startTip": "40e15f94ad8073e440b4482e0ae7ce8462c3fcda",
+        "sourceStatus": "",
+        "entry": {
+          "solution": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace/.aleph/evaluations/eval-b20ecde9",
+          "cwd": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace",
+          "pid": 411724
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-03750255",
+          "score": 7,
+          "researchCommit": "62c9d7264fe47bcb08ac399b624c367942081057",
+          "evaluatedCommit": "40e15f94ad8073e440b4482e0ae7ce8462c3fcda",
+          "evaluationRef": "refs/aleph/evaluations/eval-b20ecde9",
+          "researchBranchUpdated": true,
+          "best": {
+            "score": 7,
+            "branch": "research/r-a3918b04",
+            "commit": "40e15f94ad8073e440b4482e0ae7ce8462c3fcda",
+            "researchCommit": "62c9d7264fe47bcb08ac399b624c367942081057",
+            "evaluationRef": "refs/aleph/evaluations/eval-b20ecde9",
+            "at": "2026-10-31T12:09:38.196Z"
+          },
+          "stdout": "{\"algorithm\": \"7\", \"extra\": null, \"score\": 7}\n",
+          "stderr": ""
+        },
+        "read": {
+          "algorithm": "7",
+          "extra": null,
+          "score": 7
+        },
+        "final": {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:09:38.200Z",
+          "project": {
+            "id": "p-03750255",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace",
+            "research_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 '/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/evaluate.py'",
+            "eval_root": null,
+            "best": {
+              "score": 7,
+              "branch": "research/r-a3918b04",
+              "commit": "40e15f94ad8073e440b4482e0ae7ce8462c3fcda",
+              "researchCommit": "62c9d7264fe47bcb08ac399b624c367942081057",
+              "evaluationRef": "refs/aleph/evaluations/eval-b20ecde9",
+              "at": "2026-10-31T12:09:38.196Z"
+            },
+            "evaluations": [
+              {
+                "id": "eval-b20ecde9",
+                "branch": "research/r-a3918b04",
+                "evaluatedCommit": "40e15f94ad8073e440b4482e0ae7ce8462c3fcda",
+                "researchCommit": "62c9d7264fe47bcb08ac399b624c367942081057",
+                "evaluationRef": "refs/aleph/evaluations/eval-b20ecde9",
+                "score": 7,
+                "at": "2026-10-31T12:09:38.196Z"
+              }
+            ],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "7f3203b5-22b2-4daf-b3db-36193eac4135",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-a3918b04",
+              "worktree": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/staged/workspace/.aleph/researchers/r-f7b5cc16",
+              "updatedAt": "2026-10-31T12:09:37.885Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        },
+        "reportInput": "7",
+        "reportExtra": null
+      },
+      {
+        "mode": "advance-during-evaluation",
+        "project": "p-45dfd0d3",
+        "owned": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/workspace/.aleph/researchers/r-767cc6e2",
+        "branch": "research/r-a11360fe",
+        "startTip": "89c40dd29138b6df59220dbd15fbdc149dc9fafa",
+        "sourceStatus": "",
+        "entry": {
+          "solution": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/workspace/.aleph/evaluations/eval-377cfb87",
+          "cwd": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/workspace",
+          "pid": 412001
+        },
+        "advanced": "e625254f93d26cc2ef1c4f5795b2076afa07a142",
+        "result": {
+          "status": "done",
+          "projectId": "p-45dfd0d3",
+          "score": 3,
+          "researchCommit": "2e901c7a252bba1795d6313b251596c17b9b171a",
+          "evaluatedCommit": "89c40dd29138b6df59220dbd15fbdc149dc9fafa",
+          "evaluationRef": "refs/aleph/evaluations/eval-377cfb87",
+          "researchBranchUpdated": false,
+          "best": {
+            "score": 3,
+            "branch": "research/r-a11360fe",
+            "commit": "89c40dd29138b6df59220dbd15fbdc149dc9fafa",
+            "researchCommit": "2e901c7a252bba1795d6313b251596c17b9b171a",
+            "evaluationRef": "refs/aleph/evaluations/eval-377cfb87",
+            "at": "2026-10-31T12:09:38.613Z"
+          },
+          "stdout": "{\"algorithm\": \"3\", \"extra\": null, \"score\": 3}\n",
+          "stderr": ""
+        },
+        "read": {
+          "algorithm": "3",
+          "extra": null,
+          "score": 3
+        },
+        "final": {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:09:38.615Z",
+          "project": {
+            "id": "p-45dfd0d3",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/workspace",
+            "research_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 '/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/evaluate.py'",
+            "eval_root": null,
+            "best": {
+              "score": 3,
+              "branch": "research/r-a11360fe",
+              "commit": "89c40dd29138b6df59220dbd15fbdc149dc9fafa",
+              "researchCommit": "2e901c7a252bba1795d6313b251596c17b9b171a",
+              "evaluationRef": "refs/aleph/evaluations/eval-377cfb87",
+              "at": "2026-10-31T12:09:38.613Z"
+            },
+            "evaluations": [
+              {
+                "id": "eval-377cfb87",
+                "branch": "research/r-a11360fe",
+                "evaluatedCommit": "89c40dd29138b6df59220dbd15fbdc149dc9fafa",
+                "researchCommit": "2e901c7a252bba1795d6313b251596c17b9b171a",
+                "evaluationRef": "refs/aleph/evaluations/eval-377cfb87",
+                "score": 3,
+                "at": "2026-10-31T12:09:38.613Z"
+              }
+            ],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "81c6bcd3-96e5-4f25-9046-4aa0e17b0b08",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-a11360fe",
+              "worktree": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/advance-during-evaluation/workspace/.aleph/researchers/r-767cc6e2",
+              "updatedAt": "2026-10-31T12:09:38.344Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        },
+        "reportInput": "3",
+        "reportExtra": null
+      },
+      {
+        "mode": "explicit-branch",
+        "project": "p-eebcb5f1",
+        "owned": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/workspace/.aleph/researchers/r-5dee5456",
+        "branch": "research/r-1b7fbad6",
+        "unrelatedDirty": "M algorithm.txt",
+        "startTip": "cf92a53167add9c1c8c5508a6f2e79bca14ef75a",
+        "sourceStatus": "",
+        "entry": {
+          "solution": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/workspace/.aleph/evaluations/eval-e0168060",
+          "cwd": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/workspace",
+          "pid": 412315
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-eebcb5f1",
+          "score": 3,
+          "researchCommit": "5718ae819a1e9657f1f0926d375f6e6f040f1a07",
+          "evaluatedCommit": "cf92a53167add9c1c8c5508a6f2e79bca14ef75a",
+          "evaluationRef": "refs/aleph/evaluations/eval-e0168060",
+          "researchBranchUpdated": true,
+          "best": {
+            "score": 3,
+            "branch": "research/r-1b7fbad6",
+            "commit": "cf92a53167add9c1c8c5508a6f2e79bca14ef75a",
+            "researchCommit": "5718ae819a1e9657f1f0926d375f6e6f040f1a07",
+            "evaluationRef": "refs/aleph/evaluations/eval-e0168060",
+            "at": "2026-10-31T12:09:38.967Z"
+          },
+          "stdout": "{\"algorithm\": \"3\", \"extra\": null, \"score\": 3}\n",
+          "stderr": ""
+        },
+        "read": {
+          "algorithm": "3",
+          "extra": null,
+          "score": 3
+        },
+        "final": {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:09:38.969Z",
+          "project": {
+            "id": "p-eebcb5f1",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/workspace",
+            "research_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 '/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/evaluate.py'",
+            "eval_root": null,
+            "best": {
+              "score": 3,
+              "branch": "research/r-1b7fbad6",
+              "commit": "cf92a53167add9c1c8c5508a6f2e79bca14ef75a",
+              "researchCommit": "5718ae819a1e9657f1f0926d375f6e6f040f1a07",
+              "evaluationRef": "refs/aleph/evaluations/eval-e0168060",
+              "at": "2026-10-31T12:09:38.967Z"
+            },
+            "evaluations": [
+              {
+                "id": "eval-e0168060",
+                "branch": "research/r-1b7fbad6",
+                "evaluatedCommit": "cf92a53167add9c1c8c5508a6f2e79bca14ef75a",
+                "researchCommit": "5718ae819a1e9657f1f0926d375f6e6f040f1a07",
+                "evaluationRef": "refs/aleph/evaluations/eval-e0168060",
+                "score": 3,
+                "at": "2026-10-31T12:09:38.967Z"
+              }
+            ],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "64ef4c15-c9dc-42c1-99c4-6be77da5f389",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-1b7fbad6",
+              "worktree": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/explicit-branch/workspace/.aleph/researchers/r-5dee5456",
+              "updatedAt": "2026-10-31T12:09:38.732Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        },
+        "reportInput": "3",
+        "reportExtra": null
+      },
+      {
+        "mode": "ignored-input",
+        "project": "p-57a4216e",
+        "owned": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/workspace/.aleph/researchers/r-93e624eb",
+        "branch": "research/r-cc6cc65b",
+        "startTip": "3506d1b6b7e8dee401cfeec5fbd385792ba1fa80",
+        "sourceStatus": "",
+        "entry": {
+          "solution": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/workspace/.aleph/evaluations/eval-ffc9c651",
+          "cwd": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/workspace",
+          "pid": 412603
+        },
+        "result": {
+          "status": "done",
+          "projectId": "p-57a4216e",
+          "score": 3,
+          "researchCommit": "ab4b13a519373ea54c10ed7bc3b8055492192d71",
+          "evaluatedCommit": "3506d1b6b7e8dee401cfeec5fbd385792ba1fa80",
+          "evaluationRef": "refs/aleph/evaluations/eval-ffc9c651",
+          "researchBranchUpdated": true,
+          "best": {
+            "score": 3,
+            "branch": "research/r-cc6cc65b",
+            "commit": "3506d1b6b7e8dee401cfeec5fbd385792ba1fa80",
+            "researchCommit": "ab4b13a519373ea54c10ed7bc3b8055492192d71",
+            "evaluationRef": "refs/aleph/evaluations/eval-ffc9c651",
+            "at": "2026-10-31T12:09:39.408Z"
+          },
+          "stdout": "{\"algorithm\": \"3\", \"extra\": null, \"score\": 3}\n",
+          "stderr": ""
+        },
+        "read": {
+          "algorithm": "3",
+          "extra": null,
+          "score": 3
+        },
+        "final": {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:09:39.415Z",
+          "project": {
+            "id": "p-57a4216e",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/workspace",
+            "research_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 '/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/evaluate.py'",
+            "eval_root": null,
+            "best": {
+              "score": 3,
+              "branch": "research/r-cc6cc65b",
+              "commit": "3506d1b6b7e8dee401cfeec5fbd385792ba1fa80",
+              "researchCommit": "ab4b13a519373ea54c10ed7bc3b8055492192d71",
+              "evaluationRef": "refs/aleph/evaluations/eval-ffc9c651",
+              "at": "2026-10-31T12:09:39.408Z"
+            },
+            "evaluations": [
+              {
+                "id": "eval-ffc9c651",
+                "branch": "research/r-cc6cc65b",
+                "evaluatedCommit": "3506d1b6b7e8dee401cfeec5fbd385792ba1fa80",
+                "researchCommit": "ab4b13a519373ea54c10ed7bc3b8055492192d71",
+                "evaluationRef": "refs/aleph/evaluations/eval-ffc9c651",
+                "score": 3,
+                "at": "2026-10-31T12:09:39.408Z"
+              }
+            ],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "3943aae9-9716-4894-bf2a-505e51d4fdbe",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-cc6cc65b",
+              "worktree": "/tmp/aleph-project-dsh-6mxbkdqm/workspace/ignored-input/workspace/.aleph/researchers/r-93e624eb",
+              "updatedAt": "2026-10-31T12:09:39.098Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        },
+        "reportInput": "3",
+        "reportExtra": null
+      }
+    ],
+    "boundary": "Independent registered tools with real Git and Python. Automatic substitutes DSH storage/session and seeds owned worktree records. Actual starts a real researcher using a deterministic model, then explicitly commits its marker before admission. No product JavaScript or deadline changes. Evaluator file gate schedules source mutation after Python starts on its independent snapshot.",
+    "complete": true,
+    "protection_validated": true
+  },
+  "probe_exit": 0
+}

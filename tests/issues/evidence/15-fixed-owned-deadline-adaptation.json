@@ -1,0 +1,107 @@
+{
+  "official_source": "/home/paulus-chang/项目/aleph-fix-evaluation-processes",
+  "acceptance_source": "/tmp/aleph-19-b-acceptance-source",
+  "base_head": "4057d00ca0d8dfb3a7c7da3759505d57262b4879",
+  "increment_manifest": {
+    "source": "/tmp/aleph-19-fix-source",
+    "baseline": "4057d00ca0d8dfb3a7c7da3759505d57262b4879",
+    "baseline_description": "PR25 accepted evaluation-process implementation; #19 increment only",
+    "status": "FROZEN",
+    "frozen_at_utc": "2026-10-31T12:01:16.349713+00:00",
+    "tests": {
+      "node_pass": 152,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "new_effective_points": 48,
+      "existing_PR25_effective_points": 88,
+      "new_containers": 6,
+      "existing_PR25_containers": 3,
+      "other_existing_tests": 7,
+      "actual_dsh": "Not executed by C; B independent automatic and actual DSH acceptance required"
+    },
+    "files": [
+      {
+        "path": "dsh-plugin/index-v2.js",
+        "sha256": "ba7c1583bbd1b67841503ed5cb82e24b513e23fba3ea0975c338ae89d185cd38",
+        "bytes": 106029,
+        "status": "modified",
+        "added_lines": 49,
+        "removed_lines": 18
+      },
+      {
+        "path": "dsh-plugin/README.md",
+        "sha256": "bb2044657612d1e99aae6e9aaeae6932626340e275449bc95b31f4fcae771b8a",
+        "bytes": 3975,
+        "status": "modified",
+        "added_lines": 24,
+        "removed_lines": 0
+      },
+      {
+        "path": "docs/architecture.md",
+        "sha256": "402942fa967e29fad603ad67835c293e4c076e91d79455a9a03cbb118bd294d6",
+        "bytes": 4159,
+        "status": "modified",
+        "added_lines": 15,
+        "removed_lines": 0
+      },
+      {
+        "path": "dsh-plugin/test/evaluation-process.test.mjs",
+        "sha256": "46a1131e55901aafb817f098012cdd881e6922fd4a65e336609603c47085d00c",
+        "bytes": 16422,
+        "status": "modified",
+        "added_lines": 15,
+        "removed_lines": 6
+      },
+      {
+        "path": "dsh-plugin/test/evaluation-input.test.mjs",
+        "sha256": "2458673e6cf5b052723c40e9dffb5ed9af0d2125c90ba613c6bba28d05159c57",
+        "bytes": 20010,
+        "status": "new",
+        "added_lines": 186,
+        "removed_lines": 0
+      }
+    ],
+    "unchanged_PR25_files": [
+      {
+        "path": "dsh-plugin/evaluation-process.mjs",
+        "sha256": "6f59392952266581514a0313924c959bb1e14f20e5de93055835ecabdeb531ec"
+      },
+      {
+        "path": "dsh-plugin/package.json",
+        "sha256": "20af62172843a7765da1b3f6c429ef5bbe887eaeb1dd8637e016d4d83f76ba68"
+      },
+      {
+        "path": "dsh-plugin/test/loader.mjs",
+        "sha256": "6435ea7bfb0fc68262339649021f4f6b2ced460b3554c32cfe4b18954a5ad84a"
+      },
+      {
+        "path": "dsh-plugin/test/fixtures/evaluation-process.py",
+        "sha256": "5f664f5a61b292fe7102d96860e178f526b9328dcc0f89003ad96ec664e4e75a"
+      }
+    ],
+    "artifacts": [
+      {
+        "path": "/tmp/aleph-19-c-product-tests.txt",
+        "sha256": "62ccc02eb45b046cbbb36f4eb12cedec27ff3651c8ca187f8284b2e3d8f8ec8b",
+        "bytes": 14489
+      },
+      {
+        "path": "/tmp/aleph-19-c-changes.patch",
+        "sha256": "5435159b37e26b1174826ca738737e8f618a512080d9b9134a5f19a45cde0dc6",
+        "bytes": 32875
+      },
+      {
+        "path": "/tmp/aleph-19-c-diffstat.txt",
+        "sha256": "4bf24df1ba77edd9276c55ef9f27fcdab3574b3d5e497092833a02342baed689",
+        "bytes": 178
+      }
+    ]
+  },
+  "original_sha256": "ba7c1583bbd1b67841503ed5cb82e24b513e23fba3ea0975c338ae89d185cd38",
+  "adapted_sha256": "c9091370deac59349e95b09bc8635de385a1e0aa59753b86ba33a5dc91d97bec",
+  "unique_replacement": 1,
+  "original_ms": 600000,
+  "adapted_ms": 1200,
+  "boundary": "Only unique evaluator timeout changes in isolated acceptance worktree. Official source retains 600000ms. Real Git, Python, signals, process helper, DSH services unchanged."
+}

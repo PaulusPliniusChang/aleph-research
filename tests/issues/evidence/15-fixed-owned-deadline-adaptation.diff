@@ -1,0 +1,11 @@
+--- official/dsh-plugin/index-v2.js
++++ acceptance/dsh-plugin/index-v2.js
+@@ -826,7 +826,7 @@
+     let evaluationStopped = false;
+     try {
+       // The evaluator lives beside the project; it reads the scored branch through ALEPH_SOLUTION_DIR.
+-      const result = await runEvaluation('bash', ['-lc', project.evalCommand], { cwd: project.evalRoot || project.workspace, env, timeout: 600_000 });
++      const result = await runEvaluation('bash', ['-lc', project.evalCommand], { cwd: project.evalRoot || project.workspace, env, timeout: 1_200 });
+       evaluationStopped = true;
+       stdout = result.stdout;
+       stderr = result.stderr;

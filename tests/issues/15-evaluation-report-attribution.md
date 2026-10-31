@@ -3,12 +3,28 @@ id: ALEPH-15
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/19
-pull_request: https://github.com/hapenia/aleph-research/pull/20
+pull_request: https://github.com/hapenia/aleph-research/pull/25
 ---
 
 <!-- 本地管理说明：用户于 2026-10-31 17:27 北京时间明确接纳该候选，要求先登记为“可疑”。A 仅登记源码线索；B 应重新同步上游、排重，再执行自动测试和实际 DSH 核查。GitHub 正文应移除管理头及本段前导注释，本地文件保留完整内容。 -->
 
 # 评估期间研究分支发生变化，评分报告可能写入另一条分支
+
+## 当前修复验收（2026-10-31）
+
+当前修复已追加至现有 [PR #25](https://github.com/hapenia/aleph-research/pull/25)，同时保留评估进程清理保护。代码提交为 `95a5d61dd810659fec3df65323ce31a877429771`，上游基线仍为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。上游原议题仍处于关闭状态；旧 PR #20 已关闭且未合并。当前拉取请求尚未合并，管理状态保持原值。
+
+按照已经确认的设计，Host 在评估前检查已跟踪文件、暂存区和未跟踪文件，发现未提交输入时拒绝评估，并指出文件及提交后重试的要求。接受评估的代码来自固定提交的独立工作树。研究代理原有工作目录保持可用，评估期间的修改及新提交不能改变已接受的输入；报告引用和分支比较更新保护继续保留。
+
+[正式产品测试](evidence/15-fixed-owned-product.txt)的 152 项 Node 测试全部通过，其中新增输入检查包含 48 个有效行为点，既有进程保护包含 88 个有效行为点，其余为容器及其他既有测试。[B 独立检查](evidence/15-fixed-owned-independent.json)与[实际 DSH 检查](evidence/15-fixed-real-dsh-owned.json)各有 146 个有效行为点，全部通过。[自动原始输出](evidence/15-fixed-owned-independent.txt)与[实际原始输出](evidence/15-fixed-real-dsh-owned.txt)保留执行记录。
+
+实际 DSH 通过注册工具创建真实研究代理，使用实际持久存储、Git 工作树和 Python 评估程序；仅研究代理模型使用确定性响应。脚本在评估前明确提交模型生成的标记文件，因此干净输入对照确实没有未提交文件。未提交的已跟踪、暂存或未跟踪输入均被拒绝，拒绝期间没有启动 Python，也没有改变文件、索引、历史或报告引用。提交后重试的评分与报告分别一致为 `7`、`14` 和 `7`。评估开始后提交 `19` 的场景仍评分 `3`、报告代码为 `3`，后续提交 `19` 保留。显式分支接口使用目标分支快照，并保留主研究目录中的未提交内容 `99`。被忽略文件保留在原目录，且未进入评分快照。隔离 Host `410377` 正常退出，记录确认进程不存在。
+
+[B 超时集成自动检查](evidence/15-fixed-owned-timeout-independent.json)与[真实 DSH 超时集成检查](evidence/15-fixed-real-dsh-owned-timeout.json)各有 69 个有效行为点，全部通过。正常、非零退出、临时输入超时及研究代理输入超时场景均使用真实 Git 和 Python。评分入口及普通子孙进程在失败返回前停止，评分心跳停止，独立评估快照才被清理；研究代理原目录及评估开始后新增的未提交文件保留。隔离 Host `413666` 正常退出，进程不存在。[期限适配记录](evidence/15-fixed-owned-deadline-adaptation.json)和[精确差异](evidence/15-fixed-owned-deadline-adaptation.diff)仅适用于独立验收副本中唯一评估期限从 `600000` 毫秒缩短为 `1200` 毫秒，正式产品仍为十分钟。
+
+验收结果中的 `source_commit=4057d00` 表示导入增量前的分支提交。实际验收已经使用本次冻结增量，全部文件在验收前后均核对一致；[当前文件摘要](evidence/15-fixed-owned-source-manifest.json)记录本次提交与实际文件内容，不能使用后文旧基线的摘要代表当前修复。实际 DSH 没有执行权限观察失败注入，相关保护由产品自动测试覆盖；主动脱离进程组、远程计算及 Host 重启恢复仍在当前进程清理保证范围之外。
+
+[独立输入脚本](dsh/fixed-owned-evaluation.test.mjs)、[真实输入脚本](dsh/fixed-owned-evaluation.py)、[超时集成脚本](dsh/fixed-input-timeout-acceptance.test.mjs)与[真实超时启动脚本](dsh/fixed-input-evaluation-timeout.py)均保留。首次显式分支夹具误将 `branch` 传给不接受该参数的注册工具，[失败记录](evidence/15-fixed-owned-explicit-route-fixture-attempt.json)和[原始输出](evidence/15-fixed-owned-explicit-route-fixture-attempt.txt)单独保存；正式检查改为实际接受分支参数的 HTTP 接口，夹具错误不计入产品缺陷。
 
 ## 最新架构复核（2026-10-31 19:51 北京时间）
 
