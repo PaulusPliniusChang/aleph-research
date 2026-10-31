@@ -1,0 +1,242 @@
+(node:232533) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-06 post-composition branch changes must survive result delivery or be explicitly rejected
+  ✔ unchanged/runtime-and-state: composition captured original mission tip (0.688888ms)
+  ✔ unchanged/runtime-and-state: batch actually contains captured mission tip (4.568624ms)
+  ✔ unchanged/runtime-and-state: real task reads original composed source (0.26537ms)
+  ✔ unchanged/runtime-and-state: real task executes composed batch commit (0.137045ms)
+  ✔ unchanged/runtime-and-state: real task executes exactly once (0.113509ms)
+  ✔ unchanged/runtime-and-state: machine released after actual task and delivery (0.091346ms)
+  ✔ unchanged/runtime-and-state: machine batch ownership released (0.084487ms)
+  ✔ unchanged/runtime-and-state: captured baseline remains unchanged in record (0.090627ms)
+  ✔ unchanged/runtime-and-state: public snapshot exposes same baseline (0.095354ms)
+  ✔ unchanged/runtime-and-state: public snapshot agrees with actual mission outcome (0.100918ms)
+  ✔ unchanged/runtime-and-state: delivery produced an actual result commit object (4.801541ms)
+  ✔ unchanged/runtime-and-state: result envelope identifies original task (4.285168ms)
+  ✔ unchanged/runtime-and-state: delivery temporary worktree registrations are removed (4.823555ms)
+  ✔ unchanged/success-path: successful task and delivery have a consistent batch status (0.083527ms)
+  ✔ unchanged/success-path: a done result matches mission branch tip (0.0824ms)
+  ✔ unchanged/success-path: original source remains an ancestor of result commit (4.913511ms)
+  ✔ before-run/runtime-and-state: composition captured original mission tip (0.409969ms)
+  ✔ before-run/runtime-and-state: batch actually contains captured mission tip (5.693551ms)
+  ✔ before-run/runtime-and-state: real task reads original composed source (0.095409ms)
+  ✔ before-run/runtime-and-state: real task executes composed batch commit (0.044068ms)
+  ✔ before-run/runtime-and-state: real task executes exactly once (0.034377ms)
+  ✔ before-run/runtime-and-state: machine released after actual task and delivery (0.023828ms)
+  ✔ before-run/runtime-and-state: machine batch ownership released (0.017279ms)
+  ✔ before-run/runtime-and-state: captured baseline remains unchanged in record (0.017847ms)
+  ✔ before-run/runtime-and-state: public snapshot exposes same baseline (0.017418ms)
+  ✔ before-run/runtime-and-state: public snapshot agrees with actual mission outcome (0.018404ms)
+  ✔ before-run/runtime-and-state: delivery produced an actual result commit object (5.024537ms)
+  ✔ before-run/runtime-and-state: result envelope identifies original task (5.873205ms)
+  ✔ before-run/runtime-and-state: delivery temporary worktree registrations are removed (9.867895ms)
+  ✔ before-run/branch-protection: post-composition change is genuinely distinct (0.294267ms)
+  ✔ before-run/branch-protection: branch points at new research before delivery (0.104528ms)
+  ✖ before-run/branch-protection: later research commit remains on mission branch (10.605586ms)
+  ✖ before-run/branch-protection: branch retains later research file contents (0.9305ms)
+  ✖ before-run/branch-protection: delivery preserves research or explicitly reports refusal (16.513628ms)
+  ✔ before-run/branch-protection: captured later commit object still exists independently (7.413652ms)
+  ✔ before-run/success-path: successful task and delivery have a consistent batch status (0.056778ms)
+  ✔ before-run/success-path: a done result matches mission branch tip (0.026726ms)
+  ✔ before-run/success-path: original source remains an ancestor of result commit (7.186632ms)
+  ✔ during-run/runtime-and-state: composition captured original mission tip (0.140552ms)
+  ✔ during-run/runtime-and-state: batch actually contains captured mission tip (4.980921ms)
+  ✔ during-run/runtime-and-state: real task reads original composed source (0.103406ms)
+  ✔ during-run/runtime-and-state: real task executes composed batch commit (0.043286ms)
+  ✔ during-run/runtime-and-state: real task executes exactly once (0.039178ms)
+  ✔ during-run/runtime-and-state: machine released after actual task and delivery (0.041329ms)
+  ✔ during-run/runtime-and-state: machine batch ownership released (0.029364ms)
+  ✔ during-run/runtime-and-state: captured baseline remains unchanged in record (0.019338ms)
+  ✔ during-run/runtime-and-state: public snapshot exposes same baseline (0.017103ms)
+  ✔ during-run/runtime-and-state: public snapshot agrees with actual mission outcome (0.016009ms)
+  ✔ during-run/runtime-and-state: delivery produced an actual result commit object (4.995685ms)
+  ✔ during-run/runtime-and-state: result envelope identifies original task (7.338209ms)
+  ✔ during-run/runtime-and-state: delivery temporary worktree registrations are removed (4.013052ms)
+  ✔ during-run/branch-protection: post-composition change is genuinely distinct (0.047877ms)
+  ✔ during-run/branch-protection: branch points at new research before delivery (0.023697ms)
+  ✖ during-run/branch-protection: later research commit remains on mission branch (6.311743ms)
+  ✖ during-run/branch-protection: branch retains later research file contents (0.118835ms)
+  ✖ during-run/branch-protection: delivery preserves research or explicitly reports refusal (4.676938ms)
+  ✔ during-run/branch-protection: captured later commit object still exists independently (6.140892ms)
+  ✔ during-run/success-path: successful task and delivery have a consistent batch status (0.074238ms)
+  ✔ during-run/success-path: a done result matches mission branch tip (0.224517ms)
+  ✔ during-run/success-path: original source remains an ancestor of result commit (5.173053ms)
+  ✔ checked-out/runtime-and-state: composition captured original mission tip (0.178986ms)
+  ✔ checked-out/runtime-and-state: batch actually contains captured mission tip (5.651686ms)
+  ✔ checked-out/runtime-and-state: real task reads original composed source (0.134326ms)
+  ✔ checked-out/runtime-and-state: real task executes composed batch commit (0.052261ms)
+  ✔ checked-out/runtime-and-state: real task executes exactly once (0.036416ms)
+  ✔ checked-out/runtime-and-state: machine released after actual task and delivery (0.025622ms)
+  ✔ checked-out/runtime-and-state: machine batch ownership released (0.027243ms)
+  ✔ checked-out/runtime-and-state: captured baseline remains unchanged in record (0.023313ms)
+  ✔ checked-out/runtime-and-state: public snapshot exposes same baseline (0.019311ms)
+  ✔ checked-out/runtime-and-state: public snapshot agrees with actual mission outcome (0.063878ms)
+  ✔ checked-out/runtime-and-state: delivery produced an actual result commit object (4.907796ms)
+  ✔ checked-out/runtime-and-state: result envelope identifies original task (7.679693ms)
+  ✔ checked-out/runtime-and-state: delivery temporary worktree registrations are removed (4.733395ms)
+  ✔ checked-out/branch-protection: post-composition change is genuinely distinct (0.076673ms)
+  ✔ checked-out/branch-protection: branch points at new research before delivery (0.031073ms)
+  ✔ checked-out/branch-protection: later research commit remains on mission branch (4.887748ms)
+  ✔ checked-out/branch-protection: branch retains later research file contents (0.101649ms)
+  ✔ checked-out/branch-protection: delivery preserves research or explicitly reports refusal (4.647059ms)
+  ✔ checked-out/branch-protection: captured later commit object still exists independently (5.653663ms)
+  ✔ checked-out/git-refusal-control: checked-out branch update is reported as failure (0.269385ms)
+  ✔ checked-out/git-refusal-control: refusal preserves exact newer branch tip (0.092694ms)
+  ✔ checked-out/git-refusal-control: Git refusal reason is retained (0.239003ms)
+  ✔ checked-out/git-refusal-control: batch records delivery failure (0.052708ms)
+✖ ALEPH-06 post-composition branch changes must survive result delivery or be explicitly rejected (1461.097592ms)
+ℹ tests 84
+ℹ suites 0
+ℹ pass 77
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1609.37453
+
+✖ failing tests:
+
+test at tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89
+✖ before-run/branch-protection: later research commit remains on mission branch (10.605586ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:80:74)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:77:21)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89
+✖ before-run/branch-protection: branch retains later research file contents (0.9305ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'source-original'
+  - 'source-revised'
+            ^
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:81:70)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:77:21)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'source-original',
+    expected: 'source-revised',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89
+✖ before-run/branch-protection: delivery preserves research or explicitly reports refusal (16.513628ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(ancestor(f.repo, advanced, tip) || (mission.status === 'failed' && Boolean(mission.error)))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:82:84)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:77:21)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89
+✖ during-run/branch-protection: later research commit remains on mission branch (6.311743ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:80:74)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:77:21)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89
+✖ during-run/branch-protection: branch retains later research file contents (0.118835ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'source-original'
+  - 'source-revised'
+            ^
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:81:70)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:77:21)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'source-original',
+    expected: 'source-revised',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89
+✖ during-run/branch-protection: delivery preserves research or explicitly reports refusal (4.676938ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(ancestor(f.repo, advanced, tip) || (mission.status === 'failed' && Boolean(mission.error)))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:82:84)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:46:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/post-batch-branch-acceptance.test.mjs:77:21)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
