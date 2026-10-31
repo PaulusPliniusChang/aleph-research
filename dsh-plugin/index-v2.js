@@ -483,6 +483,24 @@ class ProjectService {
     }));
   }
 
+  killUnder(rootPath) {
+    const root = resolve(rootPath);
+    let killed = 0;
+    let entries = [];
+    try { entries = readdirSync('/proc'); } catch { return killed; }
+    for (const entry of entries) {
+      if (!/^\d+$/.test(entry)) continue;
+      const pid = Number(entry);
+      if (pid === process.pid) continue;
+      let cwd = '';
+      try { cwd = readlinkSync(`/proc/${entry}/cwd`); } catch { continue; }
+      if (cwd === root || cwd.startsWith(`${root}/`)) {
+        try { process.kill(pid, 'SIGKILL'); killed += 1; } catch { /* already gone */ }
+      }
+    }
+    return killed;
+  }
+
   async prepareBatchRuntime({ project, batch, missionRecords, batchWorktree }) {
     const cores = Math.max(1, Number(os.cpus().length) || 1);
     // One mission runs at a time, so it may use most of the machine without starving the desktop.
@@ -650,8 +668,16 @@ class ProjectService {
       outcomes.push({ missionId: mission.id, manifestId, manifestPath, status: envelope.status, resultCommit, envelope });
     }
 
+    // A timed-out runner leaves its mission children behind; never leave them consuming the machine.
+    const orphans = this.killUnder(batchWorktree);
     await git(project.missionRoot, ['worktree', 'remove', '--force', batchWorktree]).catch(() => undefined);
     await rm(batchWorktree, { recursive: true, force: true }).catch(() => undefined);
+    if (orphans > 0) {
+      await this.mutate(projectId, (current) => ({
+        ...current,
+        violations: [...(current.violations ?? []), `${now()} killed ${orphans} orphan process(es) left by batch ${batch.id}`].slice(-50),
+      })).catch(() => undefined);
+    }
     return this.mutate(projectId, (current) => ({
       ...current,
       machines: current.machines.map((item) => item.id === batch.machineId ? { ...item, status: 'idle', batchId: null } : item),
@@ -940,6 +966,22 @@ class ProjectService {
           continue;
         }
         if (!underAllowed) continue;
+        // A batch worktree that no longer belongs to a running batch must not keep computing.
+        const batchPrefix = `${join(workspace, '.aleph', 'batches')}/`;
+        if (cwd.startsWith(batchPrefix)) {
+          const batchId = cwd.slice(batchPrefix.length).split('/')[0];
+          const current = this.get(project.id);
+          const live = (current?.batches ?? []).find((item) => item.id === batchId);
+          if (!live || (live.status !== 'running' && live.status !== 'forming')) {
+            try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+            this.mutate(project.id, (cur) => ({
+              ...cur,
+              violations: [...(cur.violations ?? []), `${now()} killed orphan batch process ${pid} (${batchId}): ${cmd.slice(0, 120)}`].slice(-50),
+            })).catch(() => undefined);
+            continue;
+          }
+          continue;
+        }
         // Compute limits only police researcher worktrees. Batch and evaluation worktrees
         // run the approved heavy compute and must never be throttled by the watchdog.
         const inResearcherWorktree = cwd === join(workspace, '.aleph', 'researchers') || cwd.startsWith(`${join(workspace, '.aleph', 'researchers')}/`);
