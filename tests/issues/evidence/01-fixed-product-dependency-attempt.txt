@@ -1,0 +1,66 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:214011) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'zod' imported from /home/paulus-chang/项目/aleph-fix-capacity/dsh-plugin/index-v2.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:343:9)
+    at packageResolve (node:internal/modules/esm/resolve:751:25)
+    at moduleResolve (node:internal/modules/esm/resolve:840:18)
+    at defaultResolve (node:internal/modules/esm/resolve:973:11)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at resolve (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-capacity/dsh-plugin/test/loader.mjs:8:10)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at resolve (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-capacity/dsh-plugin/test/loader.mjs:8:10)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:265:30) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v26.12.1
+✖ test/composition.test.mjs (72.302709ms)
+(node:214012) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'zod' imported from /home/paulus-chang/项目/aleph-fix-capacity/dsh-plugin/index-v2.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:343:9)
+    at packageResolve (node:internal/modules/esm/resolve:751:25)
+    at moduleResolve (node:internal/modules/esm/resolve:840:18)
+    at defaultResolve (node:internal/modules/esm/resolve:973:11)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at resolve (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-capacity/dsh-plugin/test/loader.mjs:8:10)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at resolve (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-capacity/dsh-plugin/test/loader.mjs:8:10)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:265:30) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v26.12.1
+✖ test/project.test.mjs (66.367876ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.915155
+
+✖ failing tests:
+
+test at test/composition.test.mjs:1:1
+✖ test/composition.test.mjs (72.302709ms)
+  'test failed'
+
+test at test/project.test.mjs:1:1
+✖ test/project.test.mjs (66.367876ms)
+  'test failed'

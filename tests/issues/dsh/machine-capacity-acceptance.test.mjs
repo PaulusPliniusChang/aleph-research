@@ -98,12 +98,13 @@ test('ALEPH-01 actual machine capacity, rejection, release and concurrent public
   let race;
   try {
     // Observe first actual Git entry before starting the second public call,
-    // while composition is still pending and the machine remains idle. The
-    // first Git process is never gated; only the second template read waits.
+    // while composition is still pending. Early durable reservations are a
+    // valid implementation, so the pre-second machine state is observational.
+    // The first Git process is never gated; only the second template read waits.
     const first = tracked(f.service.formBatch({ projectId: f.id }));
     await wait(() => existsSync(join(control, 'entered-1.json')), 'first public call reaches actual Git');
     assert.equal(first.state, 'pending', 'fixture must overlap actual public calls');
-    assert.equal(f.get().machines[0].status, 'idle', 'fixture must enter second call before first durable claim');
+    const beforeSecond = f.get();
     const second = tracked(f.service.formBatch({ projectId: f.id }));
     await first.promise;
     await wait(() => second.state !== 'pending' || existsSync(join(control, 'entered-2.json')), 'second public call reaches Git or rejects');
@@ -138,7 +139,7 @@ test('ALEPH-01 actual machine capacity, rejection, release and concurrent public
       ['actual batch runs reach terminal calls', () => assert.ok(executions.every(item => item.execution.state === 'fulfilled'))],
       ['machine is idle after all actual compute completes', () => assert.equal(f.get().machines[0].status, 'idle')],
     ]);
-    race = { root: f.root, first, second, afterFirst, afterBoth, starts, final: f.get(), git: readdirSync(control).filter(name => name.startsWith('git-')).map(name => JSON.parse(readFileSync(join(control, name), 'utf8'))) };
+    race = { root: f.root, first, second, beforeSecond, afterFirst, afterBoth, starts, final: f.get(), git: readdirSync(control).filter(name => name.startsWith('git-')).map(name => JSON.parse(readFileSync(join(control, name), 'utf8'))) };
   } finally {
     process.env.PATH = originalPath;
     if (originalControl === undefined) delete process.env.ALEPH_FORM_GIT_CONTROL; else process.env.ALEPH_FORM_GIT_CONTROL = originalControl;

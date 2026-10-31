@@ -8,6 +8,38 @@ pull_request: null
 
 # 单任务派发可以绕过并发上限
 
+## 当前并发修复与独立验收（2026-10-31）
+
+修复提交为 `06c4d3d709f8125260162b032b1631bb4bd64187`，派生仓库分支为 `fix/aleph-01-machine-capacity`。B 在正式工作树中导入 C 冻结的产品和行为测试文件，提交内容与[冻结内容摘要](evidence/01-fixed-frozen-content.json)一致。提交前最后一次同步于北京时间 `2026-10-31T17:05:53+08:00` 完成，上游主分支仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。
+
+修复按任务仓库的真实路径串行执行机器检查、任务选择、Git 编排和持久化。请求获得互斥权后重新读取状态，最终写入前再次校验机器和任务归属；Git 使用已捕获的任务提交。失败时恢复模板检出并删除尚未发布的临时分支，已经被持久批次引用的分支予以保留。
+
+| 验证范围 | 结果 | 证据 |
+| --- | --- | --- |
+| 产品自动测试 | 87 项全部通过，无跳过；新增编排测试包含 85 个有意义的子行为检查点。 | [产品报告](evidence/01-fixed-product.txt) |
+| B 独立自动验收 | 54 个行为点全部通过；Node 包含父测试容器为 55 项全部通过。 | [报告](evidence/01-fixed-machine-capacity.txt)、[结构化记录](evidence/01-fixed-machine-capacity.json) |
+| 实际 DSH 修复核查 | 58 项检查全部通过，确认容量保护有效。 | [实际记录](evidence/01-fixed-real-dsh-machine-capacity.json) |
+
+实际 DSH 使用原始注册工具、持久存储、Git 和真实 shell 任务，不调用模型。首个编排调用进入真实 Git 后，后续公共调用与首个调用重叠，最终仅保留首个批次，后续调用明确拒绝机器忙碌。机器及任务归属保持，实际计算只启动一次；正常任务成功、失败后的释放及再次编排均通过。隔离 Host 已正常退出，B 另行确认其进程编号已不存在。
+
+独立验收允许正确的提前预约或等待互斥方案，不再要求后续调用开始前机器必须仍为空闲；原缺陷基线和原始失败记录保留。新工作树首次启动产品测试时缺少 `zod`，该次没有执行行为测试；[依赖中断原报告](evidence/01-fixed-product-dependency-attempt.txt)单独保留。B 复用主目录现有依赖后执行正式产品测试，没有修改冻结产品内容，也没有将依赖中断计作产品缺陷。
+
+在正式产品工作树的 `dsh-plugin` 目录执行 `npm test`。在 `aleph-tests` 根目录执行独立验收：
+
+```bash
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph-fix-capacity \
+ALEPH_CAPACITY_OBSERVATIONS=tests/issues/evidence/01-fixed-machine-capacity.json \
+node --experimental-loader /home/paulus-chang/项目/aleph-fix-capacity/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/machine-capacity-acceptance.test.mjs
+
+python3 tests/issues/dsh/current-machine-capacity.py \
+  --source /home/paulus-chang/项目/aleph-fix-capacity \
+  --output tests/issues/evidence/01-fixed-real-dsh-machine-capacity.json \
+  --expect-protection
+```
+
+互斥边界是同一进程、同一加载模块内的任务仓库，覆盖多个服务实例与符号链接别名，不提供跨独立 Host 进程的保证。该修复仅涉及批次编排，不包含或替代重启恢复 PR #13 和重复优化 PR #15。
+
 ## 当前版本适用性复核（2026-10-31）
 
 当前主仓库版本为 `66885994ceadad83a237a27c1fc7de6419889c14`，被测产品没有未提交改动，插件入口为 `dsh-plugin/index-v2.js`。旧版 `aleph_run_next` 已移除；当前容量约束体现为一台机器只能被一个未结束批次占用。本轮通过自动测试和实际 DSH 核查，确认并发 `aleph_form_batch` 请求仍能突破该约束。

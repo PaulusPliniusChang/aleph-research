@@ -1,0 +1,11 @@
+{
+  "source": "/tmp/aleph-01-fix-source",
+  "worktree": "/home/paulus-chang/\u9879\u76ee/aleph-fix-capacity",
+  "base": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "files": {
+    "dsh-plugin/index-v2.js": "38e2c9c9bb5b9f5f6d206cd33790f831a6cd49ce205c7727c4e25bd5460235e5",
+    "dsh-plugin/test/composition.test.mjs": "22bebd28c47caa899d580e0803b6ef17541d744691aa919a4c3fed8dde4e00f3"
+  },
+  "accepted_commit": "06c4d3d709f8125260162b032b1631bb4bd64187",
+  "isolated_pid_218340_exists_after_verification": false
+}
