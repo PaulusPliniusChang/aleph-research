@@ -35,6 +35,16 @@ window.__ModuleLoader__.load({
         'field.template': 'Template branch',
         'field.eval': 'Evaluator',
         'field.researcherCount': 'Researchers',
+        'field.prepared': 'Research scaffold',
+        'field.python': 'Shared Python',
+        'field.visibleData': 'Provided data',
+        'field.testset': 'Hidden testset',
+        'field.submissionPython': 'Submission Python',
+        'field.worktree': 'Worktree',
+        'field.entrypoint': 'Entrypoint',
+        'field.violations': 'Watchdog violations',
+        'section.violations': 'Runtime violations',
+        'empty.violations': 'No violations recorded.',
         'field.owner': 'Owner session',
         'field.resultCommit': 'Result commit',
         'field.preBatch': 'Pre-batch tip',
@@ -134,6 +144,16 @@ window.__ModuleLoader__.load({
         'field.template': 'Template 分支',
         'field.eval': '评测命令',
         'field.researcherCount': 'Researcher 数量',
+        'field.prepared': '研究工程',
+        'field.python': '共享 Python',
+        'field.visibleData': '提供的数据',
+        'field.testset': '隐藏测试集',
+        'field.submissionPython': '提交用 Python',
+        'field.worktree': '工作目录',
+        'field.entrypoint': '入口脚本',
+        'field.violations': 'watchdog 违规',
+        'section.violations': '运行时违规',
+        'empty.violations': '暂无违规记录。',
         'field.owner': 'Owner 会话',
         'field.resultCommit': '结果提交',
         'field.preBatch': 'Pre-batch tip',
@@ -667,6 +687,7 @@ window.__ModuleLoader__.load({
         { label: t('field.agentStatus'), width: '96px', render: (agent) => statusPill(t, agent.status) },
         { label: t('field.child'), width: 'minmax(150px, 1.4fr)', mono: true, render: (agent) => agent.childId ?? '—' },
         { label: t('table.branch'), width: 'minmax(140px, 1.3fr)', mono: true, render: (agent) => agent.branch ?? '—' },
+        { label: t('field.worktree'), width: 'minmax(180px, 1.8fr)', mono: true, render: (agent) => agent.worktree ?? '—' },
         { label: t('field.updated'), width: 'minmax(140px, 1fr)', render: (agent) => formatDate(agent.updatedAt) ?? '—' },
         { label: t('field.summary'), width: 'minmax(220px, 2.6fr)', render: (agent) => { const text = typeof agent.summary === 'string' ? agent.summary : ''; return h('span', { title: text || undefined }, text.length > 240 ? text.slice(0, 240) + '…' : text || '—'); } },
       ];
@@ -731,6 +752,12 @@ window.__ModuleLoader__.load({
           metricNode(t('field.missionRoot'), h('span', { style: { ...styles.metricValue, ...styles.mono, whiteSpace: 'normal', wordBreak: 'break-all' } }, project.mission_root ?? t(MISSING))),
           metric(t('field.eval'), project.eval_command ?? t(MISSING)),
           metric(t('field.researcherCount'), formatNumber(project.researcher_count, 0) ?? '4'),
+          metric(t('field.prepared'), project.prepared ? 'yes' : 'no'),
+          metric(t('field.python'), project.python_path ?? t(MISSING)),
+          metric(t('field.visibleData'), project.visible_data ?? t(MISSING)),
+          metric(t('field.testset'), project.testset_path ?? t(MISSING)),
+          metric(t('field.submissionPython'), project.submission_python ?? t(MISSING)),
+          metric(t('field.violations'), String(Array.isArray(project.violations) ? project.violations.length : 0)),
         ),
       );
 
@@ -785,6 +812,7 @@ window.__ModuleLoader__.load({
         { label: t('table.batch'), width: 'minmax(100px, 1fr)', mono: true, render: (mission) => mission.batch_id ?? '—' },
         { label: t('field.preBatch'), width: 'minmax(100px, 1fr)', mono: true, render: (mission) => mission.pre_batch_tip ? mission.pre_batch_tip.slice(0, 8) : '—' },
         { label: t('field.resultCommit'), width: 'minmax(100px, 1fr)', mono: true, render: (mission) => mission.result_commit ? mission.result_commit.slice(0, 8) : '—' },
+        { label: t('field.entrypoint'), width: 'minmax(120px, 1fr)', mono: true, render: (mission) => mission.entrypoint ?? '—' },
         { label: t('field.error'), width: 'minmax(150px, 2fr)', render: (mission) => mission.error ?? '—' },
       ];
       const missionCard = h(
@@ -792,6 +820,16 @@ window.__ModuleLoader__.load({
         { style: styles.card },
         h('h2', { style: styles.sectionTitle }, t('section.missions')),
         table(t, missionColumns, missions, t('empty.missions')),
+      );
+
+      const violations = Array.isArray(project.violations) ? project.violations : [];
+      const violationCard = h(
+        'div',
+        { style: styles.card },
+        h('h2', { style: styles.sectionTitle }, t('section.violations')),
+        violations.length
+          ? h('div', { style: { ...styles.mono, display: 'grid', gap: '4px', fontSize: '12px', wordBreak: 'break-all' } }, violations.slice(-10).map((line, index) => h('div', { key: index }, String(line))))
+          : h('div', { style: styles.empty }, t('empty.violations')),
       );
 
       return h(
@@ -802,6 +840,7 @@ window.__ModuleLoader__.load({
         agentSection(t, project),
         batchCard,
         missionCard,
+        violationCard,
         h(
           'div',
           { style: styles.footer },
