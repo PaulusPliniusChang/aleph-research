@@ -3,7 +3,7 @@ id: ALEPH-15
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/19
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/20
 ---
 
 <!-- 本地管理说明：用户于 2026-10-31 17:27 北京时间明确接纳该候选，要求先登记为“可疑”。A 仅登记源码线索；B 应重新同步上游、排重，再执行自动测试和实际 DSH 核查。GitHub 正文应移除管理头及本段前导注释，本地文件保留完整内容。 -->
@@ -102,7 +102,7 @@ python3 tests/issues/dsh/current-evaluation-attribution.py \
 
 ## 远端发布
 
-B 已按用户授权发布上游 [#19](https://github.com/hapenia/aleph-research/issues/19)。原始脚本与证据固定于公开提交 `98d04cc7376c83e7fcba65cf15b61924cfd58fea`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/98d04cc7376c83e7fcba65cf15b61924cfd58fea/tests/issues)。GitHub 正文移除管理字段与前导注释，本地完整保留。当前管理状态保留实际 DSH 验证结论，修复拉取请求待补充。
+B 已按用户授权发布上游 [#19](https://github.com/hapenia/aleph-research/issues/19)。原始脚本与证据固定于公开提交 `98d04cc7376c83e7fcba65cf15b61924cfd58fea`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/98d04cc7376c83e7fcba65cf15b61924cfd58fea/tests/issues)。GitHub 正文移除管理字段与前导注释，本地完整保留。当前管理状态保留实际 DSH 验证结论，修复请求为 [#20](https://github.com/hapenia/aleph-research/pull/20)，尚未合并。
 
 
 ## 修复验收（2026-10-31）
@@ -135,4 +135,6 @@ python3 tests/issues/dsh/current-evaluation-attribution.py \
   --expect-protection
 ```
 
-B 在发布边界再次同步上游与派生仓库，主分支仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。修复已推送至派生仓库，拉取请求链接将在创建后补充。当前管理状态保留实际 DSH 缺陷结论，未自动改为“已解决”。
+B 在发布边界再次同步上游与派生仓库，主分支仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。修复已推送至派生仓库，上游 [PR #20](https://github.com/hapenia/aleph-research/pull/20) 处于打开状态，尚未合并。B 已核对准确提交、派生仓库所有者、目标主分支、产品文件范围及完整正文。当前管理状态保留实际 DSH 缺陷结论，未自动改为“已解决”。
+
+修复验收证据固定于公开提交 `b960b0a09470c1f3af873c82a190531c1a04e180`，见[公开修复记录](https://github.com/PaulusPliniusChang/aleph-research/tree/b960b0a09470c1f3af873c82a190531c1a04e180/tests/issues/evidence)。该拉取请求未合并，上游主分支仍可能出现原缺陷。
