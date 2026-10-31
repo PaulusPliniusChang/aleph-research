@@ -686,6 +686,13 @@ class ProjectService {
       }
     }, 60_000);
     checkpoint.unref?.();
+    const finalCheckpoint = setTimeout(() => {
+      for (const researcher of this.get(projectId)?.agents ?? []) {
+        if (researcher.role !== 'researcher' || researcher.status !== 'running' || !researcher.childId) continue;
+        this.nudgeChild(researcher.childId, 'Final checkpoint: run git add -A && git commit in your mission worktree now, then call aleph_propose_mission. Do not write more analysis before proposing.');
+      }
+    }, 180_000);
+    finalCheckpoint.unref?.();
     return { projectId, requested, started };
   }
 
