@@ -686,11 +686,21 @@ class ProjectService {
           environ = readFileSync(`/proc/${entry}/environ`).toString('utf8');
         } catch { continue; }
         const isPython = /\.venv|python|pip|uv pip|conda|lightgbm|catboost|xgboost|torch/i.test(cmd);
+        const isBuild = /(?:^|[\s/])(?:cc1|cc1plus|gcc|g\+\+|ld|meson|ninja|cmake|make|rustc|cargo|pip|uv)(?:[\s/]|$)/i.test(cmd);
         const isCaseProcess = environ.includes('DSH_PROFILE=aleph-lab');
         if (!cwd.startsWith(workspace)) continue;
         const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
         const underMission = cwd === project.missionRoot || cwd.startsWith(`${project.missionRoot}/`);
         const nested = isCaseProcess && hasBwrapAncestor(pid);
+        const underBatchOrEval = cwd.startsWith(join(workspace, '.aleph', 'batches')) || cwd.startsWith(join(workspace, '.aleph', 'evals'));
+        if (nested && isBuild && !underBatchOrEval) {
+          try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+          this.mutate(project.id, (current) => ({
+            ...current,
+            violations: [...(current.violations ?? []), `${now()} killed package/build process ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
+          })).catch(() => undefined);
+          continue;
+        }
         const forbidden = /\/home\/hapenia\/Projects\/kunlungpt-comp|\/home\/hapenia\/Projects\/aleph-research|\/home\/hapenia\/\.dsh|problem\/data\.zip|\/testsets(?:\/|\b)|\/tmp\/aleph-case-lab\/(?:profiles|sessions|storages|home)\b/.test(cmd);
         if (nested && forbidden) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
