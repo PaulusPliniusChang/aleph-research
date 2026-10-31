@@ -3,7 +3,7 @@ id: ALEPH-06
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/7
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/21
 ---
 
 # 任务记录的代码起点可能与实际起点不一致
@@ -128,7 +128,7 @@ python3 tests/issues/dsh/current-post-batch-branch.py \
 
 ## 复现
 
-1. 最优分支还是 `initialize` 时，排队两个任务。
+1. 最优分支还是 `initialize` 时，让任务甲和任务乙进入队列。
 2. 启动并完成首个任务，使最优分支变为 `sota/main`。
 3. 派发原排队任务，对比 `baseBranch`、`baseCommit` 与实际提交的父提交。
 
@@ -150,7 +150,7 @@ DSH `0.2.2-alpha.2` 隔离环境实测确认。原始任务记录与真实 Git �
 
 ## 新增场景公开证据
 
-批次形成后分支推进场景的核查文档、脚本与原始记录固定于提交 `943195c48597b5bf13edb7b1a20773cc4953bc4c`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/943195c48597b5bf13edb7b1a20773cc4953bc4c/tests/issues)。该场景沿用上游 #7，当前没有修复拉取请求。
+批次形成后分支推进场景的核查文档、脚本与原始记录固定于提交 `943195c48597b5bf13edb7b1a20773cc4953bc4c`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/943195c48597b5bf13edb7b1a20773cc4953bc4c/tests/issues)。该场景沿用上游 #7，修复请求见后文。
 
 
 ## 当前修复与独立验收（2026-10-31）
@@ -200,4 +200,6 @@ python3 tests/issues/dsh/current-post-batch-branch.py \
   --expect-protection
 ```
 
-发布前于北京时间 `2026-10-31T18:36:25+08:00` 串行同步上游与派生仓库，干净主工作区仅快进拉取后仍为原基线。代码已推派生仓库，修复拉取请求待创建；管理状态保留历史实测结论。
+发布前于北京时间 `2026-10-31T18:36:25+08:00` 串行同步上游与派生仓库，干净主工作区仅快进拉取后仍为原基线。代码已推派生仓库，上游 [PR #21](https://github.com/hapenia/aleph-research/pull/21) 已创建且尚未合并；管理状态保留历史实测结论。
+
+修复证据固定于公开提交 `570529447970995a51aa9c44ce2055e6cd81174a`，见[公开修复记录](https://github.com/PaulusPliniusChang/aleph-research/tree/570529447970995a51aa9c44ce2055e6cd81174a/tests/issues)。上游主分支尚未包含此拉取请求，不将提交拉取请求等同于上游缺陷已消失。
