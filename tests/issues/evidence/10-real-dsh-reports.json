@@ -1,0 +1,196 @@
+{
+  "campaign": {
+    "id": "c-ad56117f",
+    "title": "Real DSH continuation and report verification",
+    "workspace": "/tmp/aleph-dsh-reproduction-h14q_vju/continuation-workspace",
+    "status": "running",
+    "exploration": 0.7,
+    "budget": null,
+    "spent": 1,
+    "sotaBranch": "sota/main",
+    "sotaScore": 30,
+    "evalCommand": "printf '{\"score\":30,\"rows\":1000,\"diagnostic\":\"real-dsh-evaluation-detail\"}\\n'",
+    "researchRoot": "/tmp/aleph-dsh-reproduction-h14q_vju/continuation-workspace/research",
+    "visibleData": null,
+    "testsetPath": null,
+    "submissionPython": null,
+    "createdAt": "2026-10-31T03:37:47.154Z",
+    "updatedAt": "2026-10-31T03:37:56.175Z",
+    "missions": [
+      {
+        "id": "m-f23cd700",
+        "description": "Write result.txt containing verified. Write ALEPH_HANDOFF.md containing marker REAL_DSH_REPORT_DETAIL and a concise change summary. Finish immediately; no experiments required. [b-fc0ad622 #1]",
+        "status": "done",
+        "strategy": "L0",
+        "baseBranch": "initialize",
+        "branch": "exp/c-ad56117f/m-f23cd700",
+        "baseCommit": "c19b5cc07d77a1820fa92295add88f5c1c37fcf5",
+        "commit": "9de1f0df73ac97c39f0806df2b27677ba4fed829",
+        "score": 30,
+        "error": null,
+        "childId": "3fc9528f-c303-4c63-9741-fd6ada7715ac",
+        "createdAt": "2026-10-31T03:37:47.156Z",
+        "finishedAt": "2026-10-31T03:37:56.152Z",
+        "reclaimed": true,
+        "batch": "b-fc0ad622",
+        "promoted": true
+      },
+      {
+        "id": "m-e23496b5",
+        "description": "Write result.txt containing verified. Write ALEPH_HANDOFF.md containing marker REAL_DSH_REPORT_DETAIL and a concise change summary. Finish immediately; no experiments required. [b-fc0ad622 #2]",
+        "status": "queued",
+        "strategy": "L1",
+        "baseBranch": "initialize",
+        "branch": "initialize",
+        "baseCommit": null,
+        "commit": null,
+        "score": null,
+        "error": null,
+        "childId": null,
+        "createdAt": "2026-10-31T03:37:47.156Z",
+        "finishedAt": null,
+        "reclaimed": false,
+        "batch": "b-fc0ad622"
+      }
+    ],
+    "maxParallel": 1,
+    "batches": [
+      {
+        "id": "b-fc0ad622",
+        "brief": "Write result.txt containing verified. Write ALEPH_HANDOFF.md containing marker REAL_DSH_REPORT_DETAIL and a concise change summary. Finish immediately; no experiments required.",
+        "count": 2,
+        "createdAt": "2026-10-31T03:37:47.156Z"
+      }
+    ],
+    "infra": {
+      "cpuCount": 12,
+      "gpuCount": 1,
+      "gpuNames": [
+        "NVIDIA GeForce RTX 4060 Ti"
+      ],
+      "maxParallel": 1,
+      "diskFreeBytes": 16429686784,
+      "diskTotalBytes": 16731148288,
+      "memoryTotalBytes": 33462292480,
+      "checkedAt": "2026-10-31T03:37:47.154Z"
+    }
+  },
+  "gitCommitMessage": "Write result.txt containing verified. Write ALEPH_HANDOFF.md containing marker REAL_DSH_REPORT_DETAIL and a concise change summary. Finish immediately; no experiments required. [b-fc0ad622 #1]\n\nHandoff:\n# AlephResearch Handoff \u2014 m-f23cd700\n\nMarker: REAL_DSH_REPORT_DETAIL\n\n## Approach\n\nExecuted the mission brief directly; no experiments were required. Created the\nrequested deliverable file `result.txt` with the single required content line\n`verified`, then wrote this report with the required marker and a concise\nchange summary.\n\n## Files changed\n\n- `result.txt` (new): contains the exact token `verified`.\n- `ALEPH_HANDOFF.md` (new): this handoff report, including marker\n  `REAL_DSH_REPORT_DETAIL`.\n\n## Validation signal\n\n- `result.txt` exists in the worktree root.\n- Its content is exactly `verified` followed by a trailing newline.\n- `ALEPH_HANDOFF.md` exists and contains `REAL_DSH_REPORT_DETAIL`.\n- No source code was modified; repository state is otherwise unchanged\n  (only two new untracked deliverables).\n\n## Next step\n\nLeader can commit the worktree as-is and evaluate the deliverable. No\nfollow-up work is needed from this mission.\n\nAleph-Mission: m-f23cd700\nAleph-Campaign: c-ad56117f\nAleph-Strategy: L0\nAleph-Base-Commit: c19b5cc07d77a1820fa92295add88f5c1c37fcf5\n\n",
+  "queriedSnapshot": {
+    "schema": 1,
+    "generated_at": "2026-10-31T03:39:26.312Z",
+    "workspace": "/tmp/aleph-dsh-reproduction-h14q_vju/continuation-workspace",
+    "campaign": {
+      "id": "c-ad56117f",
+      "title": "Real DSH continuation and report verification",
+      "status": "running",
+      "exploration": 0.7,
+      "sota_branch": "sota/main",
+      "sota_score": 30,
+      "budget": null,
+      "spent": 1,
+      "max_parallel": 1,
+      "active_agents": 0,
+      "infra": {
+        "cpuCount": 12,
+        "gpuCount": 1,
+        "gpuNames": [
+          "NVIDIA GeForce RTX 4060 Ti"
+        ],
+        "maxParallel": 1,
+        "diskFreeBytes": 16429686784,
+        "diskTotalBytes": 16731148288,
+        "memoryTotalBytes": 33462292480,
+        "checkedAt": "2026-10-31T03:37:47.154Z"
+      },
+      "batches": [
+        {
+          "id": "b-fc0ad622",
+          "brief": "Write result.txt containing verified. Write ALEPH_HANDOFF.md containing marker REAL_DSH_REPORT_DETAIL and a concise change summary. Finish immediately; no experiments required.",
+          "count": 2,
+          "createdAt": "2026-10-31T03:37:47.156Z"
+        }
+      ]
+    },
+    "missions": [
+      {
+        "id": "m-f23cd700",
+        "status": "done",
+        "strategy": "L0",
+        "branch": "exp/c-ad56117f/m-f23cd700",
+        "score": 30,
+        "description": "Write result.txt containing verified. Write ALEPH_HANDOFF.md containing marker REAL_DSH_REPORT_DETAIL and a concise change summary. Finish immediately; no experiments required. [b-fc0ad622 #1]",
+        "batch": "b-fc0ad622",
+        "promoted": true,
+        "created_at": "2026-10-31T03:37:47.156Z",
+        "finished_at": "2026-10-31T03:37:56.152Z"
+      },
+      {
+        "id": "m-e23496b5",
+        "status": "queued",
+        "strategy": "L1",
+        "branch": "initialize",
+        "score": null,
+        "description": "Write result.txt containing verified. Write ALEPH_HANDOFF.md containing marker REAL_DSH_REPORT_DETAIL and a concise change summary. Finish immediately; no experiments required. [b-fc0ad622 #2]",
+        "batch": "b-fc0ad622",
+        "promoted": false,
+        "created_at": "2026-10-31T03:37:47.156Z",
+        "finished_at": null
+      }
+    ],
+    "branches": [
+      {
+        "name": "exp/c-ad56117f/m-f23cd700",
+        "score": 30,
+        "parent": "initialize",
+        "mission": "m-f23cd700",
+        "is_sota": false
+      },
+      {
+        "name": "sota/main",
+        "score": 30,
+        "parent": null,
+        "mission": null,
+        "is_sota": true
+      }
+    ],
+    "counts": {
+      "queued": 1,
+      "running": 0,
+      "done": 1,
+      "failed": 0
+    }
+  },
+  "registeredTools": {
+    "ok": true,
+    "result": [
+      "working_directory",
+      "aleph_start_campaign",
+      "aleph_status",
+      "aleph_enqueue_mission",
+      "aleph_run_next",
+      "aleph_compose_batch",
+      "aleph_run_available",
+      "aleph_infra_status",
+      "aleph_set_budget",
+      "aleph_set_exploration",
+      "read",
+      "write",
+      "edit",
+      "glob",
+      "grep",
+      "skill",
+      "bash",
+      "read_image",
+      "todo_write"
+    ]
+  },
+  "parentSessionEventTypes": [
+    "session",
+    "permission/preset",
+    "sandbox/mode",
+    "approval/policy",
+    "subagent/catalog"
+  ],
+  "parentSessionMessages": []
+}

@@ -1,0 +1,509 @@
+(node:136463) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-13 independent InfraOptimizer duplicate-start acceptance
+  ✔ single normal invocation while optimization is pending: uses the isolated batch worktree (0.706209ms)
+  ✔ single normal invocation while optimization is pending: uses the infra agent preset (0.107935ms)
+  ✔ single normal invocation while optimization is pending: uses the real caller identity (0.10187ms)
+  ✔ single normal invocation while optimization is pending: preserves pending handoff bytes (0.149249ms)
+  ✔ single normal invocation while optimization is pending: waits for pending optimizer completion (0.091871ms)
+  ✔ single normal invocation after completion: returns successfully (0.353371ms)
+  ✔ single normal invocation after completion: commits the actual optimizer modification to batch branch (7.966783ms)
+  ✔ single normal invocation after completion: delivers result to the actual mission branch (8.983573ms)
+  ✔ single normal invocation after completion: records optimizer completion (0.466297ms)
+  ✔ single normal invocation after completion: marks batch done (0.431642ms)
+  ✔ single normal invocation after completion: releases machine (0.192312ms)
+  ✔ completed batch is invoked again: repeat is explicitly rejected (0.449692ms)
+  ✔ completed batch is invoked again: does not launch another optimizer (0.224325ms)
+  ✔ completed batch is invoked again: does not change batch branch (16.334744ms)
+  ✔ completed batch is invoked again: does not repeat actual batch computation (0.560051ms)
+  ✔ completed batch is invoked again: does not reserve the finished machine again (0.285887ms)
+  ✔ second caller while first optimizer remains pending: first optimizer is still pending when repeat returns (0.564314ms)
+  ✖ second caller while first optimizer remains pending: repeat reports an existing active execution before Git re-registration (3.909176ms)
+  ✖ second caller while first optimizer remains pending: retains the active directory (10.565572ms)
+  ✖ second caller while first optimizer remains pending: retains uncommitted handoff bytes (0.156702ms)
+  ✖ second caller while first optimizer remains pending: retains tracked source modifications (0.111986ms)
+  ✖ second caller while first optimizer remains pending: retains nested untracked optimizer files (0.094617ms)
+  ✖ second caller while first optimizer remains pending: retains actual Git worktree identity (7.427038ms)
+  ✔ second caller while first optimizer remains pending: does not launch a second optimizer (0.17401ms)
+  ✔ second caller while first optimizer remains pending: retains the first running optimizer record (0.160905ms)
+  ✔ second caller while first optimizer remains pending: keeps the active machine reserved (0.115301ms)
+  ✖ first optimizer continues after duplicate rejection: first call can complete normally (1.4305ms)
+  ✖ first optimizer continues after duplicate rejection: original batch reaches done (0.475099ms)
+  ✖ first optimizer continues after duplicate rejection: original mission receives a result (0.892221ms)
+  ✖ first optimizer continues after duplicate rejection: active machine eventually becomes idle (0.22557ms)
+  ✔ registered infra repeat after optimizer returned while actual runner is active: first invocation remains pending on actual runner (0.476339ms)
+  ✖ registered infra repeat after optimizer returned while actual runner is active: repeat rejects before starting another optimizer (0.598266ms)
+  ✖ registered infra repeat after optimizer returned while actual runner is active: repeat returns explicit active-execution rejection (0.651301ms)
+  ✖ registered infra repeat after optimizer returned while actual runner is active: does not launch a second optimizer during computation (0.598188ms)
+  ✔ registered infra repeat after optimizer returned while actual runner is active: retains active batch Git identity (15.888935ms)
+  ✔ registered infra repeat after optimizer returned while actual runner is active: retains original running script bytes (0.405183ms)
+  ✔ registered infra repeat after optimizer returned while actual runner is active: retains committed infra handoff directory (0.295127ms)
+  ✔ registered infra repeat after optimizer returned while actual runner is active: keeps exactly one actual computation (0.264597ms)
+  ✔ registered infra repeat after optimizer returned while actual runner is active: keeps machine busy during actual computation (0.169456ms)
+  ✔ registered infra repeat preserves final delivery: first invocation completes normally (0.477295ms)
+  ✔ registered infra repeat preserves final delivery: batch completes successfully (0.352421ms)
+  ✔ registered infra repeat preserves final delivery: mission receives a result exactly once (17.242892ms)
+  ✔ registered infra repeat preserves final delivery: actual computation executes exactly once (0.42253ms)
+  ✔ registered infra repeat preserves final delivery: machine becomes idle after delivery (0.268054ms)
+  ✔ registered direct batch versus active registered infra: registered infra tool exists (0.246196ms)
+  ✔ registered direct batch versus active registered infra: registered batch tool exists (0.066922ms)
+  ✖ registered direct batch versus active registered infra: direct batch rejects without starting computation (0.19775ms)
+  ✖ registered direct batch versus active registered infra: direct batch reports active execution (0.148168ms)
+  ✖ registered direct batch versus active registered infra: does not create premature batch computation (0.116725ms)
+  ✔ registered direct batch versus active registered infra: preserves active optimizer source bytes (0.085324ms)
+  ✔ registered direct batch versus active registered infra: preserves one active optimizer (0.04414ms)
+✖ ALEPH-13 independent InfraOptimizer duplicate-start acceptance (2175.429076ms)
+✖ registered direct rejection allows original infra to finish: original infra completes normally (0.748323ms)
+✖ registered direct rejection allows original infra to finish: original batch finishes done (0.290942ms)
+✖ registered direct rejection allows original infra to finish: computes exactly once after optimization (0.176861ms)
+✖ registered direct rejection allows original infra to finish: delivers one result commit (6.778678ms)
+(node:136463) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 10)
+✖ invalid invocation cannot start optimization: caller identity is required (0.222262ms)
+✖ invalid invocation cannot start optimization: missing project is rejected (0.089585ms)
+✖ invalid invocation cannot start optimization: missing batch is rejected (0.07189ms)
+✖ invalid invocation cannot start optimization: missing activation dependency is rejected (0.073224ms)
+✖ invalid invocation cannot start optimization: invalid calls launch no optimizer (0.05187ms)
+✖ invalid invocation cannot start optimization: invalid calls do not create an optimization worktree (0.069119ms)
+✖ initial optimizer startup fails before any active execution: records an explicit startup error (0.750862ms)
+✖ initial optimizer startup fails before any active execution: subsequent legal invocation can complete (0.227449ms)
+✖ initial optimizer startup fails before any active execution: successful retry executes batch exactly once (0.315602ms)
+✖ initial optimizer startup fails before any active execution: successful retry releases machine (0.212841ms)
+ℹ tests 66
+ℹ suites 0
+ℹ pass 35
+ℹ fail 31
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3119.285539
+
+✖ failing tests:
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ second caller while first optimizer remains pending: repeat reports an existing active execution before Git re-registration (3.909176ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /already registered worktree|worktree add/i. Input:
+  
+  'Error: Command failed: git -C /tmp/aleph-infra-active-duplicate-sWFUIK/workspace/missions worktree add --detach /tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4 batch/b-a5d503f4\n' +
+    'Preparing worktree (detached HEAD 8b2d86e)\n' +
+    "fatal: '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4' is a missing but already registered worktree;\n" +
+    "use 'add -f' to override, or 'prune' or 'remove' to clear\n"
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:122:194)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:120:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "Error: Command failed: git -C /tmp/aleph-infra-active-duplicate-sWFUIK/workspace/missions worktree add --detach /tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4 batch/b-a5d503f4\nPreparing worktree (detached HEAD 8b2d86e)\nfatal: '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4' is a missing but already registered worktree;\nuse 'add -f' to override, or 'prune' or 'remove' to clear\n",
+    expected: /already registered worktree|worktree add/i,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ second caller while first optimizer remains pending: retains the active directory (10.565572ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(existsSync(duplicate.worktree))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:123:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:120:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ second caller while first optimizer remains pending: retains uncommitted handoff bytes (0.156702ms)
+  Error: ENOENT: no such file or directory, open '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4/ALEPH_HANDOFF.md'
+      at readFileSync (node:fs:624:20)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:124:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:120:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4/ALEPH_HANDOFF.md'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ second caller while first optimizer remains pending: retains tracked source modifications (0.111986ms)
+  Error: ENOENT: no such file or directory, open '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4/missions/infra/run.sh'
+      at readFileSync (node:fs:624:20)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:125:65)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:120:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4/missions/infra/run.sh'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ second caller while first optimizer remains pending: retains nested untracked optimizer files (0.094617ms)
+  Error: ENOENT: no such file or directory, open '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4/scratch/cache/active.txt'
+      at readFileSync (node:fs:624:20)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:126:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:120:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4/scratch/cache/active.txt'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ second caller while first optimizer remains pending: retains actual Git worktree identity (7.427038ms)
+  Error: Command failed: git -C /tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4 rev-parse HEAD
+  fatal: cannot change to '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4': No such file or directory
+  
+      at genericNodeError (node:internal/errors:999:15)
+      at wrappedFn (node:internal/errors:544:14)
+      at checkExecSyncError (node:child_process:993:11)
+      at execFileSync (node:child_process:1029:15)
+      at git (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:11:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:127:65)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20) {
+    status: 128,
+    signal: null,
+    output: [ null, '', "fatal: cannot change to '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4': No such file or directory\n" ],
+    pid: 136983,
+    stdout: '',
+    stderr: "fatal: cannot change to '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4': No such file or directory\n"
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ first optimizer continues after duplicate rejection: first call can complete normally (1.4305ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Error: Command failed: git -C /tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4 status --porcelain\n' +
+  +   "fatal: cannot change to '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4': No such file or directory\n"
+  - undefined
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:135:55)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:134:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "Error: Command failed: git -C /tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4 status --porcelain\nfatal: cannot change to '/tmp/aleph-infra-active-duplicate-sWFUIK/workspace/.aleph/infra/b-a5d503f4': No such file or directory\n",
+    expected: undefined,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ first optimizer continues after duplicate rejection: original batch reaches done (0.475099ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'forming' !== 'done'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:136:50)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:134:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'forming',
+    expected: 'done',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ first optimizer continues after duplicate rejection: original mission receives a result (0.892221ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(duplicate.service.get(duplicate.projectId).missions[0].resultCommit)
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:137:57)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:134:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ first optimizer continues after duplicate rejection: active machine eventually becomes idle (0.22557ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'busy' !== 'idle'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:138:61)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:134:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'busy',
+    expected: 'idle',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered infra repeat after optimizer returned while actual runner is active: repeat rejects before starting another optimizer (0.598266ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:154:71)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:152:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered infra repeat after optimizer returned while actual runner is active: repeat returns explicit active-execution rejection (0.651301ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /already|active|running|busy|in.progress|reserved|not forming/i. Input:
+  
+  ''
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:155:73)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:152:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '',
+    expected: /already|active|running|busy|in.progress|reserved|not forming/i,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered infra repeat after optimizer returned while actual runner is active: does not launch a second optimizer during computation (0.598188ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:156:76)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:152:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered direct batch versus active registered infra: direct batch rejects without starting computation (0.19775ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:185:72)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:182:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered direct batch versus active registered infra: direct batch reports active execution (0.148168ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /already|active|running|busy|in.progress|reserved|not forming/i. Input:
+  
+  ''
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:186:60)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:182:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '',
+    expected: /already|active|running|busy|in.progress|reserved|not forming/i,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered direct batch versus active registered infra: does not create premature batch computation (0.116725ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:187:66)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:182:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:82:1
+✖ ALEPH-13 independent InfraOptimizer duplicate-start acceptance (2175.429076ms)
+  Error: batch b-de2523b8 is not runnable (status done)
+      at ProjectService.runBatch (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/index-v2.js:348:43)
+      at ProjectService.runInfra (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/index-v2.js:626:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/infra-duplicate-acceptance.test.mjs:194:22)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered direct rejection allows original infra to finish: original infra completes normally (0.748323ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered direct rejection allows original infra to finish: original batch finishes done (0.290942ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered direct rejection allows original infra to finish: computes exactly once after optimization (0.176861ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ registered direct rejection allows original infra to finish: delivers one result commit (6.778678ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ invalid invocation cannot start optimization: caller identity is required (0.222262ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ invalid invocation cannot start optimization: missing project is rejected (0.089585ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ invalid invocation cannot start optimization: missing batch is rejected (0.07189ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ invalid invocation cannot start optimization: missing activation dependency is rejected (0.073224ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ invalid invocation cannot start optimization: invalid calls launch no optimizer (0.05187ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ invalid invocation cannot start optimization: invalid calls do not create an optimization worktree (0.069119ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ initial optimizer startup fails before any active execution: records an explicit startup error (0.750862ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ initial optimizer startup fails before any active execution: subsequent legal invocation can complete (0.227449ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ initial optimizer startup fails before any active execution: successful retry executes batch exactly once (0.315602ms)
+  'test could not be started because its parent finished'
+
+test at tests/issues/dsh/infra-duplicate-acceptance.test.mjs:84:86
+✖ initial optimizer startup fails before any active execution: successful retry releases machine (0.212841ms)
+  'test could not be started because its parent finished'

@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+"""Control only the order of real Git SOTA writes; do not change their contents."""
+import os, pathlib, subprocess, sys, time
+args=sys.argv[1:]
+gate=os.environ.get('ALEPH_DSH_GIT_GATE')
+if gate and len(args)==6 and args[2:5]==['branch','-f','sota/main']:
+    path=pathlib.Path(gate); path.mkdir(parents=True,exist_ok=True)
+    commit=args[5]
+    score=subprocess.run(['/usr/bin/git','-C',args[1],'show',commit+':score.txt'],capture_output=True,text=True).stdout.strip()
+    with (path/'events.log').open('a') as f: f.write(f'{time.time()} requested score={score} commit={commit}\n')
+    if score=='10':
+        (path/'low-blocked').write_text(commit)
+        until=time.monotonic()+110
+        while not (path/'release-low').exists():
+            if time.monotonic()>until: raise SystemExit('git gate timed out')
+            time.sleep(.1)
+    result=subprocess.run(['/usr/bin/git',*args])
+    with (path/'events.log').open('a') as f: f.write(f'{time.time()} completed score={score} commit={commit} exit={result.returncode}\n')
+    if score=='20' and result.returncode==0: (path/'high-written').write_text(commit)
+    raise SystemExit(result.returncode)
+os.execv('/usr/bin/git',['/usr/bin/git',*args])

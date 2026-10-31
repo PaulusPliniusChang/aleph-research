@@ -1,0 +1,75 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:126785) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (713.578861ms)
+(node:126786) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ live execution survives loss of its Host observer and delivers once
+  ✔ running batch is durable before mission starts (2.273106ms)
+  ✔ execution has a durable start timestamp (0.834704ms)
+  ✔ mission running state is durable (0.341242ms)
+  ✔ running machine is reserved for the exact batch (0.335752ms)
+  ✔ restart does not mark a live runner failed (0.484444ms)
+  ✔ restart does not release a live runner machine (0.379529ms)
+  ✔ live retry observes existing execution (0.330985ms)
+  ✔ orphan execution is not started a second time (0.851692ms)
+  ✔ recovered batch reaches done (0.365906ms)
+  ✔ recovered mission reaches done (0.252008ms)
+  ✔ machine is released after actual execution finishes (0.178194ms)
+  ✔ recovered batch has completion timestamp (0.082454ms)
+  ✔ recovered mission has completion timestamp (0.093498ms)
+  ✔ resultCommit identifies a commit on the mission branch (10.626706ms)
+  ✔ delivered result retains the original batch identity (0.298322ms)
+  ✔ execution output remains available for infra decisions (3.546582ms)
+  ✔ repeated recovery creates no additional result commit (13.898433ms)
+  ✔ terminal batch retry is rejected without deleting outputs (1.989353ms)
+  ✔ recovery recognizes delivery committed before storage update (0.265695ms)
+  ✔ delivery crash window does not duplicate Git history (8.331247ms)
+  ✔ delivery crash window releases the recovered reservation (0.184896ms)
+✔ live execution survives loss of its Host observer and delivers once (1480.290714ms)
+▶ startup recovers completed legacy batch without execution metadata
+  ✔ startup reconciles legacy forming batch (0.391283ms)
+  ✔ startup delivers legacy mission output (0.385777ms)
+  ✔ startup clears legacy busy reservation (0.232452ms)
+  ✔ startup records delivered commit (0.17842ms)
+  ✔ startup leaves raw legacy output intact (1.863347ms)
+  ✔ startup exposes the recovered state through public status (1.259469ms)
+  ✔ owner can evaluate after legacy recovery (0.252574ms)
+✔ startup recovers completed legacy batch without execution metadata (464.633008ms)
+▶ interrupted legacy run has an explicit terminal outcome and retained files
+  ✔ interruption is a failed batch instead of perpetual forming (0.612477ms)
+  ✔ interruption unblocks mission ownership wait (0.224876ms)
+  ✔ interruption includes an actionable explanation (0.566242ms)
+  ✔ interrupted execution releases only its stopped machine (0.175213ms)
+  ✔ interruption retains diagnostic worktree files (2.776942ms)
+  ✔ interruption result is actually delivered before recording commit (17.144075ms)
+✔ interrupted legacy run has an explicit terminal outcome and retained files (478.871631ms)
+▶ delivery Git failure preserves results and releases an ended batch
+  ✔ delivery failure is terminal for the batch (0.603543ms)
+  ✔ failed branch update records no false delivered commit (0.298846ms)
+  ✔ delivery failure contains the Git lock diagnosis (0.261341ms)
+  ✔ Git failure does not leave a stopped machine busy (0.275506ms)
+  ✔ Git failure preserves the original mission branch (18.560785ms)
+  ✔ Git failure retains the only raw result (3.196222ms)
+✔ delivery Git failure preserves results and releases an ended batch (462.877188ms)
+▶ overlapping starts reserve one execution and setup failures terminate safely
+  ✔ overlapping starts launch only one mission program (0.612273ms)
+  ✔ competing start is rejected or observes the claimed batch (0.252196ms)
+  ✔ competing start cannot clear the successful completion (0.141289ms)
+  ✔ worktree setup failure has a terminal batch state (0.384304ms)
+  ✔ worktree setup failure releases machine reservation (0.2142ms)
+  ✔ worktree setup failure preserves an explicit mission error (0.176177ms)
+✔ overlapping starts reserve one execution and setup failures terminate safely (950.321711ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3968.777404

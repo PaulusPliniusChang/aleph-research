@@ -1,0 +1,38 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-4nf_mrr7",
+    "workspace": "/tmp/aleph-project-dsh-4nf_mrr7/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-restart",
+    "version": "66885994ceadad83a237a27c1fc7de6419889c14"
+  },
+  "url": "http://127.0.0.1:47595",
+  "events": [
+    {
+      "name": "initial-start",
+      "monotonic": 40444.80911561,
+      "value": {
+        "pid": 130299,
+        "health": {
+          "ok": true,
+          "version": "0.3.0",
+          "storage": "aleph_project"
+        }
+      }
+    },
+    {
+      "name": "stopped-final-isolated-dsh",
+      "monotonic": 40444.935307481,
+      "value": {
+        "pid": 130299,
+        "returncode": 0
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "real DSH current plugin health",
+      "passed": true
+    }
+  ]
+}

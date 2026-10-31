@@ -1,0 +1,45 @@
+{
+  "campaignId": "c-93e456c7",
+  "missions": [
+    {
+      "id": "m-2bbbfb71",
+      "description": "Write score.txt containing exactly 10. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required.",
+      "status": "done",
+      "strategy": "L0",
+      "baseBranch": "initialize",
+      "branch": "exp/c-93e456c7/m-2bbbfb71",
+      "baseCommit": "8ffa513e5b3bbd900bd03d576fb9c0ad2e5b9179",
+      "commit": "df3d04ac3b876ef1427ebb02bd7ada0a24cd05c8",
+      "score": 10,
+      "error": null,
+      "childId": "6a81dff8-b3d0-41a1-ad49-a3b294ede13c",
+      "createdAt": "2026-10-31T03:32:39.550Z",
+      "finishedAt": "2026-10-31T03:32:51.051Z",
+      "reclaimed": true,
+      "batch": null,
+      "promoted": true
+    },
+    {
+      "id": "m-b6ad82c8",
+      "description": "Write score.txt containing exactly 20. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required.",
+      "status": "done",
+      "strategy": "L0",
+      "baseBranch": "sota/main",
+      "branch": "exp/c-93e456c7/m-b6ad82c8",
+      "baseCommit": "8ffa513e5b3bbd900bd03d576fb9c0ad2e5b9179",
+      "commit": "6b934ae5022ebf021d32143c559b7612b35f7104",
+      "score": 20,
+      "error": null,
+      "childId": "5c986f45-6cc5-4be7-8652-4f396b746e09",
+      "createdAt": "2026-10-31T03:32:39.551Z",
+      "finishedAt": "2026-10-31T03:33:56.690Z",
+      "reclaimed": true,
+      "batch": null,
+      "promoted": true
+    }
+  ],
+  "initialize": "8ffa513e5b3bbd900bd03d576fb9c0ad2e5b9179",
+  "secondActualParent": "8ffa513e5b3bbd900bd03d576fb9c0ad2e5b9179",
+  "firstExperimentalCommit": "df3d04ac3b876ef1427ebb02bd7ada0a24cd05c8",
+  "sotaFinalCommit": "df3d04ac3b876ef1427ebb02bd7ada0a24cd05c8"
+}

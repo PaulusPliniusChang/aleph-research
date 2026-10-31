@@ -1,0 +1,15 @@
+{
+  "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-infra",
+  "base_sha": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "files_sha256": {
+    "dsh-plugin/index-v2.js": "357f2985abc655ef9b7159e8619f064c94fcaaee6b57e346efc8802ba58bfadc",
+    "dsh-plugin/test/infra.test.mjs": "7c72af36f066f13c6d5b2af73e094b72616f40d4a59b98edffb04bbcd3719b8c"
+  },
+  "independent_behavior_points": 65,
+  "independent_node_total": 66,
+  "product_node_total": 75,
+  "real_dsh_pending_duplicate_checks": 44,
+  "real_dsh_direct_during_infra_checks": 44,
+  "real_dsh_running_repeat_checks": 54,
+  "boundary": "All scenarios validate frozen uncommitted code. Runtime is actual DSH; only model output is deterministic and offline. Isolated hosts stopped by scenario finally."
+}

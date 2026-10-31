@@ -1,0 +1,14 @@
+{
+  "scope": "environment readiness only; not issue validation",
+  "source_commit": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "dsh_version": "0.2.2-alpha.2",
+  "plugin_version": "0.3.0",
+  "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+  "isolated_root": "/tmp/aleph-project-dsh-ip3fx5r_",
+  "url": "http://127.0.0.1:46265",
+  "requests": [
+    {"endpoint": "/api/aleph/health", "status": 200, "body": {"ok": true, "version": "0.3.0", "storage": "aleph_project"}},
+    {"endpoint": "/api/aleph/snapshot", "status": 404, "body": {"ok": false, "error": {"code": "aleph/no-project"}}},
+    {"endpoint": "/api/aleph/projects", "status": 200, "body": {"projects": []}}
+  ]
+}

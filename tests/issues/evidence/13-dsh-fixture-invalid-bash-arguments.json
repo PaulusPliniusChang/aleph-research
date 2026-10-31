@@ -1,0 +1,1079 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-0fop8br9",
+    "workspace": "/tmp/aleph-project-dsh-0fop8br9/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "66885994ceadad83a237a27c1fc7de6419889c14"
+  },
+  "url": "http://127.0.0.1:58927",
+  "boundary": "Real DSH sessions, original spawn provider, tools, Git and storage; only model output is a local deterministic LlmAdapter with no network.",
+  "events": [
+    {
+      "name": "bridge",
+      "monotonic": 41118.01821926,
+      "value": {
+        "request": {
+          "action": "parent",
+          "cwd": "/tmp/aleph-project-dsh-0fop8br9/workspace"
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "sessionId": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+            "agentPreset": "aleph"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 41118.054488835,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-0fop8br9/workspace"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-8c291559",
+            "workspace": "/tmp/aleph-project-dsh-0fop8br9/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [],
+            "batches": [],
+            "createdAt": "2026-10-31T05:43:59.928Z",
+            "updatedAt": "2026-10-31T05:43:59.928Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 41118.090456601,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+          "name": "aleph_propose_mission",
+          "args": {
+            "project_id": "p-8c291559",
+            "branch": "mission/infra"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-8c291559",
+            "workspace": "/tmp/aleph-project-dsh-0fop8br9/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-89a8d900",
+                "ownerSession": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "proposed",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T05:43:59.964Z",
+                "approvedAt": null,
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T05:43:59.928Z",
+            "updatedAt": "2026-10-31T05:43:59.964Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 41118.092092781,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+          "name": "aleph_approve_mission",
+          "args": {
+            "project_id": "p-8c291559",
+            "mission_id": "m-89a8d900"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-8c291559",
+            "workspace": "/tmp/aleph-project-dsh-0fop8br9/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-89a8d900",
+                "ownerSession": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "approved",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T05:43:59.964Z",
+                "approvedAt": "2026-10-31T05:43:59.966Z",
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T05:43:59.928Z",
+            "updatedAt": "2026-10-31T05:43:59.966Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 41118.117261238,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-8c291559"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-8c291559",
+            "workspace": "/tmp/aleph-project-dsh-0fop8br9/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-0fop8br9/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "busy",
+                "batchId": "b-79e612fe"
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-89a8d900",
+                "ownerSession": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "batched",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-79e612fe",
+                "preBatchTip": "3a120e043f43aa43c6fb737b152cc5340d977c4a",
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T05:43:59.964Z",
+                "approvedAt": "2026-10-31T05:43:59.966Z",
+                "finishedAt": null
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-79e612fe",
+                "machineId": "local",
+                "status": "forming",
+                "missionIds": [
+                  "m-89a8d900"
+                ],
+                "branch": "batch/b-79e612fe",
+                "baseTip": "4b5f9aaf4f78e2b8d00b02f020da8c2f98177585",
+                "createdAt": "2026-10-31T05:43:59.990Z"
+              }
+            ],
+            "createdAt": "2026-10-31T05:43:59.928Z",
+            "updatedAt": "2026-10-31T05:43:59.990Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "infra-request-detached-for-observation",
+      "monotonic": 41118.318216277,
+      "value": {
+        "action": "tool",
+        "sessionId": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+        "name": "aleph_run_infra",
+        "args": {
+          "project_id": "p-8c291559",
+          "batch_id": "b-79e612fe"
+        }
+      }
+    },
+    {
+      "name": "adapter-timeout",
+      "monotonic": 41133.896366749,
+      "value": {
+        "calls": [
+          {
+            "keys": [
+              "provider",
+              "model",
+              "messages",
+              "toolHistory",
+              "tools",
+              "sessionId",
+              "signal"
+            ],
+            "tools": [
+              {
+                "name": "aleph_evaluate",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    }
+                  },
+                  "required": [
+                    "project_id"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_form_batch",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    },
+                    "machine_id": {
+                      "type": "string",
+                      "description": "Machine id, default local"
+                    }
+                  },
+                  "required": [
+                    "project_id"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_propose_mission",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    },
+                    "branch": {
+                      "type": "string",
+                      "description": "Mission branch in the mission repo"
+                    }
+                  },
+                  "required": [
+                    "project_id",
+                    "branch"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_run_batch",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    },
+                    "batch_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "project_id",
+                    "batch_id"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_status",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Optional project id"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "bash",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "description": "Clear, concise description of what this command does in active voice, 5-10 words (shown in the UI). Examples: \"ls\" \u2192 \"List files in current directory\"; \"git status\" \u2192 \"Show working tree status\"; \"npm install\" \u2192 \"Install package dependencies\"."
+                    },
+                    "command": {
+                      "type": "string",
+                      "description": "The bash command to execute."
+                    },
+                    "timeoutMs": {
+                      "type": "number",
+                      "description": "Timeout in milliseconds. The executor applies its configured default and cap; on expiry the command moves to the background as a job instead of being killed."
+                    },
+                    "workdir": {
+                      "type": "string",
+                      "description": "Working directory for this command. Defaults to the session workspace; a relative path is resolved against it."
+                    },
+                    "run_in_background": {
+                      "type": "boolean",
+                      "description": "Run in the background and return a job id immediately (collect with job_output, stop with job_kill). No timeout applies."
+                    },
+                    "sandbox_permissions": {
+                      "type": "string",
+                      "description": "The narrowest wider sandbox mode for a one-shot retry of the exact command the sandbox just denied; the retry asks the user for approval.",
+                      "enum": [
+                        "workspace-write",
+                        "danger-full-access"
+                      ]
+                    },
+                    "justification": {
+                      "type": "string",
+                      "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact command needs the wider access. Use the language of the user\u2019s current request."
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "command"
+                  ]
+                }
+              },
+              {
+                "name": "edit",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to edit, resolved by the filesystem backend. Provide `file_path` before `old_string` and `new_string` in the arguments."
+                    },
+                    "old_string": {
+                      "type": "string",
+                      "description": "Literal text to replace."
+                    },
+                    "new_string": {
+                      "type": "string",
+                      "description": "Literal replacement text. Use an empty string to delete the match."
+                    },
+                    "replace_all": {
+                      "type": "boolean",
+                      "description": "Replace all matches. Defaults to false; when false, old_string must appear exactly once."
+                    },
+                    "sandbox_permissions": {
+                      "type": "string",
+                      "description": "The narrowest wider sandbox mode for a one-shot retry of the exact operation the sandbox just denied; the retry asks the user for approval.",
+                      "enum": [
+                        "workspace-write",
+                        "danger-full-access"
+                      ]
+                    },
+                    "justification": {
+                      "type": "string",
+                      "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact file operation needs the wider access. Use the language of the user\u2019s current request."
+                    }
+                  },
+                  "required": [
+                    "file_path",
+                    "old_string",
+                    "new_string"
+                  ]
+                }
+              },
+              {
+                "name": "glob",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "pattern": {
+                      "type": "string",
+                      "description": "Glob pattern to match file paths against (e.g. \"**/*.ts\", \"src/**/*.test.js\"). A pattern with no \"/\" matches the basename at any depth, so \"*\" and \"*.ts\" both search the whole tree; include a separator to anchor the depth."
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "Directory to search in. Defaults to the session workspace; a relative path resolves against it."
+                    }
+                  },
+                  "required": [
+                    "pattern"
+                  ]
+                }
+              },
+              {
+                "name": "grep",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "pattern": {
+                      "type": "string",
+                      "description": "Regular expression to search for (ripgrep syntax)."
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "File or directory to search. Defaults to the session workspace; a relative path resolves against it."
+                    },
+                    "include": {
+                      "type": "string",
+                      "description": "One glob filter for which files to search (e.g. \"*.ts\", \"*.{js,jsx}\"). Not a list; negation is not supported."
+                    }
+                  },
+                  "required": [
+                    "pattern"
+                  ]
+                }
+              },
+              {
+                "name": "read",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to read, resolved by the filesystem backend."
+                    },
+                    "offset": {
+                      "type": "number",
+                      "description": "1-based first line to return. Defaults to 1."
+                    },
+                    "limit": {
+                      "type": "number",
+                      "description": "Maximum number of lines to return. Defaults to 2000."
+                    }
+                  },
+                  "required": [
+                    "file_path"
+                  ]
+                }
+              },
+              {
+                "name": "read_image",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to the image file, resolved by the filesystem backend."
+                    }
+                  },
+                  "required": [
+                    "file_path"
+                  ]
+                }
+              },
+              {
+                "name": "todo_write",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "todos": {
+                      "type": "array",
+                      "description": "The COMPLETE task list, replacing any previous list.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "content": {
+                            "type": "string",
+                            "description": "What the task is \u2014 a short imperative line."
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "pending (not started) | in_progress (now) | completed (done).",
+                            "enum": [
+                              "pending",
+                              "in_progress",
+                              "completed"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "content",
+                          "status"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "todos"
+                  ]
+                }
+              },
+              {
+                "name": "working_directory",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "cd": {
+                      "type": "string",
+                      "description": "Existing directory to enter. Omit to read the current directory."
+                    }
+                  }
+                }
+              },
+              {
+                "name": "write",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to write, resolved by the filesystem backend. Provide `file_path` before `content` in the arguments."
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "Full UTF-8 text content to write."
+                    },
+                    "sandbox_permissions": {
+                      "type": "string",
+                      "description": "The narrowest wider sandbox mode for a one-shot retry of the exact operation the sandbox just denied; the retry asks the user for approval.",
+                      "enum": [
+                        "workspace-write",
+                        "danger-full-access"
+                      ]
+                    },
+                    "justification": {
+                      "type": "string",
+                      "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact file operation needs the wider access. Use the language of the user\u2019s current request."
+                    }
+                  },
+                  "required": [
+                    "file_path",
+                    "content"
+                  ]
+                }
+              }
+            ],
+            "model": "deterministic",
+            "toolCall": {
+              "type": "tool-call",
+              "id": "403f828e-b8eb-424c-aa53-58e20a464098",
+              "name": "bash",
+              "arguments": "{\"command\":\"printf 'real deterministic infra handoff\\\\n' > ALEPH_HANDOFF.md\\nprintf '\\\\n# deterministic infra edit\\\\n' >> missions/infra/run.sh\\nmkdir -p scratch/cache\\nprintf 'real pending optimizer marker\\\\n' > scratch/cache/active.txt\"}"
+            }
+          },
+          {
+            "keys": [
+              "provider",
+              "model",
+              "messages",
+              "toolHistory",
+              "tools",
+              "sessionId",
+              "signal"
+            ],
+            "tools": [
+              {
+                "name": "aleph_evaluate",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    }
+                  },
+                  "required": [
+                    "project_id"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_form_batch",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    },
+                    "machine_id": {
+                      "type": "string",
+                      "description": "Machine id, default local"
+                    }
+                  },
+                  "required": [
+                    "project_id"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_propose_mission",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    },
+                    "branch": {
+                      "type": "string",
+                      "description": "Mission branch in the mission repo"
+                    }
+                  },
+                  "required": [
+                    "project_id",
+                    "branch"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_run_batch",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Project id"
+                    },
+                    "batch_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "project_id",
+                    "batch_id"
+                  ]
+                }
+              },
+              {
+                "name": "aleph_status",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "project_id": {
+                      "type": "string",
+                      "description": "Optional project id"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "bash",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "description": "Clear, concise description of what this command does in active voice, 5-10 words (shown in the UI). Examples: \"ls\" \u2192 \"List files in current directory\"; \"git status\" \u2192 \"Show working tree status\"; \"npm install\" \u2192 \"Install package dependencies\"."
+                    },
+                    "command": {
+                      "type": "string",
+                      "description": "The bash command to execute."
+                    },
+                    "timeoutMs": {
+                      "type": "number",
+                      "description": "Timeout in milliseconds. The executor applies its configured default and cap; on expiry the command moves to the background as a job instead of being killed."
+                    },
+                    "workdir": {
+                      "type": "string",
+                      "description": "Working directory for this command. Defaults to the session workspace; a relative path is resolved against it."
+                    },
+                    "run_in_background": {
+                      "type": "boolean",
+                      "description": "Run in the background and return a job id immediately (collect with job_output, stop with job_kill). No timeout applies."
+                    },
+                    "sandbox_permissions": {
+                      "type": "string",
+                      "description": "The narrowest wider sandbox mode for a one-shot retry of the exact command the sandbox just denied; the retry asks the user for approval.",
+                      "enum": [
+                        "workspace-write",
+                        "danger-full-access"
+                      ]
+                    },
+                    "justification": {
+                      "type": "string",
+                      "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact command needs the wider access. Use the language of the user\u2019s current request."
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "command"
+                  ]
+                }
+              },
+              {
+                "name": "edit",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to edit, resolved by the filesystem backend. Provide `file_path` before `old_string` and `new_string` in the arguments."
+                    },
+                    "old_string": {
+                      "type": "string",
+                      "description": "Literal text to replace."
+                    },
+                    "new_string": {
+                      "type": "string",
+                      "description": "Literal replacement text. Use an empty string to delete the match."
+                    },
+                    "replace_all": {
+                      "type": "boolean",
+                      "description": "Replace all matches. Defaults to false; when false, old_string must appear exactly once."
+                    },
+                    "sandbox_permissions": {
+                      "type": "string",
+                      "description": "The narrowest wider sandbox mode for a one-shot retry of the exact operation the sandbox just denied; the retry asks the user for approval.",
+                      "enum": [
+                        "workspace-write",
+                        "danger-full-access"
+                      ]
+                    },
+                    "justification": {
+                      "type": "string",
+                      "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact file operation needs the wider access. Use the language of the user\u2019s current request."
+                    }
+                  },
+                  "required": [
+                    "file_path",
+                    "old_string",
+                    "new_string"
+                  ]
+                }
+              },
+              {
+                "name": "glob",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "pattern": {
+                      "type": "string",
+                      "description": "Glob pattern to match file paths against (e.g. \"**/*.ts\", \"src/**/*.test.js\"). A pattern with no \"/\" matches the basename at any depth, so \"*\" and \"*.ts\" both search the whole tree; include a separator to anchor the depth."
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "Directory to search in. Defaults to the session workspace; a relative path resolves against it."
+                    }
+                  },
+                  "required": [
+                    "pattern"
+                  ]
+                }
+              },
+              {
+                "name": "grep",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "pattern": {
+                      "type": "string",
+                      "description": "Regular expression to search for (ripgrep syntax)."
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "File or directory to search. Defaults to the session workspace; a relative path resolves against it."
+                    },
+                    "include": {
+                      "type": "string",
+                      "description": "One glob filter for which files to search (e.g. \"*.ts\", \"*.{js,jsx}\"). Not a list; negation is not supported."
+                    }
+                  },
+                  "required": [
+                    "pattern"
+                  ]
+                }
+              },
+              {
+                "name": "read",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to read, resolved by the filesystem backend."
+                    },
+                    "offset": {
+                      "type": "number",
+                      "description": "1-based first line to return. Defaults to 1."
+                    },
+                    "limit": {
+                      "type": "number",
+                      "description": "Maximum number of lines to return. Defaults to 2000."
+                    }
+                  },
+                  "required": [
+                    "file_path"
+                  ]
+                }
+              },
+              {
+                "name": "read_image",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to the image file, resolved by the filesystem backend."
+                    }
+                  },
+                  "required": [
+                    "file_path"
+                  ]
+                }
+              },
+              {
+                "name": "todo_write",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "todos": {
+                      "type": "array",
+                      "description": "The COMPLETE task list, replacing any previous list.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "content": {
+                            "type": "string",
+                            "description": "What the task is \u2014 a short imperative line."
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "pending (not started) | in_progress (now) | completed (done).",
+                            "enum": [
+                              "pending",
+                              "in_progress",
+                              "completed"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "content",
+                          "status"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "todos"
+                  ]
+                }
+              },
+              {
+                "name": "working_directory",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "cd": {
+                      "type": "string",
+                      "description": "Existing directory to enter. Omit to read the current directory."
+                    }
+                  }
+                }
+              },
+              {
+                "name": "write",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "file_path": {
+                      "type": "string",
+                      "description": "Path to write, resolved by the filesystem backend. Provide `file_path` before `content` in the arguments."
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "Full UTF-8 text content to write."
+                    },
+                    "sandbox_permissions": {
+                      "type": "string",
+                      "description": "The narrowest wider sandbox mode for a one-shot retry of the exact operation the sandbox just denied; the retry asks the user for approval.",
+                      "enum": [
+                        "workspace-write",
+                        "danger-full-access"
+                      ]
+                    },
+                    "justification": {
+                      "type": "string",
+                      "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact file operation needs the wider access. Use the language of the user\u2019s current request."
+                    }
+                  },
+                  "required": [
+                    "file_path",
+                    "content"
+                  ]
+                }
+              }
+            ],
+            "model": "deterministic"
+          }
+        ],
+        "waiting": true,
+        "released": false,
+        "error": null
+      }
+    },
+    {
+      "name": "projects-at-adapter-timeout",
+      "monotonic": 41133.902317052,
+      "value": {
+        "projects": [
+          {
+            "schema": 2,
+            "generated_at": "2026-10-31T05:44:15.774Z",
+            "project": {
+              "id": "p-8c291559",
+              "title": "workspace",
+              "status": "running",
+              "workspace": "/tmp/aleph-project-dsh-0fop8br9/workspace",
+              "research_root": "/tmp/aleph-project-dsh-0fop8br9/workspace/research",
+              "mission_root": "/tmp/aleph-project-dsh-0fop8br9/workspace/missions",
+              "template_branch": "template",
+              "eval_command": "python3 eval/run_eval.py"
+            },
+            "missions": [
+              {
+                "id": "m-89a8d900",
+                "owner_session": "session-9af866a6-9780-4a8d-a669-c70ab8a2f7e0",
+                "status": "batched",
+                "branch": "mission/infra",
+                "manifest_id": "infra",
+                "batch_id": "b-79e612fe",
+                "pre_batch_tip": "3a120e043f43aa43c6fb737b152cc5340d977c4a",
+                "result_commit": null,
+                "error": null,
+                "created_at": "2026-10-31T05:43:59.964Z",
+                "approved_at": "2026-10-31T05:43:59.966Z",
+                "finished_at": null
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-79e612fe",
+                "machine_id": "local",
+                "status": "forming",
+                "mission_ids": [
+                  "m-89a8d900"
+                ],
+                "branch": "batch/b-79e612fe",
+                "base_tip": "4b5f9aaf4f78e2b8d00b02f020da8c2f98177585",
+                "created_at": "2026-10-31T05:43:59.990Z",
+                "started_at": null,
+                "finished_at": null,
+                "summary": null
+              }
+            ],
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "busy",
+                "batchId": "b-79e612fe"
+              }
+            ],
+            "agents": [
+              {
+                "role": "infra",
+                "childId": "584644f9-43b3-4ca2-9ed8-ce598fa04efc",
+                "status": "running",
+                "summary": null,
+                "branch": "batch/b-79e612fe",
+                "updatedAt": "2026-10-31T05:44:00.017Z"
+              }
+            ],
+            "counts": {
+              "queued": 0,
+              "running": 1,
+              "done": 0,
+              "failed": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "stopped-isolated-dsh",
+      "monotonic": 41134.021852333,
+      "value": {
+        "pid": 134513,
+        "returncode": 0
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "deterministic adapter registered before any model call",
+      "passed": true
+    }
+  ]
+}

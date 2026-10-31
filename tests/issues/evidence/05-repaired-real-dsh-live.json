@@ -1,0 +1,907 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-gvidzepe",
+    "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-restart",
+    "version": "66885994ceadad83a237a27c1fc7de6419889c14"
+  },
+  "url": "http://127.0.0.1:35015",
+  "events": [
+    {
+      "name": "initial-start",
+      "monotonic": 40521.840603565,
+      "value": {
+        "pid": 130745,
+        "health": {
+          "ok": true,
+          "version": "0.3.0",
+          "storage": "aleph_project"
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 40521.858254631,
+      "value": {
+        "request": {
+          "action": "parent",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace"
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "sessionId": "session-7045e367-8772-442f-884a-663ba4f81f07",
+            "agentPreset": "aleph"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 40521.894683058,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-7045e367-8772-442f-884a-663ba4f81f07",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+            "eval_command": "printf '{\"score\":1}\\n'"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-50ab886a",
+            "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "printf '{\"score\":1}\\n'",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [],
+            "batches": [],
+            "createdAt": "2026-10-31T05:34:03.768Z",
+            "updatedAt": "2026-10-31T05:34:03.768Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 40521.931149922,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-7045e367-8772-442f-884a-663ba4f81f07",
+          "name": "aleph_propose_mission",
+          "args": {
+            "project_id": "p-50ab886a",
+            "branch": "mission/restart"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-50ab886a",
+            "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "printf '{\"score\":1}\\n'",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-684b3cc2",
+                "ownerSession": "session-7045e367-8772-442f-884a-663ba4f81f07",
+                "branch": "mission/restart",
+                "manifestId": "restart",
+                "manifestPath": "missions/restart/mission.json",
+                "status": "proposed",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T05:34:03.805Z",
+                "approvedAt": null,
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T05:34:03.768Z",
+            "updatedAt": "2026-10-31T05:34:03.805Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 40521.933111155,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-7045e367-8772-442f-884a-663ba4f81f07",
+          "name": "aleph_approve_mission",
+          "args": {
+            "project_id": "p-50ab886a",
+            "mission_id": "m-684b3cc2"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-50ab886a",
+            "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "printf '{\"score\":1}\\n'",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-684b3cc2",
+                "ownerSession": "session-7045e367-8772-442f-884a-663ba4f81f07",
+                "branch": "mission/restart",
+                "manifestId": "restart",
+                "manifestPath": "missions/restart/mission.json",
+                "status": "approved",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": null,
+                "preBatchTip": null,
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T05:34:03.805Z",
+                "approvedAt": "2026-10-31T05:34:03.807Z",
+                "finishedAt": null
+              }
+            ],
+            "batches": [],
+            "createdAt": "2026-10-31T05:34:03.768Z",
+            "updatedAt": "2026-10-31T05:34:03.807Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 40521.960636611,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-7045e367-8772-442f-884a-663ba4f81f07",
+          "name": "aleph_form_batch",
+          "args": {
+            "project_id": "p-50ab886a"
+          }
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "id": "p-50ab886a",
+            "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+            "researchRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/research",
+            "missionRoot": "/tmp/aleph-project-dsh-gvidzepe/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "printf '{\"score\":1}\\n'",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "busy",
+                "batchId": "b-b1dc3937"
+              }
+            ],
+            "agents": [],
+            "missions": [
+              {
+                "id": "m-684b3cc2",
+                "ownerSession": "session-7045e367-8772-442f-884a-663ba4f81f07",
+                "branch": "mission/restart",
+                "manifestId": "restart",
+                "manifestPath": "missions/restart/mission.json",
+                "status": "batched",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-b1dc3937",
+                "preBatchTip": "91732a684260b1eb5a21217abfb3a812835859eb",
+                "resultCommit": null,
+                "error": null,
+                "createdAt": "2026-10-31T05:34:03.805Z",
+                "approvedAt": "2026-10-31T05:34:03.807Z",
+                "finishedAt": null
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-b1dc3937",
+                "machineId": "local",
+                "status": "forming",
+                "missionIds": [
+                  "m-684b3cc2"
+                ],
+                "branch": "batch/b-b1dc3937",
+                "baseTip": "74ac58d48a0f83e7e4d47d4815ddf7e041dd6e96",
+                "createdAt": "2026-10-31T05:34:03.834Z"
+              }
+            ],
+            "createdAt": "2026-10-31T05:34:03.768Z",
+            "updatedAt": "2026-10-31T05:34:03.834Z"
+          }
+        }
+      }
+    },
+    {
+      "name": "request-detached-for-process-kill",
+      "monotonic": 40522.165694336,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-7045e367-8772-442f-884a-663ba4f81f07",
+          "name": "aleph_run_batch",
+          "args": {
+            "project_id": "p-50ab886a",
+            "batch_id": "b-b1dc3937"
+          }
+        }
+      }
+    },
+    {
+      "name": "before-crash-processes",
+      "monotonic": 40522.190983409,
+      "value": [
+        {
+          "pid": 130745,
+          "ppid": 130731,
+          "command": "node /opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh/lib/bin.js --profile reproduction --no-open --host 127.0.0.1 --port 35015",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace"
+        },
+        {
+          "pid": 130905,
+          "ppid": 130745,
+          "command": "python3 /tmp/aleph-project-dsh-gvidzepe/plugin/batch-process.py /tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937.execution.json 1da61b01-3ed3-44cb-82a9-9f36000747ce",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937"
+        },
+        {
+          "pid": 130906,
+          "ppid": 130905,
+          "command": "/usr/bin/python3 batch_runner.py",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937"
+        },
+        {
+          "pid": 130907,
+          "ppid": 130906,
+          "command": "bash /tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937/missions/restart/run.sh",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937/missions/restart"
+        },
+        {
+          "pid": 130908,
+          "ppid": 130907,
+          "command": "sleep 8",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937/missions/restart"
+        }
+      ]
+    },
+    {
+      "name": "before-crash-projects",
+      "monotonic": 40522.192815254,
+      "value": {
+        "projects": [
+          {
+            "schema": 2,
+            "generated_at": "2026-10-31T05:34:04.066Z",
+            "project": {
+              "id": "p-50ab886a",
+              "title": "workspace",
+              "status": "running",
+              "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+              "research_root": "/tmp/aleph-project-dsh-gvidzepe/workspace/research",
+              "mission_root": "/tmp/aleph-project-dsh-gvidzepe/workspace/missions",
+              "template_branch": "template",
+              "eval_command": "printf '{\"score\":1}\\n'"
+            },
+            "missions": [
+              {
+                "id": "m-684b3cc2",
+                "owner_session": "session-7045e367-8772-442f-884a-663ba4f81f07",
+                "status": "running",
+                "branch": "mission/restart",
+                "manifest_id": "restart",
+                "batch_id": "b-b1dc3937",
+                "pre_batch_tip": "91732a684260b1eb5a21217abfb3a812835859eb",
+                "result_commit": null,
+                "error": null,
+                "created_at": "2026-10-31T05:34:03.805Z",
+                "approved_at": "2026-10-31T05:34:03.807Z",
+                "finished_at": null
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-b1dc3937",
+                "machine_id": "local",
+                "status": "running",
+                "mission_ids": [
+                  "m-684b3cc2"
+                ],
+                "branch": "batch/b-b1dc3937",
+                "base_tip": "74ac58d48a0f83e7e4d47d4815ddf7e041dd6e96",
+                "created_at": "2026-10-31T05:34:03.834Z",
+                "started_at": "2026-10-31T05:34:03.841Z",
+                "finished_at": null,
+                "summary": {
+                  "recovery": "original batch processes are still running; observing without restarting"
+                }
+              }
+            ],
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "busy",
+                "batchId": "b-b1dc3937"
+              }
+            ],
+            "agents": [],
+            "counts": {
+              "queued": 0,
+              "running": 1,
+              "done": 0,
+              "failed": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "task-pid",
+      "monotonic": 40522.193555136,
+      "value": 130907
+    },
+    {
+      "name": "pre-crash-worktree-registration",
+      "monotonic": 40522.197735831,
+      "value": "worktree /tmp/aleph-project-dsh-gvidzepe/workspace/missions\nHEAD 74ac58d48a0f83e7e4d47d4815ddf7e041dd6e96\nbranch refs/heads/template\n\nworktree /tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937\nHEAD 1a3a4ef9623d98e73e8d855fbb265f47d07f2967\ndetached"
+    },
+    {
+      "name": "host-killed",
+      "monotonic": 40522.21448132,
+      "value": {
+        "pid": 130745,
+        "returncode": -9
+      }
+    },
+    {
+      "name": "immediately-after-crash-processes",
+      "monotonic": 40522.234555816,
+      "value": [
+        {
+          "pid": 130905,
+          "ppid": 1080,
+          "command": "python3 /tmp/aleph-project-dsh-gvidzepe/plugin/batch-process.py /tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937.execution.json 1da61b01-3ed3-44cb-82a9-9f36000747ce",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937"
+        },
+        {
+          "pid": 130906,
+          "ppid": 130905,
+          "command": "/usr/bin/python3 batch_runner.py",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937"
+        },
+        {
+          "pid": 130907,
+          "ppid": 130906,
+          "command": "bash /tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937/missions/restart/run.sh",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937/missions/restart"
+        },
+        {
+          "pid": 130908,
+          "ppid": 130907,
+          "command": "sleep 8",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace/.aleph/batches/b-b1dc3937/missions/restart"
+        }
+      ]
+    },
+    {
+      "name": "same-home-live-restart",
+      "monotonic": 40523.394734579,
+      "value": {
+        "pid": 130917,
+        "health": {
+          "ok": true,
+          "version": "0.3.0",
+          "storage": "aleph_project"
+        }
+      }
+    },
+    {
+      "name": "live-restart-project",
+      "monotonic": 40523.397091399,
+      "value": {
+        "projects": [
+          {
+            "schema": 2,
+            "generated_at": "2026-10-31T05:34:05.270Z",
+            "project": {
+              "id": "p-50ab886a",
+              "title": "workspace",
+              "status": "running",
+              "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+              "research_root": "/tmp/aleph-project-dsh-gvidzepe/workspace/research",
+              "mission_root": "/tmp/aleph-project-dsh-gvidzepe/workspace/missions",
+              "template_branch": "template",
+              "eval_command": "printf '{\"score\":1}\\n'"
+            },
+            "missions": [
+              {
+                "id": "m-684b3cc2",
+                "owner_session": "session-7045e367-8772-442f-884a-663ba4f81f07",
+                "status": "running",
+                "branch": "mission/restart",
+                "manifest_id": "restart",
+                "batch_id": "b-b1dc3937",
+                "pre_batch_tip": "91732a684260b1eb5a21217abfb3a812835859eb",
+                "result_commit": null,
+                "error": null,
+                "created_at": "2026-10-31T05:34:03.805Z",
+                "approved_at": "2026-10-31T05:34:03.807Z",
+                "finished_at": null
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-b1dc3937",
+                "machine_id": "local",
+                "status": "running",
+                "mission_ids": [
+                  "m-684b3cc2"
+                ],
+                "branch": "batch/b-b1dc3937",
+                "base_tip": "74ac58d48a0f83e7e4d47d4815ddf7e041dd6e96",
+                "created_at": "2026-10-31T05:34:03.834Z",
+                "started_at": "2026-10-31T05:34:03.841Z",
+                "finished_at": null,
+                "summary": {
+                  "recovery": "original batch processes are still running; observing without restarting"
+                }
+              }
+            ],
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "busy",
+                "batchId": "b-b1dc3937"
+              }
+            ],
+            "agents": [],
+            "counts": {
+              "queued": 0,
+              "running": 1,
+              "done": 0,
+              "failed": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "orphan-runner-completion",
+      "monotonic": 40530.082136833,
+      "value": {
+        "envelope": {
+          "schema": 1,
+          "mission_id": "restart",
+          "status": "done",
+          "exit_code": 0,
+          "artifacts": [],
+          "metrics": {},
+          "logs": []
+        },
+        "processes": [
+          {
+            "pid": 130917,
+            "ppid": 130731,
+            "command": "node /opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh/lib/bin.js --profile reproduction --no-open --host 127.0.0.1 --port 35015",
+            "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mission-tip-before-restart",
+      "monotonic": 40530.086131025,
+      "value": "91732a684260b1eb5a21217abfb3a812835859eb"
+    },
+    {
+      "name": "post-restart-project",
+      "monotonic": 40533.172663329,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T05:34:14.946Z",
+        "project": {
+          "id": "p-50ab886a",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-gvidzepe/workspace",
+          "research_root": "/tmp/aleph-project-dsh-gvidzepe/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-gvidzepe/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "printf '{\"score\":1}\\n'"
+        },
+        "missions": [
+          {
+            "id": "m-684b3cc2",
+            "owner_session": "session-7045e367-8772-442f-884a-663ba4f81f07",
+            "status": "done",
+            "branch": "mission/restart",
+            "manifest_id": "restart",
+            "batch_id": "b-b1dc3937",
+            "pre_batch_tip": "91732a684260b1eb5a21217abfb3a812835859eb",
+            "result_commit": "ca37696a0fc6576246086eddc0f7effb7f9dcfb3",
+            "error": null,
+            "created_at": "2026-10-31T05:34:03.805Z",
+            "approved_at": "2026-10-31T05:34:03.807Z",
+            "finished_at": "2026-10-31T05:34:12.392Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-b1dc3937",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-684b3cc2"
+            ],
+            "branch": "batch/b-b1dc3937",
+            "base_tip": "74ac58d48a0f83e7e4d47d4815ddf7e041dd6e96",
+            "created_at": "2026-10-31T05:34:03.834Z",
+            "started_at": "2026-10-31T05:34:03.841Z",
+            "finished_at": "2026-10-31T05:34:12.397Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-684b3cc2",
+                  "manifestId": "restart",
+                  "manifestPath": "missions/restart/mission.json",
+                  "status": "done",
+                  "resultCommit": "ca37696a0fc6576246086eddc0f7effb7f9dcfb3"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 1,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 40533.224268672,
+      "value": {
+        "request": {
+          "action": "parent",
+          "cwd": "/tmp/aleph-project-dsh-gvidzepe/workspace"
+        },
+        "response": {
+          "ok": true,
+          "result": {
+            "sessionId": "session-e4ce2269-e444-4f2c-b2fc-6c7f32b62313",
+            "agentPreset": "aleph"
+          }
+        }
+      }
+    },
+    {
+      "name": "recovery-retry-result",
+      "monotonic": 40533.228326244,
+      "value": "HTTP Error 500: Internal Server Error"
+    },
+    {
+      "name": "second-same-home-restart",
+      "monotonic": 40534.506920375,
+      "value": {
+        "pid": 131038,
+        "health": {
+          "ok": true,
+          "version": "0.3.0",
+          "storage": "aleph_project"
+        }
+      }
+    },
+    {
+      "name": "stopped-final-isolated-dsh",
+      "monotonic": 40534.629131605,
+      "value": {
+        "pid": 131038,
+        "returncode": 0
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "real DSH current plugin health",
+      "passed": true
+    },
+    {
+      "name": "new project has no missions",
+      "passed": true
+    },
+    {
+      "name": "new project has no batches",
+      "passed": true
+    },
+    {
+      "name": "new project machine is idle",
+      "passed": true
+    },
+    {
+      "name": "mission proposal is persisted",
+      "passed": true
+    },
+    {
+      "name": "proposal belongs to actual DSH parent session",
+      "passed": true
+    },
+    {
+      "name": "leader approval is persisted",
+      "passed": true
+    },
+    {
+      "name": "new batch reserves local machine",
+      "passed": true
+    },
+    {
+      "name": "mission belongs to formed batch",
+      "passed": true
+    },
+    {
+      "name": "mission pre-batch commit matches actual branch",
+      "passed": true
+    },
+    {
+      "name": "bounded real task started",
+      "passed": true
+    },
+    {
+      "name": "running command has a busy persisted machine",
+      "passed": true
+    },
+    {
+      "name": "running command has expected durable batch state",
+      "passed": true
+    },
+    {
+      "name": "running command has expected durable mission state",
+      "passed": true
+    },
+    {
+      "name": "kill target has this exact isolated DSH_HOME",
+      "passed": true
+    },
+    {
+      "name": "only selected host exited by SIGKILL",
+      "passed": true
+    },
+    {
+      "name": "live restart keeps machine busy",
+      "passed": true
+    },
+    {
+      "name": "live restart keeps unfinished batch running",
+      "passed": true
+    },
+    {
+      "name": "live restart does not deliver result prematurely",
+      "passed": true
+    },
+    {
+      "name": "live restart does not advance mission branch",
+      "passed": true
+    },
+    {
+      "name": "live restart retains active output worktree",
+      "passed": true
+    },
+    {
+      "name": "live restart does not launch second task",
+      "passed": true
+    },
+    {
+      "name": "actual orphan compute remains visible",
+      "passed": true
+    },
+    {
+      "name": "bounded task completed after parent DSH death",
+      "passed": true
+    },
+    {
+      "name": "actual runner wrote successful result",
+      "passed": true
+    },
+    {
+      "name": "runner envelope identifies expected mission",
+      "passed": true
+    },
+    {
+      "name": "runner created batch summary after host death",
+      "passed": true
+    },
+    {
+      "name": "same project identity persisted across actual DSH restart",
+      "passed": true
+    },
+    {
+      "name": "same mission persisted across actual DSH restart",
+      "passed": true
+    },
+    {
+      "name": "same batch persisted across actual DSH restart",
+      "passed": true
+    },
+    {
+      "name": "owner session persisted across actual DSH restart",
+      "passed": true
+    },
+    {
+      "name": "interrupted batch reaches done after compute completion",
+      "passed": true
+    },
+    {
+      "name": "interrupted mission reaches done after compute completion",
+      "passed": true
+    },
+    {
+      "name": "machine becomes idle after actual compute exits",
+      "passed": true
+    },
+    {
+      "name": "machine reservation is released",
+      "passed": true
+    },
+    {
+      "name": "completed result is delivered to actual mission tip",
+      "passed": true
+    },
+    {
+      "name": "mission has terminal timestamp",
+      "passed": true
+    },
+    {
+      "name": "batch has terminal timestamp",
+      "passed": true
+    },
+    {
+      "name": "successful recovery records no mission error",
+      "passed": true
+    },
+    {
+      "name": "actual mission branch advanced once",
+      "passed": true
+    },
+    {
+      "name": "Git result envelope identifies same batch",
+      "passed": true
+    },
+    {
+      "name": "Git result envelope identifies same mission",
+      "passed": true
+    },
+    {
+      "name": "Git result envelope records successful task",
+      "passed": true
+    },
+    {
+      "name": "real task executed exactly once",
+      "passed": true
+    },
+    {
+      "name": "explicit retry preserves terminal batch",
+      "passed": true
+    },
+    {
+      "name": "explicit retry preserves terminal mission",
+      "passed": true
+    },
+    {
+      "name": "explicit retry preserves idle machine",
+      "passed": true
+    },
+    {
+      "name": "explicit retry preserves result commit",
+      "passed": true
+    },
+    {
+      "name": "explicit retry preserves actual mission branch",
+      "passed": true
+    },
+    {
+      "name": "explicit retry never reruns task",
+      "passed": true
+    },
+    {
+      "name": "explicit retry retains delivered Git result",
+      "passed": true
+    },
+    {
+      "name": "second restart keeps batch done",
+      "passed": true
+    },
+    {
+      "name": "second restart keeps mission done",
+      "passed": true
+    },
+    {
+      "name": "second restart keeps machine idle",
+      "passed": true
+    },
+    {
+      "name": "second restart keeps commit identity",
+      "passed": true
+    },
+    {
+      "name": "second restart does not advance branch",
+      "passed": true
+    },
+    {
+      "name": "second restart does not rerun compute",
+      "passed": true
+    }
+  ],
+  "recovery_validated": true
+}

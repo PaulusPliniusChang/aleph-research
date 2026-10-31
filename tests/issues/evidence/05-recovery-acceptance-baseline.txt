@@ -1,0 +1,382 @@
+(node:110707) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/restart'
+Switched to branch 'template'
+▶ ALEPH-05 recovery acceptance has distinct execution, delivery, repetition and failure scenarios
+  ✔ normal completion: batch reaches done (1.55355ms)
+  ✔ normal completion: mission reaches done (0.144463ms)
+  ✔ normal completion: machine is released (0.117909ms)
+  ✔ normal completion: exactly one actual execution occurs (0.210293ms)
+  ✔ normal completion: result commit is mission branch tip (0.114987ms)
+  ✔ normal completion: result commit descends from pre-batch branch (5.469853ms)
+  ✔ already delivered result after restart: terminal batch remains terminal (0.106657ms)
+  ✔ already delivered result after restart: terminal mission remains terminal (0.120072ms)
+  ✔ already delivered result after restart: result commit is not duplicated (0.106129ms)
+  ✔ already delivered result after restart: mission branch is not moved again (5.057346ms)
+  ✔ already delivered result after restart: no execution occurs during restart (0.144003ms)
+  ✔ already delivered result after restart: machine stays idle (0.065379ms)
+  ✖ completed execution without host delivery: batch is reconciled to a terminal state (16.53489ms)
+  ✖ completed execution without host delivery: mission is reconciled to a terminal state (0.631882ms)
+  ✖ completed execution without host delivery: machine becomes idle after process really exits (0.695361ms)
+  ✔ completed execution without host delivery: finished result is delivered or preserved as evidence (0.12927ms)
+  ✔ completed execution without host delivery: recovery does not rerun finished compute (0.137689ms)
+  ✖ completed execution without host delivery: delivery or explicit interruption is recorded (0.502041ms)
+  ✔ repeated startup recovery: no compute is repeated (0.288232ms)
+  ✔ repeated startup recovery: mission tip remains stable (9.462093ms)
+  ✔ repeated startup recovery: result commit remains stable (0.248133ms)
+  ✖ repeated startup recovery: terminal batch state remains stable (0.773777ms)
+  ✖ repeated startup recovery: machine is not reserved again (0.480823ms)
+  ✔ repeated startup recovery: preserved result remains available (2.411589ms)
+  ✔ explicit retry after interrupted result: finished compute is not executed again (0.24117ms)
+  ✖ explicit retry after interrupted result: rejected retry preserves completed result evidence (0.300798ms)
+  ✖ explicit retry after interrupted result: retry returns terminal state or explicit terminal refusal (1.690291ms)
+  ✖ explicit retry after interrupted result: retry does not strand an idle machine as busy (0.26843ms)
+  ✔ orphan subprocess still executing: machine reservation is retained while actual compute runs (0.224099ms)
+  ✔ orphan subprocess still executing: compute is not started a second time (0.105684ms)
+  ✔ orphan subprocess still executing: mission branch is not advanced before completion (4.307861ms)
+  ✔ orphan subprocess still executing: active execution worktree is not deleted (0.099978ms)
+  ✖ orphan finishes after initial recovery: completed work is eventually reconciled (0.717789ms)
+  ✔ orphan finishes after initial recovery: finished compute is not repeated (0.259604ms)
+  ✖ orphan finishes after initial recovery: machine is released after completion (0.274122ms)
+  ✔ orphan finishes after initial recovery: finished output is delivered or retained (0.16397ms)
+Switched to branch 'mission/restart'
+Switched to branch 'template'
+  ✔ Git destination cannot be advanced: compute is not repeated on delivery error (0.22884ms)
+  ✔ Git destination cannot be advanced: completed output survives delivery failure (0.069732ms)
+  ✖ Git destination cannot be advanced: batch stops waiting for dead host (0.411167ms)
+  ✖ Git destination cannot be advanced: mission records delivery or explicit error (0.310191ms)
+  ✖ Git destination cannot be advanced: machine is released after actual process exits (0.183676ms)
+✖ ALEPH-05 recovery acceptance has distinct execution, delivery, repetition and failure scenarios (7394.10025ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 27
+ℹ fail 15
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7541.564821
+
+✖ failing tests:
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ completed execution without host delivery: batch is reconciled to a terminal state (16.53489ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(terminal(recovered.batches[0].status))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:106:64)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:105:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ completed execution without host delivery: mission is reconciled to a terminal state (0.631882ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(terminal(recovered.missions[0].status))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:107:66)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:105:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ completed execution without host delivery: machine becomes idle after process really exits (0.695361ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'busy' !== 'idle'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:108:72)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:105:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'busy',
+    expected: 'idle',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ completed execution without host delivery: delivery or explicit interruption is recorded (0.502041ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(recovered.missions[0].resultCommit || recovered.missions[0].error)
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:111:70)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:105:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ repeated startup recovery: terminal batch state remains stable (0.773777ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(terminal(repeated.batches[0].status))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:119:60)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:115:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ repeated startup recovery: machine is not reserved again (0.480823ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'busy' !== 'idle'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:120:54)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:115:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'busy',
+    expected: 'idle',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ explicit retry after interrupted result: rejected retry preserves completed result evidence (0.300798ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(preserved(lost, retried))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:130:75)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:128:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ explicit retry after interrupted result: retry returns terminal state or explicit terminal refusal (1.690291ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(terminal(retried.batches[0].status) && (!repeatError || /not runnable|already|terminal|completed|failed/.test(repeatError)))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:131:82)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:128:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ explicit retry after interrupted result: retry does not strand an idle machine as busy (0.26843ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'busy' !== 'idle'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:132:70)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:128:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'busy',
+    expected: 'idle',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ orphan finishes after initial recovery: completed work is eventually reconciled (0.717789ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(terminal(afterOrphan.batches[0].status))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:145:64)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:144:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ orphan finishes after initial recovery: machine is released after completion (0.274122ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'busy' !== 'idle'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:147:61)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:144:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'busy',
+    expected: 'idle',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ Git destination cannot be advanced: batch stops waiting for dead host (0.411167ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(terminal(failedProject.batches[0].status))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:156:58)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:153:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ Git destination cannot be advanced: mission records delivery or explicit error (0.310191ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(failedProject.missions[0].resultCommit || failedProject.missions[0].error)
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:157:67)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:153:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51
+✖ Git destination cannot be advanced: machine is released after actual process exits (0.183676ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'busy' !== 'idle'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:158:71)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:79:51)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/restart-recovery-acceptance.test.mjs:153:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'busy',
+    expected: 'idle',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

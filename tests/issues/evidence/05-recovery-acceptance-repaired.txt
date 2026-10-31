@@ -1,0 +1,90 @@
+(node:124445) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/restart'
+Switched to branch 'template'
+▶ ALEPH-05 recovery acceptance has distinct execution, delivery, repetition and failure scenarios
+  ✔ normal completion: batch reaches done (0.663846ms)
+  ✔ normal completion: mission reaches done (0.099943ms)
+  ✔ normal completion: machine is released (0.082381ms)
+  ✔ normal completion: exactly one actual execution occurs (0.162356ms)
+  ✔ normal completion: result commit is mission branch tip (0.083344ms)
+  ✔ normal completion: result commit descends from pre-batch branch (4.699592ms)
+  ✔ already delivered result after restart: terminal batch remains terminal (0.117538ms)
+  ✔ already delivered result after restart: terminal mission remains terminal (0.097782ms)
+  ✔ already delivered result after restart: result commit is not duplicated (0.105012ms)
+  ✔ already delivered result after restart: mission branch is not moved again (3.789326ms)
+  ✔ already delivered result after restart: no execution occurs during restart (0.127353ms)
+  ✔ already delivered result after restart: machine stays idle (0.066859ms)
+  ✔ completed execution without host delivery: batch is reconciled to a terminal state (0.388965ms)
+  ✔ completed execution without host delivery: mission is reconciled to a terminal state (0.104985ms)
+  ✔ completed execution without host delivery: machine becomes idle after process really exits (0.07885ms)
+  ✔ completed execution without host delivery: finished result is delivered or preserved as evidence (0.108132ms)
+  ✔ completed execution without host delivery: recovery does not rerun finished compute (0.097279ms)
+  ✔ completed execution without host delivery: delivery or explicit interruption is recorded (0.055874ms)
+  ✔ repeated startup recovery: no compute is repeated (0.133205ms)
+  ✔ repeated startup recovery: mission tip remains stable (5.095746ms)
+  ✔ repeated startup recovery: result commit remains stable (0.110642ms)
+  ✔ repeated startup recovery: terminal batch state remains stable (0.083488ms)
+  ✔ repeated startup recovery: machine is not reserved again (0.059648ms)
+  ✔ repeated startup recovery: preserved result remains available (0.06862ms)
+  ✔ explicit retry after interrupted result: finished compute is not executed again (0.122621ms)
+  ✔ explicit retry after interrupted result: rejected retry preserves completed result evidence (0.098959ms)
+  ✔ explicit retry after interrupted result: retry returns terminal state or explicit terminal refusal (0.162576ms)
+  ✔ explicit retry after interrupted result: retry does not strand an idle machine as busy (0.067784ms)
+  ✔ orphan subprocess still executing: machine reservation is retained while actual compute runs (0.46837ms)
+  ✔ orphan subprocess still executing: compute is not started a second time (0.301838ms)
+  ✔ orphan subprocess still executing: mission branch is not advanced before completion (14.420521ms)
+  ✔ orphan subprocess still executing: active execution worktree is not deleted (0.356991ms)
+  ✔ orphan finishes after initial recovery: completed work is eventually reconciled (0.321874ms)
+  ✔ orphan finishes after initial recovery: finished compute is not repeated (0.186573ms)
+  ✔ orphan finishes after initial recovery: machine is released after completion (0.093953ms)
+  ✔ orphan finishes after initial recovery: finished output is delivered or retained (0.096615ms)
+  ✔ Git destination cannot be advanced: compute is not repeated on delivery error (0.689985ms)
+  ✔ Git destination cannot be advanced: completed output survives delivery failure (0.27911ms)
+  ✔ Git destination cannot be advanced: batch stops waiting for dead host (0.174151ms)
+  ✔ Git destination cannot be advanced: mission records actual Git lock failure (0.683488ms)
+  ✔ Git destination cannot be advanced: machine is released after actual process exits (0.239669ms)
+Switched to a new branch 'mission/restart'
+Switched to branch 'template'
+  ✔ two calls race for the same batch: at least one caller completes successfully (0.592029ms)
+  ✔ two calls race for the same batch: exactly one actual task executes (0.339684ms)
+  ✔ two calls race for the same batch: batch reaches a terminal outcome (0.221909ms)
+  ✔ two calls race for the same batch: mission receives one branch result (13.784076ms)
+  ✔ two calls race for the same batch: machine is released after the winning runner exits (0.339981ms)
+Switched to a new branch 'mission/restart'
+Switched to branch 'template'
+  ✔ Git advanced before storage persistence: restart does not rerun compute (1.684654ms)
+  ✔ Git advanced before storage persistence: mission branch tip does not change (17.086545ms)
+  ✔ Git advanced before storage persistence: stored result points to the existing delivery (0.43995ms)
+  ✔ Git advanced before storage persistence: mission reaches done (0.190324ms)
+  ✔ Git advanced before storage persistence: batch reaches done (0.144133ms)
+  ✔ Git advanced before storage persistence: machine is released (0.125718ms)
+Switched to a new branch 'mission/restart'
+Switched to branch 'template'
+Switched to a new branch 'mission/restart-1'
+Switched to branch 'template'
+  ✔ partially persisted multi-mission delivery: completed first mission stays completed (0.503542ms)
+  ✔ partially persisted multi-mission delivery: completed first mission commit is retained (0.300439ms)
+  ✔ partially persisted multi-mission delivery: second result is recovered (0.172092ms)
+  ✔ partially persisted multi-mission delivery: second mission reaches done (0.154882ms)
+  ✔ partially persisted multi-mission delivery: both real mission branches remain stable (29.243609ms)
+  ✔ partially persisted multi-mission delivery: neither task executes again (0.432959ms)
+  ✔ partially persisted multi-mission delivery: batch reaches done (0.178432ms)
+  ✔ partially persisted multi-mission delivery: machine becomes idle (0.275987ms)
+  ✔ real legacy forming batch with existing execution worktree: fixture genuinely lacks a persisted start time (0.450804ms)
+  ✔ real legacy forming batch with existing execution worktree: fixture genuinely has legacy forming state (0.196281ms)
+  ✔ real legacy forming batch with existing execution worktree: recovery ends the interrupted batch (0.13825ms)
+  ✔ real legacy forming batch with existing execution worktree: recovery ends the interrupted mission (0.122764ms)
+  ✔ real legacy forming batch with existing execution worktree: legacy compute is not executed again (0.178893ms)
+  ✔ real legacy forming batch with existing execution worktree: completed result remains available or delivered (0.130115ms)
+  ✔ real legacy forming batch with existing execution worktree: machine is released after legacy runner exits (0.101951ms)
+✔ ALEPH-05 recovery acceptance has distinct execution, delivery, repetition and failure scenarios (14603.115745ms)
+ℹ tests 68
+ℹ suites 0
+ℹ pass 68
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14790.688668

@@ -1,0 +1,144 @@
+---
+id: ALEPH-13
+status: 已解决
+type: 缺陷
+remote_issue: https://github.com/hapenia/aleph-research/issues/14
+pull_request: https://github.com/hapenia/aleph-research/pull/15
+---
+
+# 同一批次重复启动 InfraOptimizer 会删除正在使用的工作目录
+
+## 组合修复与复测（2026-10-31）
+
+最终修复提交为 `be646b3`，派生仓库分支为 `fix/aleph-13-infra-recovery`，上游拉取请求为 [PR #15](https://github.com/hapenia/aleph-research/pull/15)。该请求依赖重启恢复 [PR #13](https://github.com/hapenia/aleph-research/pull/13)，当前分支包含前置提交 `f057a84`。主仓库尚未合并前置请求，因此本次没有另建独立原型的拉取请求。按现有规则，已经创建解决方案的拉取请求即可设置“已解决”；该状态不表示上游已经合并或发布。
+
+组合修复沿用独占执行与持久化阶段，并与恢复流程共用启动保护。优化交接到实际 runner 之间不会释放执行权；恢复扫描跳过活动优化，保留机器占用。重启后遗留的 `infra` 阶段会保留现场并拒绝直接重跑，自动接续优化会话不属于本次承诺范围。前置修复的 Linux `/proc` 进程识别、每批次监督程序、计算恢复和幂等交付继续有效。
+
+B 对 C 冻结的组合内容串行独立验收，结果如下。提交后的内容与[冻结文件摘要](evidence/13-combined-frozen-content.json)一致。
+
+| 验证范围 | 结果 | 证据 |
+| --- | --- | --- |
+| 产品完整自动测试 | 168/168 全部通过，无跳过。 | [产品报告](evidence/13-combined-product.txt) |
+| 独立优化自动验收 | 65 个行为点全部通过，Node 含父容器为 66/66。 | [报告](evidence/13-combined-infra.txt)、[结构化记录](evidence/13-combined-infra.json) |
+| 独立恢复自动验收 | 67 个行为点全部通过，Node 含父容器为 68/68。 | [报告](evidence/13-combined-restart.txt)、[结构化记录](evidence/13-combined-restart.json) |
+| 实际 DSH，活动优化经历恢复扫描后重复优化 | 63/63，通过。 | [实测记录](evidence/13-combined-real-dsh-duplicate.json) |
+| 实际 DSH，活动优化期间直接运行 | 45/45，通过。 | [实测记录](evidence/13-combined-real-dsh-direct.json) |
+| 实际 DSH，计算期间重复调用优化和直接运行 | 55/55，通过。 | [实测记录](evidence/13-combined-real-dsh-running.json) |
+| 实际 DSH，计算完成后重启 | 50/50，通过。 | [实测记录](evidence/13-combined-real-dsh-restart-completed.json) |
+| 实际 DSH，孤立计算仍活跃时重启 | 57/57，通过。 | [实测记录](evidence/13-combined-real-dsh-restart-live.json) |
+
+实际 DSH 优化场景沿用下文说明的本地确定性模型适配器；重启场景使用真实 shell 任务，不调用模型。所有场景使用独立状态目录，结束后均停止隔离服务。优化与直接运行的重复请求均在目录操作前得到明确的活动执行拒绝，原任务只计算一次，Git 历史只包含一次结果交付。
+
+组合验收在 `/home/paulus-chang/项目/aleph-fix-infra-recovery` 执行产品 `npm test`。独立自动命令将 `ALEPH_CURRENT_SOURCE` 改为该工作树，恢复自动命令使用 [恢复验收脚本](dsh/restart-recovery-acceptance.test.mjs)。实际 DSH 优化命令分别增加 `--duplicate --expect-protection --hold-for-recovery`、`--direct-during-infra --expect-protection`、`--duplicate-during-runner --expect-protection`。恢复场景使用 [真实重启脚本](dsh/current-restart.py)，增加 `--expect-recovery`，活跃计算场景再增加 `--restart-live`。每份结构化记录保存执行命令、被测来源和替代范围。
+
+## 独立修复验收（2026-10-31）
+
+基于当前 `main` 的独立修复保存在提交 `2eeaee8`，工作树为 `/home/paulus-chang/项目/aleph-fix-infra`，分支为 `fix/aleph-13-infra-duplicate-start`。该提交尚未推送，也尚未创建拉取请求。B 对 C 冻结的产品文件完成独立验收，提交内容与[冻结内容摘要](evidence/13-repaired-frozen-content.json)中的文件摘要一致。
+
+修复为优化与直接运行入口共用同一批次执行权，在目录操作前登记独占持有者，并持久化 `running` 状态和 `infra`、`batch` 阶段。优化流程把执行权交给内部批次方法，直到计算、交付和清理结束才释放。服务重新创建后，对持久化运行状态明确拒绝重复请求；本次独立修复不实现优化会话的重启恢复。
+
+| 验证范围 | 结果 | 证据 |
+| --- | --- | --- |
+| 独立自动验收 | 65 个行为点全部通过，Node 含父测试容器为 66/66，无跳过。 | [报告](evidence/13-infra-duplicate-repaired.txt)、[结构化记录](evidence/13-infra-duplicate-repaired.json) |
+| 产品自动测试 | `npm test` 的 75 项全部通过，无跳过。 | [产品报告](evidence/13-product-repaired.txt) |
+| 实际 DSH，活动优化期间重复优化 | 44 项检查全部通过，活动文件保持，原流程正常完成。 | [实测记录](evidence/13-repaired-real-dsh-duplicate.json) |
+| 实际 DSH，活动优化期间直接运行 | 44 项检查全部通过，直接入口明确拒绝提前计算。 | [实测记录](evidence/13-repaired-real-dsh-direct.json) |
+| 实际 DSH，实际计算期间重复调用 | 54 项检查全部通过，优化与直接运行入口均拒绝重复，原运行目录身份与文件保持。 | [实测记录](evidence/13-repaired-real-dsh-running.json) |
+
+实际 DSH 场景均确认真实子会话身份和工具执行；最终实际计算只执行一次，任务结果成功交付。测试仍使用下文说明的本地确定性模型适配器，场景结束后均已停止隔离服务。命令将被测目录改为独立修复工作树；实际 DSH 分别增加 `--duplicate --expect-protection`、`--direct-during-infra --expect-protection` 或 `--duplicate-during-runner --expect-protection`。
+
+独立原型与重启恢复修复的合并冲突随后由 C 处理；组合验收与最终发布结果见上节。
+
+## 当前情况
+
+研究代理把需要较多计算资源的工作封装为 mission，Leader 审批后，Composer 把任务合成 batch。Leader 调用 `aleph_run_infra`，InfraOptimizer 在批次工作目录中修改程序，Host 随后执行批次并把结果交付到任务分支。
+
+当前代码只在 `runInfra` 入口检查批次是否为 `forming`。首个优化代理启动后，Host 只登记代理记录，没有把批次改为运行中，也没有为该批次登记独占执行权。同一批次在首个优化代理仍活动时收到第二次调用，仍可通过检查。Host 随后强制删除按批次编号命名的同一工作目录。
+
+检查版本为 `66885994ceadad83a237a27c1fc7de6419889c14`，日期为 2026 年 10 月 31 日。建议优先级为 P1。B 已完成自动测试与真实 DSH 环境复现，并依据用户授权发布上游 [#14](https://github.com/hapenia/aleph-research/issues/14)。修复与验收结果见上述 [PR #15](https://github.com/hapenia/aleph-research/pull/15)。
+
+## 使用例子与触发步骤
+
+例如，批次 `b-123` 包含已经审批的训练任务。首个 InfraOptimizer 正在 `.aleph/infra/b-123` 中读取代码、修改训练脚本，并准备交接说明。
+
+1. 按当前 project、mission、batch 流程创建项目、提案、审批并编排批次。
+2. Leader 调用 `aleph_run_infra`，等待首个真实优化代理启动，确认代理仍在活动，工作目录中已有本轮文件。
+3. 在首个代理返回之前，另一个 Leader 会话针对相同 `project_id` 和 `batch_id` 再次调用 `aleph_run_infra`。
+4. 观察第二次调用是否在修改目录之前被拒绝，同时检查首个代理的工作目录、文件、后续执行和结果交付。
+
+该触发路径不需要重启 DSH，也不需要绕过 InfraOptimizer 直接运行批次。单次调用不满足重复启动的触发条件。
+
+## 实测行为与影响
+
+第二次调用通过 `forming` 检查后，先对 `.aleph/infra/<batch-id>` 执行递归强制删除，再尝试创建 Git 工作目录。首个代理仍在使用该目录，代码、未提交修改或交接说明可能因此消失。
+
+第二次调用即使随后因 Git 工作目录登记冲突而失败，前面的删除也已经发生。实际 DSH 复现中，首个真实子会话仍在等待时，第二次请求删除交接说明、受版本管理的修改和嵌套目录中的标记文件。第二次请求随后因 Git 工作区已经登记而失败。释放首个子会话后，首个 Host 流程也失败，批次保留为 `forming`，机器保留为 `busy`，任务没有结果；批次计算没有启动。已经完成的优化工作因此丢失。
+
+该问题涉及正在使用的工作目录被重复启动请求删除。InfraOptimizer 对批次程序、存储和清理方式的决定不属于本议题要求改变的范围。
+
+## 预期行为
+
+同一批次首次启动优化后，应取得该批次的独占执行权。后续重复请求应返回已经启动的执行记录，或在任何目录修改之前明确拒绝。优化转入实际批次运行时，独占执行权应继续有效，直到结果交付和本轮结束处理完成。
+
+## 当前证据与限制
+
+验证日期为 2026 年 10 月 31 日。被测源码提交为 `66885994ceadad83a237a27c1fc7de6419889c14`，被测产品没有受版本管理的本地改动。真实 DSH 版本为 `0.2.2-alpha.2`。
+
+| 验证范围 | 结果 | 证据 |
+| --- | --- | --- |
+| 独立自动验收 | 40 个行为点中，30 个通过、10 个失败；Node 额外计入父测试容器后显示 41 项、11 项失败。失败来自活动目录保留、首个优化继续执行和结果交付等行为断言。 | [原始报告](evidence/13-infra-duplicate-baseline.txt)、[结构化记录](evidence/13-infra-duplicate-baseline.json) |
+| 真实 DSH 单次正常调用 | 33 项检查全部通过，真实子会话通过实际 bash 工具写入修改和交接说明，Host 随后提交优化、执行批次并交付结果。 | [正常对照记录](evidence/13-real-dsh-normal.json) |
+| 真实 DSH 重复调用 | 36 项观测检查全部通过，确认活动工作目录被删除、两次调用最终失败以及状态未结束。此处通过表示成功复现缺陷。 | [缺陷复现记录](evidence/13-real-dsh-duplicate.json) |
+
+扩展自动基线另外覆盖优化完成后实际 runner 仍运行时重复调用，以及通过已注册 `aleph_run_batch` 绕过活动优化的路径。该基线实际执行 61 个行为点，45 个通过、16 个失败；Node 计入父测试容器后为 62 项、17 项失败。新增失败确认第二个优化代理仍会启动，直接运行工具也会提前执行计算。报告见[扩展基线](evidence/13-infra-duplicate-expanded-baseline.txt)与[结构化记录](evidence/13-infra-duplicate-expanded-baseline.json)。
+
+扩展夹具在确认直接运行工具已经错误启动计算后，先放行该次计算完成，再拒绝仍在受控等待的测试激活以结束场景；该收尾不计作产品行为。直接运行工具正确拒绝时，夹具另外执行 4 个首流程正常交付断言，因此修复验收共执行 65 个行为点。首次扩展执行因原流程在 `finally` 异步清理期间产生暂未处理的拒绝而中止，[原始中止报告](evidence/13-infra-fixture-premature-direct-abort.txt)与[不完整结构化记录](evidence/13-infra-fixture-premature-direct-abort.json)单独保留，不使用其不完整计数代替上述完整基线。
+
+自动验收使用实际 `ProjectService`、Git 仓库与 runner，项目存储使用内存适配器；仅将代理激活和结果等待替换为可控制的确定性适配器。测试覆盖单次正常运行、活动代理期间的重复调用、已完成批次重复调用、无效输入，以及代理启动失败后的合法重试。
+
+真实 DSH 场景使用实际父会话、子会话、原始子代理提供程序、工具注册、持久存储、Git 与 runner。本地 `LlmAdapter` 只预定模型输出和等待时机，不连接外部模型；真实 InfraOptimizer 子会话通过实际 bash 工具写入优化文件，随后在受控等待期间接收第二个真实父会话的重复请求。子会话持久记录证明其来源为 `subagent`、配置为 `aleph-infra`，且关联首个父会话。该场景证明实际 DSH 会话与工具路径下的问题，不表示外部模型自主完成优化。
+
+复现命令在 `aleph-tests` 工作区执行：
+
+```bash
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph \
+ALEPH_INFRA_OBSERVATIONS=/home/paulus-chang/项目/aleph-tests/tests/issues/evidence/13-infra-duplicate-baseline.json \
+node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/infra-duplicate-acceptance.test.mjs
+
+python3 tests/issues/dsh/current-infra-duplicate.py \
+  --source /home/paulus-chang/项目/aleph \
+  --output tests/issues/evidence/13-real-dsh-normal.json
+
+python3 tests/issues/dsh/current-infra-duplicate.py \
+  --source /home/paulus-chang/项目/aleph \
+  --output tests/issues/evidence/13-real-dsh-duplicate.json \
+  --duplicate
+```
+
+脚本包括[自动验收](dsh/infra-duplicate-acceptance.test.mjs)、[真实 DSH 场景](dsh/current-infra-duplicate.py)与[确定性模型适配器](dsh/infra-deterministic-bridge.mjs)。每份最终记录保存执行命令、源码版本与替代范围，场景结束后均已停止隔离服务。
+
+准备期间曾遇到本地适配器遗漏 bash 必填描述字段，以及通用诊断接口没有提供预期事件数组的问题。相关[参数错误记录](evidence/13-dsh-fixture-invalid-bash-arguments.json)和[事件接口假设记录](evidence/13-dsh-fixture-session-events-assumption.json)单独保留；夹具修正后重新完成上述场景，准备错误没有作为产品缺陷证据。
+
+源码位置如下：
+
+- [批次创建与初始状态](https://github.com/hapenia/aleph-research/blob/66885994ceadad83a237a27c1fc7de6419889c14/dsh-plugin/index-v2.js#L661)：机器被占用，批次状态设为 `forming`。
+- [优化入口检查和目录删除](https://github.com/hapenia/aleph-research/blob/66885994ceadad83a237a27c1fc7de6419889c14/dsh-plugin/index-v2.js#L580)：入口只检查 `forming`，随后删除固定批次目录。
+- [真实优化代理启动与等待](https://github.com/hapenia/aleph-research/blob/66885994ceadad83a237a27c1fc7de6419889c14/dsh-plugin/index-v2.js#L605)：Host 登记代理后等待结果，批次没有取得独占执行权。
+- [优化完成后执行批次](https://github.com/hapenia/aleph-research/blob/66885994ceadad83a237a27c1fc7de6419889c14/dsh-plugin/index-v2.js#L625)：正常路径由 `runInfra` 继续调用 `runBatch`。
+
+## 与现有议题的区别
+
+[ALEPH-01](01-run-next-concurrency.md) 与上游 [#3](https://github.com/hapenia/aleph-research/issues/3) 讨论旧版不同研究任务绕过并发上限。本议题讨论当前版本中同一批次缺少重复启动保护，直接后果是活动工作目录被删除。
+
+[ALEPH-05](05-restart-recovery.md) 与上游 [#6](https://github.com/hapenia/aleph-research/issues/6) 讨论主进程异常退出后的恢复、孤立计算和重试现场保留。本议题限定 DSH 没有重启、首个真实 InfraOptimizer 仍活动时收到重复请求。修复可能共用执行预约或目录保护机制，但无重启的活动执行保护需要独立验收。
+
+## 验收条件
+
+1. 首次优化启动后，状态能够区分尚未启动的批次和已经取得执行权的批次。
+2. 同一批次的重复请求在删除、替换或修改活动目录之前被拒绝，或返回已有执行记录。
+3. 第二次请求不启动额外优化代理，不改变首个代理的文件，也不导致首个代理失败。
+4. 首个优化代理能够正常完成修改和交接，Host 能继续执行批次并交付结果。
+5. 实际批次运行阶段也保持同一批次的独占执行，重复请求不会删除正在运行的目录。
+6. 首次启动失败时能够释放本轮预约或记录明确失败，后续合法重试不会破坏仍在运行的任务。
+7. 单次正常调用、已完成批次的重复调用，以及不同批次的合法操作均得到明确且一致的处理。

@@ -1,0 +1,859 @@
+{
+  "source": "/home/paulus-chang/项目/aleph-fix-infra-recovery",
+  "source_sha": "f057a84b776d2306f46fad33a2d2529e311063f0",
+  "source_tracked_dirty": "M  dsh-plugin/index-v2.js\nA  dsh-plugin/test/infra.test.mjs",
+  "command": [
+    "/usr/bin/node",
+    "--test-concurrency=0",
+    "--experimental-addon-modules",
+    "--test-coverage-functions=0",
+    "--experimental-loader=/home/paulus-chang/项目/aleph-fix-infra-recovery/dsh-plugin/test/loader.mjs",
+    "--inspect-publish-uid=stderr,http",
+    "--inspect-port=127.0.0.1:9229",
+    "--stack-trace-limit=10",
+    "--report-signal=SIGUSR2",
+    "--test-coverage-lines=0",
+    "--use-largepages=off",
+    "--secure-heap-min=2",
+    "--max-http-header-size=16384",
+    "--test-isolation=process",
+    "--heap-prof-interval=524288",
+    "--cpu-prof-interval=1000",
+    "--trace-event-file-pattern=node_trace.${rotation}.log",
+    "--test-coverage-branches=0",
+    "--network-family-autoselection-attempt-timeout=500",
+    "--tls-cipher-list=TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA256:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!SRP:!CAMELLIA",
+    "--test-timeout=0",
+    "--node-snapshot",
+    "--secure-heap=0",
+    "--watch-kill-signal=SIGTERM",
+    "--heapsnapshot-near-heap-limit=0",
+    "--v8-pool-size=4",
+    "--experimental-loader",
+    "/home/paulus-chang/项目/aleph-fix-infra-recovery/dsh-plugin/test/loader.mjs",
+    "--test",
+    "tests/issues/dsh/infra-duplicate-acceptance.test.mjs"
+  ],
+  "environment": {
+    "ALEPH_CURRENT_SOURCE": "/home/paulus-chang/项目/aleph-fix-infra-recovery",
+    "ALEPH_INFRA_OBSERVATIONS": "/home/paulus-chang/项目/aleph-tests/tests/issues/evidence/13-combined-infra.json"
+  },
+  "substitution": "Only subagent activation/result and Map-backed storage are deterministic; service, registered tool handlers, Git and batch runner are actual product code. If direct batch wrongly runs during active infra, let that premature compute complete, then reject only the still-held fixture activation for cleanup; do not count that cancellation as product behavior. Four final successful-infra delivery assertions run only when direct batch was correctly rejected.",
+  "observations": [
+    {
+      "runner": {
+        "root": "/tmp/aleph-infra-running-duplicate-EVZTPl",
+        "runnerFirstResult": {
+          "value": {
+            "id": "p-ed8332d0",
+            "workspace": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace",
+            "researchRoot": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/research",
+            "missionRoot": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [
+              {
+                "role": "infra",
+                "childId": "fixture-child-0",
+                "status": "done",
+                "summary": "Deterministic optimization fixture.",
+                "branch": "batch/b-544bcbb6",
+                "updatedAt": "2026-10-31T06:14:22.619Z"
+              }
+            ],
+            "missions": [
+              {
+                "id": "m-a497a2e4",
+                "ownerSession": "parent-one",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "done",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-544bcbb6",
+                "preBatchTip": "ab1806798fc6656a8111521ecb469aef2a124f5c",
+                "resultCommit": "a09cd46aa1b0be8804ee872b1a6f68fe760f3b8d",
+                "error": null,
+                "createdAt": "2026-10-31T06:14:22.395Z",
+                "approvedAt": "2026-10-31T06:14:22.395Z",
+                "finishedAt": "2026-10-31T06:14:23.146Z"
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-544bcbb6",
+                "machineId": "local",
+                "status": "done",
+                "missionIds": [
+                  "m-a497a2e4"
+                ],
+                "branch": "batch/b-544bcbb6",
+                "baseTip": "4e0b320fcc5c7cb40210444901da6ffb3582afb2",
+                "createdAt": "2026-10-31T06:14:22.484Z",
+                "phase": "batch",
+                "startedAt": "2026-10-31T06:14:22.619Z",
+                "execution": {
+                  "id": "5aab1388-4ace-4916-98cb-cbe6337b70ef",
+                  "worktree": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/.aleph/batches/b-544bcbb6",
+                  "stateFile": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/.aleph/batches/b-544bcbb6.execution.json"
+                },
+                "summary": {
+                  "runnerError": null,
+                  "missions": [
+                    {
+                      "missionId": "m-a497a2e4",
+                      "manifestId": "infra",
+                      "manifestPath": "missions/infra/mission.json",
+                      "status": "done",
+                      "resultCommit": "a09cd46aa1b0be8804ee872b1a6f68fe760f3b8d"
+                    }
+                  ]
+                },
+                "finishedAt": "2026-10-31T06:14:23.147Z"
+              }
+            ],
+            "createdAt": "2026-10-31T06:14:22.255Z",
+            "updatedAt": "2026-10-31T06:14:23.147Z"
+          }
+        },
+        "runnerSecondResult": {
+          "error": "Error: batch b-544bcbb6 is not runnable: already has an active execution"
+        },
+        "project": {
+          "id": "p-ed8332d0",
+          "workspace": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace",
+          "researchRoot": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/research",
+          "missionRoot": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "infra",
+              "childId": "fixture-child-0",
+              "status": "done",
+              "summary": "Deterministic optimization fixture.",
+              "branch": "batch/b-544bcbb6",
+              "updatedAt": "2026-10-31T06:14:22.619Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-a497a2e4",
+              "ownerSession": "parent-one",
+              "branch": "mission/infra",
+              "manifestId": "infra",
+              "manifestPath": "missions/infra/mission.json",
+              "status": "done",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-544bcbb6",
+              "preBatchTip": "ab1806798fc6656a8111521ecb469aef2a124f5c",
+              "resultCommit": "a09cd46aa1b0be8804ee872b1a6f68fe760f3b8d",
+              "error": null,
+              "createdAt": "2026-10-31T06:14:22.395Z",
+              "approvedAt": "2026-10-31T06:14:22.395Z",
+              "finishedAt": "2026-10-31T06:14:23.146Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-544bcbb6",
+              "machineId": "local",
+              "status": "done",
+              "missionIds": [
+                "m-a497a2e4"
+              ],
+              "branch": "batch/b-544bcbb6",
+              "baseTip": "4e0b320fcc5c7cb40210444901da6ffb3582afb2",
+              "createdAt": "2026-10-31T06:14:22.484Z",
+              "phase": "batch",
+              "startedAt": "2026-10-31T06:14:22.619Z",
+              "execution": {
+                "id": "5aab1388-4ace-4916-98cb-cbe6337b70ef",
+                "worktree": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/.aleph/batches/b-544bcbb6",
+                "stateFile": "/tmp/aleph-infra-running-duplicate-EVZTPl/workspace/.aleph/batches/b-544bcbb6.execution.json"
+              },
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-a497a2e4",
+                    "manifestId": "infra",
+                    "manifestPath": "missions/infra/mission.json",
+                    "status": "done",
+                    "resultCommit": "a09cd46aa1b0be8804ee872b1a6f68fe760f3b8d"
+                  }
+                ]
+              },
+              "finishedAt": "2026-10-31T06:14:23.147Z"
+            }
+          ],
+          "createdAt": "2026-10-31T06:14:22.255Z",
+          "updatedAt": "2026-10-31T06:14:23.147Z"
+        }
+      },
+      "directVersusInfra": {
+        "root": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG",
+        "directResult": {
+          "error": "Error: batch b-afcb4c2b is not runnable: already has an active execution"
+        },
+        "crossFinal": {
+          "value": {
+            "id": "p-c6da6112",
+            "workspace": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace",
+            "researchRoot": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/research",
+            "missionRoot": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [
+              {
+                "role": "infra",
+                "childId": "fixture-child-0",
+                "status": "done",
+                "summary": "Deterministic optimization fixture.",
+                "branch": "batch/b-afcb4c2b",
+                "updatedAt": "2026-10-31T06:14:23.430Z"
+              }
+            ],
+            "missions": [
+              {
+                "id": "m-8430df86",
+                "ownerSession": "parent-one",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "done",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-afcb4c2b",
+                "preBatchTip": "785293abbea4d50ae12702904b4e93adbd2679ca",
+                "resultCommit": "a54c146b88fe50f3dedaebd27acdf7b8a589c1a7",
+                "error": null,
+                "createdAt": "2026-10-31T06:14:23.351Z",
+                "approvedAt": "2026-10-31T06:14:23.351Z",
+                "finishedAt": "2026-10-31T06:14:23.917Z"
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-afcb4c2b",
+                "machineId": "local",
+                "status": "done",
+                "missionIds": [
+                  "m-8430df86"
+                ],
+                "branch": "batch/b-afcb4c2b",
+                "baseTip": "7ce33acb45e334b1fde0a40d0a9c34fded8165b6",
+                "createdAt": "2026-10-31T06:14:23.375Z",
+                "phase": "batch",
+                "startedAt": "2026-10-31T06:14:23.430Z",
+                "execution": {
+                  "id": "c29667c9-f347-4a42-8984-ee5cafeee5d1",
+                  "worktree": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/.aleph/batches/b-afcb4c2b",
+                  "stateFile": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/.aleph/batches/b-afcb4c2b.execution.json"
+                },
+                "summary": {
+                  "runnerError": null,
+                  "missions": [
+                    {
+                      "missionId": "m-8430df86",
+                      "manifestId": "infra",
+                      "manifestPath": "missions/infra/mission.json",
+                      "status": "done",
+                      "resultCommit": "a54c146b88fe50f3dedaebd27acdf7b8a589c1a7"
+                    }
+                  ]
+                },
+                "finishedAt": "2026-10-31T06:14:23.917Z"
+              }
+            ],
+            "createdAt": "2026-10-31T06:14:23.299Z",
+            "updatedAt": "2026-10-31T06:14:23.917Z"
+          }
+        },
+        "project": {
+          "id": "p-c6da6112",
+          "workspace": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace",
+          "researchRoot": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/research",
+          "missionRoot": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "infra",
+              "childId": "fixture-child-0",
+              "status": "done",
+              "summary": "Deterministic optimization fixture.",
+              "branch": "batch/b-afcb4c2b",
+              "updatedAt": "2026-10-31T06:14:23.430Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-8430df86",
+              "ownerSession": "parent-one",
+              "branch": "mission/infra",
+              "manifestId": "infra",
+              "manifestPath": "missions/infra/mission.json",
+              "status": "done",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-afcb4c2b",
+              "preBatchTip": "785293abbea4d50ae12702904b4e93adbd2679ca",
+              "resultCommit": "a54c146b88fe50f3dedaebd27acdf7b8a589c1a7",
+              "error": null,
+              "createdAt": "2026-10-31T06:14:23.351Z",
+              "approvedAt": "2026-10-31T06:14:23.351Z",
+              "finishedAt": "2026-10-31T06:14:23.917Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-afcb4c2b",
+              "machineId": "local",
+              "status": "done",
+              "missionIds": [
+                "m-8430df86"
+              ],
+              "branch": "batch/b-afcb4c2b",
+              "baseTip": "7ce33acb45e334b1fde0a40d0a9c34fded8165b6",
+              "createdAt": "2026-10-31T06:14:23.375Z",
+              "phase": "batch",
+              "startedAt": "2026-10-31T06:14:23.430Z",
+              "execution": {
+                "id": "c29667c9-f347-4a42-8984-ee5cafeee5d1",
+                "worktree": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/.aleph/batches/b-afcb4c2b",
+                "stateFile": "/tmp/aleph-infra-direct-batch-versus-infra-jBqvYG/workspace/.aleph/batches/b-afcb4c2b.execution.json"
+              },
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-8430df86",
+                    "manifestId": "infra",
+                    "manifestPath": "missions/infra/mission.json",
+                    "status": "done",
+                    "resultCommit": "a54c146b88fe50f3dedaebd27acdf7b8a589c1a7"
+                  }
+                ]
+              },
+              "finishedAt": "2026-10-31T06:14:23.917Z"
+            }
+          ],
+          "createdAt": "2026-10-31T06:14:23.299Z",
+          "updatedAt": "2026-10-31T06:14:23.917Z"
+        }
+      }
+    },
+    {
+      "normal": {
+        "root": "/tmp/aleph-infra-normal-D3tGH9",
+        "normalProject": {
+          "id": "p-9d561f97",
+          "workspace": "/tmp/aleph-infra-normal-D3tGH9/workspace",
+          "researchRoot": "/tmp/aleph-infra-normal-D3tGH9/workspace/research",
+          "missionRoot": "/tmp/aleph-infra-normal-D3tGH9/workspace/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "infra",
+              "childId": "fixture-child-0",
+              "status": "done",
+              "summary": "Deterministic optimization fixture.",
+              "branch": "batch/b-897a92a2",
+              "updatedAt": "2026-10-31T06:14:20.522Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-5d26c578",
+              "ownerSession": "parent-one",
+              "branch": "mission/infra",
+              "manifestId": "infra",
+              "manifestPath": "missions/infra/mission.json",
+              "status": "done",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-897a92a2",
+              "preBatchTip": "64597c41a2d06344a2b3cb6217b6c8d51322d286",
+              "resultCommit": "370cd7b2fc299598aa76a1f3b9d69124ca788c47",
+              "error": null,
+              "createdAt": "2026-10-31T06:14:20.450Z",
+              "approvedAt": "2026-10-31T06:14:20.450Z",
+              "finishedAt": "2026-10-31T06:14:21.007Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-897a92a2",
+              "machineId": "local",
+              "status": "done",
+              "missionIds": [
+                "m-5d26c578"
+              ],
+              "branch": "batch/b-897a92a2",
+              "baseTip": "b55f2ba43cc42ef45cb6b20da8b2926c981f402b",
+              "createdAt": "2026-10-31T06:14:20.474Z",
+              "phase": "batch",
+              "startedAt": "2026-10-31T06:14:20.523Z",
+              "execution": {
+                "id": "0cc528e8-12d7-4d2b-87e8-d9f3dd57c2a3",
+                "worktree": "/tmp/aleph-infra-normal-D3tGH9/workspace/.aleph/batches/b-897a92a2",
+                "stateFile": "/tmp/aleph-infra-normal-D3tGH9/workspace/.aleph/batches/b-897a92a2.execution.json"
+              },
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-5d26c578",
+                    "manifestId": "infra",
+                    "manifestPath": "missions/infra/mission.json",
+                    "status": "done",
+                    "resultCommit": "370cd7b2fc299598aa76a1f3b9d69124ca788c47"
+                  }
+                ]
+              },
+              "finishedAt": "2026-10-31T06:14:21.007Z"
+            }
+          ],
+          "createdAt": "2026-10-31T06:14:20.415Z",
+          "updatedAt": "2026-10-31T06:14:21.008Z"
+        },
+        "normallyFinished": {
+          "value": {
+            "id": "p-9d561f97",
+            "workspace": "/tmp/aleph-infra-normal-D3tGH9/workspace",
+            "researchRoot": "/tmp/aleph-infra-normal-D3tGH9/workspace/research",
+            "missionRoot": "/tmp/aleph-infra-normal-D3tGH9/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [
+              {
+                "role": "infra",
+                "childId": "fixture-child-0",
+                "status": "done",
+                "summary": "Deterministic optimization fixture.",
+                "branch": "batch/b-897a92a2",
+                "updatedAt": "2026-10-31T06:14:20.522Z"
+              }
+            ],
+            "missions": [
+              {
+                "id": "m-5d26c578",
+                "ownerSession": "parent-one",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "done",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-897a92a2",
+                "preBatchTip": "64597c41a2d06344a2b3cb6217b6c8d51322d286",
+                "resultCommit": "370cd7b2fc299598aa76a1f3b9d69124ca788c47",
+                "error": null,
+                "createdAt": "2026-10-31T06:14:20.450Z",
+                "approvedAt": "2026-10-31T06:14:20.450Z",
+                "finishedAt": "2026-10-31T06:14:21.007Z"
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-897a92a2",
+                "machineId": "local",
+                "status": "done",
+                "missionIds": [
+                  "m-5d26c578"
+                ],
+                "branch": "batch/b-897a92a2",
+                "baseTip": "b55f2ba43cc42ef45cb6b20da8b2926c981f402b",
+                "createdAt": "2026-10-31T06:14:20.474Z",
+                "phase": "batch",
+                "startedAt": "2026-10-31T06:14:20.523Z",
+                "execution": {
+                  "id": "0cc528e8-12d7-4d2b-87e8-d9f3dd57c2a3",
+                  "worktree": "/tmp/aleph-infra-normal-D3tGH9/workspace/.aleph/batches/b-897a92a2",
+                  "stateFile": "/tmp/aleph-infra-normal-D3tGH9/workspace/.aleph/batches/b-897a92a2.execution.json"
+                },
+                "summary": {
+                  "runnerError": null,
+                  "missions": [
+                    {
+                      "missionId": "m-5d26c578",
+                      "manifestId": "infra",
+                      "manifestPath": "missions/infra/mission.json",
+                      "status": "done",
+                      "resultCommit": "370cd7b2fc299598aa76a1f3b9d69124ca788c47"
+                    }
+                  ]
+                },
+                "finishedAt": "2026-10-31T06:14:21.007Z"
+              }
+            ],
+            "createdAt": "2026-10-31T06:14:20.415Z",
+            "updatedAt": "2026-10-31T06:14:21.008Z"
+          }
+        },
+        "repeated": {
+          "error": "Error: batch b-897a92a2 is not runnable (status done)"
+        }
+      },
+      "duplicate": {
+        "root": "/tmp/aleph-infra-active-duplicate-qfQYHH",
+        "second": {
+          "error": "Error: batch b-7d5924ba is not runnable: already has an active execution"
+        },
+        "firstAfterRepeat": {
+          "value": {
+            "id": "p-e27a28b0",
+            "workspace": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace",
+            "researchRoot": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/research",
+            "missionRoot": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [
+              {
+                "role": "infra",
+                "childId": "fixture-child-0",
+                "status": "done",
+                "summary": "Deterministic optimization fixture.",
+                "branch": "batch/b-7d5924ba",
+                "updatedAt": "2026-10-31T06:14:21.602Z"
+              }
+            ],
+            "missions": [
+              {
+                "id": "m-40846e0a",
+                "ownerSession": "parent-one",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "done",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-7d5924ba",
+                "preBatchTip": "2370c3ce538abd65459abbe58a93442b73b97d4b",
+                "resultCommit": "a1a5fe8af4e996ad640f5a8057e1f7b64bfc0bc9",
+                "error": null,
+                "createdAt": "2026-10-31T06:14:21.343Z",
+                "approvedAt": "2026-10-31T06:14:21.343Z",
+                "finishedAt": "2026-10-31T06:14:22.117Z"
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-7d5924ba",
+                "machineId": "local",
+                "status": "done",
+                "missionIds": [
+                  "m-40846e0a"
+                ],
+                "branch": "batch/b-7d5924ba",
+                "baseTip": "1721894b0e22b977b84a4e896f66490b2f2346d6",
+                "createdAt": "2026-10-31T06:14:21.432Z",
+                "phase": "batch",
+                "startedAt": "2026-10-31T06:14:21.602Z",
+                "execution": {
+                  "id": "bc12fb9b-fe4b-4558-a49c-6ed7dd0f92e5",
+                  "worktree": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/.aleph/batches/b-7d5924ba",
+                  "stateFile": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/.aleph/batches/b-7d5924ba.execution.json"
+                },
+                "summary": {
+                  "runnerError": null,
+                  "missions": [
+                    {
+                      "missionId": "m-40846e0a",
+                      "manifestId": "infra",
+                      "manifestPath": "missions/infra/mission.json",
+                      "status": "done",
+                      "resultCommit": "a1a5fe8af4e996ad640f5a8057e1f7b64bfc0bc9"
+                    }
+                  ]
+                },
+                "finishedAt": "2026-10-31T06:14:22.117Z"
+              }
+            ],
+            "createdAt": "2026-10-31T06:14:21.215Z",
+            "updatedAt": "2026-10-31T06:14:22.117Z"
+          }
+        },
+        "project": {
+          "id": "p-e27a28b0",
+          "workspace": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace",
+          "researchRoot": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/research",
+          "missionRoot": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "infra",
+              "childId": "fixture-child-0",
+              "status": "done",
+              "summary": "Deterministic optimization fixture.",
+              "branch": "batch/b-7d5924ba",
+              "updatedAt": "2026-10-31T06:14:21.602Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-40846e0a",
+              "ownerSession": "parent-one",
+              "branch": "mission/infra",
+              "manifestId": "infra",
+              "manifestPath": "missions/infra/mission.json",
+              "status": "done",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-7d5924ba",
+              "preBatchTip": "2370c3ce538abd65459abbe58a93442b73b97d4b",
+              "resultCommit": "a1a5fe8af4e996ad640f5a8057e1f7b64bfc0bc9",
+              "error": null,
+              "createdAt": "2026-10-31T06:14:21.343Z",
+              "approvedAt": "2026-10-31T06:14:21.343Z",
+              "finishedAt": "2026-10-31T06:14:22.117Z"
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-7d5924ba",
+              "machineId": "local",
+              "status": "done",
+              "missionIds": [
+                "m-40846e0a"
+              ],
+              "branch": "batch/b-7d5924ba",
+              "baseTip": "1721894b0e22b977b84a4e896f66490b2f2346d6",
+              "createdAt": "2026-10-31T06:14:21.432Z",
+              "phase": "batch",
+              "startedAt": "2026-10-31T06:14:21.602Z",
+              "execution": {
+                "id": "bc12fb9b-fe4b-4558-a49c-6ed7dd0f92e5",
+                "worktree": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/.aleph/batches/b-7d5924ba",
+                "stateFile": "/tmp/aleph-infra-active-duplicate-qfQYHH/workspace/.aleph/batches/b-7d5924ba.execution.json"
+              },
+              "summary": {
+                "runnerError": null,
+                "missions": [
+                  {
+                    "missionId": "m-40846e0a",
+                    "manifestId": "infra",
+                    "manifestPath": "missions/infra/mission.json",
+                    "status": "done",
+                    "resultCommit": "a1a5fe8af4e996ad640f5a8057e1f7b64bfc0bc9"
+                  }
+                ]
+              },
+              "finishedAt": "2026-10-31T06:14:22.117Z"
+            }
+          ],
+          "createdAt": "2026-10-31T06:14:21.215Z",
+          "updatedAt": "2026-10-31T06:14:22.117Z"
+        }
+      },
+      "invalid": {
+        "root": "/tmp/aleph-infra-invalid-input-qOHHUd",
+        "noCaller": {
+          "error": "Error: a calling Agent is required to start InfraOptimizer"
+        },
+        "noProject": {
+          "error": "Error: project not found: missing"
+        },
+        "noBatch": {
+          "error": "Error: batch not found: missing"
+        },
+        "noService": {
+          "error": "Error: subagent service is unavailable"
+        }
+      },
+      "startupFailure": {
+        "root": "/tmp/aleph-infra-start-failure-Z5JMdP",
+        "startupError": {
+          "error": "Error: deterministic activation startup failure"
+        },
+        "retryResult": {
+          "value": {
+            "id": "p-fcede395",
+            "workspace": "/tmp/aleph-infra-start-failure-Z5JMdP/workspace",
+            "researchRoot": "/tmp/aleph-infra-start-failure-Z5JMdP/workspace/research",
+            "missionRoot": "/tmp/aleph-infra-start-failure-Z5JMdP/workspace/missions",
+            "templateBranch": "template",
+            "evalCommand": "python3 eval/run_eval.py",
+            "visibleData": null,
+            "testsetPath": null,
+            "submissionPython": null,
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [
+              {
+                "role": "infra",
+                "childId": "fixture-child-0",
+                "status": "done",
+                "summary": "Deterministic optimization fixture.",
+                "branch": "batch/b-c0fc85d7",
+                "updatedAt": "2026-10-31T06:14:24.817Z"
+              }
+            ],
+            "missions": [
+              {
+                "id": "m-f865172a",
+                "ownerSession": "parent-one",
+                "branch": "mission/infra",
+                "manifestId": "infra",
+                "manifestPath": "missions/infra/mission.json",
+                "status": "done",
+                "entrypoint": "run.sh",
+                "outputs": [],
+                "resource": null,
+                "batchId": "b-c0fc85d7",
+                "preBatchTip": "d30de2695f5d55f2b97219944519a76d3f2474b6",
+                "resultCommit": "cb04a7fd5deccb9d09da5cd061fa4d819ad7c557",
+                "error": null,
+                "createdAt": "2026-10-31T06:14:24.558Z",
+                "approvedAt": "2026-10-31T06:14:24.558Z",
+                "finishedAt": "2026-10-31T06:14:25.344Z"
+              }
+            ],
+            "batches": [
+              {
+                "id": "b-c0fc85d7",
+                "machineId": "local",
+                "status": "done",
+                "missionIds": [
+                  "m-f865172a"
+                ],
+                "branch": "batch/b-c0fc85d7",
+                "baseTip": "d6b783307edeed09e7abe05546f8ab3d8cfe759c",
+                "createdAt": "2026-10-31T06:14:24.656Z",
+                "phase": "batch",
+                "startedAt": "2026-10-31T06:14:24.817Z",
+                "execution": {
+                  "id": "872ee4c9-e83f-462d-ab47-d0661ff1bd7f",
+                  "worktree": "/tmp/aleph-infra-start-failure-Z5JMdP/workspace/.aleph/batches/b-c0fc85d7",
+                  "stateFile": "/tmp/aleph-infra-start-failure-Z5JMdP/workspace/.aleph/batches/b-c0fc85d7.execution.json"
+                },
+                "summary": {
+                  "runnerError": null,
+                  "missions": [
+                    {
+                      "missionId": "m-f865172a",
+                      "manifestId": "infra",
+                      "manifestPath": "missions/infra/mission.json",
+                      "status": "done",
+                      "resultCommit": "cb04a7fd5deccb9d09da5cd061fa4d819ad7c557"
+                    }
+                  ]
+                },
+                "finishedAt": "2026-10-31T06:14:25.345Z"
+              }
+            ],
+            "createdAt": "2026-10-31T06:14:24.422Z",
+            "updatedAt": "2026-10-31T06:14:25.345Z"
+          }
+        }
+      }
+    }
+  ]
+}

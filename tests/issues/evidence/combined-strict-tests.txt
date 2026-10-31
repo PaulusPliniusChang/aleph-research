@@ -1,0 +1,226 @@
+✔ single researcher produces one commit, handoff trailers, evaluator score, and reclaimed worktree (180.794627ms)
+✔ Host squashes researcher commits into a single commit on the recorded base (166.779315ms)
+✔ result text is accepted as a handoff fallback (151.892975ms)
+✔ missing handoff marks mission failed and reclaims the worktree (60.832946ms)
+✔ evaluator exits nonzero marks mission failed and reclaims the worktree (133.796678ms)
+✔ evaluator returns no JSON score marks mission failed and reclaims the worktree (134.898441ms)
+✔ evaluator returns an infinite score marks mission failed and reclaims the worktree (130.625287ms)
+✔ researcher rejects marks mission failed and reclaims the worktree (61.014653ms)
+✔ activation startup failure is reported and its worktree reclaimed (60.685769ms)
+✔ run_available respects configured concurrency and leaves remaining work queued (384.29035ms)
+✔ parallel researchers completed with scores 10 then 20 preserve the best commit (271.381231ms)
+✔ parallel researchers completed with scores 20 then 10 preserve the best commit (274.644529ms)
+✔ parallel researchers completed with scores 20 then 20 preserve the best commit (247.389617ms)
+✔ Composer rejects a batch exceeding the remaining queued-mission budget (33.183036ms)
+✔ campaign workspace outside the calling session is rejected before creation (30.438065ms)
+✖ run_next enforces the same concurrency limit as run_available (73.294606ms)
+✖ run_next refuses queued work after the mission budget is exhausted (55.125598ms)
+✖ Composer counts active missions when reserving the mission budget (56.045269ms)
+✖ overlapping SOTA promotions keep the Git branch at the highest-scoring commit (269.165399ms)
+✖ ALEPH-05 reloaded Host reconciles persisted running missions instead of leaving orphaned work (65.674682ms)
+✖ ALEPH-06 queued mission records the actual branch used to create its worktree (170.429062ms)
+✖ ALEPH-07 researcher receives selected strategy and its behavior instructions (73.310142ms)
+✔ ALEPH-08 Leader can advance queued research after completion and decide when to stop (258.688309ms)
+✖ ALEPH-08 completion automatically advances remaining queued research (254.378039ms)
+✖ ALEPH-09 supported controls can stop dispatch for an existing campaign (55.583869ms)
+✖ ALEPH-10 completed task query preserves handoff and evaluator details (151.220588ms)
+✖ ALEPH-11 existing historical results can be selected through the public control surface (270.505899ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 16
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2848.238872
+
+✖ failing tests:
+
+test at tests/host.test.mjs:150:1
+✖ run_next enforces the same concurrency limit as run_available (73.294606ms)
+  AssertionError [ERR_ASSERTION]: one active mission is permitted
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/host.test.mjs:155:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/host.test.mjs:158:1
+✖ run_next refuses queued work after the mission budget is exhausted (55.125598ms)
+  AssertionError [ERR_ASSERTION]: zero mission budget permits no researcher dispatch
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/host.test.mjs:163:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/host.test.mjs:166:1
+✖ Composer counts active missions when reserving the mission budget (56.045269ms)
+  AssertionError [ERR_ASSERTION]: a running mission reserves the sole budget slot
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/host.test.mjs:172:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/host.test.mjs:175:1
+✖ overlapping SOTA promotions keep the Git branch at the highest-scoring commit (269.165399ms)
+  AssertionError [ERR_ASSERTION]: Git branch must agree with persisted best score
+  + actual - expected
+  
+  + '90a88b2415ba4ec64d8dbbd6783a82bf92e8405b'
+  - '41457c6e3d8c4408f834d84c200a2e1b7229d700'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/host.test.mjs:214:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '90a88b2415ba4ec64d8dbbd6783a82bf92e8405b',
+    expected: '41457c6e3d8c4408f834d84c200a2e1b7229d700',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/suspect-issues.test.mjs:10:1
+✖ ALEPH-05 reloaded Host reconciles persisted running missions instead of leaving orphaned work (65.674682ms)
+  AssertionError [ERR_ASSERTION]: new Host must reconcile a stored running task whose result handler was lost
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/suspect-issues.test.mjs:22:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'running',
+    expected: 'running',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/suspect-issues.test.mjs:25:1
+✖ ALEPH-06 queued mission records the actual branch used to create its worktree (170.429062ms)
+  AssertionError [ERR_ASSERTION]: recorded base branch must resolve to the actual checkout commit
+  + actual - expected
+  
+  + '245bdc5fdc3be33f29a378b99783bb0ebf50416d'
+  - 'c5b678c3f506b0f82695d35e723496f0d7f05a0f'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/suspect-issues.test.mjs:37:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '245bdc5fdc3be33f29a378b99783bb0ebf50416d',
+    expected: 'c5b678c3f506b0f82695d35e723496f0d7f05a0f',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/suspect-issues.test.mjs:40:1
+✖ ALEPH-07 researcher receives selected strategy and its behavior instructions (73.310142ms)
+  AssertionError [ERR_ASSERTION]: researcher context must include its selected strategy
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/suspect-issues.test.mjs:49:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: "You are an AlephResearch researcher. Work only inside the current git worktree.\nMission: m-9885b84b. Description: Try a fixture improvement [b-cc850467 #1].\nThe leader workspace is /tmp/aleph-host-test-PP8Ryw. Visible training data: (not configured).\nEdit code and run bounded experiments. Do not run git commit, git push, checkout, rebase, or create branches.\nWrite a handoff report to /tmp/aleph-host-test-PP8Ryw/.aleph/worktrees/c-0ac543c5/m-9885b84b/ALEPH_HANDOFF.md: approach, files changed, validation signal, and next step.\nFinish with a short summary. The leader commits, evaluates, and reclaims the worktree afterwards.\nid: preset-aleph-researcher\n      name: '@deepseek-ai/dsh-agent-preset'\n      config:\n        id: aleph-researcher\n        name: Aleph Researcher\n        description: AlephResearch researcher that edits one worktree per mission.\n        order: 21\n        plugins:\n          - id: persona\n            name: '@deepseek-ai/dsh-persona'\n            config:\n              prefix: |\n                You are an AlephResearch researcher. Each mission gives you one worktree and one step of work.\n\n                Read the mission brief and the branch context, then change code only inside the assigned worktree. Do not run git: never commit, push, rebase, checkout, or create branches. Write the handoff report to `ALEPH_HANDOFF.md` in the worktree, then finish with a concise summary of the change, the files touched, and the commands you ran.\n\n                The leader service will squash your work into one commit and evaluate it. Do not touch the leader workspace outside your worktree, and do not start other agents.\n          - id: tool-bash\n            name: '@deepseek-ai/dsh-tool-bash'\n          - id: tool-fs\n            name: '@deepseek-ai/dsh-tool-fs'\n          - id: tool-fs-search\n            name: '@deepseek-ai/dsh-tool-fs-search'\n            config:\n              sampleOverCapGlobResults: false\n          - id: tool-todo\n            name: '@deepseek-ai/dsh-tool-todo'\n            config:\n              allowParallelInProgress: false\n",
+    expected: /\bL0\b/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/suspect-issues.test.mjs:75:1
+✖ ALEPH-08 completion automatically advances remaining queued research (254.378039ms)
+  AssertionError [ERR_ASSERTION]: free capacity must advance the remaining queued mission without another explicit dispatch
+  
+  1 !== 2
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/suspect-issues.test.mjs:85:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/suspect-issues.test.mjs:88:1
+✖ ALEPH-09 supported controls can stop dispatch for an existing campaign (55.583869ms)
+  AssertionError [ERR_ASSERTION]: running campaign has no public stop/pause/cancel control: aleph_start_campaign, aleph_status, aleph_enqueue_mission, aleph_run_next, aleph_compose_batch, aleph_run_available, aleph_infra_status, aleph_set_budget, aleph_set_exploration
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/suspect-issues.test.mjs:97:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/suspect-issues.test.mjs:100:1
+✖ ALEPH-10 completed task query preserves handoff and evaluator details (151.220588ms)
+  AssertionError [ERR_ASSERTION]: task query must expose both the researcher report and evaluator details beyond score
+  + actual - expected
+  
+    {
+  +   evaluatorDetails: false,
+  +   researcherReport: false
+  -   evaluatorDetails: true,
+  -   researcherReport: true
+    }
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/suspect-issues.test.mjs:113:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { researcherReport: false, evaluatorDetails: false },
+    expected: { researcherReport: true, evaluatorDetails: true },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/suspect-issues.test.mjs:122:1
+✖ ALEPH-11 existing historical results can be selected through the public control surface (270.505899ms)
+  AssertionError [ERR_ASSERTION]: historical results exist but no selection/rollback operation is available: aleph_start_campaign, aleph_status, aleph_enqueue_mission, aleph_run_next, aleph_compose_batch, aleph_run_available, aleph_infra_status, aleph_set_budget, aleph_set_exploration
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/suspect-issues.test.mjs:135:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

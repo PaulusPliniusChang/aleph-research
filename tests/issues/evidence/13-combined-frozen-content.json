@@ -1,0 +1,25 @@
+{
+  "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-infra-recovery",
+  "base_sha": "f057a84b776d2306f46fad33a2d2529e311063f0",
+  "files_sha256": {
+    "dsh-plugin/index-v2.js": "fb8acb379f7bf82f4879d91dbee9750172136024bfc1c501a6ce35801afbc10a",
+    "dsh-plugin/test/infra.test.mjs": "19ea3a9ff846c3f387371a853c87dacec6f43f8d7947c12f5cf2e938b53d9b72",
+    "dsh-plugin/batch-process.py": "7fee91fa84285ac61679d66a788f38fe8522bdad728466b35c9d9e3050992ee3",
+    "dsh-plugin/package.json": "beb880a28998d00d9d3ff889aedbcdb6d3e604b76b9c42ac79b601cf659a8c24"
+  },
+  "validation": {
+    "product_node": 168,
+    "infra_behavior": 65,
+    "infra_node": 66,
+    "restart_behavior": 67,
+    "restart_node": 68,
+    "real_dsh": {
+      "duplicate_with_recovery_scans": 63,
+      "direct_during_infra": 45,
+      "duplicates_during_compute": 55,
+      "completed_restart": 50,
+      "live_restart": 57
+    }
+  },
+  "validated_product_commit": "be646b3"
+}

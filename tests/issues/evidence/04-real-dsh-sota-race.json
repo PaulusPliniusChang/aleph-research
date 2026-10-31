@@ -1,0 +1,312 @@
+[
+  {
+    "tool": "aleph_start_campaign",
+    "args": {
+      "title": "Controlled SOTA race in actual DSH",
+      "eval_command": "python3 -c 'import json,os,pathlib; print(json.dumps({\"score\":int((pathlib.Path(os.environ[\"ALEPH_SOLUTION_DIR\"])/\"score.txt\").read_text())}))'"
+    },
+    "response": {
+      "ok": true,
+      "result": {
+        "id": "c-93e456c7",
+        "title": "Controlled SOTA race in actual DSH",
+        "workspace": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace",
+        "status": "running",
+        "exploration": 0.7,
+        "budget": null,
+        "spent": 0,
+        "sotaBranch": null,
+        "sotaScore": -999999,
+        "evalCommand": "python3 -c 'import json,os,pathlib; print(json.dumps({\"score\":int((pathlib.Path(os.environ[\"ALEPH_SOLUTION_DIR\"])/\"score.txt\").read_text())}))'",
+        "researchRoot": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace/research",
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "createdAt": "2026-10-31T03:32:39.547Z",
+        "updatedAt": "2026-10-31T03:32:39.547Z",
+        "missions": [],
+        "maxParallel": 1,
+        "batches": [],
+        "infra": {
+          "cpuCount": 12,
+          "gpuCount": 1,
+          "gpuNames": [
+            "NVIDIA GeForce RTX 4060 Ti"
+          ],
+          "maxParallel": 1,
+          "diskFreeBytes": 16433676288,
+          "diskTotalBytes": 16731148288,
+          "memoryTotalBytes": 33462292480,
+          "checkedAt": "2026-10-31T03:32:39.547Z"
+        }
+      }
+    }
+  },
+  {
+    "tool": "aleph_enqueue_mission",
+    "args": {
+      "campaign_id": "c-93e456c7",
+      "strategy": "L0",
+      "description": "Write score.txt containing exactly 10. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required."
+    },
+    "response": {
+      "ok": true,
+      "result": {
+        "id": "c-93e456c7",
+        "title": "Controlled SOTA race in actual DSH",
+        "workspace": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace",
+        "status": "running",
+        "exploration": 0.7,
+        "budget": null,
+        "spent": 0,
+        "sotaBranch": null,
+        "sotaScore": -999999,
+        "evalCommand": "python3 -c 'import json,os,pathlib; print(json.dumps({\"score\":int((pathlib.Path(os.environ[\"ALEPH_SOLUTION_DIR\"])/\"score.txt\").read_text())}))'",
+        "researchRoot": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace/research",
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "createdAt": "2026-10-31T03:32:39.547Z",
+        "updatedAt": "2026-10-31T03:32:39.550Z",
+        "missions": [
+          {
+            "id": "m-2bbbfb71",
+            "description": "Write score.txt containing exactly 10. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required.",
+            "status": "queued",
+            "strategy": "L0",
+            "baseBranch": "initialize",
+            "branch": "initialize",
+            "baseCommit": null,
+            "commit": null,
+            "score": null,
+            "error": null,
+            "childId": null,
+            "createdAt": "2026-10-31T03:32:39.550Z",
+            "finishedAt": null,
+            "reclaimed": false,
+            "batch": null
+          }
+        ],
+        "maxParallel": 1,
+        "batches": [],
+        "infra": {
+          "cpuCount": 12,
+          "gpuCount": 1,
+          "gpuNames": [
+            "NVIDIA GeForce RTX 4060 Ti"
+          ],
+          "maxParallel": 1,
+          "diskFreeBytes": 16433676288,
+          "diskTotalBytes": 16731148288,
+          "memoryTotalBytes": 33462292480,
+          "checkedAt": "2026-10-31T03:32:39.547Z"
+        }
+      }
+    }
+  },
+  {
+    "tool": "aleph_enqueue_mission",
+    "args": {
+      "campaign_id": "c-93e456c7",
+      "strategy": "L0",
+      "description": "Write score.txt containing exactly 20. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required."
+    },
+    "response": {
+      "ok": true,
+      "result": {
+        "id": "c-93e456c7",
+        "title": "Controlled SOTA race in actual DSH",
+        "workspace": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace",
+        "status": "running",
+        "exploration": 0.7,
+        "budget": null,
+        "spent": 0,
+        "sotaBranch": null,
+        "sotaScore": -999999,
+        "evalCommand": "python3 -c 'import json,os,pathlib; print(json.dumps({\"score\":int((pathlib.Path(os.environ[\"ALEPH_SOLUTION_DIR\"])/\"score.txt\").read_text())}))'",
+        "researchRoot": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace/research",
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "createdAt": "2026-10-31T03:32:39.547Z",
+        "updatedAt": "2026-10-31T03:32:39.551Z",
+        "missions": [
+          {
+            "id": "m-2bbbfb71",
+            "description": "Write score.txt containing exactly 10. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required.",
+            "status": "queued",
+            "strategy": "L0",
+            "baseBranch": "initialize",
+            "branch": "initialize",
+            "baseCommit": null,
+            "commit": null,
+            "score": null,
+            "error": null,
+            "childId": null,
+            "createdAt": "2026-10-31T03:32:39.550Z",
+            "finishedAt": null,
+            "reclaimed": false,
+            "batch": null
+          },
+          {
+            "id": "m-b6ad82c8",
+            "description": "Write score.txt containing exactly 20. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required.",
+            "status": "queued",
+            "strategy": "L0",
+            "baseBranch": "initialize",
+            "branch": "initialize",
+            "baseCommit": null,
+            "commit": null,
+            "score": null,
+            "error": null,
+            "childId": null,
+            "createdAt": "2026-10-31T03:32:39.551Z",
+            "finishedAt": null,
+            "reclaimed": false,
+            "batch": null
+          }
+        ],
+        "maxParallel": 1,
+        "batches": [],
+        "infra": {
+          "cpuCount": 12,
+          "gpuCount": 1,
+          "gpuNames": [
+            "NVIDIA GeForce RTX 4060 Ti"
+          ],
+          "maxParallel": 1,
+          "diskFreeBytes": 16433676288,
+          "diskTotalBytes": 16731148288,
+          "memoryTotalBytes": 33462292480,
+          "checkedAt": "2026-10-31T03:32:39.547Z"
+        }
+      }
+    }
+  },
+  {
+    "tool": "aleph_run_next",
+    "args": {
+      "campaign_id": "c-93e456c7"
+    },
+    "response": {
+      "ok": true,
+      "result": {
+        "campaignId": "c-93e456c7",
+        "missionId": "m-2bbbfb71",
+        "childId": "6a81dff8-b3d0-41a1-ad49-a3b294ede13c",
+        "worktree": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace/.aleph/worktrees/c-93e456c7/m-2bbbfb71"
+      }
+    }
+  },
+  {
+    "tool": "aleph_run_next",
+    "args": {
+      "campaign_id": "c-93e456c7"
+    },
+    "response": {
+      "ok": true,
+      "result": {
+        "campaignId": "c-93e456c7",
+        "missionId": "m-b6ad82c8",
+        "childId": "5c986f45-6cc5-4be7-8652-4f396b746e09",
+        "worktree": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace/.aleph/worktrees/c-93e456c7/m-b6ad82c8"
+      }
+    }
+  },
+  {
+    "tool": "aleph_status",
+    "args": {
+      "campaign_id": "c-93e456c7"
+    },
+    "response": {
+      "ok": true,
+      "result": [
+        {
+          "schema": 1,
+          "generated_at": "2026-10-31T03:33:57.609Z",
+          "workspace": "/tmp/aleph-dsh-reproduction-h14q_vju/race-workspace",
+          "campaign": {
+            "id": "c-93e456c7",
+            "title": "Controlled SOTA race in actual DSH",
+            "status": "running",
+            "exploration": 0.7,
+            "sota_branch": "sota/main",
+            "sota_score": 20,
+            "budget": null,
+            "spent": 2,
+            "max_parallel": 1,
+            "active_agents": 0,
+            "infra": {
+              "cpuCount": 12,
+              "gpuCount": 1,
+              "gpuNames": [
+                "NVIDIA GeForce RTX 4060 Ti"
+              ],
+              "maxParallel": 1,
+              "diskFreeBytes": 16433676288,
+              "diskTotalBytes": 16731148288,
+              "memoryTotalBytes": 33462292480,
+              "checkedAt": "2026-10-31T03:32:39.547Z"
+            },
+            "batches": []
+          },
+          "missions": [
+            {
+              "id": "m-2bbbfb71",
+              "status": "done",
+              "strategy": "L0",
+              "branch": "exp/c-93e456c7/m-2bbbfb71",
+              "score": 10,
+              "description": "Write score.txt containing exactly 10. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required.",
+              "batch": null,
+              "promoted": true,
+              "created_at": "2026-10-31T03:32:39.550Z",
+              "finished_at": "2026-10-31T03:32:51.051Z"
+            },
+            {
+              "id": "m-b6ad82c8",
+              "status": "done",
+              "strategy": "L0",
+              "branch": "exp/c-93e456c7/m-b6ad82c8",
+              "score": 20,
+              "description": "Write score.txt containing exactly 20. Write ALEPH_HANDOFF.md explaining the deterministic reproduction change. Finish immediately after writing the files; no experiments required.",
+              "batch": null,
+              "promoted": true,
+              "created_at": "2026-10-31T03:32:39.551Z",
+              "finished_at": "2026-10-31T03:33:56.690Z"
+            }
+          ],
+          "branches": [
+            {
+              "name": "exp/c-93e456c7/m-2bbbfb71",
+              "score": 10,
+              "parent": "initialize",
+              "mission": "m-2bbbfb71",
+              "is_sota": false
+            },
+            {
+              "name": "exp/c-93e456c7/m-b6ad82c8",
+              "score": 20,
+              "parent": "sota/main",
+              "mission": "m-b6ad82c8",
+              "is_sota": false
+            },
+            {
+              "name": "sota/main",
+              "score": 20,
+              "parent": null,
+              "mission": null,
+              "is_sota": true
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 2,
+            "failed": 0
+          }
+        }
+      ]
+    }
+  }
+]

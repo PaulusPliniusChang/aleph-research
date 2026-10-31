@@ -1,0 +1,98 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:159179) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ one owner protects activation, optimization, execution and result delivery
+  ✔ execution is reserved before activation start resolves (0.568434ms)
+  ✔ persisted phase distinguishes active infrastructure (0.098065ms)
+  ✔ snapshot exposes infrastructure phase (0.277493ms)
+  ✔ overlap is rejected while activation start is pending (0.554144ms)
+  ✔ direct execution cannot bypass pending infrastructure (0.142381ms)
+  ✔ rejected requests do not delete optimizer output (1.23641ms)
+  ✔ duplicate does not start an extra optimizer (0.307258ms)
+  ✔ overlap is rejected while activation result is pending (0.25956ms)
+  ✔ losing requests do not release the original owner (0.179571ms)
+  ✔ recreated service rejects a persisted active optimizer (0.200999ms)
+  ✔ recreated service cannot run compute over active optimizer (0.105913ms)
+  ✔ rejected recreated service retains infrastructure phase (0.113333ms)
+  ✔ phase transitions to actual computation (0.198553ms)
+  ✔ infrastructure worktree remains until computation ends (0.377234ms)
+  ✔ optimizer changes are committed before computation (4.252922ms)
+  ✔ duplicate infrastructure is rejected during computation (0.169789ms)
+  ✔ duplicate direct execution is rejected during computation (0.088021ms)
+  ✔ running batch worktree survives duplicate requests (1.805968ms)
+  ✔ compute is launched exactly once (0.304443ms)
+  ✔ owner remains reserved while final delivery persistence waits (0.292369ms)
+  ✔ direct runner cannot bypass pending delivery (0.120044ms)
+  ✔ pending delivery preserves optimizer worktree (0.459784ms)
+  ✔ pending delivery has already written the mission result (4.3466ms)
+  ✔ original flow completes without rejection (0.142976ms)
+  ✔ original batch completes (0.069416ms)
+  ✔ original mission completes (0.040614ms)
+  ✔ original optimizer retains success (0.030742ms)
+  ✔ machine is released after computation (0.02619ms)
+  ✔ delivered commit is the actual mission branch tip (3.856375ms)
+  ✔ delivered result retains the batch identity (5.724827ms)
+  ✔ completed infrastructure rerun is explicitly rejected (0.145395ms)
+  ✔ completed direct rerun is explicitly rejected (0.087087ms)
+  ✔ completed requests cannot run compute twice (0.98994ms)
+✔ one owner protects activation, optimization, execution and result delivery (327.496799ms)
+▶ failed activation releases only its own reservation and permits retry
+  ✔ initial activation failure reaches caller (59.011655ms)
+  ✔ precompute failure restores runnable state (0.388755ms)
+  ✔ precompute failure clears its phase (0.198863ms)
+  ✔ machine remains assigned to retryable batch (0.169455ms)
+  ✔ failed activation did not execute compute (2.523262ms)
+  ✔ retry starts exactly one fresh optimizer (0.645465ms)
+  ✔ retry has a usable Git worktree (17.081095ms)
+  ✔ legitimate retry succeeds (0.732182ms)
+  ✔ retry completes batch (0.296898ms)
+  ✔ retry executes compute once (1.871853ms)
+✔ failed activation releases only its own reservation and permits retry (730.601431ms)
+▶ independent batches preserve separate optimizer records and execution rights
+  ✔ different batches may optimize concurrently (0.524473ms)
+  ✔ same batch id in another project is independent (0.16942ms)
+  ✔ completing one optimizer leaves the other active (0.219869ms)
+  ✔ one batch cannot release another reservation (0.097753ms)
+  ✔ first completed batch does not change second batch state (0.567993ms)
+  ✔ first completion cannot release second owner (0.365357ms)
+  ✔ all independent runs finish successfully (0.334906ms)
+  ✔ both batches in first project deliver results (0.164886ms)
+  ✔ same-id batch in other project delivers its result (0.07043ms)
+✔ independent batches preserve separate optimizer records and execution rights (1437.497565ms)
+▶ direct execution and service recreation cannot bypass an active reservation
+  ✔ direct execution records its running state (0.221131ms)
+  ✔ infrastructure cannot bypass direct execution (0.148244ms)
+  ✔ direct execution cannot duplicate itself (0.07934ms)
+  ✔ recreated service rejects retained running infrastructure (0.097272ms)
+  ✔ recreated service rejects retained running computation (0.073895ms)
+  ✔ rejected service recreation does not start optimizer (0.060245ms)
+  ✔ rejected service recreation preserves live runner files (1.044705ms)
+  ✔ original direct execution still completes (0.361613ms)
+  ✔ original direct execution delivers results once (0.936374ms)
+✔ direct execution and service recreation cannot bypass an active reservation (499.669705ms)
+▶ optimizer rejection permits retry without reverting a terminal batch
+  ✔ optimizer failure reaches original caller (20.256664ms)
+  ✔ optimizer failure is recorded on its own child (0.453004ms)
+  ✔ failure before runner restores forming (0.229081ms)
+  ✔ optimizer failure does not launch runner (1.385641ms)
+  ✔ owner failure cannot revert an already failed batch (0.796855ms)
+  ✔ failed terminal batch rejects infrastructure retry (0.511516ms)
+  ✔ failed terminal batch rejects direct retry (0.355186ms)
+  ✔ rejected retries preserve failed terminal state (0.179841ms)
+✔ optimizer rejection permits retry without reverting a terminal batch (492.588543ms)
+(node:159180) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (321.911401ms)
+ℹ tests 75
+ℹ suites 0
+ℹ pass 75
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3616.771323
