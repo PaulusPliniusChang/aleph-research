@@ -29,3 +29,8 @@ npm test
 node --check index-v2.js
 node --check client.js
 ```
+
+The client regression suite covers the no-campaign response, HTTP and network
+failures, invalid JSON, polling recovery, stale snapshots, and unmount cleanup.
+It runs with Node.js built-ins and replaces React hooks and DSH client services;
+it does not replace a browser check against a real DSH Host.

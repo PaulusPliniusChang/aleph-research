@@ -487,21 +487,27 @@ window.__ModuleLoader__.load({
               cache: 'no-store',
               headers: { accept: 'application/json' },
             });
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            const body = await response.json();
+            const body = await response.json().catch((error) => {
+              if (!response.ok) throw new Error('HTTP ' + response.status);
+              throw error;
+            });
             if (stopped) return;
-            if (body && typeof body === 'object' && body.ok === false) {
-              const error = body.error && typeof body.error === 'object' ? body.error : {};
+            const error = body?.error && typeof body.error === 'object' ? body.error : {};
+            if (response.status === 404 && body?.ok === false && (error.code === 'aleph/no-project' || error.code === 'aleph/no-campaign')) {
               setState({
                 phase: 'empty',
                 snapshot: null,
                 error: {
-                  code: typeof error.code === 'string' ? error.code : 'aleph/no-snapshot',
+                  code: error.code,
                   message: typeof error.message === 'string' ? error.message : '',
                 },
                 fetchedAt: Date.now(),
               });
               return;
+            }
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            if (body?.ok === false) {
+              throw new Error(error.message || error.code || 'aleph/snapshot-failed');
             }
             setState({
               phase: 'ready',

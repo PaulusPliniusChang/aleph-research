@@ -26,7 +26,7 @@
     "README.md"
   ],
   "scripts": {
-    "test": "node --test --experimental-loader ./test/loader.mjs test/*.test.mjs"
+    "test": "node --test --experimental-loader ./test/loader.mjs test/*.test.mjs ../tests/*.test.mjs"
   },
   "dsh": {
     "bundle": {
