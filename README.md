@@ -19,21 +19,29 @@ There is no campaign layer and no `~/.aleph` directory.
 
 ## Mission lifecycle
 
-1. Researcher works in the research repo and commits research changes.
-2. For a hardware-heavy task, researcher creates a mission branch from
+1. Researcher works in the research repo and commits research changes. The
+   researcher can inspect the complete git history of both research and mission
+   repositories with `git log --all`, `git branch -a` and `git show`.
+2. Before proposing a mission, the researcher checks mission history and
+   branches for an equivalent mission that already ran. Already-run missions
+   must not be rerun; their result commits and envelopes are read instead.
+3. For a hardware-heavy task, researcher creates a mission branch from
    `template`, adds `missions/<mission-id>/mission.json`, code, uv project and
    entrypoint, then calls `aleph_propose_mission`.
-3. Leader calls `aleph_approve_mission`; approved missions enter the queue.
-4. MissionComposer (`aleph_run_composer`) merges approved mission branches into
+4. Leader calls `aleph_approve_mission`; approved missions enter the queue.
+5. MissionComposer (`aleph_run_composer`) merges approved mission branches into
    a machine-bound batch branch and resolves merge conflicts.
-5. InfraOptimizer (`aleph_run_infra`) optimizes the merged batch code for the
+6. InfraOptimizer (`aleph_run_infra`) optimizes the merged batch code for the
    target machine, commits the optimization and runs the single batch
    entrypoint.
-6. Each mission receives a result envelope and a result commit. The Host
+7. Each mission receives a result envelope and a result commit. The Host
    cherry-picks that commit onto the mission's pre-batch branch.
-7. The researcher waits only for its own missions, calls `aleph_evaluate`, and
+8. The researcher waits only for its own missions, calls `aleph_evaluate`, and
    the Host evaluates the research branch and writes the report into the
    research commit message.
+
+The project default researcher count is 4. Each researcher gets a separate
+research branch and worktree.
 
 ## Tools
 

@@ -53,10 +53,17 @@ envelope has fixed routing fields and free-form metrics/artifacts.
 
 The project default researcher count is 4. `aleph_run_researchers` starts that
 many researcher subagents; each receives a separate research branch and
-worktree. A researcher may propose several missions over its lifetime. It waits only for missions owned by its session. When those
-missions are done, `aleph_evaluate` evaluates the research branch; the Host
-writes the evaluation report into the research commit message and the researcher
-finishes.
+worktree. A researcher may propose several missions over its lifetime.
+
+Researcher prompts require inspecting the complete git history of both research
+and mission repositories with `git log --all`, `git branch -a`, `git show` and
+`git diff`. Before proposing a mission, the researcher must check mission
+branches and result commits for an equivalent mission. Already-run missions must
+not be rerun; their result commits and envelopes are read instead.
+
+The researcher waits only for missions owned by its session. When those missions
+are done, `aleph_evaluate` evaluates the research branch; the Host writes the
+evaluation report into the research commit message and the researcher finishes.
 
 ## Current boundaries
 

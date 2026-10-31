@@ -34,6 +34,7 @@ window.__ModuleLoader__.load({
         'field.missionRoot': 'Mission repo',
         'field.template': 'Template branch',
         'field.eval': 'Evaluator',
+        'field.researcherCount': 'Researchers',
         'field.owner': 'Owner session',
         'field.resultCommit': 'Result commit',
         'field.preBatch': 'Pre-batch tip',
@@ -132,6 +133,7 @@ window.__ModuleLoader__.load({
         'field.missionRoot': 'Mission 仓库',
         'field.template': 'Template 分支',
         'field.eval': '评测命令',
+        'field.researcherCount': 'Researcher 数量',
         'field.owner': 'Owner 会话',
         'field.resultCommit': '结果提交',
         'field.preBatch': 'Pre-batch tip',
@@ -728,6 +730,7 @@ window.__ModuleLoader__.load({
           metricNode(t('field.research'), h('span', { style: { ...styles.metricValue, ...styles.mono, whiteSpace: 'normal', wordBreak: 'break-all' } }, project.research_root ?? t(MISSING))),
           metricNode(t('field.missionRoot'), h('span', { style: { ...styles.metricValue, ...styles.mono, whiteSpace: 'normal', wordBreak: 'break-all' } }, project.mission_root ?? t(MISSING))),
           metric(t('field.eval'), project.eval_command ?? t(MISSING)),
+          metric(t('field.researcherCount'), formatNumber(project.researcher_count, 0) ?? '4'),
         ),
       );
 
