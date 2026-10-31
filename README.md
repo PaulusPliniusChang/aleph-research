@@ -6,6 +6,38 @@ branch, approved by the Leader, composed into a machine-bound batch by
 MissionComposer, optimized and run by InfraOptimizer, and returned to the
 researcher through the pre-batch mission branch.
 
+## Running a case iteration
+
+A case is prepared once and copied per iteration, so a plugin change is always
+exercised against the same inputs.
+
+```bash
+# once: build the template and its shared runtime
+./scripts/case-build.sh kunlungpt
+
+# every iteration: copy the template into an isolated run
+./scripts/case-run.sh iter7
+```
+
+`case-build.sh` copies the problem statement, the evaluator, the visible wells
+and the hidden testsets out of the read-only source project, and installs a
+shared Python with numpy, pandas, scipy, scikit-learn and lightgbm. `case-run.sh`
+copies that template into a new run root with its own `DSH_HOME`, leader
+workspace, port and credentials, then prints the panel URL and project id.
+
+Once researchers have proposed missions, `scripts/case-drive.sh` replays the
+rest headlessly:
+
+```bash
+./scripts/case-drive.sh /tmp/aleph-runs/iter7 scaffold
+./scripts/case-drive.sh /tmp/aleph-runs/iter7 approve
+./scripts/case-drive.sh /tmp/aleph-runs/iter7 batch
+./scripts/case-drive.sh /tmp/aleph-runs/iter7 run
+./scripts/case-drive.sh /tmp/aleph-runs/iter7 evaluate
+```
+
+The template and runtime live under `.case-templates/` and are not committed.
+
 ## Repositories and state
 
 A DSH workspace/project contains:
