@@ -1,0 +1,110 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-_oms665z", "url": "http://127.0.0.1:33575"}
+▶ Actual researcher evaluation completion and Leader parent feedback
+  ✔ actual researcher uses assigned preset (3.096563ms)
+  ✔ actual researcher executes exactly evaluate then finish (1.920136ms)
+  ✔ actual model emitted registered evaluation tool (1.665116ms)
+  ✔ evaluation tool input identifies this project (1.660927ms)
+  ✔ actual child session records evaluation tool call (1.730205ms)
+  ✔ real Python score appears in evaluation history (1.760215ms)
+  ✔ single evaluation creates one history entry (2.298523ms)
+  ✔ evaluation history owns this researcher branch (1.72734ms)
+  ✔ report parent is evaluated research input (9.896698ms)
+  ✔ independent report ref resolves (6.270451ms)
+  ✔ report contains actual score (0.992076ms)
+  ✔ report contains actual diagnostic (0.886319ms)
+  ✔ report contains additional rows measurement (1.011102ms)
+  ✔ best score remains associated with this evaluation (1.602635ms)
+  ✔ best report remains associated with this evaluation (1.36817ms)
+  ✔ completion record matches exact child identity (1.332729ms)
+  ✔ completion record retains researcher branch (1.137989ms)
+  ✔ completion record retains researcher worktree (1.504348ms)
+  ✔ completion callback marks child done (1.656248ms)
+  ✔ completion callback stores complete summary (1.672235ms)
+  ✔ stored summary includes score (1.353609ms)
+  ✔ stored summary includes report commit (1.05344ms)
+  ✔ stored summary includes report ref (1.034267ms)
+  ✔ stored summary includes evaluated source (1.16622ms)
+  ✔ child transcript retains actual evaluation report (1.161808ms)
+  ✔ actual model completion text matches stored summary (1.104692ms)
+  ✔ child activation has left live registry (1.162711ms)
+  ✔ owned research worktree remains available (1.511018ms)
+  ✔ actual prompt carries assigned worktree (1.433065ms)
+  ✔ actual prompt carries assigned branch (1.491111ms)
+  ✔ actual prompt requires evaluate before finish (1.242173ms)
+  ✔ actual prompt disallows project queue modification (1.082287ms)
+  ✔ actual child durable parent matches Leader (1.031799ms)
+  ✔ parent session remains live (2.287382ms)
+  ✔ parent session receives native completion event (1.481554ms)
+  ✔ parent receives actual completion score automatically (1.074765ms)
+  ✔ parent receives actual report marker automatically (1.16865ms)
+  ✔ parent receives actual report commit automatically (1.435642ms)
+  ✔ parent receives actual evaluation ref automatically (1.550873ms)
+  ✔ parent receives one canonical notice for exact child (2.546037ms)
+  ✔ native notice carries complete actual closing text (1.722732ms)
+  ✔ native inbox and transcript identify same logical message (1.749439ms)
+  ✔ sibling remains genuinely live after first completion (1.035702ms)
+  ✔ sibling remains held in own model call (1.765023ms)
+  ✔ sibling persistent state remains running (1.587462ms)
+  ✔ sibling does not borrow first completion summary (1.104454ms)
+  ✔ later sibling owns its distinct summary (3.371242ms)
+  ✔ first summary survives later sibling completion (2.642809ms)
+  ✖ parent receives each child notice exactly once (3.240302ms)
+  ✖ second native notice contains its independent text (1.452406ms)
+  ✔ actual prompt requests evaluation return fields (1.351943ms)
+✖ Actual researcher evaluation completion and Leader parent feedback (1137.386036ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 49
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1311.231213
+
+✖ failing tests:
+
+test at tests/issues/dsh/fixed-parent-feedback.test.mjs:18:32
+✖ parent receives each child notice exactly once (3.240302ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+  -   '1b17ac7d-0a07-456d-9994-4beae55e2baf',
+      '1f641c4c-25c9-4f6f-98d9-a119dd485fc7'
+    ]
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:97:74
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:97:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ '1f641c4c-25c9-4f6f-98d9-a119dd485fc7' ],
+    expected: [ '1b17ac7d-0a07-456d-9994-4beae55e2baf', '1f641c4c-25c9-4f6f-98d9-a119dd485fc7' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/fixed-parent-feedback.test.mjs:18:32
+✖ second native notice contains its independent text (1.452406ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'data')
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:98:150
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:98:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/fixed-parent-feedback.py", line 66, in <module>
+    raise RuntimeError('actual process observation failed; inspect saved evidence')
+RuntimeError: actual process observation failed; inspect saved evidence

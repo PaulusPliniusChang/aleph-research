@@ -8,6 +8,20 @@ pull_request: null
 
 # 实验结果缺少可查询的报告和给 Leader 的评测反馈
 
+## 自动完成反馈修复与正式验收（2026-10-31）
+
+修复提交为 `b82a72217cc74c8a1dbbc8849c248ea241047082`，派生仓库分支为 `fix/aleph-10-parent-feedback`。修复以 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 为基线，将研究代理的结束投递选项改为 `parent`。DSH 原生管理器负责把最终文字送到创建该研究代理的准确 Leader；Host 没有额外发送重复通知。研究提示要求最终摘要引用实际评估返回的状态、分数、报告提交、源码提交和独立引用，评估未完成时如实说明。Composer 和 InfraOptimizer 的投递方式保持原值。
+
+产品自动测试为 **50／50 通过**，其中新增有效行为点为 37 项，另有 6 个父容器及 7 项既有测试，见[产品原始输出](evidence/10-fixed-parent-feedback-product.txt)。B 的[独立自动验收](dsh/current-parent-delivery-acceptance.test.mjs)执行注册工具、真实 Git 研究工作树和状态回调，使用内存存储及受控 activation 后端，包含 **58 个有效行为点，全部通过**；Node 包含父容器为 59 项，见[结构化结果](evidence/10-fixed-parent-delivery.json)及[原始输出](evidence/10-fixed-parent-delivery.txt)。
+
+[实际 DSH 验收](dsh/fixed-parent-feedback.test.mjs)通过[隔离启动脚本](dsh/fixed-parent-feedback.py)运行，包含 **51 个有效观察点，全部通过**；Node 包含父容器为 52 项，见[实际记录](evidence/10-fixed-real-dsh-parent-feedback.json)及[原始输出](evidence/10-fixed-real-dsh-parent-feedback.txt)。真实研究代理亲自调用已注册的评估工具，Python 得到 37 分，Git 创建报告及独立引用；模型随后输出由实际结果组成的结束摘要，没有调用显式发送工具。准确 Leader 自动收到原生通知，内容包括真实分数、报告、引用及源码提交。Host 的准确代理记录随后完成并保存摘要。
+
+同项目另一名真实研究代理在首个代理完成后仍然运行，摘要为空；该代理随后独立结束，保存独立摘要，并产生独立原生通知。父会话正在处理首条通知时，后续代理的通知进入真实收件队列。验收按消息编号识别同一通知在收件事件与会话正文中的记录，没有把相同消息重复计数，也没有声称父会话已经完成后续处理。隔离 Host `471949` 正常退出，进程不存在。来源、冻结文件摘要及替代范围见[验收来源记录](evidence/10-fixed-parent-feedback-source-manifest.json)。
+
+当前保证范围是仍可用的原父会话收到 DSH 原生自动结束通知。原生通知早于 Host 保存完成状态，查询可能短暂仍显示运行中；验收等待最终状态。父会话退出、父对象被替换或原生投递失败时，没有新增补投或持久消息保证。提示不能保证任意模型完整引用评估字段，Host 也没有自动拼接结构化报告。持久摘要沿用 8000 字符上限，原生通知使用实际结束文字，本次不承诺任意长度完整投递。
+
+首次独立夹具因计数变量遮蔽而中断，[原始记录](evidence/10-fixed-parent-delivery-counter-fixture-attempt.txt)单独保留。首次实际夹具把同一通知的收件插入与正文展示重复计数，[结构化记录](evidence/10-fixed-real-dsh-notice-count-fixture-attempt.json)及[输出](evidence/10-fixed-real-dsh-notice-count-fixture-attempt.txt)单独保留。第二次实际夹具只查询已进入正文的通知，遗漏正在等待父会话处理的收件通知，相关[记录](evidence/10-fixed-real-dsh-inbox-fixture-attempt.json)及[输出](evidence/10-fixed-real-dsh-inbox-fixture-attempt.txt)单独保留。最终夹具按真实消息编号和发送代理编号检查收件与正文，完整通过；上述夹具错误均不计为产品失败。
+
 ## 最新架构正式复核（2026-10-31）
 
 当前上游基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。B 在发布前依次获取上游和派生仓库，并对干净主分支执行仅快进同步；上游版本没有变化。后文旧架构证据仅作为历史记录，本次结论以当前 project、mission 和 batch 实现为准。

@@ -1,0 +1,53 @@
+{
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "source": "/tmp/aleph-10-fix-source",
+  "frozen": true,
+  "changes": [
+    {
+      "path": "docs/architecture.md",
+      "sha256": "44ae2fdc28d8b5208aef4072436d8773046fdedb4bd02e99f1fd1d8d55b2b706",
+      "baseline_sha256": "95810543fae444d944224367c346af21a036c33821e06820ebf3b2cc6c6f5036"
+    },
+    {
+      "path": "dsh-plugin/README.md",
+      "sha256": "3492340c5d06472107a01caf495d67555bef8401b01845a54004b33ca6a8a928",
+      "baseline_sha256": "ace9714b5d07ef5287005e67bda529906e9984fee38ecad16511a995667eaf3d"
+    },
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "sha256": "a126bab442d6a980391a26c6038b0b3cb2de9a23885238fa2bc3592d43de16c0",
+      "baseline_sha256": "7b2cca925247bee65b84c88d400ece2a831e1091d89e43cea476960c206aafac"
+    },
+    {
+      "path": "dsh-plugin/test/researcher-parent-delivery.test.mjs",
+      "sha256": "3b4e1e6594ef75c6c4a72e13681324a7870cf7261df4f9732cd43d3a92ee8070",
+      "baseline_sha256": null
+    }
+  ],
+  "patch": "/tmp/aleph-10-c-changes.patch",
+  "patch_sha256": "7dc24cda78f650f4efc41f659151ad4345517c7b0c7a7ee7ad993ffb032705ce",
+  "tests": {
+    "command": "npm test",
+    "cwd": "/tmp/aleph-10-fix-source/dsh-plugin",
+    "log": "/tmp/aleph-10-c-product-tests.txt",
+    "total": 50,
+    "new_effective_points": 37,
+    "new_containers": 6,
+    "existing": 7,
+    "pass": 50,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "real_dsh_run_by_c": false
+  },
+  "accepted_source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-parent-feedback",
+  "independent_automatic_effective": 58,
+  "actual_dsh_effective": 51,
+  "actual_host_cleanup": {
+    "name": "isolated-host-stopped",
+    "pid": 471949,
+    "exit": 0,
+    "pid_exists": false
+  },
+  "fixture_boundaries": "Memory storage and controlled activation for independent automatic suite; real DSH sessions, registered tool, persistent storage, Git, Python and native notification manager for actual suite. Deterministic model does not call send_message. Logical notice deduplicated by message id across inbox and transcript events. No source or timeout adapter."
+}

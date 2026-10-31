@@ -1,0 +1,1165 @@
+{
+  "source": "/home/paulus-chang/项目/aleph-fix-parent-feedback",
+  "source_sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "command": [
+    "/usr/bin/node",
+    "--test-concurrency=0",
+    "--experimental-addon-modules",
+    "--test-coverage-functions=0",
+    "--experimental-loader=/home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs",
+    "--inspect-publish-uid=stderr,http",
+    "--inspect-port=127.0.0.1:9229",
+    "--stack-trace-limit=10",
+    "--report-signal=SIGUSR2",
+    "--test-coverage-lines=0",
+    "--use-largepages=off",
+    "--secure-heap-min=2",
+    "--max-http-header-size=16384",
+    "--test-isolation=process",
+    "--heap-prof-interval=524288",
+    "--cpu-prof-interval=1000",
+    "--trace-event-file-pattern=node_trace.${rotation}.log",
+    "--test-coverage-branches=0",
+    "--network-family-autoselection-attempt-timeout=500",
+    "--tls-cipher-list=TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA256:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!SRP:!CAMELLIA",
+    "--test-timeout=0",
+    "--node-snapshot",
+    "--secure-heap=0",
+    "--watch-kill-signal=SIGTERM",
+    "--heapsnapshot-near-heap-limit=0",
+    "--v8-pool-size=4",
+    "--experimental-loader",
+    "/home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs",
+    "--test",
+    "tests/issues/dsh/current-parent-delivery-acceptance.test.mjs"
+  ],
+  "effective": 58,
+  "checks": [
+    {
+      "scope": "succeed/overlap",
+      "name": "two registered calls receive distinct child identities",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "first activation is recorded running",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "second activation is recorded running",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "first activation receives original caller identity",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "second activation uses researcher preset",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "activation uses its assigned real research worktree",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "first activation delegates completion to its exact parent",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "second activation independently delegates completion to parent",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "actual prompt requests real evaluation result fields",
+      "passed": true
+    },
+    {
+      "scope": "succeed/overlap",
+      "name": "actual prompt requires reporting incomplete evaluation honestly",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "completed activation receives its own terminal status",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "completed activation receives its own summary or error",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "other pending activation remains running",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "other pending activation retains original empty summary",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "other pending activation retains exact original record",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "historical completion remains byte-equivalent",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "running composer retains exact record",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "running infra retains exact record",
+      "passed": true
+    },
+    {
+      "scope": "succeed/first-result",
+      "name": "other project running activation remains independent",
+      "passed": true
+    },
+    {
+      "scope": "succeed/public-query",
+      "name": "registered status exposes completed activation correctly",
+      "passed": true
+    },
+    {
+      "scope": "succeed/public-query",
+      "name": "registered status keeps other activation running",
+      "passed": true
+    },
+    {
+      "scope": "succeed/second-result",
+      "name": "later activation records actual terminal outcome",
+      "passed": true
+    },
+    {
+      "scope": "succeed/second-result",
+      "name": "later activation records its distinct result",
+      "passed": true
+    },
+    {
+      "scope": "succeed/second-result",
+      "name": "earlier terminal result remains independent",
+      "passed": true
+    },
+    {
+      "scope": "succeed/second-result",
+      "name": "no unrelated agent record is added or removed",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "two registered calls receive distinct child identities",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "first activation is recorded running",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "second activation is recorded running",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "first activation receives original caller identity",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "second activation uses researcher preset",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "activation uses its assigned real research worktree",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "first activation delegates completion to its exact parent",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "second activation independently delegates completion to parent",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "actual prompt requests real evaluation result fields",
+      "passed": true
+    },
+    {
+      "scope": "fail/overlap",
+      "name": "actual prompt requires reporting incomplete evaluation honestly",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "completed activation receives its own terminal status",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "completed activation receives its own summary or error",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "other pending activation remains running",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "other pending activation retains original empty summary",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "other pending activation retains exact original record",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "historical completion remains byte-equivalent",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "running composer retains exact record",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "running infra retains exact record",
+      "passed": true
+    },
+    {
+      "scope": "fail/first-result",
+      "name": "other project running activation remains independent",
+      "passed": true
+    },
+    {
+      "scope": "fail/public-query",
+      "name": "registered status exposes completed activation correctly",
+      "passed": true
+    },
+    {
+      "scope": "fail/public-query",
+      "name": "registered status keeps other activation running",
+      "passed": true
+    },
+    {
+      "scope": "fail/second-result",
+      "name": "later activation records actual terminal outcome",
+      "passed": true
+    },
+    {
+      "scope": "fail/second-result",
+      "name": "later activation records its distinct result",
+      "passed": true
+    },
+    {
+      "scope": "fail/second-result",
+      "name": "earlier terminal result remains independent",
+      "passed": true
+    },
+    {
+      "scope": "fail/second-result",
+      "name": "no unrelated agent record is added or removed",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "single successful activation completes normally",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "single success summary is preserved",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "single failing activation records failure",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "single failure has its own reason",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "startup failure rejects registered call",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "startup failure creates a failed record without child identity",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "startup failure is recorded with own reason",
+      "passed": true
+    },
+    {
+      "scope": "single/startup-controls",
+      "name": "startup failure does not rewrite completed success",
+      "passed": true
+    }
+  ],
+  "boundary": "Actual plugin registered tool functions, ProjectService state callbacks and real project Git initialization. Memory storage, caller/session/preset services and controlled activation promises replace DSH services. Historical and unrelated agent records are explicit fixtures. Actual DSH activation behavior is verified separately.",
+  "observations": [
+    {
+      "scope": "succeed",
+      "root": "/tmp/aleph-researcher-ownership-succeed-XL6tIb",
+      "before": {
+        "id": "p-259ba951",
+        "workspace": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "succeed-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-e02d8455",
+            "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-44cb405a",
+            "updatedAt": "2026-10-31T12:57:20.576Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "succeed-child-1",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-8961b991",
+            "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-4ce3d3b3",
+            "updatedAt": "2026-10-31T12:57:20.588Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.526Z",
+        "updatedAt": "2026-10-31T12:57:20.588Z"
+      },
+      "afterFirst": {
+        "id": "p-259ba951",
+        "workspace": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "succeed-child-0",
+            "status": "done",
+            "summary": "first distinct succeed",
+            "branch": "research/r-e02d8455",
+            "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-44cb405a",
+            "updatedAt": "2026-10-31T12:57:20.593Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "succeed-child-1",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-8961b991",
+            "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-4ce3d3b3",
+            "updatedAt": "2026-10-31T12:57:20.588Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.526Z",
+        "updatedAt": "2026-10-31T12:57:20.593Z"
+      },
+      "publicStatus": [
+        {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:57:20.601Z",
+          "project": {
+            "id": "p-259ba951",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace",
+            "research_root": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/research",
+            "mission_root": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 eval/run_eval.py",
+            "eval_root": null,
+            "best": null,
+            "evaluations": [],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "historic-done",
+              "status": "done",
+              "summary": "historic summary",
+              "branch": null,
+              "updatedAt": "2000-01-01"
+            },
+            {
+              "role": "composer",
+              "childId": "fixture-composer",
+              "status": "running",
+              "summary": "composer original",
+              "branch": null,
+              "updatedAt": "2000-01-01"
+            },
+            {
+              "role": "infra",
+              "childId": "fixture-infra",
+              "status": "running",
+              "summary": "infra original",
+              "branch": null,
+              "updatedAt": "2000-01-01"
+            },
+            {
+              "role": "researcher",
+              "childId": "succeed-child-0",
+              "status": "done",
+              "summary": "first distinct succeed",
+              "branch": "research/r-e02d8455",
+              "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-44cb405a",
+              "updatedAt": "2026-10-31T12:57:20.593Z"
+            },
+            {
+              "role": "researcher",
+              "childId": "succeed-child-1",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-8961b991",
+              "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-4ce3d3b3",
+              "updatedAt": "2026-10-31T12:57:20.588Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        }
+      ],
+      "afterSecond": {
+        "id": "p-259ba951",
+        "workspace": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "succeed-child-0",
+            "status": "done",
+            "summary": "first distinct succeed",
+            "branch": "research/r-e02d8455",
+            "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-44cb405a",
+            "updatedAt": "2026-10-31T12:57:20.593Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "succeed-child-1",
+            "status": "failed",
+            "summary": "Error: second distinct fail",
+            "branch": "research/r-8961b991",
+            "worktree": "/tmp/aleph-researcher-ownership-succeed-XL6tIb/workspace/.aleph/researchers/r-4ce3d3b3",
+            "updatedAt": "2026-10-31T12:57:20.602Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.526Z",
+        "updatedAt": "2026-10-31T12:57:20.602Z"
+      }
+    },
+    {
+      "scope": "fail",
+      "root": "/tmp/aleph-researcher-ownership-fail-2wfBKj",
+      "before": {
+        "id": "p-267779c4",
+        "workspace": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "fail-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-89267a49",
+            "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-e62d43ef",
+            "updatedAt": "2026-10-31T12:57:20.699Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "fail-child-1",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-2c58115d",
+            "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-cfc86f84",
+            "updatedAt": "2026-10-31T12:57:20.706Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.651Z",
+        "updatedAt": "2026-10-31T12:57:20.706Z"
+      },
+      "afterFirst": {
+        "id": "p-267779c4",
+        "workspace": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "fail-child-0",
+            "status": "failed",
+            "summary": "Error: first distinct fail",
+            "branch": "research/r-89267a49",
+            "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-e62d43ef",
+            "updatedAt": "2026-10-31T12:57:20.707Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "fail-child-1",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-2c58115d",
+            "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-cfc86f84",
+            "updatedAt": "2026-10-31T12:57:20.706Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.651Z",
+        "updatedAt": "2026-10-31T12:57:20.707Z"
+      },
+      "publicStatus": [
+        {
+          "schema": 2,
+          "generated_at": "2026-10-31T12:57:20.713Z",
+          "project": {
+            "id": "p-267779c4",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace",
+            "research_root": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/research",
+            "mission_root": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 eval/run_eval.py",
+            "eval_root": null,
+            "best": null,
+            "evaluations": [],
+            "brief": "",
+            "researcher_count": 4,
+            "prepared": false,
+            "python_path": null,
+            "visible_data": null,
+            "testset_path": null,
+            "submission_python": null,
+            "violations": []
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "historic-done",
+              "status": "done",
+              "summary": "historic summary",
+              "branch": null,
+              "updatedAt": "2000-01-01"
+            },
+            {
+              "role": "composer",
+              "childId": "fixture-composer",
+              "status": "running",
+              "summary": "composer original",
+              "branch": null,
+              "updatedAt": "2000-01-01"
+            },
+            {
+              "role": "infra",
+              "childId": "fixture-infra",
+              "status": "running",
+              "summary": "infra original",
+              "branch": null,
+              "updatedAt": "2000-01-01"
+            },
+            {
+              "role": "researcher",
+              "childId": "fail-child-0",
+              "status": "failed",
+              "summary": "Error: first distinct fail",
+              "branch": "research/r-89267a49",
+              "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-e62d43ef",
+              "updatedAt": "2026-10-31T12:57:20.707Z"
+            },
+            {
+              "role": "researcher",
+              "childId": "fail-child-1",
+              "status": "running",
+              "summary": null,
+              "branch": "research/r-2c58115d",
+              "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-cfc86f84",
+              "updatedAt": "2026-10-31T12:57:20.706Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        }
+      ],
+      "afterSecond": {
+        "id": "p-267779c4",
+        "workspace": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "fail-child-0",
+            "status": "failed",
+            "summary": "Error: first distinct fail",
+            "branch": "research/r-89267a49",
+            "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-e62d43ef",
+            "updatedAt": "2026-10-31T12:57:20.707Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "fail-child-1",
+            "status": "done",
+            "summary": "second distinct succeed",
+            "branch": "research/r-2c58115d",
+            "worktree": "/tmp/aleph-researcher-ownership-fail-2wfBKj/workspace/.aleph/researchers/r-cfc86f84",
+            "updatedAt": "2026-10-31T12:57:20.714Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.651Z",
+        "updatedAt": "2026-10-31T12:57:20.714Z"
+      }
+    },
+    {
+      "scope": "single and startup controls",
+      "first": {
+        "id": "p-c3349f2a",
+        "workspace": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "single-controls-child-0",
+            "status": "done",
+            "summary": "single success",
+            "branch": "research/r-ede8ed07",
+            "worktree": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/.aleph/researchers/r-bd73ef5d",
+            "updatedAt": "2026-10-31T12:57:20.791Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.752Z",
+        "updatedAt": "2026-10-31T12:57:20.791Z"
+      },
+      "second": {
+        "id": "p-c3349f2a",
+        "workspace": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "single-controls-child-0",
+            "status": "done",
+            "summary": "single success",
+            "branch": "research/r-ede8ed07",
+            "worktree": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/.aleph/researchers/r-bd73ef5d",
+            "updatedAt": "2026-10-31T12:57:20.791Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "single-controls-child-1",
+            "status": "failed",
+            "summary": "Error: single failure",
+            "branch": "research/r-87ba3b6d",
+            "worktree": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/.aleph/researchers/r-bbdfc6a2",
+            "updatedAt": "2026-10-31T12:57:20.804Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.752Z",
+        "updatedAt": "2026-10-31T12:57:20.804Z"
+      },
+      "final": {
+        "id": "p-c3349f2a",
+        "workspace": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace",
+        "researchRoot": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/research",
+        "missionRoot": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "historic-done",
+            "status": "done",
+            "summary": "historic summary",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "composer",
+            "childId": "fixture-composer",
+            "status": "running",
+            "summary": "composer original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "infra",
+            "childId": "fixture-infra",
+            "status": "running",
+            "summary": "infra original",
+            "branch": null,
+            "updatedAt": "2000-01-01"
+          },
+          {
+            "role": "researcher",
+            "childId": "single-controls-child-0",
+            "status": "done",
+            "summary": "single success",
+            "branch": "research/r-ede8ed07",
+            "worktree": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/.aleph/researchers/r-bd73ef5d",
+            "updatedAt": "2026-10-31T12:57:20.791Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "single-controls-child-1",
+            "status": "failed",
+            "summary": "Error: single failure",
+            "branch": "research/r-87ba3b6d",
+            "worktree": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/.aleph/researchers/r-bbdfc6a2",
+            "updatedAt": "2026-10-31T12:57:20.804Z"
+          },
+          {
+            "role": "researcher",
+            "childId": null,
+            "status": "failed",
+            "summary": "Error: distinct startup rejection",
+            "branch": "research/r-856be163",
+            "worktree": "/tmp/aleph-researcher-ownership-single-controls-VKrjkI/workspace/.aleph/researchers/r-7a0f5b05",
+            "updatedAt": "2026-10-31T12:57:20.820Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T12:57:20.752Z",
+        "updatedAt": "2026-10-31T12:57:20.820Z"
+      }
+    }
+  ]
+}

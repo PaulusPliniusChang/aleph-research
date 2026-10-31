@@ -1,0 +1,83 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:452422) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (403.86296ms)
+(node:452423) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ researcher activation selects native parent delivery with its own research workspace
+  ✔ the native completion destination is parent (0.598485ms)
+  ✔ the exact calling parent object is delegated (0.143902ms)
+  ✔ the researcher provider and preset are preserved (0.143506ms)
+  ✔ the activation cwd is the actual checked-out researcher branch (4.77915ms)
+  ✔ the researcher worktree shares the project research history (9.781373ms)
+  ✔ the accepted receipt and running record have the exact child identity (0.761274ms)
+  ✔ the parent used by later child nudges is the original object (0.104114ms)
+  ✔ the final message requests the real evaluation return fields without fabricating a result (0.136562ms)
+  ✔ the new guidance preserves final evaluation and queue ownership instructions (0.176507ms)
+✔ researcher activation selects native parent delivery with its own research workspace (72.913095ms)
+▶ successful completion keeps summary and ownership while native notification remains external
+  ✔ the completed researcher stores the model text and report references (0.163199ms)
+  ✔ a sibling researcher remains running with no borrowed summary (0.088604ms)
+  ✔ the same child identifier in another role is not settled (0.087584ms)
+  ✔ an already terminal researcher record is not rewritten (0.067759ms)
+  ✔ native delivery leaves separate research branches and worktrees intact (10.684516ms)
+  ✔ completion does not alter missions, batches or machine reservations (0.164435ms)
+  ✔ Aleph does not add a manual completion notice alongside native delivery (0.082345ms)
+  ✔ later sibling completion stores its own result without replacing the first result (0.135842ms)
+✔ successful completion keeps summary and ownership while native notification remains external (67.134438ms)
+▶ failed activation settles only its own running record
+  ✔ a rejected activation preserves its actual error in the failed record (0.239019ms)
+  ✔ failure leaves other running researchers addressable (0.090763ms)
+  ✔ failure cannot rewrite other roles or prior terminal records (0.117779ms)
+  ✔ failure uses the same parent delivery policy without a manual error notice (0.054762ms)
+✔ failed activation settles only its own running record (54.07521ms)
+▶ closing text edge cases retain the existing stored-summary contract
+  ✔ no output (44.31818ms)
+  ✔ only nontext blocks (43.456497ms)
+  ✔ whitespace-only text (43.096695ms)
+  ✔ several text blocks (44.831662ms)
+  ✔ long closing text (43.971233ms)
+✔ closing text edge cases retain the existing stored-summary contract (220.709124ms)
+▶ admission errors and missing activation identities remain explicit
+  ✔ a missing caller is rejected before any backend admission (39.424209ms)
+  ✔ an unavailable subagent service fails without creating a running record (43.559373ms)
+  ✔ a missing project fails without backend admission (38.217646ms)
+  ✔ a caller outside the project workspace cannot start a researcher (35.572338ms)
+  ✔ parent delivery admission rejection records the actual backend error (47.316894ms)
+  ✔ invalid child identity null aborts without an ambiguous record (53.56402ms)
+  ✔ invalid child identity "   " aborts without an ambiguous record (47.356252ms)
+✔ admission errors and missing activation identities remain explicit (306.425853ms)
+▶ multiple researchers and other roles retain their individual delivery policy
+  ✔ every researcher in a group uses parent delivery with its exact receipt (0.463336ms)
+  ✔ group researchers have independent actual Git branches and worktrees (13.814747ms)
+  ✔ Composer remains caller delivery with its existing preset (0.118305ms)
+  ✔ InfraOptimizer remains caller delivery with its existing preset (0.286527ms)
+✔ multiple researchers and other roles retain their individual delivery policy (135.227557ms)
+(node:452424) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (102.189674ms)
+✔ an activation without a child identity fails instead of writing a null record (64.538664ms)
+✔ an evaluation report stays attached to the commit it scored (171.640308ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (263.917698ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (130.058137ms)
+✔ evaluations accumulate and the best result follows the highest score (336.794903ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 50
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1258.481371

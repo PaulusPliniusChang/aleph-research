@@ -1,0 +1,82 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-v8_vuzq9", "url": "http://127.0.0.1:41939"}
+▶ Actual researcher evaluation completion and Leader parent feedback
+  ✔ actual researcher uses assigned preset (1.631495ms)
+  ✔ actual researcher executes exactly evaluate then finish (1.125711ms)
+  ✔ actual model emitted registered evaluation tool (0.839338ms)
+  ✔ evaluation tool input identifies this project (1.023398ms)
+  ✔ actual child session records evaluation tool call (2.753366ms)
+  ✔ real Python score appears in evaluation history (1.638927ms)
+  ✔ single evaluation creates one history entry (0.869963ms)
+  ✔ evaluation history owns this researcher branch (1.289943ms)
+  ✔ report parent is evaluated research input (9.772953ms)
+  ✔ independent report ref resolves (5.628196ms)
+  ✔ report contains actual score (2.967468ms)
+  ✔ report contains actual diagnostic (2.079254ms)
+  ✔ report contains additional rows measurement (1.242175ms)
+  ✔ best score remains associated with this evaluation (1.02425ms)
+  ✔ best report remains associated with this evaluation (0.851511ms)
+  ✔ completion record matches exact child identity (1.026993ms)
+  ✔ completion record retains researcher branch (0.810128ms)
+  ✔ completion record retains researcher worktree (1.273528ms)
+  ✔ completion callback marks child done (0.811507ms)
+  ✔ completion callback stores complete summary (0.756192ms)
+  ✔ stored summary includes score (1.852786ms)
+  ✔ stored summary includes report commit (0.978279ms)
+  ✔ stored summary includes report ref (1.3325ms)
+  ✔ stored summary includes evaluated source (1.063648ms)
+  ✔ child transcript retains actual evaluation report (0.778634ms)
+  ✔ actual model completion text matches stored summary (0.766429ms)
+  ✔ child activation has left live registry (0.978484ms)
+  ✔ owned research worktree remains available (0.770343ms)
+  ✔ actual prompt carries assigned worktree (0.84761ms)
+  ✔ actual prompt carries assigned branch (0.848331ms)
+  ✔ actual prompt requires evaluate before finish (0.928795ms)
+  ✔ actual prompt disallows project queue modification (0.845372ms)
+  ✔ actual child durable parent matches Leader (0.79243ms)
+  ✔ parent session remains live (0.805322ms)
+  ✔ parent session receives native completion event (0.905132ms)
+  ✔ parent receives actual completion score automatically (0.959167ms)
+  ✔ parent receives actual report marker automatically (0.682578ms)
+  ✔ parent receives actual report commit automatically (0.67868ms)
+  ✔ parent receives actual evaluation ref automatically (0.652019ms)
+  ✖ parent receives exact child completion text once (1.78246ms)
+  ✔ actual prompt requests evaluation return fields (0.776057ms)
+✖ Actual researcher evaluation completion and Leader parent feedback (930.077977ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 40
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1032.025964
+
+✖ failing tests:
+
+test at tests/issues/dsh/fixed-parent-feedback.test.mjs:18:32
+✖ parent receives exact child completion text once (1.78246ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:80:76
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-parent-feedback.test.mjs:80:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/fixed-parent-feedback.py", line 66, in <module>
+    raise RuntimeError('actual process observation failed; inspect saved evidence')
+RuntimeError: actual process observation failed; inspect saved evidence

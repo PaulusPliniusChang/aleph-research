@@ -1,0 +1,33 @@
+(node:457423) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ Current researcher parent delivery preserves registered-tool activation ownership
+  ✔ succeed/overlap: two registered calls receive distinct child identities (0.661466ms)
+  ✔ succeed/overlap: first activation is recorded running (0.308481ms)
+  ✔ succeed/overlap: second activation is recorded running (0.150739ms)
+  ✔ succeed/overlap: first activation receives original caller identity (0.115791ms)
+  ✔ succeed/overlap: second activation uses researcher preset (0.095384ms)
+  ✔ succeed/overlap: activation uses its assigned real research worktree (0.107018ms)
+  ✔ succeed/overlap: first activation delegates completion to its exact parent (0.095046ms)
+  ✔ succeed/overlap: second activation independently delegates completion to parent (0.121889ms)
+  ✔ succeed/overlap: actual prompt requests real evaluation result fields (0.181484ms)
+  ✔ succeed/overlap: actual prompt requires reporting incomplete evaluation honestly (0.163747ms)
+✖ Current researcher parent delivery preserves registered-tool activation ownership (90.89329ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 10
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 222.730153
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-parent-delivery-acceptance.test.mjs:76:1
+✖ Current researcher parent delivery preserves registered-tool activation ownership (90.89329ms)
+  TypeError [Error]: .for is not iterable
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-delivery-acceptance.test.mjs:78:68)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-delivery-acceptance.test.mjs:84:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
