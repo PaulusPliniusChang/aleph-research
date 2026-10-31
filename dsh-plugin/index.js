@@ -703,8 +703,11 @@ class AlephService {
       'You are an AlephResearch researcher. Work only inside the current git worktree.',
       `Mission: ${mission.id}. Description: ${mission.description}.`,
       `The leader workspace is ${campaign.workspace}. Visible training data: ${campaign.visibleData ?? '(not configured)'}.`,
-      'Edit code and run bounded experiments. Do not run git commit, git push, checkout, rebase, or create branches.',
-      `Write a handoff report to ${handoffPath}: approach, files changed, validation signal, and next step.`,
+      'Edit code and run small bounded experiments. Do not run git commit, git push, checkout, rebase, or create branches.',
+      'Do not launch compute-heavy work on your own: large training runs, multi-seed or multi-config sweeps, multi-GPU jobs, dataset-scale generation, benchmarking campaigns, long-running background jobs, or extra agents.',
+      'Small work is allowed: reading files, focused edits, quick tests, one small fit/evaluation, and bounded commands that finish inside this mission.',
+      'When a question needs heavy compute, stop and write a concrete proposal in the handoff instead of running it. The leader will start a separate mission and Composer will batch the work with its VRAM and priority profile.',
+      `Write a handoff report to ${handoffPath}: approach, files changed, validation signal, whether heavy compute is needed, and next step.`,
       'Finish with a short summary. The leader commits, evaluates, and reclaims the worktree afterwards.',
     ].join('\n');
 

@@ -69,8 +69,12 @@ campaign pointed at an unrelated absolute path is rejected before dispatch.
 `research/` and `.aleph/` inside the workspace. The evaluator command runs in
 the workspace and must print one JSON line containing a numeric `score`.
 
-The researcher subagent edits only the mission worktree. It writes
-`ALEPH_HANDOFF.md`; the Host service then:
+The researcher subagent edits only the mission worktree. It must keep compute
+small and bounded: large training runs, multi-config sweeps, multi-GPU jobs,
+dataset-scale generation, benchmarking campaigns and background jobs belong to
+separate missions composed into batches, not inside one researcher session.
+
+The researcher writes `ALEPH_HANDOFF.md`; the Host service then:
 
 - squashes every researcher commit into one commit whose parent is the mission
   base;

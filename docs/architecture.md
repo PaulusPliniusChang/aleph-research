@@ -106,6 +106,24 @@ queue to avoid training/evaluation contention on the shared GPU. A budget
 vector can cap missions, GPU seconds and artifact bytes; token accounting is
 not yet available.
 
+## Researcher compute boundary
+
+A researcher mission is deliberately small. The Host prompt and the
+`aleph-researcher` preset forbid:
+
+- large training runs and long-running jobs;
+- multi-seed or multi-configuration sweeps;
+- multi-GPU work;
+- dataset-scale generation;
+- benchmarking campaigns and extra agents.
+
+Reading files, focused edits, quick tests, one small fit/evaluation and bounded
+commands that finish inside the mission are allowed. If a question needs heavy
+compute, the researcher must stop and write a proposal in the handoff with
+hypothesis, command, expected GPU time, VRAM, disk and priority. The Leader then
+opens a separate mission and Composer batches it with an explicit resource
+profile.
+
 ## Evaluation
 
 The evaluator command runs in the campaign workspace with

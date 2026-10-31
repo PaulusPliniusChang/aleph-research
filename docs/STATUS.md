@@ -89,6 +89,16 @@ Composer 侧已实现 VRAM 画像、优先级队列与回填；InfraOptimizer �
 累计成本画像、评测缓存、评测运行时参数、成本预算向量与评测串行队列。
 旧任务没有这些字段，缓存与成本计数从零开始。
 
+## Researcher 算力边界
+
+Researcher 的 Host prompt 与 `aleph-researcher` preset 已加入算力约束：
+
+- 禁止在单次 mission 内启动大规模训练、长任务、多 seed/多配置扫描、
+  多 GPU 作业、数据规模生成、批量基准测试与后台任务。
+- 允许读文件、聚焦修改、快速测试、单次小规模拟合/评测与有界命令。
+- 需要重算力时，researcher 必须停止并写出提案，由 Leader 新建 mission，
+  Composer 按批次与显存画像合并运行。
+
 ## 限制
 
 - 控制台只读，最新战役之外的选择尚未提供。
