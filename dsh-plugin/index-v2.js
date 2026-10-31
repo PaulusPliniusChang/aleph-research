@@ -481,10 +481,12 @@ class ProjectService {
     await mkdir(worktreesRoot, { recursive: true });
     await rm(batchWorktree, { recursive: true, force: true });
     await git(project.missionRoot, ['worktree', 'add', '--detach', batchWorktree, batch.branch]);
+    // The Host owns the runner so runner upgrades do not depend on each mission repo copy.
+    await writeFile(join(batchWorktree, '.aleph_batch_runner.py'), TEMPLATE_BATCH_RUNNER, 'utf8');
     const startedAt = now();
     let runnerError = null;
     try {
-      await run(project.pythonPath || 'python3', ['batch_runner.py'], {
+      await run(project.pythonPath || 'python3', ['.aleph_batch_runner.py'], {
         cwd: batchWorktree,
         timeout: 900_000,
         env: {
@@ -874,6 +876,10 @@ class ProjectService {
           continue;
         }
         if (!underAllowed) continue;
+        // Compute limits only police researcher worktrees. Batch and evaluation worktrees
+        // run the approved heavy compute and must never be throttled by the watchdog.
+        const inResearcherWorktree = cwd === join(workspace, '.aleph', 'researchers') || cwd.startsWith(`${join(workspace, '.aleph', 'researchers')}/`);
+        if (!inResearcherWorktree) continue;
         // Inside a researcher worktree, kill long-running local experiments.
         try {
           const stat = readFileSync(`/proc/${entry}/stat`, 'utf8');
