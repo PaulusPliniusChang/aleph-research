@@ -307,7 +307,7 @@ class ProjectService {
     return project;
   }
 
-  async scaffoldResearch({ projectId, title = 'Research project' }) {
+  async scaffoldResearch({ projectId, title = 'Research project', dataSources = [] }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const root = project.researchRoot;
@@ -316,11 +316,23 @@ class ProjectService {
     await mkdir(join(root, 'src'), { recursive: true });
     await writeFile(join(root, 'src', '__init__.py'), '', 'utf8');
     await writeFile(join(root, '.gitignore'), '__pycache__/\n*.pyc\n.venv/\n', 'utf8');
+    const toCopy = Array.isArray(dataSources) ? dataSources.filter((path) => typeof path === 'string' && path.trim()) : [];
+    let visibleData = null;
+    if (toCopy.length > 0) {
+      const dataRoot = join(root, 'data');
+      await mkdir(dataRoot, { recursive: true });
+      for (const source of toCopy) {
+        const resolved = resolve(source);
+        if (!(await pathExists(resolved))) throw new Error(`provided data path does not exist: ${resolved}`);
+        await cp(resolved, dataRoot, { recursive: true });
+      }
+      visibleData = dataRoot;
+    }
     await git(root, ['add', '-A']);
     await git(root, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', 'leader: research project scaffold']);
     const commit = (await git(root, ['rev-parse', 'HEAD'])).stdout.trim();
-    const next = await this.mutate(projectId, (current) => ({ ...current, prepared: true }));
-    return { projectId, commit, prepared: next.prepared };
+    const next = await this.mutate(projectId, (current) => ({ ...current, prepared: true, ...(visibleData ? { visibleData } : {}) }));
+    return { projectId, commit, prepared: next.prepared, visibleData: next.visibleData };
   }
 
   async startMission({ projectId, name = 'mission' }) {
@@ -584,7 +596,7 @@ class ProjectService {
       'You are an AlephResearch researcher.',
       `Project: ${project.id}. Research brief: ${project.brief || '(no extra brief)'}.`,
       `Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
-      'You cannot see any dataset: do not read data.zip, visible-data, testsets or any data directory. The Leader created your initial research scaffold; work from that code. Mission code may read data at runtime from Host-provided environment variables, but you must not inspect the data.',
+      `The Leader created your initial research scaffold. Provided data is already copied under data/ in ${worktree}; use it directly. Do not read data.zip, testsets, the original project or DSH state.`,
       'Do not install packages outside the mission uv project and do not write outside your assigned research worktree or mission repo branch.',
       'Do not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.' ,
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
@@ -679,7 +691,7 @@ class ProjectService {
         const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
         const underMission = cwd === project.missionRoot || cwd.startsWith(`${project.missionRoot}/`);
         const nested = isCaseProcess && hasBwrapAncestor(pid);
-        const forbidden = /\/home\/hapenia\/Projects\/kunlungpt-comp|\/home\/hapenia\/Projects\/aleph-research|\/home\/hapenia\/\.dsh|problem\/data\.zip|\/testsets(?:\/|\b)|visible-data|\/tmp\/aleph-case-lab\/(?:profiles|sessions|storages|home)\b/.test(cmd);
+        const forbidden = /\/home\/hapenia\/Projects\/kunlungpt-comp|\/home\/hapenia\/Projects\/aleph-research|\/home\/hapenia\/\.dsh|problem\/data\.zip|\/testsets(?:\/|\b)|\/tmp\/aleph-case-lab\/(?:profiles|sessions|storages|home)\b/.test(cmd);
         if (nested && forbidden) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
           this.mutate(project.id, (current) => ({
@@ -1005,8 +1017,8 @@ export async function apply(ctx) {
     ctx.tools.register(tool(
       'aleph_create_research_scaffold',
       'Leader creates the initial research project before any researcher starts.',
-      { ...projectIdParam, title: { type: 'string', description: 'Research project title' } },
-      async (args) => service.scaffoldResearch({ projectId: args.project_id, title: args.title ?? 'Research project' }),
+      { ...projectIdParam, title: { type: 'string', description: 'Research project title' }, data: { type: 'array', items: { type: 'string' }, description: 'Data sources to copy into the research project' } },
+      async (args) => service.scaffoldResearch({ projectId: args.project_id, title: args.title ?? 'Research project', dataSources: args.data }),
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_start_mission',
