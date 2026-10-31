@@ -10,6 +10,31 @@ pull_request: https://github.com/hapenia/aleph-research/pull/18
 
 # 一个研究代理结束时，可能批量改写其他研究代理的状态与摘要
 
+## 最新主分支正式核查（2026-10-31）
+
+本次以最新主分支 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 重新核查研究代理的回调归属。当前成功和失败回调按本次激活的 `childId`、researcher 角色及运行状态共同筛选，已经包含独立身份保护；旧拉取请求 #18 已关闭且未合并，不能继续表述为等待旧修复合并。
+
+独立自动检查包含 50 个有效行为点，全部通过；含父测试容器的 Node 报告为 51 项全部通过。检查分别覆盖先结束代理成功与失败、后续代理返回相反结果、独立摘要、历史记录、其他角色、其他项目、单代理执行及启动失败。当前研究代理使用独立分支与工作树，自动检查按记录的工作树核对实际激活目录，不沿用旧版共享研究目录假设。
+
+实际 DSH 的 31 项观察全部通过。两名研究代理使用真实父子会话、原始 spawn 服务、独立工作树、真实 bash 与持久存储；本地确定性模型仅控制工具调用、摘要及等待时机。首名代理结束后，后续代理确实仍在运行，其持久状态保持 `running`、摘要保持为空；后续代理结束后，独立回调写入对应摘要，先前记录保持不变。该实际场景覆盖成功回调的重叠路径，失败回调和其他项目隔离由自动检查覆盖，没有将自动替身视为真实失败激活。
+
+证据包括[自动报告](evidence/14-latest-researcher-ownership.txt)、[自动结构化记录](evidence/14-latest-researcher-ownership.json)与[实际 DSH 记录](evidence/14-latest-real-dsh-ownership.json)，对应[自动脚本](dsh/latest-researcher-ownership.test.mjs)及[实际脚本](dsh/latest-researcher-ownership.py)。正式隔离 Host 正常退出，进程编号与确认结果记录在实际证据中。
+
+实际夹具原先等待子代理出现 `idle`，当前 DSH 可能在完成后直接清理该实例，因此该等待超时；正式脚本改为等待实际持久回调完成。该[原始等待中断](evidence/14-latest-real-dsh-disposal-contract-fixture-attempt.json)单独保留。另一次启动中，健康检查早于登录链接写入日志，夹具读取空链接中断，尚未执行行为检查；[原始启动中断](evidence/14-latest-real-dsh-login-log-fixture-attempt.json)单独保留，正式脚本明确等待实际登录链接出现。
+
+当前已测范围没有复现批量改写。本次没有新增产品修改，没有重新打开旧拉取请求，也没有更改本地管理状态。研究结束后的父会话通知由独立议题 #11 处理，不混入本节的记录归属结论。下文保留旧版本的缺陷与修复历史。
+
+```bash
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph \
+ALEPH_RESEARCHER_OBSERVATIONS=tests/issues/evidence/14-latest-researcher-ownership.json \
+node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/latest-researcher-ownership.test.mjs
+
+python3 tests/issues/dsh/latest-researcher-ownership.py \
+  --source /home/paulus-chang/项目/aleph --expect-protection \
+  --output tests/issues/evidence/14-latest-real-dsh-ownership.json
+```
+
 ## 修复与独立验收（2026-10-31）
 
 上游[拉取请求 #18](https://github.com/hapenia/aleph-research/pull/18)已创建，当前仍未合并。修复证据固定于[公开提交 `0bd5c63f64b7eaa7d16edb65d05d617839df81d5`](https://github.com/PaulusPliniusChang/aleph-research/tree/0bd5c63f64b7eaa7d16edb65d05d617839df81d5/tests/issues)。本地管理状态保留原缺陷实测记录，没有代替用户设置“已解决”。

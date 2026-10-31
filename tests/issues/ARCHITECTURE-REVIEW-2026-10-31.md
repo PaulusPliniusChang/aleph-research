@@ -2,7 +2,7 @@
 
 ## 复核范围
 
-2026 年 10 月 31 日，主仓库与上游 `main` 均为 `6688599`。`aleph-tests` 是同一 Git 仓库的独立工作区，分支为 `codex/aleph-regression-tests`，基线为 `a77893e`，保留旧版 campaign 实现和历史测试。
+2026 年 10 月 31 日，最新主仓库与上游 `main` 均为 `785a7e9`。最初复核基线为 `6688599`，下文旧请求与旧结果仅作历史记录。`aleph-tests` 是同一 Git 仓库的独立工作区，分支为 `codex/aleph-regression-tests`，基线为 `a77893e`，保留旧版 campaign 实现和历史测试。
 
 当前插件由 `dsh-plugin/package.json` 导出 `index-v2.js`。顶层状态为 project，任务经过提案、审批、批次编排、运行和结果提交。旧版 `aleph_start_campaign`、`aleph_enqueue_mission`、`aleph_compose_batch`、`aleph_run_next` 与 `aleph_run_available` 没有在当前入口注册。旧源码文件仍存在不表示当前插件继续使用该实现。
 
@@ -24,6 +24,7 @@
 | ALEPH-11 | [#12](https://github.com/hapenia/aleph-research/issues/12) | 旧 SOTA 模型未沿用，当前人工选择与回退需求需要重新确认。 |
 | ALEPH-13 | [#14](https://github.com/hapenia/aleph-research/issues/14) | 当前架构已经双阶段复现同批次重复优化删除活动目录；修复 [PR #15](https://github.com/hapenia/aleph-research/pull/15) 依赖 #13，组合产品 168 项、优化 65 个行为点、恢复 67 个行为点及实际 DSH 场景均通过，详见独立议题文档。 |
 | ALEPH-12 | [#1](https://github.com/hapenia/aleph-research/issues/1) | 当前无项目空状态仍对应同类问题，现有 [PR #2](https://github.com/hapenia/aleph-research/pull/2) 已包含当前架构修复。 |
+| ALEPH-14 | [#16](https://github.com/hapenia/aleph-research/issues/16) | 最新主分支 `785a7e9` 已正式通过 50 个独立自动行为点与 31 项实际 DSH 观察。成功与失败回调精确匹配独立身份，实际先结束代理不改写仍在运行的记录，独立摘要分别保留。当前已测范围不复现旧缺陷，旧 PR18 保持关闭，管理状态保留。 |
 
 各独立文件保留原有 `status` 与历史证据。元数据复核保留已存在的远端链接，后续独立实测结论记录在对应议题中。ALEPH-05 和新接纳的 ALEPH-13 已确认适用于当前架构，现有上游 #6 将补充当前复现范围；其余旧状态不能代替当前版本的验证结论。现有议题均不重复创建。
 

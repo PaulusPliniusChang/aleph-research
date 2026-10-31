@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/latest-researcher-ownership.py", line 175, in <module>
+    wait(lambda: next(s for s in control()['states'] if s['sessionId'] == two['childId'])['agentStatus'] == 'idle', 'second actual agent idle')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/latest-researcher-ownership.py", line 74, in wait
+    raise TimeoutError('fixture timeout: ' + label)
+TimeoutError: fixture timeout: second actual agent idle

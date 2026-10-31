@@ -1,0 +1,41 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-pf8_so2p",
+    "workspace": "/tmp/aleph-project-dsh-pf8_so2p/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "dirty": "",
+    "dsh_version": "0.2.2-alpha.2"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/latest-researcher-ownership.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--expect-protection",
+    "--output",
+    "tests/issues/evidence/14-latest-real-dsh-ownership.json"
+  ],
+  "events": [
+    {
+      "name": "error",
+      "monotonic": 68483.978752668,
+      "value": {
+        "type": "IndexError",
+        "message": "list index out of range"
+      }
+    },
+    {
+      "name": "isolated-dsh-stopped",
+      "monotonic": 68488.994485101,
+      "value": {
+        "pid": 496410,
+        "exit": -9,
+        "pid_exists": false
+      }
+    }
+  ],
+  "checks": [],
+  "boundary": "Actual DSH parent/child sessions, original spawn provider, registered tools, persistent projects, Git initialization and actual bash. Only model responses/wait timing use local deterministic LlmAdapter. Two real success lifecycles; activation rejection callback separately covered by automatic adapter, not claimed here. No external model or credentials."
+}
