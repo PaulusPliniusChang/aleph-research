@@ -89,6 +89,12 @@ branch and cherry-picked back to the pre-batch branch.
 
 ## Status
 
-The project/mission/batch core, Composer agent, result cherry-pick and
-researcher evaluate path have been exercised in an isolated DSH. See
-`docs/STATUS.md` and `docs/architecture.md`.
+The project/mission/batch core, Composer agent, InfraOptimizer batch run,
+result cherry-pick and researcher evaluate path have been exercised in an
+isolated DSH. Run the core integration test with:
+
+```bash
+cd dsh-plugin && npm test
+```
+
+See `docs/STATUS.md` and `docs/architecture.md`.

@@ -62,4 +62,6 @@ finishes.
 - One local machine; multi-machine is an interface extension.
 - Composer conflict handling is one merge attempt and fails to the operator.
 - Batch optimization is agent-driven and bounded by prompt.
-- Automated tests are not yet included.
+- The core project/mission/batch/result/evaluate path has an automated
+  integration test in `dsh-plugin/test`; multi-machine and richer conflict
+  handling remain future work.

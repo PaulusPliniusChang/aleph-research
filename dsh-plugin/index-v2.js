@@ -343,7 +343,6 @@ class ProjectService {
   async runBatch({ projectId, batchId }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
-    this.assertWorkspace(agent, project.workspace);
     const batch = project.batches.find((item) => item.id === batchId);
     if (!batch) throw new Error(`batch not found: ${batchId}`);
     if (batch.status !== 'forming') throw new Error(`batch ${batchId} is not runnable (status ${batch.status})`);
@@ -595,9 +594,10 @@ class ProjectService {
     const prompt = [
       'You are InfraOptimizer for AlephResearch.',
       `Batch: ${batch.id}. Machine: ${batch.machineId}. Work only inside this worktree: ${worktree}.`,
-      'Optimize the merged batch code for the actual machine: profile CPU/GPU/memory/IO, remove redundant work, tune threading, batching, precision, caching, data loading and runtime parameters.',
-      'Use short bounded benchmarks only. Do not start large training jobs, sweeps, background jobs or extra agents. Do not change project budget, queue or scheduling constraints.',
-      'Write ALEPH_HANDOFF.md with changes and before/after measurements. The Host commits the batch branch and then runs the single batch entrypoint.',
+      'Optimize only files under the current worktree. Do not inspect /home, /root, DSH profile/state, other projects, or search the filesystem. Do not start extra agents.',
+      'First read the batch files and the manifest. Make at most one focused optimization to threading, batching, import cost, allocation, precision or caching. Run one small before/after benchmark if cheap; otherwise inspect statically.',
+      'Use at most six shell commands total. If no safe improvement is justified, write ALEPH_HANDOFF.md and stop without changing code.',
+      'Write ALEPH_HANDOFF.md with changes and before/after measurements. Do not change project budget, queue or scheduling constraints. The Host commits the batch branch and runs the single batch entrypoint.',
     ].join('\n');
     const abort = new AbortController();
     let activation;
@@ -858,3 +858,5 @@ export async function apply(ctx) {
     },
   });
 }
+
+export { ProjectService, snapshot };

@@ -25,6 +25,9 @@
     "icon.svg",
     "README.md"
   ],
+  "scripts": {
+    "test": "node --test --experimental-loader ./test/loader.mjs test/*.test.mjs"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

@@ -27,13 +27,29 @@
 
 项目 `p-1877e11f`：
 
-- MissionComposer 创建 batch `b-61469d71`。
-- researcher 子会话 `f4fce692` 在 research repo 完成研究、evaluate，并写入
-  research commit `7fe854e`。
+- MissionComposer 创建 batch `b-9c817dea` 并绑定 local 机器。
+- InfraOptimizer 完成 batch 优化与运行；batch 状态 done，机器恢复 idle。
+- mission `m-79a0a937` 结果写入 `results/m-test4/result.json`，结果提交
+  `eacf7b6` cherry-pick 回 `mission/test4`。
+- researcher 子会话 `f4fce692` 完成研究、evaluate，并写入 research commit
+  `7fe854e`。
+
+## 测试
+
+`dsh-plugin/test/project.test.mjs` 使用临时 git repo 与 mock storage table 覆盖：
+
+- project 初始化与 template branch
+- mission 提案、自有 mission 等待、其他 researcher 不阻塞
+- Leader 审批
+- Composer 合并 batch
+- batch 运行与 per-mission result envelope
+- 结果 cherry-pick 回 pre-batch mission branch
+- research evaluate 与报告写入 research commit
+
+运行方式：`cd dsh-plugin && npm test`。
 
 ## 待完成
 
-- InfraOptimizer batch 运行的完整闭环验证（当前一次运行仍停在 agent 阶段）。
-- 自动化测试。
 - 多机接口。
 - 更完整的 Composer 冲突解决与结果归因。
+- 旧 client 中未使用代码清理。

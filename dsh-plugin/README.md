@@ -25,6 +25,7 @@ dsh plugin --profile web add "$PWD"
 
 ```bash
 npm install
+npm test
 node --check index-v2.js
 node --check client.js
 ```
