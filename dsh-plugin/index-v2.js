@@ -311,7 +311,7 @@ class ProjectService {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const root = project.researchRoot;
-    await writeFile(join(root, 'README.md'), `# ${title}\n\n${project.brief || ''}\n`, 'utf8');
+    await writeFile(join(root, 'README.md'), `# ${title}\n\n${project.brief || ''}\n\n## Provided data\n\nThe data selected by the Leader is under data/ in this worktree.\n\n## Submission contract\n\nThe research branch root must contain predict.py. The evaluator runs predict.py with --visible-data, --input-dir and --output; ALEPH_SOLUTION_DIR points at the branch root and ALEPH_VISIBLE_DATA points at the provided data. Hidden testsets are leader-side only.\n`, 'utf8');
     await writeFile(join(root, 'pyproject.toml'), '[project]\nname = "aleph-research"\nversion = "0.1.0"\nrequires-python = ">=3.10"\n', 'utf8');
     await mkdir(join(root, 'src'), { recursive: true });
     await writeFile(join(root, 'src', '__init__.py'), '', 'utf8');
@@ -597,7 +597,7 @@ class ProjectService {
       `Project: ${project.id}. Research brief: ${project.brief || '(no extra brief)'}.`,
       `Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
       `The Leader created your initial research scaffold. Provided data is already copied under data/ in ${worktree}; use it directly. Do not read data.zip, testsets, the original project or DSH state.`,
-      'Do not install packages outside the mission uv project and do not write outside your assigned research worktree or mission repo branch.',
+      'Small bounded analysis may use a uv environment inside your worktree. Do not install packages globally or outside the project; full training must still be a mission.',
       'Do not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.' ,
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
@@ -686,7 +686,7 @@ class ProjectService {
           environ = readFileSync(`/proc/${entry}/environ`).toString('utf8');
         } catch { continue; }
         const isPython = /\.venv|python|pip|uv pip|conda|lightgbm|catboost|xgboost|torch/i.test(cmd);
-        const isBuild = /(?:^|[\s/])(?:cc1|cc1plus|gcc|g\+\+|ld|meson|ninja|cmake|make|rustc|cargo|pip|uv)(?:[\s/]|$)/i.test(cmd);
+        const isBuild = /(?:^|[\s/])(?:cc1|cc1plus|gcc|g\+\+|ld|meson|ninja|cmake|make|rustc|cargo)(?:[\s/]|$)/i.test(cmd);
         const isCaseProcess = environ.includes('DSH_PROFILE=aleph-lab');
         if (!cwd.startsWith(workspace)) continue;
         const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
