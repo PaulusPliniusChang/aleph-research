@@ -679,7 +679,22 @@ class ProjectService {
     for (let index = 0; index < requested; index += 1) {
       started.push(await this.startResearcher({ projectId, agent }));
     }
+    const checkpoint = setTimeout(() => {
+      for (const researcher of this.get(projectId)?.agents ?? []) {
+        if (researcher.role !== 'researcher' || researcher.status !== 'running' || !researcher.childId) continue;
+        this.nudgeChild(researcher.childId, 'Checkpoint: stop expanding the analysis. Commit a valid mission with the current code and call aleph_propose_mission now. You can improve it after the first result.');
+      }
+    }, 300_000);
+    checkpoint.unref?.();
     return { projectId, requested, started };
+  }
+
+  nudgeChild(childId, text) {
+    if (!childId || !this.subagents) return;
+    const parent = this.parentAgents?.get(childId);
+    if (!parent) return;
+    this.subagents.sendMessage(parent, childId, [{ type: 'text', text }], { signal: new AbortController().signal })
+      .catch(() => undefined);
   }
 
   nudgeForKill(project, cwd, reason) {
