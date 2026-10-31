@@ -525,9 +525,14 @@ window.__ModuleLoader__.load({
               cache: 'no-store',
               headers: { accept: 'application/json' },
             });
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            const body = await response.json();
+            const body = await response.json().catch(() => null);
             if (stopped) return;
+            // No project yet is an empty state with guidance, not a failure.
+            if (response.status === 404 && body?.error?.code === 'aleph/no-project') {
+              setState({ phase: 'empty', snapshot: null, error: { code: 'aleph/no-project', message: '' }, fetchedAt: Date.now() });
+              return;
+            }
+            if (!response.ok) throw new Error('HTTP ' + response.status);
             if (body && typeof body === 'object' && body.ok === false) {
               const error = body.error && typeof body.error === 'object' ? body.error : {};
               setState({
