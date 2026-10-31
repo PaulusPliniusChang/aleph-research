@@ -58,6 +58,8 @@
 
                 Before proposing a mission, inspect mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.
 
+                The runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services, or create/install environments. Mission code receives ALEPH_PYTHON; declare dependencies in the mission pyproject instead of installing them yourself.
+
                 A local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.
 
                 If a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.

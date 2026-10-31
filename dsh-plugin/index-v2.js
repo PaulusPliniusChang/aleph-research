@@ -627,7 +627,7 @@ class ProjectService {
       `Project: ${project.id}. Research brief: ${project.brief || '(no extra brief)'}.`,
       `Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
       `The Leader created your initial research scaffold. Provided data is already copied under data/ in ${worktree}; use it directly. Do not read data.zip, testsets, the original project or DSH state.`,
-      `Use the shared Python environment: ${project.pythonPath ?? 'python3'}. Do not create or install a uv environment; mission entrypoints receive ALEPH_PYTHON.`, 'Small bounded analysis may use the shared environment; full training must still be a mission.',
+      `The runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services or create/install environments. Mission code receives ALEPH_PYTHON.`, 'Declare dependencies in the mission pyproject; Composer and InfraOptimizer resolve the runtime environment. Do not install packages yourself.', 'Small bounded analysis uses the prepared runtime; full training must still be a mission.',
       'Do not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.' ,
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
@@ -872,7 +872,7 @@ class ProjectService {
       'You are MissionComposer for AlephResearch.',
       `Project: ${project.id}. Research repo: ${project.researchRoot}. Mission repo: ${project.missionRoot}.`,
       'Inspect the approved MissionQueue with aleph_status, then merge approved missions into a machine-bound batch with aleph_form_batch.',
-      'Resolve merge conflicts in the mission repo before batching. Do not run researchers or change research code.',
+      'Resolve merge conflicts in the mission repo before batching. Do not run researchers or change research code. Dependency and runtime environment setup belongs to InfraOptimizer; do not ask researchers to check environments.',
       'Return the batch id, machine, mission ids and any conflict decisions.',
     ].join('\n');
     let activation;
@@ -916,7 +916,7 @@ class ProjectService {
     const prompt = [
       'You are InfraOptimizer for AlephResearch.',
       `Batch: ${batch.id}. Machine: ${batch.machineId}. Work only inside this worktree: ${worktree}.`,
-      'Optimize only files under the current worktree. Do not inspect /home, /root, DSH profile/state, other projects, or search the filesystem. Do not start extra agents.',
+      `Optimize only files under the current worktree. Shared Python: ${project.pythonPath ?? 'python3'}; ALEPH_PYTHON is set for batch execution. Resolve mission dependencies with uv inside this worktree before optimizing; this is the only environment setup. Do not inspect /home, /root, DSH profile/state, other projects, or search the filesystem. Do not start extra agents.`,
       'First read the batch files and the manifest. Make at most one focused optimization to threading, batching, import cost, allocation, precision or caching. Run one small before/after benchmark if cheap; otherwise inspect statically.',
       'Use at most six shell commands total. If no safe improvement is justified, write ALEPH_HANDOFF.md and stop without changing code.',
       'Write ALEPH_HANDOFF.md with changes and before/after measurements. Do not change project budget, queue or scheduling constraints. The Host commits the batch branch and runs the single batch entrypoint.',
