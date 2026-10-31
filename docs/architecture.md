@@ -51,8 +51,9 @@ envelope has fixed routing fields and free-form metrics/artifacts.
 
 ## Researcher lifecycle
 
-A researcher runs in the research repo and may propose several missions over
-its lifetime. It waits only for missions owned by its session. When those
+The project default researcher count is 4. `aleph_run_researchers` starts that
+many researcher subagents; each receives a separate research branch and
+worktree. A researcher may propose several missions over its lifetime. It waits only for missions owned by its session. When those
 missions are done, `aleph_evaluate` evaluates the research branch; the Host
 writes the evaluation report into the research commit message and the researcher
 finishes.

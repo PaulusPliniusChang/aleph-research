@@ -47,6 +47,7 @@ There is no campaign layer and no `~/.aleph` directory.
 - `aleph_run_batch`
 - `aleph_evaluate`
 - `aleph_run_researcher`
+- `aleph_run_researchers` (default count 4)
 
 ## Install
 
