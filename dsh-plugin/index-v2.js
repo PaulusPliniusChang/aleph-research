@@ -343,7 +343,14 @@ class ProjectService {
     const worktree = join(project.workspace, '.aleph', 'missions', newId('mw'));
     await mkdir(join(project.workspace, '.aleph', 'missions'), { recursive: true });
     await git(project.missionRoot, ['worktree', 'add', '-b', branch, worktree, project.templateBranch]);
-    return { projectId, branch, worktree };
+    const missionDir = join(worktree, 'missions', slug);
+    await mkdir(missionDir, { recursive: true });
+    await writeFile(join(missionDir, 'mission.json'), JSON.stringify({ id: slug, entrypoint: 'run.sh', outputs: [] }, null, 2), 'utf8');
+    await writeFile(join(missionDir, 'run.sh'), '#!/usr/bin/env bash\nset -euo pipefail\n# Replace this stub with the mission entrypoint.\necho "mission not implemented" >&2\nexit 1\n', 'utf8');
+    await writeFile(join(missionDir, 'README.md'), `# ${slug}\n\nFill mission.json, replace run.sh with the mission entrypoint, add code and an uv project, commit, then call aleph_propose_mission.\n`, 'utf8');
+    await git(worktree, ['add', '-A']);
+    await git(worktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', `mission scaffold ${slug}`]);
+    return { projectId, branch, worktree, missionId: slug, missionDir };
   }
 
   async listMissions({ projectId }) {
