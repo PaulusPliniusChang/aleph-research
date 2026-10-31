@@ -307,7 +307,7 @@ class ProjectService {
     return project;
   }
 
-  async scaffoldResearch({ projectId, title = 'Research project', dataSources = [] }) {
+  async scaffoldResearch({ projectId, title = 'Research project', dataSources = [], pythonPath = null }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const root = project.researchRoot;
@@ -331,7 +331,7 @@ class ProjectService {
     await git(root, ['add', '-A']);
     await git(root, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', 'leader: research project scaffold']);
     const commit = (await git(root, ['rev-parse', 'HEAD'])).stdout.trim();
-    const next = await this.mutate(projectId, (current) => ({ ...current, prepared: true, ...(visibleData ? { visibleData } : {}) }));
+    const next = await this.mutate(projectId, (current) => ({ ...current, prepared: true, ...(visibleData ? { visibleData } : {}), ...(pythonPath ? { pythonPath: resolve(pythonPath) } : {}) }));
     return { projectId, commit, prepared: next.prepared, visibleData: next.visibleData };
   }
 
@@ -441,6 +441,7 @@ class ProjectService {
         env: {
           ALEPH_WORKSPACE: project.workspace,
           ...(project.visibleData ? { ALEPH_VISIBLE_DATA: project.visibleData } : {}),
+          ...(project.pythonPath ? { ALEPH_PYTHON: project.pythonPath } : {}),
           ...(project.testsetPath ? { ALEPH_TESTSET: project.testsetPath } : {}),
         },
       });
@@ -618,7 +619,7 @@ class ProjectService {
       `Project: ${project.id}. Research brief: ${project.brief || '(no extra brief)'}.`,
       `Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
       `The Leader created your initial research scaffold. Provided data is already copied under data/ in ${worktree}; use it directly. Do not read data.zip, testsets, the original project or DSH state.`,
-      'Small bounded analysis may use a uv environment inside your worktree. Do not install packages globally or outside the project; full training must still be a mission.',
+      `Use the shared Python environment: ${project.pythonPath ?? 'python3'}. Do not create or install a uv environment; mission entrypoints receive ALEPH_PYTHON.`, 'Small bounded analysis may use the shared environment; full training must still be a mission.',
       'Do not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.' ,
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
@@ -1091,8 +1092,8 @@ export async function apply(ctx) {
     ctx.tools.register(tool(
       'aleph_create_research_scaffold',
       'Leader creates the initial research project before any researcher starts.',
-      { ...projectIdParam, title: { type: 'string', description: 'Research project title' }, data: { type: 'array', items: { type: 'string' }, description: 'Data sources to copy into the research project' } },
-      async (args) => service.scaffoldResearch({ projectId: args.project_id, title: args.title ?? 'Research project', dataSources: args.data }),
+      { ...projectIdParam, title: { type: 'string', description: 'Research project title' }, data: { type: 'array', items: { type: 'string' }, description: 'Data sources to copy into the research project' }, python: { type: 'string', description: 'Shared Python executable for researchers and missions' } },
+      async (args) => service.scaffoldResearch({ projectId: args.project_id, title: args.title ?? 'Research project', dataSources: args.data, pythonPath: args.python }),
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_start_mission',
