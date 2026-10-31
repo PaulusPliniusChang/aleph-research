@@ -311,7 +311,7 @@ class ProjectService {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const root = project.researchRoot;
-    await writeFile(join(root, 'README.md'), `# ${title}\n\n${project.brief || ''}\n\n## Provided data\n\nThe data selected by the Leader is under data/ in this worktree.\n\n## Submission contract\n\nThe research branch root must contain predict.py. The evaluator runs predict.py with --visible-data, --input-dir and --output; ALEPH_SOLUTION_DIR points at the branch root and ALEPH_VISIBLE_DATA points at the provided data. Hidden testsets are leader-side only.\n`, 'utf8');
+    await writeFile(join(root, 'README.md'), `# ${title}\n\n${project.brief || ''}\n\n## Provided data\n\nThe data selected by the Leader is under data/ in this worktree.\n\n## Data format\n\nProvided files are under data/. Well files are comma-separated text with a header row, a units row and data rows. Parse by column name, not position, because columns can vary between wells. Treat -99999 as missing. Hidden evaluation inputs contain only the standard input columns.\n\n## Submission contract\n\nThe research branch root must contain predict.py. The evaluator runs predict.py with --visible-data, --input-dir and --output; ALEPH_SOLUTION_DIR points at the branch root and ALEPH_VISIBLE_DATA points at the provided data. Hidden testsets are leader-side only.\n`, 'utf8');
     await writeFile(join(root, 'pyproject.toml'), '[project]\nname = "aleph-research"\nversion = "0.1.0"\nrequires-python = ">=3.10"\n', 'utf8');
     await mkdir(join(root, 'src'), { recursive: true });
     await writeFile(join(root, 'src', '__init__.py'), '', 'utf8');
