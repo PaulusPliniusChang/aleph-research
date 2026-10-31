@@ -361,7 +361,8 @@ class ProjectService {
       visibleData = dataRoot;
     }
     await git(root, ['add', '-A']);
-    await git(root, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', 'leader: research project scaffold']);
+    // Re-scaffolding an unchanged project must stay idempotent.
+    await git(root, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m', 'leader: research project scaffold']);
     const commit = (await git(root, ['rev-parse', 'HEAD'])).stdout.trim();
     const next = await this.mutate(projectId, (current) => ({ ...current, prepared: true, ...(visibleData ? { visibleData } : {}), ...(pythonPath ? { pythonPath: resolve(pythonPath) } : {}) }));
     return { projectId, commit, prepared: next.prepared, visibleData: next.visibleData };
