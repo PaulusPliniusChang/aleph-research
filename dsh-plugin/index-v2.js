@@ -472,8 +472,8 @@ class ProjectService {
     return registered;
   }
 
-  async approve({ projectId, missionId }) {
-    return this.mutate(projectId, (project) => ({
+  async approve({ projectId, missionId, agent = null }) {
+    const updated = await this.mutate(projectId, (project) => ({
       ...project,
       missions: project.missions.map((mission) => (
         mission.id === missionId && mission.status === 'proposed'
@@ -481,6 +481,8 @@ class ProjectService {
           : mission
       )),
     }));
+    await this.notifyComposer({ projectId, agent, event: 'mission approved', detail: missionId }).catch(() => undefined);
+    return updated;
   }
 
   killUnder(rootPath) {
@@ -678,7 +680,7 @@ class ProjectService {
         violations: [...(current.violations ?? []), `${now()} killed ${orphans} orphan process(es) left by batch ${batch.id}`].slice(-50),
       })).catch(() => undefined);
     }
-    return this.mutate(projectId, (current) => ({
+    const settled = await this.mutate(projectId, (current) => ({
       ...current,
       machines: current.machines.map((item) => item.id === batch.machineId ? { ...item, status: 'idle', batchId: null } : item),
       missions: current.missions.map((mission) => {
@@ -702,6 +704,8 @@ class ProjectService {
         summary: { runnerError, missions: outcomes.map(({ envelope, ...rest }) => rest) },
       } : item),
     }));
+    await this.notifyComposer({ projectId, agent: null, event: 'batch finished', detail: batch.id }).catch(() => undefined);
+    return settled;
   }
 
   async evaluate({ projectId, agent, branch = null }) {
@@ -1042,6 +1046,47 @@ class ProjectService {
     }
   }
 
+  composerRecord(projectId) {
+    const project = this.get(projectId);
+    return (project?.agents ?? []).find((item) => item.role === 'composer' && item.status === 'running');
+  }
+
+  /** The Composer is a long-lived queue manager; start it once and keep talking to it. */
+  async ensureComposer({ projectId, agent }) {
+    const project = this.get(projectId);
+    const existing = (project?.agents ?? []).filter((item) => item.role === 'composer' && item.childId).pop();
+    if (existing?.childId) return { projectId, childId: existing.childId, started: false };
+    const started = await this.runComposer({ projectId, agent });
+    return { projectId, childId: started.childId, started: true };
+  }
+
+  /** Tell the Composer the MissionQueue changed. */
+  async notifyComposer({ projectId, agent, event, detail }) {
+    const project = this.get(projectId);
+    if (!project) return { delivered: false, reason: 'no project' };
+    const record = (project.agents ?? []).filter((item) => item.role === 'composer' && item.childId).pop();
+    if (!record?.childId) {
+      const ensured = await this.ensureComposer({ projectId, agent }).catch(() => null);
+      return { delivered: Boolean(ensured), started: true, childId: ensured?.childId ?? null };
+    }
+    const parent = this.parentAgents?.get(record.childId) ?? agent;
+    if (!parent || !this.subagents) return { delivered: false, reason: 'no live composer parent' };
+    const queued = project.missions.filter((mission) => mission.status === 'approved').length;
+    const machine = project.machines.find((item) => item.id === 'local');
+    const text = [
+      `MissionQueue changed (${event}${detail ? `: ${detail}` : ''}).`,
+      `${queued} mission(s) approved and waiting. Machine local is ${machine?.status ?? 'unknown'}.`,
+      'Apply your dispatch policy: run approved work immediately when the machine is idle; only compose ahead and invoke InfraOptimizer while it is busy.',
+    ].join(' ');
+    try {
+      await this.subagents.sendMessage(parent, record.childId, [{ type: 'text', text }], { signal: new AbortController().signal });
+    } catch (error) {
+      const restarted = await this.runComposer({ projectId, agent }).catch(() => null);
+      return { delivered: Boolean(restarted), restarted: true, childId: restarted?.childId ?? null };
+    }
+    return { delivered: true, childId: record.childId, queued };
+  }
+
   async claimRole(projectId, role) {
     const project = this.get(projectId);
     if ((project.agents ?? []).some((item) => item.role === role && item.status === 'running')) {
@@ -1063,14 +1108,20 @@ class ProjectService {
     if (!project) throw new Error(`project not found: ${projectId}`);
     this.assertWorkspace(agent, project.workspace);
     await this.claimRole(projectId, 'composer');
-    const abort = new AbortController();
     const prompt = [
-      'You are MissionComposer for AlephResearch.',
-      `Project: ${project.id}. Research repo: ${project.researchRoot}. Mission repo: ${project.missionRoot}.`,
-      'Inspect the approved MissionQueue with aleph_status, then merge approved missions into a machine-bound batch with aleph_form_batch.',
-      'Resolve merge conflicts in the mission repo before batching. Do not run researchers or change research code. Dependency and runtime environment setup belongs to InfraOptimizer; do not ask researchers to check environments.',
-      'Return the batch id, machine, mission ids and any conflict decisions.',
+      'You are MissionComposer for AlephResearch, the long-lived owner of the MissionQueue.',
+      `Project: ${project.id}. Research repo: ${project.researchRoot}. Mission repo: ${project.missionRoot}. Machine: local.`,
+      'Researcher missions arrive as proposals; the Leader approves them into the queue and the Host notifies you whenever that queue changes.',
+      '',
+      'Dispatch policy:',
+      '- When the machine is idle, run approved work immediately: form a batch with aleph_form_batch and start it with aleph_run_batch. Do not optimize or pre-compose idle capacity away.',
+      '- When the machine is already busy, use the waiting time productively: form the next batch ahead of time and call aleph_run_infra so InfraOptimizer resolves dependencies and tunes that batch for this machine. It will start as soon as the machine frees up.',
+      '- Never leave approved missions sitting in the queue while the machine is idle.',
+      '',
+      'Batch composition is your call. Delegate the mechanical work of merging branches and settling conflicts to a sub composer agent when a batch needs judgment; resolve nothing by hand in the mission repo yourself.',
+      'Do not run researchers, do not edit research branches, and do not change project budgets. Report what you dispatched or prepared, with batch ids.',
     ].join('\n');
+    const abort = new AbortController();
     let activation;
     try {
       activation = await this.subagents.startActivation({
@@ -1081,18 +1132,30 @@ class ProjectService {
       await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'composer', childId: null, status: 'failed', summary: String(error), branch: null, worktree: null, updatedAt: now() }] }));
       throw error;
     }
-    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'composer', childId: activation.childId ?? null, status: 'running', summary: null, branch: null, worktree: null, updatedAt: now() }] }));
-    try {
-      const result = await activation.result;
+    const childId = activation.childId ?? null;
+    await this.mutate(projectId, (current) => ({
+      ...current,
+      agents: [
+        ...(current.agents ?? []).filter((item) => !(item.role === 'composer' && item.status === 'running')),
+        { role: 'composer', childId, status: 'running', summary: null, branch: null, worktree: null, updatedAt: now() },
+      ],
+    }));
+    this.parentAgents ??= new Map();
+    if (childId) this.parentAgents.set(childId, agent);
+    // The Composer stays addressable between turns; the record closes when its session settles.
+    activation.result.then(async (result) => {
       const summary = (result?.output ?? []).filter((block) => block?.type === 'text').map((block) => block.text).join('\n').trim().slice(0, 8000) || '(no summary)';
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'composer' && item.status === 'running' ? { ...item, status: 'done', summary, updatedAt: now() } : item) }));
-      return { projectId, role: 'composer', childId: activation.childId, summary };
-    } catch (error) {
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'composer' && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) }));
-      throw error;
-    } finally {
-      this.activations?.delete?.(abort);
-    }
+      await this.mutate(projectId, (current) => ({
+        ...current,
+        agents: (current.agents ?? []).map((item) => (item.role === 'composer' && item.childId === childId ? { ...item, status: 'done', summary, updatedAt: now() } : item)),
+      })).catch(() => undefined);
+    }, async (error) => {
+      await this.mutate(projectId, (current) => ({
+        ...current,
+        agents: (current.agents ?? []).map((item) => (item.role === 'composer' && item.childId === childId ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item)),
+      })).catch(() => undefined);
+    });
+    return { projectId, role: 'composer', childId, persistent: true };
   }
 
   async runInfra({ projectId, batchId, agent }) {
@@ -1402,7 +1465,7 @@ export async function apply(ctx) {
       'aleph_approve_mission',
       'Approve a proposed mission and move it to the approved queue.',
       { ...projectIdParam, mission_id: { type: 'string', required: true } },
-      async (args) => service.approve({ projectId: args.project_id, missionId: args.mission_id }),
+      async (args, exec) => service.approve({ projectId: args.project_id, missionId: args.mission_id, agent: exec.agent }),
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_form_batch',
@@ -1647,6 +1710,7 @@ export async function apply(ctx) {
         if (reopened.length === 0) return sendJson(res, 409, { ok: false, error: { code: 'aleph/nothing-to-retry' } });
         const formed = await service.formBatch({ projectId, machineId: batch.machineId ?? 'local' });
         const next = formed.batches[formed.batches.length - 1];
+        await service.notifyComposer({ projectId, agent: null, event: 'batch retried', detail: next.id }).catch(() => undefined);
         return sendJson(res, 200, { ok: true, reopened, batch: { id: next.id, mission_ids: next.missionIds, branch: next.branch } });
       } catch (error) {
         return sendJson(res, 500, { ok: false, error: { code: 'aleph/retry-failed', message: String(error?.message ?? error) } });

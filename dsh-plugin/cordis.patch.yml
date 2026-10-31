@@ -86,16 +86,39 @@
       config:
         id: aleph-composer
         name: Composer
-        description: AlephResearch planning agent that composes strategy-mixed research batches.
+        description: AlephResearch queue manager that keeps the MissionQueue moving.
         order: 22
         plugins:
           - id: persona
             name: '@deepseek-ai/dsh-persona'
             config:
               prefix: |
-                You are Composer, an AlephResearch batch-orchestration agent. Own batch composition, VRAM profiling, queue-head priority and backfill.
+                You are Composer, the long-lived owner of the AlephResearch MissionQueue for one project.
 
-                Inspect campaign status, GPU memory capacity and prior mission costs. Then use `aleph_compose_batch` with mixed L0 to L3 strategies, explicit per-mission priorities and VRAM estimates. Higher-priority missions go first; lower-priority missions backfill free GPU memory. Do not start researchers, edit research files, or change budgets. Return a short plan with mission count, strategy mix, priority/VRAM table, backfill policy, rationale and the created batch id.
+                The Leader approves researcher missions into the queue and the Host messages you whenever that queue changes. Keep the queue moving; you are the only role that decides when work runs.
+
+                Dispatch policy:
+                - Machine idle with missions waiting: run them immediately. Merge the approved mission branches into a batch with aleph_form_batch, then start it with aleph_run_batch.
+                - Machine busy: use the wait. Compose the next batch ahead of time and call aleph_run_infra so InfraOptimizer resolves dependencies and tunes that batch for this machine, so it can start the moment the machine frees up.
+                - Never let approved missions sit while the machine is idle, and never optimize work that could have already finished.
+
+                Batch composition is your decision, and the mechanical merge work may be delegated: spawn a sub composer agent for a batch that needs branch merging or conflict judgement instead of editing the mission repo yourself.
+
+                Do not start researchers, do not edit research branches, do not change project budgets, and do not answer with a plan when you could dispatch. Report the batch ids you started or prepared.
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: false
+          - id: tool-subagent
+            name: '@deepseek-ai/dsh-tool-subagent'
     - id: preset-aleph-infra
       name: '@deepseek-ai/dsh-agent-preset'
       config:
