@@ -68,3 +68,27 @@
 产物也未复制。原工程 `/home/hapenia/Projects/kunlungpt-comp` 未写入。
 
 项目初始化创建了 `research/` 与 `missions/` 仓库，以及模板分支；`problem/` 位于项目根目录。项目默认 researcher 数量为 4。
+
+## End-to-end run
+
+The rebuilt case project completed the full pipeline for the first time.
+
+| Stage | Evidence |
+| --- | --- |
+| Research | researcher branches with `predict.py` and notes |
+| Mission | proposed branches with manifest, entrypoint and uv project |
+| Batch | `b-8b68c816` with three approved missions |
+| Result | per-mission `result.json`, `metrics.json`, `run.log` and model bundles committed back |
+| Evaluate | hidden-testset score `79.72` written into research commit `afb9633` |
+
+Mission scores on the hidden-holdout split, with the floor baseline as reference:
+
+| Mission | Score | Floor |
+| --- | --- | --- |
+| atom-cv-plus | 80.24 | 70.18 |
+| atom-seq-blend-cv | 80.18 | 70.18 |
+| atom-oof-ensemble | 79.79 | 70.69 |
+| atom-snap-hgb | 70.84 | 70.69 |
+
+The operator API (`/api/aleph/approve`, `/api/aleph/batch`, `/api/aleph/run`,
+`/api/aleph/evaluate`) replays this pipeline without spending a model turn.
