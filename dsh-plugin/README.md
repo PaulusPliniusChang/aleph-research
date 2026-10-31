@@ -29,8 +29,8 @@ from a source directory.
 | `aleph_compose_batch` | Compose a multi-mission batch with mixed strategies, priorities and VRAM estimates. |
 | `aleph_run_available` | Dispatch queued missions up to the concurrency limit. |
 | `aleph_run_composer` | Start the Composer role agent. |
-| `aleph_run_infra` | Start the InfraOptimizer role agent. |
-| `aleph_set_parallel` | Set the concurrency limit chosen by InfraOptimizer. |
+| `aleph_run_infra` | Start InfraOptimizer on a code worktree; returns an infra branch. |
+| `aleph_set_parallel` | Set the campaign concurrency limit. |
 | `aleph_set_runtime` | Set evaluator threads and timeout. |
 | `aleph_set_budget_vector` | Set mission, GPU-second and disk-byte caps. |
 | `aleph_infra_status` | Refresh CPU, GPU, memory, disk and concurrency capacity. |

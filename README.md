@@ -15,9 +15,9 @@ a separate `~/.aleph` directory or an external daemon.
   with their own presets and child sessions.
   - Composer owns batch orchestration, VRAM profiling, queue-head priority and
     backfill.
-  - InfraOptimizer owns cost profiling, evaluation caching, evaluator
-    environment/runtime settings, the cost budget vector, and hardware
-    queueing.
+  - InfraOptimizer owns machine-specific code optimization: it profiles the
+    target machine, edits a dedicated code worktree, runs a short benchmark and
+    returns an infra branch. It does not set campaign constraints.
   - `aleph_run_available` dispatches by priority and fills free GPU memory with
     lower-priority work.
 - Modes: `Aleph Research` for the Leader and `Aleph Researcher` for one mission.
@@ -57,9 +57,10 @@ Host command. It does not touch the current DSH profile.
    command, optional visible-data path, hidden-testset path and submission
    interpreter. If the workspace has no `research/` repository, the tool creates
    an `initialize` branch and `sota/main`.
-4. Call `aleph_run_infra` to let InfraOptimizer choose concurrency and budget.
-5. Call `aleph_run_composer` to let Composer design a strategy-mixed batch.
-6. Call `aleph_run_available` to dispatch researchers.
+4. Call `aleph_run_composer` to let Composer design a strategy-mixed batch.
+5. Call `aleph_run_available` to dispatch researchers.
+6. Call `aleph_run_infra` to optimize a code worktree for the actual machine;
+   it returns an `infra/...` branch and does not change campaign constraints.
 
 The campaign workspace must be the DSH session workspace or a directory inside
 it. The researcher runs under the session's workspace-write sandbox, so a

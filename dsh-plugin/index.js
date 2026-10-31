@@ -89,6 +89,7 @@ const campaignSchema = z.object({
     childId: z.string().nullable(),
     status: z.enum(['running', 'done', 'failed']),
     summary: z.string().nullable(),
+    branch: z.string().nullable().optional(),
     updatedAt: z.string(),
   })).optional(),
   runtime: z.object({
@@ -212,7 +213,7 @@ function snapshot(campaign) {
       active_agents: campaign.missions.filter((mission) => mission.status === 'running').length,
       infra: campaign.infra ?? null,
       batches: campaign.batches ?? [],
-      agents: campaign.agents ?? [],
+      agents: (campaign.agents ?? []).map((agent) => ({ ...agent, branch: agent.branch ?? null })),
       runtime: campaign.runtime ?? null,
       cache: campaign.cache ?? { hits: 0, misses: 0, entries: {} },
       cost_profile: campaign.costProfile ?? { missions: 0, gpuSeconds: 0, evalSeconds: 0, diskBytes: 0 },
@@ -531,24 +532,37 @@ class AlephService {
     this.assertWorkspace(agent, campaign.workspace);
     const active = (campaign.agents ?? []).find((item) => item.role === role && item.status === 'running');
     if (active) throw new Error(`${role} agent is already running: ${active.childId ?? 'starting'}`);
-    const isComposer = role === 'composer';
-    const prompt = isComposer
+
+    const isInfra = role === 'infra';
+    let worktree = campaign.workspace;
+    let baseCommit = null;
+    if (isInfra) {
+      const worktreeRoot = join(campaign.workspace, '.aleph', 'worktrees', campaign.id);
+      worktree = join(worktreeRoot, newId('infra'));
+      await mkdir(worktreeRoot, { recursive: true });
+      await git(campaign.researchRoot, ['worktree', 'add', '--detach', worktree, baseBranch(campaign)]);
+      baseCommit = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
+    }
+
+    const prompt = isInfra
       ? [
-          'You are Composer, an AlephResearch planning agent.',
+          'You are InfraOptimizer, an AlephResearch machine-specific code optimization agent.',
+          `Campaign: ${campaign.id} "${campaign.title}". Work only inside this worktree: ${worktree}.`,
+          `Base commit: ${baseCommit}.`,
+          'Optimize the code for the actual machine: inspect CPU/GPU/memory/IO, reduce unnecessary allocations, tune threading/batching/precision/caching/compile or runtime parameters, and remove redundant work.',
+          'Run only short bounded profiling and benchmark commands. Do not start large training jobs, sweeps, background jobs, or extra agents. Do not change campaign budget, concurrency, explore policy or other constraints.',
+          'Make the code changes in this worktree. Write ALEPH_HANDOFF.md with what changed, the before/after benchmark, expected speed/VRAM/disk impact, and a next step.',
+          'The Host will commit one commit and return the branch; no hidden-test promotion is performed here.',
+        ].join('\n')
+      : [
+          'You are Composer, an AlephResearch batch-orchestration agent. Own batch composition, VRAM profiling, queue-head priority and backfill.',
           `Campaign: ${campaign.id} "${campaign.title}" in ${campaign.workspace}.`,
           `Current SOTA: ${campaign.sotaBranch ?? 'none'} (${campaign.sotaScore}). Exploration: ${campaign.exploration}. Budget: ${campaign.budget ?? 'unset'}. Spent: ${campaign.spent}.`,
           'Inspect status and infrastructure, then compose the next batch of at most 4 missions with mixed L0 to L3 strategies.',
           'Use aleph_status, aleph_infra_status and aleph_compose_batch. Assign each mission a priority and a VRAM estimate; high-priority work runs first and lower-priority work backfills free GPU memory.',
           'Do not start researchers and do not edit research files. Return a short batch plan: mission count, strategy mix, priorities, VRAM estimates, rationale and the created batch id.',
-        ].join('\n')
-      : [
-          'You are InfraOptimizer, an AlephResearch resource agent.',
-          `Campaign: ${campaign.id} "${campaign.title}" in ${campaign.workspace}.`,
-          `Current concurrency limit: ${campaign.maxParallel ?? 1}. Budget: ${campaign.budget ?? 'unset'}. Spent: ${campaign.spent}.`,
-          'Inspect current CPU, GPU, memory, disk, cost profile, evaluation cache and runtime settings with aleph_infra_status.',
-          'Optimize across tasks: choose a safe concurrency limit, set a cost budget vector, and tune evaluation runtime with aleph_set_parallel, aleph_set_budget_vector, aleph_set_runtime.',
-          'Evaluation runs are serialized on the shared GPU; do not start researchers. Return a short efficiency decision: concurrency, budget, runtime, cache/cost observation, bottleneck and rationale.',
         ].join('\n');
+
     const abort = new AbortController();
     this.activations.add(abort);
     let activation;
@@ -560,56 +574,73 @@ class AlephService {
         signal: abort.signal,
         request: {
           parent: agent,
-          cwd: campaign.workspace,
+          cwd: worktree,
           agentPreset: `aleph-${role}`,
           prompt: [{ type: 'text', text: prompt }],
         },
       });
     } catch (error) {
+      if (isInfra) await cleanupWorktree(campaign, worktree).catch(() => undefined);
       await this.mutate(campaignId, (current) => ({
         ...current,
         agents: [...(current.agents ?? []), {
-          role, childId: null, status: 'failed', summary: error instanceof Error ? error.message : String(error), updatedAt: now(),
+          role, childId: null, status: 'failed', summary: error instanceof Error ? error.message : String(error), branch: null, updatedAt: now(),
         }],
       }));
       this.activations.delete(abort);
       throw error;
     }
+
     await this.mutate(campaignId, (current) => ({
       ...current,
       agents: [...(current.agents ?? []), {
-        role, childId: activation.childId ?? null, status: 'running', summary: null, updatedAt: now(),
+        role, childId: activation.childId ?? null, status: 'running', summary: null, branch: null, updatedAt: now(),
       }],
     }));
+
     try {
       const result = await activation.result;
-      const summary = (result?.output ?? [])
+      const resultText = (result?.output ?? [])
         .filter((block) => block?.type === 'text' && typeof block.text === 'string')
         .map((block) => block.text)
         .join('\n')
-        .trim()
-        .slice(0, 4000) || '(no summary)';
+        .trim();
+      let summary = resultText || '(no summary)';
+      let branch = null;
+      if (isInfra) {
+        const handoff = await readFile(join(worktree, HANDOFF_FILE), 'utf8').catch(() => '');
+        summary = (handoff || resultText || '(no summary)').trim();
+        await git(worktree, ['add', '-A']);
+        await git(worktree, ['reset', '--soft', baseCommit]);
+        await git(worktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m',
+          `infra optimization\n\nHandoff:\n${summary}\n\nAleph-Role: InfraOptimizer\nAleph-Campaign: ${campaign.id}\nAleph-Base-Commit: ${baseCommit}`]);
+        const commit = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
+        branch = `infra/${campaign.id}/${newId('i')}`;
+        await git(campaign.researchRoot, ['branch', '-f', branch, commit]);
+      }
+      summary = summary.slice(0, 8000);
       await this.mutate(campaignId, (current) => ({
         ...current,
         agents: (current.agents ?? []).map((item) => (
           item.role === role && item.status === 'running'
-            ? { ...item, status: 'done', summary, updatedAt: now() }
+            ? { ...item, status: 'done', summary, branch, updatedAt: now() }
             : item
         )),
       }));
-      return { campaignId, role, childId: activation.childId ?? null, summary };
+      return { campaignId, role, childId: activation.childId ?? null, branch, summary };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       await this.mutate(campaignId, (current) => ({
         ...current,
         agents: (current.agents ?? []).map((item) => (
           item.role === role && item.status === 'running'
-            ? { ...item, status: 'failed', summary: message, updatedAt: now() }
+            ? { ...item, status: 'failed', summary: message, branch: null, updatedAt: now() }
             : item
         )),
       }));
       throw error;
     } finally {
+      if (isInfra) await cleanupWorktree(campaign, worktree).catch(() => undefined);
       this.activations.delete(abort);
     }
   }
@@ -987,7 +1018,7 @@ export async function apply(ctx) {
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_infra_status',
-      'Refresh and return InfraOptimizer capacity: CPU, GPU, disk, memory and the campaign concurrency limit.',
+      'Return host capacity and campaign cost/cache/runtime state for Leader and Composer.',
       campaignParameter,
       async (args) => service.infraStatus({ campaignId: args.campaign_id }),
     ), { when: ({ agent }) => isAleph(agent) }),
@@ -999,7 +1030,7 @@ export async function apply(ctx) {
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_run_infra',
-      'Start the InfraOptimizer agent to inspect capacity and set a safe concurrency/budget.',
+      'Start InfraOptimizer to optimize a code worktree for the actual machine, run a short benchmark and return an infra branch.',
       campaignParameter,
       async (args, exec) => service.runAgent({ campaignId: args.campaign_id, role: 'infra', agent: exec.agent }),
     ), { when: ({ agent }) => isLeader(agent) }),
@@ -1016,7 +1047,7 @@ export async function apply(ctx) {
         ompThreads: args.omp_threads ?? 0,
         evalTimeoutMs: args.eval_timeout_ms ?? 180_000,
       }),
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_set_budget_vector',
       'Set the cost budget vector (missions, GPU seconds, disk bytes) chosen by InfraOptimizer.',
@@ -1032,7 +1063,7 @@ export async function apply(ctx) {
         gpuSeconds: args.gpu_seconds ?? null,
         diskBytes: args.disk_bytes ?? null,
       }),
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_set_parallel',
       'Set the campaign concurrency limit chosen by InfraOptimizer.',
@@ -1041,7 +1072,7 @@ export async function apply(ctx) {
         max_parallel: { type: 'integer', required: true, description: 'Concurrency limit from 1 to 8' },
       },
       async (args) => service.setParallel({ campaignId: args.campaign_id, maxParallel: args.max_parallel }),
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_set_budget',
       'Set or clear the campaign mission budget.',
@@ -1050,7 +1081,7 @@ export async function apply(ctx) {
         budget: { type: 'number', description: 'Budget in missions, or null to clear' },
       },
       async (args) => service.setBudget({ campaignId: args.campaign_id, budget: args.budget ?? null }),
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_set_exploration',
       'Set the campaign exploration level used by the next strategy sample.',
@@ -1059,7 +1090,7 @@ export async function apply(ctx) {
         exploration: { type: 'number', required: true, description: 'Value in [0, 1]' },
       },
       async (args) => service.setExploration({ campaignId: args.campaign_id, exploration: args.exploration }),
-    ), { when: ({ agent }) => isAleph(agent) }),
+    ), { when: ({ agent }) => isLeader(agent) }),
   ];
   ctx.effect(() => () => { for (const dispose of disposers) dispose(); });
 

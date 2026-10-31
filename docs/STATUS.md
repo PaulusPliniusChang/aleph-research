@@ -50,9 +50,10 @@
 - Composer：`aleph_compose_batch` 创建一个批次，按 L0 到 L3 轮换生成任务。
 - 多 agent：`aleph_run_available` 按并发上限启动多个 researcher 子代理；
   Host 服务分别提交、评测与回收各自 worktree。
-- InfraOptimizer：campaign 创建时探测 CPU、NVIDIA GPU、内存与磁盘，
-  计算并发上限；`aleph_infra_status` 可刷新，控制台显示 CPU、GPU、磁盘、
-  内存与活动 agent 数量。
+- InfraOptimizer：代码优化 agent，在独立 worktree 中针对实际机器优化代码，
+  返回 `infra/...` 分支；不设置预算、并发或评测运行时约束。
+- 容量与成本读数：Host 探测 CPU、GPU、内存与磁盘，维护成本画像和评测缓存，
+  由 Leader 侧使用。
 
 案例批次验证：
 
@@ -66,28 +67,28 @@
 
 两者已改为独立 DSH agent，而不是 Host 辅助函数：
 
-- `aleph_run_infra` 启动 `aleph-infra` 子代理，检查容量并设置并发与预算。
+- `aleph_run_infra` 为 `aleph-infra` 子代理创建独立代码 worktree；子代理优化代码、
+  运行短基准并返回 `infra/...` 分支。
 - `aleph_run_composer` 启动 `aleph-composer` 子代理，检查状态并创建批次。
 - 角色 agent 的 child session、状态与摘要记录在 campaign 中，并显示在控制台
   “编排 agent”区域。
 
 在战役 `c-73eb500a` 上验证：
 
-- InfraOptimizer 子会话 `2c5a2579-fd6e-4f82-ab5e-6b118377fcf8`，保持并发 2，
-  设置预算 12。
 - Composer 子会话 `9867adc4-5f11-4f8b-ad86-08b354d0f913`，创建批次
   `b-75bf349d`，包含 L3、L2、L1、L0 任务各一。
-- 按修正职责复跑：InfraOptimizer 子会话
-  `c554a707-5fe6-4d4d-8b38-0038ef6c3c3d` 设置评测运行时
-  `OMP_NUM_THREADS=8`、超时 300 秒，并检查成本画像与评测缓存；
-  Composer 子会话 `a3a4fcac-4353-4700-80c7-664e9ab5a2a4` 创建批次
+- Composer 子会话 `a3a4fcac-4353-4700-80c7-664e9ab5a2a4` 创建批次
   `b-e616e166`，为任务设置优先级 90、80、55、30 与显存估算
   5200、1300、3600、1800 MB。
-- 角色 agent 状态均为 done，控制台显示摘要与批次。
+- InfraOptimizer 子会话 `194df601-a4e3-4fbd-b2c8-682ea981cb31` 在
+  `infra-2bb3c4dd` worktree 中优化 `experiment.py`，返回分支
+  `infra/c-c1498ff8/i-a251463c`；提交 `6bec2ca` 包含代码改动与
+  `ALEPH_HANDOFF.md`。
+- 角色 agent 状态均为 done，控制台显示角色、子会话、分支与摘要。
 
-Composer 侧已实现 VRAM 画像、优先级队列与回填；InfraOptimizer 侧已实现
-累计成本画像、评测缓存、评测运行时参数、成本预算向量与评测串行队列。
-旧任务没有这些字段，缓存与成本计数从零开始。
+Composer 侧已实现 VRAM 画像、优先级队列与回填。成本画像、评测缓存、
+评测运行时参数、成本预算向量与评测串行队列属于 Host/Leader 侧控制，
+不属于 InfraOptimizer 的代码优化职责。
 
 ## Researcher 算力边界
 

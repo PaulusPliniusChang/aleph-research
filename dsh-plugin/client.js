@@ -634,6 +634,7 @@ window.__ModuleLoader__.load({
         { label: t('field.role'), width: 'minmax(110px, 0.9fr)', primary: true, render: (agent) => roleName(agent.role) ?? agent.role ?? '—' },
         { label: t('field.agentStatus'), width: '96px', render: (agent) => statusPill(t, agent.status) },
         { label: t('field.child'), width: 'minmax(150px, 1.4fr)', mono: true, render: (agent) => agent.childId ?? '—' },
+        { label: t('table.branch'), width: 'minmax(140px, 1.3fr)', mono: true, render: (agent) => agent.branch ?? '—' },
         { label: t('field.updated'), width: 'minmax(140px, 1fr)', render: (agent) => formatDate(agent.updatedAt) ?? '—' },
         { label: t('field.summary'), width: 'minmax(220px, 2.6fr)', render: (agent) => { const text = typeof agent.summary === 'string' ? agent.summary : ''; return h('span', { title: text || undefined }, text.length > 240 ? text.slice(0, 240) + '…' : text || '—'); } },
       ];
