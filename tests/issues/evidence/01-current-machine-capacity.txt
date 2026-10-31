@@ -1,0 +1,196 @@
+(node:197554) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-01 actual machine capacity, rejection, release and concurrent public composition
+  ✔ task success releases machine: project has one actual machine (0.82721ms)
+  ✔ task success releases machine: composition persists busy reservation (0.200292ms)
+  ✔ task success releases machine: reservation names the formed batch (0.201798ms)
+  ✔ task success releases machine: persisted mission belongs to formed batch (0.156355ms)
+  ✔ task success releases machine: actual Git branch includes mission commit (1.358979ms)
+  ✔ task success releases machine: sequential composition while reserved rejects busy (0.525972ms)
+  ✔ task success releases machine: rejected composition adds no batch (0.14405ms)
+  ✔ task success releases machine: rejected composition preserves waiting approved mission (0.149854ms)
+  ✔ task success releases machine/active: actual task executes once (0.29965ms)
+  ✔ task success releases machine/active: machine remains busy during actual compute (0.195878ms)
+  ✔ task success releases machine/active: active compute keeps same owner (0.114283ms)
+  ✔ task success releases machine/active: composition during compute rejects busy (0.135651ms)
+  ✔ task success releases machine/terminal: run call finishes without infrastructure error (0.432878ms)
+  ✔ task success releases machine/terminal: batch records actual success or task failure (0.281576ms)
+  ✔ task success releases machine/terminal: terminal execution releases machine (0.137844ms)
+  ✔ task success releases machine/terminal: terminal execution clears reservation (0.134221ms)
+  ✔ task success releases machine/terminal: waiting mission was not run prematurely (0.211783ms)
+  ✔ task success releases machine/reuse: new batch receives released machine (0.410694ms)
+  ✔ task success releases machine/reuse: new batch contains only waiting mission (0.940669ms)
+  ✔ task success releases machine/reuse-done: waiting task eventually executes once (0.52619ms)
+  ✔ task success releases machine/reuse-done: machine returns idle after reuse (0.184515ms)
+  ✔ task failure releases machine: project has one actual machine (0.326927ms)
+  ✔ task failure releases machine: composition persists busy reservation (0.157401ms)
+  ✔ task failure releases machine: reservation names the formed batch (0.126225ms)
+  ✔ task failure releases machine: persisted mission belongs to formed batch (0.073392ms)
+  ✔ task failure releases machine: actual Git branch includes mission commit (1.979667ms)
+  ✔ task failure releases machine: sequential composition while reserved rejects busy (0.164386ms)
+  ✔ task failure releases machine: rejected composition adds no batch (0.067448ms)
+  ✔ task failure releases machine: rejected composition preserves waiting approved mission (0.049807ms)
+  ✔ task failure releases machine/active: actual task executes once (0.199623ms)
+  ✔ task failure releases machine/active: machine remains busy during actual compute (0.108832ms)
+  ✔ task failure releases machine/active: active compute keeps same owner (0.055201ms)
+  ✔ task failure releases machine/active: composition during compute rejects busy (0.129478ms)
+  ✔ task failure releases machine/terminal: run call finishes without infrastructure error (0.126085ms)
+  ✔ task failure releases machine/terminal: batch records actual success or task failure (0.035936ms)
+  ✔ task failure releases machine/terminal: terminal execution releases machine (0.023925ms)
+  ✔ task failure releases machine/terminal: terminal execution clears reservation (0.020297ms)
+  ✔ task failure releases machine/terminal: waiting mission was not run prematurely (0.031664ms)
+  ✔ task failure releases machine/reuse: new batch receives released machine (0.232437ms)
+  ✔ task failure releases machine/reuse: new batch contains only waiting mission (0.1408ms)
+  ✔ task failure releases machine/reuse-done: waiting task eventually executes once (0.357466ms)
+  ✔ task failure releases machine/reuse-done: machine returns idle after reuse (0.079233ms)
+  ✔ controlled concurrent composition: first public call succeeds (0.183368ms)
+  ✔ controlled concurrent composition: first batch owns machine before second Git proceeds (0.076387ms)
+  ✖ controlled concurrent composition: second call rejects already claimed machine (1.088169ms)
+  ✖ controlled concurrent composition: actual persisted capacity allows one unfinished batch (0.191613ms)
+  ✖ controlled concurrent composition: machine owner remains the original batch (0.15136ms)
+  ✖ controlled concurrent composition: mission remains assigned to original batch (0.126583ms)
+  ✔ controlled concurrent composition: every actual batch contains captured mission ancestor (2.287934ms)
+  ✔ controlled concurrent composition: every actual batch targets the one local machine (0.134524ms)
+  ✖ actual simultaneous task capacity: single machine never launches two batches simultaneously (0.292359ms)
+  ✔ actual simultaneous task capacity: every recorded start belongs to an actual distinct batch worktree (0.238978ms)
+  ✔ race cleanup: actual batch runs reach terminal calls (0.239121ms)
+  ✔ race cleanup: machine is idle after all actual compute completes (0.110436ms)
+✖ ALEPH-01 actual machine capacity, rejection, release and concurrent public composition (2476.938349ms)
+ℹ tests 55
+ℹ suites 0
+ℹ pass 49
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2600.654334
+
+✖ failing tests:
+
+test at tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89
+✖ controlled concurrent composition: second call rejects already claimed machine (1.088169ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'fulfilled'
+  - 'rejected'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:117:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:114:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'fulfilled',
+    expected: 'rejected',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89
+✖ controlled concurrent composition: actual persisted capacity allows one unfinished batch (0.191613ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:118:78)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:114:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89
+✖ controlled concurrent composition: machine owner remains the original batch (0.15136ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'b-155b84f1'
+  - 'b-cf3e7d48'
+       ^
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:119:65)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:114:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'b-155b84f1',
+    expected: 'b-cf3e7d48',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89
+✖ controlled concurrent composition: mission remains assigned to original batch (0.126583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'b-155b84f1'
+  - 'b-cf3e7d48'
+       ^
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:120:67)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:114:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'b-155b84f1',
+    expected: 'b-cf3e7d48',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89
+✖ actual simultaneous task capacity: single machine never launches two batches simultaneously (0.292359ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:131:81)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:46:89)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/machine-capacity-acceptance.test.mjs:130:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
