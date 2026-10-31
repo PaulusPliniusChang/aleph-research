@@ -72,7 +72,7 @@ const projectSchema = z.object({
   submissionPython: z.string().nullable().optional(),
   machines: z.array(machineSchema),
   agents: z.array(z.object({
-    role: z.enum(['composer', 'infra']),
+    role: z.enum(['researcher', 'composer', 'infra']),
     childId: z.string().nullable(),
     status: z.enum(['running', 'done', 'failed']),
     summary: z.string().nullable(),
@@ -240,9 +240,20 @@ class ProjectService {
     throw new Error('workspace is required when the calling session has no cwd');
   }
 
-  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null }) {
+  assertWorkspace(agent, workspace) {
+    const root = this.sessionFor(agent)?.header?.cwd;
+    if (typeof root !== 'string' || root === '') return;
+    const target = resolve(workspace);
+    const base = resolve(root);
+    if (target !== base && !target.startsWith(`${base}/`)) {
+      throw new Error(`project workspace ${target} is outside the DSH session workspace ${base}; open the project as the DSH workspace`);
+    }
+  }
+
+  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null, agent = null }) {
     const target = resolve(workspace);
     if (!(await pathExists(target))) throw new Error(`workspace does not exist: ${target}`);
+    if (agent) this.assertWorkspace(agent, target);
     const existing = this.byWorkspace(target);
     if (existing) return existing;
     const researchRoot = join(target, 'research');
@@ -332,6 +343,7 @@ class ProjectService {
   async runBatch({ projectId, batchId }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
+    this.assertWorkspace(agent, project.workspace);
     const batch = project.batches.find((item) => item.id === batchId);
     if (!batch) throw new Error(`batch not found: ${batchId}`);
     if (batch.status !== 'forming') throw new Error(`batch ${batchId} is not runnable (status ${batch.status})`);
@@ -493,11 +505,47 @@ class ProjectService {
     return { status: 'done', projectId, score, researchCommit, stdout: stdout.slice(0, 8000), stderr: stderr.slice(0, 4000) };
   }
 
+  async startResearcher({ projectId, agent }) {
+    if (!agent) throw new Error('a calling Agent is required to start a researcher');
+    if (!this.subagents) throw new Error('subagent service is unavailable');
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    this.assertWorkspace(agent, project.workspace);
+    const prompt = [
+      'You are an AlephResearch researcher.',
+      `Project: ${project.id}. Research repo: ${project.researchRoot}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
+      'Work on the research repo, maintain your own research branches, and commit research changes when appropriate.',
+      'Small work can be done directly. For work with significant hardware cost, create a mission branch from the mission template, add missions/<id>/mission.json plus code and an uv project, commit the branch, and call aleph_propose_mission.',
+      'After proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.',
+      'When all your missions are done, call aleph_evaluate once more so the Host evaluates the research branch and writes the report into the research commit, then finish. Do not modify project queue, batch or machine state.',
+    ].join('\n');
+    const abort = new AbortController();
+    let activation;
+    try {
+      activation = await this.subagents.startActivation({
+        provider: 'spawn', label: `aleph researcher ${project.id}`, delivery: 'caller', signal: abort.signal,
+        request: { parent: agent, cwd: project.researchRoot, agentPreset: 'aleph-researcher', prompt: [{ type: 'text', text: prompt }] },
+      });
+    } catch (error) {
+      await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: null, status: 'failed', summary: String(error), branch: null, updatedAt: now() }] }));
+      throw error;
+    }
+    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: activation.childId ?? null, status: 'running', summary: null, branch: null, updatedAt: now() }] }));
+    activation.result.then(async (result) => {
+      const summary = (result?.output ?? []).filter((block) => block?.type === 'text').map((block) => block.text).join('\n').trim().slice(0, 8000) || '(no summary)';
+      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'done', summary, updatedAt: now() } : item) })).catch(() => undefined);
+    }, async (error) => {
+      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) })).catch(() => undefined);
+    });
+    return { projectId, role: 'researcher', childId: activation.childId ?? null };
+  }
+
   async runComposer({ projectId, agent }) {
     if (!agent) throw new Error('a calling Agent is required to start Composer');
     if (!this.subagents) throw new Error('subagent service is unavailable');
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
+    this.assertWorkspace(agent, project.workspace);
     const abort = new AbortController();
     const prompt = [
       'You are MissionComposer for AlephResearch.',
@@ -718,6 +766,7 @@ export async function apply(ctx) {
         visibleData: args.visible_data,
         testsetPath: args.testset,
         submissionPython: args.submission_python,
+        agent: exec.agent,
       }),
     ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
@@ -753,6 +802,12 @@ export async function apply(ctx) {
       { ...projectIdParam },
       async (args, exec) => service.evaluate({ projectId: args.project_id, agent: exec.agent }),
     ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_run_researcher',
+      'Start a researcher subagent in the research repo; it proposes missions and waits only for its own missions.',
+      { ...projectIdParam },
+      async (args, exec) => service.startResearcher({ projectId: args.project_id, agent: exec.agent }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_run_composer',
       'Start MissionComposer to inspect the approved queue and form a machine-bound batch.',
