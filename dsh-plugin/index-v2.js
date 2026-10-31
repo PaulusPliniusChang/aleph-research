@@ -993,8 +993,10 @@ class ProjectService {
     if (!machine) throw new Error(`machine not found: ${machineId}`);
     if (machine.status !== 'idle') throw new Error(`machine ${machineId} is busy`);
     const approvedAll = project.missions.filter((mission) => mission.status === 'approved');
+    const terminalBranches = new Set(project.missions.filter((mission) => ['done', 'failed', 'batched'].includes(mission.status)).map((mission) => mission.branch));
     const seenBranches = new Set();
     const approved = approvedAll.filter((mission) => {
+      if (terminalBranches.has(mission.branch)) return false;
       if (seenBranches.has(mission.branch)) return false;
       seenBranches.add(mission.branch);
       return true;
@@ -1023,8 +1025,8 @@ class ProjectService {
         if (approved.some((item) => item.id === mission.id)) {
           return { ...mission, status: 'batched', batchId, preBatchTip: preBatch[mission.id] };
         }
-        if (mission.status === 'approved' && approved.some((item) => item.branch === mission.branch)) {
-          return { ...mission, status: 'failed', error: 'duplicate branch already batched', finishedAt: now() };
+        if (mission.status === 'approved' && (approved.some((item) => item.branch === mission.branch) || terminalBranches.has(mission.branch))) {
+          return { ...mission, status: 'failed', error: 'branch already has a terminal mission; propose a new branch', finishedAt: now() };
         }
         return mission;
       }),
