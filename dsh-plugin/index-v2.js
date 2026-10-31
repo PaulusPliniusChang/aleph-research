@@ -343,6 +343,19 @@ class ProjectService {
     return { projectId, commit, prepared: next.prepared, visibleData: next.visibleData };
   }
 
+  async removeMissionWorktree(project, branch) {
+    const text = (await git(project.missionRoot, ['worktree', 'list', '--porcelain'])).stdout;
+    let current = null;
+    for (const line of text.split(/\r?\n/)) {
+      if (line.startsWith('worktree ')) current = { path: line.slice(9) };
+      else if (current && line.startsWith('branch ')) current.branch = line.slice(7).replace(/^refs\/heads\//, '');
+      else if (!line.trim() && current) {
+        if (current.branch === branch) await git(project.missionRoot, ['worktree', 'remove', '--force', current.path]).catch(() => undefined);
+        current = null;
+      }
+    }
+  }
+
   async startMission({ projectId, name = 'mission' }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
@@ -394,7 +407,7 @@ class ProjectService {
       throw new Error(`mission branch ${branch} has no valid missions/<id>/mission.json: ${error instanceof Error ? error.message : error}`);
     }
     const ownerSession = agent?.id ?? null;
-    return this.mutate(projectId, (current) => ({
+    const registered = await this.mutate(projectId, (current) => ({
       ...current,
       missions: [...current.missions, {
         id: newId('m'),
@@ -415,6 +428,8 @@ class ProjectService {
         finishedAt: null,
       }],
     }));
+    await this.removeMissionWorktree(project, branch);
+    return registered;
   }
 
   async approve({ projectId, missionId }) {
@@ -443,7 +458,7 @@ class ProjectService {
     const startedAt = now();
     let runnerError = null;
     try {
-      await run('python3', ['batch_runner.py'], {
+      await run(project.pythonPath || 'python3', ['batch_runner.py'], {
         cwd: batchWorktree,
         timeout: 900_000,
         env: {
