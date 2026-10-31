@@ -1,0 +1,1586 @@
+{
+  "source": "/home/paulus-chang/项目/aleph",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": false,
+  "checks": [
+    {
+      "scope": "checked-clean",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "checked-clean",
+      "name": "checked-out branch move must reject before ref mutation",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n200 !== 500\n"
+    },
+    {
+      "scope": "checked-clean",
+      "name": "checked-out source HEAD must remain intact",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '7ab8eeb1478d6825bf827ccb100b630fef7863b2'\n- '0bac8383107d1663201f932af202a137706dc090'\n"
+    },
+    {
+      "scope": "checked-clean",
+      "name": "checked-out status must remain intact",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'M  algorithm.txt'\n- ''\n"
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "checked-out branch move must reject before ref mutation",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n200 !== 500\n"
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "checked-out source HEAD must remain intact",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '7ab8eeb1478d6825bf827ccb100b630fef7863b2'\n- '3b71d010ef933d10ed103ceb14c960d727827d91'\n"
+    },
+    {
+      "scope": "checked-dirty",
+      "name": "checked-out status must remain intact",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "linked-clean",
+      "name": "checked-out branch move must reject before ref mutation",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n200 !== 500\n"
+    },
+    {
+      "scope": "linked-clean",
+      "name": "checked-out source HEAD must remain intact",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '7ab8eeb1478d6825bf827ccb100b630fef7863b2'\n- 'ed1a60075eb83b83742d85151abfdf0c9e2cf2ec'\n"
+    },
+    {
+      "scope": "linked-clean",
+      "name": "checked-out status must remain intact",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'M  algorithm.txt'\n- ''\n"
+    },
+    {
+      "scope": "linked-clean",
+      "name": "other checked-out main worktree stays unchanged",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "checked-out branch move must reject before ref mutation",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n200 !== 500\n"
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "checked-out source HEAD must remain intact",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '415df7cd507dfd43ce428f513a77d426bea83dc4'\n- '209a87c91e3c54f29a9c65a94f11a3163e9faef3'\n"
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "checked-out status must remain intact",
+      "passed": true
+    },
+    {
+      "scope": "linked-dirty",
+      "name": "other checked-out main worktree stays unchanged",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "valid safe selection succeeds",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "selected ref equals best evaluated input",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "returned selected score matches actual Python score",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "returned previous ref matches preselection ref",
+      "passed": true
+    },
+    {
+      "scope": "unoccupied",
+      "name": "safe selection preserves checked-out snapshot",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "valid safe selection succeeds",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "selected ref equals best evaluated input",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "returned selected score matches actual Python score",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "returned previous ref matches preselection ref",
+      "passed": true
+    },
+    {
+      "scope": "already-best",
+      "name": "safe selection preserves checked-out snapshot",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "invalid selection rejects",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "invalid selection returns actionable cause",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "invalid selection leaves checked-out snapshot unchanged",
+      "passed": true
+    },
+    {
+      "scope": "missing-branch",
+      "name": "invalid selection does not create missing branch",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "project research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "original algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "later algorithm commit remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "selection preserves evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "selection preserves best score and source record",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "selection preserves tracked working contents",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "selection preserves staged tree",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "selection preserves untracked pending contents",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "invalid selection rejects",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "invalid selection returns actionable cause",
+      "passed": true
+    },
+    {
+      "scope": "no-best",
+      "name": "invalid selection leaves checked-out snapshot unchanged",
+      "passed": true
+    }
+  ],
+  "scenarios": [
+    {
+      "mode": "checked-clean",
+      "project": "p-e0eba5ae",
+      "repo": "/tmp/aleph-select-checked-clean-vLBElZ/workspace/research",
+      "target": "/tmp/aleph-select-checked-clean-vLBElZ/workspace/research",
+      "branch": "main",
+      "bestInput": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+      "later": "0bac8383107d1663201f932af202a137706dc090",
+      "evaluated": {
+        "status": "done",
+        "projectId": "p-e0eba5ae",
+        "score": 10,
+        "researchCommit": "2804116754c8a3a7a5c9724ec3599ab73d53720e",
+        "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "evaluationRef": "refs/aleph/evaluations/eval-c92305ea",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "2804116754c8a3a7a5c9724ec3599ab73d53720e",
+          "evaluationRef": "refs/aleph/evaluations/eval-c92305ea",
+          "at": "2026-10-31T12:17:56.187Z"
+        },
+        "stdout": "{\"score\": 10}\n",
+        "stderr": ""
+      },
+      "before": {
+        "head": "0bac8383107d1663201f932af202a137706dc090",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "after": {
+        "head": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "M  algorithm.txt",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainBefore": {
+        "head": "0bac8383107d1663201f932af202a137706dc090",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainAfter": {
+        "head": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "M  algorithm.txt",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "response": {
+        "status": 200,
+        "value": {
+          "ok": true,
+          "projectId": "p-e0eba5ae",
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "score": 10,
+          "previous": "0bac8383107d1663201f932af202a137706dc090"
+        }
+      },
+      "stateBefore": {
+        "id": "p-e0eba5ae",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-checked-clean-vLBElZ/workspace",
+        "research_root": "/tmp/aleph-select-checked-clean-vLBElZ/workspace/research",
+        "mission_root": "/tmp/aleph-select-checked-clean-vLBElZ/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "2804116754c8a3a7a5c9724ec3599ab73d53720e",
+          "evaluationRef": "refs/aleph/evaluations/eval-c92305ea",
+          "at": "2026-10-31T12:17:56.187Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-c92305ea",
+            "branch": "main",
+            "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+            "researchCommit": "2804116754c8a3a7a5c9724ec3599ab73d53720e",
+            "evaluationRef": "refs/aleph/evaluations/eval-c92305ea",
+            "score": 10,
+            "at": "2026-10-31T12:17:56.187Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-e0eba5ae",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-checked-clean-vLBElZ/workspace",
+        "research_root": "/tmp/aleph-select-checked-clean-vLBElZ/workspace/research",
+        "mission_root": "/tmp/aleph-select-checked-clean-vLBElZ/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "2804116754c8a3a7a5c9724ec3599ab73d53720e",
+          "evaluationRef": "refs/aleph/evaluations/eval-c92305ea",
+          "at": "2026-10-31T12:17:56.187Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-c92305ea",
+            "branch": "main",
+            "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+            "researchCommit": "2804116754c8a3a7a5c9724ec3599ab73d53720e",
+            "evaluationRef": "refs/aleph/evaluations/eval-c92305ea",
+            "score": 10,
+            "at": "2026-10-31T12:17:56.187Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "checked-dirty",
+      "project": "p-e9a4ad3b",
+      "repo": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace/research",
+      "target": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace/research",
+      "branch": "main",
+      "bestInput": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+      "later": "3b71d010ef933d10ed103ceb14c960d727827d91",
+      "evaluated": {
+        "status": "done",
+        "projectId": "p-e9a4ad3b",
+        "score": 10,
+        "researchCommit": "6c9c04a289e9296e76a9af0ae3ec5980932d798e",
+        "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "evaluationRef": "refs/aleph/evaluations/eval-16c8a6c0",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "6c9c04a289e9296e76a9af0ae3ec5980932d798e",
+          "evaluationRef": "refs/aleph/evaluations/eval-16c8a6c0",
+          "at": "2026-10-31T12:17:56.473Z"
+        },
+        "stdout": "{\"score\": 10}\n",
+        "stderr": ""
+      },
+      "before": {
+        "head": "3b71d010ef933d10ed103ceb14c960d727827d91",
+        "index": "d240adbbada2eb832a287281407973bf7367db98",
+        "status": "MM algorithm.txt\n?? pending.txt",
+        "algorithm": "40\n",
+        "pending": "pending work\n"
+      },
+      "after": {
+        "head": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "index": "d240adbbada2eb832a287281407973bf7367db98",
+        "status": "MM algorithm.txt\n?? pending.txt",
+        "algorithm": "40\n",
+        "pending": "pending work\n"
+      },
+      "mainBefore": {
+        "head": "3b71d010ef933d10ed103ceb14c960d727827d91",
+        "index": "d240adbbada2eb832a287281407973bf7367db98",
+        "status": "MM algorithm.txt\n?? pending.txt",
+        "algorithm": "40\n",
+        "pending": "pending work\n"
+      },
+      "mainAfter": {
+        "head": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "index": "d240adbbada2eb832a287281407973bf7367db98",
+        "status": "MM algorithm.txt\n?? pending.txt",
+        "algorithm": "40\n",
+        "pending": "pending work\n"
+      },
+      "response": {
+        "status": 200,
+        "value": {
+          "ok": true,
+          "projectId": "p-e9a4ad3b",
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "score": 10,
+          "previous": "3b71d010ef933d10ed103ceb14c960d727827d91"
+        }
+      },
+      "stateBefore": {
+        "id": "p-e9a4ad3b",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace",
+        "research_root": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace/research",
+        "mission_root": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "6c9c04a289e9296e76a9af0ae3ec5980932d798e",
+          "evaluationRef": "refs/aleph/evaluations/eval-16c8a6c0",
+          "at": "2026-10-31T12:17:56.473Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-16c8a6c0",
+            "branch": "main",
+            "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+            "researchCommit": "6c9c04a289e9296e76a9af0ae3ec5980932d798e",
+            "evaluationRef": "refs/aleph/evaluations/eval-16c8a6c0",
+            "score": 10,
+            "at": "2026-10-31T12:17:56.473Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-e9a4ad3b",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace",
+        "research_root": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace/research",
+        "mission_root": "/tmp/aleph-select-checked-dirty-CHqdSE/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "6c9c04a289e9296e76a9af0ae3ec5980932d798e",
+          "evaluationRef": "refs/aleph/evaluations/eval-16c8a6c0",
+          "at": "2026-10-31T12:17:56.473Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-16c8a6c0",
+            "branch": "main",
+            "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+            "researchCommit": "6c9c04a289e9296e76a9af0ae3ec5980932d798e",
+            "evaluationRef": "refs/aleph/evaluations/eval-16c8a6c0",
+            "score": 10,
+            "at": "2026-10-31T12:17:56.473Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "linked-clean",
+      "project": "p-141240ea",
+      "repo": "/tmp/aleph-select-linked-clean-tejRoY/workspace/research",
+      "target": "/tmp/aleph-select-linked-clean-tejRoY/linked",
+      "branch": "research/linked",
+      "bestInput": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+      "later": "ed1a60075eb83b83742d85151abfdf0c9e2cf2ec",
+      "evaluated": {
+        "status": "done",
+        "projectId": "p-141240ea",
+        "score": 10,
+        "researchCommit": "5203dd1406c9615141880c642ef062843622d3fe",
+        "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "evaluationRef": "refs/aleph/evaluations/eval-1519d357",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "5203dd1406c9615141880c642ef062843622d3fe",
+          "evaluationRef": "refs/aleph/evaluations/eval-1519d357",
+          "at": "2026-10-31T12:17:56.722Z"
+        },
+        "stdout": "{\"score\": 10}\n",
+        "stderr": ""
+      },
+      "before": {
+        "head": "ed1a60075eb83b83742d85151abfdf0c9e2cf2ec",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "after": {
+        "head": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "M  algorithm.txt",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainBefore": {
+        "head": "ed1a60075eb83b83742d85151abfdf0c9e2cf2ec",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainAfter": {
+        "head": "ed1a60075eb83b83742d85151abfdf0c9e2cf2ec",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "response": {
+        "status": 200,
+        "value": {
+          "ok": true,
+          "projectId": "p-141240ea",
+          "branch": "research/linked",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "score": 10,
+          "previous": "ed1a60075eb83b83742d85151abfdf0c9e2cf2ec"
+        }
+      },
+      "stateBefore": {
+        "id": "p-141240ea",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-linked-clean-tejRoY/workspace",
+        "research_root": "/tmp/aleph-select-linked-clean-tejRoY/workspace/research",
+        "mission_root": "/tmp/aleph-select-linked-clean-tejRoY/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "5203dd1406c9615141880c642ef062843622d3fe",
+          "evaluationRef": "refs/aleph/evaluations/eval-1519d357",
+          "at": "2026-10-31T12:17:56.722Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-1519d357",
+            "branch": "main",
+            "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+            "researchCommit": "5203dd1406c9615141880c642ef062843622d3fe",
+            "evaluationRef": "refs/aleph/evaluations/eval-1519d357",
+            "score": 10,
+            "at": "2026-10-31T12:17:56.722Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-141240ea",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-linked-clean-tejRoY/workspace",
+        "research_root": "/tmp/aleph-select-linked-clean-tejRoY/workspace/research",
+        "mission_root": "/tmp/aleph-select-linked-clean-tejRoY/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+          "researchCommit": "5203dd1406c9615141880c642ef062843622d3fe",
+          "evaluationRef": "refs/aleph/evaluations/eval-1519d357",
+          "at": "2026-10-31T12:17:56.722Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-1519d357",
+            "branch": "main",
+            "evaluatedCommit": "7ab8eeb1478d6825bf827ccb100b630fef7863b2",
+            "researchCommit": "5203dd1406c9615141880c642ef062843622d3fe",
+            "evaluationRef": "refs/aleph/evaluations/eval-1519d357",
+            "score": 10,
+            "at": "2026-10-31T12:17:56.722Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "linked-dirty",
+      "project": "p-4669b040",
+      "repo": "/tmp/aleph-select-linked-dirty-bQoOKA/workspace/research",
+      "target": "/tmp/aleph-select-linked-dirty-bQoOKA/linked",
+      "branch": "research/linked",
+      "bestInput": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+      "later": "209a87c91e3c54f29a9c65a94f11a3163e9faef3",
+      "evaluated": {
+        "status": "done",
+        "projectId": "p-4669b040",
+        "score": 10,
+        "researchCommit": "2fe0eb1b6f67c3b6c42245e684fcfdcf94d1d38a",
+        "evaluatedCommit": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+        "evaluationRef": "refs/aleph/evaluations/eval-d3e3f279",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+          "researchCommit": "2fe0eb1b6f67c3b6c42245e684fcfdcf94d1d38a",
+          "evaluationRef": "refs/aleph/evaluations/eval-d3e3f279",
+          "at": "2026-10-31T12:17:57.168Z"
+        },
+        "stdout": "{\"score\": 10}\n",
+        "stderr": ""
+      },
+      "before": {
+        "head": "209a87c91e3c54f29a9c65a94f11a3163e9faef3",
+        "index": "d240adbbada2eb832a287281407973bf7367db98",
+        "status": "MM algorithm.txt\n?? pending.txt",
+        "algorithm": "40\n",
+        "pending": "pending work\n"
+      },
+      "after": {
+        "head": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+        "index": "d240adbbada2eb832a287281407973bf7367db98",
+        "status": "MM algorithm.txt\n?? pending.txt",
+        "algorithm": "40\n",
+        "pending": "pending work\n"
+      },
+      "mainBefore": {
+        "head": "209a87c91e3c54f29a9c65a94f11a3163e9faef3",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainAfter": {
+        "head": "209a87c91e3c54f29a9c65a94f11a3163e9faef3",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "response": {
+        "status": 200,
+        "value": {
+          "ok": true,
+          "projectId": "p-4669b040",
+          "branch": "research/linked",
+          "commit": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+          "score": 10,
+          "previous": "209a87c91e3c54f29a9c65a94f11a3163e9faef3"
+        }
+      },
+      "stateBefore": {
+        "id": "p-4669b040",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-linked-dirty-bQoOKA/workspace",
+        "research_root": "/tmp/aleph-select-linked-dirty-bQoOKA/workspace/research",
+        "mission_root": "/tmp/aleph-select-linked-dirty-bQoOKA/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+          "researchCommit": "2fe0eb1b6f67c3b6c42245e684fcfdcf94d1d38a",
+          "evaluationRef": "refs/aleph/evaluations/eval-d3e3f279",
+          "at": "2026-10-31T12:17:57.168Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-d3e3f279",
+            "branch": "main",
+            "evaluatedCommit": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+            "researchCommit": "2fe0eb1b6f67c3b6c42245e684fcfdcf94d1d38a",
+            "evaluationRef": "refs/aleph/evaluations/eval-d3e3f279",
+            "score": 10,
+            "at": "2026-10-31T12:17:57.168Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-4669b040",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-linked-dirty-bQoOKA/workspace",
+        "research_root": "/tmp/aleph-select-linked-dirty-bQoOKA/workspace/research",
+        "mission_root": "/tmp/aleph-select-linked-dirty-bQoOKA/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+          "researchCommit": "2fe0eb1b6f67c3b6c42245e684fcfdcf94d1d38a",
+          "evaluationRef": "refs/aleph/evaluations/eval-d3e3f279",
+          "at": "2026-10-31T12:17:57.168Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-d3e3f279",
+            "branch": "main",
+            "evaluatedCommit": "415df7cd507dfd43ce428f513a77d426bea83dc4",
+            "researchCommit": "2fe0eb1b6f67c3b6c42245e684fcfdcf94d1d38a",
+            "evaluationRef": "refs/aleph/evaluations/eval-d3e3f279",
+            "score": 10,
+            "at": "2026-10-31T12:17:57.168Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "unoccupied",
+      "project": "p-3b01ffa9",
+      "repo": "/tmp/aleph-select-unoccupied-O9LAO8/workspace/research",
+      "target": "/tmp/aleph-select-unoccupied-O9LAO8/workspace/research",
+      "branch": "research/idle",
+      "bestInput": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+      "later": "3b9c68aa4e40f658aaa62394d6cabb296cc1c4e0",
+      "evaluated": {
+        "status": "done",
+        "projectId": "p-3b01ffa9",
+        "score": 10,
+        "researchCommit": "7653d4000809de9416cc3f1f567eda4018f6ed7f",
+        "evaluatedCommit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+        "evaluationRef": "refs/aleph/evaluations/eval-71295597",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "researchCommit": "7653d4000809de9416cc3f1f567eda4018f6ed7f",
+          "evaluationRef": "refs/aleph/evaluations/eval-71295597",
+          "at": "2026-10-31T12:17:57.619Z"
+        },
+        "stdout": "{\"score\": 10}\n",
+        "stderr": ""
+      },
+      "before": {
+        "head": "3b9c68aa4e40f658aaa62394d6cabb296cc1c4e0",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "after": {
+        "head": "3b9c68aa4e40f658aaa62394d6cabb296cc1c4e0",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainBefore": {
+        "head": "3b9c68aa4e40f658aaa62394d6cabb296cc1c4e0",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainAfter": {
+        "head": "3b9c68aa4e40f658aaa62394d6cabb296cc1c4e0",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "response": {
+        "status": 200,
+        "value": {
+          "ok": true,
+          "projectId": "p-3b01ffa9",
+          "branch": "research/idle",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "score": 10,
+          "previous": "3b9c68aa4e40f658aaa62394d6cabb296cc1c4e0"
+        }
+      },
+      "stateBefore": {
+        "id": "p-3b01ffa9",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-unoccupied-O9LAO8/workspace",
+        "research_root": "/tmp/aleph-select-unoccupied-O9LAO8/workspace/research",
+        "mission_root": "/tmp/aleph-select-unoccupied-O9LAO8/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "researchCommit": "7653d4000809de9416cc3f1f567eda4018f6ed7f",
+          "evaluationRef": "refs/aleph/evaluations/eval-71295597",
+          "at": "2026-10-31T12:17:57.619Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-71295597",
+            "branch": "main",
+            "evaluatedCommit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+            "researchCommit": "7653d4000809de9416cc3f1f567eda4018f6ed7f",
+            "evaluationRef": "refs/aleph/evaluations/eval-71295597",
+            "score": 10,
+            "at": "2026-10-31T12:17:57.619Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-3b01ffa9",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-unoccupied-O9LAO8/workspace",
+        "research_root": "/tmp/aleph-select-unoccupied-O9LAO8/workspace/research",
+        "mission_root": "/tmp/aleph-select-unoccupied-O9LAO8/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "researchCommit": "7653d4000809de9416cc3f1f567eda4018f6ed7f",
+          "evaluationRef": "refs/aleph/evaluations/eval-71295597",
+          "at": "2026-10-31T12:17:57.619Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-71295597",
+            "branch": "main",
+            "evaluatedCommit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+            "researchCommit": "7653d4000809de9416cc3f1f567eda4018f6ed7f",
+            "evaluationRef": "refs/aleph/evaluations/eval-71295597",
+            "score": 10,
+            "at": "2026-10-31T12:17:57.619Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "already-best",
+      "project": "p-f0299ff7",
+      "repo": "/tmp/aleph-select-already-best-SinQgF/workspace/research",
+      "target": "/tmp/aleph-select-already-best-SinQgF/workspace/research",
+      "branch": "main",
+      "bestInput": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+      "later": "9a96fe5c698dff4f55a0fe950e6178ed53cab267",
+      "evaluated": {
+        "status": "done",
+        "projectId": "p-f0299ff7",
+        "score": 10,
+        "researchCommit": "8e4750dc3cd4c4d6a5b77a1bbea08f4fad929968",
+        "evaluatedCommit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+        "evaluationRef": "refs/aleph/evaluations/eval-c89e6693",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "researchCommit": "8e4750dc3cd4c4d6a5b77a1bbea08f4fad929968",
+          "evaluationRef": "refs/aleph/evaluations/eval-c89e6693",
+          "at": "2026-10-31T12:17:58.088Z"
+        },
+        "stdout": "{\"score\": 10}\n",
+        "stderr": ""
+      },
+      "before": {
+        "head": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+        "index": "39be676654ac3fe6501041a24ecc6e2f6595ae64",
+        "status": "",
+        "algorithm": "10\n",
+        "pending": null
+      },
+      "after": {
+        "head": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+        "index": "39be676654ac3fe6501041a24ecc6e2f6595ae64",
+        "status": "",
+        "algorithm": "10\n",
+        "pending": null
+      },
+      "mainBefore": {
+        "head": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+        "index": "39be676654ac3fe6501041a24ecc6e2f6595ae64",
+        "status": "",
+        "algorithm": "10\n",
+        "pending": null
+      },
+      "mainAfter": {
+        "head": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+        "index": "39be676654ac3fe6501041a24ecc6e2f6595ae64",
+        "status": "",
+        "algorithm": "10\n",
+        "pending": null
+      },
+      "response": {
+        "status": 200,
+        "value": {
+          "ok": true,
+          "projectId": "p-f0299ff7",
+          "branch": "main",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "score": 10,
+          "previous": "6805299e913aaab869c6dc3c83bf196f6e8efd0b"
+        }
+      },
+      "stateBefore": {
+        "id": "p-f0299ff7",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-already-best-SinQgF/workspace",
+        "research_root": "/tmp/aleph-select-already-best-SinQgF/workspace/research",
+        "mission_root": "/tmp/aleph-select-already-best-SinQgF/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "researchCommit": "8e4750dc3cd4c4d6a5b77a1bbea08f4fad929968",
+          "evaluationRef": "refs/aleph/evaluations/eval-c89e6693",
+          "at": "2026-10-31T12:17:58.088Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-c89e6693",
+            "branch": "main",
+            "evaluatedCommit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+            "researchCommit": "8e4750dc3cd4c4d6a5b77a1bbea08f4fad929968",
+            "evaluationRef": "refs/aleph/evaluations/eval-c89e6693",
+            "score": 10,
+            "at": "2026-10-31T12:17:58.088Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-f0299ff7",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-already-best-SinQgF/workspace",
+        "research_root": "/tmp/aleph-select-already-best-SinQgF/workspace/research",
+        "mission_root": "/tmp/aleph-select-already-best-SinQgF/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+          "researchCommit": "8e4750dc3cd4c4d6a5b77a1bbea08f4fad929968",
+          "evaluationRef": "refs/aleph/evaluations/eval-c89e6693",
+          "at": "2026-10-31T12:17:58.088Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-c89e6693",
+            "branch": "main",
+            "evaluatedCommit": "6805299e913aaab869c6dc3c83bf196f6e8efd0b",
+            "researchCommit": "8e4750dc3cd4c4d6a5b77a1bbea08f4fad929968",
+            "evaluationRef": "refs/aleph/evaluations/eval-c89e6693",
+            "score": 10,
+            "at": "2026-10-31T12:17:58.088Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "missing-branch",
+      "project": "p-22651ec9",
+      "repo": "/tmp/aleph-select-missing-branch-9jlqVE/workspace/research",
+      "target": "/tmp/aleph-select-missing-branch-9jlqVE/workspace/research",
+      "branch": "research/missing",
+      "bestInput": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+      "later": "e82b8e26eac36e5a8dca0ea86c4c46a25b922eb6",
+      "evaluated": {
+        "status": "done",
+        "projectId": "p-22651ec9",
+        "score": 10,
+        "researchCommit": "9e2ea4292a0695f4a8061eb959d913bb999e85c0",
+        "evaluatedCommit": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+        "evaluationRef": "refs/aleph/evaluations/eval-e634c5ef",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+          "researchCommit": "9e2ea4292a0695f4a8061eb959d913bb999e85c0",
+          "evaluationRef": "refs/aleph/evaluations/eval-e634c5ef",
+          "at": "2026-10-31T12:17:58.553Z"
+        },
+        "stdout": "{\"score\": 10}\n",
+        "stderr": ""
+      },
+      "before": {
+        "head": "e82b8e26eac36e5a8dca0ea86c4c46a25b922eb6",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "after": {
+        "head": "e82b8e26eac36e5a8dca0ea86c4c46a25b922eb6",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainBefore": {
+        "head": "e82b8e26eac36e5a8dca0ea86c4c46a25b922eb6",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainAfter": {
+        "head": "e82b8e26eac36e5a8dca0ea86c4c46a25b922eb6",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "response": {
+        "status": 500,
+        "value": {
+          "ok": false,
+          "error": {
+            "code": "aleph/select-best-failed",
+            "message": "research branch not found: research/missing"
+          }
+        }
+      },
+      "stateBefore": {
+        "id": "p-22651ec9",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-missing-branch-9jlqVE/workspace",
+        "research_root": "/tmp/aleph-select-missing-branch-9jlqVE/workspace/research",
+        "mission_root": "/tmp/aleph-select-missing-branch-9jlqVE/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+          "researchCommit": "9e2ea4292a0695f4a8061eb959d913bb999e85c0",
+          "evaluationRef": "refs/aleph/evaluations/eval-e634c5ef",
+          "at": "2026-10-31T12:17:58.553Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-e634c5ef",
+            "branch": "main",
+            "evaluatedCommit": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+            "researchCommit": "9e2ea4292a0695f4a8061eb959d913bb999e85c0",
+            "evaluationRef": "refs/aleph/evaluations/eval-e634c5ef",
+            "score": 10,
+            "at": "2026-10-31T12:17:58.553Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-22651ec9",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-missing-branch-9jlqVE/workspace",
+        "research_root": "/tmp/aleph-select-missing-branch-9jlqVE/workspace/research",
+        "mission_root": "/tmp/aleph-select-missing-branch-9jlqVE/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "main",
+          "commit": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+          "researchCommit": "9e2ea4292a0695f4a8061eb959d913bb999e85c0",
+          "evaluationRef": "refs/aleph/evaluations/eval-e634c5ef",
+          "at": "2026-10-31T12:17:58.553Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-e634c5ef",
+            "branch": "main",
+            "evaluatedCommit": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+            "researchCommit": "9e2ea4292a0695f4a8061eb959d913bb999e85c0",
+            "evaluationRef": "refs/aleph/evaluations/eval-e634c5ef",
+            "score": 10,
+            "at": "2026-10-31T12:17:58.553Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "no-best",
+      "project": "p-f3c6f3a3",
+      "repo": "/tmp/aleph-select-no-best-9jVPJ3/workspace/research",
+      "target": "/tmp/aleph-select-no-best-9jVPJ3/workspace/research",
+      "branch": "main",
+      "bestInput": "a7ee288401b140d87b3997ca2631f8b88eb1e4b9",
+      "later": "1643aded11e5b561d85f757eae288a32fd457abf",
+      "before": {
+        "head": "1643aded11e5b561d85f757eae288a32fd457abf",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "after": {
+        "head": "1643aded11e5b561d85f757eae288a32fd457abf",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainBefore": {
+        "head": "1643aded11e5b561d85f757eae288a32fd457abf",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "mainAfter": {
+        "head": "1643aded11e5b561d85f757eae288a32fd457abf",
+        "index": "532ecc2e143aedb52fa23320dfd6f4f0e97ce93f",
+        "status": "",
+        "algorithm": "20\n",
+        "pending": null
+      },
+      "response": {
+        "status": 500,
+        "value": {
+          "ok": false,
+          "error": {
+            "code": "aleph/select-best-failed",
+            "message": "no evaluated best result yet"
+          }
+        }
+      },
+      "stateBefore": {
+        "id": "p-f3c6f3a3",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-no-best-9jVPJ3/workspace",
+        "research_root": "/tmp/aleph-select-no-best-9jVPJ3/workspace/research",
+        "mission_root": "/tmp/aleph-select-no-best-9jVPJ3/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": null,
+        "evaluations": [],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "stateAfter": {
+        "id": "p-f3c6f3a3",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-select-no-best-9jVPJ3/workspace",
+        "research_root": "/tmp/aleph-select-no-best-9jVPJ3/workspace/research",
+        "mission_root": "/tmp/aleph-select-no-best-9jVPJ3/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 -c 'import json,os;from pathlib import Path;print(json.dumps({\"score\":int(Path(os.environ[\"ALEPH_SOLUTION_DIR\"]).joinpath(\"algorithm.txt\").read_text())}))'",
+        "eval_root": null,
+        "best": null,
+        "evaluations": [],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    }
+  ],
+  "boundary": "Real project init/evaluate/select-best handlers, Git refs/index/files, linked worktrees, Python scoring. Automatic replaces DSH session/storage. Actual uses real DSH sessions/tools/persistent storage and authenticated HTTP. No product edits or model calls.",
+  "complete": true,
+  "failed": 10
+}

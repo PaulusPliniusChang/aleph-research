@@ -1,0 +1,362 @@
+(node:415889) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ B current select-best preserves checked-out worktrees and selects unoccupied refs
+  ✔ checked-clean: project research repository remains valid (8.78062ms)
+  ✔ checked-clean: original algorithm commit remains reachable (11.651907ms)
+  ✔ checked-clean: later algorithm commit remains reachable (11.226713ms)
+  ✔ checked-clean: selection preserves evaluation history (1.12808ms)
+  ✔ checked-clean: selection preserves best score and source record (0.761895ms)
+  ✔ checked-clean: selection preserves tracked working contents (0.271378ms)
+  ✔ checked-clean: selection preserves staged tree (0.214971ms)
+  ✔ checked-clean: selection preserves untracked pending contents (0.256032ms)
+  ✖ checked-clean: checked-out branch move must reject before ref mutation (0.967702ms)
+  ✖ checked-clean: checked-out source HEAD must remain intact (1.965835ms)
+  ✖ checked-clean: checked-out status must remain intact (1.352ms)
+  ✔ checked-dirty: project research repository remains valid (4.647571ms)
+  ✔ checked-dirty: original algorithm commit remains reachable (4.738325ms)
+  ✔ checked-dirty: later algorithm commit remains reachable (4.39708ms)
+  ✔ checked-dirty: selection preserves evaluation history (0.535321ms)
+  ✔ checked-dirty: selection preserves best score and source record (0.317738ms)
+  ✔ checked-dirty: selection preserves tracked working contents (0.240868ms)
+  ✔ checked-dirty: selection preserves staged tree (0.201283ms)
+  ✔ checked-dirty: selection preserves untracked pending contents (0.231909ms)
+  ✖ checked-dirty: checked-out branch move must reject before ref mutation (0.497673ms)
+  ✖ checked-dirty: checked-out source HEAD must remain intact (0.350655ms)
+  ✔ checked-dirty: checked-out status must remain intact (0.175071ms)
+  ✔ linked-clean: project research repository remains valid (9.959742ms)
+  ✔ linked-clean: original algorithm commit remains reachable (12.194966ms)
+  ✔ linked-clean: later algorithm commit remains reachable (16.5481ms)
+  ✔ linked-clean: selection preserves evaluation history (1.243617ms)
+  ✔ linked-clean: selection preserves best score and source record (0.745529ms)
+  ✔ linked-clean: selection preserves tracked working contents (0.51167ms)
+  ✔ linked-clean: selection preserves staged tree (0.635189ms)
+  ✔ linked-clean: selection preserves untracked pending contents (0.59955ms)
+  ✖ linked-clean: checked-out branch move must reject before ref mutation (1.053296ms)
+  ✖ linked-clean: checked-out source HEAD must remain intact (0.939971ms)
+  ✖ linked-clean: checked-out status must remain intact (0.838964ms)
+  ✔ linked-clean: other checked-out main worktree stays unchanged (0.721852ms)
+  ✔ linked-dirty: project research repository remains valid (8.288778ms)
+  ✔ linked-dirty: original algorithm commit remains reachable (13.791564ms)
+  ✔ linked-dirty: later algorithm commit remains reachable (15.364019ms)
+  ✔ linked-dirty: selection preserves evaluation history (0.659152ms)
+  ✔ linked-dirty: selection preserves best score and source record (1.318827ms)
+  ✔ linked-dirty: selection preserves tracked working contents (0.811122ms)
+  ✔ linked-dirty: selection preserves staged tree (0.697783ms)
+  ✔ linked-dirty: selection preserves untracked pending contents (0.431331ms)
+  ✖ linked-dirty: checked-out branch move must reject before ref mutation (0.807124ms)
+  ✖ linked-dirty: checked-out source HEAD must remain intact (0.570639ms)
+  ✔ linked-dirty: checked-out status must remain intact (0.564685ms)
+  ✔ linked-dirty: other checked-out main worktree stays unchanged (0.318857ms)
+  ✔ unoccupied: project research repository remains valid (10.580871ms)
+  ✔ unoccupied: original algorithm commit remains reachable (9.930959ms)
+  ✔ unoccupied: later algorithm commit remains reachable (7.76523ms)
+  ✔ unoccupied: selection preserves evaluation history (0.735018ms)
+  ✔ unoccupied: selection preserves best score and source record (0.572773ms)
+  ✔ unoccupied: selection preserves tracked working contents (0.574934ms)
+  ✔ unoccupied: selection preserves staged tree (0.523284ms)
+  ✔ unoccupied: selection preserves untracked pending contents (0.732869ms)
+  ✔ unoccupied: valid safe selection succeeds (0.750573ms)
+  ✔ unoccupied: selected ref equals best evaluated input (14.830668ms)
+  ✔ unoccupied: returned selected score matches actual Python score (0.89309ms)
+  ✔ unoccupied: returned previous ref matches preselection ref (0.687721ms)
+  ✔ unoccupied: safe selection preserves checked-out snapshot (0.771022ms)
+  ✔ already-best: project research repository remains valid (12.143636ms)
+  ✔ already-best: original algorithm commit remains reachable (11.648981ms)
+  ✔ already-best: later algorithm commit remains reachable (7.572547ms)
+  ✔ already-best: selection preserves evaluation history (0.636845ms)
+  ✔ already-best: selection preserves best score and source record (0.660047ms)
+  ✔ already-best: selection preserves tracked working contents (1.003486ms)
+  ✔ already-best: selection preserves staged tree (2.021826ms)
+  ✔ already-best: selection preserves untracked pending contents (0.523057ms)
+  ✔ already-best: valid safe selection succeeds (0.520803ms)
+  ✔ already-best: selected ref equals best evaluated input (9.754079ms)
+  ✔ already-best: returned selected score matches actual Python score (1.320332ms)
+  ✔ already-best: returned previous ref matches preselection ref (0.766311ms)
+  ✔ already-best: safe selection preserves checked-out snapshot (0.921076ms)
+  ✔ missing-branch: project research repository remains valid (4.530527ms)
+  ✔ missing-branch: original algorithm commit remains reachable (6.430313ms)
+  ✔ missing-branch: later algorithm commit remains reachable (6.838615ms)
+  ✔ missing-branch: selection preserves evaluation history (0.559943ms)
+  ✔ missing-branch: selection preserves best score and source record (0.460378ms)
+  ✔ missing-branch: selection preserves tracked working contents (0.485897ms)
+  ✔ missing-branch: selection preserves staged tree (0.4686ms)
+  ✔ missing-branch: selection preserves untracked pending contents (0.530667ms)
+  ✔ missing-branch: invalid selection rejects (1.17998ms)
+  ✔ missing-branch: invalid selection returns actionable cause (3.156251ms)
+  ✔ missing-branch: invalid selection leaves checked-out snapshot unchanged (1.150364ms)
+  ✔ missing-branch: invalid selection does not create missing branch (6.027014ms)
+  ✔ no-best: project research repository remains valid (13.475898ms)
+  ✔ no-best: original algorithm commit remains reachable (8.284661ms)
+  ✔ no-best: later algorithm commit remains reachable (12.208433ms)
+  ✔ no-best: selection preserves evaluation history (1.844138ms)
+  ✔ no-best: selection preserves best score and source record (1.716049ms)
+  ✔ no-best: selection preserves tracked working contents (1.290144ms)
+  ✔ no-best: selection preserves staged tree (1.128042ms)
+  ✔ no-best: selection preserves untracked pending contents (2.286056ms)
+  ✔ no-best: invalid selection rejects (1.569804ms)
+  ✔ no-best: invalid selection returns actionable cause (0.635121ms)
+  ✔ no-best: invalid selection leaves checked-out snapshot unchanged (0.727736ms)
+✖ B current select-best preserves checked-out worktrees and selects unoccupied refs (3051.98077ms)
+ℹ tests 96
+ℹ suites 0
+ℹ pass 85
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3137.408555
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ checked-clean: checked-out branch move must reject before ref mutation (0.967702ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 500
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:149
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 500,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ checked-clean: checked-out source HEAD must remain intact (1.965835ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '7ab8eeb1478d6825bf827ccb100b630fef7863b2'
+  - '0bac8383107d1663201f932af202a137706dc090'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:150
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '7ab8eeb1478d6825bf827ccb100b630fef7863b2',
+    expected: '0bac8383107d1663201f932af202a137706dc090',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ checked-clean: checked-out status must remain intact (1.352ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'M  algorithm.txt'
+  - ''
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:55:237
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:55:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'M  algorithm.txt',
+    expected: '',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ checked-dirty: checked-out branch move must reject before ref mutation (0.497673ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 500
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:149
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 500,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ checked-dirty: checked-out source HEAD must remain intact (0.350655ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '7ab8eeb1478d6825bf827ccb100b630fef7863b2'
+  - '3b71d010ef933d10ed103ceb14c960d727827d91'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:150
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '7ab8eeb1478d6825bf827ccb100b630fef7863b2',
+    expected: '3b71d010ef933d10ed103ceb14c960d727827d91',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ linked-clean: checked-out branch move must reject before ref mutation (1.053296ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 500
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:149
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 500,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ linked-clean: checked-out source HEAD must remain intact (0.939971ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '7ab8eeb1478d6825bf827ccb100b630fef7863b2'
+  - 'ed1a60075eb83b83742d85151abfdf0c9e2cf2ec'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:150
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '7ab8eeb1478d6825bf827ccb100b630fef7863b2',
+    expected: 'ed1a60075eb83b83742d85151abfdf0c9e2cf2ec',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ linked-clean: checked-out status must remain intact (0.838964ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'M  algorithm.txt'
+  - ''
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:55:237
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:55:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'M  algorithm.txt',
+    expected: '',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ linked-dirty: checked-out branch move must reject before ref mutation (0.807124ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 500
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:149
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:53:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 500,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-select-best.test.mjs:21:38
+✖ linked-dirty: checked-out source HEAD must remain intact (0.570639ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '415df7cd507dfd43ce428f513a77d426bea83dc4'
+  - '209a87c91e3c54f29a9c65a94f11a3163e9faef3'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:150
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-select-best.test.mjs:54:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '415df7cd507dfd43ce428f513a77d426bea83dc4',
+    expected: '209a87c91e3c54f29a9c65a94f11a3163e9faef3',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
