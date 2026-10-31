@@ -11,7 +11,9 @@ subagents. The client entry adds the `Aleph` project console.
 
 - `aleph`: Leader and approval tools.
 - `aleph-researcher`: research work, mission proposal, evaluate and exit.
-- `aleph-composer`: batch composition and conflict handling.
+- `aleph-composer`: batch composition, conflict handling, direct batch execution
+  and InfraOptimizer dispatch. The Infra dispatch tool is available to the
+  Leader and Composer; researchers and InfraOptimizer do not receive it.
 - `aleph-infra`: machine-specific batch code optimization.
 
 ## Install

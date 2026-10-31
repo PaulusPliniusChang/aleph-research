@@ -1543,6 +1543,7 @@ export async function apply(ctx) {
   };
   const isAleph = (agent) => ['aleph', 'aleph-researcher', 'aleph-composer', 'aleph-infra'].includes(presetOf(agent));
   const isLeader = (agent) => presetOf(agent) === 'aleph';
+  const canRunInfra = (agent) => ['aleph', 'aleph-composer'].includes(presetOf(agent));
   const projectIdParam = { project_id: { type: 'string', required: true, description: 'Project id' } };
 
   const disposers = [
@@ -1651,7 +1652,7 @@ export async function apply(ctx) {
       'Start InfraOptimizer on a forming batch, then run the batch and deliver per-mission results.',
       { ...projectIdParam, batch_id: { type: 'string', required: true } },
       async (args, exec) => service.runInfra({ projectId: args.project_id, batchId: args.batch_id, agent: exec.agent }),
-    ), { when: ({ agent }) => isLeader(agent) }),
+    ), { when: ({ agent }) => canRunInfra(agent) }),
     ctx.tools.register(tool(
       'aleph_run_batch',
       'Run a formed machine-bound batch, write per-mission result envelopes and cherry-pick results to pre-batch mission branches.',
