@@ -1391,6 +1391,28 @@ export async function apply(ctx) {
   // replayed headlessly. Only missions whose branch has no terminal mission are approved.
   ctx.webServer.register({
     kind: 'exact',
+    path: '/api/aleph/scaffold',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const projectId = args.project_id ?? args.projectId;
+        const result = await service.scaffoldResearch({
+          projectId,
+          title: args.title ?? 'Research project',
+          dataSources: args.data ?? [],
+          pythonPath: args.python ?? null,
+        });
+        return sendJson(res, 200, { ok: true, ...result });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/scaffold-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+  ctx.webServer.register({
+    kind: 'exact',
     path: '/api/aleph/approve',
     async handler(req, res) {
       if (req.method !== 'POST') return sendJson(res, 405, { ok: false });

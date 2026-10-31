@@ -4,3 +4,4 @@ __pycache__/
 .aleph/
 cases/
 dsh-plugin/node_modules/
+.case-templates/
