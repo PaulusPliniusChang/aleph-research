@@ -128,6 +128,36 @@ async function git(repo, args, timeout = 120_000) {
   return run('git', ['-C', repo, ...args], { timeout });
 }
 
+async function committedResearchOnly(worktree) {
+  // NUL records preserve spaces, newlines, Unicode names and rename source paths.
+  // Git's ordinary ignore rules apply; ignored files never enter the snapshot.
+  const status = (await git(worktree, ['status', '--porcelain=v1', '-z', '--untracked-files=all'])).stdout;
+  if (!status) return;
+  const fields = status.split('\0');
+  const changes = [];
+  for (let index = 0; index < fields.length; index += 1) {
+    const entry = fields[index];
+    if (!entry) continue;
+    const change = { status: entry.slice(0, 2), path: entry.slice(3) };
+    if (/[RC]/.test(change.status)) change.originalPath = fields[++index];
+    changes.push(change);
+  }
+  throw Object.assign(new Error(`Evaluation requires committed research files in ${worktree}. Commit the listed changes and untracked files, then retry aleph_evaluate. No files were staged, committed or removed. Changes: ${JSON.stringify(changes)}. Git-ignored files are excluded from evaluation snapshots.`), {
+    code: 'ALEPH_EVALUATION_UNCOMMITTED', worktree, changes,
+  });
+}
+
+async function researchWorktreeForRef(repo, ref) {
+  const listing = (await git(repo, ['worktree', 'list', '--porcelain', '-z'])).stdout;
+  for (const record of listing.split('\0\0')) {
+    const fields = record.split('\0');
+    if (fields.includes(`branch ${ref}`)) {
+      return fields.find(field => field.startsWith('worktree '))?.slice(9) ?? null;
+    }
+  }
+  return null;
+}
+
 async function pathExists(path) {
   try {
     await stat(path);
@@ -760,27 +790,28 @@ class ProjectService {
     let targetRef = null;
     let evaluatedCommit;
     if (!branch && agentRecord?.worktree && await pathExists(agentRecord.worktree)) {
-      // Evaluate the researcher's own worktree, but pin the commit so the report
-      // keeps pointing at the code that was actually scored.
-      worktree = agentRecord.worktree;
-      const symbolic = await git(worktree, ['symbolic-ref', '--quiet', 'HEAD']).catch(() => ({ stdout: '' }));
+      const source = agentRecord.worktree;
+      const symbolic = await git(source, ['symbolic-ref', '--quiet', 'HEAD']).catch(() => ({ stdout: '' }));
       targetRef = symbolic.stdout.trim() || null;
-      evaluatedCommit = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
+      evaluatedCommit = (await git(source, ['rev-parse', '--verify', '--end-of-options', `${targetRef ?? 'HEAD'}^{commit}`])).stdout.trim();
+      await committedResearchOnly(source);
     } else {
       const rev = branch ?? 'HEAD';
-      const exists = branch
-        ? await git(project.researchRoot, ['rev-parse', '--verify', branch]).then(() => true).catch(() => false)
-        : true;
-      if (!exists) throw new Error(`research branch not found: ${branch}`);
-      const symbolic = await git(project.researchRoot, ['symbolic-ref', '--quiet', 'HEAD']).catch(() => ({ stdout: '' }));
-      targetRef = branch ? (branch.startsWith('refs/') ? branch : `refs/heads/${branch}`) : (symbolic.stdout.trim() || null);
-      evaluatedCommit = (await git(project.researchRoot, ['rev-parse', '--verify', rev])).stdout.trim();
-      await mkdir(worktreeRoot, { recursive: true });
-      worktree = join(worktreeRoot, evaluationId);
-      await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, evaluatedCommit]);
-      temporary = true;
+      const symbolic = await git(project.researchRoot, ['rev-parse', '--symbolic-full-name', '--verify', '--end-of-options', rev]).catch(() => ({ stdout: '' }));
+      const ref = symbolic.stdout.trim();
+      targetRef = ref.startsWith('refs/heads/') ? ref : null;
+      evaluatedCommit = (await git(project.researchRoot, ['rev-parse', '--verify', '--end-of-options', `${targetRef ?? rev}^{commit}`]))
+        .stdout.trim();
+      // Reject only the worktree associated with the selected branch. Other
+      // checked-out branches and their pending edits are not evaluation inputs.
+      const source = targetRef ? await researchWorktreeForRef(project.researchRoot, targetRef) : (!branch ? project.researchRoot : null);
+      if (source) await committedResearchOnly(source);
     }
     const evaluatedTree = (await git(project.researchRoot, ['rev-parse', `${evaluatedCommit}^{tree}`])).stdout.trim();
+    await mkdir(worktreeRoot, { recursive: true });
+    worktree = join(worktreeRoot, evaluationId);
+    await git(project.researchRoot, ['worktree', 'add', '--detach', worktree, evaluatedCommit]);
+    temporary = true;
     const env = {
       ALEPH_WORKSPACE: project.workspace,
       ALEPH_SOLUTION_DIR: worktree,
@@ -880,7 +911,7 @@ class ProjectService {
       'If a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.',
       'Small work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.',
       'After proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.',
-      'When all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state.',
+      'When all your missions are done, commit all research changes and untracked files before calling aleph_evaluate. The tool rejects uncommitted input and lists paths to commit before retrying. Git-ignored files are excluded; commit any required input explicitly. The Host evaluates a separate worktree at the fixed commit and writes the report for that same code, then finish. Do not modify project queue, batch or machine state.',
     ].join('\n');
     const abort = new AbortController();
     let activation;
@@ -1641,7 +1672,7 @@ export async function apply(ctx) {
     ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
       'aleph_evaluate',
-      'Evaluate the research branch after all missions owned by this researcher are done; Host writes the report into the research commit message.',
+      'Commit all research changes and untracked files before evaluation. Uncommitted input is rejected with paths to commit before retrying; Git-ignored files are excluded. After owned missions finish, Host evaluates an isolated worktree at the fixed commit and writes the report for that same code.',
       { ...projectIdParam },
       async (args, exec) => service.evaluate({ projectId: args.project_id, agent: exec.agent }),
     ), { when: ({ agent }) => isAleph(agent) }),

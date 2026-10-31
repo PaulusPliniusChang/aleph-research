@@ -30,6 +30,30 @@ node --check index-v2.js
 node --check client.js
 ```
 
+## Committed evaluation input
+
+Commit all tracked changes, staged changes, and untracked research files before
+calling `aleph_evaluate`. Uncommitted input returns
+`ALEPH_EVALUATION_UNCOMMITTED` with the worktree, Git statuses, and exact paths to
+commit before retrying. The Host does not stage, commit, stash, clean, or remove
+files from the original researcher worktree. Ordinary Git ignore rules apply;
+ignored files are not copied into evaluation snapshots. Required ignored input
+must be explicitly committed before evaluation.
+
+Every evaluation, including a researcher's own branch, runs from a separate
+detached worktree at the commit captured before computation. Later research
+edits, commits, and branch switches cannot change that evaluation's submitted
+input. The evaluator runs from `evalRoot` or the workspace and receives the
+snapshot through `ALEPH_SOLUTION_DIR`. A selected branch's associated worktree
+must have committed input; dirty worktrees on unrelated branches do not block
+evaluating a clean selected branch or a commit without a checked-out worktree.
+
+Report tree, evaluated commit, history, and best record identify the submitted
+code. Independent evaluation refs preserve reports; branch compare-and-swap
+keeps any later research commit intact. Evaluator-generated files are excluded
+from report trees. The configured evaluator is responsible for executing the
+submitted input rather than replacing it with other source files.
+
 ## Evaluation process lifetime
 
 Managed evaluation requires Linux and readable `/proc` process metadata. Each

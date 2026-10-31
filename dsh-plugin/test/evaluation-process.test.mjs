@@ -165,14 +165,19 @@ test('evaluation service stops computation before Git cleanup and preserves rese
       if (owned) {
         ownWorktree = join(root, 'owned-research');
         git(p.researchRoot, ['worktree', 'add', '-b', 'research/owned', ownWorktree]);
-        await writeFile(join(ownWorktree, 'uncommitted.txt'), 'retain research\n');
         await service.mutate(p.id, current => ({ ...current, agents: [{ role: 'researcher', childId: agent.id,
           worktree: ownWorktree, branch: 'research/owned', status: 'running', summary: null, updatedAt: new Date().toISOString() }] }));
       }
       let result;
       let error;
-      try { result = await service.evaluate({ projectId: p.id, agent }); }
-      catch (failure) { error = failure; }
+      const evaluation = service.evaluate({ projectId: p.id, agent }).then(value => ({ result: value }), failure => ({ error: failure }));
+      if (owned) {
+        // Admission requires committed input; later edits remain in the source,
+        // while computation and process cleanup operate on a separate snapshot.
+        await waitFor(() => existsSync(join(gate, 'entry.json')));
+        await writeFile(join(ownWorktree, 'uncommitted.txt'), 'retain research\n');
+      }
+      ({ result, error } = await evaluation);
       const stoppedAt = Date.now();
       const records = identities(gate);
       const solution = records[0].solution;
@@ -182,9 +187,13 @@ test('evaluation service stops computation before Git cleanup and preserves rese
         assert.notEqual(records[0].solution, evaluator);
       });
       await point(`${scope}: no owned real calculation survives service completion`, () => assert.deepEqual(records.filter(live), []));
-      await point(`${scope}: solution registration matches temporary/owned policy`, () => {
-        assert.equal(existsSync(solution), owned);
-        assert.equal(git(p.researchRoot, ['worktree', 'list', '--porcelain']).includes(solution), owned);
+      await point(`${scope}: stopped evaluation snapshot is removed while the source remains`, () => {
+        assert.equal(existsSync(solution), false);
+        assert.equal(git(p.researchRoot, ['worktree', 'list', '--porcelain']).includes(solution), false);
+        if (owned) {
+          assert.ok(existsSync(ownWorktree));
+          assert.ok(git(p.researchRoot, ['worktree', 'list', '--porcelain']).includes(ownWorktree));
+        }
       });
       await point(`${scope}: evaluator and project directories remain`, () => assert.ok(existsSync(evaluator) && existsSync(root)));
       if (mode === 'success') {

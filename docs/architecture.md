@@ -65,6 +65,21 @@ The researcher waits only for missions owned by its session. When those missions
 are done, `aleph_evaluate` evaluates the research branch; the Host writes the
 evaluation report into the research commit message and the researcher finishes.
 
+Evaluation requires committed research input. The Host rejects tracked/index
+changes and untracked files in the selected source worktree with exact path
+diagnostics. Ordinary Git ignore rules apply; ignored files are excluded from
+the submitted snapshot. Other worktrees are not inputs to a selected branch and
+their pending files do not block that branch's evaluation.
+
+The Host captures the source commit and creates an independent detached
+evaluation worktree, even when the caller owns a researcher worktree. The report
+uses that commit's tree and parent; history and best records use the same source.
+The independent evaluation ref preserves the report while branch
+compare-and-swap protects later research commits. The original researcher files
+and index remain untouched. Evaluation process ownership confirms ordinary
+computation stopped before removing the temporary snapshot; uncertain cleanup
+retains the snapshot and blocks new evaluation until cleanup succeeds.
+
 ## Current boundaries
 
 - One local machine; multi-machine is an interface extension.
