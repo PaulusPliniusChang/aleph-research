@@ -614,6 +614,7 @@ class ProjectService {
         join(workspace, '.aleph', 'evals'),
       ];
       let entries = [];
+      const groups = new Map();
       try { entries = readdirSync('/proc'); } catch { continue; }
       for (const entry of entries) {
         if (!/^\d+$/.test(entry)) continue;
@@ -690,7 +691,23 @@ class ProjectService {
             }
           }
           this.cpuSamples.set(key, { ticks, at: nowMs });
+          const groupKey = allowed.find((path) => cwd === path || cwd.startsWith(`${path}/`)) ?? cwd;
+          const group = groups.get(groupKey) ?? { ticks: 0, pids: [] };
+          group.ticks += prior ? Math.max(0, ticks - prior.ticks) : 0;
+          group.pids.push(pid);
+          groups.set(groupKey, group);
         } catch { /* process exited */ }
+      }
+      for (const [groupKey, group] of groups) {
+        if (group.ticks > 1500) {
+          for (const pid of group.pids) {
+            try { process.kill(pid, 'SIGKILL'); } catch { /* ignore */ }
+          }
+          this.mutate(project.id, (current) => ({
+            ...current,
+            violations: [...(current.violations ?? []), `${now()} killed aggregate heavy compute (${group.ticks} ticks) under ${groupKey}`].slice(-50),
+          })).catch(() => undefined);
+        }
       }
     }
   }
