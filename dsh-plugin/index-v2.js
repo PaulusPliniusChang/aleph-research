@@ -537,7 +537,8 @@ class ProjectService {
       'You are an AlephResearch researcher.',
       `Project: ${project.id}. Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
       `Canonical read-only visible data: ${project.visibleData ?? '(none configured)'}. Read it directly; do not copy or extract it into the project or your worktree.`,
-      'Do not install packages outside the mission uv project and do not write outside your assigned research worktree or mission repo branch.' ,
+      'Do not install packages outside the mission uv project and do not write outside your assigned research worktree or mission repo branch.',
+      'Do not read /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH state. Run commands from your worktree, not from the project root; use the canonical visible data directly.' ,
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
       'Before creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.',
@@ -619,7 +620,25 @@ class ProjectService {
         const isCaseProcess = environ.includes('DSH_PROFILE=aleph-lab');
         if (!cwd.startsWith(workspace)) continue;
         const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
+        const underMission = cwd === project.missionRoot || cwd.startsWith(`${project.missionRoot}/`);
         const nested = isCaseProcess && hasBwrapAncestor(pid);
+        const forbidden = /\/home\/hapenia\/Projects\/kunlungpt-comp|\/home\/hapenia\/Projects\/aleph-research|\/home\/hapenia\/\.dsh/.test(cmd);
+        if (nested && forbidden) {
+          try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+          this.mutate(project.id, (current) => ({
+            ...current,
+            violations: [...(current.violations ?? []), `${now()} killed forbidden-path access ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
+          })).catch(() => undefined);
+          continue;
+        }
+        if (nested && (cwd === workspace || (!underAllowed && !underMission))) {
+          try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+          this.mutate(project.id, (current) => ({
+            ...current,
+            violations: [...(current.violations ?? []), `${now()} killed command outside researcher/mission directories ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
+          })).catch(() => undefined);
+          continue;
+        }
         const isSearch = /(?:grep\s+-r|find\s+\/tmp|find\s+\/home|grep\s+-r.*\/home)/.test(cmd);
         if (nested && !underAllowed && isSearch) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
