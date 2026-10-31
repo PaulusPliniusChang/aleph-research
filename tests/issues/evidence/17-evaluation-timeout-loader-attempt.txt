@@ -1,0 +1,27 @@
+✖ ALEPH-17 evaluation deadline owns real descendant lifetimes before cleanup (9.431152ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 75.680859
+
+✖ failing tests:
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:41:1
+✖ ALEPH-17 evaluation deadline owns real descendant lifetimes before cleanup (9.431152ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@deepseek-ai/dsh-storage-domain' imported from /home/paulus-chang/项目/aleph/dsh-plugin/index-v2.js
+      at Object.getPackageJSONURL (node:internal/modules/package_json_reader:343:9)
+      at packageResolve (node:internal/modules/esm/resolve:751:25)
+      at moduleResolve (node:internal/modules/esm/resolve:840:18)
+      at defaultResolve (node:internal/modules/esm/resolve:973:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:708:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:728:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:766:56)
+      at #resolve (node:internal/modules/esm/loader:690:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:610:35)
+      at ModuleJob.syncLink (node:internal/modules/esm/module_job:277:33) {
+    code: 'ERR_MODULE_NOT_FOUND'
+  }

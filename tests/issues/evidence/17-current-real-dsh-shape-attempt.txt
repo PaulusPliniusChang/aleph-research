@@ -1,0 +1,98 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-x_i6_48u", "url": "http://127.0.0.1:55609"}
+▶ ALEPH-17 evaluation deadline owns real descendant lifetimes before cleanup
+  ✔ normal-temporary: evaluation receives real workspace environment (0.826186ms)
+  ✔ normal-temporary: solution directory is distinct from evaluator cwd (0.249438ms)
+  ✔ normal-temporary: solution directory existed when evaluation began (0.160577ms)
+  ✔ normal-temporary: project directory survives evaluation (0.190594ms)
+  ✔ normal-temporary: research repository remains valid (5.222548ms)
+  ✔ normal-temporary: actual success score is parsed (0.385524ms)
+  ✔ normal-temporary: success retains actual evaluated input commit (0.243829ms)
+  ✔ normal-temporary: success report is a real Git commit (4.613925ms)
+  ✔ normal-temporary: success records independent evaluation ref (4.801368ms)
+  ✔ normal-temporary: normal temporary solution is removed (0.332401ms)
+  ✔ normal-temporary: normal entry has exited (1.078055ms)
+  ✖ normal-temporary: history records the successful score (0.376883ms)
+  ✔ failure-temporary: evaluation receives real workspace environment (0.251866ms)
+  ✔ failure-temporary: solution directory is distinct from evaluator cwd (0.128646ms)
+  ✔ failure-temporary: solution directory existed when evaluation began (0.078847ms)
+  ✔ failure-temporary: project directory survives evaluation (0.079803ms)
+  ✔ failure-temporary: research repository remains valid (4.7606ms)
+  ✔ failure-temporary: failure returns an actual command error (0.203946ms)
+  ✔ failure-temporary: failure never returns a success result (0.100658ms)
+  ✔ failure-temporary: failed evaluation does not record history (0.104003ms)
+  ✔ failure-temporary: failed evaluation does not update best (0.087015ms)
+  ✔ failure-temporary: failed evaluation preserves source branch (4.263987ms)
+  ✔ failure-temporary: failure stops the directly owned entry (0.216283ms)
+  ✔ failure-temporary: temporary worktree registration is cleaned (4.484082ms)
+  ✔ failure-temporary: controlled nonzero error retains exit code (0.223281ms)
+  ✔ timeout-temporary: evaluation receives real workspace environment (0.266946ms)
+  ✔ timeout-temporary: solution directory is distinct from evaluator cwd (0.139561ms)
+  ✔ timeout-temporary: solution directory existed when evaluation began (0.115358ms)
+  ✔ timeout-temporary: project directory survives evaluation (0.121375ms)
+  ✔ timeout-temporary: research repository remains valid (5.165075ms)
+  ✔ timeout-temporary: failure returns an actual command error (0.168521ms)
+  ✔ timeout-temporary: failure never returns a success result (0.145006ms)
+  ✔ timeout-temporary: failed evaluation does not record history (0.148358ms)
+  ✔ timeout-temporary: failed evaluation does not update best (0.116968ms)
+  ✔ timeout-temporary: failed evaluation preserves source branch (4.77567ms)
+  ✔ timeout-temporary: failure stops the directly owned entry (0.240901ms)
+  ✔ timeout-temporary: temporary worktree registration is cleaned (4.478356ms)
+  ✔ timeout-temporary: worker really was an entry descendant (0.305209ms)
+  ✔ timeout-temporary: grandchild really was a worker descendant (0.274263ms)
+  ✔ timeout-temporary: entry received actual SIGTERM (0.218882ms)
+  ✔ timeout-temporary: deadline is bounded by disclosed adapter (0.183564ms)
+  ✔ timeout-temporary: descendants remain in ordinary inherited process group (0.17864ms)
+  ✔ timeout-temporary: defect: scoring worker remains alive after timeout (0.328998ms)
+  ✔ timeout-temporary: defect: scoring grandchild remains alive after timeout (0.245491ms)
+  ✔ timeout-temporary: defect: actual heartbeat continues beyond timeout (0.22396ms)
+  ✔ timeout-temporary: defect: live grandchild observes deleted solution input (0.232576ms)
+  ✔ timeout-owned: evaluation receives real workspace environment (0.457083ms)
+  ✔ timeout-owned: solution directory is distinct from evaluator cwd (0.295922ms)
+  ✔ timeout-owned: solution directory existed when evaluation began (0.310319ms)
+  ✔ timeout-owned: project directory survives evaluation (0.268814ms)
+  ✔ timeout-owned: research repository remains valid (5.28444ms)
+  ✔ timeout-owned: failure returns an actual command error (0.320971ms)
+  ✔ timeout-owned: failure never returns a success result (0.304178ms)
+  ✔ timeout-owned: failed evaluation does not record history (0.269733ms)
+  ✔ timeout-owned: failed evaluation does not update best (0.296966ms)
+  ✔ timeout-owned: failed evaluation preserves source branch (4.940322ms)
+  ✔ timeout-owned: failure stops the directly owned entry (0.428793ms)
+  ✔ timeout-owned: owned worktree remains registered (4.997081ms)
+  ✔ timeout-owned: worker really was an entry descendant (0.300822ms)
+  ✔ timeout-owned: grandchild really was a worker descendant (0.184743ms)
+  ✔ timeout-owned: entry received actual SIGTERM (0.426988ms)
+  ✔ timeout-owned: deadline is bounded by disclosed adapter (0.198912ms)
+  ✔ timeout-owned: descendants remain in ordinary inherited process group (0.669236ms)
+  ✔ timeout-owned: defect: scoring worker remains alive after timeout (0.21266ms)
+  ✔ timeout-owned: defect: scoring grandchild remains alive after timeout (0.179332ms)
+  ✔ timeout-owned: defect: actual heartbeat continues beyond timeout (0.155307ms)
+  ✔ timeout-owned: owned solution and input are preserved (0.208999ms)
+✖ ALEPH-17 evaluation deadline owns real descendant lifetimes before cleanup (4199.816722ms)
+ℹ tests 68
+ℹ suites 0
+ℹ pass 66
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4272.284911
+
+✖ failing tests:
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ normal-temporary: history records the successful score (0.376883ms)
+  TypeError [Error]: Cannot read properties of undefined (reading '0')
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:63:96
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:63:11)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/current-evaluation-timeout.py", line 69, in <module>
+    raise RuntimeError('actual process observation failed; inspect saved evidence')
+RuntimeError: actual process observation failed; inspect saved evidence

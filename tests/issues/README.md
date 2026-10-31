@@ -22,6 +22,8 @@
 | ALEPH-13 | [同一批次重复启动 InfraOptimizer 会删除正在使用的工作目录](13-infra-duplicate-start.md) |
 | ALEPH-14 | [一个研究代理结束时，可能批量改写其他研究代理的状态与摘要](14-researcher-callback-ownership.md) |
 | ALEPH-15 | [评估期间研究分支发生变化，评分报告可能写入另一条分支](15-evaluation-report-attribution.md) |
+| ALEPH-16 | [控制台读取代理列表的位置错误，已有代理可能显示尚未运行](16-console-agent-records.md) |
+| ALEPH-17 | [评估超时后，评分子进程可能继续运行，而评估目录已经被删除](17-evaluation-timeout-processes.md) |
 
 原议题 `ALEPH-03`，文件 `03-composer-running-budget.md`，已经并入 [ALEPH-02](02-run-next-budget.md)。原有运行任务预算占用问题、复现步骤和自动测试均已保留，编号 `ALEPH-03` 不再复用。
 

@@ -1,0 +1,1597 @@
+{
+  "source": "/home/paulus-chang/项目/aleph",
+  "source_sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "mode": "automatic registered-tool adapter",
+  "node": "v26.12.1",
+  "checks": [
+    {
+      "scope": "normal-temporary",
+      "name": "evaluation receives real workspace environment",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "solution directory is distinct from evaluator cwd",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "solution directory existed when evaluation began",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "project directory survives evaluation",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "actual success score is parsed",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "success retains actual evaluated input commit",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "success report is a real Git commit",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "success records independent evaluation ref",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "normal temporary solution is removed",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "normal entry has exited",
+      "passed": true
+    },
+    {
+      "scope": "normal-temporary",
+      "name": "history records the successful score",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "evaluation receives real workspace environment",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "solution directory is distinct from evaluator cwd",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "solution directory existed when evaluation began",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "project directory survives evaluation",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "failure returns an actual command error",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "failure never returns a success result",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "failed evaluation does not record history",
+      "passed": false,
+      "error": "Cannot read properties of undefined (reading 'length')"
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "failed evaluation does not update best",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- null\n"
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "failed evaluation preserves source branch",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "failure stops the directly owned entry",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "temporary worktree registration is cleaned",
+      "passed": true
+    },
+    {
+      "scope": "failure-temporary",
+      "name": "controlled nonzero error retains exit code",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "evaluation receives real workspace environment",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "solution directory is distinct from evaluator cwd",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "solution directory existed when evaluation began",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "project directory survives evaluation",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "failure returns an actual command error",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "failure never returns a success result",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "failed evaluation does not record history",
+      "passed": false,
+      "error": "Cannot read properties of undefined (reading 'length')"
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "failed evaluation does not update best",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- null\n"
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "failed evaluation preserves source branch",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "failure stops the directly owned entry",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "temporary worktree registration is cleaned",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "worker really was an entry descendant",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "grandchild really was a worker descendant",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "entry received actual SIGTERM",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "deadline is bounded by disclosed adapter",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "descendants remain in ordinary inherited process group",
+      "passed": true
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "scoring worker must stop before tool failure returns",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "scoring grandchild must stop before tool failure returns",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "scoring heartbeat must stop before failure returns",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "scope": "timeout-temporary",
+      "name": "solution must not be deleted while scoring descendant still runs",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "evaluation receives real workspace environment",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "solution directory is distinct from evaluator cwd",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "solution directory existed when evaluation began",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "project directory survives evaluation",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "research repository remains valid",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "failure returns an actual command error",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "failure never returns a success result",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "failed evaluation does not record history",
+      "passed": false,
+      "error": "Cannot read properties of undefined (reading 'length')"
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "failed evaluation does not update best",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- null\n"
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "failed evaluation preserves source branch",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "failure stops the directly owned entry",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "owned worktree remains registered",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "worker really was an entry descendant",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "grandchild really was a worker descendant",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "entry received actual SIGTERM",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "deadline is bounded by disclosed adapter",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "descendants remain in ordinary inherited process group",
+      "passed": true
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "scoring worker must stop before tool failure returns",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "scoring grandchild must stop before tool failure returns",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "scoring heartbeat must stop before failure returns",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "scope": "timeout-owned",
+      "name": "owned solution and input are preserved",
+      "passed": true
+    }
+  ],
+  "scenarios": [
+    {
+      "scope": "normal-temporary",
+      "root": "/tmp/aleph-timeout-normal-temporary-DZjM16",
+      "project": "p-3d8d6283",
+      "mode": "success",
+      "owned": false,
+      "entry": {
+        "pid": 283507,
+        "ppid": 283384,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6112973",
+        "role": "entry",
+        "cwd": "/tmp/aleph-timeout-normal-temporary-DZjM16/evaluation-entry",
+        "solution": "/tmp/aleph-timeout-normal-temporary-DZjM16/workspace/.aleph/evaluations/eval-9123f8bd",
+        "at": 1793445451648249300
+      },
+      "solution": "/tmp/aleph-timeout-normal-temporary-DZjM16/workspace/.aleph/evaluations/eval-9123f8bd",
+      "initialSolutionExists": false,
+      "finishedAt": 1793445451676,
+      "elapsedMs": 94,
+      "result": {
+        "status": "done",
+        "projectId": "p-3d8d6283",
+        "score": 7,
+        "researchCommit": "88fef100f723d0aa7a661b32cb6e2d731191cb46",
+        "evaluatedCommit": "1db631929dd4e215809db31b925d12f810555b7e",
+        "evaluationRef": "refs/aleph/evaluations/eval-9123f8bd",
+        "researchBranchUpdated": true,
+        "best": {
+          "score": 7,
+          "branch": "main",
+          "commit": "1db631929dd4e215809db31b925d12f810555b7e",
+          "researchCommit": "88fef100f723d0aa7a661b32cb6e2d731191cb46",
+          "evaluationRef": "refs/aleph/evaluations/eval-9123f8bd",
+          "at": "2026-10-31T11:17:31.676Z"
+        },
+        "stdout": "{\"score\": 7, \"solution\": \"/tmp/aleph-timeout-normal-temporary-DZjM16/workspace/.aleph/evaluations/eval-9123f8bd\"}\n",
+        "stderr": ""
+      },
+      "afterProcesses": [
+        null
+      ],
+      "workerEvents": [],
+      "grandchildEvents": [],
+      "entryEvents": [],
+      "public": {
+        "id": "p-3d8d6283",
+        "workspace": "/tmp/aleph-timeout-normal-temporary-DZjM16/workspace",
+        "researchRoot": "/tmp/aleph-timeout-normal-temporary-DZjM16/workspace/research",
+        "missionRoot": "/tmp/aleph-timeout-normal-temporary-DZjM16/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 '/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/aleph-timeout-probe.py' '/tmp/aleph-timeout-normal-temporary-DZjM16/gate' 'success'",
+        "evalRoot": "/tmp/aleph-timeout-normal-temporary-DZjM16/evaluation-entry",
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:17:31.565Z",
+        "updatedAt": "2026-10-31T11:17:31.676Z",
+        "evaluations": [
+          {
+            "id": "eval-9123f8bd",
+            "branch": "main",
+            "evaluatedCommit": "1db631929dd4e215809db31b925d12f810555b7e",
+            "researchCommit": "88fef100f723d0aa7a661b32cb6e2d731191cb46",
+            "evaluationRef": "refs/aleph/evaluations/eval-9123f8bd",
+            "score": 7,
+            "at": "2026-10-31T11:17:31.676Z"
+          }
+        ],
+        "best": {
+          "score": 7,
+          "branch": "main",
+          "commit": "1db631929dd4e215809db31b925d12f810555b7e",
+          "researchCommit": "88fef100f723d0aa7a661b32cb6e2d731191cb46",
+          "evaluationRef": "refs/aleph/evaluations/eval-9123f8bd",
+          "at": "2026-10-31T11:17:31.676Z"
+        }
+      },
+      "cleanup": [],
+      "remainingActive": []
+    },
+    {
+      "scope": "failure-temporary",
+      "root": "/tmp/aleph-timeout-failure-temporary-AqbGcY",
+      "project": "p-62fa8818",
+      "mode": "nonzero",
+      "owned": false,
+      "entry": {
+        "pid": 283669,
+        "ppid": 283384,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6113015",
+        "role": "entry",
+        "cwd": "/tmp/aleph-timeout-failure-temporary-AqbGcY/workspace",
+        "solution": "/tmp/aleph-timeout-failure-temporary-AqbGcY/workspace/.aleph/evaluations/eval-f15080e5",
+        "at": 1793445452062944500
+      },
+      "solution": "/tmp/aleph-timeout-failure-temporary-AqbGcY/workspace/.aleph/evaluations/eval-f15080e5",
+      "initialSolutionExists": true,
+      "finishedAt": 1793445452072,
+      "elapsedMs": 69,
+      "error": {
+        "message": "Command failed: bash -lc python3 '/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/aleph-timeout-probe.py' '/tmp/aleph-timeout-failure-temporary-AqbGcY/gate' 'nonzero'\ncontrolled evaluation failure\n",
+        "code": 3,
+        "killed": false,
+        "signal": null
+      },
+      "afterProcesses": [
+        null
+      ],
+      "workerEvents": [],
+      "grandchildEvents": [],
+      "entryEvents": [],
+      "public": {
+        "id": "p-62fa8818",
+        "workspace": "/tmp/aleph-timeout-failure-temporary-AqbGcY/workspace",
+        "researchRoot": "/tmp/aleph-timeout-failure-temporary-AqbGcY/workspace/research",
+        "missionRoot": "/tmp/aleph-timeout-failure-temporary-AqbGcY/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 '/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/aleph-timeout-probe.py' '/tmp/aleph-timeout-failure-temporary-AqbGcY/gate' 'nonzero'",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:17:31.986Z",
+        "updatedAt": "2026-10-31T11:17:31.986Z"
+      },
+      "cleanup": [],
+      "remainingActive": []
+    },
+    {
+      "scope": "timeout-temporary",
+      "root": "/tmp/aleph-timeout-timeout-temporary-x4RNfC",
+      "project": "p-08df755f",
+      "mode": "timeout",
+      "owned": false,
+      "entry": {
+        "pid": 283810,
+        "ppid": 283384,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6113054",
+        "role": "entry",
+        "cwd": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace",
+        "solution": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace/.aleph/evaluations/eval-ee92d3e5",
+        "at": 1793445452460502300
+      },
+      "worker": {
+        "pid": 283820,
+        "ppid": 283810,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6113058",
+        "role": "worker",
+        "cwd": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace",
+        "solution": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace/.aleph/evaluations/eval-ee92d3e5",
+        "at": 1793445452484053500
+      },
+      "grandchild": {
+        "pid": 283821,
+        "ppid": 283820,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6113060",
+        "role": "grandchild",
+        "cwd": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace",
+        "solution": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace/.aleph/evaluations/eval-ee92d3e5",
+        "at": 1793445452506678800
+      },
+      "beforeProcesses": [
+        {
+          "pid": 283810,
+          "state": "S",
+          "ppid": 283384,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113054"
+        },
+        {
+          "pid": 283820,
+          "state": "S",
+          "ppid": 283810,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113058"
+        },
+        {
+          "pid": 283821,
+          "state": "S",
+          "ppid": 283820,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113060"
+        }
+      ],
+      "solution": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace/.aleph/evaluations/eval-ee92d3e5",
+      "initialSolutionExists": true,
+      "finishedAt": 1793445453636,
+      "elapsedMs": 1236,
+      "error": {
+        "message": "Command failed: bash -lc python3 '/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/aleph-timeout-probe.py' '/tmp/aleph-timeout-timeout-temporary-x4RNfC/gate' 'timeout'\n",
+        "code": 143,
+        "killed": true,
+        "signal": null
+      },
+      "afterProcesses": [
+        null,
+        {
+          "pid": 283820,
+          "state": "S",
+          "ppid": 1080,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113058"
+        },
+        {
+          "pid": 283821,
+          "state": "S",
+          "ppid": 283820,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113060"
+        }
+      ],
+      "workerEvents": [
+        {
+          "kind": "spawn",
+          "at": 1793445452484382500,
+          "pid": 283820,
+          "child": 283821
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452484441300,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452534622500,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452584840000,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452635047200,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452685274400,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452735492000,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452785733600,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452835954400,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452886206000,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452936426000,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452986666200,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453036836400,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453087057400,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453137282300,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453187527400,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453237757400,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453287981000,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453338268000,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453388591900,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453438857700,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453489097500,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453539304200,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453589505800,
+          "pid": 283820,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453639741700,
+          "pid": 283820,
+          "solutionExists": false,
+          "inputExists": false
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453689978000,
+          "pid": 283820,
+          "solutionExists": false,
+          "inputExists": false
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453740266000,
+          "pid": 283820,
+          "solutionExists": false,
+          "inputExists": false
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453790519800,
+          "pid": 283820,
+          "solutionExists": false,
+          "inputExists": false
+        }
+      ],
+      "grandchildEvents": [
+        {
+          "kind": "heartbeat",
+          "at": 1793445452506775000,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452556976000,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452607187500,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452657465600,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452707724300,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452757942500,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452808176600,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452858413800,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452908633600,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445452958835200,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453009091600,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453059341600,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453109577700,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453159824400,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453210065400,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453260395500,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453310596900,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453360836900,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453411111700,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453461330200,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453511542500,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453561771300,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453611997000,
+          "pid": 283821,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453662320400,
+          "pid": 283821,
+          "solutionExists": false,
+          "inputExists": false
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453712552400,
+          "pid": 283821,
+          "solutionExists": false,
+          "inputExists": false
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445453762755300,
+          "pid": 283821,
+          "solutionExists": false,
+          "inputExists": false
+        }
+      ],
+      "entryEvents": [
+        {
+          "kind": "spawn",
+          "at": 1793445452460786200,
+          "pid": 283810,
+          "child": 283820
+        },
+        {
+          "kind": "signal",
+          "at": 1793445453624545000,
+          "pid": 283810,
+          "signal": 15
+        }
+      ],
+      "public": {
+        "id": "p-08df755f",
+        "workspace": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace",
+        "researchRoot": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace/research",
+        "missionRoot": "/tmp/aleph-timeout-timeout-temporary-x4RNfC/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 '/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/aleph-timeout-probe.py' '/tmp/aleph-timeout-timeout-temporary-x4RNfC/gate' 'timeout'",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:17:32.382Z",
+        "updatedAt": "2026-10-31T11:17:32.382Z"
+      },
+      "cleanup": [
+        {
+          "pid": 283821,
+          "start": "6113060",
+          "signal": "SIGKILL"
+        },
+        {
+          "pid": 283820,
+          "start": "6113058",
+          "signal": "SIGKILL"
+        }
+      ],
+      "remainingActive": []
+    },
+    {
+      "scope": "timeout-owned",
+      "root": "/tmp/aleph-timeout-timeout-owned-0Hff1z",
+      "project": "p-9f0d7a27",
+      "mode": "timeout",
+      "owned": true,
+      "entry": {
+        "pid": 283956,
+        "ppid": 283384,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6113212",
+        "role": "entry",
+        "cwd": "/tmp/aleph-timeout-timeout-owned-0Hff1z/workspace",
+        "solution": "/tmp/aleph-timeout-timeout-owned-0Hff1z/owned-research",
+        "at": 1793445454035542000
+      },
+      "worker": {
+        "pid": 283966,
+        "ppid": 283956,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6113216",
+        "role": "worker",
+        "cwd": "/tmp/aleph-timeout-timeout-owned-0Hff1z/workspace",
+        "solution": "/tmp/aleph-timeout-timeout-owned-0Hff1z/owned-research",
+        "at": 1793445454067391200
+      },
+      "grandchild": {
+        "pid": 283967,
+        "ppid": 283966,
+        "pgid": 283366,
+        "sid": 283366,
+        "start": "6113219",
+        "role": "grandchild",
+        "cwd": "/tmp/aleph-timeout-timeout-owned-0Hff1z/workspace",
+        "solution": "/tmp/aleph-timeout-timeout-owned-0Hff1z/owned-research",
+        "at": 1793445454091832600
+      },
+      "beforeProcesses": [
+        {
+          "pid": 283956,
+          "state": "S",
+          "ppid": 283384,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113212"
+        },
+        {
+          "pid": 283966,
+          "state": "S",
+          "ppid": 283956,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113216"
+        },
+        {
+          "pid": 283967,
+          "state": "S",
+          "ppid": 283966,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113219"
+        }
+      ],
+      "solution": "/tmp/aleph-timeout-timeout-owned-0Hff1z/owned-research",
+      "initialSolutionExists": true,
+      "finishedAt": 1793445455206,
+      "elapsedMs": 1223,
+      "error": {
+        "message": "Command failed: bash -lc python3 '/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/aleph-timeout-probe.py' '/tmp/aleph-timeout-timeout-owned-0Hff1z/gate' 'timeout'\n",
+        "code": 143,
+        "killed": true,
+        "signal": null
+      },
+      "afterProcesses": [
+        null,
+        {
+          "pid": 283966,
+          "state": "S",
+          "ppid": 1080,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113216"
+        },
+        {
+          "pid": 283967,
+          "state": "S",
+          "ppid": 283966,
+          "pgid": 283366,
+          "sid": 283366,
+          "start": "6113219"
+        }
+      ],
+      "workerEvents": [
+        {
+          "kind": "spawn",
+          "at": 1793445454067660500,
+          "pid": 283966,
+          "child": 283967
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454067721700,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454117912800,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454168145200,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454218369800,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454268675000,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454318937000,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454369180400,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454419391500,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454469608000,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454519810800,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454570036700,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454620446500,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454670703000,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454720911600,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454771122400,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454821349400,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454871593700,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454921813200,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454972020000,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455022243600,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455072462300,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455122673400,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455172880400,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455223078000,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455273298000,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455323498200,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455373713700,
+          "pid": 283966,
+          "solutionExists": true,
+          "inputExists": true
+        }
+      ],
+      "grandchildEvents": [
+        {
+          "kind": "heartbeat",
+          "at": 1793445454091924700,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454142152400,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454192429600,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454242672600,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454292885000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454343081000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454393304000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454443515400,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454493741800,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454543971300,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454594260000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454644546000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454694884600,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454745218000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454795475200,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454845692000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454895944000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454946200000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445454996440800,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455046679300,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455096881700,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455147081700,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455197334500,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455247595500,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455297873700,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        },
+        {
+          "kind": "heartbeat",
+          "at": 1793445455348080000,
+          "pid": 283967,
+          "solutionExists": true,
+          "inputExists": true
+        }
+      ],
+      "entryEvents": [
+        {
+          "kind": "spawn",
+          "at": 1793445454035797000,
+          "pid": 283956,
+          "child": 283966
+        },
+        {
+          "kind": "signal",
+          "at": 1793445455199913500,
+          "pid": 283956,
+          "signal": 15
+        }
+      ],
+      "public": {
+        "id": "p-9f0d7a27",
+        "workspace": "/tmp/aleph-timeout-timeout-owned-0Hff1z/workspace",
+        "researchRoot": "/tmp/aleph-timeout-timeout-owned-0Hff1z/workspace/research",
+        "missionRoot": "/tmp/aleph-timeout-timeout-owned-0Hff1z/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 '/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/aleph-timeout-probe.py' '/tmp/aleph-timeout-timeout-owned-0Hff1z/gate' 'timeout'",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "timeout-owned-researcher",
+            "worktree": "/tmp/aleph-timeout-timeout-owned-0Hff1z/owned-research",
+            "branch": "research/owned",
+            "status": "running",
+            "summary": null,
+            "updatedAt": "2026-10-31T11:17:33.982Z"
+          }
+        ],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:17:33.960Z",
+        "updatedAt": "2026-10-31T11:17:33.960Z"
+      },
+      "cleanup": [
+        {
+          "pid": 283967,
+          "start": "6113219",
+          "signal": "SIGKILL"
+        },
+        {
+          "pid": 283966,
+          "start": "6113216",
+          "signal": "SIGKILL"
+        }
+      ],
+      "remainingActive": []
+    }
+  ],
+  "boundary": "Only matching bash -lc evaluator commands with existing timeout600000 and aleph-timeout-probe.py are adapted to1200ms before original real execFile. Actual Git, Python descendants, signals, /proc identity, and cleanup. Automatic mode replaces storage/session services. Actual mode uses original DSH session/tools/storage; owned researcher uses deterministic model only.",
+  "complete": true
+}

@@ -1,0 +1,251 @@
+(node:286722) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-17 evaluation deadline owns real descendant lifetimes before cleanup
+  ✔ normal-temporary: evaluation receives real workspace environment (0.944381ms)
+  ✔ normal-temporary: solution directory is distinct from evaluator cwd (0.314851ms)
+  ✔ normal-temporary: solution directory existed when evaluation began (0.276404ms)
+  ✔ normal-temporary: project directory survives evaluation (2.686125ms)
+  ✔ normal-temporary: research repository remains valid (4.871352ms)
+  ✔ normal-temporary: actual success score is parsed (64.953845ms)
+  ✔ normal-temporary: success retains actual evaluated input commit (0.481421ms)
+  ✔ normal-temporary: success report is a real Git commit (5.5065ms)
+  ✔ normal-temporary: success records independent evaluation ref (6.018185ms)
+  ✔ normal-temporary: normal temporary solution is removed (0.44683ms)
+  ✔ normal-temporary: normal entry has exited (0.340418ms)
+  ✔ normal-temporary: history records the successful score (3.211453ms)
+  ✔ failure-temporary: evaluation receives real workspace environment (436.878782ms)
+  ✔ failure-temporary: solution directory is distinct from evaluator cwd (11.014367ms)
+  ✔ failure-temporary: solution directory existed when evaluation began (6.833474ms)
+  ✔ failure-temporary: project directory survives evaluation (0.326056ms)
+  ✔ failure-temporary: research repository remains valid (5.551311ms)
+  ✔ failure-temporary: failure returns an actual command error (0.579079ms)
+  ✔ failure-temporary: failure never returns a success result (0.372408ms)
+  ✔ failure-temporary: failed evaluation does not record history (0.294587ms)
+  ✔ failure-temporary: failed evaluation does not update best (0.262061ms)
+  ✔ failure-temporary: failed evaluation preserves source branch (5.482571ms)
+  ✔ failure-temporary: failure stops the directly owned entry (0.379402ms)
+  ✔ failure-temporary: temporary worktree registration is cleaned (6.978829ms)
+  ✔ failure-temporary: controlled nonzero error retains exit code (21.750655ms)
+  ✔ timeout-temporary: evaluation receives real workspace environment (0.582617ms)
+  ✔ timeout-temporary: solution directory is distinct from evaluator cwd (2.516503ms)
+  ✔ timeout-temporary: solution directory existed when evaluation began (0.44276ms)
+  ✔ timeout-temporary: project directory survives evaluation (0.241673ms)
+  ✔ timeout-temporary: research repository remains valid (5.770487ms)
+  ✔ timeout-temporary: failure returns an actual command error (0.332236ms)
+  ✔ timeout-temporary: failure never returns a success result (0.293985ms)
+  ✔ timeout-temporary: failed evaluation does not record history (0.258539ms)
+  ✔ timeout-temporary: failed evaluation does not update best (0.381866ms)
+  ✔ timeout-temporary: failed evaluation preserves source branch (5.091821ms)
+  ✔ timeout-temporary: failure stops the directly owned entry (0.31584ms)
+  ✔ timeout-temporary: temporary worktree registration is cleaned (4.896057ms)
+  ✔ timeout-temporary: worker really was an entry descendant (0.380146ms)
+  ✔ timeout-temporary: grandchild really was a worker descendant (0.298732ms)
+  ✔ timeout-temporary: entry received actual SIGTERM (0.393392ms)
+  ✔ timeout-temporary: deadline is bounded by disclosed adapter (0.374838ms)
+  ✔ timeout-temporary: descendants remain in ordinary inherited process group (0.320891ms)
+  ✖ timeout-temporary: scoring worker must stop before tool failure returns (1.407342ms)
+  ✖ timeout-temporary: scoring grandchild must stop before tool failure returns (0.475502ms)
+  ✖ timeout-temporary: scoring heartbeat must stop before failure returns (0.495937ms)
+  ✖ timeout-temporary: solution must not be deleted while scoring descendant still runs (0.35868ms)
+Preparing worktree (new branch 'research/owned')
+  ✔ timeout-owned: evaluation receives real workspace environment (0.631597ms)
+  ✔ timeout-owned: solution directory is distinct from evaluator cwd (1.416328ms)
+  ✔ timeout-owned: solution directory existed when evaluation began (2.673586ms)
+  ✔ timeout-owned: project directory survives evaluation (0.42839ms)
+  ✔ timeout-owned: research repository remains valid (5.807696ms)
+  ✔ timeout-owned: failure returns an actual command error (0.357784ms)
+  ✔ timeout-owned: failure never returns a success result (0.305587ms)
+  ✔ timeout-owned: failed evaluation does not record history (0.286333ms)
+  ✔ timeout-owned: failed evaluation does not update best (0.270045ms)
+  ✔ timeout-owned: failed evaluation preserves source branch (7.300902ms)
+  ✔ timeout-owned: failure stops the directly owned entry (0.77063ms)
+  ✔ timeout-owned: owned worktree remains registered (6.989366ms)
+  ✔ timeout-owned: worker really was an entry descendant (0.804385ms)
+  ✔ timeout-owned: grandchild really was a worker descendant (0.649816ms)
+  ✔ timeout-owned: entry received actual SIGTERM (0.655894ms)
+  ✔ timeout-owned: deadline is bounded by disclosed adapter (0.599408ms)
+  ✔ timeout-owned: descendants remain in ordinary inherited process group (1.023774ms)
+  ✖ timeout-owned: scoring worker must stop before tool failure returns (0.68102ms)
+  ✖ timeout-owned: scoring grandchild must stop before tool failure returns (0.623098ms)
+  ✖ timeout-owned: scoring heartbeat must stop before failure returns (0.510468ms)
+  ✔ timeout-owned: owned solution and input are preserved (0.59734ms)
+✖ ALEPH-17 evaluation deadline owns real descendant lifetimes before cleanup (4579.397689ms)
+ℹ tests 68
+ℹ suites 0
+ℹ pass 60
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4677.722712
+
+✖ failing tests:
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ timeout-temporary: scoring worker must stop before tool failure returns (1.407342ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:78:150
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:78:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ timeout-temporary: scoring grandchild must stop before tool failure returns (0.475502ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:79:158
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:79:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ timeout-temporary: scoring heartbeat must stop before failure returns (0.495937ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:80:147
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:80:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ timeout-temporary: solution must not be deleted while scoring descendant still runs (0.35868ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:81:178
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:81:23)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ timeout-owned: scoring worker must stop before tool failure returns (0.68102ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:78:150
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:78:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ timeout-owned: scoring grandchild must stop before tool failure returns (0.623098ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:79:158
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:79:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38
+✖ timeout-owned: scoring heartbeat must stop before failure returns (0.510468ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:80:147
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:42:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/evaluation-timeout-acceptance.test.mjs:80:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

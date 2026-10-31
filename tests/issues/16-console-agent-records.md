@@ -69,7 +69,7 @@ B 在北京时间 2026 年 10 月 31 日完成最新实现核查。正式运行�
 ### 自动行为检查
 
 ```bash
-ALEPH_CONSOLE_AGENT_OBSERVATIONS=tests/issues/evidence/16-console-agent-baseline.json node --test tests/issues/dsh/console-agent-records-acceptance.test.mjs
+ALEPH_CONSOLE_AGENT_OBSERVATIONS=tests/issues/evidence/16-console-agent-baseline.json node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs --test tests/issues/dsh/console-agent-records-acceptance.test.mjs
 ```
 
 [独立脚本](dsh/console-agent-records-acceptance.test.mjs)调用实际后端快照序列化函数，并在虚拟机中执行完整的客户端 `consoleBody` 和 `agentSection`。测试以结构收集器替代 React 的 `createElement`，项目和代理状态由明确的样例提供；这部分不属于浏览器或实际 DSH 验证。
