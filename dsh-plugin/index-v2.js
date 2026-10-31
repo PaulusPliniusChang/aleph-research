@@ -684,7 +684,7 @@ class ProjectService {
         if (researcher.role !== 'researcher' || researcher.status !== 'running' || !researcher.childId) continue;
         this.nudgeChild(researcher.childId, 'Checkpoint: stop expanding the analysis. Commit a valid mission with the current code and call aleph_propose_mission now. You can improve it after the first result.');
       }
-    }, 300_000);
+    }, 60_000);
     checkpoint.unref?.();
     return { projectId, requested, started };
   }
