@@ -407,6 +407,8 @@ class ProjectService {
     } catch (error) {
       throw new Error(`mission branch ${branch} has no valid missions/<id>/mission.json: ${error instanceof Error ? error.message : error}`);
     }
+    const existingMission = (project.missions ?? []).find((mission) => mission.branch === branch);
+    if (existingMission) return { projectId, missions: project.missions };
     const ownerSession = agent?.id ?? null;
     const registered = await this.mutate(projectId, (current) => ({
       ...current,
@@ -990,7 +992,13 @@ class ProjectService {
     const machine = project.machines.find((item) => item.id === machineId);
     if (!machine) throw new Error(`machine not found: ${machineId}`);
     if (machine.status !== 'idle') throw new Error(`machine ${machineId} is busy`);
-    const approved = project.missions.filter((mission) => mission.status === 'approved');
+    const approvedAll = project.missions.filter((mission) => mission.status === 'approved');
+    const seenBranches = new Set();
+    const approved = approvedAll.filter((mission) => {
+      if (seenBranches.has(mission.branch)) return false;
+      seenBranches.add(mission.branch);
+      return true;
+    });
     if (approved.length === 0) throw new Error('no approved missions');
     const batchId = newId('b');
     const batchBranch = `batch/${batchId}`;
