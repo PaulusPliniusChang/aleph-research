@@ -536,6 +536,8 @@ class ProjectService {
     const prompt = [
       'You are an AlephResearch researcher.',
       `Project: ${project.id}. Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
+      `Canonical read-only visible data: ${project.visibleData ?? '(none configured)'}. Read it directly; do not copy or extract it into the project or your worktree.`,
+      'Do not install packages outside the mission uv project and do not write outside your assigned research worktree or mission repo branch.' ,
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
       'Before creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.',
@@ -593,12 +595,23 @@ class ProjectService {
         if (pid === process.pid) continue;
         let cwd = '';
         let cmd = '';
+        let environ = '';
         try {
           cwd = readlinkSync(`/proc/${entry}/cwd`);
           cmd = readFileSync(`/proc/${entry}/cmdline`).toString('utf8').replace(/\0/g, ' ');
+          environ = readFileSync(`/proc/${entry}/environ`).toString('utf8');
         } catch { continue; }
+        const isPython = /\.venv|python|pip|uv pip|conda|lightgbm|catboost|xgboost|torch/i.test(cmd);
+        const isCaseProcess = environ.includes('DSH_PROFILE=aleph-lab');
+        if (isCaseProcess && isPython && !cwd.startsWith(workspace)) {
+          try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+          this.mutate(project.id, (current) => ({
+            ...current,
+            violations: [...(current.violations ?? []), `${now()} killed out-of-project compute ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
+          })).catch(() => undefined);
+          continue;
+        }
         if (!cwd.startsWith(workspace)) continue;
-        const isPython = /\.venv|python|conda|lightgbm|catboost|xgboost|torch/i.test(cmd);
         if (!isPython) continue;
         const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
         if (!underAllowed) {
