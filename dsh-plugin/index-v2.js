@@ -11,7 +11,7 @@ import { execFile } from 'node:child_process';
 import { readdirSync, readFileSync, readlinkSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 
 import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain';
@@ -462,6 +462,7 @@ class ProjectService {
         cwd: batchWorktree,
         timeout: 900_000,
         env: {
+          ...(project.pythonPath ? { PATH: `${dirname(project.pythonPath)}:${process.env.PATH ?? ''}` } : {}),
           ALEPH_WORKSPACE: project.workspace,
           ...(project.visibleData ? { ALEPH_VISIBLE_DATA: project.visibleData } : {}),
           ...(project.pythonPath ? { ALEPH_PYTHON: project.pythonPath } : {}),
