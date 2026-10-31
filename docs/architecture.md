@@ -57,8 +57,14 @@ id, error and reclamation flag.
 
 - Campaign state is not stored in the workspace; it is in DSH storage.
 - Worktrees and logs are workspace-local `.aleph/` data and can be gitignored.
+- The campaign workspace must be the DSH session workspace or a directory inside
+  it. The researcher inherits the session's workspace-write sandbox; a campaign
+  outside that boundary is rejected before dispatch because its worktree would
+  be read-only.
 - The researcher never sees the leader workspace outside its worktree.
 - Hidden test data and evaluator configuration remain Leader-side.
+- The evaluator receives `ALEPH_TESTSET` when a testset path is configured and
+  `ALEPH_SUBMISSION_PYTHON` when a submission interpreter is configured.
 
 ## Evaluation
 

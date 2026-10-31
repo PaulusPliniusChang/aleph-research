@@ -28,6 +28,21 @@
 - 评测返回 `score: 1`，SOTA 更新为 `sota/main`；worktree 已删除。
 - 状态在 Host 重启后保留；控制台截图见 `docs/assets/aleph-console.png`。
 
+## kunlungpt 案例
+
+在独立 DSH 的会话工作区内运行了真实案例副本：
+
+- 工作区：`/tmp/aleph-dsh-lab2/leader/kunlungpt`
+- 战役：`c-cd6dec80`
+- 任务：`m-6d6f5d96`，隐藏集得分 `72.9076`
+- 提交：`06e7dce`，父提交 `dc1959b`，`initialize..sota/main` 提交数为 1
+- SOTA：`sota/main`，分数 `72.9076`
+- worktree 已回收，控制台显示任务、分支、分数与已花费。
+
+首次把案例工作区放在会话工作区之外时，DSH sandbox 对 researcher 只提供
+只读权限，任务无法写回真实 worktree。Host 服务已增加 workspace 边界校验：
+战役工作区必须是 DSH 会话工作区或其子目录，否则在派发前拒绝。
+
 ## 限制
 
 - 控制台只读，最新战役之外的选择尚未提供。

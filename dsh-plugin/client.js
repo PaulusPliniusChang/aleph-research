@@ -550,7 +550,7 @@ window.__ModuleLoader__.load({
           metric(t('field.id'), campaign.id ?? t(MISSING)),
           metricNode(t('field.status'), statusPill(t, campaign.status)),
           metricNode(t('field.exploration'), explorationBlock(t, campaign.exploration)),
-          metric(t('field.budget'), formatNumber(campaign.budget, 2)),
+          metric(t('field.budget'), formatNumber(campaign.budget, 2) ?? t(MISSING)),
           metric(t('field.spent'), formatNumber(campaign.spent, 2)),
           metric(t('field.generated'), generated),
         ),

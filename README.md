@@ -45,9 +45,14 @@ Host command. It does not touch the current DSH profile.
 1. Open or create a DSH workspace. Empty directories are allowed.
 2. Select `Aleph Research` for the session.
 3. Ask the Leader to call `aleph_start_campaign` with a title, an evaluator
-   command and optional visible-data path. If the workspace has no `research/`
-   repository, the tool creates an `initialize` branch and `sota/main`.
+   command, optional visible-data path, hidden-testset path and submission
+   interpreter. If the workspace has no `research/` repository, the tool creates
+   an `initialize` branch and `sota/main`.
 4. Call `aleph_enqueue_mission`, then `aleph_run_next`.
+
+The campaign workspace must be the DSH session workspace or a directory inside
+it. The researcher runs under the session's workspace-write sandbox, so a
+campaign pointed at an unrelated absolute path is rejected before dispatch.
 
 `aleph_start_campaign` keeps campaign state in DSH storage and creates
 `research/` and `.aleph/` inside the workspace. The evaluator command runs in
@@ -93,7 +98,9 @@ python3 eval/run_eval.py
 ## Status
 
 The Host plugin, two presets, tools, storage-domain state, console and one
-end-to-end researcher dispatch have been exercised in an isolated DSH. See
+end-to-end researcher dispatch have been exercised in an isolated DSH. The
+kunlungpt case was also run through the new Host plugin: hidden-set score
+72.9076, one commit on `sota/main`, and a reclaimed worktree. See
 `docs/STATUS.md` and `docs/architecture.md`.
 
 The old Python control plane has been removed. The browser UI, storage schema

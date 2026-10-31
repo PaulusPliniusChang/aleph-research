@@ -22,7 +22,7 @@ from a source directory.
 
 | Tool | Purpose |
 | --- | --- |
-| `aleph_start_campaign` | Create a campaign in a DSH workspace. |
+| `aleph_start_campaign` | Create a campaign in a DSH workspace; accepts evaluator, visible-data, testset and submission-python paths. |
 | `aleph_status` | Read campaigns and missions from the storage domain. |
 | `aleph_enqueue_mission` | Queue one mission with an L0 to L3 strategy. |
 | `aleph_run_next` | Start the next queued researcher subagent. |

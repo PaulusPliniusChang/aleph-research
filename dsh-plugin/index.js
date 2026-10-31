@@ -44,13 +44,15 @@ const campaignSchema = z.object({
   workspace: z.string(),
   status: z.enum(['running', 'paused', 'draft']),
   exploration: z.number(),
-  budget: z.number(),
+  budget: z.number().nullable().optional(),
   spent: z.number(),
   sotaBranch: z.string().nullable(),
   sotaScore: z.number(),
   evalCommand: z.string(),
   researchRoot: z.string(),
   visibleData: z.string().nullable(),
+  testsetPath: z.string().nullable().optional(),
+  submissionPython: z.string().nullable().optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
   missions: z.array(missionSchema),
@@ -138,8 +140,8 @@ function snapshot(campaign) {
       status: campaign.status,
       exploration: campaign.exploration,
       sota_branch: campaign.sotaBranch,
-      sota_score: campaign.sotaScore,
-      budget: campaign.budget,
+      sota_score: campaign.sotaBranch ? campaign.sotaScore : null,
+      budget: campaign.budget ?? null,
       spent: campaign.spent,
     },
     missions: campaign.missions.map((mission) => ({
@@ -233,6 +235,19 @@ class AlephService {
     return this.sessions?.get(agent?.id);
   }
 
+  assertWorkspace(agent, workspace) {
+    const sessionRoot = this.sessionFor(agent)?.header?.cwd;
+    if (typeof sessionRoot !== 'string' || sessionRoot === '') return;
+    const root = resolve(sessionRoot);
+    const target = resolve(workspace);
+    if (target !== root && !target.startsWith(`${root}/`)) {
+      throw new Error(
+        `campaign workspace ${target} is outside the DSH session workspace ${root}; ` +
+        'open the leader workspace as the DSH workspace before starting or dispatching a campaign',
+      );
+    }
+  }
+
   workspaceFor(agent, explicit) {
     if (typeof explicit === 'string' && explicit.trim() !== '') return resolve(explicit.trim());
     const session = this.sessionFor(agent);
@@ -241,7 +256,7 @@ class AlephService {
     throw new Error('workspace is required when the calling session has no cwd');
   }
 
-  async create({ workspace, title, evalCommand = 'python3 eval/run_eval.py', visibleData = null }) {
+  async create({ workspace, title, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null }) {
     const target = resolve(workspace);
     if (!(await pathExists(target))) throw new Error(`workspace does not exist: ${target}`);
     const campaignId = newId('c');
@@ -262,13 +277,15 @@ class AlephService {
       workspace: target,
       status: 'running',
       exploration: 0.7,
-      budget: 100,
+      budget: null,
       spent: 0,
       sotaBranch: null,
       sotaScore: -999999,
       evalCommand,
       researchRoot,
       visibleData: typeof visibleData === 'string' && visibleData ? resolve(visibleData) : null,
+      testsetPath: typeof testsetPath === 'string' && testsetPath ? resolve(testsetPath) : null,
+      submissionPython: typeof submissionPython === 'string' && submissionPython ? submissionPython : null,
       createdAt: stamp,
       updatedAt: stamp,
       missions: [],
@@ -320,6 +337,7 @@ class AlephService {
     if (!this.subagents) throw new Error('subagent service is unavailable');
     const campaign = this.table.get(campaignId);
     if (!campaign) throw new Error(`campaign not found: ${campaignId}`);
+    this.assertWorkspace(agent, campaign.workspace);
     const mission = campaign.missions.find((item) => item.status === 'queued');
     if (!mission) throw new Error('no queued mission');
 
@@ -432,6 +450,8 @@ class AlephService {
       ALEPH_SOLUTION_DIR: worktree,
       ALEPH_SUBMISSION: commit,
       ...(campaign.visibleData ? { ALEPH_VISIBLE_DATA: campaign.visibleData } : {}),
+      ...(campaign.testsetPath ? { ALEPH_TESTSET: campaign.testsetPath } : {}),
+      ...(campaign.submissionPython ? { ALEPH_SUBMISSION_PYTHON: campaign.submissionPython } : {}),
     };
     const result = await run('bash', ['-lc', campaign.evalCommand], {
       cwd: campaign.workspace,
@@ -492,6 +512,8 @@ export async function apply(ctx) {
     title: { type: 'string', description: 'Campaign title' },
     eval_command: { type: 'string', description: 'Leader-side evaluator command; prints JSON with a numeric score' },
     visible_data: { type: 'string', description: 'Optional absolute visible-data directory for researchers' },
+    testset: { type: 'string', description: 'Optional absolute hidden-testset root for the evaluator' },
+    submission_python: { type: 'string', description: 'Optional Python interpreter for the submission' },
   };
 
   const campaignParameter = { campaign_id: { type: 'string', required: true, description: 'Campaign id' } };
@@ -501,12 +523,18 @@ export async function apply(ctx) {
       'aleph_start_campaign',
       'Create an AlephResearch campaign inside a DSH workspace. State is stored in the DSH storage domain; no ~/.aleph files are written.',
       workspaceParameters,
-      async (args, exec) => service.create({
-        workspace: service.workspaceFor(exec.agent, args.workspace),
-        title: args.title,
-        evalCommand: args.eval_command,
-        visibleData: args.visible_data,
-      }),
+      async (args, exec) => {
+        const workspace = service.workspaceFor(exec.agent, args.workspace);
+        service.assertWorkspace(exec.agent, workspace);
+        return service.create({
+          workspace,
+          title: args.title,
+          evalCommand: args.eval_command,
+          visibleData: args.visible_data,
+          testsetPath: args.testset,
+          submissionPython: args.submission_python,
+        });
+      },
     ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
       'aleph_status',
@@ -596,6 +624,8 @@ export async function apply(ctx) {
           title: args.title,
           evalCommand: args.evalCommand ?? args.eval_command,
           visibleData: args.visibleData ?? args.visible_data,
+          testsetPath: args.testset ?? args.testsetPath,
+          submissionPython: args.submissionPython ?? args.submission_python,
         });
         return sendJson(res, 200, snapshot(campaign));
       } catch (error) {
