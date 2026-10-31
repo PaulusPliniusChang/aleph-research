@@ -70,6 +70,7 @@ const projectSchema = z.object({
   evalCommand: z.string(),
   brief: z.string().optional(),
   researcherCount: z.number().int().optional(),
+  prepared: z.boolean().optional(),
   visibleData: z.string().nullable().optional(),
   testsetPath: z.string().nullable().optional(),
   submissionPython: z.string().nullable().optional(),
@@ -290,6 +291,7 @@ class ProjectService {
       evalCommand,
       brief,
       researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : 4,
+      prepared: false,
       visibleData: visibleData ? resolve(visibleData) : null,
       testsetPath: testsetPath ? resolve(testsetPath) : null,
       submissionPython: submissionPython || null,
@@ -303,6 +305,22 @@ class ProjectService {
     };
     await this.table.put(project.id, project);
     return project;
+  }
+
+  async scaffoldResearch({ projectId, title = 'Research project' }) {
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    const root = project.researchRoot;
+    await writeFile(join(root, 'README.md'), `# ${title}\n\n${project.brief || ''}\n`, 'utf8');
+    await writeFile(join(root, 'pyproject.toml'), '[project]\nname = "aleph-research"\nversion = "0.1.0"\nrequires-python = ">=3.10"\n', 'utf8');
+    await mkdir(join(root, 'src'), { recursive: true });
+    await writeFile(join(root, 'src', '__init__.py'), '', 'utf8');
+    await writeFile(join(root, '.gitignore'), '__pycache__/\n*.pyc\n.venv/\n', 'utf8');
+    await git(root, ['add', '-A']);
+    await git(root, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', 'leader: research project scaffold']);
+    const commit = (await git(root, ['rev-parse', 'HEAD'])).stdout.trim();
+    const next = await this.mutate(projectId, (current) => ({ ...current, prepared: true }));
+    return { projectId, commit, prepared: next.prepared };
   }
 
   async startMission({ projectId, name = 'mission' }) {
@@ -384,7 +402,15 @@ class ProjectService {
     const startedAt = now();
     let runnerError = null;
     try {
-      await run('python3', ['batch_runner.py'], { cwd: batchWorktree, timeout: 900_000 });
+      await run('python3', ['batch_runner.py'], {
+        cwd: batchWorktree,
+        timeout: 900_000,
+        env: {
+          ALEPH_WORKSPACE: project.workspace,
+          ...(project.visibleData ? { ALEPH_VISIBLE_DATA: project.visibleData } : {}),
+          ...(project.testsetPath ? { ALEPH_TESTSET: project.testsetPath } : {}),
+        },
+      });
       runnerError = null;
     } catch (error) {
       runnerError = error instanceof Error ? error.message : String(error);
@@ -558,7 +584,7 @@ class ProjectService {
       'You are an AlephResearch researcher.',
       `Project: ${project.id}. Research brief: ${project.brief || '(no extra brief)'}.`,
       `Research worktree: ${worktree}. Research branch: ${branch}. Mission repo: ${project.missionRoot}. Template branch: ${project.templateBranch}.`,
-      `Canonical read-only visible data: ${project.visibleData ?? '(none configured)'}. Read it directly; do not copy or extract it into the project or your worktree.`,
+      'You cannot see any dataset: do not read data.zip, visible-data, testsets or any data directory. The Leader created your initial research scaffold; work from that code. Mission code may read data at runtime from Host-provided environment variables, but you must not inspect the data.',
       'Do not install packages outside the mission uv project and do not write outside your assigned research worktree or mission repo branch.',
       'Do not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.' ,
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
@@ -592,6 +618,7 @@ class ProjectService {
   async startResearchers({ projectId, count = null, agent }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
+    if (!project.prepared) throw new Error('research project not prepared; Leader must call aleph_create_research_scaffold first');
     const requested = Math.max(1, Math.min(16, Number(count) || project.researcherCount || 4));
     await this.mutate(projectId, (current) => ({
       ...current,
@@ -652,7 +679,7 @@ class ProjectService {
         const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
         const underMission = cwd === project.missionRoot || cwd.startsWith(`${project.missionRoot}/`);
         const nested = isCaseProcess && hasBwrapAncestor(pid);
-        const forbidden = /\/home\/hapenia\/Projects\/kunlungpt-comp|\/home\/hapenia\/Projects\/aleph-research|\/home\/hapenia\/\.dsh|problem\/data\.zip|\/testsets(?:\/|\b)|\/tmp\/aleph-case-lab\/(?:profiles|sessions|storages|home)\b/.test(cmd);
+        const forbidden = /\/home\/hapenia\/Projects\/kunlungpt-comp|\/home\/hapenia\/Projects\/aleph-research|\/home\/hapenia\/\.dsh|problem\/data\.zip|\/testsets(?:\/|\b)|visible-data|\/tmp\/aleph-case-lab\/(?:profiles|sessions|storages|home)\b/.test(cmd);
         if (nested && forbidden) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
           this.mutate(project.id, (current) => ({
@@ -885,6 +912,7 @@ function snapshot(project) {
       eval_command: project.evalCommand,
       brief: project.brief ?? '',
       researcher_count: project.researcherCount ?? 4,
+      prepared: project.prepared === true,
     },
     missions: project.missions.map((mission) => ({
       id: mission.id,
@@ -974,6 +1002,12 @@ export async function apply(ctx) {
       { project_id: { type: 'string', description: 'Optional project id' } },
       async (args) => (args.project_id ? [service.get(args.project_id)].filter(Boolean) : service.list()).map(snapshot),
     ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_create_research_scaffold',
+      'Leader creates the initial research project before any researcher starts.',
+      { ...projectIdParam, title: { type: 'string', description: 'Research project title' } },
+      async (args) => service.scaffoldResearch({ projectId: args.project_id, title: args.title ?? 'Research project' }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_start_mission',
       'Create a mission branch from the template and return its worktree for the researcher to fill.',
