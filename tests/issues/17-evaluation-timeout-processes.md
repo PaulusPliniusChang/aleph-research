@@ -117,4 +117,32 @@ python3 tests/issues/dsh/current-evaluation-timeout.py --source /home/paulus-cha
 
 ## 远端发布
 
-B 已将问题上传至上游 [#23](https://github.com/hapenia/aleph-research/issues/23)，发布后逐字核验正文并确认议题开放。固定原始证据提交为 `aa6b230333eebf55253ca6fff423a91ea24866cf`。远端正文已移除 YAML 管理头及前导管理注释，本地完整保留。修复实现与后续验收尚待完成。
+B 已将问题上传至上游 [#23](https://github.com/hapenia/aleph-research/issues/23)，发布后逐字核验正文并确认议题开放。固定原始证据提交为 `aa6b230333eebf55253ca6fff423a91ea24866cf`。远端正文已移除 YAML 管理头及前导管理注释，本地完整保留。修复实现已完成，修复验收见下节。
+
+
+## 修复验收
+
+C 提供的修复仅改变评估命令的进程生命周期：评估通过独立 Linux 进程组启动；入口成功、失败、超时或输出超限后，Host 先停止同组普通后代，再删除临时研究工作区。研究代理自有工作区继续保留。无法确认停止时，Host 返回清理错误、保留目录，并阻止后续评估直接启动；同一 Host 中的后续请求先重试旧组清理。
+
+B 以 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 建立独立工作树，导入[冻结清单](evidence/17-fixed-source-manifest.json)中的全部文件。正式产品测试 98 项全部通过，其中新增有效行为检查点为 88 项，父容器为 3 项，既有测试为 7 项。测试覆盖正常及失败入口、忽略结束信号的后代、输出超限、启动失败、无关进程保留、临时目录清理顺序、自有目录及未提交内容保留，以及清理无法确认后的阻止和恢复。原始输出见[产品日志](evidence/17-fixed-product.txt)。清理权限异常采用明确的测试注入，不属于操作系统真实权限故障实测。
+
+### 独立自动与实际 DSH
+
+```bash
+ALEPH_CURRENT_SOURCE=/tmp/aleph-17-b-acceptance-source ALEPH_TIMEOUT_EXPECT_PROTECTION=1 ALEPH_TIMEOUT_OBSERVATIONS=tests/issues/evidence/17-fixed-independent.json node --experimental-loader /home/paulus-chang/项目/aleph-fix-evaluation-processes/dsh-plugin/test/loader.mjs --test tests/issues/dsh/evaluation-timeout-acceptance.test.mjs
+python3 tests/issues/dsh/current-evaluation-timeout.py --source /tmp/aleph-17-b-acceptance-source --output tests/issues/evidence/17-fixed-real-dsh-evaluation-timeout.json --expect-protection
+```
+
+独立自动检查的 67 个有效行为点全部通过，Node 连同父容器报告 68 项全部通过，见[原始输出](evidence/17-fixed-independent.txt)及[完整记录](evidence/17-fixed-independent.json)。自动模式使用内存存储与会话适配器，执行真实注册工具、Git、Python、信号和进程观察。
+
+实际 DSH 的 67 项观察全部通过，见[原始输出](evidence/17-fixed-real-dsh-evaluation-timeout.txt)和[完整记录](evidence/17-fixed-real-dsh-evaluation-timeout.json)。DSH 会话、注册工具、持久化存储和研究代理自有 Git 工作区均真实运行；模型响应采用本地确定性适配器。正常评分、独立评估引用和历史记录正确，失败未增加成功报告或最高分。临时路径及自有路径超时分别约为 1341 毫秒和 1281 毫秒，工具返回后入口、工作进程及评分后代均已不在 `/proc` 中，未出现返回后的评分心跳。临时研究工作区已清理，自有研究工作区及输入文件保留。各场景 `remainingActive` 均为空，隔离 Host `318450` 已退出且进程编号不存在。
+
+新实现使用 `spawn` 助手，旧 `execFile` 预加载适配器不再适用。B 仅在隔离验收副本中，将唯一 `runEvaluation` 调用的期限从 `600_000` 改为 `1200` 毫秒。该副本没有替换进程创建、Git、信号或进程观察。生产工作树仍保留十分钟，准确差异及原新 SHA256 见[适配差异](evidence/17-fixed-deadline-adaptation.diff)和[适配清单](evidence/17-fixed-deadline-adaptation.json)。
+
+B 在正式发布前再次串行获取上游和派生仓库，并对干净主分支执行仅快进同步，基线仍为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。验后所有文件的 SHA256 均与冻结清单一致，临时依赖链接已经移除，见[最终审计](evidence/17-fixed-final-audit.json)。主代理已审阅完整自动及实际记录，认可修复验收。
+
+### 支持边界
+
+该实现要求 Linux 及可读取的 `/proc` 元数据。主动调用 `setsid`、更换进程组或提交到外部服务的计算不在终止保证范围内。Host 重启后的进程归属恢复、显卡或远端计算清理未纳入本次修复。非 Linux 平台启动前返回明确错误，该分支没有在其他操作系统实测。清理记录只保存在当前 Host 内存中。
+
+修复拉取请求待发布。议题状态保留原核查状态，是否合并或关闭由上游维护者决定。

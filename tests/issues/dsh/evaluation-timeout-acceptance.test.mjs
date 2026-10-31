@@ -6,10 +6,12 @@ import {join,resolve} from 'node:path';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 import test from 'node:test';
 const actual=Boolean(process.env.ALEPH_TIMEOUT_ACTUAL_CONFIG);
+const repair=process.env.ALEPH_TIMEOUT_EXPECT_PROTECTION==='1';
+const expectSurvivors=actual&&!repair;
 const cfg=actual?JSON.parse(readFileSync(process.env.ALEPH_TIMEOUT_ACTUAL_CONFIG,'utf8')):{};
 const source=resolve(cfg.source||process.env.ALEPH_CURRENT_SOURCE||'/home/paulus-chang/项目/aleph');
 const output=cfg.output||process.env.ALEPH_TIMEOUT_OBSERVATIONS;
-const records={source,source_sha:execFileSync('git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),mode:actual?'actual DSH':'automatic registered-tool adapter',node:process.version,checks:[],scenarios:[],boundary:'Only matching bash -lc evaluator commands with existing timeout600000 and aleph-timeout-probe.py are adapted to1200ms before original real execFile. Actual Git, Python descendants, signals, /proc identity, and cleanup. Automatic mode replaces storage/session services. Actual mode uses original DSH session/tools/storage; owned researcher uses deterministic model only.'};
+const records={source,source_sha:execFileSync('git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),mode:actual?'actual DSH':'automatic registered-tool adapter',node:process.version,checks:[],scenarios:[],boundary:repair?'Isolated frozen-source copy: unique runEvaluation deadline600000→1200ms; real spawn, Git, signals, /proc and cleanup; official production remains ten minutes. Actual mode uses real DSH services and a deterministic researcher model.':'Only matching bash -lc evaluator commands with existing timeout600000 and aleph-timeout-probe.py are adapted to1200ms before original real execFile. Actual Git, Python descendants, signals, /proc identity, and cleanup. Automatic mode replaces storage/session services. Actual mode uses original DSH session/tools/storage; owned researcher uses deterministic model only.'};
 const save=()=>{if(output)writeFileSync(output,JSON.stringify(records,null,2));};
 const git=(repo,...args)=>execFileSync('git',['-C',repo,...args],{encoding:'utf8'}).trim();
 const quote=s=>"'"+s.replaceAll("'","'\\''")+"'";
@@ -75,10 +77,10 @@ test('ALEPH-17 evaluation deadline owns real descendant lifetimes before cleanup
      await point(scope,'entry received actual SIGTERM',()=>assert.ok(scenario.entryEvents.some(e=>e.kind==='signal'&&e.signal===15)));
      await point(scope,'deadline is bounded by disclosed adapter',()=>assert.ok(scenario.elapsedMs>=1000&&scenario.elapsedMs<6000));
      await point(scope,'descendants remain in ordinary inherited process group',()=>assert.equal(scenario.grandchild.pgid,entry.pgid));
-     await point(scope,actual?'defect: scoring worker remains alive after timeout':'scoring worker must stop before tool failure returns',()=>assert.equal(Boolean(alive(scenario.worker)),actual));
-     await point(scope,actual?'defect: scoring grandchild remains alive after timeout':'scoring grandchild must stop before tool failure returns',()=>assert.equal(Boolean(alive(scenario.grandchild)),actual));
-     await point(scope,actual?'defect: actual heartbeat continues beyond timeout':'scoring heartbeat must stop before failure returns',()=>assert.equal(scenario.grandchildEvents.some(e=>e.kind==='heartbeat'&&e.at/1e6>scenario.finishedAt),actual));
-     if(!owned) await point(scope,actual?'defect: live grandchild observes deleted solution input':'solution must not be deleted while scoring descendant still runs',()=>assert.equal(scenario.grandchildEvents.some(e=>e.kind==='heartbeat'&&!e.solutionExists&&!e.inputExists),actual));
+     await point(scope,expectSurvivors?'defect: scoring worker remains alive after timeout':'scoring worker must stop before tool failure returns',()=>assert.equal(Boolean(alive(scenario.worker)),expectSurvivors));
+     await point(scope,expectSurvivors?'defect: scoring grandchild remains alive after timeout':'scoring grandchild must stop before tool failure returns',()=>assert.equal(Boolean(alive(scenario.grandchild)),expectSurvivors));
+     await point(scope,expectSurvivors?'defect: actual heartbeat continues beyond timeout':'scoring heartbeat must stop before failure returns',()=>assert.equal(scenario.grandchildEvents.some(e=>e.kind==='heartbeat'&&e.at/1e6>scenario.finishedAt),expectSurvivors));
+     if(!owned) await point(scope,expectSurvivors?'defect: live grandchild observes deleted solution input':'solution must not be deleted while scoring descendant still runs',()=>assert.equal(scenario.grandchildEvents.some(e=>e.kind==='heartbeat'&&!e.solutionExists&&!e.inputExists),expectSurvivors));
      else await point(scope,'owned solution and input are preserved',()=>assert.ok(existsSync(join(entry.solution,'algorithm.txt'))));
     }else await point(scope,'controlled nonzero error retains exit code',()=>assert.ok(error.message.includes('controlled evaluation failure')));
    }

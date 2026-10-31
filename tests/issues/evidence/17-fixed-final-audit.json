@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-31T19:37:56.324478+08:00",
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "frozen_manifest_sha256": "aecddbcee8bb7994f091b90a0054a25bbe2d4469546099895dce28cc08754615",
+  "all_seven_post_test_hashes_match": true,
+  "temporary_dependency_symlink_removed": true,
+  "production_timeout_ms": 600000,
+  "main_clean": true
+}

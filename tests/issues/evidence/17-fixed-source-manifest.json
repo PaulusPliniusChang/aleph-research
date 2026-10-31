@@ -1,0 +1,41 @@
+{
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "hasGit": false,
+  "changes": [
+    {
+      "path": "dsh-plugin/README.md",
+      "kind": "modified",
+      "sha256": "8abc99aa77c0121503cd4a917d875a08d61ad8dfe3392663382ae9c5d540d62d"
+    },
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "kind": "modified",
+      "sha256": "2b252963110e627275f396f67f5a3e5b9bd1b9178205ea06ef97536fd6a7d454"
+    },
+    {
+      "path": "dsh-plugin/package.json",
+      "kind": "modified",
+      "sha256": "20af62172843a7765da1b3f6c429ef5bbe887eaeb1dd8637e016d4d83f76ba68"
+    },
+    {
+      "path": "dsh-plugin/test/loader.mjs",
+      "kind": "modified",
+      "sha256": "6435ea7bfb0fc68262339649021f4f6b2ced460b3554c32cfe4b18954a5ad84a"
+    },
+    {
+      "path": "dsh-plugin/evaluation-process.mjs",
+      "kind": "added",
+      "sha256": "6f59392952266581514a0313924c959bb1e14f20e5de93055835ecabdeb531ec"
+    },
+    {
+      "path": "dsh-plugin/test/evaluation-process.test.mjs",
+      "kind": "added",
+      "sha256": "6e64ba46ca18bfbea4f2b89ea9a8ad62a57b83e4fd547bb57cbfe8d790816e84"
+    },
+    {
+      "path": "dsh-plugin/test/fixtures/evaluation-process.py",
+      "kind": "added",
+      "sha256": "5f664f5a61b292fe7102d96860e178f526b9328dcc0f89003ad96ec664e4e75a"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:313119) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ Linux evaluation group owns real entry, descendants, output and signal escalation
+  ✔ success: entry really executed in requested cwd and environment (0.63377ms)
+  ✔ success: owned session and group are isolated from Host (0.317828ms)
+  ✔ success: all observed real owned processes stopped before return (0.612419ms)
+  ✔ success: valid score output remains parseable (0.181526ms)
+  ✔ successful output preserves UTF-8 and stderr (0.252422ms)
+  ✔ failure: entry really executed in requested cwd and environment (0.224395ms)
+  ✔ failure: owned session and group are isolated from Host (0.187085ms)
+  ✔ failure: all observed real owned processes stopped before return (0.137476ms)
+  ✔ failure: failure retains its actual category and safe-stop marker (0.134857ms)
+  ✔ direct: entry really executed in requested cwd and environment (0.239779ms)
+  ✔ direct: owned session and group are isolated from Host (0.149086ms)
+  ✔ direct: all observed real owned processes stopped before return (0.112231ms)
+  ✔ direct: failure retains its actual category and safe-stop marker (0.062803ms)
+  ✔ tree: entry really executed in requested cwd and environment (0.16617ms)
+  ✔ tree: owned session and group are isolated from Host (0.16381ms)
+  ✔ tree: all observed real owned processes stopped before return (0.094331ms)
+  ✔ tree: failure retains its actual category and safe-stop marker (0.037913ms)
+  ✔ tree: worker and grandchild are ordinary owned descendants (0.10844ms)
+  ✔ tree: descendant heartbeats do not continue after return (0.346663ms)
+  ✔ ignore-entry: entry really executed in requested cwd and environment (0.158341ms)
+  ✔ ignore-entry: owned session and group are isolated from Host (0.140586ms)
+  ✔ ignore-entry: all observed real owned processes stopped before return (0.084554ms)
+  ✔ ignore-entry: failure retains its actual category and safe-stop marker (0.024049ms)
+  ✔ ignore-entry: worker and grandchild are ordinary owned descendants (0.019936ms)
+  ✔ ignore-entry: descendant heartbeats do not continue after return (0.513729ms)
+  ✔ ignore-entry: ignored TERM receives real escalation before bounded failure (0.671428ms)
+  ✔ ignore-grandchild: entry really executed in requested cwd and environment (0.25883ms)
+  ✔ ignore-grandchild: owned session and group are isolated from Host (0.198568ms)
+  ✔ ignore-grandchild: all observed real owned processes stopped before return (0.124401ms)
+  ✔ ignore-grandchild: failure retains its actual category and safe-stop marker (0.042548ms)
+  ✔ ignore-grandchild: worker and grandchild are ordinary owned descendants (0.049363ms)
+  ✔ ignore-grandchild: descendant heartbeats do not continue after return (0.359781ms)
+  ✔ ignore-grandchild: ignored TERM receives real escalation before bounded failure (0.233686ms)
+  ✔ background-success: entry really executed in requested cwd and environment (0.157202ms)
+  ✔ background-success: owned session and group are isolated from Host (0.126677ms)
+  ✔ background-success: all observed real owned processes stopped before return (0.132885ms)
+  ✔ background-success: valid score output remains parseable (0.080243ms)
+  ✔ background-success: worker and grandchild are ordinary owned descendants (0.084851ms)
+  ✔ background-success: descendant heartbeats do not continue after return (0.328106ms)
+  ✔ background-failure: entry really executed in requested cwd and environment (0.439616ms)
+  ✔ background-failure: owned session and group are isolated from Host (0.197867ms)
+  ✔ background-failure: all observed real owned processes stopped before return (0.276414ms)
+  ✔ background-failure: failure retains its actual category and safe-stop marker (0.038451ms)
+  ✔ background-failure: worker and grandchild are ordinary owned descendants (0.039399ms)
+  ✔ background-failure: descendant heartbeats do not continue after return (0.251572ms)
+  ✔ overflow: entry really executed in requested cwd and environment (0.186874ms)
+  ✔ overflow: owned session and group are isolated from Host (0.157739ms)
+  ✔ overflow: all observed real owned processes stopped before return (0.086878ms)
+  ✔ overflow: failure retains its actual category and safe-stop marker (0.03298ms)
+  ✔ output overflow preserves bounded stdout for diagnosis (0.086579ms)
+  ✔ spawn failure retains ENOENT and allows safe cleanup (2.268018ms)
+  ✔ timeout leaves another owned session running even from the same cwd (161.3953ms)
+✔ Linux evaluation group owns real entry, descendants, output and signal escalation (3500.103604ms)
+▶ evaluation service stops computation before Git cleanup and preserves researcher worktrees
+  ✔ normal: evaluator cwd uses evalRoot while solution is the research code (0.187378ms)
+  ✔ normal: no owned real calculation survives service completion (0.14414ms)
+  ✔ normal: solution registration matches temporary/owned policy (4.362662ms)
+  ✔ normal: evaluator and project directories remain (0.106822ms)
+  ✔ normal: score, evaluated commit and independent report ref remain correct (6.819458ms)
+  ✔ normal: best and history record only completed evaluation (0.111175ms)
+  ✔ nonzero: evaluator cwd uses evalRoot while solution is the research code (0.125667ms)
+  ✔ nonzero: no owned real calculation survives service completion (0.078ms)
+  ✔ nonzero: solution registration matches temporary/owned policy (4.332936ms)
+  ✔ nonzero: evaluator and project directories remain (0.915745ms)
+  ✔ nonzero: original failure category remains visible (0.224563ms)
+  ✔ nonzero: no failed result enters history or best (0.16079ms)
+  ✔ nonzero: research source branch remains at original commit (5.58497ms)
+  ✔ timeout-temporary: evaluator cwd uses evalRoot while solution is the research code (0.211038ms)
+  ✔ timeout-temporary: no owned real calculation survives service completion (0.097843ms)
+  ✔ timeout-temporary: solution registration matches temporary/owned policy (5.354747ms)
+  ✔ timeout-temporary: evaluator and project directories remain (0.066122ms)
+  ✔ timeout-temporary: original failure category remains visible (0.034337ms)
+  ✔ timeout-temporary: no failed result enters history or best (0.021864ms)
+  ✔ timeout-temporary: research source branch remains at original commit (5.598055ms)
+  ✔ timeout-temporary: no descendant observed premature solution deletion (0.451879ms)
+Preparing worktree (new branch 'research/owned')
+  ✔ timeout-owned: evaluator cwd uses evalRoot while solution is the research code (0.155323ms)
+  ✔ timeout-owned: no owned real calculation survives service completion (0.124953ms)
+  ✔ timeout-owned: solution registration matches temporary/owned policy (5.457235ms)
+  ✔ timeout-owned: evaluator and project directories remain (0.06059ms)
+  ✔ timeout-owned: original failure category remains visible (0.030838ms)
+  ✔ timeout-owned: no failed result enters history or best (0.037929ms)
+  ✔ timeout-owned: research source branch remains at original commit (6.029974ms)
+  ✔ timeout-owned: no descendant observed premature solution deletion (0.314437ms)
+  ✔ owned timeout preserves uncommitted research (0.121648ms)
+✔ evaluation service stops computation before Git cleanup and preserves researcher worktrees (2396.378723ms)
+▶ uncertain process cleanup retains code and blocks retries until recovery
+  ✔ observation uncertainty reports diagnostic cleanup failure (0.45967ms)
+  ✔ real unresolved evaluator and solution remain for safe recovery (20.701903ms)
+  ✔ retry fails before creating another worktree or evaluator (11.125137ms)
+  ✔ unresolved evaluation records no report or best result (5.312473ms)
+  ✔ recovery stops exact previous process before another evaluation succeeds (0.256559ms)
+  ✔ recovery keeps the previously retained research code available (0.234566ms)
+✔ uncertain process cleanup retains code and blocks retries until recovery (808.220124ms)
+(node:313120) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (450.30045ms)
+(node:313121) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (106.824452ms)
+✔ an activation without a child identity fails instead of writing a null record (78.494252ms)
+✔ an evaluation report stays attached to the commit it scored (192.71462ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (325.97011ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (130.637667ms)
+✔ evaluations accumulate and the best result follows the highest score (401.661676ms)
+ℹ tests 98
+ℹ suites 0
+ℹ pass 98
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6952.386479

@@ -1,0 +1,10 @@
+{
+  "official_source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-evaluation-processes",
+  "acceptance_source": "/tmp/aleph-17-b-acceptance-source",
+  "original_sha256": "2b252963110e627275f396f67f5a3e5b9bd1b9178205ea06ef97536fd6a7d454",
+  "adapted_sha256": "4ced8f504c48092971c9fea8cce4e1c967cc1add8012b8a210dbd59c9078f94e",
+  "unique_replacement": 1,
+  "original_ms": 600000,
+  "adapted_ms": 1200,
+  "boundary": "Only the unique evaluator call timeout changes. Real spawn, Git, signals and /proc remain unchanged. Official production source retains ten minutes."
+}

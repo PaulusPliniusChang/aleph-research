@@ -15,6 +15,7 @@ import urllib.request
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=Path, required=True)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--expect-protection', action='store_true')
 args = parser.parse_args()
 spec = importlib.util.spec_from_file_location('launcher', Path(__file__).with_name('launch-project.py'))
 launcher = importlib.util.module_from_spec(spec)
@@ -35,14 +36,17 @@ args.output.parent.mkdir(parents=True, exist_ok=True)
 environment['source_commit'] = subprocess.check_output(['git', '-C', str(args.source), 'rev-parse', 'HEAD'], text=True).strip()
 environment['dirty'] = subprocess.check_output(['git', '-C', str(args.source), 'status', '--porcelain', '--untracked-files=no'], text=True)
 records = {'environment': environment, 'url': url, 'command': [sys.executable, *sys.argv],
-           'boundary': 'Actual DSH tools, persistent storage and real Python processes; precise eval execFile deadline adapter600000→1200ms; no product source edits', 'events': []}
+           'boundary': ('Actual DSH tools/storage/Python. Isolated frozen-source copy uses a single runEvaluation timeout600000→1200ms source adaptation; official production unchanged.' if args.expect_protection else 'Actual DSH tools, persistent storage and real Python processes; precise eval execFile deadline adapter600000→1200ms; no product source edits'), 'events': []}
 config = root / 'browser-config.json'
 probe_output = root / 'probe-observations.json'
 config.write_text(json.dumps({'source':str(args.source.resolve()),'workspace':str(workspace),'url':url,'output':str(probe_output)}))
 preload = Path(__file__).with_name('evaluation-timeout-preload.mjs').resolve()
-adapter_log = args.output.with_name('17-current-real-dsh-adapter.jsonl').resolve()
+adapter_log = args.output.with_name('17-fixed-real-dsh-adapter.jsonl' if args.expect_protection else '17-current-real-dsh-adapter.jsonl').resolve()
 if adapter_log.exists(): adapter_log.unlink()
 probe_env = dict(os.environ, DSH_HOME=str(root / 'home'), NODE_OPTIONS='--import='+str(preload), ALEPH_TIMEOUT_ADAPTER_LOG=str(adapter_log), ALEPH_TIMEOUT_ACTUAL_CONFIG=str(config))
+if args.expect_protection:
+    probe_env.pop('NODE_OPTIONS', None)
+    probe_env['ALEPH_TIMEOUT_EXPECT_PROTECTION']='1'
 log = (root / 'dsh.log').open('w')
 proc = subprocess.Popen(['node', str(runtime / 'node_modules/@deepseek-ai/dsh/lib/bin.js'),
     '--profile', 'reproduction', '--no-open', '--host', '127.0.0.1', '--port', str(port)],
