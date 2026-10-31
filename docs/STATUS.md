@@ -63,10 +63,9 @@
 - 项目工作区：`/tmp/aleph-case-lab/leader`
 - 项目 id：`p-65b9c1a3`
 
-只复制了 `problem/` 与 `data/` 中受控的原始数据内容；没有复制 `.venv`、notebooks、
-outputs、catboost_info、aleph-case 或其他工程产物。`data/research` 与
-`data/rerun` 属于派生内容，未复制。原工程
-`/home/hapenia/Projects/kunlungpt-comp` 未写入。
+只复制了 `problem/`；`data/` 中的内容全部是从 `problem/data.zip` 派生出来的，
+未复制到案例中。`.venv`、notebooks、outputs、catboost_info、aleph-case 等工程
+产物也未复制。原工程 `/home/hapenia/Projects/kunlungpt-comp` 未写入。
 
 项目初始化创建了 `research/` 与 `missions/` 仓库，以及模板分支；`problem/` 和
 `data/` 位于项目根目录。
