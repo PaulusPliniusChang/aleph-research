@@ -1,0 +1,82 @@
+(node:246883) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-evaluation/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-evaluation/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'research/a'
+Switched to a new branch 'research/b'
+Switched to branch 'research/a'
+▶ ALEPH-15 evaluation scores and report commits retain actual evaluated source
+  ✔ stable/input: actual evaluator reads algorithm a (0.712058ms)
+  ✔ stable/input: actual evaluator runs in solution worktree (0.268277ms)
+  ✔ stable/input: evaluation directory differs from shared repository (0.728919ms)
+  ✔ stable/input: evaluation snapshot is captured original commit (4.620213ms)
+  ✔ stable/input: evaluation worktree is detached (4.073707ms)
+  ✔ stable/report: tool records completed evaluation (0.253906ms)
+  ✔ stable/report: tool returns same project identity (0.106608ms)
+  ✔ stable/report: score comes from actual algorithm a (0.101203ms)
+  ✔ stable/report: stdout identifies actual algorithm a (0.103955ms)
+  ✔ stable/report: successful evaluation emits no stderr (0.092764ms)
+  ✔ stable/report: returned research commit exists (4.907598ms)
+  ✔ stable/report: report contains matching score trailer (1.426233ms)
+  ✔ stable/report: report contains evaluated algorithm identity (0.092942ms)
+  ✔ stable/report: report parent is actual evaluated source (0.067148ms)
+  ✔ stable/report: returned report tree contains actual evaluated algorithm (0.034257ms)
+  ✔ stable/report: unrelated research b receives no evaluation commit (4.347255ms)
+  ✔ stable/report: evaluation worktree is removed after completion (0.12253ms)
+  ✔ stable/report: Git worktree registration is removed (4.322693ms)
+  ✔ stable/report: evaluation does not create compute missions (0.440574ms)
+Switched to a new branch 'research/a'
+Switched to a new branch 'research/b'
+Switched to branch 'research/a'
+Switched to branch 'research/b'
+  ✔ switch/input: actual evaluator reads algorithm a (0.151571ms)
+  ✔ switch/input: actual evaluator runs in solution worktree (0.035219ms)
+  ✔ switch/input: evaluation directory differs from shared repository (0.024826ms)
+  ✔ switch/input: evaluation snapshot is captured original commit (4.802782ms)
+  ✔ switch/input: evaluation worktree is detached (6.666413ms)
+  ✔ switch/report: tool records completed evaluation (0.146046ms)
+  ✔ switch/report: tool returns same project identity (0.034814ms)
+  ✔ switch/report: score comes from actual algorithm a (0.022517ms)
+  ✔ switch/report: stdout identifies actual algorithm a (0.044655ms)
+  ✔ switch/report: successful evaluation emits no stderr (0.030658ms)
+  ✔ switch/report: returned research commit exists (4.206854ms)
+  ✔ switch/report: report contains matching score trailer (0.049002ms)
+  ✔ switch/report: report contains evaluated algorithm identity (0.030368ms)
+  ✔ switch/report: report parent is actual evaluated source (0.024879ms)
+  ✔ switch/report: returned report tree contains actual evaluated algorithm (0.038288ms)
+  ✔ switch/report: unrelated research b receives no evaluation commit (8.526385ms)
+  ✔ switch/report: evaluation worktree is removed after completion (0.063536ms)
+  ✔ switch/report: Git worktree registration is removed (3.933555ms)
+  ✔ switch/report: evaluation does not create compute missions (0.093561ms)
+Switched to a new branch 'research/a'
+Switched to a new branch 'research/b'
+Switched to branch 'research/a'
+  ✔ advance/input: actual evaluator reads algorithm a (0.296123ms)
+  ✔ advance/input: actual evaluator runs in solution worktree (0.091502ms)
+  ✔ advance/input: evaluation directory differs from shared repository (0.115654ms)
+  ✔ advance/input: evaluation snapshot is captured original commit (5.048916ms)
+  ✔ advance/input: evaluation worktree is detached (4.202597ms)
+  ✔ advance/report: tool records completed evaluation (0.149924ms)
+  ✔ advance/report: tool returns same project identity (0.049339ms)
+  ✔ advance/report: score comes from actual algorithm a (0.026213ms)
+  ✔ advance/report: stdout identifies actual algorithm a (0.031618ms)
+  ✔ advance/report: successful evaluation emits no stderr (0.019093ms)
+  ✔ advance/report: returned research commit exists (4.756285ms)
+  ✔ advance/report: report contains matching score trailer (0.054744ms)
+  ✔ advance/report: report contains evaluated algorithm identity (0.027998ms)
+  ✔ advance/report: report parent is actual evaluated source (0.022353ms)
+  ✔ advance/report: returned report tree contains actual evaluated algorithm (0.020196ms)
+  ✔ advance/report: unrelated research b receives no evaluation commit (4.148044ms)
+  ✔ advance/report: evaluation worktree is removed after completion (0.066988ms)
+  ✔ advance/report: Git worktree registration is removed (4.623861ms)
+  ✔ advance/report: evaluation does not create compute missions (0.102406ms)
+  ✔ advance/preservation: new research commit remains reachable from own branch (4.774513ms)
+  ✔ advance/preservation: new research working file is preserved (0.603779ms)
+✔ ALEPH-15 evaluation scores and report commits retain actual evaluated source (746.441395ms)
+ℹ tests 60
+ℹ suites 0
+ℹ pass 60
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 907.914826

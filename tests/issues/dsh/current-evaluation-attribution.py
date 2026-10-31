@@ -17,6 +17,7 @@ import urllib.request
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=Path, required=True)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--expect-protection', action='store_true')
 args = parser.parse_args()
 spec = importlib.util.spec_from_file_location('launcher', Path(__file__).with_name('launch-project.py'))
 launcher = importlib.util.module_from_spec(spec)
@@ -172,7 +173,27 @@ try:
         check(scope + ': evaluation worktree is cleaned', not Path(evaluated['cwd']).exists())
         check(scope + ': actual worktree registration is cleaned', evaluated['cwd'] not in git(repo, 'worktree', 'list', '--porcelain'))
         check(scope + ': real project still has no compute missions', public['missions'] == [])
-        if scope == 'stable':
+        if args.expect_protection:
+            check(scope + ': protected report parent matches actual evaluated code', parent == captured)
+            check(scope + ': protected report tree contains evaluated algorithm', algorithm == 'algorithm-a')
+            check(scope + ': original evaluated commit is explicitly returned', result['evaluatedCommit'] == captured)
+            check(scope + ': report identifies exact evaluated commit', 'Aleph-Research-Commit: ' + captured in report)
+            check(scope + ': durable evaluation reference resolves to returned report', git(repo, 'rev-parse', result['evaluationRef']) == tip)
+            check(scope + ': unrelated branch remains at original algorithm b', git(repo, 'rev-parse', 'research/b') == other)
+            if scope == 'switch':
+                check('protected switch: evaluated original branch receives its own report', git(repo, 'rev-parse', 'research/a') == tip)
+                check('protected switch: shared repository stays on unrelated branch', git(repo, 'branch', '--show-current') == 'research/b')
+                check('protected switch: unrelated working algorithm remains b', (repo / 'algorithm.txt').read_text().strip() == 'algorithm-b')
+                check('protected switch: conditional original branch update succeeds', result['researchBranchUpdated'] is True)
+            elif scope == 'advance':
+                check('protected advance: original branch retains exact new tip', git(repo, 'rev-parse', 'research/a') == advanced)
+                check('protected advance: new source remains reachable', git(repo, 'merge-base', '--is-ancestor', advanced, 'research/a') == '')
+                check('protected advance: current file keeps newer algorithm', (repo / 'algorithm.txt').read_text().strip() == 'algorithm-a-revised')
+                check('protected advance: branch update is explicitly declined', result['researchBranchUpdated'] is False)
+            else:
+                check('protected stable: original branch advances to its own report', git(repo, 'rev-parse', 'research/a') == tip)
+                check('protected stable: successful conditional branch update is returned', result['researchBranchUpdated'] is True)
+        elif scope == 'stable':
             check('stable: report parent matches evaluated code', parent == captured)
             check('stable: report tree contains evaluated algorithm', algorithm == 'algorithm-a')
             check('stable: unrelated branch remains unchanged', git(repo, 'rev-parse', 'research/b') == other)
@@ -185,7 +206,8 @@ try:
             check('defect advance: report parent is revised untested code', parent == advanced and parent != captured)
             check('defect advance: report tree contains revised untested algorithm', algorithm == 'algorithm-a-revised')
             check('advance: new code remains reachable', git(repo, 'merge-base', '--is-ancestor', advanced, 'research/a') == '')
-    records['defect_reproduced'] = True
+    records['defect_reproduced'] = not args.expect_protection
+    records['protection_validated'] = args.expect_protection
 except Exception as error:
     event('error', {'type': type(error).__name__, 'message': str(error)})
     raise

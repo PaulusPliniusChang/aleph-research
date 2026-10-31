@@ -1,0 +1,11 @@
+{
+  "baseline": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-evaluation",
+  "sha256": {
+    "dsh-plugin/index-v2.js": "3cb257cfbeea1caa04611e1425b34b91b95ceb767eef32d59d9ca36eb3d74cf6",
+    "dsh-plugin/test/evaluation.test.mjs": "cb12e2bbe0c2e0cc7b2193cee428195e75c2ad02a0f67461dbf408836406a31f"
+  },
+  "product_node_checks": 101,
+  "independent_behavior_checks": 59,
+  "actual_dsh_checks": 74
+}

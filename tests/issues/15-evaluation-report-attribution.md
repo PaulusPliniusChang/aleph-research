@@ -16,7 +16,7 @@ pull_request: null
 
 当前源码没有保存并校验报告对应的原始研究分支和提交。如果评估期间研究仓库切换分支或推进到其他代码，评分报告可能被写入另一份研究代码的提交历史。建议优先级为 P2。
 
-B 已在最新基线 `66885994ceadad83a237a27c1fc7de6419889c14` 完成独立自动测试和实际 DSH 核查，报告与代码关联错误已复现。自动验收包含 59 个有效行为点，其中 54 个通过、5 个失败；实际 DSH 的 56 项观察检查全部通过，表示缺陷复现成功。远端议题和拉取请求链接待补充。
+B 已在最新基线 `66885994ceadad83a237a27c1fc7de6419889c14` 完成独立自动测试和实际 DSH 核查，报告与代码关联错误已复现。自动验收包含 59 个有效行为点，其中 54 个通过、5 个失败；实际 DSH 的 56 项观察检查全部通过，表示缺陷复现成功。上游议题为 [#19](https://github.com/hapenia/aleph-research/issues/19)；修复验收结果见后文。
 
 ## 使用例子
 
@@ -103,3 +103,36 @@ python3 tests/issues/dsh/current-evaluation-attribution.py \
 ## 远端发布
 
 B 已按用户授权发布上游 [#19](https://github.com/hapenia/aleph-research/issues/19)。原始脚本与证据固定于公开提交 `98d04cc7376c83e7fcba65cf15b61924cfd58fea`，见[公开目录](https://github.com/PaulusPliniusChang/aleph-research/tree/98d04cc7376c83e7fcba65cf15b61924cfd58fea/tests/issues)。GitHub 正文移除管理字段与前导注释，本地完整保留。当前管理状态保留实际 DSH 验证结论，修复拉取请求待补充。
+
+
+## 修复验收（2026-10-31）
+
+C 已提供冻结修复，B 在独立正式工作树 `/home/paulus-chang/项目/aleph-fix-evaluation` 验收。产品提交为 `f969a9bf99e9ecc10f7c0e759ed5ddce2773b134`，分支为 `fix/aleph-15-evaluation-attribution`，基线为 `66885994ceadad83a237a27c1fc7de6419889c14`。产品修改仅包含 `dsh-plugin/index-v2.js` 与新增 `dsh-plugin/test/evaluation.test.mjs`。
+
+Host 现在先固定实际评估的研究提交与原分支，再从该提交创建评估目录。评估结束后，Host 使用原代码树与原父提交创建报告提交，并将报告保存在独立的 `refs/aleph/evaluations/<evaluationId>` 引用中。Host 只在原分支仍停留于原提交时更新该分支，避免覆盖评估期间新增的代码。返回值新增 `evaluatedCommit`、`evaluationRef` 和 `researchBranchUpdated`，原有返回字段保留。
+
+- [产品测试](evidence/15-fixed-product.txt)全部通过，Node 总数为 101 项，其中新增套件包含 99 个有效子行为检查点。
+- [B 独立自动验收](evidence/15-fixed-evaluation-attribution.txt)的 59 个有效行为点全部通过；Node 计入父容器为 60 项。[结构化记录](evidence/15-fixed-evaluation-attribution.json)保存实际研究代码、报告和返回值。
+- [实际 DSH 修复核查](evidence/15-fixed-real-dsh-evaluation-attribution.json)的 74 项检查全部通过，`protection_validated=true`，`defect_reproduced=false`。实际注册工具、父会话、持久存储、分离工作树和 Python 评估均真实运行。稳定、切换分支及推进提交的场景中，报告父提交与代码树均对应实际接受评估的代码，持久引用正确指向报告；切换分支不改动另一条分支的工作文件，推进分支保留新增提交和文件并返回 `researchBranchUpdated=false`。隔离 Host 已停止，退出记录确认进程不存在。
+
+产品测试另覆盖共享暂存区、未跟踪文件、评估命令修改或暂存文件、分离 HEAD、失败清理及垃圾回收后报告可达性。上述额外边界没有全部通过实际 DSH 重复执行，实际 DSH 证据仅支持稳定、切换和推进场景。
+
+B 在全部验收后重新核对[冻结文件摘要](evidence/15-fixed-frozen-content.json)，内容保持不变。`index-v2.js` 的 SHA256 为 `3cb257cfbeea1caa04611e1425b34b91b95ceb767eef32d59d9ca36eb3d74cf6`，`evaluation.test.mjs` 的 SHA256 为 `cb12e2bbe0c2e0cc7b2193cee428195e75c2ad02a0f67461dbf408836406a31f`。临时依赖链接已移除，没有提交。
+
+```bash
+cd /home/paulus-chang/项目/aleph-fix-evaluation/dsh-plugin
+npm test
+
+cd /home/paulus-chang/项目/aleph-tests
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph-fix-evaluation \
+ALEPH_EVALUATION_OBSERVATIONS=tests/issues/evidence/15-fixed-evaluation-attribution.json \
+node --experimental-loader /home/paulus-chang/项目/aleph-fix-evaluation/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/evaluation-attribution-acceptance.test.mjs
+
+python3 tests/issues/dsh/current-evaluation-attribution.py \
+  --source /home/paulus-chang/项目/aleph-fix-evaluation \
+  --output tests/issues/evidence/15-fixed-real-dsh-evaluation-attribution.json \
+  --expect-protection
+```
+
+B 在发布边界再次同步上游与派生仓库，主分支仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。修复已推送至派生仓库，拉取请求链接将在创建后补充。当前管理状态保留实际 DSH 缺陷结论，未自动改为“已解决”。
