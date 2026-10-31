@@ -1,0 +1,213 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:364041) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ persistent admission, queued cancellation, and retained research
+  ✔ legacy projects are running without migration (0.817146ms)
+  ✔ pause persists control and reason (0.159844ms)
+  ✔ snapshot reports actual paused state (0.253768ms)
+  ✔ repeated pause retains revision and operation (0.201301ms)
+  ✔ pause blocks mission workspace creation (0.468429ms)
+  ✔ pause blocks proposals before Git inspection (0.203063ms)
+  ✔ pause blocks direct batch composition without new branch (9.394383ms)
+  ✔ pause blocks research activation before worktree creation (0.374725ms)
+  ✔ pause blocks researcher group before side effects (0.352018ms)
+  ✔ pause blocks Composer startup (0.210061ms)
+  ✔ paused approval admits queued mission (0.086498ms)
+  ✔ paused approval sends no dispatch notification (0.056157ms)
+  ✔ resume opens admission with incremented revision (0.062801ms)
+  ✔ resume reports notification failure honestly (0.593107ms)
+  ✔ duplicate resume sends no additional message (0.169477ms)
+  ✔ queued cancellation persists cancelled status (0.074605ms)
+  ✔ cancelled mission branch remains unchanged (4.193639ms)
+  ✔ cancelled mission excluded from queued and counted separately (0.237498ms)
+  ✔ repeated cancellation retains operation id (0.225663ms)
+  ✔ approval cannot revive cancelled mission (0.23685ms)
+  ✔ Composer cannot select cancelled work (0.465394ms)
+  ✔ empty project finishes immediately (0.07281ms)
+  ✔ finished project cannot resume (0.127047ms)
+  ✔ finished project rejects approval (0.10903ms)
+  ✔ finished project preserves evaluation access (86.040275ms)
+  ✔ finished state survives recovery (0.136376ms)
+  ✔ cancelled branch and evaluation history survive recovery (4.449ms)
+✔ persistent admission, queued cancellation, and retained research (231.996458ms)
+▶ formed batch controls and restart launch fence
+  ✔ paused formed batch cannot run (0.562656ms)
+  ✔ paused formed batch cannot start InfraOptimizer (0.468714ms)
+  ✔ batched mission cancellation returns batch conflict (0.155246ms)
+  ✔ forming batch cancellation confirms completion (0.160996ms)
+  ✔ forming batch cancellation cancels undelivered mission (0.188199ms)
+  ✔ forming batch cancellation releases matching machine (0.091386ms)
+  ✔ cancelled batch cannot be started (0.482201ms)
+  ✔ cancellation diagnostics are retained (0.948979ms)
+  ✔ duplicate batch cancellation remains cancelled (0.202369ms)
+  ✔ pause survives Host recovery (0.10104ms)
+  ✔ cancelled batch survives Host recovery (0.089067ms)
+✔ formed batch controls and restart launch fence (147.366331ms)
+▶ real running batch cancellation preserves work and precise machine ownership
+  ✔ active runner is a real process (0.31987ms)
+  ✔ running mission is reflected in snapshot (0.350197ms)
+  ✔ duplicate batch start is rejected before directory mutation (0.604588ms)
+  ✔ running cancellation confirms owned computation stopped (0.413382ms)
+  ✔ cancelled running batch never becomes done (0.220861ms)
+  ✔ cancelled mission has no fabricated result commit (0.114824ms)
+  ✔ cancelled worktree remains available for diagnosis (0.485586ms)
+  ✔ cancelled mission original branch remains intact (4.469526ms)
+  ✔ machine releases only after cancellation confirmation (0.192572ms)
+✔ real running batch cancellation preserves work and precise machine ownership (315.103833ms)
+▶ pause and finish drain existing compute without new dispatch
+  ✔ pause leaves running computation alive (0.222777ms)
+  ✔ pause does not convert running batch into cancelled (0.1447ms)
+  ✔ finish reports draining while compute remains (0.087286ms)
+  ✔ finish allows already running process to continue (0.433741ms)
+  ✔ draining batch delivers normal results (0.323609ms)
+  ✔ last batch settles project to finished (0.144095ms)
+  ✔ finished batch sends no new dispatch notification (0.073423ms)
+✔ pause and finish drain existing compute without new dispatch (362.276976ms)
+▶ InfraOptimizer exact ownership: paused
+  ✔ duplicate Infra startup is rejected without erasing edits (0.465321ms)
+  ✔ existing optimization can commit after dispatch closes (5.240307ms)
+  ✔ closed dispatch prevents Infra completion starting compute (0.143501ms)
+  ✔ Infra completion closes only its own activation record (0.094072ms)
+✔ InfraOptimizer exact ownership: paused (202.501437ms)
+▶ InfraOptimizer exact ownership: cancel-before-receipt
+  ✔ duplicate Infra startup is rejected without erasing edits (0.400802ms)
+  ✔ cancelled activation receives exact receipt disposal (0.232306ms)
+  ✔ late successful result never advances batch branch (6.234141ms)
+  ✔ cancelled optimization edits remain in original directory (0.437524ms)
+  ✔ cancel before receipt publication completes without running batch (0.229893ms)
+✔ InfraOptimizer exact ownership: cancel-before-receipt (186.14381ms)
+▶ InfraOptimizer exact ownership: dispose-failure
+  ✔ duplicate Infra startup is rejected without erasing edits (0.398406ms)
+  ✔ cancelled activation receives exact receipt disposal (0.122615ms)
+  ✔ late successful result never advances batch branch (6.018111ms)
+  ✔ cancelled optimization edits remain in original directory (0.431306ms)
+  ✔ failed dispose does not report cancellation complete (0.16067ms)
+  ✔ failed dispose retains cancelling and busy machine (0.153883ms)
+✔ InfraOptimizer exact ownership: dispose-failure (225.513924ms)
+▶ InfraOptimizer exact ownership: finished
+  ✔ duplicate Infra startup is rejected without erasing edits (0.394089ms)
+  ✔ existing optimization can commit after dispatch closes (4.713666ms)
+  ✔ closed dispatch prevents Infra completion starting compute (0.133173ms)
+  ✔ Infra completion closes only its own activation record (0.068555ms)
+  ✔ finished project retains unstarted optimized batch (0.124961ms)
+✔ InfraOptimizer exact ownership: finished (197.080006ms)
+▶ cancellation and result publication share one short transaction
+  ✔ cancel intent before publishing blocks mission result reference (0.230592ms)
+  ✔ cancel intent before publishing preserves branch tip (4.640827ms)
+✔ cancellation and result publication share one short transaction (246.508561ms)
+▶ restart reconciles a command reserved before spawn without false ownership
+  ✔ pre-spawn crash recovery settles persisted cancellation (0.162452ms)
+  ✔ pre-spawn crash recovery releases verified unadmitted machine (0.088737ms)
+  ✔ pre-spawn recovery writes durable delayed-launch fence (0.748901ms)
+✔ restart reconciles a command reserved before spawn without false ownership (165.087401ms)
+▶ Composer cleanup never waits on the tool currently calling finish
+  ✔ finish tool returns while exact Composer disposal awaits caller (0.184835ms)
+  ✔ finish reports Composer cleanup pending separately (0.054367ms)
+  ✔ Composer cleanup completes after caller releases (0.20902ms)
+✔ Composer cleanup never waits on the tool currently calling finish (63.587863ms)
+▶ registered control tools enforce Leader authority; HTTP operator routes use same controls
+  ✔ pause_project tool is registered (0.273029ms)
+  ✔ resume_project tool is registered (0.085794ms)
+  ✔ finish_project tool is registered (0.044893ms)
+  ✔ cancel_mission tool is registered (0.040275ms)
+  ✔ cancel_batch tool is registered (0.107343ms)
+  ✔ non-Leader execution is rejected even when directly invoked (0.298799ms)
+  ✔ Leader from another workspace cannot control project (0.241994ms)
+  ✔ authorized Leader control uses persisted service state (0.15471ms)
+  ✔ operator route rejects GET state change (0.389328ms)
+  ✔ operator route rejects malformed JSON (0.157304ms)
+  ✔ operator resume shares persisted control implementation (0.286966ms)
+  ✔ operator route missing project reports 404 (0.18926ms)
+✔ registered control tools enforce Leader authority; HTTP operator routes use same controls (47.888153ms)
+▶ real dependency preparation is owned and cancellable before the batch runner
+  ✔ dependency setup starts a real owned process (0.314085ms)
+  ✔ preparation phase retains forming status before runner (0.161671ms)
+  ✔ preparation identity is durable before cancellation (0.107196ms)
+  ✔ preparation cancellation confirms process termination (0.682562ms)
+  ✔ cancelled preparation never dispatches batch runner (0.512189ms)
+  ✔ cancelled preparation retains dependency worktree (0.838174ms)
+✔ real dependency preparation is owned and cancellable before the batch runner (295.511708ms)
+▶ delivery published before cancellation remains done while remaining work is cancelled
+  ✔ result publication and persisted done state precede cancel acquisition (0.352487ms)
+  ✔ already published mission remains done after whole-batch cancel (0.159942ms)
+  ✔ already published result reference remains readable (4.59944ms)
+  ✔ remaining unpublished mission becomes cancelled (0.103341ms)
+  ✔ unpublished second branch stays at original mission commit (7.861232ms)
+  ✔ partial delivery still ends whole batch as cancelled (0.182793ms)
+✔ delivery published before cancellation remains done while remaining work is cancelled (453.74466ms)
+▶ Infra preparation reservation precedes a delayed real worktree-add return
+  ✔ first actual worktree exists while add return is delayed (34.161726ms)
+  ✔ second same-batch Infra request is rejected in preparation gap (0.263497ms)
+  ✔ rejected request preserves first real worktree and contents (0.376369ms)
+  ✔ duplicate preparation request starts no Infra model activation (0.103887ms)
+  ✔ original preparation resumes and exact activation completes (0.167695ms)
+  ✔ original preparation modifications survive into optimized branch (29.655531ms)
+✔ Infra preparation reservation precedes a delayed real worktree-add return (516.411657ms)
+(node:364042) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ owned batch commands: real processes, signals, durable receipts and launch fences
+  ✔ stdout is captured (79.70933ms)
+  ✔ stderr is captured independently (73.047186ms)
+  ✔ UTF8 stdout survives byte boundaries (73.770953ms)
+  ✔ custom environment reaches user command (68.775007ms)
+  ✔ cwd is honored (68.183631ms)
+  ✔ nonzero exit remains an error (67.649024ms)
+  ✔ failing command retains stderr (74.420791ms)
+  ✔ missing user executable fails cleanly (44.183426ms)
+  ✔ missing cwd fails without unknown ownership (11.09066ms)
+  ✔ timeout terminates real running command (216.415314ms)
+  ✔ pre-aborted request never runs code (1.036293ms)
+  ✔ running abort stops owned command (98.621847ms)
+  ✔ repeated abort remains one cleanup (88.812241ms)
+  ✔ stdout overflow is bounded and stops computation (125.713697ms)
+  ✔ stderr overflow is bounded independently (102.449198ms)
+  ✔ successful receipt records detached group and session (68.044263ms)
+  ✔ successful receipt records boot and start identity (72.329899ms)
+  ✔ recovery after ordinary exit confirms stopped (64.684094ms)
+  ✔ recovery stops a currently live owned group (201.439705ms)
+  ✔ wrong execution identity refuses recovery signal (129.904019ms)
+  ✔ reused PID start identity fails closed (75.443936ms)
+  ✔ previous boot receipt requires no signal (0.525038ms)
+  ✔ invalid group receipt fails closed (64.426927ms)
+  ✔ missing receipt before spawn is fenced without claiming an unknown PID (0.77285ms)
+  ✔ go without receipt is inconsistent and fails closed (0.597705ms)
+  ✔ delayed launcher after recovery fence cannot run user code (26.872532ms)
+  ✔ launcher writes receipt but never starts without Host go (66.282233ms)
+  ✔ TERM-ignoring descendants receive escalation (866.597237ms)
+  ✔ entry exit still cleans ordinary background descendants (810.484768ms)
+  ✔ same-directory unrelated process survives managed timeout (151.875419ms)
+  ✔ one owned group survives cancellation of another (179.629596ms)
+  ✔ missing execution identity is rejected before spawn (0.254006ms)
+✔ owned batch commands: real processes, signals, durable receipts and launch fences (3984.240788ms)
+(node:364043) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (448.208128ms)
+(node:364044) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (106.42086ms)
+✔ an activation without a child identity fails instead of writing a null record (65.690194ms)
+✔ an evaluation report stays attached to the commit it scored (177.818636ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (318.336995ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (118.194027ms)
+✔ evaluations accumulate and the best result follows the highest score (369.195935ms)
+ℹ tests 167
+ℹ suites 0
+ℹ pass 167
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4159.334625

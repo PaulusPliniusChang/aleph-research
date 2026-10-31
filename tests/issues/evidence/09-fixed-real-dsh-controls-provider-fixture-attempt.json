@@ -1,0 +1,43 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-2z8anhch",
+    "workspace": "/tmp/aleph-project-dsh-2z8anhch/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-project-controls",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "dirty": " M docs/architecture.md\n M dsh-plugin/README.md\n M dsh-plugin/index-v2.js\n M dsh-plugin/package.json\n?? dsh-plugin/execution-launcher.mjs\n?? dsh-plugin/execution-owner.mjs\n?? dsh-plugin/node_modules\n?? dsh-plugin/project-controls.mjs\n?? dsh-plugin/test/controls.test.mjs\n?? dsh-plugin/test/execution-owner.test.mjs\n"
+  },
+  "url": "http://127.0.0.1:36137",
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/fixed-project-controls.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph-fix-project-controls",
+    "--output",
+    "tests/issues/evidence/09-fixed-real-dsh-controls.json"
+  ],
+  "configured_presets": [
+    "aleph",
+    "aleph-researcher",
+    "aleph-composer",
+    "aleph-infra"
+  ],
+  "boundary": "Original product copied into isolated installed DSH; only each preset model provider/model is set to the local deterministic adapter. Real activations, model Bash/Host tool calls, activation receipt disposal, Git, persistent storage and Python compute. Exact first Infra worktree-add response scheduled after real Git success. No source or deadline edits.",
+  "events": [
+    {
+      "name": "host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 374715,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "probe_exit": 1
+}

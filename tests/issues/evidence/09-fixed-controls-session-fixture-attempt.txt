@@ -1,0 +1,32 @@
+(node:374183) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-project-controls/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-project-controls/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ B independent fixed project controls and precise execution ownership
+  ✔ initial registered project is running (1.136832ms)
+  ✔ research repository is real Git (1.446195ms)
+  ✔ mission proposal retains its committed branch (1.262434ms)
+✖ B independent fixed project controls and precise execution ownership (537.542015ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 614.589468
+
+✖ failing tests:
+
+test at tests/issues/dsh/fixed-project-controls.test.mjs:34:1
+✖ B independent fixed project controls and precise execution ownership (537.542015ms)
+  Error: project controls require an active Leader session
+      at authorizeControl (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-project-controls/dsh-plugin/index-v2.js:1578:27)
+      at Object.execute (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-project-controls/dsh-plugin/index-v2.js:1711:7)
+      at invoke (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-project-controls.test.mjs:26:526)
+      at Object.call (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-project-controls.test.mjs:27:168)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-project-controls.test.mjs:40:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    status: 403
+  }

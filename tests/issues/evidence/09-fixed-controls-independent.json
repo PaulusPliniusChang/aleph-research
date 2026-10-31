@@ -1,0 +1,927 @@
+{
+  "source": "/home/paulus-chang/项目/aleph-fix-project-controls",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": false,
+  "checks": [
+    {
+      "name": "initial registered project is running",
+      "passed": true
+    },
+    {
+      "name": "research repository is real Git",
+      "passed": true
+    },
+    {
+      "name": "mission proposal retains its committed branch",
+      "passed": true
+    },
+    {
+      "name": "pause persists through registered status",
+      "passed": true
+    },
+    {
+      "name": "pause records operator reason",
+      "passed": true
+    },
+    {
+      "name": "pause is idempotent without revision churn",
+      "passed": true
+    },
+    {
+      "name": "paused project rejects new mission creation",
+      "passed": true
+    },
+    {
+      "name": "paused project rejects forming new batches",
+      "passed": true
+    },
+    {
+      "name": "paused approval queues approved work",
+      "passed": true
+    },
+    {
+      "name": "paused approval does not start Composer",
+      "passed": true
+    },
+    {
+      "name": "queued cancellation reports cleanup complete",
+      "passed": true
+    },
+    {
+      "name": "queued cancellation persists terminal state",
+      "passed": true
+    },
+    {
+      "name": "queued cancellation preserves original branch",
+      "passed": true
+    },
+    {
+      "name": "queued cancellation preserves mission code",
+      "passed": true
+    },
+    {
+      "name": "queued cancellation retains operation identity",
+      "passed": true
+    },
+    {
+      "name": "approval cannot revive cancelled mission",
+      "passed": true
+    },
+    {
+      "name": "resume reopens dispatch",
+      "passed": true
+    },
+    {
+      "name": "resume advances control revision once",
+      "passed": true
+    },
+    {
+      "name": "cancelled work cannot form batch",
+      "passed": true
+    },
+    {
+      "name": "finished project stays closed",
+      "passed": true
+    },
+    {
+      "name": "finished project cannot resume",
+      "passed": true
+    },
+    {
+      "name": "finished retains cancelled count separately",
+      "passed": true
+    },
+    {
+      "name": "registered authority control aleph_pause_project",
+      "passed": true
+    },
+    {
+      "name": "registered authority control aleph_resume_project",
+      "passed": true
+    },
+    {
+      "name": "registered authority control aleph_finish_project",
+      "passed": true
+    },
+    {
+      "name": "registered authority control aleph_cancel_mission",
+      "passed": true
+    },
+    {
+      "name": "registered authority control aleph_cancel_batch",
+      "passed": true
+    },
+    {
+      "name": "running computation has live entry process",
+      "passed": true
+    },
+    {
+      "name": "running computation has live ordinary descendant",
+      "passed": true
+    },
+    {
+      "name": "public running batch status is accurate",
+      "passed": true
+    },
+    {
+      "name": "running batch owns busy machine",
+      "passed": true
+    },
+    {
+      "name": "duplicate run rejects active execution",
+      "passed": true
+    },
+    {
+      "name": "duplicate run preserves computation",
+      "passed": true
+    },
+    {
+      "name": "individual cancellation identifies whole batch conflict",
+      "passed": true
+    },
+    {
+      "name": "whole batch cancellation confirms cleanup",
+      "passed": true
+    },
+    {
+      "name": "entry process stopped before confirmed cancellation",
+      "passed": true
+    },
+    {
+      "name": "ordinary descendant stopped before confirmed cancellation",
+      "passed": true
+    },
+    {
+      "name": "whole batch persists cancelled state",
+      "passed": true
+    },
+    {
+      "name": "undelivered mission becomes cancelled",
+      "passed": true
+    },
+    {
+      "name": "cancelled work gets no false result commit",
+      "passed": true
+    },
+    {
+      "name": "machine releases after confirmed stop",
+      "passed": true
+    },
+    {
+      "name": "machine clears cancelled batch ownership",
+      "passed": true
+    },
+    {
+      "name": "execution becomes inactive",
+      "passed": true
+    },
+    {
+      "name": "cancelled execution worktree is retained",
+      "passed": true
+    },
+    {
+      "name": "cancellation diagnostics are retained",
+      "passed": true
+    },
+    {
+      "name": "cancelled mission source branch is preserved",
+      "passed": true
+    },
+    {
+      "name": "cancelled batch cannot retry into execution",
+      "passed": true
+    },
+    {
+      "name": "pause leaves existing batch process active",
+      "passed": true
+    },
+    {
+      "name": "pause leaves running batch status",
+      "passed": true
+    },
+    {
+      "name": "finish reports draining active work",
+      "passed": true
+    },
+    {
+      "name": "finish does not kill admitted computation",
+      "passed": true
+    },
+    {
+      "name": "finish rejects additional batch dispatch",
+      "passed": true
+    },
+    {
+      "name": "drained mission delivers successful result",
+      "passed": true
+    },
+    {
+      "name": "drained batch reaches done",
+      "passed": true
+    },
+    {
+      "name": "drained execution releases machine",
+      "passed": true
+    },
+    {
+      "name": "draining finishes project",
+      "passed": true
+    },
+    {
+      "name": "delivered artifact retained in real Git result",
+      "passed": true
+    },
+    {
+      "name": "Composer cleanup reports completion after Host tool returns",
+      "passed": true
+    },
+    {
+      "name": "exact Composer receipt was disposed",
+      "passed": true
+    },
+    {
+      "name": "infra owns execution before activation record",
+      "passed": true
+    },
+    {
+      "name": "infra preparation has not launched model",
+      "passed": true
+    },
+    {
+      "name": "duplicate Infra request rejects during Git response window",
+      "passed": true
+    },
+    {
+      "name": "duplicate never invokes another worktree add",
+      "passed": true
+    },
+    {
+      "name": "duplicate keeps first request pending",
+      "passed": true
+    },
+    {
+      "name": "duplicate preserves prepared directory inode",
+      "passed": true
+    },
+    {
+      "name": "duplicate preserves prepared marker",
+      "passed": true
+    },
+    {
+      "name": "actual Infra edit exists before cancellation",
+      "passed": true
+    },
+    {
+      "name": "Infra activation record has exact child identity",
+      "passed": true
+    },
+    {
+      "name": "Infra cancellation confirms exact activation cleanup",
+      "passed": true
+    },
+    {
+      "name": "Infra cancellation retains edited worktree",
+      "passed": true
+    },
+    {
+      "name": "Infra cancellation retains model edit",
+      "passed": true
+    },
+    {
+      "name": "Infra cancellation releases machine after cleanup",
+      "passed": true
+    },
+    {
+      "name": "Infra cancellation persists cancelled batch",
+      "passed": true
+    },
+    {
+      "name": "Infra cancellation creates no false mission result",
+      "passed": true
+    },
+    {
+      "name": "exact Infra receipt was disposed",
+      "passed": true
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "queued",
+      "project": {
+        "id": "p-b36cb6ce",
+        "workspace": "/tmp/aleph-b-controls-fixed-qJfZd1/queued",
+        "researchRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/queued/research",
+        "missionRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/queued/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:58:29.305Z",
+        "updatedAt": "2026-10-31T11:58:29.305Z"
+      }
+    },
+    {
+      "name": "cancel-compute",
+      "project": {
+        "id": "p-91b99b91",
+        "workspace": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute",
+        "researchRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/research",
+        "missionRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:58:29.804Z",
+        "updatedAt": "2026-10-31T11:58:29.804Z"
+      },
+      "started": {
+        "pid": 374454,
+        "child": 374456
+      },
+      "cancellation": {
+        "projectId": "p-91b99b91",
+        "complete": true,
+        "batch": {
+          "id": "b-7ef08aad",
+          "machineId": "local",
+          "status": "cancelled",
+          "missionIds": [
+            "m-349d38be"
+          ],
+          "branch": "batch/b-7ef08aad",
+          "baseTip": "d70c08c72809e3fa0c91ae295ca4d7af642e9c8c",
+          "createdAt": "2026-10-31T11:58:30.223Z",
+          "execution": {
+            "id": "batch-d76c6ecd-bfab-4b6d-aa95-d7ba705a4aaf",
+            "role": "batch",
+            "active": false,
+            "hostId": "host-06f5b36c-7423-462b-9061-0baecb40ba43",
+            "phase": "stopped",
+            "commands": [
+              {
+                "id": "batch-d76c6ecd-bfab-4b6d-aa95-d7ba705a4aaf-1",
+                "phase": "stopped",
+                "receiptPath": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/.aleph/executions/batch-d76c6ecd-bfab-4b6d-aa95-d7ba705a4aaf/1.json"
+              }
+            ],
+            "worktree": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/.aleph/batches/b-7ef08aad"
+          },
+          "startedAt": "2026-10-31T11:58:30.257Z",
+          "infra": {
+            "cores": 12,
+            "threads": 10,
+            "missions": [
+              {
+                "mission": "m-349d38be",
+                "status": "no-pyproject"
+              }
+            ],
+            "runner": "python3",
+            "timeout_ms": 21600000,
+            "env": {
+              "ALEPH_THREADS": "10",
+              "OMP_NUM_THREADS": "10",
+              "OPENBLAS_NUM_THREADS": "10",
+              "MKL_NUM_THREADS": "10",
+              "NUMEXPR_NUM_THREADS": "10",
+              "UV_CACHE_DIR": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/.aleph/batches/b-7ef08aad/.uv-cache",
+              "UV_PYTHON_DOWNLOADS": "never"
+            }
+          },
+          "cancellation": {
+            "operationId": "cancel-batch-7dfb9cc8-0608-4551-9908-5dd55c8ea9d0",
+            "reason": "stop actual compute",
+            "requestedAt": "2026-10-31T11:58:30.376Z",
+            "complete": true,
+            "confirmedAt": "2026-10-31T11:58:30.445Z",
+            "diagnosticPath": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/.aleph/diagnostics/cancel-batch-7dfb9cc8-0608-4551-9908-5dd55c8ea9d0",
+            "cleanupError": null
+          },
+          "finishedAt": "2026-10-31T11:58:30.445Z"
+        }
+      },
+      "run": {
+        "value": {
+          "id": "p-91b99b91",
+          "workspace": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute",
+          "researchRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/research",
+          "missionRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "evalRoot": null,
+          "brief": "",
+          "researcherCount": 4,
+          "prepared": false,
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "busy",
+              "batchId": "b-7ef08aad",
+              "executionId": "batch-d76c6ecd-bfab-4b6d-aa95-d7ba705a4aaf"
+            }
+          ],
+          "agents": [
+            {
+              "role": "composer",
+              "childId": "actual-substitute-2",
+              "status": "running",
+              "summary": null,
+              "branch": null,
+              "worktree": null,
+              "updatedAt": "2026-10-31T11:58:30.073Z"
+            }
+          ],
+          "missions": [
+            {
+              "id": "m-349d38be",
+              "ownerSession": "leader-cancel-compute",
+              "branch": "missions/cancelled-c22d4c18",
+              "manifestId": "cancelled",
+              "manifestPath": "missions/cancelled/mission.json",
+              "status": "running",
+              "entrypoint": "run.sh",
+              "outputs": [],
+              "resource": null,
+              "batchId": "b-7ef08aad",
+              "preBatchTip": "a4d186286235fbe840cc2c8b89a2130a9c307b79",
+              "resultCommit": null,
+              "error": null,
+              "createdAt": "2026-10-31T11:58:30.015Z",
+              "approvedAt": "2026-10-31T11:58:30.073Z",
+              "finishedAt": null
+            }
+          ],
+          "batches": [
+            {
+              "id": "b-7ef08aad",
+              "machineId": "local",
+              "status": "cancelling",
+              "missionIds": [
+                "m-349d38be"
+              ],
+              "branch": "batch/b-7ef08aad",
+              "baseTip": "d70c08c72809e3fa0c91ae295ca4d7af642e9c8c",
+              "createdAt": "2026-10-31T11:58:30.223Z",
+              "execution": {
+                "id": "batch-d76c6ecd-bfab-4b6d-aa95-d7ba705a4aaf",
+                "role": "batch",
+                "active": true,
+                "hostId": "host-06f5b36c-7423-462b-9061-0baecb40ba43",
+                "phase": "between-commands",
+                "commands": [
+                  {
+                    "id": "batch-d76c6ecd-bfab-4b6d-aa95-d7ba705a4aaf-1",
+                    "phase": "stopped",
+                    "receiptPath": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/.aleph/executions/batch-d76c6ecd-bfab-4b6d-aa95-d7ba705a4aaf/1.json"
+                  }
+                ],
+                "worktree": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/.aleph/batches/b-7ef08aad"
+              },
+              "startedAt": "2026-10-31T11:58:30.257Z",
+              "infra": {
+                "cores": 12,
+                "threads": 10,
+                "missions": [
+                  {
+                    "mission": "m-349d38be",
+                    "status": "no-pyproject"
+                  }
+                ],
+                "runner": "python3",
+                "timeout_ms": 21600000,
+                "env": {
+                  "ALEPH_THREADS": "10",
+                  "OMP_NUM_THREADS": "10",
+                  "OPENBLAS_NUM_THREADS": "10",
+                  "MKL_NUM_THREADS": "10",
+                  "NUMEXPR_NUM_THREADS": "10",
+                  "UV_CACHE_DIR": "/tmp/aleph-b-controls-fixed-qJfZd1/cancel-compute/.aleph/batches/b-7ef08aad/.uv-cache",
+                  "UV_PYTHON_DOWNLOADS": "never"
+                }
+              },
+              "cancellation": {
+                "operationId": "cancel-batch-7dfb9cc8-0608-4551-9908-5dd55c8ea9d0",
+                "reason": "stop actual compute",
+                "requestedAt": "2026-10-31T11:58:30.376Z",
+                "complete": false
+              }
+            }
+          ],
+          "violations": [],
+          "createdAt": "2026-10-31T11:58:29.804Z",
+          "updatedAt": "2026-10-31T11:58:30.443Z"
+        }
+      }
+    },
+    {
+      "name": "drain-composer",
+      "project": {
+        "id": "p-90ad18f1",
+        "workspace": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer",
+        "researchRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer/research",
+        "missionRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:58:30.664Z",
+        "updatedAt": "2026-10-31T11:58:30.664Z"
+      },
+      "started": {
+        "pid": 374536,
+        "child": 374538
+      },
+      "final": {
+        "schema": 2,
+        "generated_at": "2026-10-31T11:58:31.700Z",
+        "project": {
+          "id": "p-90ad18f1",
+          "title": "drain-composer",
+          "status": "finished",
+          "control": {
+            "state": "finished",
+            "revision": 2,
+            "changedAt": "2026-10-31T11:58:31.700Z",
+            "reason": "",
+            "operationId": "finish-f42b70ef-866f-4609-a173-0c52bbc6a5c3",
+            "composerCleanup": "pending"
+          },
+          "workspace": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer",
+          "research_root": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer/research",
+          "mission_root": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-6ad10eaa",
+            "owner_session": "leader-drain-composer",
+            "status": "done",
+            "branch": "missions/drain-982ccb10",
+            "manifest_id": "drain",
+            "manifest_path": "missions/drain/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-d99e3b04",
+            "pre_batch_tip": "ae359931826d9162fcdb646e3385a63b3c0e7b61",
+            "result_commit": "8c7200fbe71826b44377561d02ddf7cab9d91375",
+            "error": null,
+            "cancelled_at": null,
+            "cancel_reason": null,
+            "created_at": "2026-10-31T11:58:30.877Z",
+            "approved_at": "2026-10-31T11:58:30.930Z",
+            "finished_at": "2026-10-31T11:58:31.610Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-d99e3b04",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-6ad10eaa"
+            ],
+            "branch": "batch/b-d99e3b04",
+            "base_tip": "88c0f17fcc2185ccaa8fe97d3056b34593b15d71",
+            "created_at": "2026-10-31T11:58:31.078Z",
+            "started_at": "2026-10-31T11:58:31.110Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-6ad10eaa",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer/.aleph/batches/b-d99e3b04/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T11:58:31.667Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-6ad10eaa",
+                  "manifestId": "drain",
+                  "manifestPath": "missions/drain/mission.json",
+                  "status": "done",
+                  "resultCommit": "8c7200fbe71826b44377561d02ddf7cab9d91375"
+                }
+              ]
+            },
+            "execution": {
+              "id": "batch-bace977a-1213-409d-a360-56e32aeb13a5",
+              "role": "batch",
+              "active": false,
+              "hostId": "host-1c8fea50-9e36-4546-b27c-4e8e463be3e5",
+              "phase": "stopped",
+              "commands": [
+                {
+                  "id": "batch-bace977a-1213-409d-a360-56e32aeb13a5-1",
+                  "phase": "stopped",
+                  "receiptPath": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer/.aleph/executions/batch-bace977a-1213-409d-a360-56e32aeb13a5/1.json"
+                }
+              ],
+              "worktree": "/tmp/aleph-b-controls-fixed-qJfZd1/drain-composer/.aleph/batches/b-d99e3b04"
+            },
+            "cancellation": null
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "actual-substitute-3",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T11:58:30.930Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 1,
+          "failed": 0,
+          "cancelled": 0
+        }
+      }
+    },
+    {
+      "name": "infra-preparation",
+      "project": {
+        "id": "p-e67d038a",
+        "workspace": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation",
+        "researchRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/research",
+        "missionRoot": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "",
+        "researcherCount": 4,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [],
+        "missions": [],
+        "batches": [],
+        "violations": [],
+        "createdAt": "2026-10-31T11:58:31.927Z",
+        "updatedAt": "2026-10-31T11:58:31.927Z"
+      },
+      "duplicate": {
+        "error": "batch b-5fdc28d2 has active execution or status forming"
+      },
+      "cancel": {
+        "projectId": "p-e67d038a",
+        "complete": true,
+        "batch": {
+          "id": "b-5fdc28d2",
+          "machineId": "local",
+          "status": "cancelled",
+          "missionIds": [
+            "m-ad5bf8cc"
+          ],
+          "branch": "batch/b-5fdc28d2",
+          "baseTip": "ae441020f76034451aec5112105dac67a60346ce",
+          "createdAt": "2026-10-31T11:58:32.320Z",
+          "execution": {
+            "id": "infra-cad18a4d-cc47-4d23-abc5-0011980771ec",
+            "role": "infra",
+            "active": false,
+            "hostId": "host-a372c9cf-a016-4e28-825f-1f61c2aa9ee0",
+            "phase": "stopped",
+            "commands": [],
+            "worktree": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/.aleph/infra/b-5fdc28d2"
+          },
+          "cancellation": {
+            "operationId": "cancel-batch-36ffb980-f512-4afe-9359-c5258c046ae9",
+            "reason": "",
+            "requestedAt": "2026-10-31T11:58:32.407Z",
+            "complete": true,
+            "confirmedAt": "2026-10-31T11:58:32.408Z",
+            "diagnosticPath": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/.aleph/diagnostics/cancel-batch-36ffb980-f512-4afe-9359-c5258c046ae9",
+            "cleanupError": null
+          },
+          "finishedAt": "2026-10-31T11:58:32.408Z"
+        }
+      },
+      "final": {
+        "schema": 2,
+        "generated_at": "2026-10-31T11:58:32.408Z",
+        "project": {
+          "id": "p-e67d038a",
+          "title": "infra-preparation",
+          "status": "running",
+          "control": {
+            "state": "running",
+            "revision": 0
+          },
+          "workspace": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation",
+          "research_root": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/research",
+          "mission_root": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-ad5bf8cc",
+            "owner_session": "leader-infra-preparation",
+            "status": "cancelled",
+            "branch": "missions/infra-e0a13714",
+            "manifest_id": "infra",
+            "manifest_path": "missions/infra/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-5fdc28d2",
+            "pre_batch_tip": "fe2f66d62fc8ed044561f395fd6d0f3fc87e2315",
+            "result_commit": null,
+            "error": null,
+            "cancelled_at": "2026-10-31T11:58:32.408Z",
+            "cancel_reason": "",
+            "created_at": "2026-10-31T11:58:32.124Z",
+            "approved_at": "2026-10-31T11:58:32.189Z",
+            "finished_at": "2026-10-31T11:58:32.408Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-5fdc28d2",
+            "machine_id": "local",
+            "status": "cancelled",
+            "mission_ids": [
+              "m-ad5bf8cc"
+            ],
+            "branch": "batch/b-5fdc28d2",
+            "base_tip": "ae441020f76034451aec5112105dac67a60346ce",
+            "created_at": "2026-10-31T11:58:32.320Z",
+            "started_at": null,
+            "infra": null,
+            "finished_at": "2026-10-31T11:58:32.408Z",
+            "summary": null,
+            "execution": {
+              "id": "infra-cad18a4d-cc47-4d23-abc5-0011980771ec",
+              "role": "infra",
+              "active": false,
+              "hostId": "host-a372c9cf-a016-4e28-825f-1f61c2aa9ee0",
+              "phase": "stopped",
+              "commands": [],
+              "worktree": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/.aleph/infra/b-5fdc28d2"
+            },
+            "cancellation": {
+              "operationId": "cancel-batch-36ffb980-f512-4afe-9359-c5258c046ae9",
+              "reason": "",
+              "requestedAt": "2026-10-31T11:58:32.407Z",
+              "complete": true,
+              "confirmedAt": "2026-10-31T11:58:32.408Z",
+              "diagnosticPath": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/.aleph/diagnostics/cancel-batch-36ffb980-f512-4afe-9359-c5258c046ae9",
+              "cleanupError": null
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null,
+            "executionId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "actual-substitute-4",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T11:58:32.189Z"
+          },
+          {
+            "role": "infra",
+            "childId": "actual-substitute-5",
+            "status": "failed",
+            "summary": "Error: batch execution was cancelled or superseded",
+            "branch": "batch/b-5fdc28d2",
+            "worktree": "/tmp/aleph-b-controls-fixed-qJfZd1/infra-preparation/.aleph/infra/b-5fdc28d2",
+            "updatedAt": "2026-10-31T11:58:32.407Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0,
+          "cancelled": 1
+        }
+      }
+    }
+  ],
+  "boundary": "Registered product tools, real Git, mission worktrees and Python processes. Automatic substitutes DSH storage/sessions/activation receipts; actual uses installed DSH and deterministic model responses. Exact first Infra worktree-add response is delayed after real Git completes. No product source changes or deadline adaptation.",
+  "complete": true,
+  "protection_validated": true
+}

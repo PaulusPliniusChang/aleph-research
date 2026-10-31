@@ -1,0 +1,128 @@
+{
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "source": "/tmp/aleph-09-fix-source",
+  "frozen_at_utc": "2026-10-31T11:55:22.111086+00:00",
+  "tests": {
+    "node_pass": 167,
+    "new_effective_behavior_points": 144,
+    "new_containers": 16,
+    "existing_tests": 7,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "actual_dsh": "not run by C; B independent acceptance required",
+    "full_suite_before_test_path_correction": true,
+    "unicode_targeted_after_correction": {
+      "path": "/tmp/aleph-09-\u4e2d\u6587\u8def\u5f84\u9a8c\u8bc1/dsh-plugin",
+      "effective_points": 32,
+      "containers": 1,
+      "node_pass": 33,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "command": "node --test test/execution-owner.test.mjs"
+    }
+  },
+  "files": [
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "sha256": "16df3b8552082b082f5d9a4d266929a2ba93926aeff2137fdbb31bfd6b2035dd",
+      "bytes": 109413,
+      "status": "modified",
+      "added_lines": 217,
+      "removed_lines": 144
+    },
+    {
+      "path": "dsh-plugin/project-controls.mjs",
+      "sha256": "88281bb00d15c8be35bcdc8ce2a4b5159ad40d161c21bf2afaa22a40d7423a69",
+      "bytes": 18505,
+      "status": "new",
+      "added_lines": 322,
+      "removed_lines": 0
+    },
+    {
+      "path": "dsh-plugin/execution-owner.mjs",
+      "sha256": "d34da8d9c96edae25ff52f77878a469266964fdedc05c5292075a40db57e5841",
+      "bytes": 9511,
+      "status": "new",
+      "added_lines": 200,
+      "removed_lines": 0
+    },
+    {
+      "path": "dsh-plugin/execution-launcher.mjs",
+      "sha256": "8af0eb4ba71c9b5d17e2d0f48c4ce7e1b46bef7158c36efc370603b84b56d119",
+      "bytes": 1609,
+      "status": "new",
+      "added_lines": 27,
+      "removed_lines": 0
+    },
+    {
+      "path": "dsh-plugin/package.json",
+      "sha256": "2ba4d4dce6acbcf3d35390bb065d5e8f1cd15a755bfe5b64dc9472fae706e4e7",
+      "bytes": 1169,
+      "status": "modified",
+      "added_lines": 3,
+      "removed_lines": 0
+    },
+    {
+      "path": "dsh-plugin/README.md",
+      "sha256": "eb6b26601275eb52dd750bd2b9f36334dcc91d4beae706184816f3cb92e6f1da",
+      "bytes": 4121,
+      "status": "modified",
+      "added_lines": 53,
+      "removed_lines": 0
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "3bbdcf394b982856937eba346a12ed8dc3604d52ee90a5449af8efd4f4127c41",
+      "bytes": 5239,
+      "status": "modified",
+      "added_lines": 33,
+      "removed_lines": 0
+    },
+    {
+      "path": "dsh-plugin/test/controls.test.mjs",
+      "sha256": "48b4192d9835ad60fe3b77b3d25c715553412331aa4d2fe26612c0f29cc0f8ec",
+      "bytes": 29176,
+      "status": "new",
+      "added_lines": 248,
+      "removed_lines": 0
+    },
+    {
+      "path": "dsh-plugin/test/execution-owner.test.mjs",
+      "sha256": "6059854a3437e2a8977f9df35eccced4557e951a3a5f13315bfbfd110447af28",
+      "bytes": 10709,
+      "status": "new",
+      "added_lines": 55,
+      "removed_lines": 0
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/tmp/aleph-09-c-product-tests.txt",
+      "sha256": "7378383893f8b11712dda48f0471bb854893b4f18648c52294b6c951565a9d7d",
+      "bytes": 14869
+    },
+    {
+      "path": "/tmp/aleph-09-c-changes.patch",
+      "sha256": "b6e3693c37772f5156e7cae8ea2f5ec263dee4005a9864fd9c0c765994f34421",
+      "bytes": 111716
+    },
+    {
+      "path": "/tmp/aleph-09-c-diffstat.txt",
+      "sha256": "cb869a0c12366c916c59dc71903f87279fc33231f302f1c5de6f90b08cdde822",
+      "bytes": 311
+    },
+    {
+      "path": "/tmp/aleph-09-control-plan.md",
+      "sha256": "0769fd5e15d9fc1fb5efaa55ffb6c853f9272e3ff02bde7360243c881e05d17e",
+      "bytes": 27211
+    },
+    {
+      "path": "/tmp/aleph-09-c-unicode-owner-tests.txt",
+      "sha256": "bae6e3f1c9de18a651c7007801cb053c8b2ee9a7f0f5fa505c4c4a9e13e0b76c",
+      "bytes": 2324
+    }
+  ],
+  "revision": "Test-only Unicode path correction: fileURLToPath instead of URL.pathname; runtime files unchanged."
+}

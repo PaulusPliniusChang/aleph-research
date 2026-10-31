@@ -8,6 +8,37 @@ pull_request: null
 
 # 研究过程缺少暂停、恢复、取消和结束操作
 
+## 当前修复验收
+
+修复提交为 `b1f9f048ae8cc7569e6a9e36dcafe119f2c02783`，派生分支为 `fix/aleph-09-project-controls`，基线为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。修复提供 Leader 正式工具及经过 DSH 外层登录认证的 HTTP 操作：项目暂停、恢复、结束，排队任务取消，以及整批运行取消。暂停阻止新派发，已有计算继续执行；结束关闭派发并等待已接纳工作完成；取消确认实际停止后才释放机器，保留工作树、原任务分支及诊断。尚不能确认停止时，操作保持 `complete:false`、取消中及机器占用状态。
+
+批次执行权在目录操作之前取得，因此同一修复同时覆盖原议题 #14 的 InfraOptimizer 准备窗口。该窗口尚未启动优化模型；后续独立阶段另外启动真实优化模型、通过 Bash 写入文件并验证取消后文件保留，准备与活动阶段的证据分别记录。
+
+| 验证范围 | 结果与证据 |
+| --- | --- |
+| 产品自动测试 | Node 167/167 通过，包含 144 个新增有效行为点、16 个新增容器及 7 个既有测试。见[产品输出](evidence/09-fixed-product-unicode-corrected.txt)。 |
+| B 独立自动验收 | 75 个有效行为点全部通过，Node 连同父容器为 76/76。见[行为记录](evidence/09-fixed-controls-independent.json)及[执行输出](evidence/09-fixed-controls-independent.txt)。 |
+| 实际 DSH | 77 个有效行为观察全部通过，Node 连同父容器为 78/78。见[完整记录](evidence/09-fixed-real-dsh-controls.json)及[执行输出](evidence/09-fixed-real-dsh-controls.txt)。 |
+| 实际 Host 重启 | 上述实际记录另含 12 项持久化检查，项目结束状态、任务状态与结果提交、机器状态及批次归属全部保持。 |
+
+独立自动模式替代 DSH 存储、会话、预设和激活回执，保留真实 Git、工作树、Python 主子进程、进程组及信号。实际模式使用已安装 DSH 的真实父子会话、注册工具、存储、激活回执和 Python 计算；确定性本地模型只控制模型返回。真实 Composer 调用 `aleph_run_batch`，批次运行期间接受结束请求，计算正常交付成果，随后激活回执释放完成。该流程检查了当前工具尚未返回时请求释放 Composer 的等待问题。
+
+实际 InfraOptimizer 使用 Bash 写入 `infra-fixture-marker.txt`，取消操作释放对应激活回执，工作树及修改保留。实际计算取消场景记录 Python 入口与普通子进程身份，确认入口与子进程均停止后才返回完成，并验证机器释放及没有虚构结果提交。准备窗口继续使用真实 Git 创建工作树后延迟响应的调度器；重复请求没有再次执行 Git 创建，也没有删除首目录、改变目录 inode 或移除标记。
+
+此次实际隔离配置明确设置 Composer 的 `tool-subagent` 后端为 `spawn`。安装环境要求该配置；原预设缺少该值，因此旧基线中的 Composer 未启动。该配置调整仅用于隔离运行环境，产品 JavaScript、执行期限、激活服务及释放服务均保持原始实现。全局默认模型使用本地适配器。此前错误添加预设默认模型导致重复服务注册的记录保存在[配置准备失败记录](evidence/09-fixed-real-dsh-controls-provider-fixture-attempt.json)及[输出](evidence/09-fixed-real-dsh-controls-provider-fixture-attempt.txt)，不属于产品失败。
+
+自动夹具的会话对象参数错误记录保存在 `09-fixed-controls-session-fixture-attempt.*`。首次产品测试使用 URL 的 `pathname`，中文仓库路径被百分号编码，导致测试启动器无法加载；该次输出保存在[原始失败日志](evidence/09-fixed-product.txt)。C 仅将测试路径转换改为 `fileURLToPath`；B 导入唯一变化后重跑完整产品测试，167/167 通过。运行时代码没有因此改变。[冻结清单](evidence/09-fixed-source-manifest.json)记录全部产品文件摘要，提交前逐项核对一致，临时依赖链接已移除。
+
+实际 Host `388560` 在重启前退出，最终 Host `388940` 正常退出，对应进程编号均不存在。当前独立实际场景覆盖排队取消、正在计算的取消、结束等待、Composer 回执释放、InfraOptimizer 准备竞争与活动取消，以及终态重启。依赖准备取消、结果发布与取消竞争、不确定释放及启动回执恢复边界由产品自动测试覆盖，本轮没有逐项重复为真实 DSH 场景。
+
+支持边界是单个 Host、Linux、可读取的 `/proc` 以及保留在所属进程组中的普通后代进程。主动脱离进程组的进程、远端计算及跨 Host 竞争不在本轮保证范围。操作页面按钮不属于本次实现。原人工维护状态按规则保留；上游合并情况另行记录。
+
+复跑使用[独立脚本](dsh/fixed-project-controls.test.mjs)、[实际启动脚本](dsh/fixed-project-controls.py)及[模型适配器](dsh/controls-deterministic-bridge.mjs)。自动模式需设置 `ALEPH_CURRENT_SOURCE`、`ALEPH_FIXED_CONTROLS_OUTPUT`、`ALEPH_INFRA_PREPARATION_GATE`，并将临时 `bin/git` 链接至[精确 Git 调度器](dsh/infra-preparation-git-scheduler.py)。实际命令如下：
+
+```bash
+python3 tests/issues/dsh/fixed-project-controls.py --source /home/paulus-chang/项目/aleph-fix-project-controls --output tests/issues/evidence/09-fixed-real-dsh-controls.json
+```
+
 ## 当前版本适用性复核（2026-10-31）
 
 当前正式核查版本为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`，插件入口为 `dsh-plugin/index-v2.js`，采用 project、mission 和 batch 模型。旧版范围是 campaign 的暂停、恢复、取消和结束。当前顶层模型为 project，旧活动控制验收条件不能直接套用；项目、任务、批次的控制需求需要分别确认。

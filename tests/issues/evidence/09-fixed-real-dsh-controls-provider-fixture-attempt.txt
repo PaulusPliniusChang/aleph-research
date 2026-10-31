@@ -1,0 +1,27 @@
+{"phase": "host-ready", "root": "/tmp/aleph-project-dsh-2z8anhch", "url": "http://127.0.0.1:36137"}
+✖ B independent fixed project controls and precise execution ownership (34.414534ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 159.595677
+
+✖ failing tests:
+
+test at tests/issues/dsh/fixed-project-controls.test.mjs:34:1
+✖ B independent fixed project controls and precise execution ownership (34.414534ms)
+  Error: {"status":500,"value":{"ok":false,"error":"RemoteError: agent-default-model (@deepseek-ai/dsh-agent-default-model): service \"agentDefaultModel\" has been registered at <AgentDefaultModelConfig>","stack":"RemoteError: agent-default-model (@deepseek-ai/dsh-agent-default-model): service \"agentDefaultModel\" has been registered at <AgentDefaultModelConfig>\n    at Proxy.retain (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-agent-preset-registry/lib/index.js:661:12)\n    at async Proxy.mount (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-agent-preset-registry/lib/index.js:703:23)\n    at async setup (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-api-session-controller/lib/index.js:274:5)\n    at async raceAbort (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-agent-loop/lib/index.js:1234:10)\n    at async file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-agent-loop/lib/index.js:1574:26\n    at async file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-agent-loop/lib/index.js:599:12\n    at async Proxy.initializeAgent (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-agent-loop/lib/index.js:1565:11)\n    at async file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-agent-loop/lib/index.js:1685:12"}}
+      at bridge (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-project-controls.test.mjs:18:116)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async fixture (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-project-controls.test.mjs:24:18)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/fixed-project-controls.test.mjs:36:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/fixed-project-controls.py", line 39, in <module>
+    if result.returncode:raise RuntimeError('Actual controls acceptance did not complete; original report retained')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Actual controls acceptance did not complete; original report retained
