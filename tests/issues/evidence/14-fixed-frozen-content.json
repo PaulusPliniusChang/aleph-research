@@ -1,0 +1,9 @@
+{
+  "product_commit": "93243df86fc542598f6dbc8624275fa7e322420d",
+  "baseline": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "frozen_source": "/tmp/aleph-14-fix-source",
+  "files": {
+    "dsh-plugin/index-v2.js": "03fe508552d375191a114fd4ae9677c25e7cde439f3086c631d731631ef54772",
+    "dsh-plugin/test/researcher.test.mjs": "95d9111064b8a395348367eb06b501fc4f4c99f8f910b4c835c6df2b7573736d"
+  }
+}

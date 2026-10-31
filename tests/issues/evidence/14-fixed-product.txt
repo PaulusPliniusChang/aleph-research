@@ -1,0 +1,89 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:223429) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (336.788797ms)
+(node:223430) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ researcher callbacks preserve each child identity and terminal result
+  ✔ done overlap: calls expose distinct child identities (0.938886ms)
+  ✔ done overlap: first child is recorded running (0.191426ms)
+  ✔ done overlap: second child is recorded running (0.122308ms)
+  ✔ done overlap: activation retains caller identity (0.10367ms)
+  ✔ done overlap: activation selects researcher preset (0.075977ms)
+  ✔ done overlap: activation uses project research directory (0.085345ms)
+  ✔ done first result: only completed child reaches its terminal state (0.232373ms)
+  ✔ done first result: completed child receives its own summary (0.197133ms)
+  ✔ done first result: pending sibling remains running (0.133592ms)
+  ✔ done first result: pending sibling retains its exact record (1.011222ms)
+  ✔ done first result: legacy child without identity remains unchanged (0.12326ms)
+  ✔ done first result: historical terminal record is preserved (0.07389ms)
+  ✔ done first result: composer with same child ID is preserved (0.07988ms)
+  ✔ done first result: infra with same child ID is preserved (0.08168ms)
+  ✔ done first result: same child ID in another project is preserved (0.085762ms)
+  ✔ done first result: callback does not add or remove records (0.053758ms)
+  ✔ done later result: later child records its actual outcome (0.316001ms)
+  ✔ done later result: later child records its distinct summary (0.139804ms)
+  ✔ done later result: earlier child retains its exact terminal record (0.116845ms)
+  ✔ failed overlap: calls expose distinct child identities (0.130508ms)
+  ✔ failed overlap: first child is recorded running (0.068601ms)
+  ✔ failed overlap: second child is recorded running (0.046729ms)
+  ✔ failed overlap: activation retains caller identity (0.025485ms)
+  ✔ failed overlap: activation selects researcher preset (0.025028ms)
+  ✔ failed overlap: activation uses project research directory (0.027374ms)
+  ✔ failed first result: only completed child reaches its terminal state (0.158533ms)
+  ✔ failed first result: completed child receives its own summary (0.059764ms)
+  ✔ failed first result: pending sibling remains running (0.063694ms)
+  ✔ failed first result: pending sibling retains its exact record (0.055373ms)
+  ✔ failed first result: legacy child without identity remains unchanged (0.057609ms)
+  ✔ failed first result: historical terminal record is preserved (0.04176ms)
+  ✔ failed first result: composer with same child ID is preserved (0.036556ms)
+  ✔ failed first result: infra with same child ID is preserved (0.032791ms)
+  ✔ failed first result: same child ID in another project is preserved (0.039232ms)
+  ✔ failed first result: callback does not add or remove records (0.057112ms)
+  ✔ failed later result: later child records its actual outcome (0.135814ms)
+  ✔ failed later result: later child records its distinct summary (0.108573ms)
+  ✔ failed later result: earlier child retains its exact terminal record (0.05327ms)
+  ✔ reverse completion order: later started child can finish first (0.176151ms)
+  ✔ reverse completion order: earlier pending child retains exact record (0.107949ms)
+  ✔ reverse completion preservation: earlier child receives its final summary (0.212398ms)
+  ✔ reverse completion preservation: later completed child remains unchanged (0.094554ms)
+  ✔ startup failure: caller receives original startup rejection (0.628739ms)
+  ✔ startup failure: failure appends a failed record (0.097628ms)
+  ✔ startup failure: failure record has no invented child identity (0.058412ms)
+  ✔ startup failure: failure record preserves reason (0.057564ms)
+  ✔ startup failure: unrelated running child is unchanged (0.054469ms)
+  ✔ invalid identity null: invalid activation rejects startup (0.348012ms)
+  ✔ invalid identity null: invalid activation receives abort signal (0.083848ms)
+  ✔ invalid identity null: invalid activation is recorded as failed (0.077186ms)
+  ✔ invalid identity null: invalid identity is not recorded as a running child (0.108051ms)
+  ✔ invalid identity null: existing null identity record is preserved (0.062953ms)
+  ✔ invalid identity null: existing valid child is preserved (0.052578ms)
+  ✔ invalid identity "": invalid activation rejects startup (0.236652ms)
+  ✔ invalid identity "": invalid activation receives abort signal (0.06698ms)
+  ✔ invalid identity "": invalid activation is recorded as failed (0.057194ms)
+  ✔ invalid identity "": invalid identity is not recorded as a running child (0.045094ms)
+  ✔ invalid identity "": existing null identity record is preserved (0.047532ms)
+  ✔ invalid identity "": existing valid child is preserved (0.036996ms)
+  ✔ invalid identity "   ": invalid activation rejects startup (0.298675ms)
+  ✔ invalid identity "   ": invalid activation receives abort signal (0.070711ms)
+  ✔ invalid identity "   ": invalid activation is recorded as failed (0.080056ms)
+  ✔ invalid identity "   ": invalid identity is not recorded as a running child (0.073068ms)
+  ✔ invalid identity "   ": existing null identity record is preserved (0.079638ms)
+  ✔ invalid identity "   ": existing valid child is preserved (0.063263ms)
+  ✔ summary compatibility: text output is combined and trimmed (0.204223ms)
+  ✔ summary compatibility: empty output retains no-summary fallback (0.07792ms)
+  ✔ summary compatibility: large summary retains existing length limit (0.082369ms)
+✔ researcher callbacks preserve each child identity and terminal result (664.896124ms)
+ℹ tests 70
+ℹ suites 0
+ℹ pass 70
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 800.597228

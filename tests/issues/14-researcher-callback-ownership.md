@@ -10,6 +10,36 @@ pull_request: null
 
 # 一个研究代理结束时，可能批量改写其他研究代理的状态与摘要
 
+## 修复与独立验收（2026-10-31）
+
+修复已提交派生仓库分支 `fix/aleph-14-researcher-ownership`，提交简称为 `93243df`。B 在独立工作树 `/home/paulus-chang/项目/aleph-fix-researcher` 导入 C 冻结的产品文件；[文件摘要](evidence/14-fixed-frozen-content.json)与冻结内容一致。最新上游仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。
+
+成功和失败回调同时匹配本次激活的 `childId`、researcher 角色及运行状态，仅更新对应记录。违反已安装 DSH 激活契约的缺失、空值或空白身份会中止激活，并保存启动失败记录；正常异步启动与返回身份保持原有行为。
+
+| 验证范围 | 实际结果 | 证据 |
+| --- | --- | --- |
+| 产品自动测试 | 70 项全部通过，新增研究代理测试包含 68 个有效子行为点，无跳过。 | [产品报告](evidence/14-fixed-product.txt) |
+| B 独立自动验收 | 50 个有效行为点全部通过；Node 包含父测试容器为 51 项全部通过。 | [报告](evidence/14-fixed-researcher-ownership.txt)、[结构化观察](evidence/14-fixed-researcher-ownership.json) |
+| 实际 DSH 修复核查 | 31 项检查全部通过，记录与真实子会话分别对应。 | [实际记录](evidence/14-fixed-real-dsh-researcher-ownership.json) |
+
+实际 DSH 使用原始 spawn 提供程序、真实父子会话、注册工具、持久存储、Git 与实际 bash。首个研究代理结束后，后续实际代理仍独立运行，持久记录保持 `running` 且摘要为空；后续代理结束后，各记录保存独立的正确摘要。隔离 Host 已退出，记录确认进程不存在。
+
+本地确定性模型适配器仅控制输出与等待时机。实际 DSH 验证成功回调的重叠路径；失败回调、相反结束顺序、其他角色与项目隔离、历史记录及异常身份由自动测试覆盖，没有据此宣称实际失败激活已核查。Composer 和 InfraOptimizer 不属于本次修复范围。原始缺陷基线及失败记录保留，本地管理状态仍由原有实测记录支持。
+
+在正式工作树的 `dsh-plugin` 目录执行 `npm test`。在 `aleph-tests` 根目录执行独立验收：
+
+```bash
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph-fix-researcher \
+ALEPH_RESEARCHER_OBSERVATIONS=tests/issues/evidence/14-fixed-researcher-ownership.json \
+node --experimental-loader /home/paulus-chang/项目/aleph-fix-researcher/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/researcher-ownership-acceptance.test.mjs
+
+python3 tests/issues/dsh/current-researcher-ownership.py \
+  --source /home/paulus-chang/项目/aleph-fix-researcher \
+  --output tests/issues/evidence/14-fixed-real-dsh-researcher-ownership.json \
+  --expect-protection
+```
+
 ## 当前情况
 
 同一项目可以启动多个研究代理，每次激活都有独立的 `childId`。Host 会分别保存研究代理的运行记录，但成功和失败回调只按“角色为 researcher 且状态为 running”选择待更新记录，没有匹配本次结束代理的 `childId`。

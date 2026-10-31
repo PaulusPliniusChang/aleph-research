@@ -1,0 +1,63 @@
+(node:225819) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-researcher/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-researcher/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-14 researcher callbacks preserve activation ownership through registered tools
+  ✔ succeed/overlap: two registered calls receive distinct child identities (0.847071ms)
+  ✔ succeed/overlap: first activation is recorded running (0.344536ms)
+  ✔ succeed/overlap: second activation is recorded running (0.18444ms)
+  ✔ succeed/overlap: first activation receives original caller identity (0.172334ms)
+  ✔ succeed/overlap: second activation uses researcher preset (0.129981ms)
+  ✔ succeed/overlap: activation uses actual project research directory (0.126558ms)
+  ✔ succeed/first-result: completed activation receives its own terminal status (0.228161ms)
+  ✔ succeed/first-result: completed activation receives its own summary or error (0.210928ms)
+  ✔ succeed/first-result: other pending activation remains running (0.132695ms)
+  ✔ succeed/first-result: other pending activation retains original empty summary (0.133973ms)
+  ✔ succeed/first-result: other pending activation retains exact original record (0.773383ms)
+  ✔ succeed/first-result: historical completion remains byte-equivalent (0.101172ms)
+  ✔ succeed/first-result: running composer retains exact record (0.078898ms)
+  ✔ succeed/first-result: running infra retains exact record (0.110944ms)
+  ✔ succeed/first-result: other project running activation remains independent (0.099727ms)
+  ✔ succeed/public-query: registered status exposes completed activation correctly (0.074051ms)
+  ✔ succeed/public-query: registered status keeps other activation running (0.054996ms)
+  ✔ succeed/second-result: later activation records actual terminal outcome (0.287449ms)
+  ✔ succeed/second-result: later activation records its distinct result (0.11102ms)
+  ✔ succeed/second-result: earlier terminal result remains independent (0.109627ms)
+  ✔ succeed/second-result: no unrelated agent record is added or removed (0.059862ms)
+  ✔ fail/overlap: two registered calls receive distinct child identities (0.246138ms)
+  ✔ fail/overlap: first activation is recorded running (0.10001ms)
+  ✔ fail/overlap: second activation is recorded running (0.073118ms)
+  ✔ fail/overlap: first activation receives original caller identity (0.042354ms)
+  ✔ fail/overlap: second activation uses researcher preset (0.032725ms)
+  ✔ fail/overlap: activation uses actual project research directory (0.048532ms)
+  ✔ fail/first-result: completed activation receives its own terminal status (0.182006ms)
+  ✔ fail/first-result: completed activation receives its own summary or error (0.069466ms)
+  ✔ fail/first-result: other pending activation remains running (0.053403ms)
+  ✔ fail/first-result: other pending activation retains original empty summary (0.033913ms)
+  ✔ fail/first-result: other pending activation retains exact original record (0.043823ms)
+  ✔ fail/first-result: historical completion remains byte-equivalent (0.050869ms)
+  ✔ fail/first-result: running composer retains exact record (0.046685ms)
+  ✔ fail/first-result: running infra retains exact record (0.04016ms)
+  ✔ fail/first-result: other project running activation remains independent (0.069281ms)
+  ✔ fail/public-query: registered status exposes completed activation correctly (0.041163ms)
+  ✔ fail/public-query: registered status keeps other activation running (0.022423ms)
+  ✔ fail/second-result: later activation records actual terminal outcome (0.133167ms)
+  ✔ fail/second-result: later activation records its distinct result (0.070092ms)
+  ✔ fail/second-result: earlier terminal result remains independent (0.060768ms)
+  ✔ fail/second-result: no unrelated agent record is added or removed (0.036649ms)
+  ✔ single/startup-controls: single successful activation completes normally (0.170969ms)
+  ✔ single/startup-controls: single success summary is preserved (0.072955ms)
+  ✔ single/startup-controls: single failing activation records failure (0.050941ms)
+  ✔ single/startup-controls: single failure has its own reason (0.139411ms)
+  ✔ single/startup-controls: startup failure rejects registered call (0.507371ms)
+  ✔ single/startup-controls: startup failure creates a failed record without child identity (0.069793ms)
+  ✔ single/startup-controls: startup failure is recorded with own reason (0.059065ms)
+  ✔ single/startup-controls: startup failure does not rewrite completed success (0.083601ms)
+✔ ALEPH-14 researcher callbacks preserve activation ownership through registered tools (271.560423ms)
+ℹ tests 51
+ℹ suites 0
+ℹ pass 51
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 432.694715
