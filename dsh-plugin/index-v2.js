@@ -951,12 +951,27 @@ class ProjectService {
     }
   }
 
+  async claimRole(projectId, role) {
+    const project = this.get(projectId);
+    if ((project.agents ?? []).some((item) => item.role === role && item.status === 'running')) {
+      throw new Error(`${role} is already running for this project`);
+    }
+    // A crashed or superseded activation leaves a stale running record; clear it first.
+    await this.mutate(projectId, (current) => ({
+      ...current,
+      agents: (current.agents ?? []).map((item) => (
+        item.role === role && item.status === 'running' ? { ...item, status: 'failed', summary: 'superseded', updatedAt: now() } : item
+      )),
+    }));
+  }
+
   async runComposer({ projectId, agent }) {
     if (!agent) throw new Error('a calling Agent is required to start Composer');
     if (!this.subagents) throw new Error('subagent service is unavailable');
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     this.assertWorkspace(agent, project.workspace);
+    await this.claimRole(projectId, 'composer');
     const abort = new AbortController();
     const prompt = [
       'You are MissionComposer for AlephResearch.',
@@ -997,6 +1012,7 @@ class ProjectService {
     const batch = project.batches.find((item) => item.id === batchId);
     if (!batch) throw new Error(`batch not found: ${batchId}`);
     if (batch.status !== 'forming') throw new Error(`batch ${batchId} is not forming`);
+    await this.claimRole(projectId, 'infra');
     const worktreeRoot = join(project.workspace, '.aleph', 'infra');
     const worktree = join(worktreeRoot, batchId);
     await mkdir(worktreeRoot, { recursive: true });
