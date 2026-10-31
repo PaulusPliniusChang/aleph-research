@@ -67,18 +67,36 @@ execution ownership and cancellation diagnostics.
 
 Batch commands require Linux and `/proc`. Each command has a detached session,
 a durable identity receipt, and Host go/stop fences before user computation.
-Recovery verifies boot identity and process start time before sending signals.
-A missing receipt without a go fence proves no user command was admitted; a stop
-fence also prevents a delayed launcher from admitting that command later.
+Ordinary Host restart recovery observes recorded boot identity, process start
+time, and process-group membership without sending signals or writing stop
+fences. Active or unverifiable commands retain their batch and machine ownership.
+Only a persisted or newly requested cancellation authorizes the stop protocol.
+A missing receipt without a go fence proves no user command was admitted; an
+explicit cancellation's stop fence also prevents a delayed launcher from
+admitting that command later.
 A go fence without its receipt is uncertain and retains machine ownership.
 Ordinary descendants must remain in their owned process group. Descendants that
 escape with `setsid`, remote services, and arbitrary GPU jobs require a stronger
 execution service; this implementation does not prove their termination.
 
+Startup captures orphan execution identities once. The existing five-second
+monitor observes only those captured executions, preserving live computation and
+legitimate unexecuted `forming` machine reservations. After a captured command
+exits, the Host marks undelivered work interrupted, clears only its exact machine
+and execution reservation, and preserves its worktree, output and Git branches.
+Recovery does not deliver results or repeat computation. Legacy commands without
+receipts retain the readable Linux `/proc/*/cwd` observation scope; failure to
+enumerate `/proc` retains ownership for a later check. Unreadable individual
+process directories do not prove membership in a batch. Repeated startup calls
+do not recapture new executions or newly created agents. A finishing project
+settles after its captured executions finish.
+
 The project lock coordinates one Host's writes; independent Hosts must not write
 the same project concurrently. InfraOptimizer receipts cannot be reconstructed
-after a Host restart, so an uncertain activation remains `cancelling` and busy
-for operator investigation. Composer disposal is asynchronous to avoid waiting
+after a Host restart, so ordinary recovery retains an uncertain activation's
+active reservation for operator investigation. Explicit cancellation remains
+`cancelling` and busy until its original receipt boundary can be satisfied.
+Composer disposal is asynchronous to avoid waiting
 on a Host tool called by that Composer. `control.composerCleanup` reports
 `pending`, `complete`, or `failed` separately from dispatch state. Host restart
 can leave that cleanup diagnostic pending; it does not manufacture completion.

@@ -172,7 +172,31 @@ export async function runOwnedCommand(command, args, options = {}) {
   return result;
 }
 
-/** Recover only a durable, identity-verified group owned by this command. */
+/** Observe an owned command after restart without signalling or writing fences. */
+export async function observeRecordedExecution(receiptPath, executionId) {
+  let record;
+  try { record = JSON.parse(await readFile(receiptPath, 'utf8')); }
+  catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    try { await readFile(receiptPath + '.go'); }
+    catch (goError) {
+      // A delayed launcher still needs the departed Host's admission. It cannot
+      // start user computation merely by publishing its receipt afterwards.
+      if (goError.code === 'ENOENT') return { active: false, neverAdmitted: true };
+      throw goError;
+    }
+    throw new Error('execution go fence exists without ownership receipt');
+  }
+  if (!executionId || record.executionId !== executionId) throw new Error('execution receipt belongs to another execution');
+  const boot = (await readFile('/proc/sys/kernel/random/boot_id', 'utf8')).trim();
+  if (record.boot !== boot) return { active: false, previousBoot: true };
+  if (record.pid !== record.group || record.session !== record.group || !record.start) throw new Error('invalid execution ownership receipt');
+  const info = await processStat(record.pid);
+  if (info && info.start !== record.start) throw new Error('execution process identity changed after restart');
+  return { active: (await activeMembers(record.group, record.start)).length > 0 };
+}
+
+/** Stop only a durable, identity-verified group after explicit cancellation. */
 export async function stopRecordedExecution(receiptPath, executionId) {
   // A stop fence survives a missing receipt and also blocks a delayed launcher.
   // A go file without its receipt is inconsistent and cannot authorize cleanup.

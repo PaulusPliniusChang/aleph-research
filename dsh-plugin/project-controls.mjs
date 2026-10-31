@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { runOwnedCommand, stopRecordedExecution } from './execution-owner.mjs';
+import { runOwnedCommand, stopRecordedExecution, observeRecordedExecution } from './execution-owner.mjs';
 
 const timestamp = () => new Date().toISOString();
 const id = prefix => `${prefix}-${randomUUID()}`;
@@ -283,40 +283,101 @@ export class ProjectControls {
     }
   }
 
-  async recover() {
-    for (const original of this.service.list()) {
+  recover() {
+    this.restartRecovery ??= this.initializeRecovery();
+    return this.restartRecovery;
+  }
+
+  restartIdentity(project, batch) {
+    return JSON.stringify([project.workspace, project.missionRoot, batch.id, batch.status,
+      batch.machineId, batch.branch, batch.baseTip, batch.createdAt, batch.startedAt,
+      batch.execution ?? null]);
+  }
+
+  async initializeRecovery() {
+    this.restartedBatches = new Map();
+    const originals = this.service.list();
+    for (const original of originals) {
       for (const batch of original.batches) {
-        if (batch.status === 'cancelling') { await this.cancelBatch({ projectId: original.id, batchId: batch.id }); continue; }
-        if (!batch.execution?.active) continue;
-        let failure;
-        try {
-          if (batch.execution.role === 'infra') throw new Error('InfraOptimizer activation identity unavailable after Host restart');
-          for (const command of batch.execution.commands ?? []) {
-            if (command.phase !== 'stopped') await stopRecordedExecution(command.receiptPath, command.id);
-          }
-        } catch (error) { failure = String(error); }
-        await this.service.mutate(original.id, p => ({ ...p,
-          batches: p.batches.map(b => b.id === batch.id ? { ...b,
-            status: failure ? 'cancelling' : 'failed', finishedAt: failure ? null : timestamp(),
-            execution: { ...b.execution, active: Boolean(failure), phase: failure ? 'uncertain' : 'stopped' },
-            ...(failure ? { cancellation: { operationId: id('recover'), reason: 'Host restart', requestedAt: timestamp(), complete: false, cleanupError: failure } }
-              : { summary: { ...b.summary, runnerError: 'interrupted by Host restart' } }) } : b),
-          missions: p.missions.map(m => m.batchId === batch.id && ['batched', 'running'].includes(m.status)
-            ? { ...m, ...(failure ? {} : { status: 'failed', finishedAt: timestamp(), error: 'interrupted by Host restart' }) } : m),
-          machines: p.machines.map(machine => !failure && machine.batchId === batch.id && machine.executionId === batch.execution.id
-            ? { ...machine, status: 'idle', batchId: null, executionId: null } : machine),
-        }));
+        if (batch.status !== 'cancelling' && (batch.status === 'running' || batch.execution?.active)) {
+          this.restartedBatches.set(this.key(original.id, batch.id), {
+            projectId: original.id, batchId: batch.id, identity: this.restartIdentity(original, batch),
+          });
+        }
       }
-      // Legacy runs have no authority receipt: retain live/unknown computation; never signal by cwd.
-      const interrupted = new Set(original.batches.filter(b => !b.execution && b.status === 'running'
-        && !this.service.hasProcessUnder(join(original.workspace, '.aleph', 'batches', b.id))).map(b => b.id));
-      await this.service.mutate(original.id, p => ({ ...p,
-        agents: (p.agents ?? []).map(a => a.status === 'running' ? { ...a, status: 'failed', summary: 'interrupted by Host restart', updatedAt: timestamp() } : a),
-        batches: p.batches.map(b => interrupted.has(b.id) ? { ...b, status: 'failed', finishedAt: timestamp(), summary: { runnerError: 'interrupted by Host restart' } } : b),
-        missions: p.missions.map(m => interrupted.has(m.batchId) && ['batched', 'running'].includes(m.status) ? { ...m, status: 'failed', finishedAt: timestamp(), error: 'interrupted by Host restart' } : m),
-        machines: p.machines.map(machine => interrupted.has(machine.batchId) ? { ...machine, status: 'idle', batchId: null, executionId: null } : machine),
-      }));
-      await this.maybeFinished(original.id);
+      const staleAgents = new Set((original.agents ?? []).filter(a => a.status === 'running').map(a => JSON.stringify(a)));
+      await this.lock(original.id, () => this.service.mutate(original.id, p => ({ ...p,
+        agents: (p.agents ?? []).map(a => staleAgents.has(JSON.stringify(a))
+          ? { ...a, status: 'failed', summary: 'interrupted by Host restart', updatedAt: timestamp() } : a),
+        // A forming batch already owns a machine. Cancellation and uncertain
+        // activations also retain it until their existing stop contract succeeds.
+        machines: p.machines.map(machine => machine.status === 'busy' && !p.batches.some(batch =>
+          batch.id === machine.batchId && batch.machineId === machine.id
+          && (['forming', 'running', 'cancelling'].includes(batch.status) || batch.execution?.active))
+          ? { ...machine, status: 'idle', batchId: null, executionId: null } : machine),
+      })));
+    }
+    // Only persisted user cancellation authorizes stopping during startup.
+    for (const original of originals) {
+      for (const batch of original.batches) {
+        if (batch.status === 'cancelling') await this.cancelBatch({ projectId: original.id, batchId: batch.id });
+      }
+    }
+    await this.checkRecoveredBatches();
+    for (const original of originals) await this.maybeFinished(original.id);
+  }
+
+  checkRecoveredBatches() {
+    if (this.restartCheck) return this.restartCheck;
+    this.restartCheck = this.reconcileRecoveredBatches().finally(() => { this.restartCheck = null; });
+    return this.restartCheck;
+  }
+
+  async recoveredActive(project, batch) {
+    if (batch.execution?.active) {
+      // Activation disposal requires the exact in-memory receipt. Observation
+      // cannot invent a receipt or turn an ordinary restart into cancellation.
+      if (batch.execution.role === 'infra') return null;
+      for (const command of batch.execution.commands ?? []) {
+        if (command.phase === 'stopped') continue;
+        try { if ((await observeRecordedExecution(command.receiptPath, command.id)).active) return true; }
+        catch { return null; }
+      }
+    }
+    // Keep PR29's readable-cwd observation for legacy/no-command windows too.
+    return this.service.hasProcessUnder(batch.execution?.worktree
+      ?? join(project.workspace, '.aleph', 'batches', batch.id));
+  }
+
+  async reconcileRecoveredBatches() {
+    for (const [key, tracked] of this.restartedBatches ?? []) {
+      const project = this.service.get(tracked.projectId);
+      const batch = project?.batches.find(b => b.id === tracked.batchId);
+      const matches = (p, b) => b && this.restartIdentity(p, b) === tracked.identity;
+      if (!project || !matches(project, batch)) { this.restartedBatches.delete(key); continue; }
+      if (await this.recoveredActive(project, batch) !== false) continue;
+      try {
+        await this.lock(project.id, () => this.service.mutate(project.id, p => {
+          const owned = p.batches.find(b => b.id === tracked.batchId);
+          if (!matches(p, owned)) return p;
+          const finishedAt = timestamp();
+          const terminal = ['done', 'failed', 'cancelled'].includes(owned.status);
+          return { ...p,
+            batches: p.batches.map(b => b.id === owned.id ? { ...b,
+              ...(terminal ? {} : { status: 'failed', finishedAt, summary: { ...b.summary, runnerError: 'interrupted by Host restart' } }),
+              ...(b.execution ? { execution: { ...b.execution, active: false, phase: 'stopped' } } : {}),
+            } : b),
+            missions: p.missions.map(m => m.batchId === owned.id && ['batched', 'running'].includes(m.status)
+              ? { ...m, status: 'failed', finishedAt, error: 'interrupted by Host restart' } : m),
+            machines: p.machines.map(machine => machine.id === owned.machineId && machine.batchId === owned.id
+              && (!owned.execution || machine.executionId === owned.execution.id)
+              ? { ...machine, status: 'idle', batchId: null, executionId: null } : machine),
+            violations: [...(p.violations ?? []), `${finishedAt} recovered from restart: batch ${owned.id} interrupted`].slice(-50),
+          };
+        }));
+        this.restartedBatches.delete(key);
+        await this.maybeFinished(project.id);
+      } catch { /* Failed durable settlement is retried on the next tick. */ }
     }
   }
 }

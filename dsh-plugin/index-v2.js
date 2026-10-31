@@ -1000,22 +1000,21 @@ class ProjectService {
       .catch(() => undefined);
   }
 
-  /**
-   * A Host restart ends every live activation and any batch runner, but storage still
-   * describes them as running. Reconcile that once at startup so the machine is usable.
-   */
+  /** Capture restart orphans once; ordinary recovery observes without stopping. */
   async recoverAfterRestart() { return this.controls.recover(); }
+
+  checkRecoveredBatches() { return this.controls.checkRecoveredBatches(); }
 
   hasProcessUnder(rootPath) {
     const root = resolve(rootPath);
     let entries = [];
-    try { entries = readdirSync('/proc'); } catch { return false; }
+    try { entries = readdirSync('/proc'); } catch { return null; }
     for (const entry of entries) {
       if (!/^\d+$/.test(entry)) continue;
       try {
         const cwd = readlinkSync(`/proc/${entry}/cwd`);
         if (cwd === root || cwd.startsWith(`${root}/`)) return true;
-      } catch { /* process vanished */ }
+      } catch { /* vanished or outside the readable cwd observation scope */ }
     }
     return false;
   }
@@ -1559,9 +1558,12 @@ export async function apply(ctx) {
   const agentPresets = ctx.get('agentPresets');
   const workspaceRegistry = ctx.get('workspaceRegistry');
   const service = new ProjectService(ctx, domain, { sessions, subagents, agentPresets });
-  ctx.effect(() => { const timer = setInterval(() => service.checkProcesses(), 5000); timer.unref?.(); return () => clearInterval(timer); });
   // Do not expose write tools/routes until persistent intent has been reconciled.
   await service.recoverAfterRestart();
+  ctx.effect(() => { const timer = setInterval(() => {
+    service.checkProcesses();
+    void service.checkRecoveredBatches().catch(() => undefined);
+  }, 5000); timer.unref?.(); return () => clearInterval(timer); });
 
   const presetOf = (agent) => {
     if (!sessions || !agentPresets) return null;

@@ -92,11 +92,21 @@ an already delivered result or prevents the later branch update.
 
 Host batch/dependency commands run through `execution-owner.mjs` and a small
 launcher. The launcher atomically records Linux boot/session/group/start
-identity, then waits for Host admission. Durable stop fences close recovery's
-pre-spawn gap. Recovery finishes before tools and routes are registered. Exact
+identity, then waits for Host admission. Durable stop fences close explicit
+cancellation's pre-spawn gap. Startup reconciliation finishes before tools and
+routes are registered. Ordinary restart does not stop compute: read-only receipt
+observation retains active or unverifiable groups, and the five-second monitor
+follows only identities captured at startup until their processes exit. Legacy
+commands use the readable Linux process-cwd scope, retaining ownership when
+`/proc` enumeration is unavailable. Forming reservations remain busy. Settlement
+preserves outputs and branches, records interrupted undelivered work without
+rerunning it, and releases only matching machine/batch/execution ownership.
+New or replaced executions and agents are excluded from follow-up reconciliation.
+Persisted `cancelling` intent resumes the existing stop protocol instead. Exact
 activation receipts own InfraOptimizer disposal; a resolved result does not
-substitute for successful disposal. Unknown cleanup retains `cancelling`, the
-machine assignment and the worktree.
+substitute for successful disposal. Ordinary restart preserves an unreconstructed
+InfraOptimizer activation's reservation. Unknown explicit cancellation cleanup
+retains `cancelling`, the machine assignment and the worktree.
 
 Machine release checks batch and execution ownership. Late callbacks cannot
 publish results for a cancelled or replaced execution. Composer cleanup is
