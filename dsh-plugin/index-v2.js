@@ -612,16 +612,23 @@ class ProjectService {
         resource: mission.resource ?? null,
         error: runnerError,
       };
+      // The runner may key output by manifest id while the mission directory carries a suffix.
+      let resultDir = null;
       if (missionDir) {
+        for (const candidate of [manifestId, missionDir].filter(Boolean)) {
+          if (await pathExists(join(batchWorktree, 'results', candidate))) { resultDir = candidate; break; }
+        }
+      }
+      if (resultDir) {
         try {
-          const raw = await readFile(join(batchWorktree, 'results', missionDir, 'result.json'), 'utf8');
+          const raw = await readFile(join(batchWorktree, 'results', resultDir, 'result.json'), 'utf8');
           const own = JSON.parse(raw);
           envelope = { ...envelope, ...own, batch_id: batch.id, machine_id: batch.machineId };
           // The runner writes one result.json per mission, so a mission's own status is authoritative.
           if (envelope.status === 'done') envelope.error = null;
           else envelope.error = envelope.error || runnerError || 'mission failed';
           try {
-            const metricsRaw = await readFile(join(batchWorktree, 'results', missionDir, 'metrics.json'), 'utf8');
+            const metricsRaw = await readFile(join(batchWorktree, 'results', resultDir, 'metrics.json'), 'utf8');
             envelope.metrics = JSON.parse(metricsRaw);
           } catch { /* mission did not publish metrics */ }
         } catch {
@@ -630,7 +637,7 @@ class ProjectService {
         }
       } else {
         envelope.status = 'failed';
-        envelope.error = 'mission manifest not found';
+        envelope.error = missionDir ? 'mission produced no result directory' : 'mission manifest not found';
       }
 
       let resultCommit = null;
@@ -641,8 +648,8 @@ class ProjectService {
         const target = join(resultWorktree, 'results', manifestId);
         await mkdir(target, { recursive: true });
         // Persist every produced file so later researchers can reuse artifacts and metrics.
-        if (missionDir) {
-          const produced = join(batchWorktree, 'results', missionDir);
+        if (resultDir) {
+          const produced = join(batchWorktree, 'results', resultDir);
           for (const entry of await readdir(produced).catch(() => [])) {
             if (entry === 'result.json') continue;
             await cp(join(produced, entry), join(target, entry), { recursive: true, force: true }).catch(() => undefined);
