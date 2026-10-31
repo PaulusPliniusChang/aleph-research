@@ -1391,6 +1391,25 @@ export async function apply(ctx) {
   // replayed headlessly. Only missions whose branch has no terminal mission are approved.
   ctx.webServer.register({
     kind: 'exact',
+    path: '/api/aleph/set-python',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const result = await service.setPython({
+          projectId: args.project_id ?? args.projectId,
+          pythonPath: args.python,
+        });
+        return sendJson(res, 200, { ok: true, ...result });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/set-python-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+  ctx.webServer.register({
+    kind: 'exact',
     path: '/api/aleph/scaffold',
     async handler(req, res) {
       if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
