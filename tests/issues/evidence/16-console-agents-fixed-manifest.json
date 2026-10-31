@@ -1,0 +1,15 @@
+{
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-console-agents",
+  "files": {
+    "dsh-plugin/client.js": "1ea2344d70fb85df2251388a5f61b80d2bd32b921fb3b419f688371d5986dc5c",
+    "dsh-plugin/test/console-agents.test.mjs": "1929b53f77980e4f1da33311cb4eca6b6eadd7e36eeb7f76345e511fd104705f"
+  },
+  "effective_product_points": 54,
+  "product_node_total": 64,
+  "effective_independent_points": 41,
+  "independent_node_total": 42,
+  "real_dsh_observations": 23,
+  "result": "passed",
+  "boundary": "Actual DSH researcher, tools, storage, Git, Bash and UI polling; deterministic local model. Composer and InfraOptimizer roles are automatic fixtures only. Browser plugin not available; Playwright and Chrome. Mobile existing wide table may require horizontal navigation, not a responsive redesign."
+}

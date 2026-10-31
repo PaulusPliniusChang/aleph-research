@@ -15,6 +15,8 @@ import urllib.request
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=Path, required=True)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--expect-protection', action='store_true')
+parser.add_argument('--screenshot-prefix', default='16-current')
 args = parser.parse_args()
 spec = importlib.util.spec_from_file_location('launcher', Path(__file__).with_name('launch-project.py'))
 launcher = importlib.util.module_from_spec(spec)
@@ -38,7 +40,8 @@ records = {'environment': environment, 'url': url, 'command': [sys.executable, *
            'browser_fallback': 'Browser plugin not available', 'events': []}
 config = root / 'browser-config.json'
 config.write_text(json.dumps({'root': str(root), 'workspace': str(workspace), 'url': url,
-                             'output': str(args.output.resolve()), 'evidenceDir': str(args.output.resolve().parent)}))
+                             'output': str(args.output.resolve()), 'evidenceDir': str(args.output.resolve().parent),
+                             'expectProtection': args.expect_protection, 'screenshotPrefix': args.screenshot_prefix}))
 log = (root / 'dsh.log').open('w')
 proc = subprocess.Popen(['node', str(runtime / 'node_modules/@deepseek-ai/dsh/lib/bin.js'),
     '--profile', 'reproduction', '--no-open', '--host', '127.0.0.1', '--port', str(port)],

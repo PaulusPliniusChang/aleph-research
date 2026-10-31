@@ -1,0 +1,54 @@
+(node:295636) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-console-agents/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-fix-console-agents/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-16 actual snapshot projection reaches existing console agent render
+  ✔ researcher: backend snapshot retains independent full record (1.435098ms)
+  ✔ researcher: project metadata does not contain duplicate agent list (0.198387ms)
+  ✔ researcher: console shows actual role (0.134489ms)
+  ✔ researcher: console shows actual state (0.152459ms)
+  ✔ researcher: console shows actual child session (0.149396ms)
+  ✔ researcher: console shows research branch (0.111038ms)
+  ✔ researcher: console shows independent summary (0.11634ms)
+  ✔ researcher: nonempty records suppress empty-list guidance (0.192375ms)
+  ✔ composer: backend snapshot retains independent full record (0.200888ms)
+  ✔ composer: project metadata does not contain duplicate agent list (0.191262ms)
+  ✔ composer: console shows actual role (0.145283ms)
+  ✔ composer: console shows actual state (0.078505ms)
+  ✔ composer: console shows actual child session (0.058029ms)
+  ✔ composer: console shows research branch (0.048122ms)
+  ✔ composer: console shows independent summary (0.058143ms)
+  ✔ composer: nonempty records suppress empty-list guidance (0.036719ms)
+  ✔ infra: backend snapshot retains independent full record (0.070356ms)
+  ✔ infra: project metadata does not contain duplicate agent list (0.046587ms)
+  ✔ infra: console shows actual role (0.038137ms)
+  ✔ infra: console shows actual state (0.030973ms)
+  ✔ infra: console shows actual child session (0.107824ms)
+  ✔ infra: console shows research branch (0.121914ms)
+  ✔ infra: console shows independent summary (0.094423ms)
+  ✔ infra: nonempty records suppress empty-list guidance (0.046804ms)
+  ✔ empty control: empty list displays agent guidance (0.10562ms)
+  ✔ empty control: project identity remains displayed (0.075465ms)
+  ✔ empty control: machine identity remains displayed (0.06404ms)
+  ✔ empty control: evaluator remains displayed (0.06404ms)
+  ✔ missing optional records: snapshot supplies empty array (0.105184ms)
+  ✔ missing optional records: console renders guidance without crash (0.406448ms)
+  ✔ independent records: first session is displayed (0.097711ms)
+  ✔ independent records: second session is displayed (0.061293ms)
+  ✔ independent records: both distinct summaries remain available (0.062047ms)
+  ✔ subsequent snapshot: running record is visible before finish (0.167325ms)
+  ✔ subsequent snapshot: final summary becomes visible (0.087819ms)
+  ✔ subsequent snapshot: transition never reports empty list (0.081153ms)
+  ✔ table control: actual child identity renders when supplied correctly (0.135417ms)
+  ✔ table control: long summary is visibly truncated (0.126851ms)
+  ✔ table control: absent summary displays placeholder (0.088178ms)
+  ✔ table control: oldest ninth record is omitted by existing display limit (0.17633ms)
+  ✔ table control: most recent record remains visible (0.185219ms)
+✔ ALEPH-16 actual snapshot projection reaches existing console agent render (36.064496ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 42
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 222.199284

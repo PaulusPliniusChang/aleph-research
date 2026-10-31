@@ -1,0 +1,338 @@
+{
+  "source": "/home/paulus-chang/项目/aleph-fix-console-agents",
+  "source_sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "boundary": "Actual backend snapshot serializer and complete existing consoleBody/agentSection evaluated inside VM. React createElement replaced by a structural virtual-tree collector; project/agent states are explicit fixtures, no browser or DSH is claimed. Actual rendered DSH verification is separate.",
+  "observations": [
+    {
+      "scope": "researcher",
+      "agent": {
+        "role": "researcher",
+        "status": "running",
+        "childId": "child-researcher",
+        "branch": "research/researcher",
+        "updatedAt": "2026-10-31T01:02:03Z",
+        "summary": "Independent summary researcher"
+      },
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T11:24:14.204Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "status": "running",
+            "childId": "child-researcher",
+            "branch": "research/researcher",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary researcher"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 7:24:14 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nResearchers\n4\nBest score\n—\nBest commit\n—\nEvaluations\n0\nResearch scaffold\nno\nShared Python\n—\nProvided data\n—\nHidden testset\n—\nSubmission Python\n—\nWatchdog violations\n0\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nrole.researcher\n\nRunning\nchild-researcher\nresearch/researcher\n—\n10/31/2026, 9:02:03 AM\nIndependent summary researcher\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nEntrypoint\nError\nNo missions recorded yet.\n\nRuntime violations\nNo violations recorded.\nGenerated at: 10/31/2026, 7:24:14 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nrole.researcher\n\nRunning\nchild-researcher\nresearch/researcher\n—\n10/31/2026, 9:02:03 AM\nIndependent summary researcher",
+      "agentLeaves": [
+        "Orchestration agents",
+        "Role",
+        "Agent status",
+        "Child session",
+        "Branch",
+        "Worktree",
+        "Updated",
+        "Summary",
+        "role.researcher",
+        "Running",
+        "child-researcher",
+        "research/researcher",
+        "—",
+        "10/31/2026, 9:02:03 AM",
+        "Independent summary researcher"
+      ]
+    },
+    {
+      "scope": "composer",
+      "agent": {
+        "role": "composer",
+        "status": "done",
+        "childId": "child-composer",
+        "branch": "research/composer",
+        "updatedAt": "2026-10-31T01:02:03Z",
+        "summary": "Independent summary composer"
+      },
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T11:24:14.224Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "status": "done",
+            "childId": "child-composer",
+            "branch": "research/composer",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary composer"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 7:24:14 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nResearchers\n4\nBest score\n—\nBest commit\n—\nEvaluations\n0\nResearch scaffold\nno\nShared Python\n—\nProvided data\n—\nHidden testset\n—\nSubmission Python\n—\nWatchdog violations\n0\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nComposer\n\nDone\nchild-composer\nresearch/composer\n—\n10/31/2026, 9:02:03 AM\nIndependent summary composer\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nEntrypoint\nError\nNo missions recorded yet.\n\nRuntime violations\nNo violations recorded.\nGenerated at: 10/31/2026, 7:24:14 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nComposer\n\nDone\nchild-composer\nresearch/composer\n—\n10/31/2026, 9:02:03 AM\nIndependent summary composer",
+      "agentLeaves": [
+        "Orchestration agents",
+        "Role",
+        "Agent status",
+        "Child session",
+        "Branch",
+        "Worktree",
+        "Updated",
+        "Summary",
+        "Composer",
+        "Done",
+        "child-composer",
+        "research/composer",
+        "—",
+        "10/31/2026, 9:02:03 AM",
+        "Independent summary composer"
+      ]
+    },
+    {
+      "scope": "infra",
+      "agent": {
+        "role": "infra",
+        "status": "failed",
+        "childId": "child-infra",
+        "branch": "research/infra",
+        "updatedAt": "2026-10-31T01:02:03Z",
+        "summary": "Independent summary infra"
+      },
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T11:24:14.226Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "infra",
+            "status": "failed",
+            "childId": "child-infra",
+            "branch": "research/infra",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary infra"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 7:24:14 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nResearchers\n4\nBest score\n—\nBest commit\n—\nEvaluations\n0\nResearch scaffold\nno\nShared Python\n—\nProvided data\n—\nHidden testset\n—\nSubmission Python\n—\nWatchdog violations\n0\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nInfraOptimizer\n\nFailed\nchild-infra\nresearch/infra\n—\n10/31/2026, 9:02:03 AM\nIndependent summary infra\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nEntrypoint\nError\nNo missions recorded yet.\n\nRuntime violations\nNo violations recorded.\nGenerated at: 10/31/2026, 7:24:14 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nInfraOptimizer\n\nFailed\nchild-infra\nresearch/infra\n—\n10/31/2026, 9:02:03 AM\nIndependent summary infra",
+      "agentLeaves": [
+        "Orchestration agents",
+        "Role",
+        "Agent status",
+        "Child session",
+        "Branch",
+        "Worktree",
+        "Updated",
+        "Summary",
+        "InfraOptimizer",
+        "Failed",
+        "child-infra",
+        "research/infra",
+        "—",
+        "10/31/2026, 9:02:03 AM",
+        "Independent summary infra"
+      ]
+    },
+    {
+      "scope": "multiple",
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T11:24:14.229Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "status": "running",
+            "childId": "child-first",
+            "branch": "research/first",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary first"
+          },
+          {
+            "role": "infra",
+            "status": "done",
+            "childId": "child-second",
+            "branch": "research/second",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary second"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 7:24:14 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nResearchers\n4\nBest score\n—\nBest commit\n—\nEvaluations\n0\nResearch scaffold\nno\nShared Python\n—\nProvided data\n—\nHidden testset\n—\nSubmission Python\n—\nWatchdog violations\n0\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nrole.researcher\n\nRunning\nchild-first\nresearch/first\n—\n10/31/2026, 9:02:03 AM\nIndependent summary first\nInfraOptimizer\n\nDone\nchild-second\nresearch/second\n—\n10/31/2026, 9:02:03 AM\nIndependent summary second\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nEntrypoint\nError\nNo missions recorded yet.\n\nRuntime violations\nNo violations recorded.\nGenerated at: 10/31/2026, 7:24:14 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nWorktree\nUpdated\nSummary\nrole.researcher\n\nRunning\nchild-first\nresearch/first\n—\n10/31/2026, 9:02:03 AM\nIndependent summary first\nInfraOptimizer\n\nDone\nchild-second\nresearch/second\n—\n10/31/2026, 9:02:03 AM\nIndependent summary second",
+      "agentLeaves": [
+        "Orchestration agents",
+        "Role",
+        "Agent status",
+        "Child session",
+        "Branch",
+        "Worktree",
+        "Updated",
+        "Summary",
+        "role.researcher",
+        "Running",
+        "child-first",
+        "research/first",
+        "—",
+        "10/31/2026, 9:02:03 AM",
+        "Independent summary first",
+        "InfraOptimizer",
+        "Done",
+        "child-second",
+        "research/second",
+        "—",
+        "10/31/2026, 9:02:03 AM",
+        "Independent summary second"
+      ]
+    }
+  ]
+}

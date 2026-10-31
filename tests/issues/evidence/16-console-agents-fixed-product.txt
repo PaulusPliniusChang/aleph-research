@@ -1,0 +1,94 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:292548) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ top-level snapshot agents reach every existing table column
+  ✔ snapshot has no nested duplicate agent list (0.882659ms)
+  ✔ researcher exact child session is visible (0.264273ms)
+  ✔ researcher role is visible (0.210017ms)
+  ✔ researcher status is visible (0.228127ms)
+  ✔ researcher branch is visible (0.158008ms)
+  ✔ researcher worktree is visible (0.16553ms)
+  ✔ researcher update time is visible (0.134664ms)
+  ✔ researcher independent summary is visible (0.236562ms)
+  ✔ composer exact child session is visible (0.16343ms)
+  ✔ composer role is visible (0.205321ms)
+  ✔ composer status is visible (0.097651ms)
+  ✔ composer branch is visible (0.091765ms)
+  ✔ composer worktree is visible (0.079893ms)
+  ✔ composer update time is visible (0.057603ms)
+  ✔ composer independent summary is visible (0.076452ms)
+  ✔ infra exact child session is visible (0.058084ms)
+  ✔ infra role is visible (0.054513ms)
+  ✔ infra status is visible (0.076029ms)
+  ✔ infra branch is visible (0.055799ms)
+  ✔ infra worktree is visible (0.067439ms)
+  ✔ infra update time is visible (0.050911ms)
+  ✔ infra independent summary is visible (0.073034ms)
+  ✔ nonempty top-level agents suppress empty guidance (0.135529ms)
+  ✔ all existing agent column headers remain present (0.596218ms)
+  ✔ render leaves snapshot records unchanged (0.114919ms)
+  ✔ project identity remains visible (0.092673ms)
+  ✔ machine identity remains visible (0.091443ms)
+  ✔ evaluator remains visible (0.085099ms)
+✔ top-level snapshot agents reach every existing table column (28.915139ms)
+▶ agent routing preserves empty handling and display boundaries
+  ✔ empty top-level list displays empty guidance (1.493489ms)
+  ✔ missing top-level list displays empty guidance (0.655957ms)
+  ✔ null top-level list displays empty guidance (0.683997ms)
+  ✔ object top-level list displays empty guidance (0.490192ms)
+  ✔ obsolete nested list cannot replace an empty top-level list (1.561121ms)
+  ✔ top-level list remains authoritative over contradictory nested data (1.246048ms)
+  ✔ long summary is truncated visibly while preserving complete tooltip (0.788304ms)
+  ✔ exactly 240 summary characters remain untruncated (1.21561ms)
+  ✔ absent optional fields render placeholders without hiding the child (0.446957ms)
+  ✔ unknown status remains visible as unknown (0.408956ms)
+  ✔ only the most recent eight records are displayed in original order (0.879439ms)
+  ✔ mission and batch fields remain associated with their own sections (1.270216ms)
+✔ agent routing preserves empty handling and display boundaries (14.501023ms)
+▶ real client polling callbacks refresh the displayed agent records
+  ✔ initial page shows loading state (0.239211ms)
+  ✔ poll requests the read-only snapshot endpoint without cached results (0.28852ms)
+  ✔ client retains the existing two-second poll interval (0.120543ms)
+  ✔ successful first poll displays the running child (0.760013ms)
+  ✔ subsequent poll replaces running status with done status (0.48547ms)
+  ✔ subsequent poll displays the final summary (0.250293ms)
+  ✔ failed poll retains the last agent records and summary (0.342847ms)
+  ✔ failed poll displays stale-data guidance (0.360042ms)
+  ✔ no-project response uses existing empty-project guidance (0.109691ms)
+  ✔ no-project response removes prior agent records (0.093388ms)
+  ✔ later successful poll restores actual records (0.214147ms)
+  ✔ back button keeps its existing callback (0.399802ms)
+  ✔ unmount stops the polling interval (0.061627ms)
+  ✔ fresh page instance reconstructs completed records from a new snapshot (1.44731ms)
+✔ real client polling callbacks refresh the displayed agent records (28.507731ms)
+(node:292549) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (530.522193ms)
+(node:292550) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (153.699824ms)
+✔ an activation without a child identity fails instead of writing a null record (81.679095ms)
+✔ an evaluation report stays attached to the commit it scored (220.887768ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (377.668358ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (132.255378ms)
+✔ evaluations accumulate and the best result follows the highest score (418.831266ms)
+ℹ tests 64
+ℹ suites 0
+ℹ pass 64
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1590.910671

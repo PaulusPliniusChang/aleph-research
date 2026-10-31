@@ -104,3 +104,30 @@ python3 tests/issues/dsh/current-console-agents.py --source /home/paulus-chang/�
 ## 远端发布
 
 B 已将该问题上传至上游 [#22](https://github.com/hapenia/aleph-research/issues/22)。公开证据固定于提交 `6cc3510d7b3dea239a9fda6628c6b2158beff9f6`，远端正文移除了 YAML 管理头和前导管理注释，本地仍保留完整原文。发布时议题处于开放状态，产品修复尚未提交。
+
+
+## 修复验收
+
+C 在基线 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 提供冻结修改，B 在独立工作树 `/home/paulus-chang/项目/aleph-fix-console-agents` 仅导入客户端与新增产品测试。客户端把完整快照传入代理区域，代理表格读取顶层 `snapshot.agents`。导入文件的校验值见[验收清单](evidence/16-console-agents-fixed-manifest.json)。
+
+B 于北京时间 `2026-10-31T19:23:34+08:00` 再次串行获取上游和派生仓库，主分支仍为该基线，主工作区干净。B 独立执行产品测试，新增测试包含 54 个有效行为点，Node 连同容器和既有测试报告 64 项通过、0 项失败；B 的独立行为脚本包含 41 个有效检查点，全部通过，Node 连同容器报告 42 项通过、0 项失败。
+
+```bash
+cd /home/paulus-chang/项目/aleph-fix-console-agents/dsh-plugin
+npm test
+cd /home/paulus-chang/项目/aleph-tests
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph-fix-console-agents ALEPH_CONSOLE_AGENT_OBSERVATIONS=tests/issues/evidence/16-console-agents-fixed-independent.json node --experimental-loader /home/paulus-chang/项目/aleph-fix-console-agents/dsh-plugin/test/loader.mjs --test tests/issues/dsh/console-agent-records-acceptance.test.mjs
+python3 tests/issues/dsh/current-console-agents.py --source /home/paulus-chang/项目/aleph-fix-console-agents --expect-protection --screenshot-prefix 16-fixed --output tests/issues/evidence/16-fixed-real-dsh-console-agents.json
+```
+
+真实 DSH 浏览器核查的 23 项观察全部通过。页面显示运行中的真实研究子会话；完成后，页面轮询展示相应摘要；刷新页面并重新打开 Aleph 后，持久化记录和摘要仍然显示。空列表对照继续显示空提示。桌面视口为 `1440×1000`，手机视口为 `390×844`。浏览器没有框架错误遮罩或未捕获异常，仅存在已解释的无项目快照 HTTP 404。隔离 Host 的进程编号为 `295680`，核查结束后已退出，进程编号不存在。
+
+真实研究会话、注册工具、持久化存储、Git 工作树、Bash 和页面轮询均由实际 DSH 执行，模型响应采用本地确定性适配器；Composer 和 InfraOptimizer 的角色覆盖仍来自自动样例。手机页面沿用现有宽表布局，部分列超出初始视口；本次核查只确认代理记录与摘要的数据展示恢复，不表示完成响应式布局改造。研究角色仍显示既有的 `role.researcher` 文案。
+
+- [产品测试原始输出](evidence/16-console-agents-fixed-product.txt)
+- [独立测试原始输出](evidence/16-console-agents-fixed-independent.txt)与[结构观察](evidence/16-console-agents-fixed-independent.json)
+- [实际 DSH 完整记录](evidence/16-fixed-real-dsh-console-agents.json)与[执行输出](evidence/16-fixed-real-dsh-console-agents.txt)
+- [修复后运行页面](evidence/16-fixed-running-desktop.png)、[完成页面](evidence/16-fixed-done-desktop.png)及[刷新页面](evidence/16-fixed-reloaded-desktop.png)
+- [修复后手机运行页面](evidence/16-fixed-running-mobile.png)与[手机完成页面](evidence/16-fixed-done-mobile.png)
+
+新工作树首次运行缺少依赖链接，B 配置已有依赖后完成正式验收；该环境错误保存在 `16-console-agents-fixed-product-dependency-attempt.txt`，没有计为产品失败。原始缺陷证据及截图保持保留。

@@ -1,0 +1,24 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-bldpldg8", "url": "http://127.0.0.1:54399"}
+actual page has DSH identity
+actual console is not blank
+current upstream no-project console shows empty state
+real new project has empty top-level agent list
+real project metadata has no nested agent list
+real empty agent list is shown as empty
+real researcher child is live
+real researcher invoked actual bash before waiting
+actual bash ran in researcher owned worktree
+public actual running record belongs to child
+public running record has no summary
+running child is rendered in agent section
+nonempty running API list replaces empty guidance
+mobile console retains project identity
+mobile running child is rendered without empty guidance
+actual completion API has correct child summary
+real completion summary appears after page poll
+desktop completed record replaces empty guidance
+reload recovers persisted child and summary
+actual persisted backend record survives reload
+no framework error overlay is present
+no uncaught page error is present
+browser console contains only expected no-project HTTP 404

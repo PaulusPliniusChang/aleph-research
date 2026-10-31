@@ -3,6 +3,7 @@ import {readFile, writeFile} from 'node:fs/promises';
 import {chromium} from '/tmp/aleph-regression-validation/node_modules/playwright-core/index.mjs';
 
 const config = JSON.parse(await readFile(process.argv[2], 'utf8'));
+const repaired = Boolean(config.expectProtection);
 const records = {flow: 'Actual DSH console -> initialize project -> observe real agent records',
   browserFallback: 'Browser plugin not available', checks: [], pageErrors: [], consoleLogs: [], failedResponses: [], events: []};
 const save = () => writeFile(config.output, JSON.stringify(records, null, 2));
@@ -32,7 +33,7 @@ try {
   await check('actual page has DSH identity', (await page.title()).includes('DSH'));
   await check('actual console is not blank', (await page.locator('body').innerText()).includes('Aleph Research'));
   const screenshot = async label => {
-    const file = `16-current-${label}.png`;
+    const file = `${config.screenshotPrefix || '16-current'}-${label}.png`;
     await page.screenshot({path:config.evidenceDir + '/' + file});
     records.events.push({name:label, screenshot:file, body:await page.locator('body').innerText()});
     await save();
@@ -80,12 +81,12 @@ try {
     if(!response.url().endsWith('/api/aleph/snapshot') || response.status()!==200) return false;
     try {return (await response.json()).agents?.some(a=>a.childId===run.childId && a.status==='running');} catch {return false;}
   },{timeout:7000});
-  await check('defect: running child is absent from rendered agent section', !(await section().innerText()).includes(run.childId));
-  await check('defect: nonempty running API list is rendered as empty', (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。'));
+  await check(repaired ? 'running child is rendered in agent section' : 'defect: running child is absent from rendered agent section', (await section().innerText()).includes(run.childId) === repaired);
+  await check(repaired ? 'nonempty running API list replaces empty guidance' : 'defect: nonempty running API list is rendered as empty', (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') !== repaired);
   await screenshot('running-desktop');
   await page.setViewportSize({width:390,height:844});
   await check('mobile console retains project identity', (await page.locator('body').innerText()).includes(pid));
-  await check('defect: mobile running agent section is also empty', (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') && !(await section().innerText()).includes(run.childId));
+  await check(repaired ? 'mobile running child is rendered without empty guidance' : 'defect: mobile running agent section is also empty', repaired ? !(await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') && (await section().innerText()).includes(run.childId) : (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') && !(await section().innerText()).includes(run.childId));
   await screenshot('running-mobile');
   await control({action:'release',sessionId:run.childId});
   await wait(async()=> (await snapshot()).agents.some(a=>a.childId===run.childId && a.status==='done'), 'actual completion callback');
@@ -98,15 +99,15 @@ try {
     if(!response.url().endsWith('/api/aleph/snapshot') || response.status()!==200) return false;
     try {return (await response.json()).agents?.some(a=>a.childId===run.childId && a.status==='done');} catch {return false;}
   },{timeout:7000});
-  await check('defect: real completion summary remains absent after page poll', !(await section().innerText()).includes(expected));
+  await check(repaired ? 'real completion summary appears after page poll' : 'defect: real completion summary remains absent after page poll', (await section().innerText()).includes(expected) === repaired);
   await screenshot('done-mobile');
   await page.setViewportSize({width:1440,height:1000});
-  await check('defect: desktop done section still uses empty guidance', (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。'));
+  await check(repaired ? 'desktop completed record replaces empty guidance' : 'defect: desktop done section still uses empty guidance', (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') !== repaired);
   await screenshot('done-desktop');
   await page.reload();
   await page.getByRole('button',{name:'Aleph',exact:true}).click();
   await page.getByRole('heading',{name:'编排 agent',exact:true}).waitFor();
-  await check('defect: reload cannot recover persisted record', (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') && !(await section().innerText()).includes(run.childId));
+  await check(repaired ? 'reload recovers persisted child and summary' : 'defect: reload cannot recover persisted record', repaired ? (await section().innerText()).includes(run.childId) && (await section().innerText()).includes(expected) && !(await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') : (await section().innerText()).includes('尚未运行 Composer 或 InfraOptimizer。') && !(await section().innerText()).includes(run.childId));
   await screenshot('reloaded-desktop');
   await check('actual persisted backend record survives reload', (await snapshot()).agents.find(a=>a.childId===run.childId)?.summary===expected);
   await check('no framework error overlay is present', await page.locator('vite-error-overlay,nextjs-portal,[data-nextjs-dialog]').count() === 0);
@@ -115,7 +116,8 @@ try {
   const unexpectedConsole=records.consoleLogs.filter(m=>!(m.type==='error' && m.text==='Failed to load resource: the server responded with a status of 404 (Not Found)' && m.location?.url===config.url+'/api/aleph/snapshot'));
   records.expectedConsoleExplanation='The actual no-project control returns HTTP 404 aleph/no-project. Chromium reports that request in console; current upstream correctly renders the empty state. All other errors/warnings fail the check.';
   await check('browser console contains only expected no-project HTTP 404', unexpectedConsole.length===0 && unexpectedResponses.length===0,{unexpectedConsole,unexpectedResponses});
-  records.defect_reproduced=true;
+  records.defect_reproduced=!repaired;
+  records.repair_accepted=repaired;
   await save();
   await save();
 } catch (error) {
