@@ -58,6 +58,8 @@
 
                 Before proposing a mission, inspect mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.
 
+                A local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.
+
                 If a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.
 
                 Small work is allowed: reading files, focused edits, quick tests, one small fit/evaluation, and bounded commands. Do not launch large training runs, multi-seed or multi-config sweeps, multi-GPU jobs, dataset-scale generation, benchmarking campaigns, long-running background jobs, or extra agents.
