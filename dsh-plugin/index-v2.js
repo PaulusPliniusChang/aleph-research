@@ -170,17 +170,40 @@ for mission_dir in sorted(missions.glob("*/")):
     env = dict(os.environ)
     env["ALEPH_MISSION_ID"] = mission_id
     env["ALEPH_OUTPUT_DIR"] = str(output_dir)
-    proc = subprocess.run(["bash", str(mission_dir / entrypoint)], cwd=mission_dir, env=env)
-    reports.append({"mission_id": mission_id, "exit_code": proc.returncode})
-    (output_dir / "result.json").write_text(json.dumps({
+    log_path = output_dir / "run.log"
+    with log_path.open("w", encoding="utf-8", errors="replace") as log:
+        proc = subprocess.run(
+            ["bash", str(mission_dir / entrypoint)],
+            cwd=mission_dir, env=env, stdout=log, stderr=subprocess.STDOUT,
+        )
+    record = {
         "schema": 1,
         "mission_id": mission_id,
         "status": "done" if proc.returncode == 0 else "failed",
         "exit_code": proc.returncode,
-        "artifacts": [],
+        "artifacts": [str(log_path.relative_to(root))],
         "metrics": {},
-        "logs": [],
-    }, ensure_ascii=False))
+        "logs": [str(log_path.relative_to(root))],
+        "error": None if proc.returncode == 0 else f"mission entrypoint exited with {proc.returncode}; see {log_path.name}",
+    }
+    for name, key in (("result.json", None), ("metrics.json", "metrics")):
+        candidate = output_dir / name
+        if not candidate.exists():
+            continue
+        try:
+            parsed = json.loads(candidate.read_text())
+        except Exception:
+            continue
+        if key is None:
+            record.update(parsed)
+            record["mission_id"] = mission_id
+            if proc.returncode == 0:
+                record["status"] = "done"
+                record["error"] = None
+        else:
+            record[key] = parsed
+    (output_dir / "result.json").write_text(json.dumps(record, ensure_ascii=False, indent=2))
+    reports.append({"mission_id": mission_id, "exit_code": proc.returncode, "status": record["status"]})
 (results / "batch.json").write_text(json.dumps({"missions": reports}, ensure_ascii=False))
 print(json.dumps({"missions": reports}))
 sys.exit(0 if all(item["exit_code"] == 0 for item in reports) else 1)
@@ -513,7 +536,15 @@ class ProjectService {
       if (missionDir) {
         try {
           const raw = await readFile(join(batchWorktree, 'results', missionDir, 'result.json'), 'utf8');
-          envelope = { ...envelope, ...JSON.parse(raw), batch_id: batch.id, machine_id: batch.machineId };
+          const own = JSON.parse(raw);
+          envelope = { ...envelope, ...own, batch_id: batch.id, machine_id: batch.machineId };
+          // The runner writes one result.json per mission, so a mission's own status is authoritative.
+          if (envelope.status === 'done') envelope.error = null;
+          else envelope.error = envelope.error || runnerError || 'mission failed';
+          try {
+            const metricsRaw = await readFile(join(batchWorktree, 'results', missionDir, 'metrics.json'), 'utf8');
+            envelope.metrics = JSON.parse(metricsRaw);
+          } catch { /* mission did not publish metrics */ }
         } catch {
           envelope.status = 'failed';
           envelope.error = runnerError || 'mission result missing';
