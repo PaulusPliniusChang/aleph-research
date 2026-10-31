@@ -507,7 +507,7 @@ class ProjectService {
         prepared.push({ mission: mission.id, status: 'sync-failed', error: String(error?.message ?? error).slice(0, 400) });
       }
     }
-    const infra = { cores, threads, missions: prepared, runner: project.pythonPath ?? 'python3' };
+    const infra = { cores, threads, missions: prepared, runner: project.pythonPath ?? 'python3', timeout_ms: Number(process.env.ALEPH_BATCH_TIMEOUT_MS) > 0 ? Number(process.env.ALEPH_BATCH_TIMEOUT_MS) : 6 * 60 * 60 * 1000 };
     await writeFile(join(batchWorktree, 'infra.json'), JSON.stringify(infra, null, 2), 'utf8').catch(() => undefined);
     return { ...infra, env };
   }
@@ -526,6 +526,10 @@ class ProjectService {
     await git(project.missionRoot, ['worktree', 'add', '--detach', batchWorktree, batch.branch]);
     // The Host owns the runner so runner upgrades do not depend on each mission repo copy.
     await writeFile(join(batchWorktree, '.aleph_batch_runner.py'), TEMPLATE_BATCH_RUNNER, 'utf8');
+    // Batches run real training; the budget must fit the machine, not a demo.
+    const batchTimeoutMs = Number(process.env.ALEPH_BATCH_TIMEOUT_MS) > 0
+      ? Number(process.env.ALEPH_BATCH_TIMEOUT_MS)
+      : 6 * 60 * 60 * 1000;
     const infra = await this.prepareBatchRuntime({ project, batch, missionRecords, batchWorktree });
     const startedAt = now();
     await this.mutate(projectId, (current) => ({
@@ -536,7 +540,7 @@ class ProjectService {
     try {
       await run(project.pythonPath || 'python3', ['.aleph_batch_runner.py'], {
         cwd: batchWorktree,
-        timeout: 900_000,
+        timeout: batchTimeoutMs,
         env: {
           ...(project.pythonPath ? { PATH: `${dirname(project.pythonPath)}:${process.env.PATH ?? ''}` } : {}),
           ...infra.env,
