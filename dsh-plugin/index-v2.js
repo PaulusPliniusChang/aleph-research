@@ -21,6 +21,8 @@ import { z } from 'zod';
 const execFileAsync = promisify(execFile);
 const DOMAIN_NAME = 'aleph_project';
 const HANDOFF_FILE = 'ALEPH_HANDOFF.md';
+// Files that only carry repository bookkeeping; a merge conflict in these is resolved by the batch side.
+const BOOKKEEPING_PATHS = new Set(['.gitignore', '.gitattributes', 'README.md']);
 
 const missionSchema = z.object({
   id: z.string(),
@@ -1070,6 +1072,15 @@ class ProjectService {
       try {
         await git(project.missionRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'merge', '--no-ff', '-m', `merge mission ${mission.id}`, mission.branch]);
       } catch (error) {
+        // Bookkeeping files carry no mission logic; keep the batch side and continue.
+        const conflicted = (await git(project.missionRoot, ['diff', '--name-only', '--diff-filter=U']).catch(() => ({ stdout: '' }))).stdout.split(/\r?\n/).filter(Boolean);
+        const trivial = conflicted.length > 0 && conflicted.every((path) => BOOKKEEPING_PATHS.has(path));
+        if (trivial) {
+          await git(project.missionRoot, ['checkout', '--ours', '--', ...conflicted]).catch(() => undefined);
+          await git(project.missionRoot, ['add', '-A']);
+          await git(project.missionRoot, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--no-edit']).catch(() => undefined);
+          continue;
+        }
         await git(project.missionRoot, ['merge', '--abort']).catch(() => undefined);
         await git(project.missionRoot, ['switch', project.templateBranch]);
         throw new Error(`merge conflict for mission ${mission.id}; Composer must resolve it before batching`);
