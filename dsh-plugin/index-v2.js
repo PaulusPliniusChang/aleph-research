@@ -305,6 +305,17 @@ class ProjectService {
     return project;
   }
 
+  async startMission({ projectId, name = 'mission' }) {
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    const slug = String(name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'mission';
+    const branch = `missions/${slug}-${randomUUID().slice(0, 8)}`;
+    const worktree = join(project.workspace, '.aleph', 'missions', newId('mw'));
+    await mkdir(join(project.workspace, '.aleph', 'missions'), { recursive: true });
+    await git(project.missionRoot, ['worktree', 'add', '-b', branch, worktree, project.templateBranch]);
+    return { projectId, branch, worktree };
+  }
+
   async propose({ projectId, branch, agent }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
@@ -553,7 +564,7 @@ class ProjectService {
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
       'Before creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.',
-      'Small work can be done directly. For work with significant hardware cost, create a mission branch from the mission template, add missions/<id>/mission.json plus code and an uv project, commit the branch, and call aleph_propose_mission.',
+      'Small work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.',
       'After proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.',
       'When all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state.',
     ].join('\n');
@@ -616,6 +627,7 @@ class ProjectService {
       const workspace = resolve(project.workspace);
       const allowed = [
         join(workspace, '.aleph', 'researchers'),
+        join(workspace, '.aleph', 'missions'),
         join(workspace, '.aleph', 'batches'),
         join(workspace, '.aleph', 'evals'),
       ];
@@ -961,6 +973,12 @@ export async function apply(ctx) {
       'Return projects, missions, batches and machines.',
       { project_id: { type: 'string', description: 'Optional project id' } },
       async (args) => (args.project_id ? [service.get(args.project_id)].filter(Boolean) : service.list()).map(snapshot),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_start_mission',
+      'Create a mission branch from the template and return its worktree for the researcher to fill.',
+      { ...projectIdParam, name: { type: 'string', description: 'Short mission name' } },
+      async (args) => service.startMission({ projectId: args.project_id, name: args.name ?? 'mission' }),
     ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
       'aleph_propose_mission',
