@@ -349,10 +349,33 @@ class ProjectService {
     const best = project.best;
     if (!best?.commit) throw new Error('no evaluated best result yet');
     const ref = branch.startsWith('refs/') ? branch : `refs/heads/${branch}`;
+    if (!ref.startsWith('refs/heads/')) throw new Error(`not a local research branch: ${branch}`);
     const current = (await git(project.researchRoot, ['rev-parse', '--verify', ref]).catch(() => ({ stdout: '' }))).stdout.trim();
     if (!current) throw new Error(`research branch not found: ${branch}`);
+    const result = { projectId, branch, commit: best.commit, score: best.score, previous: current };
+    // A no-op must not require changing or saving an occupied worktree.
+    if (current === best.commit) return result;
+
+    // update-ref changes symbolic HEAD without synchronizing its worktree/index.
+    // Read NUL records so Unicode, spaces and newlines remain exact paths.
+    // Enumeration failure propagates: an unknown occupancy is never an empty list.
+    const listing = (await git(project.researchRoot, ['worktree', 'list', '--porcelain', '-z'])).stdout;
+    const occupied = [];
+    let worktree = null;
+    for (const field of listing.split('\0')) {
+      if (!field) worktree = null;
+      else if (field.startsWith('worktree ')) worktree = field.slice(9);
+      else if (field === `branch ${ref}` && worktree !== null) occupied.push(worktree);
+    }
+    if (occupied.length) {
+      const error = new Error(`cannot select best: research branch ${ref} is checked out in ${JSON.stringify(occupied)}; save or commit pending changes, then switch each listed worktree away from this branch and retry`);
+      error.code = 'ALEPH_SELECTION_BRANCH_CHECKED_OUT';
+      error.branch = ref;
+      error.worktrees = occupied;
+      throw error;
+    }
     await git(project.researchRoot, ['update-ref', '-m', `select best ${best.commit}`, ref, best.commit, current]);
-    return { projectId, branch, commit: best.commit, score: best.score, previous: current };
+    return result;
   }
 
   async setPython({ projectId, pythonPath }) {

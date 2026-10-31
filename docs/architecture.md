@@ -65,6 +65,22 @@ The researcher waits only for missions owned by its session. When those missions
 are done, `aleph_evaluate` evaluates the research branch; the Host writes the
 evaluation report into the research commit message and the researcher finishes.
 
+## Selecting the best research commit
+
+The operator route `POST /api/aleph/select-best` moves an existing local research
+branch to `best.commit`, with `main` as the default target. Selection does not
+change evaluation history or the recorded best. A branch already at the selected
+commit succeeds as a no-op, even with pending worktree changes.
+
+Before moving another branch tip, the Host enumerates main and linked worktrees
+using NUL-separated Git records. A checked-out target is refused with its exact
+paths and instructions to save or commit changes and switch away before retrying.
+No implicit worktree/index reset, staging, commit, stash or cleanup occurs. An
+unoccupied branch advances only through an expected-tip Git reference update;
+enumeration failure prevents the update. This protects ordinary use by one Host;
+the occupancy check and reference transaction do not form a cross-process Git
+checkout lock.
+
 ## Current boundaries
 
 - One local machine; multi-machine is an interface extension.
