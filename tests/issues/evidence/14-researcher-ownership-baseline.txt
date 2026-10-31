@@ -1,0 +1,371 @@
+(node:204984) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-14 researcher callbacks preserve activation ownership through registered tools
+  ✔ succeed/overlap: two registered calls receive distinct child identities (0.759468ms)
+  ✔ succeed/overlap: first activation is recorded running (0.197095ms)
+  ✔ succeed/overlap: second activation is recorded running (0.182339ms)
+  ✔ succeed/overlap: first activation receives original caller identity (0.172792ms)
+  ✔ succeed/overlap: second activation uses researcher preset (0.106074ms)
+  ✔ succeed/overlap: activation uses actual project research directory (0.080867ms)
+  ✔ succeed/first-result: completed activation receives its own terminal status (0.409145ms)
+  ✔ succeed/first-result: completed activation receives its own summary or error (0.218276ms)
+  ✖ succeed/first-result: other pending activation remains running (2.186906ms)
+  ✖ succeed/first-result: other pending activation retains original empty summary (0.388901ms)
+  ✖ succeed/first-result: other pending activation retains exact original record (1.032133ms)
+  ✔ succeed/first-result: historical completion remains byte-equivalent (0.113135ms)
+  ✔ succeed/first-result: running composer retains exact record (0.075028ms)
+  ✔ succeed/first-result: running infra retains exact record (0.082667ms)
+  ✔ succeed/first-result: other project running activation remains independent (0.121584ms)
+  ✔ succeed/public-query: registered status exposes completed activation correctly (0.207993ms)
+  ✖ succeed/public-query: registered status keeps other activation running (0.254781ms)
+  ✖ succeed/second-result: later activation records actual terminal outcome (0.503552ms)
+  ✖ succeed/second-result: later activation records its distinct result (7.184272ms)
+  ✔ succeed/second-result: earlier terminal result remains independent (0.243218ms)
+  ✔ succeed/second-result: no unrelated agent record is added or removed (0.126095ms)
+  ✔ fail/overlap: two registered calls receive distinct child identities (0.259963ms)
+  ✔ fail/overlap: first activation is recorded running (0.140676ms)
+  ✔ fail/overlap: second activation is recorded running (0.096255ms)
+  ✔ fail/overlap: first activation receives original caller identity (0.051179ms)
+  ✔ fail/overlap: second activation uses researcher preset (0.045616ms)
+  ✔ fail/overlap: activation uses actual project research directory (0.049189ms)
+  ✔ fail/first-result: completed activation receives its own terminal status (0.318827ms)
+  ✔ fail/first-result: completed activation receives its own summary or error (0.155938ms)
+  ✖ fail/first-result: other pending activation remains running (0.694783ms)
+  ✖ fail/first-result: other pending activation retains original empty summary (0.798947ms)
+  ✖ fail/first-result: other pending activation retains exact original record (1.144724ms)
+  ✔ fail/first-result: historical completion remains byte-equivalent (0.724781ms)
+  ✔ fail/first-result: running composer retains exact record (0.23073ms)
+  ✔ fail/first-result: running infra retains exact record (0.255697ms)
+  ✔ fail/first-result: other project running activation remains independent (0.263677ms)
+  ✔ fail/public-query: registered status exposes completed activation correctly (0.081167ms)
+  ✖ fail/public-query: registered status keeps other activation running (0.35961ms)
+  ✖ fail/second-result: later activation records actual terminal outcome (0.272941ms)
+  ✖ fail/second-result: later activation records its distinct result (0.557738ms)
+  ✔ fail/second-result: earlier terminal result remains independent (0.112121ms)
+  ✔ fail/second-result: no unrelated agent record is added or removed (0.062881ms)
+  ✔ single/startup-controls: single successful activation completes normally (0.202679ms)
+  ✔ single/startup-controls: single success summary is preserved (0.080293ms)
+  ✔ single/startup-controls: single failing activation records failure (0.073255ms)
+  ✔ single/startup-controls: single failure has its own reason (0.224635ms)
+  ✔ single/startup-controls: startup failure rejects registered call (0.551907ms)
+  ✔ single/startup-controls: startup failure creates a failed record without child identity (0.084404ms)
+  ✔ single/startup-controls: startup failure is recorded with own reason (0.081893ms)
+  ✔ single/startup-controls: startup failure does not rewrite completed success (0.087288ms)
+✖ ALEPH-14 researcher callbacks preserve activation ownership through registered tools (374.031749ms)
+ℹ tests 51
+ℹ suites 0
+ℹ pass 38
+ℹ fail 13
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 511.495301
+
+✖ failing tests:
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ succeed/first-result: other pending activation remains running (2.186906ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'done' !== 'running'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:98:65)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:95:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'done',
+    expected: 'running',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ succeed/first-result: other pending activation retains original empty summary (0.388901ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'first distinct succeed'
+  - null
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:99:80)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:95:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'first distinct succeed',
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ succeed/first-result: other pending activation retains exact original record (1.032133ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      branch: null,
+      childId: 'succeed-child-1',
+      role: 'researcher',
+  +   status: 'done',
+  +   summary: 'first distinct succeed',
+  +   updatedAt: '2026-10-31T08:23:08.899Z'
+  -   status: 'running',
+  -   summary: null,
+  -   updatedAt: '2026-10-31T08:23:08.895Z'
+    }
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:100:79)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:95:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { role: 'researcher', childId: 'succeed-child-1', status: 'done', summary: 'first distinct succeed', branch: null, updatedAt: '2026-10-31T08:23:08.899Z' },
+    expected: { role: 'researcher', childId: 'succeed-child-1', status: 'running', summary: null, branch: null, updatedAt: '2026-10-31T08:23:08.895Z' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ succeed/public-query: registered status keeps other activation running (0.254781ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'done' !== 'running'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:109:73)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:107:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'done',
+    expected: 'running',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ succeed/second-result: later activation records actual terminal outcome (0.503552ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'done' !== 'failed'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:115:73)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:114:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'done',
+    expected: 'failed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ succeed/second-result: later activation records its distinct result (7.184272ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(own(two.childId).summary.includes(secondSummary))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:116:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:114:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ fail/first-result: other pending activation remains running (0.694783ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'failed'
+  - 'running'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:98:65)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:95:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'failed',
+    expected: 'running',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ fail/first-result: other pending activation retains original empty summary (0.798947ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Error: first distinct fail'
+  - null
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:99:80)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:95:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Error: first distinct fail',
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ fail/first-result: other pending activation retains exact original record (1.144724ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      branch: null,
+      childId: 'fail-child-1',
+      role: 'researcher',
+  +   status: 'failed',
+  +   summary: 'Error: first distinct fail',
+  +   updatedAt: '2026-10-31T08:23:09.030Z'
+  -   status: 'running',
+  -   summary: null,
+  -   updatedAt: '2026-10-31T08:23:09.029Z'
+    }
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:100:79)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:95:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { role: 'researcher', childId: 'fail-child-1', status: 'failed', summary: 'Error: first distinct fail', branch: null, updatedAt: '2026-10-31T08:23:09.030Z' },
+    expected: { role: 'researcher', childId: 'fail-child-1', status: 'running', summary: null, branch: null, updatedAt: '2026-10-31T08:23:09.029Z' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ fail/public-query: registered status keeps other activation running (0.35961ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'failed'
+  - 'running'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:109:73)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:107:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'failed',
+    expected: 'running',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ fail/second-result: later activation records actual terminal outcome (0.272941ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'failed' !== 'done'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:115:73)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:114:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'failed',
+    expected: 'done',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89
+✖ fail/second-result: later activation records its distinct result (0.557738ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(own(two.childId).summary.includes(secondSummary))
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:116:69)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:78:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/researcher-ownership-acceptance.test.mjs:114:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

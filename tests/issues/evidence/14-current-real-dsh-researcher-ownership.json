@@ -1,0 +1,929 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-1ajzbfxu",
+    "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "66885994ceadad83a237a27c1fc7de6419889c14",
+    "dirty": "",
+    "dsh_version": "0.2.2-alpha.2"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-researcher-ownership.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/14-current-real-dsh-researcher-ownership.json"
+  ],
+  "events": [
+    {
+      "name": "bridge",
+      "monotonic": 50946.926646172,
+      "value": {
+        "request": {
+          "action": "parent",
+          "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace"
+        },
+        "result": {
+          "sessionId": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+          "agentPreset": "aleph"
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 50946.966954981,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+          "name": "aleph_init_project",
+          "args": {
+            "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace"
+          }
+        },
+        "result": {
+          "id": "p-76322ddb",
+          "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+          "researchRoot": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/research",
+          "missionRoot": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/missions",
+          "templateBranch": "template",
+          "evalCommand": "python3 eval/run_eval.py",
+          "visibleData": null,
+          "testsetPath": null,
+          "submissionPython": null,
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [],
+          "missions": [],
+          "batches": [],
+          "createdAt": "2026-10-31T08:27:48.840Z",
+          "updatedAt": "2026-10-31T08:27:48.840Z"
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 50946.986409088,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+          "name": "aleph_run_researcher",
+          "args": {
+            "project_id": "p-76322ddb"
+          }
+        },
+        "result": {
+          "projectId": "p-76322ddb",
+          "role": "researcher",
+          "childId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2"
+        }
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 50947.009320439,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+          "name": "aleph_run_researcher",
+          "args": {
+            "project_id": "p-76322ddb"
+          }
+        },
+        "result": {
+          "projectId": "p-76322ddb",
+          "role": "researcher",
+          "childId": "12512b1a-3240-4259-aadd-61d469c4ae96"
+        }
+      }
+    },
+    {
+      "name": "before-release-project",
+      "monotonic": 50947.189221509,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T08:27:49.063Z",
+        "project": {
+          "id": "p-76322ddb",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+          "research_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py"
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "updatedAt": "2026-10-31T08:27:48.857Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "updatedAt": "2026-10-31T08:27:48.881Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "both-actual-children-waiting",
+      "monotonic": 50947.196211195,
+      "value": {
+        "states": [
+          {
+            "sessionId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "calls": 2,
+            "waiting": true,
+            "released": false,
+            "emittedSummary": null,
+            "toolCall": {
+              "type": "tool-call",
+              "id": "433fd3cf-cf8d-45fe-a07d-19560117bfc8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-578183c6-4f17-45e3-a900-a8e7bb66f7a2.txt\"}"
+            },
+            "live": true,
+            "agentStatus": "running",
+            "header": {
+              "version": 4,
+              "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+              "createdAt": 1793435268845,
+              "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+              "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+              "isSeeded": false,
+              "origin": "subagent",
+              "delegationDepth": 1,
+              "agentPreset": "aleph-researcher"
+            }
+          },
+          {
+            "sessionId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "calls": 2,
+            "waiting": true,
+            "released": false,
+            "emittedSummary": null,
+            "toolCall": {
+              "type": "tool-call",
+              "id": "cdd5fb86-2d0b-45a3-914b-508ce66501d8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-12512b1a-3240-4259-aadd-61d469c4ae96.txt\"}"
+            },
+            "live": true,
+            "agentStatus": "running",
+            "header": {
+              "version": 4,
+              "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+              "createdAt": 1793435268863,
+              "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+              "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+              "isSeeded": false,
+              "origin": "subagent",
+              "delegationDepth": 1,
+              "agentPreset": "aleph-researcher"
+            }
+          }
+        ],
+        "children": [
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "createdAt": 1793435268845
+          },
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "createdAt": 1793435268863
+          }
+        ]
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 50947.220424563,
+      "value": {
+        "request": {
+          "action": "inspect",
+          "sessionId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2"
+        },
+        "result": {
+          "header": {
+            "version": 4,
+            "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "createdAt": 1793435268845,
+            "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+            "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+            "isSeeded": false,
+            "origin": "subagent",
+            "delegationDepth": 1,
+            "agentPreset": "aleph-researcher"
+          },
+          "events": []
+        }
+      }
+    },
+    {
+      "name": "child1-actual-header",
+      "monotonic": 50947.220780127,
+      "value": {
+        "version": 4,
+        "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+        "createdAt": 1793435268845,
+        "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+        "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+        "isSeeded": false,
+        "origin": "subagent",
+        "delegationDepth": 1,
+        "agentPreset": "aleph-researcher"
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 50947.223891589,
+      "value": {
+        "request": {
+          "action": "inspect",
+          "sessionId": "12512b1a-3240-4259-aadd-61d469c4ae96"
+        },
+        "result": {
+          "header": {
+            "version": 4,
+            "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "createdAt": 1793435268863,
+            "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+            "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+            "isSeeded": false,
+            "origin": "subagent",
+            "delegationDepth": 1,
+            "agentPreset": "aleph-researcher"
+          },
+          "events": []
+        }
+      }
+    },
+    {
+      "name": "child2-actual-header",
+      "monotonic": 50947.22419786,
+      "value": {
+        "version": 4,
+        "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+        "createdAt": 1793435268863,
+        "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+        "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+        "isSeeded": false,
+        "origin": "subagent",
+        "delegationDepth": 1,
+        "agentPreset": "aleph-researcher"
+      }
+    },
+    {
+      "name": "release-first",
+      "monotonic": 50947.227190803,
+      "value": {
+        "states": [
+          {
+            "sessionId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "calls": 2,
+            "waiting": false,
+            "released": true,
+            "emittedSummary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "toolCall": {
+              "type": "tool-call",
+              "id": "433fd3cf-cf8d-45fe-a07d-19560117bfc8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-578183c6-4f17-45e3-a900-a8e7bb66f7a2.txt\"}"
+            },
+            "live": true,
+            "agentStatus": "running",
+            "header": {
+              "version": 4,
+              "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+              "createdAt": 1793435268845,
+              "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+              "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+              "isSeeded": false,
+              "origin": "subagent",
+              "delegationDepth": 1,
+              "agentPreset": "aleph-researcher"
+            }
+          },
+          {
+            "sessionId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "calls": 2,
+            "waiting": true,
+            "released": false,
+            "emittedSummary": null,
+            "toolCall": {
+              "type": "tool-call",
+              "id": "cdd5fb86-2d0b-45a3-914b-508ce66501d8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-12512b1a-3240-4259-aadd-61d469c4ae96.txt\"}"
+            },
+            "live": true,
+            "agentStatus": "running",
+            "header": {
+              "version": 4,
+              "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+              "createdAt": 1793435268863,
+              "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+              "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+              "isSeeded": false,
+              "origin": "subagent",
+              "delegationDepth": 1,
+              "agentPreset": "aleph-researcher"
+            }
+          }
+        ],
+        "children": [
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "createdAt": 1793435268845
+          },
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "createdAt": 1793435268863
+          }
+        ]
+      }
+    },
+    {
+      "name": "after-first-project",
+      "monotonic": 50947.286697967,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T08:27:49.160Z",
+        "project": {
+          "id": "p-76322ddb",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+          "research_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py"
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "status": "done",
+            "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "branch": null,
+            "updatedAt": "2026-10-31T08:27:49.114Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "status": "done",
+            "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "branch": null,
+            "updatedAt": "2026-10-31T08:27:49.114Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "after-first-actual-children",
+      "monotonic": 50947.292953957,
+      "value": {
+        "states": [
+          {
+            "sessionId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "calls": 2,
+            "waiting": false,
+            "released": true,
+            "emittedSummary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "toolCall": {
+              "type": "tool-call",
+              "id": "433fd3cf-cf8d-45fe-a07d-19560117bfc8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-578183c6-4f17-45e3-a900-a8e7bb66f7a2.txt\"}"
+            },
+            "live": false,
+            "agentStatus": null,
+            "header": null
+          },
+          {
+            "sessionId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "calls": 2,
+            "waiting": true,
+            "released": false,
+            "emittedSummary": null,
+            "toolCall": {
+              "type": "tool-call",
+              "id": "cdd5fb86-2d0b-45a3-914b-508ce66501d8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-12512b1a-3240-4259-aadd-61d469c4ae96.txt\"}"
+            },
+            "live": true,
+            "agentStatus": "running",
+            "header": {
+              "version": 4,
+              "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+              "createdAt": 1793435268863,
+              "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+              "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+              "isSeeded": false,
+              "origin": "subagent",
+              "delegationDepth": 1,
+              "agentPreset": "aleph-researcher"
+            }
+          }
+        ],
+        "children": [
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "createdAt": 1793435268845
+          },
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "createdAt": 1793435268863
+          }
+        ]
+      }
+    },
+    {
+      "name": "bridge",
+      "monotonic": 50947.30161217,
+      "value": {
+        "request": {
+          "action": "tool",
+          "sessionId": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+          "name": "aleph_status",
+          "args": {
+            "project_id": "p-76322ddb"
+          }
+        },
+        "result": [
+          {
+            "schema": 2,
+            "generated_at": "2026-10-31T08:27:49.175Z",
+            "project": {
+              "id": "p-76322ddb",
+              "title": "workspace",
+              "status": "running",
+              "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+              "research_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/research",
+              "mission_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/missions",
+              "template_branch": "template",
+              "eval_command": "python3 eval/run_eval.py"
+            },
+            "missions": [],
+            "batches": [],
+            "machines": [
+              {
+                "id": "local",
+                "kind": "local",
+                "status": "idle",
+                "batchId": null
+              }
+            ],
+            "agents": [
+              {
+                "role": "researcher",
+                "childId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+                "status": "done",
+                "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+                "branch": null,
+                "updatedAt": "2026-10-31T08:27:49.114Z"
+              },
+              {
+                "role": "researcher",
+                "childId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+                "status": "done",
+                "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+                "branch": null,
+                "updatedAt": "2026-10-31T08:27:49.114Z"
+              }
+            ],
+            "counts": {
+              "queued": 0,
+              "running": 0,
+              "done": 0,
+              "failed": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "registered-status-after-first",
+      "monotonic": 50947.3024915,
+      "value": [
+        {
+          "schema": 2,
+          "generated_at": "2026-10-31T08:27:49.175Z",
+          "project": {
+            "id": "p-76322ddb",
+            "title": "workspace",
+            "status": "running",
+            "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+            "research_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/research",
+            "mission_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/missions",
+            "template_branch": "template",
+            "eval_command": "python3 eval/run_eval.py"
+          },
+          "missions": [],
+          "batches": [],
+          "machines": [
+            {
+              "id": "local",
+              "kind": "local",
+              "status": "idle",
+              "batchId": null
+            }
+          ],
+          "agents": [
+            {
+              "role": "researcher",
+              "childId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+              "status": "done",
+              "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+              "branch": null,
+              "updatedAt": "2026-10-31T08:27:49.114Z"
+            },
+            {
+              "role": "researcher",
+              "childId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+              "status": "done",
+              "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+              "branch": null,
+              "updatedAt": "2026-10-31T08:27:49.114Z"
+            }
+          ],
+          "counts": {
+            "queued": 0,
+            "running": 0,
+            "done": 0,
+            "failed": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "release-second",
+      "monotonic": 50947.306172228,
+      "value": {
+        "states": [
+          {
+            "sessionId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "calls": 2,
+            "waiting": false,
+            "released": true,
+            "emittedSummary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "toolCall": {
+              "type": "tool-call",
+              "id": "433fd3cf-cf8d-45fe-a07d-19560117bfc8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-578183c6-4f17-45e3-a900-a8e7bb66f7a2.txt\"}"
+            },
+            "live": false,
+            "agentStatus": null,
+            "header": null
+          },
+          {
+            "sessionId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "calls": 2,
+            "waiting": false,
+            "released": true,
+            "emittedSummary": "Distinct researcher result for 12512b1a-3240-4259-aadd-61d469c4ae96",
+            "toolCall": {
+              "type": "tool-call",
+              "id": "cdd5fb86-2d0b-45a3-914b-508ce66501d8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-12512b1a-3240-4259-aadd-61d469c4ae96.txt\"}"
+            },
+            "live": true,
+            "agentStatus": "running",
+            "header": {
+              "version": 4,
+              "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+              "createdAt": 1793435268863,
+              "cwd": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+              "parentSession": "session-af4cbe52-6eac-48ba-a70a-408b9201dd11",
+              "isSeeded": false,
+              "origin": "subagent",
+              "delegationDepth": 1,
+              "agentPreset": "aleph-researcher"
+            }
+          }
+        ],
+        "children": [
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "createdAt": 1793435268845
+          },
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "createdAt": 1793435268863
+          }
+        ]
+      }
+    },
+    {
+      "name": "final-actual-project",
+      "monotonic": 50947.412794491,
+      "value": {
+        "schema": 2,
+        "generated_at": "2026-10-31T08:27:49.286Z",
+        "project": {
+          "id": "p-76322ddb",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-1ajzbfxu/workspace",
+          "research_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-1ajzbfxu/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py"
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "status": "done",
+            "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "branch": null,
+            "updatedAt": "2026-10-31T08:27:49.114Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "status": "done",
+            "summary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "branch": null,
+            "updatedAt": "2026-10-31T08:27:49.114Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "final-actual-children",
+      "monotonic": 50947.41522191,
+      "value": {
+        "states": [
+          {
+            "sessionId": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "calls": 2,
+            "waiting": false,
+            "released": true,
+            "emittedSummary": "Distinct researcher result for 578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "toolCall": {
+              "type": "tool-call",
+              "id": "433fd3cf-cf8d-45fe-a07d-19560117bfc8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-578183c6-4f17-45e3-a900-a8e7bb66f7a2.txt\"}"
+            },
+            "live": false,
+            "agentStatus": null,
+            "header": null
+          },
+          {
+            "sessionId": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "calls": 2,
+            "waiting": false,
+            "released": true,
+            "emittedSummary": "Distinct researcher result for 12512b1a-3240-4259-aadd-61d469c4ae96",
+            "toolCall": {
+              "type": "tool-call",
+              "id": "cdd5fb86-2d0b-45a3-914b-508ce66501d8",
+              "name": "bash",
+              "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-12512b1a-3240-4259-aadd-61d469c4ae96.txt\"}"
+            },
+            "live": false,
+            "agentStatus": null,
+            "header": null
+          }
+        ],
+        "children": [
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "578183c6-4f17-45e3-a900-a8e7bb66f7a2",
+            "createdAt": 1793435268845
+          },
+          {
+            "mode": "continuable",
+            "label": "aleph researcher p-76322ddb",
+            "id": "12512b1a-3240-4259-aadd-61d469c4ae96",
+            "createdAt": 1793435268863
+          }
+        ]
+      }
+    },
+    {
+      "name": "isolated-dsh-stopped",
+      "monotonic": 50947.531331909,
+      "value": {
+        "pid": 205867,
+        "exit": 0,
+        "pid_exists": false
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "real DSH deterministic adapter starts without child calls",
+      "passed": true
+    },
+    {
+      "name": "project initially has no agent records",
+      "passed": true
+    },
+    {
+      "name": "real researcher calls have distinct child identities",
+      "passed": true
+    },
+    {
+      "name": "registered status contains both real researcher records",
+      "passed": true
+    },
+    {
+      "name": "child1: actual project records running",
+      "passed": true
+    },
+    {
+      "name": "child1: actual project has no terminal summary",
+      "passed": true
+    },
+    {
+      "name": "child1: actual model independently waiting",
+      "passed": true
+    },
+    {
+      "name": "child1: actual agent is live",
+      "passed": true
+    },
+    {
+      "name": "child1: actual model executed tool before second generation",
+      "passed": true
+    },
+    {
+      "name": "child1: actual bash wrote marker in research repository",
+      "passed": true
+    },
+    {
+      "name": "child1: session is a real subagent",
+      "passed": true
+    },
+    {
+      "name": "child2: actual project records running",
+      "passed": true
+    },
+    {
+      "name": "child2: actual project has no terminal summary",
+      "passed": true
+    },
+    {
+      "name": "child2: actual model independently waiting",
+      "passed": true
+    },
+    {
+      "name": "child2: actual agent is live",
+      "passed": true
+    },
+    {
+      "name": "child2: actual model executed tool before second generation",
+      "passed": true
+    },
+    {
+      "name": "child2: actual bash wrote marker in research repository",
+      "passed": true
+    },
+    {
+      "name": "child2: session is a real subagent",
+      "passed": true
+    },
+    {
+      "name": "first real activation records successful completion",
+      "passed": true
+    },
+    {
+      "name": "first real activation records distinct emitted summary",
+      "passed": true
+    },
+    {
+      "name": "second real child remains independently blocked",
+      "passed": true
+    },
+    {
+      "name": "second real child remains live after first completes",
+      "passed": true
+    },
+    {
+      "name": "second real child has not emitted a terminal result",
+      "passed": true
+    },
+    {
+      "name": "defect: second pending child is prematurely recorded done",
+      "passed": true
+    },
+    {
+      "name": "defect: first summary overwrites second pending record",
+      "passed": true
+    },
+    {
+      "name": "registered status exposes actual stored second-child state",
+      "passed": true
+    },
+    {
+      "name": "second real model emitted its distinct final summary",
+      "passed": true
+    },
+    {
+      "name": "second real session finished waiting",
+      "passed": true
+    },
+    {
+      "name": "first persistent result remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "no extra researcher records appear",
+      "passed": true
+    },
+    {
+      "name": "defect: later real callback leaves overwritten summary unrepaired",
+      "passed": true
+    }
+  ],
+  "boundary": "Actual DSH parent/child sessions, original spawn provider, registered tools, persistent projects, Git initialization and actual bash. Only model responses/wait timing use local deterministic LlmAdapter. Two real success lifecycles; activation rejection callback separately covered by automatic adapter, not claimed here. No external model or credentials."
+}

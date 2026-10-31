@@ -20,6 +20,7 @@
 | ALEPH-11 | [最优结果缺少人工选择和回退操作](11-sota-selection-rollback.md) |
 | ALEPH-12 | [无战役时控制台显示快照读取失败，未展示空状态引导](12-console-no-campaign-empty-state.md) |
 | ALEPH-13 | [同一批次重复启动 InfraOptimizer 会删除正在使用的工作目录](13-infra-duplicate-start.md) |
+| ALEPH-14 | [一个研究代理结束时，可能批量改写其他研究代理的状态与摘要](14-researcher-callback-ownership.md) |
 
 原议题 `ALEPH-03`，文件 `03-composer-running-budget.md`，已经并入 [ALEPH-02](02-run-next-budget.md)。原有运行任务预算占用问题、复现步骤和自动测试均已保留，编号 `ALEPH-03` 不再复用。
 
