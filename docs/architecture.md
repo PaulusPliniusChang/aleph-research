@@ -8,7 +8,7 @@ and researcher dispatch use DSH services directly.
 | DSH facility | AlephResearch use |
 | --- | --- |
 | `ctx.storageDomain` | Durable `aleph_research` domain with one `campaigns` table. |
-| `ctx.tools` | Leader tools for campaign start, status, enqueue, dispatch and exploration. |
+| `ctx.tools` | Leader tools for campaign start, status, enqueue, batch composition, parallel dispatch, InfraOptimizer and exploration/budget controls. |
 | `ctx.subagents.startActivation` | One `aleph-researcher` child per mission. |
 | `ctx.sessions` | Resolve the Leader workspace from the session header `cwd`. |
 | `ctx.agentPresets` | Show tools only in the `aleph` preset. |
@@ -65,6 +65,24 @@ id, error and reclamation flag.
 - Hidden test data and evaluator configuration remain Leader-side.
 - The evaluator receives `ALEPH_TESTSET` when a testset path is configured and
   `ALEPH_SUBMISSION_PYTHON` when a submission interpreter is configured.
+
+## Composer
+
+`aleph_compose_batch` creates one batch record and several queued missions that
+share a brief but rotate through L0 to L3. A batch is visible in the console and
+on each mission as a `batch` id. Composer handles queue composition and budget
+guarding; it does not call an LLM itself.
+
+## InfraOptimizer
+
+Campaign creation probes CPU cores, NVIDIA GPUs, memory, and free disk, then
+sets a concurrency limit (`ALEPH_MAX_PARALLEL` can override it).
+`aleph_infra_status` refreshes that snapshot. `aleph_run_available` starts
+queued missions only while the number of running missions is below the limit,
+so a Composer batch cannot oversubscribe the host.
+
+This is capacity-aware scheduling, not a full cost model: budget is counted in
+missions, and there is no GPU-time or token accounting in this version.
 
 ## Evaluation
 

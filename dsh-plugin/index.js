@@ -9,7 +9,8 @@
  */
 import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, stat, statfs, writeFile } from 'node:fs/promises';
+import { cpus, freemem, totalmem } from 'node:os';
 import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 
@@ -36,6 +37,8 @@ const missionSchema = z.object({
   createdAt: z.string(),
   finishedAt: z.string().nullable(),
   reclaimed: z.boolean(),
+  batch: z.string().nullable().optional(),
+  promoted: z.boolean().optional(),
 });
 
 const campaignSchema = z.object({
@@ -56,6 +59,23 @@ const campaignSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   missions: z.array(missionSchema),
+  maxParallel: z.number().int().optional(),
+  batches: z.array(z.object({
+    id: z.string(),
+    brief: z.string(),
+    count: z.number().int(),
+    createdAt: z.string(),
+  })).optional(),
+  infra: z.object({
+    cpuCount: z.number().int(),
+    gpuCount: z.number().int(),
+    gpuNames: z.array(z.string()),
+    maxParallel: z.number().int(),
+    diskFreeBytes: z.number().nullable(),
+    diskTotalBytes: z.number().nullable(),
+    memoryTotalBytes: z.number().nullable(),
+    checkedAt: z.string(),
+  }).optional(),
 });
 
 const campaignDomain = defineDomain({
@@ -143,6 +163,10 @@ function snapshot(campaign) {
       sota_score: campaign.sotaBranch ? campaign.sotaScore : null,
       budget: campaign.budget ?? null,
       spent: campaign.spent,
+      max_parallel: campaign.maxParallel ?? 1,
+      active_agents: campaign.missions.filter((mission) => mission.status === 'running').length,
+      infra: campaign.infra ?? null,
+      batches: campaign.batches ?? [],
     },
     missions: campaign.missions.map((mission) => ({
       id: mission.id,
@@ -151,6 +175,8 @@ function snapshot(campaign) {
       branch: mission.branch,
       score: mission.score,
       description: mission.description,
+      batch: mission.batch ?? null,
+      promoted: mission.promoted === true,
       created_at: mission.createdAt,
       finished_at: mission.finishedAt,
     })),
@@ -197,6 +223,42 @@ async function pathExists(path) {
   }
 }
 
+async function detectInfra(workspace) {
+  const cpuCount = Math.max(1, cpus().length);
+  const gpuNames = [];
+  try {
+    const result = await run('nvidia-smi', ['--query-gpu=name', '--format=csv,noheader'], { timeout: 5_000 });
+    for (const line of result.stdout.split(/\r?\n/)) {
+      if (line.trim()) gpuNames.push(line.trim());
+    }
+  } catch {
+    // CPU-only hosts are the common case.
+  }
+  let diskFreeBytes = null;
+  let diskTotalBytes = null;
+  try {
+    const info = await statfs(workspace);
+    diskFreeBytes = info.bavail * info.bsize;
+    diskTotalBytes = info.blocks * info.bsize;
+  } catch {
+    // Keep unknown disk capacity explicit.
+  }
+  const configured = Number(process.env.ALEPH_MAX_PARALLEL);
+  const maxParallel = Number.isFinite(configured) && configured > 0
+    ? Math.floor(configured)
+    : Math.max(1, Math.min(4, Math.floor(cpuCount / 2), gpuNames.length > 0 ? gpuNames.length * 2 : 4));
+  return {
+    cpuCount,
+    gpuCount: gpuNames.length,
+    gpuNames,
+    maxParallel,
+    diskFreeBytes,
+    diskTotalBytes,
+    memoryTotalBytes: totalmem ? totalmem() : null,
+    checkedAt: now(),
+  };
+}
+
 /** Host-side service shared by tools and HTTP routes. */
 class AlephService {
   constructor(ctx, domain, deps) {
@@ -207,6 +269,7 @@ class AlephService {
     this.subagents = deps.subagents;
     this.agentPresets = deps.agentPresets;
     this.writeChain = Promise.resolve();
+    this.dispatchChain = Promise.resolve();
     this.activations = new Set();
   }
 
@@ -270,6 +333,7 @@ class AlephService {
       await git(researchRoot, ['branch', 'sota/main', 'initialize']);
     }
     await mkdir(join(target, '.aleph'), { recursive: true });
+    const infra = await detectInfra(target);
     const stamp = now();
     const campaign = {
       id: campaignId,
@@ -289,9 +353,33 @@ class AlephService {
       createdAt: stamp,
       updatedAt: stamp,
       missions: [],
+      maxParallel: infra.maxParallel,
+      batches: [],
+      infra,
     };
     await this.table.put(campaignId, campaign);
     return campaign;
+  }
+
+  newMission(campaign, description, strategy, batch = null) {
+    const branch = baseBranch(campaign);
+    return {
+      id: newId('m'),
+      description: description || 'researcher mission',
+      status: 'queued',
+      strategy,
+      baseBranch: branch,
+      branch,
+      baseCommit: null,
+      commit: null,
+      score: null,
+      error: null,
+      childId: null,
+      createdAt: now(),
+      finishedAt: null,
+      reclaimed: false,
+      batch,
+    };
   }
 
   async enqueue({ campaignId, description = '', strategy = 'auto' }) {
@@ -299,30 +387,50 @@ class AlephService {
       const chosen = strategy !== 'auto' && STRATEGIES.includes(strategy)
         ? strategy
         : sampleStrategy(campaign.exploration, Date.now() + campaign.missions.length);
-      const branch = baseBranch(campaign);
-      const mission = {
-        id: newId('m'),
-        description: description || 'researcher mission',
-        status: 'queued',
-        strategy: chosen,
-        baseBranch: branch,
-        branch,
-        baseCommit: null,
-        commit: null,
-        score: null,
-        error: null,
-        childId: null,
-        createdAt: now(),
-        finishedAt: null,
-        reclaimed: false,
+      return { ...campaign, missions: [...campaign.missions, this.newMission(campaign, description, chosen)] };
+    });
+  }
+
+  async compose({ campaignId, brief, count = 2, strategies = null }) {
+    const requested = Math.max(1, Math.min(4, Number(count) || 1));
+    return this.mutate(campaignId, (campaign) => {
+      const pending = campaign.missions.filter((mission) => mission.status === 'queued').length;
+      if (campaign.budget != null && campaign.spent + pending + requested > campaign.budget) {
+        throw new Error(`campaign budget ${campaign.budget} would be exceeded`);
+      }
+      const batchId = newId('b');
+      const chosen = Array.isArray(strategies) && strategies.length > 0
+        ? strategies.filter((name) => STRATEGIES.includes(name))
+        : STRATEGIES;
+      const missions = [];
+      for (let index = 0; index < requested; index += 1) {
+        const strategy = chosen[index % chosen.length] ?? sampleStrategy(campaign.exploration, Date.now() + index);
+        missions.push(this.newMission(campaign, `${brief} [${batchId} #${index + 1}]`, strategy, batchId));
+      }
+      const batch = { id: batchId, brief, count: requested, createdAt: now() };
+      return {
+        ...campaign,
+        missions: [...campaign.missions, ...missions],
+        batches: [...(campaign.batches ?? []), batch],
       };
-      return { ...campaign, missions: [...campaign.missions, mission] };
     });
   }
 
   async setExploration({ campaignId, exploration }) {
     if (!(exploration >= 0 && exploration <= 1)) throw new Error('exploration must be between 0 and 1');
     return this.mutate(campaignId, (campaign) => ({ ...campaign, exploration }));
+  }
+
+  async setBudget({ campaignId, budget }) {
+    if (!(budget === null || (typeof budget === 'number' && budget >= 0))) throw new Error('budget must be a non-negative number or null');
+    return this.mutate(campaignId, (campaign) => ({ ...campaign, budget }));
+  }
+
+  async infraStatus({ campaignId }) {
+    const campaign = this.table.get(campaignId);
+    if (!campaign) throw new Error(`campaign not found: ${campaignId}`);
+    const infra = await detectInfra(campaign.workspace);
+    return this.mutate(campaignId, (current) => ({ ...current, infra, maxParallel: infra.maxParallel }));
   }
 
   missionUpdate(campaign, missionId, updater) {
@@ -332,7 +440,28 @@ class AlephService {
     };
   }
 
-  async runNext({ campaignId, agent }) {
+  async runNext(args) {
+    const operation = () => this._runNext(args);
+    const queued = this.dispatchChain.then(operation, operation);
+    this.dispatchChain = queued.catch(() => undefined);
+    return queued;
+  }
+
+  async runAvailable({ campaignId, agent }) {
+    const results = [];
+    for (;;) {
+      const campaign = this.table.get(campaignId);
+      if (!campaign) throw new Error(`campaign not found: ${campaignId}`);
+      const active = campaign.missions.filter((mission) => mission.status === 'running').length;
+      const limit = campaign.maxParallel ?? 1;
+      if (active >= limit) break;
+      if (!campaign.missions.some((mission) => mission.status === 'queued')) break;
+      results.push(await this.runNext({ campaignId, agent }));
+    }
+    return results;
+  }
+
+  async _runNext({ campaignId, agent }) {
     if (!agent) throw new Error('a calling Agent is required to dispatch a researcher');
     if (!this.subagents) throw new Error('subagent service is unavailable');
     const campaign = this.table.get(campaignId);
@@ -424,19 +553,20 @@ class AlephService {
       const finishedAt = now();
       const branch = `exp/${campaign.id}/${mission.id}`;
       await git(campaign.researchRoot, ['branch', '-f', branch, commit]);
-      const promoted = score > campaign.sotaScore;
-      if (promoted) {
-        await git(campaign.researchRoot, ['branch', '-f', 'sota/main', commit]);
-      }
+      let promoted = false;
       campaign = await this.mutate(campaignId, (current) => {
+        promoted = score > current.sotaScore;
         let next = this.missionUpdate(current, missionId, (item) => ({
-          ...item, status: 'done', score, commit, branch, finishedAt, error: null, reclaimed: true,
+          ...item, status: 'done', score, commit, branch, finishedAt, error: null, reclaimed: true, promoted,
         }));
         if (promoted) {
           next = { ...next, sotaBranch: 'sota/main', sotaScore: score };
         }
         return { ...next, spent: next.spent + 1 };
       });
+      if (promoted) {
+        await git(campaign.researchRoot, ['branch', '-f', 'sota/main', commit]);
+      }
     } catch (error) {
       await this.failMission(campaignId, missionId, worktree, error instanceof Error ? error.message : String(error));
       return;
@@ -566,6 +696,43 @@ export async function apply(ctx) {
       'Start a queued researcher through the DSH subagent service and return its child session id.',
       campaignParameter,
       async (args, exec) => service.runNext({ campaignId: args.campaign_id, agent: exec.agent }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_compose_batch',
+      'Compose a batch of missions across L0 to L3 so several researchers can be dispatched concurrently.',
+      {
+        ...campaignParameter,
+        brief: { type: 'string', required: true, description: 'Shared research brief for the batch' },
+        count: { type: 'integer', description: 'Batch size, 1 to 4' },
+        strategies: { type: 'array', items: { type: 'string' }, description: 'Optional strategy order, e.g. L0, L3, L2' },
+      },
+      async (args) => service.compose({
+        campaignId: args.campaign_id,
+        brief: args.brief,
+        count: args.count ?? 2,
+        strategies: args.strategies,
+      }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_run_available',
+      'Dispatch queued missions until the campaign maxParallel limit is reached.',
+      campaignParameter,
+      async (args, exec) => service.runAvailable({ campaignId: args.campaign_id, agent: exec.agent }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_infra_status',
+      'Refresh and return InfraOptimizer capacity: CPU, GPU, disk, memory and the campaign concurrency limit.',
+      campaignParameter,
+      async (args) => service.infraStatus({ campaignId: args.campaign_id }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_set_budget',
+      'Set or clear the campaign mission budget.',
+      {
+        ...campaignParameter,
+        budget: { type: 'number', description: 'Budget in missions, or null to clear' },
+      },
+      async (args) => service.setBudget({ campaignId: args.campaign_id, budget: args.budget ?? null }),
     ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
       'aleph_set_exploration',

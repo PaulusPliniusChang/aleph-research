@@ -9,8 +9,11 @@ a separate `~/.aleph` directory or an external daemon.
 
 - Host service: campaign queue, strategy sampling, git worktrees, single-commit
   handoff, evaluation, SOTA promotion and worktree reclamation.
-- Leader tools: `aleph_start_campaign`, `aleph_status`,
-  `aleph_enqueue_mission`, `aleph_run_next`, `aleph_set_exploration`.
+- Leader tools: campaign lifecycle, single missions, Composer batches,
+  parallel dispatch, InfraOptimizer capacity and exploration/budget controls.
+- Multi-agent execution: Composer batches mix L0 to L3 strategies and
+  `aleph_run_available` dispatches several researcher subagents concurrently up
+  to the InfraOptimizer limit.
 - Modes: `Aleph Research` for the Leader and `Aleph Researcher` for one mission.
 - Console: a read-only `Aleph` sidebar panel reading the Host API.
 - Persistence: the `aleph_research` domain opened through `ctx.storageDomain`.
@@ -71,8 +74,9 @@ The researcher subagent edits only the mission worktree. It writes
 ## Console
 
 The `Aleph` sidebar panel reads `/api/aleph/snapshot` and shows the latest
-campaign, missions, branches and counts. The panel is read-only; all control is
-through Leader tools.
+campaign, active agents, missions, branches, Composer batches and
+InfraOptimizer capacity. The panel is read-only; all control is through Leader
+tools.
 
 ![AlephResearch console](docs/assets/aleph-console.png)
 
@@ -97,11 +101,12 @@ python3 eval/run_eval.py
 
 ## Status
 
-The Host plugin, two presets, tools, storage-domain state, console and one
-end-to-end researcher dispatch have been exercised in an isolated DSH. The
-kunlungpt case was also run through the new Host plugin: hidden-set score
-72.9076, one commit on `sota/main`, and a reclaimed worktree. See
-`docs/STATUS.md` and `docs/architecture.md`.
+The Host plugin, two presets, tools, storage-domain state, console, multi-agent
+batch dispatch and InfraOptimizer capacity readout have been exercised in an
+isolated DSH. The kunlungpt case was run twice through the Host plugin: a single
+mission and a Composer batch of two concurrent researchers, both scoring
+72.9076 on the hidden set with reclaimed worktrees. See `docs/STATUS.md` and
+`docs/architecture.md`.
 
 The old Python control plane has been removed. The browser UI, storage schema
 and researcher tools are the only supported control surface.

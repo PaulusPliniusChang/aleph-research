@@ -26,7 +26,11 @@ from a source directory.
 | `aleph_status` | Read campaigns and missions from the storage domain. |
 | `aleph_enqueue_mission` | Queue one mission with an L0 to L3 strategy. |
 | `aleph_run_next` | Start the next queued researcher subagent. |
+| `aleph_compose_batch` | Compose a multi-mission batch with mixed strategies. |
+| `aleph_run_available` | Dispatch queued missions up to the concurrency limit. |
+| `aleph_infra_status` | Refresh CPU, GPU, memory, disk and concurrency capacity. |
 | `aleph_set_exploration` | Change the campaign exploration level. |
+| `aleph_set_budget` | Set or clear the campaign mission budget. |
 
 Tools are visible only in the `aleph` preset.
 

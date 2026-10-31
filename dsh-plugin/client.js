@@ -22,6 +22,7 @@ window.__ModuleLoader__.load({
 
     const MISSION_COLUMNS = '96px minmax(84px, 120px) 76px minmax(120px, 1.4fr) 72px minmax(160px, 2fr)';
     const BRANCH_COLUMNS = 'minmax(150px, 1.6fr) 72px minmax(100px, 1fr) minmax(100px, 1fr) 64px';
+    const BATCH_COLUMNS = 'minmax(90px, 0.8fr) minmax(220px, 2.4fr) 80px minmax(150px, 1fr)';
 
     const dict = {
       en: {
@@ -40,6 +41,18 @@ window.__ModuleLoader__.load({
         'section.counts': 'Mission counts',
         'section.missions': 'Missions',
         'section.branches': 'Branches',
+        'section.infra': 'InfraOptimizer',
+        'section.batches': 'Composer batches',
+        'field.parallel': 'Parallel limit',
+        'field.activeAgents': 'Active agents',
+        'field.cpu': 'CPU cores',
+        'field.gpu': 'GPUs',
+        'field.disk': 'Disk free',
+        'field.memory': 'Memory',
+        'field.limit': 'Concurrency',
+        'table.batch': 'Batch',
+        'field.brief': 'Brief',
+        'field.count': 'Missions',
         'field.id': 'Campaign',
         'field.status': 'Status',
         'field.exploration': 'Exploration',
@@ -75,6 +88,7 @@ window.__ModuleLoader__.load({
         'branch.sota': 'SOTA',
         'empty.missions': 'No missions recorded yet.',
         'empty.branches': 'No branches recorded yet.',
+        'empty.batches': 'No composed batches yet.',
         'value.none': '—',
         'updated.at': 'Last updated',
       },
@@ -94,6 +108,18 @@ window.__ModuleLoader__.load({
         'section.counts': '任务计数',
         'section.missions': '任务',
         'section.branches': '分支',
+        'section.infra': 'InfraOptimizer',
+        'section.batches': 'Composer 批次',
+        'field.parallel': '并发上限',
+        'field.activeAgents': '活动 agent',
+        'field.cpu': 'CPU 核数',
+        'field.gpu': 'GPU',
+        'field.disk': '磁盘可用',
+        'field.memory': '内存',
+        'field.limit': '并发限制',
+        'table.batch': '批次',
+        'field.brief': '研究简述',
+        'field.count': '任务数',
         'field.id': '战役',
         'field.status': '状态',
         'field.exploration': '探索度',
@@ -129,6 +155,7 @@ window.__ModuleLoader__.load({
         'branch.sota': 'SOTA',
         'empty.missions': '暂无任务记录。',
         'empty.branches': '暂无分支记录。',
+        'empty.batches': '暂无 Composer 批次。',
         'value.none': '—',
         'updated.at': '最后更新',
       },
@@ -347,6 +374,16 @@ window.__ModuleLoader__.load({
       return value.toFixed(digits);
     }
 
+    /** Format a byte count compactly. */
+    function formatBytes(value) {
+      if (typeof value !== 'number' || !Number.isFinite(value)) return null;
+      const units = ['B', 'KiB', 'MiB', 'GiB', 'TiB'];
+      let amount = Math.max(0, value);
+      let index = 0;
+      while (amount >= 1024 && index < units.length - 1) { amount /= 1024; index += 1; }
+      return amount.toFixed(index === 0 ? 0 : 1) + ' ' + units[index];
+    }
+
     /** Format an ISO timestamp in the browser locale, or return the raw string. */
     function formatDate(value) {
       if (typeof value !== 'string' || value === '') return null;
@@ -532,6 +569,42 @@ window.__ModuleLoader__.load({
       return result;
     }
 
+    /** InfraOptimizer capacity card. */
+    function infraSection(t, campaign) {
+      const infra = campaign && typeof campaign.infra === 'object' && campaign.infra !== null ? campaign.infra : {};
+      const gpu = Array.isArray(infra.gpuNames) && infra.gpuNames.length > 0 ? infra.gpuNames.join(', ') : '0';
+      return h(
+        'section',
+        { style: styles.card },
+        h('h2', { style: styles.sectionTitle }, t('section.infra')),
+        h(
+          'div',
+          { style: styles.metricGrid },
+          metric(t('field.cpu'), formatNumber(infra.cpuCount, 0) ?? '—'),
+          metric(t('field.gpu'), gpu),
+          metric(t('field.disk'), formatBytes(infra.diskFreeBytes) ?? '—'),
+          metric(t('field.memory'), formatBytes(infra.memoryTotalBytes) ?? '—'),
+          metric(t('field.limit'), formatNumber(campaign.max_parallel, 0) ?? '—'),
+        ),
+      );
+    }
+
+    /** Composer batch card. */
+    function batchSection(t, snapshot, batches) {
+      const columns = [
+        { label: t('table.batch'), width: 'minmax(90px, 0.8fr)', mono: true, primary: true, render: (batch) => batch.id ?? '—' },
+        { label: t('field.brief'), width: 'minmax(220px, 2.4fr)', render: (batch) => batch.brief ?? '—' },
+        { label: t('field.count'), width: '80px', render: (batch) => formatNumber(batch.count, 0) ?? '—' },
+        { label: t('field.created'), width: 'minmax(150px, 1fr)', render: (batch) => formatDate(batch.createdAt) ?? '—' },
+      ];
+      return h(
+        'section',
+        { style: styles.card },
+        h('h2', { style: styles.sectionTitle }, t('section.batches')),
+        table(t, columns, batches, t('empty.batches')),
+      );
+    }
+
     /** The campaign console page body; `snapshot` is untrusted JSON. */
     function consoleBody(t, snapshot) {
       const campaign = snapshot && typeof snapshot.campaign === 'object' && snapshot.campaign !== null ? snapshot.campaign : {};
@@ -539,6 +612,7 @@ window.__ModuleLoader__.load({
       const generated = formatDate(snapshot?.generated_at);
       const missions = Array.isArray(snapshot?.missions) ? snapshot.missions : [];
       const branches = Array.isArray(snapshot?.branches) ? snapshot.branches : [];
+      const batches = Array.isArray(campaign?.batches) ? campaign.batches : [];
 
       const campaignCard = h(
         'div',
@@ -552,6 +626,8 @@ window.__ModuleLoader__.load({
           metricNode(t('field.exploration'), explorationBlock(t, campaign.exploration)),
           metric(t('field.budget'), formatNumber(campaign.budget, 2) ?? t(MISSING)),
           metric(t('field.spent'), formatNumber(campaign.spent, 2)),
+          metric(t('field.parallel'), formatNumber(campaign.max_parallel, 0) ?? '1'),
+          metric(t('field.activeAgents'), formatNumber(campaign.active_agents, 0) ?? '0'),
           metric(t('field.generated'), generated),
         ),
         h(
@@ -629,6 +705,8 @@ window.__ModuleLoader__.load({
         { style: styles.frame },
         h('div', { style: styles.twoCards }, campaignCard, sotaCard),
         countsCard,
+        infraSection(t, campaign),
+        batchSection(t, snapshot, batches),
         h(
           'section',
           { style: styles.card },

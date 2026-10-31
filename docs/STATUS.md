@@ -43,9 +43,28 @@
 只读权限，任务无法写回真实 worktree。Host 服务已增加 workspace 边界校验：
 战役工作区必须是 DSH 会话工作区或其子目录，否则在派发前拒绝。
 
+## 多 agent、Composer 与 InfraOptimizer
+
+已实现并在控制台可见：
+
+- Composer：`aleph_compose_batch` 创建一个批次，按 L0 到 L3 轮换生成任务。
+- 多 agent：`aleph_run_available` 按并发上限启动多个 researcher 子代理；
+  Host 服务分别提交、评测与回收各自 worktree。
+- InfraOptimizer：campaign 创建时探测 CPU、NVIDIA GPU、内存与磁盘，
+  计算并发上限；`aleph_infra_status` 可刷新，控制台显示 CPU、GPU、磁盘、
+  内存与活动 agent 数量。
+
+案例批次验证：
+
+- 战役 `c-73eb500a`
+- 批次 `b-c87bfc13`
+- 任务 `m-1b0da1ee`、`m-9bde95ac` 并发完成，隐藏集分数均为 `72.9076`
+- SOTA 更新为 `sota/main`，worktree 均已回收，已花费为 2
+- 控制台截图见 `docs/assets/aleph-console.png`
+
 ## 限制
 
 - 控制台只读，最新战役之外的选择尚未提供。
-- 还没有暂停、预算强制与多任务并发。
+- 还没有暂停工具；预算只按任务数校验，没有 GPU 时间与 token 成本模型。
 - 评测协议由项目提供，尚未内置通用任务模板。
 - Git LFS/CoW 与 OpenTelemetry 尚未迁移到新的 Host 插件。
