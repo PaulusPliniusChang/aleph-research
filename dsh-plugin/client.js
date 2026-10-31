@@ -27,16 +27,31 @@ window.__ModuleLoader__.load({
     const dict = {
       en: {
         nav: 'Aleph',
-        'page.title': 'Aleph Research console',
-        'page.subtitle': 'Read-only view of campaign state stored by the DSH Aleph Host service.',
+        'page.title': 'Aleph Research project',
+        'section.project': 'Project',
+        'section.machines': 'Machines',
+        'field.research': 'Research repo',
+        'field.missionRoot': 'Mission repo',
+        'field.template': 'Template branch',
+        'field.eval': 'Evaluator',
+        'field.owner': 'Owner session',
+        'field.resultCommit': 'Result commit',
+        'field.preBatch': 'Pre-batch tip',
+        'field.error': 'Error',
+        'field.machine': 'Machine',
+        'machine.idle': 'Idle',
+        'machine.busy': 'Busy',
+        'machine.unknown': 'Unknown',
+        'empty.machines': 'No machines registered.',
+        'page.subtitle': 'Read-only view of the DSH project, missions, batches and machines.',
         'action.back': 'Back to conversation',
         'state.loading': 'Loading campaign snapshot…',
         'state.empty.title': 'No campaign snapshot yet',
-        'state.empty.detail': 'The Host service has no campaign yet. Start one from Leader mode with aleph_start_campaign.',
+        'state.empty.detail': 'No project yet. Initialize one from Leader mode with aleph_init_project.',
         'state.error.title': 'Cannot read the campaign snapshot',
         'state.error.detail': 'The console keeps retrying every 2 seconds.',
         'state.stale': 'Showing the last snapshot; the latest poll failed.',
-        'section.campaign': 'Campaign',
+        'section.campaign': 'Project',
         'section.sota': 'State of the art',
         'section.counts': 'Mission counts',
         'section.missions': 'Missions',
@@ -69,7 +84,7 @@ window.__ModuleLoader__.load({
         'table.batch': 'Batch',
         'field.brief': 'Brief',
         'field.count': 'Missions',
-        'field.id': 'Campaign',
+        'field.id': 'Project',
         'field.status': 'Status',
         'field.exploration': 'Exploration',
         'field.budget': 'Budget',
@@ -110,16 +125,31 @@ window.__ModuleLoader__.load({
       },
       zh: {
         nav: 'Aleph',
-        'page.title': 'Aleph Research 控制台',
-        'page.subtitle': '只读展示 DSH Aleph Host 服务保存的战役状态。',
+        'page.title': 'Aleph Research 项目',
+        'section.project': '项目',
+        'section.machines': '机器',
+        'field.research': '研究仓库',
+        'field.missionRoot': 'Mission 仓库',
+        'field.template': 'Template 分支',
+        'field.eval': '评测命令',
+        'field.owner': 'Owner 会话',
+        'field.resultCommit': '结果提交',
+        'field.preBatch': 'Pre-batch tip',
+        'field.error': '错误',
+        'field.machine': '机器',
+        'machine.idle': '空闲',
+        'machine.busy': '忙碌',
+        'machine.unknown': '未知',
+        'empty.machines': '暂无注册机器。',
+        'page.subtitle': '只读展示 DSH 项目、mission、batch 与机器状态。',
         'action.back': '返回对话',
         'state.loading': '正在加载战役快照…',
         'state.empty.title': '暂无战役快照',
-        'state.empty.detail': 'Host 服务尚无战役；在 Leader 模式使用 aleph_start_campaign 创建。',
+        'state.empty.detail': '尚无项目；在 Leader 模式使用 aleph_init_project 创建。',
         'state.error.title': '无法读取战役快照',
         'state.error.detail': '控制台每 2 秒自动重试。',
         'state.stale': '正在显示最后一次快照；最近一次轮询失败。',
-        'section.campaign': '战役',
+        'section.campaign': '项目',
         'section.sota': '当前最优',
         'section.counts': '任务计数',
         'section.missions': '任务',
@@ -152,7 +182,7 @@ window.__ModuleLoader__.load({
         'table.batch': '批次',
         'field.brief': '研究简述',
         'field.count': '任务数',
-        'field.id': '战役',
+        'field.id': '项目',
         'field.status': '状态',
         'field.exploration': '探索度',
         'field.budget': '预算',
@@ -662,51 +692,55 @@ window.__ModuleLoader__.load({
       );
     }
 
-    /** The campaign console page body; `snapshot` is untrusted JSON. */
+    function missionDisplayStatus(status) {
+      if (status === 'proposed' || status === 'approved') return 'queued';
+      if (status === 'batched' || status === 'running') return 'running';
+      if (status === 'done' || status === 'failed') return status;
+      return 'unknown';
+    }
+
+    function batchDisplayStatus(status) {
+      if (status === 'forming') return 'queued';
+      return ['running', 'done', 'failed'].includes(status) ? status : 'unknown';
+    }
+
+    /** The project console page body; `snapshot` is untrusted JSON. */
     function consoleBody(t, snapshot) {
-      const campaign = snapshot && typeof snapshot.campaign === 'object' && snapshot.campaign !== null ? snapshot.campaign : {};
+      const project = snapshot && typeof snapshot.project === 'object' && snapshot.project !== null ? snapshot.project : {};
       const counts = missionCounts(snapshot);
       const generated = formatDate(snapshot?.generated_at);
-      const missions = Array.isArray(snapshot?.missions) ? snapshot.missions : [];
-      const branches = Array.isArray(snapshot?.branches) ? snapshot.branches : [];
-      const batches = Array.isArray(campaign?.batches) ? campaign.batches : [];
+      const missions = missionList(snapshot);
+      const batches = Array.isArray(snapshot?.batches) ? snapshot.batches.filter((batch) => batch && typeof batch === 'object') : [];
+      const machines = Array.isArray(snapshot?.machines) ? snapshot.machines.filter((machine) => machine && typeof machine === 'object') : [];
 
-      const campaignCard = h(
+      const projectCard = h(
         'div',
         { style: styles.card },
-        h('h2', { style: styles.sectionTitle }, t('section.campaign')),
+        h('h2', { style: styles.sectionTitle }, t('section.project')),
         h(
           'div',
           { style: styles.metricGrid },
-          metric(t('field.id'), campaign.id ?? t(MISSING)),
-          metricNode(t('field.status'), statusPill(t, campaign.status)),
-          metricNode(t('field.exploration'), explorationBlock(t, campaign.exploration)),
-          metric(t('field.budget'), formatNumber(campaign.budget, 2) ?? t(MISSING)),
-          metric(t('field.spent'), formatNumber(campaign.spent, 2)),
-          metric(t('field.parallel'), formatNumber(campaign.max_parallel, 0) ?? '1'),
-          metric(t('field.activeAgents'), formatNumber(campaign.active_agents, 0) ?? '0'),
+          metric(t('field.id'), project.id ?? t(MISSING)),
+          metricNode(t('field.status'), statusPill(t, project.status)),
+          metric(t('field.template'), project.template_branch ?? t(MISSING)),
           metric(t('field.generated'), generated),
-        ),
-        h(
-          'div',
-          { style: { ...styles.metricGrid, gridColumn: '1 / -1' } },
-          metricNode(t('field.workspace'), h('span', { style: { ...styles.metricValue, ...styles.mono, whiteSpace: 'normal', wordBreak: 'break-all' } }, snapshot?.workspace ?? t(MISSING))),
+          metricNode(t('field.workspace'), h('span', { style: { ...styles.metricValue, ...styles.mono, whiteSpace: 'normal', wordBreak: 'break-all' } }, project.workspace ?? t(MISSING))),
+          metricNode(t('field.research'), h('span', { style: { ...styles.metricValue, ...styles.mono, whiteSpace: 'normal', wordBreak: 'break-all' } }, project.research_root ?? t(MISSING))),
+          metricNode(t('field.missionRoot'), h('span', { style: { ...styles.metricValue, ...styles.mono, whiteSpace: 'normal', wordBreak: 'break-all' } }, project.mission_root ?? t(MISSING))),
+          metric(t('field.eval'), project.eval_command ?? t(MISSING)),
         ),
       );
 
-      const sotaCard = h(
+      const machineColumns = [
+        { label: t('field.machine'), width: 'minmax(100px, 1fr)', mono: true, primary: true, render: (machine) => machine.id ?? '—' },
+        { label: t('field.status'), width: '96px', render: (machine) => h('span', { style: styles.badge }, t('machine.' + (machine.status ?? 'unknown'))) },
+        { label: t('table.batch'), width: 'minmax(120px, 1.4fr)', mono: true, render: (machine) => machine.batchId ?? '—' },
+      ];
+      const machineCard = h(
         'div',
         { style: styles.card },
-        h('h2', { style: styles.sectionTitle }, t('section.sota')),
-        h(
-          'div',
-          { style: styles.sotaRow },
-          metricNode(
-            t('field.sotaBranch'),
-            h('span', { style: { ...styles.sotaValue, ...styles.mono } }, campaign.sota_branch ?? t(MISSING)),
-          ),
-          metricNode(t('field.sotaScore'), h('span', { style: styles.sotaValue }, formatNumber(campaign.sota_score, 3) ?? t(MISSING))),
-        ),
+        h('h2', { style: styles.sectionTitle }, t('section.machines')),
+        table(t, machineColumns, machines, t('empty.machines')),
       );
 
       const countsCard = h(
@@ -716,75 +750,60 @@ window.__ModuleLoader__.load({
         h(
           'div',
           { style: styles.counts },
-          STATUS_KEYS.map((key) =>
-            h(
-              'div',
-              { key },
-              h(
-                'div',
-                { style: styles.countTile },
-                h('span', { style: styles.countValue }, String(counts[key])),
-                h('span', { style: styles.countLabel }, t('count.' + key)),
-              ),
+          STATUS_KEYS.map((key) => h('div', { key },
+            h('div', { style: styles.countTile },
+              h('span', { style: styles.countValue }, String(counts[key] ?? 0)),
+              h('span', { style: styles.countLabel }, t('count.' + key)),
             ),
-          ),
+          )),
         ),
       );
 
-      const missionColumns = [
-        { label: t('table.status'), width: '96px', render: (mission) => statusPill(t, mission.status) },
-        { label: t('table.mission'), width: 'minmax(84px, 120px)', mono: true, primary: true, render: (mission) => String(mission.id ?? '—') },
-        { label: t('table.strategy'), width: '76px', render: (mission) => mission.strategy ?? '—' },
-        { label: t('field.priority'), width: '64px', render: (mission) => formatNumber(mission.priority, 0) ?? '—' },
-        { label: t('field.vram'), width: '76px', render: (mission) => formatNumber(mission.vram_mb, 0) ?? '—' },
-        { label: t('table.branch'), width: 'minmax(120px, 1.4fr)', mono: true, render: (mission) => mission.branch ?? '—' },
-        { label: t('table.score'), width: '72px', render: (mission) => formatNumber(mission.score, 3) ?? '—' },
-        {
-          label: t('table.description'),
-          width: 'minmax(160px, 2fr)',
-          render: (mission) =>
-            h('span', { title: typeof mission.description === 'string' ? mission.description : undefined }, mission.description ?? '—'),
-        },
+      const batchColumns = [
+        { label: t('table.batch'), width: 'minmax(100px, 1fr)', mono: true, primary: true, render: (batch) => batch.id ?? '—' },
+        { label: t('field.status'), width: '96px', render: (batch) => statusPill(t, batchDisplayStatus(batch.status)) },
+        { label: t('field.machine'), width: 'minmax(80px, 0.8fr)', mono: true, render: (batch) => batch.machine_id ?? '—' },
+        { label: t('field.count'), width: '72px', render: (batch) => String(Array.isArray(batch.mission_ids) ? batch.mission_ids.length : 0) },
+        { label: t('table.branch'), width: 'minmax(140px, 1.4fr)', mono: true, render: (batch) => batch.branch ?? '—' },
+        { label: t('field.created'), width: 'minmax(140px, 1fr)', render: (batch) => formatDate(batch.created_at) ?? '—' },
       ];
+      const batchCard = h(
+        'div',
+        { style: styles.card },
+        h('h2', { style: styles.sectionTitle }, t('section.batches')),
+        table(t, batchColumns, batches, t('empty.batches')),
+      );
 
-      const branchColumns = [
-        { label: t('table.branch'), width: 'minmax(150px, 1.6fr)', mono: true, primary: true, render: (branch) => branch.name ?? '—' },
-        { label: t('table.score'), width: '72px', render: (branch) => formatNumber(branch.score, 3) ?? '—' },
-        { label: t('field.parent'), width: 'minmax(100px, 1fr)', mono: true, render: (branch) => branch.parent ?? '—' },
-        { label: t('field.mission'), width: 'minmax(100px, 1fr)', mono: true, render: (branch) => branch.mission ?? '—' },
-        {
-          label: '',
-          width: '64px',
-          render: (branch) => (branch.is_sota === true ? h('span', { style: { ...styles.badge, color: TOKENS.success } }, t('branch.sota')) : null),
-        },
+      const missionColumns = [
+        { label: t('table.status'), width: '96px', render: (mission) => statusPill(t, missionDisplayStatus(mission.status)) },
+        { label: t('table.mission'), width: 'minmax(92px, 120px)', mono: true, primary: true, render: (mission) => mission.id ?? '—' },
+        { label: t('field.owner'), width: 'minmax(120px, 1.4fr)', mono: true, render: (mission) => mission.owner_session ?? '—' },
+        { label: t('table.branch'), width: 'minmax(120px, 1.4fr)', mono: true, render: (mission) => mission.branch ?? '—' },
+        { label: t('table.batch'), width: 'minmax(100px, 1fr)', mono: true, render: (mission) => mission.batch_id ?? '—' },
+        { label: t('field.preBatch'), width: 'minmax(100px, 1fr)', mono: true, render: (mission) => mission.pre_batch_tip ? mission.pre_batch_tip.slice(0, 8) : '—' },
+        { label: t('field.resultCommit'), width: 'minmax(100px, 1fr)', mono: true, render: (mission) => mission.result_commit ? mission.result_commit.slice(0, 8) : '—' },
+        { label: t('field.error'), width: 'minmax(150px, 2fr)', render: (mission) => mission.error ?? '—' },
       ];
+      const missionCard = h(
+        'div',
+        { style: styles.card },
+        h('h2', { style: styles.sectionTitle }, t('section.missions')),
+        table(t, missionColumns, missions, t('empty.missions')),
+      );
 
       return h(
         'div',
         { style: styles.frame },
-        h('div', { style: styles.twoCards }, campaignCard, sotaCard),
-        countsCard,
-        infraSection(t, campaign),
-        agentSection(t, campaign),
-        batchSection(t, snapshot, batches),
-        h(
-          'section',
-          { style: styles.card },
-          h('h2', { style: styles.sectionTitle }, t('section.missions')),
-          table(t, missionColumns, missionList(snapshot), t('empty.missions')),
-        ),
-        h(
-          'section',
-          { style: styles.card },
-          h('h2', { style: styles.sectionTitle }, t('section.branches')),
-          table(t, branchColumns, branches.filter((branch) => branch && typeof branch === 'object').slice(0, 500), t('empty.branches')),
-        ),
+        projectCard,
+        h('div', { style: styles.twoCards }, machineCard, countsCard),
+        batchCard,
+        missionCard,
         h(
           'div',
           { style: styles.footer },
           h('span', null, generated ? t('field.generated') + ': ' + generated : ''),
           h('span', null, snapshot?.schema !== undefined ? 'schema ' + String(snapshot.schema) : ''),
-          h('span', null, 'missions: ' + String(missions.length) + ' · branches: ' + String(branches.length)),
+          h('span', null, 'missions: ' + String(missions.length) + ' · batches: ' + String(batches.length)),
         ),
       );
     }
@@ -805,8 +824,8 @@ window.__ModuleLoader__.load({
       const t = props.t;
       const state = useSnapshot();
       const snapshot = state.snapshot;
-      const campaign = snapshot && typeof snapshot.campaign === 'object' && snapshot.campaign !== null ? snapshot.campaign : null;
-      const campaignName = campaign ? campaign.title ?? campaign.id : null;
+      const project = snapshot && typeof snapshot.project === 'object' && snapshot.project !== null ? snapshot.project : null;
+      const projectName = project ? project.title ?? project.id : null;
 
       let content;
       if (state.phase === 'loading') content = stateCard(t('state.loading'), '');
@@ -830,13 +849,13 @@ window.__ModuleLoader__.load({
             h(
               'div',
               { style: { minWidth: 0 } },
-              h('h1', { style: styles.title }, campaignName ? t('page.title') + ' · ' + campaignName : t('page.title')),
+              h('h1', { style: styles.title }, projectName ? t('page.title') + ' · ' + projectName : t('page.title')),
               h('p', { style: styles.subtitle }, t('page.subtitle')),
             ),
             h(
               'div',
               { style: styles.headerActions },
-              state.phase === 'ready' ? statusPill(t, campaign?.status) : null,
+              state.phase === 'ready' ? statusPill(t, project?.status) : null,
               h('span', { style: { fontSize: 11.5, color: TOKENS.labelTertiary } }, formatClock(state.fetchedAt) ? t('updated.at') + ': ' + formatClock(state.fetchedAt) : ''),
               h('button', { type: 'button', style: styles.button, onClick: props.onClose }, t('action.back')),
             ),
