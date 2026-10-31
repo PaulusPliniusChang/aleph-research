@@ -2,7 +2,7 @@
 id: ALEPH-16
 status: dsh实测有问题
 type: 缺陷
-remote_issue: null
+remote_issue: https://github.com/hapenia/aleph-research/issues/22
 pull_request: null
 ---
 
@@ -16,7 +16,7 @@ Host 保存研究代理、Composer 和 InfraOptimizer 的记录，并在快照�
 
 表格读取传入对象的 `.agents` 字段时，只能得到缺失值，随后使用空数组并显示“尚未运行 Composer 或 InfraOptimizer。”即使后端已经存在正确记录，页面也可能无法展示。建议优先级为 P2。
 
-最新上游 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 已完成自动和实际 DSH 核查。自动检查包含 41 个有效行为点，其中 17 个通过、24 个失败；真实浏览器的 23 项观察全部符合复现条件。远端议题和拉取请求链接待补充。
+最新上游 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 已完成自动和实际 DSH 核查。自动检查包含 41 个有效行为点，其中 17 个通过、24 个失败；真实浏览器的 23 项观察全部符合复现条件。上游议题为 [#22](https://github.com/hapenia/aleph-research/issues/22)，修复拉取请求待补充。
 
 ## 使用例子
 
@@ -99,3 +99,8 @@ python3 tests/issues/dsh/current-console-agents.py --source /home/paulus-chang/�
 - [刷新后重新打开页面](evidence/16-current-reloaded-desktop.png)
 
 首次导航因预览版说明弹窗出现较晚而中断；后续脚本改为等待并关闭弹窗。一次刷新检查因未重新打开 Aleph 而中断，另一次检查因没有区分预期的无项目 404 而中断。这些属于测试脚本调整，原始记录分别保留在 `16-current-real-dsh-navigation-attempt.json`、`16-current-real-dsh-reopen-attempt.json` 和 `16-current-real-dsh-console-log-attempt.json`，没有作为产品失败或增加有效检查点。最终脚本完整通过。
+
+
+## 远端发布
+
+B 已将该问题上传至上游 [#22](https://github.com/hapenia/aleph-research/issues/22)。公开证据固定于提交 `6cc3510d7b3dea239a9fda6628c6b2158beff9f6`，远端正文移除了 YAML 管理头和前导管理注释，本地仍保留完整原文。发布时议题处于开放状态，产品修复尚未提交。
