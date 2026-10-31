@@ -103,6 +103,7 @@ case = json.load(open(case_path))
 print(json.dumps({
     "workspace": os.path.join(run_root, "leader"),
     "eval_command": case["eval_command"],
+    "eval_root": os.path.join(run_root, "case"),
     "testset": os.path.join(run_root, "case", "testsets"),
     "submission_python": os.path.join(runtime, "bin", "python"),
     "researchers": case["researcher_count"],

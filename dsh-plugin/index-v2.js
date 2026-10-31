@@ -68,6 +68,7 @@ const projectSchema = z.object({
   missionRoot: z.string(),
   templateBranch: z.string(),
   evalCommand: z.string(),
+  evalRoot: z.string().nullable().optional(),
   brief: z.string().optional(),
   researcherCount: z.number().int().optional(),
   prepared: z.boolean().optional(),
@@ -280,7 +281,7 @@ class ProjectService {
     }
   }
 
-  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', visibleData = null, testsetPath = null, submissionPython = null, researchers = 4, brief = '', agent = null }) {
+  async init({ workspace, evalCommand = 'python3 eval/run_eval.py', evalRoot = null, visibleData = null, testsetPath = null, submissionPython = null, researchers = 4, brief = '', agent = null }) {
     const target = resolve(workspace);
     if (!(await pathExists(target))) throw new Error(`workspace does not exist: ${target}`);
     if (agent) this.assertWorkspace(agent, target);
@@ -291,6 +292,7 @@ class ProjectService {
         researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : (current.researcherCount ?? 4),
         brief: brief || current.brief || '',
         evalCommand: evalCommand || current.evalCommand,
+        evalRoot: evalRoot ? resolve(evalRoot) : current.evalRoot,
         visibleData: visibleData ? resolve(visibleData) : current.visibleData,
         testsetPath: testsetPath ? resolve(testsetPath) : current.testsetPath,
         submissionPython: submissionPython ?? current.submissionPython,
@@ -313,6 +315,7 @@ class ProjectService {
       missionRoot,
       templateBranch: 'template',
       evalCommand,
+      evalRoot: evalRoot ? resolve(evalRoot) : null,
       brief,
       researcherCount: Number.isFinite(Number(researchers)) ? Number(researchers) : 4,
       prepared: false,
@@ -662,7 +665,7 @@ class ProjectService {
     try {
       // The evaluator lives with the project, not inside the research worktree; it reads the
       // branch under test through ALEPH_SOLUTION_DIR.
-      const result = await run('bash', ['-lc', project.evalCommand], { cwd: project.workspace, env, timeout: 600_000 });
+      const result = await run('bash', ['-lc', project.evalCommand], { cwd: project.evalRoot || project.workspace, env, timeout: 600_000 });
       stdout = result.stdout;
       stderr = result.stderr;
       const parsed = parseScore(stdout);
@@ -1138,6 +1141,7 @@ function snapshot(project) {
       mission_root: project.missionRoot,
       template_branch: project.templateBranch,
       eval_command: project.evalCommand,
+      eval_root: project.evalRoot ?? null,
       brief: project.brief ?? '',
       researcher_count: project.researcherCount ?? 4,
       prepared: project.prepared === true,
@@ -1214,6 +1218,7 @@ export async function apply(ctx) {
       {
         workspace: { type: 'string', description: 'Absolute workspace path; defaults to the session cwd' },
         eval_command: { type: 'string', description: 'Research evaluator command' },
+        eval_root: { type: 'string', description: 'Directory the evaluator runs from' },
         visible_data: { type: 'string' },
         testset: { type: 'string' },
         submission_python: { type: 'string' },
@@ -1223,6 +1228,7 @@ export async function apply(ctx) {
       async (args, exec) => service.init({
         workspace: service.workspaceFor(exec.agent, args.workspace),
         evalCommand: args.eval_command,
+        evalRoot: args.eval_root ?? null,
         visibleData: args.visible_data,
         testsetPath: args.testset,
         submissionPython: args.submission_python,
@@ -1356,6 +1362,7 @@ export async function apply(ctx) {
         const project = await service.init({
           workspace: args.workspace,
           evalCommand: args.evalCommand ?? args.eval_command,
+          evalRoot: args.evalRoot ?? args.eval_root ?? null,
           visibleData: args.visibleData ?? args.visible_data,
           testsetPath: args.testset ?? args.testsetPath,
           submissionPython: args.submissionPython ?? args.submission_python,
