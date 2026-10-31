@@ -909,10 +909,10 @@ class ProjectService {
         request: { parent: agent, cwd: project.workspace, agentPreset: 'aleph-composer', prompt: [{ type: 'text', text: prompt }] },
       });
     } catch (error) {
-      await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'composer', childId: null, status: 'failed', summary: String(error), branch, worktree, updatedAt: now() }] }));
+      await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'composer', childId: null, status: 'failed', summary: String(error), branch: null, worktree: null, updatedAt: now() }] }));
       throw error;
     }
-    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'composer', childId: activation.childId ?? null, status: 'running', summary: null, branch, worktree, updatedAt: now() }] }));
+    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'composer', childId: activation.childId ?? null, status: 'running', summary: null, branch: null, worktree: null, updatedAt: now() }] }));
     try {
       const result = await activation.result;
       const summary = (result?.output ?? []).filter((block) => block?.type === 'text').map((block) => block.text).join('\n').trim().slice(0, 8000) || '(no summary)';
