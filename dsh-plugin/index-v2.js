@@ -668,6 +668,10 @@ class ProjectService {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     if (!project.prepared) throw new Error('research project not prepared; Leader must call aleph_create_research_scaffold first');
+    const missionBranches = new Set((await git(project.missionRoot, ['for-each-ref', '--format=%(refname:short)', 'refs/heads/missions'])).stdout.split(/\r?\n/).filter(Boolean));
+    if ((project.missions ?? []).some((mission) => !missionBranches.has(mission.branch))) {
+      await this.mutate(projectId, (current) => ({ ...current, missions: (current.missions ?? []).filter((mission) => missionBranches.has(mission.branch)) }));
+    }
     const requested = Math.max(1, Math.min(16, Number(count) || project.researcherCount || 4));
     await this.mutate(projectId, (current) => ({
       ...current,
