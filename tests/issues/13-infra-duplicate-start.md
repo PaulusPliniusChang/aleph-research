@@ -3,10 +3,16 @@ id: ALEPH-13
 status: 已解决
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/14
-pull_request: https://github.com/hapenia/aleph-research/pull/26
+pull_request: https://github.com/hapenia/aleph-research/pull/30
 ---
 
 # 同一批次重复启动 InfraOptimizer 会删除正在使用的工作目录
+
+
+
+## 当前整合交付
+
+[PR #30](https://github.com/hapenia/aleph-research/pull/30) 将 PR #26 的项目控制与 PR #29 的重启后持续收尾整合，当前开放且尚未合并。准确提交为 `a85ccea4a6e7da7f2c56708627cbd1a873b7493a`。组合已经通过产品 262 项、B 独立 105 个有效自动行为点及实际 DSH 105 个有效观察点，范围与证据见[组合验收](09-campaign-controls.md#项目控制与重启恢复的组合验收2026-10-31)。PR #26 和 PR #29 保留为分别验收的历史请求；此次整合没有扩大多机器范围，也没有改变原人工状态。
 
 
 ## 当前准备窗口的修复验收
