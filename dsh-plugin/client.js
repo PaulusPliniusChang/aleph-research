@@ -49,6 +49,8 @@ window.__ModuleLoader__.load({
         'field.subject': 'Subject',
         'field.date': 'Date',
         'field.refs': 'Refs',
+        'field.head': 'HEAD',
+        'empty.worktrees': 'No worktrees.',
         'empty.git': 'No git repositories yet.',
         'empty.violations': 'No violations recorded.',
         'field.owner': 'Owner session',
@@ -164,6 +166,8 @@ window.__ModuleLoader__.load({
         'field.subject': '说明',
         'field.date': '日期',
         'field.refs': '引用',
+        'field.head': 'HEAD',
+        'empty.worktrees': '暂无工作目录。',
         'empty.git': '暂无 git 仓库。',
         'empty.violations': '暂无违规记录。',
         'field.owner': 'Owner 会话',
@@ -749,6 +753,11 @@ window.__ModuleLoader__.load({
         { label: t('field.subject'), width: 'minmax(200px, 2.4fr)', render: (item) => item.subject ?? '—' },
         { label: t('field.date'), width: '110px', render: (item) => item.date ?? '—' },
       ];
+      const worktreeColumns = [
+        { label: t('field.worktree'), width: 'minmax(220px, 2.4fr)', mono: true, primary: true, render: (item) => item.path ?? '—' },
+        { label: t('table.branch'), width: 'minmax(140px, 1.4fr)', mono: true, render: (item) => item.branch || 'detached' },
+        { label: t('field.head'), width: '90px', mono: true, render: (item) => item.head ? item.head.slice(0, 8) : '—' },
+      ];
       const commitColumns = [
         { label: t('field.tip'), width: '80px', mono: true, primary: true, render: (item) => item.hash ?? '—' },
         { label: t('field.refs'), width: 'minmax(120px, 1.4fr)', mono: true, render: (item) => item.refs ?? '—' },
@@ -761,6 +770,8 @@ window.__ModuleLoader__.load({
           h('div', { style: { ...styles.mono, fontSize: '12px', wordBreak: 'break-all' } }, repo.root),
           h('div', { style: styles.sectionTitle }, t('section.branches')),
           table(t, branchColumns, Array.isArray(repo.branches) ? repo.branches : [], t('empty.git')),
+          h('div', { style: styles.sectionTitle }, 'Worktrees'),
+          table(t, worktreeColumns, Array.isArray(repo.worktrees) ? repo.worktrees : [], t('empty.worktrees')),
           h('div', { style: styles.sectionTitle }, 'Commits'),
           table(t, commitColumns, Array.isArray(repo.commits) ? repo.commits : [], t('empty.git')),
         );
