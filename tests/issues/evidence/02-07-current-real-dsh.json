@@ -1,0 +1,1420 @@
+{
+  "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": true,
+  "checks": [
+    {
+      "issue": "#4",
+      "name": "project initializer has no numeric budget argument",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "former quota setter is absent from visible current tools",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "former campaign dispatch operation is absent",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "research objectives are a supported initializer argument",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "former campaign composition operation is absent",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "mission proposal uses a committed branch argument",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "new project starts without queued work",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "new project has no numerical quota counter",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "current machine registry starts idle",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "initial machine has no batch owner",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "initial research objective is stored exactly",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "researcher count is distinct from quota",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives exact custom research objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives assigned research branch",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives assigned worktree path",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives mission repository location",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives significant-compute mission requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives own-mission waiting requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives dependency declaration requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives final evaluation requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first research branch actually exists",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first research worktree belongs to research repository",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first real bash runs in assigned worktree",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "updating research objective preserves project identity",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "updating research objective persists new content",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "later researcher receives updated research objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "later researcher does not receive obsolete custom objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "captured first request retains original objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "researchers have independent branches",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "researchers have independent worktrees",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "registered status retains both live researcher identities",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "mission scaffold does not execute computation",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "mission method exists in committed manifest",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "proposal requires later approval",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "proposal alone starts no calculation",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "proposal alone creates no batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "unapproved work cannot form a batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "unapproved rejection leaves source commit reachable",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal preserves researcher ownership",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal preserves declared output names",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal preserves resource description",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal has no structured L0-L3 strategy record",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "explicit method remains readable from proposed branch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approval admits the mission to approved queue",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approval itself has not run task code",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approval does not create a numerical spending record",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approved work forms a machine-bound batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "batch reserves the local machine",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "reservation records exact batch identity",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "mission is associated with admitted batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "composition itself does not execute task code",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "reserved machine refuses another batch",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "batch tree retains explicit mission method",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "execution records running batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "execution retains busy machine ownership",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "executing mission retains current batched lifecycle state",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "task is launched once",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed task has a done result",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed batch releases machine",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed batch clears reservation identity",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed task has a readable result commit",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "result commit retains explicit method metadata",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "declared result is readable from the delivered source branch",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "both context-delivery lifecycles finish independently",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "first": {
+        "projectId": "p-c2907b59",
+        "role": "researcher",
+        "childId": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+        "branch": "research/r-4c7c9610",
+        "worktree": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2"
+      },
+      "firstContext": {
+        "sessionId": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+        "calls": 2,
+        "waiting": true,
+        "released": false,
+        "emittedSummary": null,
+        "initialContext": {
+          "messages": [
+            {
+              "role": "system",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "You are an AI agent powered by DeepSeek Harness.\n\nYou are an AlephResearch researcher. Work in the research repo, maintain your own research branches, and commit research changes when appropriate.\n\nYou may inspect the complete git history of the research and mission repositories with `git log --all`, `git branch -a`, `git show` and `git diff`. Mission results are cherry-picked onto mission branches, so prior missions and their outputs are visible there.\n\nBefore proposing a mission, inspect mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.\n\nThe runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services, or create/install environments. Mission code receives ALEPH_PYTHON; declare dependencies in the mission pyproject instead of installing them yourself.\n\nA local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.\n\nIf a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.\n\nSmall work is allowed: reading files, focused edits, quick tests, one small fit/evaluation, and bounded commands. Do not launch large training runs, multi-seed or multi-config sweeps, multi-GPU jobs, dataset-scale generation, benchmarking campaigns, long-running background jobs, or extra agents.\n\nHeavy work must be packaged as a mission: create a branch in the mission repo from the template branch, add `missions/<mission-id>/mission.json`, code, an uv project and entrypoint, commit the branch, and call `aleph_propose_mission`. The Leader must approve it before it enters the queue.\n\nWait only for missions owned by this researcher: call `aleph_evaluate`; a waiting result lists your pending missions, so wait briefly and retry. When all your missions are done, call `aleph_evaluate` once more; Host evaluates the research branch and writes the report into the research commit. Then finish. Do not modify project, batch or machine state, and do not start other agents.\n\n\nTokens prefixed with @ are paths the user explicitly referenced. Relative paths resolve from the workspace root; absolute paths identify files or directories on the host. A trailing slash marks a directory: list it when its contents matter. Anything else is a file: use the read tool when its contents are needed, and do not claim to have inspected it before reading. @\"...\" quotes a path containing spaces.\n\nCheck the [exit code: N] marker on every bash result; investigate failures before moving on.\n\nUse the read tool \u2014 not shell commands like cat \u2014 to inspect text files. Use offset and limit to continue reading large files.\n\nRead an existing file before overwriting it with write (the default fs-observation-policy requires it) and prefer edit for targeted changes.\n\nRead a file before editing it (the default fs-observation-policy requires it), unless you just created or edited it in this session.\n\nUse the glob tool \u2014 not shell find \u2014 to discover files by path pattern.\n\nUse the grep tool \u2014 not shell grep or rg \u2014 to search file contents. Use read on a matched file when you need surrounding context.\n\nPrefer showing the primary results within your final response alongside a brief explanation. Use ![Description](<path/to/image.png>) when an image supports an explanation or comparison. Use [Description](<path/to/image.png>) when referring to an image or listing files. Enclose Markdown file destinations in angle brackets, especially paths containing spaces. Do not call present just to list edited source files, or run commands to check whether a diff view will appear. Use present to publish complete deliverables, including images, Office documents, spreadsheets, and slide decks, when separate access helps the user. Hosts that support file cards can show the presented file with preview and open actions. Avoid repeating results already shown inline unless the separate card adds useful access. Outside commands, configuration expressions, and code blocks, link every mention of an existing file, including repeats and tables, to its full path relative to the working directory or absolute; append #L24 or #L24-L30 to the target for known lines. Use the filename or a clear alias as the label, adding only enough parent directories to distinguish files; keep full paths out of labels. Default to the name alone; when precise locations matter, append :24 or :24\u201330, with no # or L in the line suffix.\n\nThe runtime context names the DeepSeek Harness implementation checkout. The checkout location and current working directory are separate values and may differ; never infer the working directory from the checkout path. Use pwd to determine the current working directory. Use this checkout only to inspect or extend DSH itself.\n\nYou are interacting with the user through the DeepSeek Harness Web GUI whose URL the runtime context names. When the user refers to \"this page\", \"this GUI\", or \"this app\" without naming another target, they mean this GUI. The browser provides no implicit DOM, route, or screenshot context. The client-plugin HMR receiver is active, but client-plugin changes reload without a refresh only while `pnpm run dev:web` is also running from this same checkout to rebuild their bundles; verify that watcher before promising automatic updates. Every other change \u2014 the apps/web shell and plain packages \u2014 requires rebuilding the affected Web artifacts and verifying this existing URL after a page refresh. Starting another server does not update this GUI. The apps/web Vite entry builds the shell but is not a standalone application because only dsh web injects window.__DSH_BOOT__. Do not start a replacement server unless the user asks; if one is needed, use a managed background job and verify its exact URL."
+                }
+              ],
+              "source": {
+                "kind": "system-prompt"
+              },
+              "id": "b450d188-6dee-4ba0-b7a8-a85ed71554d1"
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "The working directory changed from \"/tmp/aleph-project-dsh-9sz52xl4/workspace\" to \"/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2\"."
+                }
+              ],
+              "source": {
+                "kind": "working-directory"
+              },
+              "role": "user",
+              "id": "2c3ce9ea-f30c-4d89-a19b-8608e8291fcb"
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "You are an AlephResearch researcher.\nProject: p-c2907b59. Research brief: CONSERVATIVE-A: Preserve the scoring interface. Compare only normalization and document the measured effect..\nResearch worktree: /tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2. Research branch: research/r-4c7c9610. Mission repo: /tmp/aleph-project-dsh-9sz52xl4/workspace/missions. Template branch: template.\nThe Leader created your initial research scaffold. Provided data is already copied under data/ in /tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2; use it directly. Do not read data.zip, testsets, the original project or DSH state.\nThe runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services or create/install environments. Mission code receives ALEPH_PYTHON.\nDeclare dependencies in the mission pyproject; Composer and InfraOptimizer resolve the runtime environment. Do not install packages yourself.\nSmall bounded analysis uses the prepared runtime; full training must still be a mission.\nDo not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.\nWork only in the assigned research worktree and commit research changes to its branch when appropriate.\nYou may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.\nBefore creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.\nAll missions are visible to every researcher. Before doing data analysis, call aleph_list_missions; if an equivalent mission already has a result, inspect it with git show in the mission repo and reuse it instead of repeating the analysis.\nBudget the exploration: keep schema and data sanity checks compact, then create a mission or commit a code increment instead of running exploratory scripts indefinitely.\nA local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.\nIf a local command is killed for exceeding the compute limit, do not retry it locally; create a mission for that work and let other researchers reuse the result.\nIf a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.\nSmall work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.\nAfter proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.\nWhen all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state."
+                }
+              ],
+              "source": {
+                "kind": "user"
+              },
+              "role": "user",
+              "id": "d127d4b6-5228-42a4-b3e1-6c7ad7bda6d0"
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Current runtime context. This snapshot supersedes earlier runtime-context snapshots.\n\nCurrent working directory: \"/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2\".\n\nCurrent DSH file policy: workspace-write. Any available operation enforced by the DSH file sandbox may modify files under the session workspace: \"/tmp/aleph-project-dsh-9sz52xl4/workspace\". Some platform temporary areas may also be writable.\n\nApproval prompts are disabled in this session: actions that require approval are rejected automatically \u2014 do not request sandbox escalation (do not set `sandbox_permissions`).\n\nYou are a delegated subagent: your permission scope was fixed when you were started and cannot be widened from inside this session \u2014 operations that require approval are rejected automatically. When the task needs access beyond that scope, do not retry the denied operation; state the limitation in your reply so the delegating agent can handle it.\n\nCurrent DeepSeek Harness implementation checkout: \"/opt/dsh-desktop-linux-bin/resources/app/dsh/\".\n\nCurrent DeepSeek Harness Web GUI URL: \"http://127.0.0.1:51353\"."
+                }
+              ],
+              "source": {
+                "kind": "runtime-context",
+                "form": "snapshot",
+                "sections": [
+                  {
+                    "name": "working-directory:current",
+                    "text": "Current working directory: \"/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2\"."
+                  },
+                  {
+                    "name": "sandbox:policy",
+                    "text": "Current DSH file policy: workspace-write. Any available operation enforced by the DSH file sandbox may modify files under the session workspace: \"/tmp/aleph-project-dsh-9sz52xl4/workspace\". Some platform temporary areas may also be writable."
+                  },
+                  {
+                    "name": "approval:policy",
+                    "text": "Approval prompts are disabled in this session: actions that require approval are rejected automatically \u2014 do not request sandbox escalation (do not set `sandbox_permissions`)."
+                  },
+                  {
+                    "name": "subagent:delegation",
+                    "text": "You are a delegated subagent: your permission scope was fixed when you were started and cannot be widened from inside this session \u2014 operations that require approval are rejected automatically. When the task needs access beyond that scope, do not retry the denied operation; state the limitation in your reply so the delegating agent can handle it."
+                  },
+                  {
+                    "name": "harness:source",
+                    "text": "Current DeepSeek Harness implementation checkout: \"/opt/dsh-desktop-linux-bin/resources/app/dsh/\"."
+                  },
+                  {
+                    "name": "app:web-surface",
+                    "text": "Current DeepSeek Harness Web GUI URL: \"http://127.0.0.1:51353\"."
+                  }
+                ]
+              },
+              "role": "user",
+              "id": "691aa939-f0cc-4249-97f4-5c047ed6a275"
+            }
+          ]
+        },
+        "toolCall": {
+          "type": "tool-call",
+          "id": "cfa95c9e-3ed8-4ddd-a3a1-4c76bd624981",
+          "name": "bash",
+          "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-1e7a505c-30aa-40f8-ab15-3e4eb95b518f.txt\"}"
+        },
+        "live": true,
+        "agentStatus": "running",
+        "header": {
+          "version": 4,
+          "id": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+          "createdAt": 1793454002235,
+          "cwd": "/tmp/aleph-project-dsh-9sz52xl4/workspace",
+          "parentSession": "session-2bf2265f-3dcb-43bf-a38c-f738325d0784",
+          "isSeeded": false,
+          "origin": "subagent",
+          "delegationDepth": 1,
+          "agentPreset": "aleph-researcher"
+        }
+      }
+    },
+    {
+      "second": {
+        "projectId": "p-c2907b59",
+        "role": "researcher",
+        "childId": "08e0f5f8-d8c5-45b4-b69d-2732d6dbe042",
+        "branch": "research/r-a1bb5fb7",
+        "worktree": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208"
+      },
+      "secondContext": {
+        "sessionId": "08e0f5f8-d8c5-45b4-b69d-2732d6dbe042",
+        "calls": 2,
+        "waiting": true,
+        "released": false,
+        "emittedSummary": null,
+        "initialContext": {
+          "messages": [
+            {
+              "role": "system",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "You are an AI agent powered by DeepSeek Harness.\n\nYou are an AlephResearch researcher. Work in the research repo, maintain your own research branches, and commit research changes when appropriate.\n\nYou may inspect the complete git history of the research and mission repositories with `git log --all`, `git branch -a`, `git show` and `git diff`. Mission results are cherry-picked onto mission branches, so prior missions and their outputs are visible there.\n\nBefore proposing a mission, inspect mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.\n\nThe runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services, or create/install environments. Mission code receives ALEPH_PYTHON; declare dependencies in the mission pyproject instead of installing them yourself.\n\nA local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.\n\nIf a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.\n\nSmall work is allowed: reading files, focused edits, quick tests, one small fit/evaluation, and bounded commands. Do not launch large training runs, multi-seed or multi-config sweeps, multi-GPU jobs, dataset-scale generation, benchmarking campaigns, long-running background jobs, or extra agents.\n\nHeavy work must be packaged as a mission: create a branch in the mission repo from the template branch, add `missions/<mission-id>/mission.json`, code, an uv project and entrypoint, commit the branch, and call `aleph_propose_mission`. The Leader must approve it before it enters the queue.\n\nWait only for missions owned by this researcher: call `aleph_evaluate`; a waiting result lists your pending missions, so wait briefly and retry. When all your missions are done, call `aleph_evaluate` once more; Host evaluates the research branch and writes the report into the research commit. Then finish. Do not modify project, batch or machine state, and do not start other agents.\n\n\nTokens prefixed with @ are paths the user explicitly referenced. Relative paths resolve from the workspace root; absolute paths identify files or directories on the host. A trailing slash marks a directory: list it when its contents matter. Anything else is a file: use the read tool when its contents are needed, and do not claim to have inspected it before reading. @\"...\" quotes a path containing spaces.\n\nCheck the [exit code: N] marker on every bash result; investigate failures before moving on.\n\nUse the read tool \u2014 not shell commands like cat \u2014 to inspect text files. Use offset and limit to continue reading large files.\n\nRead an existing file before overwriting it with write (the default fs-observation-policy requires it) and prefer edit for targeted changes.\n\nRead a file before editing it (the default fs-observation-policy requires it), unless you just created or edited it in this session.\n\nUse the glob tool \u2014 not shell find \u2014 to discover files by path pattern.\n\nUse the grep tool \u2014 not shell grep or rg \u2014 to search file contents. Use read on a matched file when you need surrounding context.\n\nPrefer showing the primary results within your final response alongside a brief explanation. Use ![Description](<path/to/image.png>) when an image supports an explanation or comparison. Use [Description](<path/to/image.png>) when referring to an image or listing files. Enclose Markdown file destinations in angle brackets, especially paths containing spaces. Do not call present just to list edited source files, or run commands to check whether a diff view will appear. Use present to publish complete deliverables, including images, Office documents, spreadsheets, and slide decks, when separate access helps the user. Hosts that support file cards can show the presented file with preview and open actions. Avoid repeating results already shown inline unless the separate card adds useful access. Outside commands, configuration expressions, and code blocks, link every mention of an existing file, including repeats and tables, to its full path relative to the working directory or absolute; append #L24 or #L24-L30 to the target for known lines. Use the filename or a clear alias as the label, adding only enough parent directories to distinguish files; keep full paths out of labels. Default to the name alone; when precise locations matter, append :24 or :24\u201330, with no # or L in the line suffix.\n\nThe runtime context names the DeepSeek Harness implementation checkout. The checkout location and current working directory are separate values and may differ; never infer the working directory from the checkout path. Use pwd to determine the current working directory. Use this checkout only to inspect or extend DSH itself.\n\nYou are interacting with the user through the DeepSeek Harness Web GUI whose URL the runtime context names. When the user refers to \"this page\", \"this GUI\", or \"this app\" without naming another target, they mean this GUI. The browser provides no implicit DOM, route, or screenshot context. The client-plugin HMR receiver is active, but client-plugin changes reload without a refresh only while `pnpm run dev:web` is also running from this same checkout to rebuild their bundles; verify that watcher before promising automatic updates. Every other change \u2014 the apps/web shell and plain packages \u2014 requires rebuilding the affected Web artifacts and verifying this existing URL after a page refresh. Starting another server does not update this GUI. The apps/web Vite entry builds the shell but is not a standalone application because only dsh web injects window.__DSH_BOOT__. Do not start a replacement server unless the user asks; if one is needed, use a managed background job and verify its exact URL."
+                }
+              ],
+              "source": {
+                "kind": "system-prompt"
+              },
+              "id": "e31e7b1b-9197-437f-83ea-5352e53593f9"
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "The working directory changed from \"/tmp/aleph-project-dsh-9sz52xl4/workspace\" to \"/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208\"."
+                }
+              ],
+              "source": {
+                "kind": "working-directory"
+              },
+              "role": "user",
+              "id": "6d1e87d2-6317-4766-9966-82c18792475b"
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "You are an AlephResearch researcher.\nProject: p-c2907b59. Research brief: EXPLORATORY-B: Investigate a new feature family. Retain a comparable baseline and document evidence..\nResearch worktree: /tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208. Research branch: research/r-a1bb5fb7. Mission repo: /tmp/aleph-project-dsh-9sz52xl4/workspace/missions. Template branch: template.\nThe Leader created your initial research scaffold. Provided data is already copied under data/ in /tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208; use it directly. Do not read data.zip, testsets, the original project or DSH state.\nThe runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services or create/install environments. Mission code receives ALEPH_PYTHON.\nDeclare dependencies in the mission pyproject; Composer and InfraOptimizer resolve the runtime environment. Do not install packages yourself.\nSmall bounded analysis uses the prepared runtime; full training must still be a mission.\nDo not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.\nWork only in the assigned research worktree and commit research changes to its branch when appropriate.\nYou may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.\nBefore creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.\nAll missions are visible to every researcher. Before doing data analysis, call aleph_list_missions; if an equivalent mission already has a result, inspect it with git show in the mission repo and reuse it instead of repeating the analysis.\nBudget the exploration: keep schema and data sanity checks compact, then create a mission or commit a code increment instead of running exploratory scripts indefinitely.\nA local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.\nIf a local command is killed for exceeding the compute limit, do not retry it locally; create a mission for that work and let other researchers reuse the result.\nIf a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.\nSmall work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.\nAfter proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.\nWhen all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state."
+                }
+              ],
+              "source": {
+                "kind": "user"
+              },
+              "role": "user",
+              "id": "95e66e4d-19f2-47eb-9aa4-e48acdc8f7c4"
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Current runtime context. This snapshot supersedes earlier runtime-context snapshots.\n\nCurrent working directory: \"/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208\".\n\nCurrent DSH file policy: workspace-write. Any available operation enforced by the DSH file sandbox may modify files under the session workspace: \"/tmp/aleph-project-dsh-9sz52xl4/workspace\". Some platform temporary areas may also be writable.\n\nApproval prompts are disabled in this session: actions that require approval are rejected automatically \u2014 do not request sandbox escalation (do not set `sandbox_permissions`).\n\nYou are a delegated subagent: your permission scope was fixed when you were started and cannot be widened from inside this session \u2014 operations that require approval are rejected automatically. When the task needs access beyond that scope, do not retry the denied operation; state the limitation in your reply so the delegating agent can handle it.\n\nCurrent DeepSeek Harness implementation checkout: \"/opt/dsh-desktop-linux-bin/resources/app/dsh/\".\n\nCurrent DeepSeek Harness Web GUI URL: \"http://127.0.0.1:51353\"."
+                }
+              ],
+              "source": {
+                "kind": "runtime-context",
+                "form": "snapshot",
+                "sections": [
+                  {
+                    "name": "working-directory:current",
+                    "text": "Current working directory: \"/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208\"."
+                  },
+                  {
+                    "name": "sandbox:policy",
+                    "text": "Current DSH file policy: workspace-write. Any available operation enforced by the DSH file sandbox may modify files under the session workspace: \"/tmp/aleph-project-dsh-9sz52xl4/workspace\". Some platform temporary areas may also be writable."
+                  },
+                  {
+                    "name": "approval:policy",
+                    "text": "Approval prompts are disabled in this session: actions that require approval are rejected automatically \u2014 do not request sandbox escalation (do not set `sandbox_permissions`)."
+                  },
+                  {
+                    "name": "subagent:delegation",
+                    "text": "You are a delegated subagent: your permission scope was fixed when you were started and cannot be widened from inside this session \u2014 operations that require approval are rejected automatically. When the task needs access beyond that scope, do not retry the denied operation; state the limitation in your reply so the delegating agent can handle it."
+                  },
+                  {
+                    "name": "harness:source",
+                    "text": "Current DeepSeek Harness implementation checkout: \"/opt/dsh-desktop-linux-bin/resources/app/dsh/\"."
+                  },
+                  {
+                    "name": "app:web-surface",
+                    "text": "Current DeepSeek Harness Web GUI URL: \"http://127.0.0.1:51353\"."
+                  }
+                ]
+              },
+              "role": "user",
+              "id": "068c49a2-db4b-4722-8c40-dd291e40ba4b"
+            }
+          ]
+        },
+        "toolCall": {
+          "type": "tool-call",
+          "id": "e05907d3-a8ae-4644-82cf-934ca8538443",
+          "name": "bash",
+          "arguments": "{\"description\":\"Record actual researcher session working directory\",\"command\":\"pwd > researcher-08e0f5f8-d8c5-45b4-b69d-2732d6dbe042.txt\"}"
+        },
+        "live": true,
+        "agentStatus": "running",
+        "header": {
+          "version": 4,
+          "id": "08e0f5f8-d8c5-45b4-b69d-2732d6dbe042",
+          "createdAt": 1793454002450,
+          "cwd": "/tmp/aleph-project-dsh-9sz52xl4/workspace",
+          "parentSession": "session-2bf2265f-3dcb-43bf-a38c-f738325d0784",
+          "isSeeded": false,
+          "origin": "subagent",
+          "delegationDepth": 1,
+          "agentPreset": "aleph-researcher"
+        }
+      }
+    },
+    {
+      "created": {
+        "projectId": "p-c2907b59",
+        "branch": "missions/contract-analysis-8d3a0b69",
+        "worktree": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/missions/mw-63d613cb",
+        "missionId": "contract-analysis",
+        "missionDir": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/missions/mw-63d613cb/missions/contract-analysis"
+      },
+      "manifest": {
+        "id": "contract-analysis",
+        "entrypoint": "run.sh",
+        "outputs": [
+          "contract.txt"
+        ],
+        "resource": {
+          "cpu": 1,
+          "memory_mb": 64
+        },
+        "strategy": "EXPLICIT-MISSION-METHOD",
+        "objective": "Analyze only the committed fixture"
+      },
+      "tip": "685b3e4ca8779c3e9f02097482dbfb93df29b94a",
+      "mission": {
+        "id": "m-529d01a5",
+        "ownerSession": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+        "branch": "missions/contract-analysis-8d3a0b69",
+        "manifestId": "contract-analysis",
+        "manifestPath": "missions/contract-analysis/mission.json",
+        "status": "proposed",
+        "entrypoint": "run.sh",
+        "outputs": [
+          "contract.txt"
+        ],
+        "resource": {
+          "cpu": 1,
+          "memory_mb": 64
+        },
+        "batchId": null,
+        "preBatchTip": null,
+        "resultCommit": null,
+        "error": null,
+        "createdAt": "2026-10-31T13:40:02.644Z",
+        "approvedAt": null,
+        "finishedAt": null
+      }
+    },
+    {
+      "formed": {
+        "id": "p-c2907b59",
+        "workspace": "/tmp/aleph-project-dsh-9sz52xl4/workspace",
+        "researchRoot": "/tmp/aleph-project-dsh-9sz52xl4/workspace/research",
+        "missionRoot": "/tmp/aleph-project-dsh-9sz52xl4/workspace/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "EXPLORATORY-B: Investigate a new feature family. Retain a comparable baseline and document evidence.",
+        "researcherCount": 2,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-0a3509b3"
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-4c7c9610",
+            "worktree": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2",
+            "updatedAt": "2026-10-31T13:40:02.248Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "08e0f5f8-d8c5-45b4-b69d-2732d6dbe042",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-a1bb5fb7",
+            "worktree": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208",
+            "updatedAt": "2026-10-31T13:40:02.458Z"
+          },
+          {
+            "role": "composer",
+            "childId": null,
+            "status": "failed",
+            "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:40:02.682Z"
+          }
+        ],
+        "missions": [
+          {
+            "id": "m-529d01a5",
+            "ownerSession": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+            "branch": "missions/contract-analysis-8d3a0b69",
+            "manifestId": "contract-analysis",
+            "manifestPath": "missions/contract-analysis/mission.json",
+            "status": "batched",
+            "entrypoint": "run.sh",
+            "outputs": [
+              "contract.txt"
+            ],
+            "resource": {
+              "cpu": 1,
+              "memory_mb": 64
+            },
+            "batchId": "b-0a3509b3",
+            "preBatchTip": "685b3e4ca8779c3e9f02097482dbfb93df29b94a",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:40:02.644Z",
+            "approvedAt": "2026-10-31T13:40:02.675Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0a3509b3",
+            "machineId": "local",
+            "status": "forming",
+            "missionIds": [
+              "m-529d01a5"
+            ],
+            "branch": "batch/b-0a3509b3",
+            "baseTip": "68609669956d713359879b56e2e1c089af89aea8",
+            "createdAt": "2026-10-31T13:40:02.717Z"
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:40:02.217Z",
+        "updatedAt": "2026-10-31T13:40:02.717Z"
+      }
+    },
+    {
+      "final": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:40:02.874Z",
+        "project": {
+          "id": "p-c2907b59",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-9sz52xl4/workspace",
+          "research_root": "/tmp/aleph-project-dsh-9sz52xl4/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-9sz52xl4/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "EXPLORATORY-B: Investigate a new feature family. Retain a comparable baseline and document evidence.",
+          "researcher_count": 2,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-529d01a5",
+            "owner_session": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+            "status": "done",
+            "branch": "missions/contract-analysis-8d3a0b69",
+            "manifest_id": "contract-analysis",
+            "manifest_path": "missions/contract-analysis/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-0a3509b3",
+            "pre_batch_tip": "685b3e4ca8779c3e9f02097482dbfb93df29b94a",
+            "result_commit": "c4ba13d9b6196816e1244760c831879061c25f9f",
+            "error": null,
+            "created_at": "2026-10-31T13:40:02.644Z",
+            "approved_at": "2026-10-31T13:40:02.675Z",
+            "finished_at": "2026-10-31T13:40:02.870Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-0a3509b3",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-529d01a5"
+            ],
+            "branch": "batch/b-0a3509b3",
+            "base_tip": "68609669956d713359879b56e2e1c089af89aea8",
+            "created_at": "2026-10-31T13:40:02.717Z",
+            "started_at": "2026-10-31T13:40:02.741Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-529d01a5",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/batches/b-0a3509b3/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:40:02.870Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-529d01a5",
+                  "manifestId": "contract-analysis",
+                  "manifestPath": "missions/contract-analysis/mission.json",
+                  "status": "done",
+                  "resultCommit": "c4ba13d9b6196816e1244760c831879061c25f9f"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "1e7a505c-30aa-40f8-ab15-3e4eb95b518f",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-4c7c9610",
+            "worktree": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c71f31a2",
+            "updatedAt": "2026-10-31T13:40:02.248Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "08e0f5f8-d8c5-45b4-b69d-2732d6dbe042",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-a1bb5fb7",
+            "worktree": "/tmp/aleph-project-dsh-9sz52xl4/workspace/.aleph/researchers/r-c2d70208",
+            "updatedAt": "2026-10-31T13:40:02.458Z"
+          },
+          {
+            "role": "composer",
+            "childId": null,
+            "status": "failed",
+            "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:40:02.682Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 1,
+          "failed": 0
+        }
+      }
+    }
+  ],
+  "boundary": "Current project/mission/batch contract, not restoration of campaign quotas or L0-L3. Automatic substitutes storage, sessions and activation receipts; real Git, worktrees and shell computation remain. Actual uses installed DSH, registered tools, persistent state and original spawn provider. A local deterministic adapter records actual initial model context and performs a real bash cwd marker before waiting. No production code, deadline or quota edits.",
+  "definitions": [
+    {
+      "name": "working_directory",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "cd": {
+            "type": "string",
+            "description": "Existing directory to enter. Omit to read the current directory."
+          }
+        }
+      }
+    },
+    {
+      "name": "aleph_init_project",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "description": "Absolute workspace path; defaults to the session cwd"
+          },
+          "eval_command": {
+            "type": "string",
+            "description": "Research evaluator command"
+          },
+          "eval_root": {
+            "type": "string",
+            "description": "Directory the evaluator runs from"
+          },
+          "visible_data": {
+            "type": "string"
+          },
+          "testset": {
+            "type": "string"
+          },
+          "submission_python": {
+            "type": "string"
+          },
+          "researchers": {
+            "type": "integer",
+            "description": "Default researcher count (default 4)"
+          },
+          "brief": {
+            "type": "string",
+            "description": "Research objective for researcher prompts"
+          }
+        }
+      }
+    },
+    {
+      "name": "aleph_list_missions",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_status",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Optional project id"
+          }
+        }
+      }
+    },
+    {
+      "name": "aleph_set_python",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "python": {
+            "type": "string",
+            "description": "Python executable path"
+          }
+        },
+        "required": [
+          "project_id",
+          "python"
+        ]
+      }
+    },
+    {
+      "name": "aleph_create_research_scaffold",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "title": {
+            "type": "string",
+            "description": "Research project title"
+          },
+          "data": {
+            "type": "array",
+            "description": "Data sources to copy into the research project",
+            "items": {
+              "type": "string"
+            }
+          },
+          "python": {
+            "type": "string",
+            "description": "Shared Python executable for researchers and missions"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_start_mission",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Short mission name"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_propose_mission",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Mission branch in the mission repo"
+          }
+        },
+        "required": [
+          "project_id",
+          "branch"
+        ]
+      }
+    },
+    {
+      "name": "aleph_approve_mission",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "mission_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "mission_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_form_batch",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "machine_id": {
+            "type": "string",
+            "description": "Machine id, default local"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_evaluate",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_researcher",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_researchers",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Optional count; defaults to the project researcher count"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_composer",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_infra",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "batch_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "batch_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_batch",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "batch_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "batch_id"
+        ]
+      }
+    },
+    {
+      "name": "read",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Path to read, resolved by the filesystem backend."
+          },
+          "offset": {
+            "type": "number",
+            "description": "1-based first line to return. Defaults to 1."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of lines to return. Defaults to 2000."
+          }
+        },
+        "required": [
+          "file_path"
+        ]
+      }
+    },
+    {
+      "name": "write",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Path to write, resolved by the filesystem backend. Provide `file_path` before `content` in the arguments."
+          },
+          "content": {
+            "type": "string",
+            "description": "Full UTF-8 text content to write."
+          },
+          "sandbox_permissions": {
+            "type": "string",
+            "description": "The narrowest wider sandbox mode for a one-shot retry of the exact operation the sandbox just denied; the retry asks the user for approval.",
+            "enum": [
+              "workspace-write",
+              "danger-full-access"
+            ]
+          },
+          "justification": {
+            "type": "string",
+            "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact file operation needs the wider access. Use the language of the user\u2019s current request."
+          }
+        },
+        "required": [
+          "file_path",
+          "content"
+        ]
+      }
+    },
+    {
+      "name": "edit",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Path to edit, resolved by the filesystem backend. Provide `file_path` before `old_string` and `new_string` in the arguments."
+          },
+          "old_string": {
+            "type": "string",
+            "description": "Literal text to replace."
+          },
+          "new_string": {
+            "type": "string",
+            "description": "Literal replacement text. Use an empty string to delete the match."
+          },
+          "replace_all": {
+            "type": "boolean",
+            "description": "Replace all matches. Defaults to false; when false, old_string must appear exactly once."
+          },
+          "sandbox_permissions": {
+            "type": "string",
+            "description": "The narrowest wider sandbox mode for a one-shot retry of the exact operation the sandbox just denied; the retry asks the user for approval.",
+            "enum": [
+              "workspace-write",
+              "danger-full-access"
+            ]
+          },
+          "justification": {
+            "type": "string",
+            "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact file operation needs the wider access. Use the language of the user\u2019s current request."
+          }
+        },
+        "required": [
+          "file_path",
+          "old_string",
+          "new_string"
+        ]
+      }
+    },
+    {
+      "name": "glob",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "Glob pattern to match file paths against (e.g. \"**/*.ts\", \"src/**/*.test.js\"). A pattern with no \"/\" matches the basename at any depth, so \"*\" and \"*.ts\" both search the whole tree; include a separator to anchor the depth."
+          },
+          "path": {
+            "type": "string",
+            "description": "Directory to search in. Defaults to the session workspace; a relative path resolves against it."
+          }
+        },
+        "required": [
+          "pattern"
+        ]
+      }
+    },
+    {
+      "name": "grep",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "Regular expression to search for (ripgrep syntax)."
+          },
+          "path": {
+            "type": "string",
+            "description": "File or directory to search. Defaults to the session workspace; a relative path resolves against it."
+          },
+          "include": {
+            "type": "string",
+            "description": "One glob filter for which files to search (e.g. \"*.ts\", \"*.{js,jsx}\"). Not a list; negation is not supported."
+          }
+        },
+        "required": [
+          "pattern"
+        ]
+      }
+    },
+    {
+      "name": "skill",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The exact skill name from the available skills list."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "bash",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Clear, concise description of what this command does in active voice, 5-10 words (shown in the UI). Examples: \"ls\" \u2192 \"List files in current directory\"; \"git status\" \u2192 \"Show working tree status\"; \"npm install\" \u2192 \"Install package dependencies\"."
+          },
+          "command": {
+            "type": "string",
+            "description": "The bash command to execute."
+          },
+          "timeoutMs": {
+            "type": "number",
+            "description": "Timeout in milliseconds. The executor applies its configured default and cap; on expiry the command moves to the background as a job instead of being killed."
+          },
+          "workdir": {
+            "type": "string",
+            "description": "Working directory for this command. Defaults to the session workspace; a relative path is resolved against it."
+          },
+          "run_in_background": {
+            "type": "boolean",
+            "description": "Run in the background and return a job id immediately (collect with job_output, stop with job_kill). No timeout applies."
+          },
+          "sandbox_permissions": {
+            "type": "string",
+            "description": "The narrowest wider sandbox mode for a one-shot retry of the exact command the sandbox just denied; the retry asks the user for approval.",
+            "enum": [
+              "workspace-write",
+              "danger-full-access"
+            ]
+          },
+          "justification": {
+            "type": "string",
+            "description": "Required with sandbox_permissions: one sentence for the user explaining why this exact command needs the wider access. Use the language of the user\u2019s current request."
+          }
+        },
+        "required": [
+          "description",
+          "command"
+        ]
+      }
+    },
+    {
+      "name": "read_image",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Path to the image file, resolved by the filesystem backend."
+          }
+        },
+        "required": [
+          "file_path"
+        ]
+      }
+    },
+    {
+      "name": "todo_write",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "todos": {
+            "type": "array",
+            "description": "The COMPLETE task list, replacing any previous list.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "description": "What the task is \u2014 a short imperative line."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "pending (not started) | in_progress (now) | completed (done).",
+                  "enum": [
+                    "pending",
+                    "in_progress",
+                    "completed"
+                  ]
+                }
+              },
+              "required": [
+                "content",
+                "status"
+              ]
+            }
+          }
+        },
+        "required": [
+          "todos"
+        ]
+      }
+    }
+  ],
+  "complete": true,
+  "effective": 64,
+  "by_issue": {
+    "#4": 30,
+    "#8": 34
+  },
+  "failed": 0,
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-9sz52xl4",
+    "workspace": "/tmp/aleph-project-dsh-9sz52xl4/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf"
+  },
+  "host": {
+    "pid": 534895,
+    "exit": 0,
+    "pid_exists": false
+  },
+  "launcher_exit": 0
+}

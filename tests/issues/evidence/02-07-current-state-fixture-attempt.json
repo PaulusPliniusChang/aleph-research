@@ -1,0 +1,933 @@
+{
+  "source": "/tmp/aleph-current-migration-validation-source",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": false,
+  "checks": [
+    {
+      "issue": "#4",
+      "name": "project initializer has no numeric budget argument",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "former quota setter is absent from visible current tools",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "former campaign dispatch operation is absent",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "research objectives are a supported initializer argument",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "former campaign composition operation is absent",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "mission proposal uses a committed branch argument",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "new project starts without queued work",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "new project has no numerical quota counter",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "current machine registry starts idle",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "initial machine has no batch owner",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "initial research objective is stored exactly",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "researcher count is distinct from quota",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives exact custom research objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives assigned research branch",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives assigned worktree path",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives mission repository location",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives significant-compute mission requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives own-mission waiting requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives dependency declaration requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation receives final evaluation requirement",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first research branch actually exists",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first research worktree belongs to research repository",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "first activation request uses researcher preset",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "updating research objective preserves project identity",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "updating research objective persists new content",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "later researcher receives updated research objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "later researcher does not receive obsolete custom objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "captured first request retains original objective",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "researchers have independent branches",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "researchers have independent worktrees",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "registered status retains both live researcher identities",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "mission scaffold does not execute computation",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "mission method exists in committed manifest",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "proposal requires later approval",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "proposal alone starts no calculation",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "proposal alone creates no batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "unapproved work cannot form a batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "unapproved rejection leaves source commit reachable",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal preserves researcher ownership",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal preserves declared output names",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal preserves resource description",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "proposal has no structured L0-L3 strategy record",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "explicit method remains readable from proposed branch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approval admits the mission to approved queue",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approval itself has not run task code",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approval does not create a numerical spending record",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "approved work forms a machine-bound batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "batch reserves the local machine",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "reservation records exact batch identity",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "mission is associated with admitted batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "composition itself does not execute task code",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "batch tree retains explicit mission method",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "execution records running batch",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "execution retains busy machine ownership",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "execution records running mission",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'batched'\n- 'running'\n"
+    },
+    {
+      "issue": "#4",
+      "name": "task is launched once",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed task has a done result",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed batch releases machine",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed batch clears reservation identity",
+      "passed": true
+    },
+    {
+      "issue": "#4",
+      "name": "completed task has a readable result commit",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "result commit retains explicit method metadata",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "declared result is readable from the delivered source branch",
+      "passed": true
+    },
+    {
+      "issue": "#8",
+      "name": "both context-delivery lifecycles finish independently",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "first": {
+        "projectId": "p-cf6b4b58",
+        "role": "researcher",
+        "childId": "migration-child-0",
+        "branch": "research/r-a3b4b84c",
+        "worktree": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-0dd36ef9"
+      },
+      "firstContext": {
+        "context": "You are an AlephResearch researcher.\nProject: p-cf6b4b58. Research brief: CONSERVATIVE-A: Preserve the scoring interface. Compare only normalization and document the measured effect..\nResearch worktree: /tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-0dd36ef9. Research branch: research/r-a3b4b84c. Mission repo: /tmp/aleph-budget-strategy-HdYFhy/missions. Template branch: template.\nThe Leader created your initial research scaffold. Provided data is already copied under data/ in /tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-0dd36ef9; use it directly. Do not read data.zip, testsets, the original project or DSH state.\nThe runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services or create/install environments. Mission code receives ALEPH_PYTHON.\nDeclare dependencies in the mission pyproject; Composer and InfraOptimizer resolve the runtime environment. Do not install packages yourself.\nSmall bounded analysis uses the prepared runtime; full training must still be a mission.\nDo not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.\nWork only in the assigned research worktree and commit research changes to its branch when appropriate.\nYou may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.\nBefore creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.\nAll missions are visible to every researcher. Before doing data analysis, call aleph_list_missions; if an equivalent mission already has a result, inspect it with git show in the mission repo and reuse it instead of repeating the analysis.\nBudget the exploration: keep schema and data sanity checks compact, then create a mission or commit a code increment instead of running exploratory scripts indefinitely.\nA local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.\nIf a local command is killed for exceeding the compute limit, do not retry it locally; create a mission for that work and let other researchers reuse the result.\nIf a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.\nSmall work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.\nAfter proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.\nWhen all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state.",
+        "cwd": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-0dd36ef9",
+        "preset": "aleph-researcher"
+      }
+    },
+    {
+      "second": {
+        "projectId": "p-cf6b4b58",
+        "role": "researcher",
+        "childId": "migration-child-1",
+        "branch": "research/r-ea3279da",
+        "worktree": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-77c42113"
+      },
+      "secondContext": {
+        "context": "You are an AlephResearch researcher.\nProject: p-cf6b4b58. Research brief: EXPLORATORY-B: Investigate a new feature family. Retain a comparable baseline and document evidence..\nResearch worktree: /tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-77c42113. Research branch: research/r-ea3279da. Mission repo: /tmp/aleph-budget-strategy-HdYFhy/missions. Template branch: template.\nThe Leader created your initial research scaffold. Provided data is already copied under data/ in /tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-77c42113; use it directly. Do not read data.zip, testsets, the original project or DSH state.\nThe runtime environment is prepared by Composer and InfraOptimizer. Do not inspect Python versions, installed packages, CPU/GPU, system services or create/install environments. Mission code receives ALEPH_PYTHON.\nDeclare dependencies in the mission pyproject; Composer and InfraOptimizer resolve the runtime environment. Do not install packages yourself.\nSmall bounded analysis uses the prepared runtime; full training must still be a mission.\nDo not read problem/data.zip, any testsets directory, /home/hapenia/Projects/kunlungpt-comp, /home/hapenia/Projects/aleph-research, /home/hapenia/.dsh or any DSH profile/state. Run commands from your worktree, not from the project root; use canonical visible data only.\nWork only in the assigned research worktree and commit research changes to its branch when appropriate.\nYou may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.\nBefore creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.\nAll missions are visible to every researcher. Before doing data analysis, call aleph_list_missions; if an equivalent mission already has a result, inspect it with git show in the mission repo and reuse it instead of repeating the analysis.\nBudget the exploration: keep schema and data sanity checks compact, then create a mission or commit a code increment instead of running exploratory scripts indefinitely.\nA local script that fits a model, runs cross-validation, or needs a timeout above 120 seconds is mission-worthy even if named quick or prototype. Create the mission before running it locally.\nIf a local command is killed for exceeding the compute limit, do not retry it locally; create a mission for that work and let other researchers reuse the result.\nIf a task would help other researchers and has non-trivial cost, create a mission for it instead of running it only locally. Shared analysis, feature engineering, data cleaning, baselines, training and sweeps are typical examples; other researchers must be able to read the mission result.\nSmall work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.\nAfter proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.\nWhen all your missions are done, call aleph_evaluate once more so the Host evaluates your research branch and writes the report into its commit, then finish. Do not modify project queue, batch or machine state.",
+        "cwd": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-77c42113",
+        "preset": "aleph-researcher"
+      }
+    },
+    {
+      "created": {
+        "projectId": "p-cf6b4b58",
+        "branch": "missions/contract-analysis-f9147bb7",
+        "worktree": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/missions/mw-58ac5807",
+        "missionId": "contract-analysis",
+        "missionDir": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/missions/mw-58ac5807/missions/contract-analysis"
+      },
+      "manifest": {
+        "id": "contract-analysis",
+        "entrypoint": "run.sh",
+        "outputs": [
+          "contract.txt"
+        ],
+        "resource": {
+          "cpu": 1,
+          "memory_mb": 64
+        },
+        "strategy": "EXPLICIT-MISSION-METHOD",
+        "objective": "Analyze only the committed fixture"
+      },
+      "tip": "f8ab4049d8afb7ec446204acad4acd36783a3569",
+      "mission": {
+        "id": "m-bf045346",
+        "ownerSession": "migration-child-0",
+        "branch": "missions/contract-analysis-f9147bb7",
+        "manifestId": "contract-analysis",
+        "manifestPath": "missions/contract-analysis/mission.json",
+        "status": "proposed",
+        "entrypoint": "run.sh",
+        "outputs": [
+          "contract.txt"
+        ],
+        "resource": {
+          "cpu": 1,
+          "memory_mb": 64
+        },
+        "batchId": null,
+        "preBatchTip": null,
+        "resultCommit": null,
+        "error": null,
+        "createdAt": "2026-10-31T13:39:15.686Z",
+        "approvedAt": null,
+        "finishedAt": null
+      }
+    },
+    {
+      "formed": {
+        "id": "p-cf6b4b58",
+        "workspace": "/tmp/aleph-budget-strategy-HdYFhy",
+        "researchRoot": "/tmp/aleph-budget-strategy-HdYFhy/research",
+        "missionRoot": "/tmp/aleph-budget-strategy-HdYFhy/missions",
+        "templateBranch": "template",
+        "evalCommand": "python3 eval/run_eval.py",
+        "evalRoot": null,
+        "brief": "EXPLORATORY-B: Investigate a new feature family. Retain a comparable baseline and document evidence.",
+        "researcherCount": 2,
+        "prepared": false,
+        "visibleData": null,
+        "testsetPath": null,
+        "submissionPython": null,
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-e33f3c7c"
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "migration-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-a3b4b84c",
+            "worktree": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-0dd36ef9",
+            "updatedAt": "2026-10-31T13:39:15.578Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "migration-child-1",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-ea3279da",
+            "worktree": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-77c42113",
+            "updatedAt": "2026-10-31T13:39:15.601Z"
+          },
+          {
+            "role": "composer",
+            "childId": "migration-child-2",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:39:15.709Z"
+          }
+        ],
+        "missions": [
+          {
+            "id": "m-bf045346",
+            "ownerSession": "migration-child-0",
+            "branch": "missions/contract-analysis-f9147bb7",
+            "manifestId": "contract-analysis",
+            "manifestPath": "missions/contract-analysis/mission.json",
+            "status": "batched",
+            "entrypoint": "run.sh",
+            "outputs": [
+              "contract.txt"
+            ],
+            "resource": {
+              "cpu": 1,
+              "memory_mb": 64
+            },
+            "batchId": "b-e33f3c7c",
+            "preBatchTip": "f8ab4049d8afb7ec446204acad4acd36783a3569",
+            "resultCommit": null,
+            "error": null,
+            "createdAt": "2026-10-31T13:39:15.686Z",
+            "approvedAt": "2026-10-31T13:39:15.708Z",
+            "finishedAt": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-e33f3c7c",
+            "machineId": "local",
+            "status": "forming",
+            "missionIds": [
+              "m-bf045346"
+            ],
+            "branch": "batch/b-e33f3c7c",
+            "baseTip": "e3af2c2fb0a881b44b43b73f588f22682874fba7",
+            "createdAt": "2026-10-31T13:39:15.741Z"
+          }
+        ],
+        "violations": [],
+        "createdAt": "2026-10-31T13:39:15.564Z",
+        "updatedAt": "2026-10-31T13:39:15.741Z"
+      }
+    },
+    {
+      "final": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:39:15.888Z",
+        "project": {
+          "id": "p-cf6b4b58",
+          "title": "aleph-budget-strategy-HdYFhy",
+          "status": "running",
+          "workspace": "/tmp/aleph-budget-strategy-HdYFhy",
+          "research_root": "/tmp/aleph-budget-strategy-HdYFhy/research",
+          "mission_root": "/tmp/aleph-budget-strategy-HdYFhy/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "EXPLORATORY-B: Investigate a new feature family. Retain a comparable baseline and document evidence.",
+          "researcher_count": 2,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-bf045346",
+            "owner_session": "migration-child-0",
+            "status": "done",
+            "branch": "missions/contract-analysis-f9147bb7",
+            "manifest_id": "contract-analysis",
+            "manifest_path": "missions/contract-analysis/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-e33f3c7c",
+            "pre_batch_tip": "f8ab4049d8afb7ec446204acad4acd36783a3569",
+            "result_commit": "92b88e0d7d259a3514342a443c88c80617755f9a",
+            "error": null,
+            "created_at": "2026-10-31T13:39:15.686Z",
+            "approved_at": "2026-10-31T13:39:15.708Z",
+            "finished_at": "2026-10-31T13:39:15.888Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-e33f3c7c",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-bf045346"
+            ],
+            "branch": "batch/b-e33f3c7c",
+            "base_tip": "e3af2c2fb0a881b44b43b73f588f22682874fba7",
+            "created_at": "2026-10-31T13:39:15.741Z",
+            "started_at": "2026-10-31T13:39:15.759Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-bf045346",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/batches/b-e33f3c7c/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:39:15.888Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-bf045346",
+                  "manifestId": "contract-analysis",
+                  "manifestPath": "missions/contract-analysis/mission.json",
+                  "status": "done",
+                  "resultCommit": "92b88e0d7d259a3514342a443c88c80617755f9a"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "childId": "migration-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-a3b4b84c",
+            "worktree": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-0dd36ef9",
+            "updatedAt": "2026-10-31T13:39:15.578Z"
+          },
+          {
+            "role": "researcher",
+            "childId": "migration-child-1",
+            "status": "running",
+            "summary": null,
+            "branch": "research/r-ea3279da",
+            "worktree": "/tmp/aleph-budget-strategy-HdYFhy/.aleph/researchers/r-77c42113",
+            "updatedAt": "2026-10-31T13:39:15.601Z"
+          },
+          {
+            "role": "composer",
+            "childId": "migration-child-2",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:39:15.709Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 1,
+          "failed": 0
+        }
+      }
+    }
+  ],
+  "boundary": "Current project/mission/batch contract, not restoration of campaign quotas or L0-L3. Automatic substitutes storage, sessions and activation receipts; real Git, worktrees and shell computation remain. Actual uses installed DSH, registered tools, persistent state and original spawn provider. A local deterministic adapter records actual initial model context and performs a real bash cwd marker before waiting. No production code, deadline or quota edits.",
+  "definitions": [
+    {
+      "name": "aleph_init_project",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "description": "Absolute workspace path; defaults to the session cwd"
+          },
+          "eval_command": {
+            "type": "string",
+            "description": "Research evaluator command"
+          },
+          "eval_root": {
+            "type": "string",
+            "description": "Directory the evaluator runs from"
+          },
+          "visible_data": {
+            "type": "string"
+          },
+          "testset": {
+            "type": "string"
+          },
+          "submission_python": {
+            "type": "string"
+          },
+          "researchers": {
+            "type": "integer",
+            "description": "Default researcher count (default 4)"
+          },
+          "brief": {
+            "type": "string",
+            "description": "Research objective for researcher prompts"
+          }
+        }
+      }
+    },
+    {
+      "name": "aleph_list_missions",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_status",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Optional project id"
+          }
+        }
+      }
+    },
+    {
+      "name": "aleph_set_python",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "python": {
+            "type": "string",
+            "description": "Python executable path"
+          }
+        },
+        "required": [
+          "project_id",
+          "python"
+        ]
+      }
+    },
+    {
+      "name": "aleph_create_research_scaffold",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "title": {
+            "type": "string",
+            "description": "Research project title"
+          },
+          "data": {
+            "type": "array",
+            "description": "Data sources to copy into the research project",
+            "items": {
+              "type": "string"
+            }
+          },
+          "python": {
+            "type": "string",
+            "description": "Shared Python executable for researchers and missions"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_start_mission",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Short mission name"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_propose_mission",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Mission branch in the mission repo"
+          }
+        },
+        "required": [
+          "project_id",
+          "branch"
+        ]
+      }
+    },
+    {
+      "name": "aleph_approve_mission",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "mission_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "mission_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_form_batch",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "machine_id": {
+            "type": "string",
+            "description": "Machine id, default local"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_evaluate",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_researcher",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_researchers",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Optional count; defaults to the project researcher count"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_composer",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_infra",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "batch_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "batch_id"
+        ]
+      }
+    },
+    {
+      "name": "aleph_run_batch",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id"
+          },
+          "batch_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "batch_id"
+        ]
+      }
+    }
+  ],
+  "complete": true,
+  "effective": 63,
+  "by_issue": {
+    "#4": 29,
+    "#8": 34
+  },
+  "failed": 1
+}

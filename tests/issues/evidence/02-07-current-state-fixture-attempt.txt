@@ -1,0 +1,101 @@
+▶ B current budget scope and research instruction delivery
+  ✔ #4: project initializer has no numeric budget argument (0.612869ms)
+  ✔ #4: former quota setter is absent from visible current tools (0.200084ms)
+  ✔ #4: former campaign dispatch operation is absent (0.166255ms)
+  ✔ #8: research objectives are a supported initializer argument (0.147579ms)
+  ✔ #8: former campaign composition operation is absent (0.131582ms)
+  ✔ #8: mission proposal uses a committed branch argument (0.127057ms)
+  ✔ #4: new project starts without queued work (0.288226ms)
+  ✔ #4: new project has no numerical quota counter (0.163255ms)
+  ✔ #4: current machine registry starts idle (0.167819ms)
+  ✔ #4: initial machine has no batch owner (0.164328ms)
+  ✔ #8: initial research objective is stored exactly (0.111886ms)
+  ✔ #8: researcher count is distinct from quota (0.087407ms)
+  ✔ #8: first activation receives exact custom research objective (0.379912ms)
+  ✔ #8: first activation receives assigned research branch (0.183039ms)
+  ✔ #8: first activation receives assigned worktree path (0.1248ms)
+  ✔ #8: first activation receives mission repository location (0.124065ms)
+  ✔ #8: first activation receives significant-compute mission requirement (0.113536ms)
+  ✔ #8: first activation receives own-mission waiting requirement (0.145562ms)
+  ✔ #8: first activation receives dependency declaration requirement (0.096881ms)
+  ✔ #8: first activation receives final evaluation requirement (0.111924ms)
+  ✔ #8: first research branch actually exists (5.135545ms)
+  ✔ #8: first research worktree belongs to research repository (4.344553ms)
+  ✔ #8: first activation request uses researcher preset (0.166005ms)
+  ✔ #8: updating research objective preserves project identity (0.187559ms)
+  ✔ #8: updating research objective persists new content (0.364941ms)
+  ✔ #8: later researcher receives updated research objective (0.293508ms)
+  ✔ #8: later researcher does not receive obsolete custom objective (0.149245ms)
+  ✔ #8: captured first request retains original objective (0.125304ms)
+  ✔ #8: researchers have independent branches (0.199587ms)
+  ✔ #8: researchers have independent worktrees (0.104198ms)
+  ✔ #8: registered status retains both live researcher identities (0.727664ms)
+  ✔ #4: mission scaffold does not execute computation (0.536193ms)
+  ✔ #8: mission method exists in committed manifest (4.960416ms)
+  ✔ #4: proposal requires later approval (0.351153ms)
+  ✔ #4: proposal alone starts no calculation (0.149006ms)
+  ✔ #4: proposal alone creates no batch (0.119314ms)
+  ✔ #4: unapproved work cannot form a batch (0.778714ms)
+  ✔ #4: unapproved rejection leaves source commit reachable (4.791932ms)
+  ✔ #8: proposal preserves researcher ownership (0.243268ms)
+  ✔ #8: proposal preserves declared output names (0.125225ms)
+  ✔ #8: proposal preserves resource description (0.152068ms)
+  ✔ #8: proposal has no structured L0-L3 strategy record (0.104425ms)
+  ✔ #8: explicit method remains readable from proposed branch (4.276964ms)
+  ✔ #4: approval admits the mission to approved queue (0.14555ms)
+  ✔ #4: approval itself has not run task code (0.126847ms)
+  ✔ #4: approval does not create a numerical spending record (0.109039ms)
+  ✔ #4: approved work forms a machine-bound batch (0.286809ms)
+  ✔ #4: batch reserves the local machine (0.180664ms)
+  ✔ #4: reservation records exact batch identity (0.130495ms)
+  ✔ #4: mission is associated with admitted batch (0.124609ms)
+  ✔ #4: composition itself does not execute task code (0.124853ms)
+  ✔ #8: batch tree retains explicit mission method (4.863782ms)
+  ✔ #4: execution records running batch (0.293505ms)
+  ✔ #4: execution retains busy machine ownership (0.154525ms)
+  ✖ #4: execution records running mission (1.154529ms)
+  ✔ #4: task is launched once (0.308681ms)
+  ✔ #4: completed task has a done result (0.305261ms)
+  ✔ #4: completed batch releases machine (0.179009ms)
+  ✔ #4: completed batch clears reservation identity (0.154234ms)
+  ✔ #4: completed task has a readable result commit (4.834994ms)
+  ✔ #8: result commit retains explicit method metadata (4.626856ms)
+  ✔ #8: declared result is readable from the delivered source branch (5.109926ms)
+  ✔ #8: both context-delivery lifecycles finish independently (0.655606ms)
+✖ B current budget scope and research instruction delivery (464.563572ms)
+ℹ tests 64
+ℹ suites 0
+ℹ pass 62
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 530.006788
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-budget-strategy.test.mjs:21:38
+✖ #4: execution records running mission (1.154529ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'batched'
+  - 'running'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-budget-strategy.test.mjs:111:67
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-budget-strategy.test.mjs:21:79)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-budget-strategy.test.mjs:21:38)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-budget-strategy.test.mjs:111:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'batched',
+    expected: 'running',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
