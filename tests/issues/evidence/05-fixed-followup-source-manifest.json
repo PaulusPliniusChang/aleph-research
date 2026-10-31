@@ -1,0 +1,133 @@
+{
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "source": "/tmp/aleph-05-restart-fix-source",
+  "frozen": true,
+  "changes": [
+    {
+      "path": "docs/architecture.md",
+      "sha256": "1adfa758dc645ee41297787eef30861dc80b980d512ae6a7beb3d6193135ea8b",
+      "baseline_sha256": "95810543fae444d944224367c346af21a036c33821e06820ebf3b2cc6c6f5036"
+    },
+    {
+      "path": "dsh-plugin/README.md",
+      "sha256": "3cc5133323a9ddb6aade8a2f660f0bb5fe3866737e657ff7d9f5dbfd163c3352",
+      "baseline_sha256": "ace9714b5d07ef5287005e67bda529906e9984fee38ecad16511a995667eaf3d"
+    },
+    {
+      "path": "dsh-plugin/index-v2.js",
+      "sha256": "af3ff0a1a75c2840ac0b488637f1bea24ec769c7d2ab9934fa6c8862a7aabadf",
+      "baseline_sha256": "7b2cca925247bee65b84c88d400ece2a831e1091d89e43cea476960c206aafac"
+    },
+    {
+      "path": "dsh-plugin/test/restart-followup.test.mjs",
+      "sha256": "e83d3370179d6a0acc2e55a07cc21276f8e31b8ef0a93319f08df0e958c4f7c1",
+      "baseline_sha256": null
+    }
+  ],
+  "patch": "/tmp/aleph-05-restart-c-changes.patch",
+  "patch_sha256": "03c0f5dd3d5080fa276a191a558dfcfd2bb3f6a113a1a8fdc7ee574eae26ccf1",
+  "tests": {
+    "log": "/tmp/aleph-05-restart-c-product-tests.txt",
+    "command": "npm test",
+    "total": 56,
+    "new_effective_points": 41,
+    "new_containers": 8,
+    "existing": 7,
+    "pass": 56,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "actual_plugin_interval_exercised": true,
+    "real_dsh_run_by_c": false
+  },
+  "accepted_source": "/home/paulus-chang/\u9879\u76ee/aleph-fix-restart-followup",
+  "independent_automatic_effective": 66,
+  "actual_dsh_effective": 66,
+  "actual_hosts": [
+    {
+      "pid": 481741,
+      "crash": false,
+      "alive": false,
+      "pid_exists": true
+    },
+    {
+      "pid": 481937,
+      "crash": true,
+      "alive": false,
+      "pid_exists": true
+    },
+    {
+      "pid": 482202,
+      "crash": true,
+      "alive": false,
+      "pid_exists": true
+    },
+    {
+      "pid": 482402,
+      "crash": false,
+      "alive": false,
+      "pid_exists": false
+    },
+    {
+      "pid": 482508,
+      "crash": false,
+      "alive": false,
+      "pid_exists": true
+    },
+    {
+      "pid": 482781,
+      "final": true,
+      "exists": false
+    }
+  ],
+  "actual_cleanup": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 481741,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "post_exit_observations": [
+    {
+      "mode": "active-at-restart",
+      "confirmedExitAt": "2026-10-31T13:04:15.284Z",
+      "postExitObservedMs": 6102
+    }
+  ],
+  "boundary": "Product startup plus original five-second interval; real task runner and real owning Host SIGKILL; no product edits, shorter deadlines or manual follow-up method calls. Disk storage adapter for automatic, actual DSH persistence/tools/HTTP for actual. Unobservable-process and multi-Host guarantees not claimed.",
+  "post_launcher_host_pid_check": [
+    {
+      "pid": 481741,
+      "pid_exists": false
+    },
+    {
+      "pid": 481937,
+      "pid_exists": false
+    },
+    {
+      "pid": 482202,
+      "pid_exists": false
+    },
+    {
+      "pid": 482402,
+      "pid_exists": false
+    },
+    {
+      "pid": 482508,
+      "pid_exists": false
+    },
+    {
+      "pid": 482781,
+      "pid_exists": false
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+npm notice run @local/dsh-aleph-research@0.3.0 test
+npm notice run node --test --experimental-loader ./test/loader.mjs test/*.test.mjs
+(node:472904) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/test'
+Switched to branch 'template'
+✔ project mission flows through approval, batch, result cherry-pick and evaluate (481.214875ms)
+(node:472905) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Switched to a new branch 'mission/second'
+▶ restart preserves a legitimate unexecuted forming reservation
+  ✔ forming batch remains forming with the original identity (0.941632ms)
+  ✔ batched mission keeps its batch ownership (0.146591ms)
+  ✔ machine remains busy for the original forming batch (0.119619ms)
+  ✔ startup neither executes compute nor moves the mission branch (5.296912ms)
+Switched to branch 'template'
+  ✔ another batch cannot steal the reserved machine (1.085379ms)
+  ✔ periodic follow-up does not expire an unexecuted forming batch (0.234244ms)
+  ✔ the original forming batch can still run and deliver its own result (0.359846ms)
+✔ restart preserves a legitimate unexecuted forming reservation (364.998918ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Preparing worktree (detached HEAD 41bb8a8)
+▶ startup captures a real live runner and later reconciles its exit without another restart
+  ✔ live runner is detected under its actual worktree (3.499907ms)
+  ✔ live startup preserves running batch and exact machine reservation (0.69688ms)
+  ✔ startup closes only its stale agent snapshot (0.183335ms)
+  ✔ live follow-up preserves new agents and does not duplicate computation (3.831676ms)
+  ✔ a repeated startup call is idempotent and does not recapture agents (0.13219ms)
+  ✔ explicit live rerun is refused before altering the worktree (2.783661ms)
+  ✔ post-exit follow-up marks the captured batch interrupted with a completion time (0.261912ms)
+  ✔ the blocked mission reaches explicit failed state without a forged result commit (0.114171ms)
+  ✔ only the exact completed reservation is released (0.084778ms)
+  ✔ actual output and registered worktree remain available for inspection (11.15063ms)
+  ✔ terminal rerun is rejected and completed output is not erased (0.321953ms)
+  ✔ subsequent follow-up and another Host recovery preserve the terminal record (0.262167ms)
+✔ startup captures a real live runner and later reconciles its exit without another restart (223.429691ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ recovery does not take ownership of new, replaced or already terminal work
+  ✔ a changed startedAt prevents an old observation from settling a replacement (124.338147ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a changed branch prevents an old observation from settling a replacement (124.526837ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a changed machineId prevents an old observation from settling a replacement (126.157989ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ new running work after startup is never added to orphan tracking (122.047807ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a newer machine owner is not released by an old batch completion (124.674795ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+  ✔ a normally settled record wins over a stale restart observation (135.077346ms)
+✔ recovery does not take ownership of new, replaced or already terminal work (758.074659ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ uncertainty, failed writes and overlapping ticks retain safe recovery ownership
+  ✔ an unknown observation preserves busy running state for a future tick (0.195063ms)
+  ✔ a failed durable write keeps the original reservation and tracked batch (0.134336ms)
+  ✔ overlapping ticks share one pending reconciliation (0.089012ms)
+  ✔ a later successful write closes the batch and preserves earlier summary fields (0.066164ms)
+  ✔ retry and overlap produce only one interruption diagnostic (0.081253ms)
+✔ uncertainty, failed writes and overlapping ticks retain safe recovery ownership (120.044446ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ already delivered results and invalid reservations remain stable across startup
+  ✔ done batch and mission retain the delivered commit (4.53992ms)
+  ✔ done output stays readable from Git without another computation (5.320073ms)
+  ✔ a busy reservation pointing to a missing batch is released at startup (0.256527ms)
+  ✔ a batch assigned to another machine cannot justify this machine reservation (0.157084ms)
+✔ already delivered results and invalid reservations remain stable across startup (282.149384ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+▶ plugin startup waits for recovery before tool admission and disposes its follow-up timer
+  ✔ no product tool is registered while the startup durable write is pending (0.165736ms)
+  ✔ tool admission begins only after stale records settle with the forming reservation retained (0.087086ms)
+✔ plugin startup waits for recovery before tool admission and disposes its follow-up timer (153.53465ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Preparing worktree (detached HEAD 34e947d)
+▶ completed orphan output remains preserved when the first restart observes no live runner
+  ✔ the stopped batch and mission are explicitly interrupted on initial recovery (0.35714ms)
+  ✔ successful compute output stays readable without claiming a delivered result (10.022108ms)
+  ✔ explicit rerun and repeated recovery cannot repeat the completed compute (0.581159ms)
+✔ completed orphan output remains preserved when the first restart observes no live runner (210.724861ms)
+Switched to a new branch 'mission/first'
+Switched to branch 'template'
+Preparing worktree (detached HEAD a5705d8)
+▶ the actual plugin timer eventually closes only the startup runner after natural exit
+  ✔ the five-second interval reaches terminal state and releases the owned machine (0.43595ms)
+  ✔ the interval preserves new agents, compute output and one execution count (0.332442ms)
+✔ the actual plugin timer eventually closes only the startup runner after natural exit (5253.655916ms)
+(node:472906) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./test/loader.mjs", pathToFileURL("./")); register("./test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a researcher completion settles only its own activation record (118.456968ms)
+✔ an activation without a child identity fails instead of writing a null record (74.1791ms)
+✔ an evaluation report stays attached to the commit it scored (216.443655ms)
+Switched to a new branch 'missions/late-commit'
+Switched to branch 'template'
+Switched to branch 'missions/late-commit'
+Switched to branch 'template'
+✔ result delivery refuses to overwrite commits pushed after batching (270.159502ms)
+Switched to a new branch 'missions/slow'
+Switched to branch 'template'
+✔ a Host restart frees the machine and fails interrupted work (126.883314ms)
+✔ evaluations accumulate and the best result follows the highest score (338.341755ms)
+ℹ tests 56
+ℹ suites 0
+ℹ pass 56
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7551.718788
