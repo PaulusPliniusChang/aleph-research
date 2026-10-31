@@ -71,6 +71,7 @@ const projectSchema = z.object({
   brief: z.string().optional(),
   researcherCount: z.number().int().optional(),
   prepared: z.boolean().optional(),
+  pythonPath: z.string().nullable().optional(),
   visibleData: z.string().nullable().optional(),
   testsetPath: z.string().nullable().optional(),
   submissionPython: z.string().nullable().optional(),
