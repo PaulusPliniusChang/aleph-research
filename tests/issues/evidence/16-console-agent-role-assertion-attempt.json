@@ -1,0 +1,219 @@
+{
+  "source": "/home/paulus-chang/项目/aleph",
+  "source_sha": "66885994ceadad83a237a27c1fc7de6419889c14",
+  "boundary": "Actual backend snapshot serializer and complete existing consoleBody/agentSection evaluated inside VM. React createElement replaced by a structural virtual-tree collector; project/agent states are explicit fixtures, no browser or DSH is claimed. Actual rendered DSH verification is separate.",
+  "observations": [
+    {
+      "scope": "researcher",
+      "agent": {
+        "role": "researcher",
+        "status": "running",
+        "childId": "child-researcher",
+        "branch": "research/researcher",
+        "updatedAt": "2026-10-31T01:02:03Z",
+        "summary": "Independent summary researcher"
+      },
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T10:10:08.310Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py"
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "status": "running",
+            "childId": "child-researcher",
+            "branch": "research/researcher",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary researcher"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 6:10:08 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet.\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nError\nNo missions recorded yet.\nGenerated at: 10/31/2026, 6:10:08 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet."
+    },
+    {
+      "scope": "composer",
+      "agent": {
+        "role": "composer",
+        "status": "done",
+        "childId": "child-composer",
+        "branch": "research/composer",
+        "updatedAt": "2026-10-31T01:02:03Z",
+        "summary": "Independent summary composer"
+      },
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T10:10:08.329Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py"
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "status": "done",
+            "childId": "child-composer",
+            "branch": "research/composer",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary composer"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 6:10:08 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet.\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nError\nNo missions recorded yet.\nGenerated at: 10/31/2026, 6:10:08 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet."
+    },
+    {
+      "scope": "infra",
+      "agent": {
+        "role": "infra",
+        "status": "failed",
+        "childId": "child-infra",
+        "branch": "research/infra",
+        "updatedAt": "2026-10-31T01:02:03Z",
+        "summary": "Independent summary infra"
+      },
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T10:10:08.330Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py"
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "infra",
+            "status": "failed",
+            "childId": "child-infra",
+            "branch": "research/infra",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary infra"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 6:10:08 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet.\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nError\nNo missions recorded yet.\nGenerated at: 10/31/2026, 6:10:08 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet."
+    },
+    {
+      "scope": "multiple",
+      "data": {
+        "schema": 2,
+        "generated_at": "2026-10-31T10:10:08.333Z",
+        "project": {
+          "id": "project-visible-01",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/real/workspace",
+          "research_root": "/real/workspace/research",
+          "mission_root": "/real/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python eval.py"
+        },
+        "missions": [],
+        "batches": [],
+        "machines": [
+          {
+            "id": "machine-visible-01",
+            "status": "idle",
+            "kind": "local",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "researcher",
+            "status": "running",
+            "childId": "child-first",
+            "branch": "research/first",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary first"
+          },
+          {
+            "role": "infra",
+            "status": "done",
+            "childId": "child-second",
+            "branch": "research/second",
+            "updatedAt": "2026-10-31T01:02:03Z",
+            "summary": "Independent summary second"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      },
+      "body": "Project\nProject\nproject-visible-01\nStatus\n\nRunning\nTemplate branch\ntemplate\nGenerated at\n10/31/2026, 6:10:08 PM\nWorkspace\n/real/workspace\nResearch repo\n/real/workspace/research\nMission repo\n/real/workspace/missions\nEvaluator\npython eval.py\nMachines\nMachine\nStatus\nBatch\nmachine-visible-01\nIdle\n—\nMission counts\n0\nQueued\n0\nRunning\n0\nDone\n0\nFailed\nOrchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet.\nComposer batches\nBatch\nStatus\nMachine\nMissions\nBranch\nCreated\nNo composed batches yet.\nMissions\nStatus\nMission\nOwner session\nBranch\nBatch\nPre-batch tip\nResult commit\nError\nNo missions recorded yet.\nGenerated at: 10/31/2026, 6:10:08 PM\nschema 2\nmissions: 0 · batches: 0",
+      "agents": "Orchestration agents\nRole\nAgent status\nChild session\nBranch\nUpdated\nSummary\nNo Composer or InfraOptimizer run yet."
+    }
+  ]
+}

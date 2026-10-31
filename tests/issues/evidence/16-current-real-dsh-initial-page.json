@@ -1,0 +1,73 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-_rru_6j8",
+    "workspace": "/tmp/aleph-project-dsh-_rru_6j8/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf"
+  },
+  "url": "http://127.0.0.1:58493",
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-console-agents.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/16-current-real-dsh-console-agents.json"
+  ],
+  "browser_fallback": "Browser plugin not available",
+  "events": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 279966,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "browser": {
+    "flow": "Actual DSH console -> initialize project -> observe real agent records",
+    "browserFallback": "Browser plugin not available",
+    "checks": [
+      {
+        "name": "actual page has DSH identity",
+        "passed": true
+      },
+      {
+        "name": "actual console is not blank",
+        "passed": true
+      },
+      {
+        "name": "no framework error overlay is present",
+        "passed": true
+      },
+      {
+        "name": "no uncaught page error is present",
+        "passed": true,
+        "value": []
+      }
+    ],
+    "pageErrors": [],
+    "consoleLogs": [
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+    ],
+    "events": [
+      {
+        "name": "initial-console",
+        "body": "DSH \u672c\u5730\u6784\u5efa\n0.2.2-alpha.2-f3803c9-dirty\n\u65b0\u4f1a\u8bdd\n\u63d2\u4ef6\n\u81ea\u52a8\u5316\u4efb\u52a1\nAleph\n\u66f4\u591a\n\u5de5\u4f5c\u533a\n\u9ed8\u8ba4\u5de5\u4f5c\u533a\n\u65b0\u4f1a\u8bdd\n\u66f4\u591a\nAleph Research \u9879\u76ee\n\n\u53ea\u8bfb\u5c55\u793a DSH \u9879\u76ee\u3001mission\u3001batch \u4e0e\u673a\u5668\u72b6\u6001\u3002\n\n\u6700\u540e\u66f4\u65b0: 19:10:11\n\u8fd4\u56de\u5bf9\u8bdd\n\u6682\u65e0\u6218\u5f79\u5feb\u7167\n\n\u5c1a\u65e0\u9879\u76ee\uff1b\u5728 Leader \u6a21\u5f0f\u4f7f\u7528 aleph_init_project \u521b\u5efa\u3002\n\naleph/no-project",
+        "screenshot": "/tmp/aleph-project-dsh-_rru_6j8/no-project-desktop.png"
+      }
+    ]
+  },
+  "browser_exit": 0
+}
