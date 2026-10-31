@@ -797,7 +797,7 @@ class ProjectService {
         } catch { /* process exited */ }
       }
       for (const [groupKey, group] of groups) {
-        if (group.ticks > 1500) {
+        if (group.ticks > 1000) {
           for (const pid of group.pids) {
             try { process.kill(pid, 'SIGKILL'); } catch { /* ignore */ }
           }
