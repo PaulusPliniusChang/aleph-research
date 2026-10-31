@@ -1,0 +1,706 @@
+{
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "automatic_total": 172,
+  "actual_total": 172,
+  "unique_assertion_mapping": {
+    "upstream5_current_best_consistency": [
+      {
+        "scope": "higher-finishes-first",
+        "name": "best score equals highest completed numeric score"
+      },
+      {
+        "scope": "higher-finishes-first",
+        "name": "best commit identifies matching actually scored algorithm"
+      },
+      {
+        "scope": "higher-finishes-first",
+        "name": "best report identifies same input code"
+      },
+      {
+        "scope": "higher-finishes-first",
+        "name": "best ref retains its report"
+      },
+      {
+        "scope": "higher-finishes-first",
+        "name": "best record branch matches winning code"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "best score equals highest completed numeric score"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "best commit identifies matching actually scored algorithm"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "best report identifies same input code"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "best ref retains its report"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "best record branch matches winning code"
+      },
+      {
+        "scope": "equal-score",
+        "name": "best score equals highest completed numeric score"
+      },
+      {
+        "scope": "equal-score",
+        "name": "best commit identifies matching actually scored algorithm"
+      },
+      {
+        "scope": "equal-score",
+        "name": "best report identifies same input code"
+      },
+      {
+        "scope": "equal-score",
+        "name": "best ref retains its report"
+      },
+      {
+        "scope": "equal-score",
+        "name": "best record branch matches winning code"
+      },
+      {
+        "scope": "scoreless",
+        "name": "scoreless report does not become best"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "best score equals highest completed numeric score"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "best commit identifies matching actually scored algorithm"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "best report identifies same input code"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "best ref retains its report"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "best record branch matches winning code"
+      }
+    ],
+    "upstream11_current_report_retrieval": [
+      {
+        "scope": "higher-finishes-first",
+        "name": "main research branch remains unchanged"
+      },
+      {
+        "scope": "higher-finishes-first",
+        "name": "main research worktree stays clean"
+      },
+      {
+        "scope": "higher-finishes-first",
+        "name": "history retains each completed evaluation"
+      },
+      {
+        "scope": "higher-finishes-first",
+        "name": "history completion order matches real releases"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "higher-finishes-first/low",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "higher-finishes-first/high",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "main research branch remains unchanged"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "main research worktree stays clean"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "history retains each completed evaluation"
+      },
+      {
+        "scope": "lower-finishes-first",
+        "name": "history completion order matches real releases"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "lower-finishes-first/low",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "lower-finishes-first/high",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "equal-score",
+        "name": "main research branch remains unchanged"
+      },
+      {
+        "scope": "equal-score",
+        "name": "main research worktree stays clean"
+      },
+      {
+        "scope": "equal-score",
+        "name": "history retains each completed evaluation"
+      },
+      {
+        "scope": "equal-score",
+        "name": "history completion order matches real releases"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "equal-score/low",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "equal-score/high",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "scoreless",
+        "name": "main research branch remains unchanged"
+      },
+      {
+        "scope": "scoreless",
+        "name": "main research worktree stays clean"
+      },
+      {
+        "scope": "scoreless",
+        "name": "history retains each completed evaluation"
+      },
+      {
+        "scope": "scoreless",
+        "name": "history completion order matches real releases"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "scoreless/one",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "nonzero",
+        "name": "main research branch remains unchanged"
+      },
+      {
+        "scope": "nonzero",
+        "name": "main research worktree stays clean"
+      },
+      {
+        "scope": "nonzero",
+        "name": "nonzero evaluator returns failure"
+      },
+      {
+        "scope": "nonzero",
+        "name": "failure diagnostic retains actual stderr"
+      },
+      {
+        "scope": "nonzero",
+        "name": "failure creates no evaluation history"
+      },
+      {
+        "scope": "nonzero",
+        "name": "failure creates no best result"
+      },
+      {
+        "scope": "nonzero",
+        "name": "failure creates no report ref"
+      },
+      {
+        "scope": "nonzero",
+        "name": "failure preserves source branch"
+      },
+      {
+        "scope": "nonzero",
+        "name": "failed temporary evaluation worktree removed"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "main research branch remains unchanged"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "main research worktree stays clean"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "history retains each completed evaluation"
+      },
+      {
+        "scope": "bounded-report",
+        "name": "history completion order matches real releases"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "evaluation returns success"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "returned score follows actual evaluator contract"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "history score matches returned score"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "history branch matches input branch"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "report ref resolves to matching report"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "report parent identifies scored input"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "report source metadata identifies scored input"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "report retains additional rows information"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "report retains diagnostic information"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "report retains relative baseline measurement"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "tool response returns evaluator stderr"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "tool response retains rows and diagnostic output"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "research source remains reachable"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "successful evaluation updates only its branch report"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "history report fields match return value"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "stdout limit is explicit at8000 characters"
+      },
+      {
+        "scope": "bounded-report/one",
+        "name": "commit report applies documented4000-character prefix"
+      }
+    ]
+  },
+  "mapping_counts": {
+    "upstream5": 21,
+    "upstream11": 151
+  },
+  "boundary": "One combined automatic gate172 effective points; each point assigned exactly once. No same observation counted as a unique point for both issues. #5 historic sota and multi-machine capacity not exercised. #11 no unsolicited Leader completion notification claim; output limits8000/4000 are recorded behavior.",
+  "actual_host": 427736,
+  "host_stopped": true
+}

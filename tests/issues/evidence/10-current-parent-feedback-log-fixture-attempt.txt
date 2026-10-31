@@ -1,0 +1,238 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-_78um2os", "url": "http://127.0.0.1:40959"}
+▶ Actual researcher evaluation completion and Leader parent feedback
+  ✔ actual researcher uses assigned preset (2.439448ms)
+  ✔ actual researcher executes exactly evaluate then finish (0.313725ms)
+  ✔ actual model emitted registered evaluation tool (0.243829ms)
+  ✔ evaluation tool input identifies this project (0.224675ms)
+  ✖ actual child session records evaluation tool call (15.67433ms)
+  ✔ real Python score appears in evaluation history (0.253782ms)
+  ✔ single evaluation creates one history entry (0.198313ms)
+  ✔ evaluation history owns this researcher branch (0.21558ms)
+  ✔ report parent is evaluated research input (13.886814ms)
+  ✔ independent report ref resolves (7.772375ms)
+  ✔ report contains actual score (0.186338ms)
+  ✔ report contains actual diagnostic (0.11515ms)
+  ✔ report contains additional rows measurement (0.111499ms)
+  ✔ best score remains associated with this evaluation (0.149124ms)
+  ✔ best report remains associated with this evaluation (0.099213ms)
+  ✔ completion record matches exact child identity (0.081414ms)
+  ✔ completion record retains researcher branch (0.074116ms)
+  ✔ completion record retains researcher worktree (0.076244ms)
+  ✔ completion callback marks child done (0.073252ms)
+  ✔ completion callback stores complete summary (0.068171ms)
+  ✔ stored summary includes score (0.069926ms)
+  ✔ stored summary includes report commit (0.137593ms)
+  ✔ stored summary includes report ref (0.116979ms)
+  ✔ stored summary includes evaluated source (0.074151ms)
+  ✖ child transcript retains actual evaluation report (0.38382ms)
+  ✖ child transcript retains completion text (0.288275ms)
+  ✔ child activation has left live registry (0.10082ms)
+  ✔ owned research worktree remains available (0.112021ms)
+  ✖ actual prompt carries assigned worktree (0.255459ms)
+  ✖ actual prompt carries assigned branch (0.23953ms)
+  ✖ actual prompt requires evaluate before finish (0.210334ms)
+  ✖ actual prompt disallows project queue modification (0.219662ms)
+  ✖ actual child durable parent matches Leader (0.119235ms)
+  ✔ parent session remains live (0.093569ms)
+  ✔ parent session events remain unchanged on child completion (0.471207ms)
+  ✔ parent receives no completion score automatically (0.139418ms)
+  ✔ parent receives no report marker automatically (0.091592ms)
+  ✔ parent receives no report commit automatically (0.103002ms)
+  ✔ parent receives no evaluation ref automatically (0.165738ms)
+✖ Actual researcher evaluation completion and Leader parent feedback (907.785137ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 31
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1019.314328
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ actual child session records evaluation tool call (15.67433ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(childText.includes('aleph_evaluate'))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:45:77
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:45:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ child transcript retains actual evaluation report (0.38382ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(childText.includes(e.researchCommit))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:65:77
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:65:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ child transcript retains completion text (0.288275ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(childText.includes(summary))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:66:68
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:66:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ actual prompt carries assigned worktree (0.255459ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(prompt.includes(child.worktree))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:69:67
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:69:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ actual prompt carries assigned branch (0.23953ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(prompt.includes(child.branch))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:70:65
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:70:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ actual prompt requires evaluate before finish (0.210334ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(prompt.includes('call aleph_evaluate once more'))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:71:73
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:71:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ actual prompt disallows project queue modification (0.219662ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(prompt.includes('Do not modify project queue'))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:72:78
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:72:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:18:32
+✖ actual child durable parent matches Leader (0.119235ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'parentSession')
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:73:94
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:51)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:18:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:73:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/current-parent-feedback.py", line 66, in <module>
+    raise RuntimeError('actual process observation failed; inspect saved evidence')
+RuntimeError: actual process observation failed; inspect saved evidence

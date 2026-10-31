@@ -1,0 +1,33 @@
+{
+  "baseline": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "product_source_edits": false,
+  "deadline_adaptation": false,
+  "effective_observations": 39,
+  "parent_before_events": 4,
+  "parent_after_events": 4,
+  "events": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 442481,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "source_sha256": {
+    "/home/paulus-chang/\u9879\u76ee/aleph/dsh-plugin/index-v2.js": "7b2cca925247bee65b84c88d400ece2a831e1091d89e43cea476960c206aafac",
+    "/opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-subagent/lib/index.js": "5aad8aadee1879f1e8a878431630f885adbe6f9ee9cb1832838abbc56bc1fbea",
+    "tests/issues/dsh/current-parent-feedback-bridge.mjs": "493ec2575550acb053b6a67a0a3ad6fdac63ac203a12394349c21c3c7db88ceb",
+    "tests/issues/dsh/current-parent-feedback.test.mjs": "1de982181119f34ff40a59254ea3018d2274148adacb6bb77da2b1f2337a23cc",
+    "tests/issues/dsh/current-parent-feedback.py": "82b44dd53fb9542b2d8821bf4f17312c1450fc5c870c333f2f48fa6c290e3235"
+  },
+  "fixture_adaptation": "Only isolated diagnostic bridge reads actual session.log instead of nonexistent session.events. Model is deterministic, all scoring/Git/DSH tools real.",
+  "explicit_send_message_tested": false
+}

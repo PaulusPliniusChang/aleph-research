@@ -1,0 +1,1413 @@
+{
+  "source": "/home/paulus-chang/项目/aleph",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": false,
+  "checks": [
+    {
+      "scope": "higher-finishes-first",
+      "name": "main research branch remains unchanged",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "main research worktree stays clean",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "history retains each completed evaluation",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "history completion order matches real releases",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/low",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first/high",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "best score equals highest completed numeric score",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "best commit identifies matching actually scored algorithm",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "best report identifies same input code",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "best ref retains its report",
+      "passed": true
+    },
+    {
+      "scope": "higher-finishes-first",
+      "name": "best record branch matches winning code",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "main research branch remains unchanged",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "main research worktree stays clean",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "history retains each completed evaluation",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "history completion order matches real releases",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/low",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first/high",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "best score equals highest completed numeric score",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "best commit identifies matching actually scored algorithm",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "best report identifies same input code",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "best ref retains its report",
+      "passed": true
+    },
+    {
+      "scope": "lower-finishes-first",
+      "name": "best record branch matches winning code",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "main research branch remains unchanged",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "main research worktree stays clean",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "history retains each completed evaluation",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "history completion order matches real releases",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/low",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "equal-score/high",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "best score equals highest completed numeric score",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "best commit identifies matching actually scored algorithm",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "best report identifies same input code",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "best ref retains its report",
+      "passed": true
+    },
+    {
+      "scope": "equal-score",
+      "name": "best record branch matches winning code",
+      "passed": true
+    },
+    {
+      "scope": "scoreless",
+      "name": "main research branch remains unchanged",
+      "passed": true
+    },
+    {
+      "scope": "scoreless",
+      "name": "main research worktree stays clean",
+      "passed": true
+    },
+    {
+      "scope": "scoreless",
+      "name": "history retains each completed evaluation",
+      "passed": true
+    },
+    {
+      "scope": "scoreless",
+      "name": "history completion order matches real releases",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "scoreless/one",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "scoreless",
+      "name": "scoreless report does not become best",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "main research branch remains unchanged",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "main research worktree stays clean",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "nonzero evaluator returns failure",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "failure diagnostic retains actual stderr",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "failure creates no evaluation history",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "failure creates no best result",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "failure creates no report ref",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "failure preserves source branch",
+      "passed": true
+    },
+    {
+      "scope": "nonzero",
+      "name": "failed temporary evaluation worktree removed",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "main research branch remains unchanged",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "main research worktree stays clean",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "history retains each completed evaluation",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "history completion order matches real releases",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "evaluation returns success",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "returned score follows actual evaluator contract",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "history score matches returned score",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "history branch matches input branch",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "report ref resolves to matching report",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "report parent identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "report source metadata identifies scored input",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "report retains additional rows information",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "report retains diagnostic information",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "report retains relative baseline measurement",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "tool response returns evaluator stderr",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "tool response retains rows and diagnostic output",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "research source remains reachable",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "successful evaluation updates only its branch report",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "history report fields match return value",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "stdout limit is explicit at8000 characters",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report/one",
+      "name": "commit report applies documented4000-character prefix",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "best score equals highest completed numeric score",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "best commit identifies matching actually scored algorithm",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "best report identifies same input code",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "best ref retains its report",
+      "passed": true
+    },
+    {
+      "scope": "bounded-report",
+      "name": "best record branch matches winning code",
+      "passed": true
+    }
+  ],
+  "scenarios": [
+    {
+      "mode": "higher-finishes-first",
+      "project": "p-4117f348",
+      "inputs": [
+        {
+          "label": "low",
+          "score": 10,
+          "input": "a826a3b239b7c2ffede45fb46e157aa328a2b7aa",
+          "branch": "research/low"
+        },
+        {
+          "label": "high",
+          "score": 20,
+          "input": "533f8814fe1b7196d28c70e414be525ad0668cbb",
+          "branch": "research/high"
+        }
+      ],
+      "order": [
+        1,
+        0
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-4117f348",
+            "score": 10,
+            "researchCommit": "4b3925fca760ec467961039f7340f1ce83073fbf",
+            "evaluatedCommit": "a826a3b239b7c2ffede45fb46e157aa328a2b7aa",
+            "evaluationRef": "refs/aleph/evaluations/eval-4f518007",
+            "researchBranchUpdated": true,
+            "best": {
+              "score": 20,
+              "branch": "research/high",
+              "commit": "533f8814fe1b7196d28c70e414be525ad0668cbb",
+              "researchCommit": "60806cf283fc5e41b74b6763557341bb7ca1de86",
+              "evaluationRef": "refs/aleph/evaluations/eval-940a560c",
+              "at": "2026-10-31T12:28:42.774Z"
+            },
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-low\", \"baseline_delta\": 5, \"score\": 10}\n",
+            "stderr": "stderr-low\n"
+          },
+          "report": "research evaluation: 10\n\nAleph-Project: p-4117f348\nAleph-Evaluation: 10\nAleph-Research-Commit: a826a3b239b7c2ffede45fb46e157aa328a2b7aa\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-low\", \"baseline_delta\": 5, \"score\": 10}"
+        },
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-4117f348",
+            "score": 20,
+            "researchCommit": "60806cf283fc5e41b74b6763557341bb7ca1de86",
+            "evaluatedCommit": "533f8814fe1b7196d28c70e414be525ad0668cbb",
+            "evaluationRef": "refs/aleph/evaluations/eval-940a560c",
+            "researchBranchUpdated": true,
+            "best": {
+              "score": 20,
+              "branch": "research/high",
+              "commit": "533f8814fe1b7196d28c70e414be525ad0668cbb",
+              "researchCommit": "60806cf283fc5e41b74b6763557341bb7ca1de86",
+              "evaluationRef": "refs/aleph/evaluations/eval-940a560c",
+              "at": "2026-10-31T12:28:42.774Z"
+            },
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-high\", \"baseline_delta\": 15, \"score\": 20}\n",
+            "stderr": "stderr-high\n"
+          },
+          "report": "research evaluation: 20\n\nAleph-Project: p-4117f348\nAleph-Evaluation: 20\nAleph-Research-Commit: 533f8814fe1b7196d28c70e414be525ad0668cbb\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-high\", \"baseline_delta\": 15, \"score\": 20}"
+        }
+      ],
+      "state": {
+        "id": "p-4117f348",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-history-higher-finishes-first-BuDMBm/workspace",
+        "research_root": "/tmp/aleph-history-higher-finishes-first-BuDMBm/workspace/research",
+        "mission_root": "/tmp/aleph-history-higher-finishes-first-BuDMBm/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 '/tmp/aleph-history-higher-finishes-first-BuDMBm/evaluate.py'",
+        "eval_root": null,
+        "best": {
+          "score": 20,
+          "branch": "research/high",
+          "commit": "533f8814fe1b7196d28c70e414be525ad0668cbb",
+          "researchCommit": "60806cf283fc5e41b74b6763557341bb7ca1de86",
+          "evaluationRef": "refs/aleph/evaluations/eval-940a560c",
+          "at": "2026-10-31T12:28:42.774Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-940a560c",
+            "branch": "research/high",
+            "evaluatedCommit": "533f8814fe1b7196d28c70e414be525ad0668cbb",
+            "researchCommit": "60806cf283fc5e41b74b6763557341bb7ca1de86",
+            "evaluationRef": "refs/aleph/evaluations/eval-940a560c",
+            "score": 20,
+            "at": "2026-10-31T12:28:42.774Z"
+          },
+          {
+            "id": "eval-4f518007",
+            "branch": "research/low",
+            "evaluatedCommit": "a826a3b239b7c2ffede45fb46e157aa328a2b7aa",
+            "researchCommit": "4b3925fca760ec467961039f7340f1ce83073fbf",
+            "evaluationRef": "refs/aleph/evaluations/eval-4f518007",
+            "score": 10,
+            "at": "2026-10-31T12:28:42.805Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "lower-finishes-first",
+      "project": "p-43068d0d",
+      "inputs": [
+        {
+          "label": "low",
+          "score": 10,
+          "input": "463a77188a93f91e1e50190bec5dbdc457084382",
+          "branch": "research/low"
+        },
+        {
+          "label": "high",
+          "score": 20,
+          "input": "07494375b666a34485cdb91140becb3d15232ca6",
+          "branch": "research/high"
+        }
+      ],
+      "order": [
+        0,
+        1
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-43068d0d",
+            "score": 10,
+            "researchCommit": "ab28c18064af180202ee39fbc07e98e54e66e111",
+            "evaluatedCommit": "463a77188a93f91e1e50190bec5dbdc457084382",
+            "evaluationRef": "refs/aleph/evaluations/eval-99e316e7",
+            "researchBranchUpdated": true,
+            "best": {
+              "score": 10,
+              "branch": "research/low",
+              "commit": "463a77188a93f91e1e50190bec5dbdc457084382",
+              "researchCommit": "ab28c18064af180202ee39fbc07e98e54e66e111",
+              "evaluationRef": "refs/aleph/evaluations/eval-99e316e7",
+              "at": "2026-10-31T12:28:43.083Z"
+            },
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-low\", \"baseline_delta\": 5, \"score\": 10}\n",
+            "stderr": "stderr-low\n"
+          },
+          "report": "research evaluation: 10\n\nAleph-Project: p-43068d0d\nAleph-Evaluation: 10\nAleph-Research-Commit: 463a77188a93f91e1e50190bec5dbdc457084382\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-low\", \"baseline_delta\": 5, \"score\": 10}"
+        },
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-43068d0d",
+            "score": 20,
+            "researchCommit": "27865877cdd2a81347a2e327930633af3b22f89e",
+            "evaluatedCommit": "07494375b666a34485cdb91140becb3d15232ca6",
+            "evaluationRef": "refs/aleph/evaluations/eval-cfbc8ba8",
+            "researchBranchUpdated": true,
+            "best": {
+              "score": 20,
+              "branch": "research/high",
+              "commit": "07494375b666a34485cdb91140becb3d15232ca6",
+              "researchCommit": "27865877cdd2a81347a2e327930633af3b22f89e",
+              "evaluationRef": "refs/aleph/evaluations/eval-cfbc8ba8",
+              "at": "2026-10-31T12:28:43.113Z"
+            },
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-high\", \"baseline_delta\": 15, \"score\": 20}\n",
+            "stderr": "stderr-high\n"
+          },
+          "report": "research evaluation: 20\n\nAleph-Project: p-43068d0d\nAleph-Evaluation: 20\nAleph-Research-Commit: 07494375b666a34485cdb91140becb3d15232ca6\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-high\", \"baseline_delta\": 15, \"score\": 20}"
+        }
+      ],
+      "state": {
+        "id": "p-43068d0d",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-history-lower-finishes-first-1XTAY9/workspace",
+        "research_root": "/tmp/aleph-history-lower-finishes-first-1XTAY9/workspace/research",
+        "mission_root": "/tmp/aleph-history-lower-finishes-first-1XTAY9/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 '/tmp/aleph-history-lower-finishes-first-1XTAY9/evaluate.py'",
+        "eval_root": null,
+        "best": {
+          "score": 20,
+          "branch": "research/high",
+          "commit": "07494375b666a34485cdb91140becb3d15232ca6",
+          "researchCommit": "27865877cdd2a81347a2e327930633af3b22f89e",
+          "evaluationRef": "refs/aleph/evaluations/eval-cfbc8ba8",
+          "at": "2026-10-31T12:28:43.113Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-99e316e7",
+            "branch": "research/low",
+            "evaluatedCommit": "463a77188a93f91e1e50190bec5dbdc457084382",
+            "researchCommit": "ab28c18064af180202ee39fbc07e98e54e66e111",
+            "evaluationRef": "refs/aleph/evaluations/eval-99e316e7",
+            "score": 10,
+            "at": "2026-10-31T12:28:43.083Z"
+          },
+          {
+            "id": "eval-cfbc8ba8",
+            "branch": "research/high",
+            "evaluatedCommit": "07494375b666a34485cdb91140becb3d15232ca6",
+            "researchCommit": "27865877cdd2a81347a2e327930633af3b22f89e",
+            "evaluationRef": "refs/aleph/evaluations/eval-cfbc8ba8",
+            "score": 20,
+            "at": "2026-10-31T12:28:43.113Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "equal-score",
+      "project": "p-b92fe663",
+      "inputs": [
+        {
+          "label": "low",
+          "score": 10,
+          "input": "cd97b072b5e2ea007812d860089e8584ae456312",
+          "branch": "research/low"
+        },
+        {
+          "label": "high",
+          "score": 10,
+          "input": "f562ae796d16d860706a3e7c60b91fd42399af69",
+          "branch": "research/high"
+        }
+      ],
+      "order": [
+        0,
+        1
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-b92fe663",
+            "score": 10,
+            "researchCommit": "446f23726504c65d744126108c033cdfb713a2ef",
+            "evaluatedCommit": "cd97b072b5e2ea007812d860089e8584ae456312",
+            "evaluationRef": "refs/aleph/evaluations/eval-1ff4fb96",
+            "researchBranchUpdated": true,
+            "best": {
+              "score": 10,
+              "branch": "research/low",
+              "commit": "cd97b072b5e2ea007812d860089e8584ae456312",
+              "researchCommit": "446f23726504c65d744126108c033cdfb713a2ef",
+              "evaluationRef": "refs/aleph/evaluations/eval-1ff4fb96",
+              "at": "2026-10-31T12:28:43.432Z"
+            },
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-low\", \"baseline_delta\": 5, \"score\": 10}\n",
+            "stderr": "stderr-low\n"
+          },
+          "report": "research evaluation: 10\n\nAleph-Project: p-b92fe663\nAleph-Evaluation: 10\nAleph-Research-Commit: cd97b072b5e2ea007812d860089e8584ae456312\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-low\", \"baseline_delta\": 5, \"score\": 10}"
+        },
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-b92fe663",
+            "score": 10,
+            "researchCommit": "a4238ea20248b393e9c6fd78c39a3f6e62851c97",
+            "evaluatedCommit": "f562ae796d16d860706a3e7c60b91fd42399af69",
+            "evaluationRef": "refs/aleph/evaluations/eval-cfdd7264",
+            "researchBranchUpdated": true,
+            "best": {
+              "score": 10,
+              "branch": "research/low",
+              "commit": "cd97b072b5e2ea007812d860089e8584ae456312",
+              "researchCommit": "446f23726504c65d744126108c033cdfb713a2ef",
+              "evaluationRef": "refs/aleph/evaluations/eval-1ff4fb96",
+              "at": "2026-10-31T12:28:43.432Z"
+            },
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-high\", \"baseline_delta\": 5, \"score\": 10}\n",
+            "stderr": "stderr-high\n"
+          },
+          "report": "research evaluation: 10\n\nAleph-Project: p-b92fe663\nAleph-Evaluation: 10\nAleph-Research-Commit: f562ae796d16d860706a3e7c60b91fd42399af69\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-high\", \"baseline_delta\": 5, \"score\": 10}"
+        }
+      ],
+      "state": {
+        "id": "p-b92fe663",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-history-equal-score-qh8W1g/workspace",
+        "research_root": "/tmp/aleph-history-equal-score-qh8W1g/workspace/research",
+        "mission_root": "/tmp/aleph-history-equal-score-qh8W1g/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 '/tmp/aleph-history-equal-score-qh8W1g/evaluate.py'",
+        "eval_root": null,
+        "best": {
+          "score": 10,
+          "branch": "research/low",
+          "commit": "cd97b072b5e2ea007812d860089e8584ae456312",
+          "researchCommit": "446f23726504c65d744126108c033cdfb713a2ef",
+          "evaluationRef": "refs/aleph/evaluations/eval-1ff4fb96",
+          "at": "2026-10-31T12:28:43.432Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-1ff4fb96",
+            "branch": "research/low",
+            "evaluatedCommit": "cd97b072b5e2ea007812d860089e8584ae456312",
+            "researchCommit": "446f23726504c65d744126108c033cdfb713a2ef",
+            "evaluationRef": "refs/aleph/evaluations/eval-1ff4fb96",
+            "score": 10,
+            "at": "2026-10-31T12:28:43.432Z"
+          },
+          {
+            "id": "eval-cfdd7264",
+            "branch": "research/high",
+            "evaluatedCommit": "f562ae796d16d860706a3e7c60b91fd42399af69",
+            "researchCommit": "a4238ea20248b393e9c6fd78c39a3f6e62851c97",
+            "evaluationRef": "refs/aleph/evaluations/eval-cfdd7264",
+            "score": 10,
+            "at": "2026-10-31T12:28:43.488Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "scoreless",
+      "project": "p-a0313221",
+      "inputs": [
+        {
+          "label": "one",
+          "score": 30,
+          "input": "a1d5ca568d6b8a98a821cfef056dfb25ad7fc76a",
+          "branch": "research/one"
+        }
+      ],
+      "order": [
+        0
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-a0313221",
+            "score": null,
+            "researchCommit": "a943a03b2aacf82e08afb6b7a4b61cb5e8bd3b7d",
+            "evaluatedCommit": "a1d5ca568d6b8a98a821cfef056dfb25ad7fc76a",
+            "evaluationRef": "refs/aleph/evaluations/eval-98f1261d",
+            "researchBranchUpdated": true,
+            "best": null,
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-one\", \"baseline_delta\": 25}\n",
+            "stderr": "stderr-one\n"
+          },
+          "report": "research evaluation: no score\n\nAleph-Project: p-a0313221\nAleph-Evaluation: none\nAleph-Research-Commit: a1d5ca568d6b8a98a821cfef056dfb25ad7fc76a\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-one\", \"baseline_delta\": 25}"
+        }
+      ],
+      "state": {
+        "id": "p-a0313221",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-history-scoreless-ERPHkh/workspace",
+        "research_root": "/tmp/aleph-history-scoreless-ERPHkh/workspace/research",
+        "mission_root": "/tmp/aleph-history-scoreless-ERPHkh/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 '/tmp/aleph-history-scoreless-ERPHkh/evaluate.py'",
+        "eval_root": null,
+        "best": null,
+        "evaluations": [
+          {
+            "id": "eval-98f1261d",
+            "branch": "research/one",
+            "evaluatedCommit": "a1d5ca568d6b8a98a821cfef056dfb25ad7fc76a",
+            "researchCommit": "a943a03b2aacf82e08afb6b7a4b61cb5e8bd3b7d",
+            "evaluationRef": "refs/aleph/evaluations/eval-98f1261d",
+            "score": null,
+            "at": "2026-10-31T12:28:43.929Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "nonzero",
+      "project": "p-237188ae",
+      "inputs": [
+        {
+          "label": "one",
+          "score": 30,
+          "input": "f7dbbb3495e816c8777250376808c48b4000046b",
+          "branch": "research/one"
+        }
+      ],
+      "order": [
+        0
+      ],
+      "responses": [
+        {
+          "status": 500,
+          "value": {
+            "ok": false,
+            "error": {
+              "code": "aleph/evaluate-failed",
+              "message": "Command failed: bash -lc python3 '/tmp/aleph-history-nonzero-wAD1uR/evaluate.py'\ncontrolled-error\n"
+            }
+          }
+        }
+      ],
+      "state": {
+        "id": "p-237188ae",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-history-nonzero-wAD1uR/workspace",
+        "research_root": "/tmp/aleph-history-nonzero-wAD1uR/workspace/research",
+        "mission_root": "/tmp/aleph-history-nonzero-wAD1uR/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 '/tmp/aleph-history-nonzero-wAD1uR/evaluate.py'",
+        "eval_root": null,
+        "best": null,
+        "evaluations": [],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    },
+    {
+      "mode": "bounded-report",
+      "project": "p-7246a331",
+      "inputs": [
+        {
+          "label": "one",
+          "score": 30,
+          "input": "6ec6fc7591661943244e2fd135c6bf9f20c7abd4",
+          "branch": "research/one"
+        }
+      ],
+      "order": [
+        0
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "value": {
+            "status": "done",
+            "projectId": "p-7246a331",
+            "score": 30,
+            "researchCommit": "e6d5c274373e9f1004f7538937d672c0e4574e1f",
+            "evaluatedCommit": "6ec6fc7591661943244e2fd135c6bf9f20c7abd4",
+            "evaluationRef": "refs/aleph/evaluations/eval-5ebffc01",
+            "researchBranchUpdated": true,
+            "best": {
+              "score": 30,
+              "branch": "research/one",
+              "commit": "6ec6fc7591661943244e2fd135c6bf9f20c7abd4",
+              "researchCommit": "e6d5c274373e9f1004f7538937d672c0e4574e1f",
+              "evaluationRef": "refs/aleph/evaluations/eval-5ebffc01",
+              "at": "2026-10-31T12:28:44.357Z"
+            },
+            "stdout": "{\"rows\": 1000, \"diagnostic\": \"diagnostic-one\", \"baseline_delta\": 25, \"score\": 30, \"detail\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "stderr": "stderr-one\n"
+          },
+          "report": "research evaluation: 30\n\nAleph-Project: p-7246a331\nAleph-Evaluation: 30\nAleph-Research-Commit: 6ec6fc7591661943244e2fd135c6bf9f20c7abd4\n\n{\"rows\": 1000, \"diagnostic\": \"diagnostic-one\", \"baseline_delta\": 25, \"score\": 30, \"detail\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ],
+      "state": {
+        "id": "p-7246a331",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-history-bounded-report-OGQ872/workspace",
+        "research_root": "/tmp/aleph-history-bounded-report-OGQ872/workspace/research",
+        "mission_root": "/tmp/aleph-history-bounded-report-OGQ872/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 '/tmp/aleph-history-bounded-report-OGQ872/evaluate.py'",
+        "eval_root": null,
+        "best": {
+          "score": 30,
+          "branch": "research/one",
+          "commit": "6ec6fc7591661943244e2fd135c6bf9f20c7abd4",
+          "researchCommit": "e6d5c274373e9f1004f7538937d672c0e4574e1f",
+          "evaluationRef": "refs/aleph/evaluations/eval-5ebffc01",
+          "at": "2026-10-31T12:28:44.357Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-5ebffc01",
+            "branch": "research/one",
+            "evaluatedCommit": "6ec6fc7591661943244e2fd135c6bf9f20c7abd4",
+            "researchCommit": "e6d5c274373e9f1004f7538937d672c0e4574e1f",
+            "evaluationRef": "refs/aleph/evaluations/eval-5ebffc01",
+            "score": 30,
+            "at": "2026-10-31T12:28:44.357Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      }
+    }
+  ],
+  "boundary": "Current evaluation histories/best-score updates and report lookup through real project handlers, Git and gated Python. Automatic substitutes session/storage. Actual uses real DSH sessions/tools/persistence/authenticated HTTP. No product source, timeout, Git or score-parser adapters.",
+  "complete": true,
+  "failed": 0
+}

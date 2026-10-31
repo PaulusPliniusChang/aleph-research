@@ -1,0 +1,52 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-dk62m2lg",
+    "workspace": "/tmp/aleph-project-dsh-dk62m2lg/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "source_commit": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "dirty": ""
+  },
+  "url": "http://127.0.0.1:52415",
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-parent-feedback.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/10-current-real-dsh-parent-feedback.json"
+  ],
+  "boundary": "Real DSH sessions, researcher worktrees, persistent storage, Git and Python evaluator; deterministic researcher model only. No source edits or timeout adaptation.",
+  "events": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 441752,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "probe": {
+    "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "checks": [],
+    "boundary": "Actual DSH researcher model invokes registered aleph_evaluate, real Python/Git/storage, then finishes with a deterministic full summary made from its actual evaluation result. Parent session is observed without executing a query tool after child completion. No product edits or deadline changes.",
+    "parent": "session-a56add36-87ad-4ea8-b446-37a3a9073911",
+    "child": {
+      "projectId": "p-0d1f1485",
+      "role": "researcher",
+      "childId": "328733ec-c319-4f9b-abcd-a46ce6bfe608",
+      "branch": "research/r-905a27d7",
+      "worktree": "/tmp/aleph-project-dsh-dk62m2lg/workspace/feedback/.aleph/researchers/r-3a3a5e35"
+    },
+    "project": "p-0d1f1485"
+  },
+  "probe_exit": 1
+}

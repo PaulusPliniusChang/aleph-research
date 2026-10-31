@@ -1,0 +1,50 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-6azoulr8", "url": "http://127.0.0.1:50855"}
+▶ Actual researcher evaluation completion and Leader parent feedback
+  ✔ actual researcher uses assigned preset (1.340489ms)
+  ✔ actual researcher executes exactly evaluate then finish (0.85182ms)
+  ✔ actual model emitted registered evaluation tool (0.743394ms)
+  ✔ evaluation tool input identifies this project (0.712583ms)
+  ✔ actual child session records evaluation tool call (0.74783ms)
+  ✔ real Python score appears in evaluation history (0.722449ms)
+  ✔ single evaluation creates one history entry (0.700617ms)
+  ✔ evaluation history owns this researcher branch (0.758599ms)
+  ✔ report parent is evaluated research input (5.587527ms)
+  ✔ independent report ref resolves (4.658685ms)
+  ✔ report contains actual score (0.907726ms)
+  ✔ report contains actual diagnostic (0.821127ms)
+  ✔ report contains additional rows measurement (0.803177ms)
+  ✔ best score remains associated with this evaluation (0.774365ms)
+  ✔ best report remains associated with this evaluation (1.322212ms)
+  ✔ completion record matches exact child identity (0.668834ms)
+  ✔ completion record retains researcher branch (0.592895ms)
+  ✔ completion record retains researcher worktree (0.601754ms)
+  ✔ completion callback marks child done (0.577324ms)
+  ✔ completion callback stores complete summary (0.627333ms)
+  ✔ stored summary includes score (0.57769ms)
+  ✔ stored summary includes report commit (0.558578ms)
+  ✔ stored summary includes report ref (0.598405ms)
+  ✔ stored summary includes evaluated source (0.5827ms)
+  ✔ child transcript retains actual evaluation report (0.552031ms)
+  ✔ actual model completion text matches stored summary (0.551281ms)
+  ✔ child activation has left live registry (0.54271ms)
+  ✔ owned research worktree remains available (0.550927ms)
+  ✔ actual prompt carries assigned worktree (0.892058ms)
+  ✔ actual prompt carries assigned branch (0.5119ms)
+  ✔ actual prompt requires evaluate before finish (0.491105ms)
+  ✔ actual prompt disallows project queue modification (0.473925ms)
+  ✔ actual child durable parent matches Leader (0.490302ms)
+  ✔ parent session remains live (0.502143ms)
+  ✔ parent session events remain unchanged on child completion (1.113906ms)
+  ✔ parent receives no completion score automatically (0.520323ms)
+  ✔ parent receives no report marker automatically (0.472668ms)
+  ✔ parent receives no report commit automatically (0.460033ms)
+  ✔ parent receives no evaluation ref automatically (0.566309ms)
+✔ Actual researcher evaluation completion and Leader parent feedback (869.126298ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 963.624052

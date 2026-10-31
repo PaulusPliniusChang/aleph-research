@@ -1,0 +1,26 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-dk62m2lg", "url": "http://127.0.0.1:52415"}
+✖ Actual researcher evaluation completion and Leader parent feedback (290.31854ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 394.726723
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-parent-feedback.test.mjs:17:1
+✖ Actual researcher evaluation completion and Leader parent feedback (290.31854ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'some')
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:35:120
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async until (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:11:65)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-parent-feedback.test.mjs:35:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/current-parent-feedback.py", line 66, in <module>
+    raise RuntimeError('actual process observation failed; inspect saved evidence')
+RuntimeError: actual process observation failed; inspect saved evidence

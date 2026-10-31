@@ -1,0 +1,434 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-_78um2os",
+    "workspace": "/tmp/aleph-project-dsh-_78um2os/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "source_commit": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "dirty": ""
+  },
+  "url": "http://127.0.0.1:40959",
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-parent-feedback.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/10-current-real-dsh-parent-feedback.json"
+  ],
+  "boundary": "Real DSH sessions, researcher worktrees, persistent storage, Git and Python evaluator; deterministic researcher model only. No source edits or timeout adaptation.",
+  "events": [
+    {
+      "name": "actual-host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "isolated-host-stopped",
+      "pid": 442057,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "probe": {
+    "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "checks": [
+      {
+        "name": "actual researcher uses assigned preset",
+        "passed": true
+      },
+      {
+        "name": "actual researcher executes exactly evaluate then finish",
+        "passed": true
+      },
+      {
+        "name": "actual model emitted registered evaluation tool",
+        "passed": true
+      },
+      {
+        "name": "evaluation tool input identifies this project",
+        "passed": true
+      },
+      {
+        "name": "actual child session records evaluation tool call",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert.ok(childText.includes('aleph_evaluate'))\n"
+      },
+      {
+        "name": "real Python score appears in evaluation history",
+        "passed": true
+      },
+      {
+        "name": "single evaluation creates one history entry",
+        "passed": true
+      },
+      {
+        "name": "evaluation history owns this researcher branch",
+        "passed": true
+      },
+      {
+        "name": "report parent is evaluated research input",
+        "passed": true
+      },
+      {
+        "name": "independent report ref resolves",
+        "passed": true
+      },
+      {
+        "name": "report contains actual score",
+        "passed": true
+      },
+      {
+        "name": "report contains actual diagnostic",
+        "passed": true
+      },
+      {
+        "name": "report contains additional rows measurement",
+        "passed": true
+      },
+      {
+        "name": "best score remains associated with this evaluation",
+        "passed": true
+      },
+      {
+        "name": "best report remains associated with this evaluation",
+        "passed": true
+      },
+      {
+        "name": "completion record matches exact child identity",
+        "passed": true
+      },
+      {
+        "name": "completion record retains researcher branch",
+        "passed": true
+      },
+      {
+        "name": "completion record retains researcher worktree",
+        "passed": true
+      },
+      {
+        "name": "completion callback marks child done",
+        "passed": true
+      },
+      {
+        "name": "completion callback stores complete summary",
+        "passed": true
+      },
+      {
+        "name": "stored summary includes score",
+        "passed": true
+      },
+      {
+        "name": "stored summary includes report commit",
+        "passed": true
+      },
+      {
+        "name": "stored summary includes report ref",
+        "passed": true
+      },
+      {
+        "name": "stored summary includes evaluated source",
+        "passed": true
+      },
+      {
+        "name": "child transcript retains actual evaluation report",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert.ok(childText.includes(e.researchCommit))\n"
+      },
+      {
+        "name": "child transcript retains completion text",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert.ok(childText.includes(summary))\n"
+      },
+      {
+        "name": "child activation has left live registry",
+        "passed": true
+      },
+      {
+        "name": "owned research worktree remains available",
+        "passed": true
+      },
+      {
+        "name": "actual prompt carries assigned worktree",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert.ok(prompt.includes(child.worktree))\n"
+      },
+      {
+        "name": "actual prompt carries assigned branch",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert.ok(prompt.includes(child.branch))\n"
+      },
+      {
+        "name": "actual prompt requires evaluate before finish",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert.ok(prompt.includes('call aleph_evaluate once more'))\n"
+      },
+      {
+        "name": "actual prompt disallows project queue modification",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert.ok(prompt.includes('Do not modify project queue'))\n"
+      },
+      {
+        "name": "actual child durable parent matches Leader",
+        "passed": false,
+        "error": "Cannot read properties of undefined (reading 'parentSession')"
+      },
+      {
+        "name": "parent session remains live",
+        "passed": true
+      },
+      {
+        "name": "parent session events remain unchanged on child completion",
+        "passed": true
+      },
+      {
+        "name": "parent receives no completion score automatically",
+        "passed": true
+      },
+      {
+        "name": "parent receives no report marker automatically",
+        "passed": true
+      },
+      {
+        "name": "parent receives no report commit automatically",
+        "passed": true
+      },
+      {
+        "name": "parent receives no evaluation ref automatically",
+        "passed": true
+      }
+    ],
+    "boundary": "Actual DSH researcher model invokes registered aleph_evaluate, real Python/Git/storage, then finishes with a deterministic full summary made from its actual evaluation result. Parent session is observed without executing a query tool after child completion. No product edits or deadline changes.",
+    "parent": "session-fbe7049e-5010-4d0e-9f6c-c4d4481683a3",
+    "child": {
+      "projectId": "p-f0099d58",
+      "role": "researcher",
+      "childId": "469f7c2b-3854-4c4c-99f8-3c84f5009c53",
+      "branch": "research/r-8a3a6861",
+      "worktree": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback/.aleph/researchers/r-5b9297e8"
+    },
+    "project": "p-f0099d58",
+    "parentBefore": {
+      "header": {
+        "version": 4,
+        "id": "session-fbe7049e-5010-4d0e-9f6c-c4d4481683a3",
+        "createdAt": 1793450399922,
+        "cwd": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback",
+        "isSeeded": false,
+        "agentPreset": "aleph"
+      },
+      "events": []
+    },
+    "childInitial": {
+      "header": {
+        "version": 4,
+        "id": "469f7c2b-3854-4c4c-99f8-3c84f5009c53",
+        "createdAt": 1793450400026,
+        "cwd": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback",
+        "parentSession": "session-fbe7049e-5010-4d0e-9f6c-c4d4481683a3",
+        "isSeeded": false,
+        "origin": "subagent",
+        "delegationDepth": 1,
+        "agentPreset": "aleph-researcher"
+      },
+      "events": []
+    },
+    "evaluated": {
+      "schema": 2,
+      "generated_at": "2026-10-31T12:40:00.182Z",
+      "project": {
+        "id": "p-f0099d58",
+        "title": "feedback",
+        "status": "running",
+        "workspace": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback",
+        "research_root": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback/research",
+        "mission_root": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback/missions",
+        "template_branch": "template",
+        "eval_command": "python3 /tmp/aleph-project-dsh-_78um2os/workspace/feedback-evaluate.py",
+        "eval_root": null,
+        "best": {
+          "score": 37,
+          "branch": "research/r-8a3a6861",
+          "commit": "197d19337f1f1bc2bee816f188bd0dedfb47442c",
+          "researchCommit": "be63b359c073c4796005e8c9ea7fa2f8522d4244",
+          "evaluationRef": "refs/aleph/evaluations/eval-69572e65",
+          "at": "2026-10-31T12:40:00.170Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-69572e65",
+            "branch": "research/r-8a3a6861",
+            "evaluatedCommit": "197d19337f1f1bc2bee816f188bd0dedfb47442c",
+            "researchCommit": "be63b359c073c4796005e8c9ea7fa2f8522d4244",
+            "evaluationRef": "refs/aleph/evaluations/eval-69572e65",
+            "score": 37,
+            "at": "2026-10-31T12:40:00.170Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "missions": [],
+      "batches": [],
+      "machines": [
+        {
+          "id": "local",
+          "kind": "local",
+          "status": "idle",
+          "batchId": null
+        }
+      ],
+      "agents": [
+        {
+          "role": "researcher",
+          "childId": "469f7c2b-3854-4c4c-99f8-3c84f5009c53",
+          "status": "running",
+          "summary": null,
+          "branch": "research/r-8a3a6861",
+          "worktree": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback/.aleph/researchers/r-5b9297e8",
+          "updatedAt": "2026-10-31T12:40:00.042Z"
+        }
+      ],
+      "counts": {
+        "queued": 0,
+        "running": 0,
+        "done": 0,
+        "failed": 0
+      }
+    },
+    "reportMessage": "research evaluation: 37\n\nAleph-Project: p-f0099d58\nAleph-Evaluation: 37\nAleph-Research-Commit: 197d19337f1f1bc2bee816f188bd0dedfb47442c\n\n{\"score\": 37, \"rows\": 123, \"diagnostic\": \"parent-feedback-report-marker\"}",
+    "final": {
+      "schema": 2,
+      "generated_at": "2026-10-31T12:40:00.240Z",
+      "project": {
+        "id": "p-f0099d58",
+        "title": "feedback",
+        "status": "running",
+        "workspace": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback",
+        "research_root": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback/research",
+        "mission_root": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback/missions",
+        "template_branch": "template",
+        "eval_command": "python3 /tmp/aleph-project-dsh-_78um2os/workspace/feedback-evaluate.py",
+        "eval_root": null,
+        "best": {
+          "score": 37,
+          "branch": "research/r-8a3a6861",
+          "commit": "197d19337f1f1bc2bee816f188bd0dedfb47442c",
+          "researchCommit": "be63b359c073c4796005e8c9ea7fa2f8522d4244",
+          "evaluationRef": "refs/aleph/evaluations/eval-69572e65",
+          "at": "2026-10-31T12:40:00.170Z"
+        },
+        "evaluations": [
+          {
+            "id": "eval-69572e65",
+            "branch": "research/r-8a3a6861",
+            "evaluatedCommit": "197d19337f1f1bc2bee816f188bd0dedfb47442c",
+            "researchCommit": "be63b359c073c4796005e8c9ea7fa2f8522d4244",
+            "evaluationRef": "refs/aleph/evaluations/eval-69572e65",
+            "score": 37,
+            "at": "2026-10-31T12:40:00.170Z"
+          }
+        ],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "missions": [],
+      "batches": [],
+      "machines": [
+        {
+          "id": "local",
+          "kind": "local",
+          "status": "idle",
+          "batchId": null
+        }
+      ],
+      "agents": [
+        {
+          "role": "researcher",
+          "childId": "469f7c2b-3854-4c4c-99f8-3c84f5009c53",
+          "status": "done",
+          "summary": "Research complete. score=37; report=be63b359c073c4796005e8c9ea7fa2f8522d4244; ref=refs/aleph/evaluations/eval-69572e65; parent-feedback-report-marker; source=197d19337f1f1bc2bee816f188bd0dedfb47442c",
+          "branch": "research/r-8a3a6861",
+          "worktree": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback/.aleph/researchers/r-5b9297e8",
+          "updatedAt": "2026-10-31T12:40:00.209Z"
+        }
+      ],
+      "counts": {
+        "queued": 0,
+        "running": 0,
+        "done": 0,
+        "failed": 0
+      }
+    },
+    "parentAfter": {
+      "header": {
+        "version": 4,
+        "id": "session-fbe7049e-5010-4d0e-9f6c-c4d4481683a3",
+        "createdAt": 1793450399922,
+        "cwd": "/tmp/aleph-project-dsh-_78um2os/workspace/feedback",
+        "isSeeded": false,
+        "agentPreset": "aleph"
+      },
+      "events": []
+    },
+    "childAfter": {
+      "events": null
+    },
+    "control": {
+      "states": [
+        {
+          "sid": "469f7c2b-3854-4c4c-99f8-3c84f5009c53",
+          "calls": 2,
+          "preset": "aleph-researcher",
+          "waiting": false,
+          "commands": [
+            {
+              "name": "aleph_evaluate",
+              "args": {
+                "project_id": "p-f0099d58"
+              }
+            }
+          ],
+          "summaries": [
+            "Research complete. score=37; report=be63b359c073c4796005e8c9ea7fa2f8522d4244; ref=refs/aleph/evaluations/eval-69572e65; parent-feedback-report-marker; source=197d19337f1f1bc2bee816f188bd0dedfb47442c"
+          ],
+          "live": false,
+          "status": null
+        }
+      ],
+      "children": [
+        {
+          "mode": "continuable",
+          "label": "aleph researcher p-f0099d58",
+          "id": "469f7c2b-3854-4c4c-99f8-3c84f5009c53",
+          "createdAt": 1793450400026
+        }
+      ]
+    },
+    "summary": "Research complete. score=37; report=be63b359c073c4796005e8c9ea7fa2f8522d4244; ref=refs/aleph/evaluations/eval-69572e65; parent-feedback-report-marker; source=197d19337f1f1bc2bee816f188bd0dedfb47442c",
+    "parentLive": {
+      "live": true
+    },
+    "complete": true,
+    "defect_reproduced": true,
+    "effective": 39,
+    "failed": 8
+  },
+  "probe_exit": 1
+}
