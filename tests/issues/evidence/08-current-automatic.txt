@@ -1,0 +1,69 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (0.73155ms)
+  ✔ current explicit Composer tool is registered (0.187704ms)
+  ✔ current mission approval is registered (0.12951ms)
+  ✔ initial project has no Composer records (0.105919ms)
+  ✔ proposal alone creates no batch (0.690312ms)
+  ✔ proposal alone starts no Composer (0.284151ms)
+  ✔ proposal alone runs no computation (0.155341ms)
+  ✔ first approval starts a Composer identity (0.457102ms)
+  ✖ Composer can access the Infra dispatch tool required by its prompt (4.290903ms)
+  ✔ first computation needs no Leader dispatch (0.209086ms)
+  ✔ first batch owns busy machine (0.124426ms)
+  ✔ unapproved second mission remains proposed (0.112878ms)
+  ✔ unapproved second computation has not started (0.095937ms)
+  ✔ approval while busy keeps second mission approved (0.147612ms)
+  ✔ busy approval preserves existing machine owner (0.101056ms)
+  ✔ busy approval does not duplicate Composer (0.09807ms)
+  ✔ busy approval does not start second calculation early (0.091701ms)
+  ✔ first mission finishes successfully (0.962327ms)
+  ✔ second queued mission finishes without Leader dispatch (0.726248ms)
+  ✔ distinct batches execute queued work (0.771004ms)
+  ✔ both finished batches retain done state (0.65344ms)
+  ✔ completion releases machine capacity (0.178327ms)
+  ✔ completion clears exact machine batch owner (0.174422ms)
+  ✔ first task computes once (0.23413ms)
+  ✔ second task computes once (0.167631ms)
+  ✔ first result belongs to first mission branch (4.782962ms)
+  ✔ second result belongs to second mission branch (4.622548ms)
+  ✔ third unapproved mission stays untouched (0.200982ms)
+  ✔ second dispatch uses an Infra activation (0.159063ms)
+  ✔ Infra static inspection completes successfully (0.134471ms)
+  ✔ Infra handoff persists in optimized batch history (4.647397ms)
+  ✔ later approval dispatches third work without Leader command (0.91365ms)
+  ✔ later approval reuses same Composer identity (1.967466ms)
+  ✔ all three task branches have distinct result commits (0.37348ms)
+  ✔ later work is computed exactly once (0.332264ms)
+  ✔ final state has no approved work left (0.230295ms)
+  ✔ activation uses one persistent Composer (0.12324ms)
+  ✔ completion posts exact queue event to Composer (0.155986ms)
+  ✔ later approval posts queue event to same Composer (0.1657ms)
+  ✔ deterministic automatic model has no tool errors (0.113611ms)
+✖ B current persistent Composer continuation (843.471735ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 39
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 904.953022
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ Composer can access the Infra dispatch tool required by its prompt (4.290903ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok((await visibleFor(composer.childId)).includes('aleph_run_infra'))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:55:99
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:56)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

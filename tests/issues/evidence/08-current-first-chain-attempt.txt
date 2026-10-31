@@ -1,0 +1,37 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (0.676524ms)
+  ✔ current explicit Composer tool is registered (0.165762ms)
+  ✔ current mission approval is registered (0.127963ms)
+  ✔ initial project has no Composer records (0.130594ms)
+  ✔ proposal alone creates no batch (2.453144ms)
+  ✔ proposal alone starts no Composer (2.668758ms)
+  ✔ proposal alone runs no computation (0.225921ms)
+  ✔ first approval starts a Composer identity (0.594112ms)
+  ✔ first computation needs no Leader dispatch (0.411216ms)
+  ✔ first batch owns busy machine (0.431133ms)
+  ✔ unapproved second mission remains proposed (0.269308ms)
+  ✔ unapproved second computation has not started (0.269685ms)
+  ✔ approval while busy keeps second mission approved (0.498803ms)
+  ✔ busy approval preserves existing machine owner (0.241851ms)
+  ✔ busy approval does not duplicate Composer (0.192298ms)
+  ✔ busy approval does not start second calculation early (0.178848ms)
+✖ B current persistent Composer continuation (30520.592369ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 30584.481416
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:20:1
+✖ B current persistent Composer continuation (30520.592369ms)
+  Error: fixture timeout first and second finish through Composer continuation
+      at until (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:14:101)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:64:38)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

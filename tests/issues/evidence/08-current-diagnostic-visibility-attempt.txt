@@ -1,0 +1,175 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (0.988733ms)
+  ✔ current explicit Composer tool is registered (0.197468ms)
+  ✔ current mission approval is registered (0.150087ms)
+  ✔ initial project has no Composer records (0.173491ms)
+  ✔ proposal alone creates no batch (3.817119ms)
+  ✔ proposal alone starts no Composer (3.722274ms)
+  ✔ proposal alone runs no computation (0.277036ms)
+  ✔ first approval starts a Composer identity (0.512509ms)
+  ✔ Composer can access the Infra dispatch tool required by its prompt (3.771982ms)
+  ✔ first computation needs no Leader dispatch (0.396193ms)
+  ✔ first batch owns busy machine (0.30605ms)
+  ✔ unapproved second mission remains proposed (0.168487ms)
+  ✔ unapproved second computation has not started (0.117794ms)
+  ✔ approval while busy keeps second mission approved (0.423969ms)
+  ✔ busy approval preserves existing machine owner (0.258141ms)
+  ✔ busy approval does not duplicate Composer (0.155585ms)
+  ✔ busy approval does not start second calculation early (0.131673ms)
+  ✔ first mission finishes successfully (0.309243ms)
+  ✔ second queued mission finishes without Leader dispatch (0.190372ms)
+  ✔ distinct batches execute queued work (0.137071ms)
+  ✔ both finished batches retain done state (0.135833ms)
+  ✔ completion releases machine capacity (0.119524ms)
+  ✔ completion clears exact machine batch owner (0.110711ms)
+  ✔ first task computes once (0.161442ms)
+  ✔ second task computes once (0.136566ms)
+  ✔ first result belongs to first mission branch (4.860568ms)
+  ✔ second result belongs to second mission branch (4.798594ms)
+  ✔ third unapproved mission stays untouched (0.22884ms)
+  ✖ second dispatch uses an Infra activation (1.054268ms)
+  ✖ Infra static inspection completes successfully (0.378311ms)
+  ✖ Infra handoff persists in optimized batch history (5.666285ms)
+  ✔ later approval dispatches third work without Leader command (0.511372ms)
+  ✔ later approval reuses same Composer identity (1.210855ms)
+  ✔ all three task branches have distinct result commits (0.263065ms)
+  ✔ later work is computed exactly once (0.209213ms)
+  ✔ final state has no approved work left (0.293717ms)
+  ✖ actual Composer issues direct execution tools (0.769172ms)
+  ✖ actual Composer issues Infra execution tool (0.37342ms)
+  ✔ actual Composer receives queue change notifications (2.07249ms)
+  ✖ actual Infra calls bash (0.283127ms)
+✖ B current persistent Composer continuation (1131.783328ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 34
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1198.176994
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ second dispatch uses an Infra activation (1.054268ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:77:68
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:77:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ Infra static inspection completes successfully (0.378311ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'status')
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:78:120
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:78:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ Infra handoff persists in optimized batch history (5.666285ms)
+  Error: Command failed: git -C /tmp/aleph-project-dsh-y6jsh8cn/workspace/missions show batch/b-c167e011:ALEPH_HANDOFF.md
+  fatal: path 'ALEPH_HANDOFF.md' does not exist in 'batch/b-c167e011'
+  
+      at genericNodeError (node:internal/errors:999:15)
+      at wrappedFn (node:internal/errors:544:14)
+      at checkExecSyncError (node:child_process:993:11)
+      at execFileSync (node:child_process:1029:15)
+      at git (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:12:27)
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:79:80
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17) {
+    status: 128,
+    signal: null,
+    output: [ null, '', "fatal: path 'ALEPH_HANDOFF.md' does not exist in 'batch/b-c167e011'\n" ],
+    pid: 541362,
+    stdout: '',
+    stderr: "fatal: path 'ALEPH_HANDOFF.md' does not exist in 'batch/b-c167e011'\n"
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ actual Composer issues direct execution tools (0.769172ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 2
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:88:74
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:88:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ actual Composer issues Infra execution tool (0.37342ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:89:72
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:89:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ actual Infra calls bash (0.283127ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'commands')
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:91:104
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:91:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)

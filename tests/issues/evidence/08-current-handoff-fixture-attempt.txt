@@ -1,0 +1,80 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (0.824298ms)
+  ✔ current explicit Composer tool is registered (0.200497ms)
+  ✔ current mission approval is registered (0.128153ms)
+  ✔ initial project has no Composer records (0.12245ms)
+  ✔ proposal alone creates no batch (0.652838ms)
+  ✔ proposal alone starts no Composer (0.305807ms)
+  ✔ proposal alone runs no computation (0.179688ms)
+ ✖ B current persistent Composer continuation (30346.144737ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 30414.849455
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:20:1
+✖ B current persistent Composer continuation (30346.144737ms)
+  Error: fixture timeout Composer starts first actual computation
+      at until (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:14:101)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:53:2)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+capacity (0.128216ms)
+  ✔ completion clears exact machine batch owner (0.116503ms)
+  ✔ first task computes once (0.161553ms)
+  ✔ second task computes once (0.240575ms)
+  ✔ first result belongs to first mission branch (6.553529ms)
+  ✔ second result belongs to second mission branch (4.912582ms)
+  ✔ third unapproved mission stays untouched (0.273473ms)
+  ✔ second dispatch uses an Infra activation (0.279695ms)
+  ✔ Infra static inspection completes successfully (0.208457ms)
+  ✖ Infra handoff persists in second result history (4.703833ms)
+  ✔ later approval dispatches third work without Leader command (0.403249ms)
+  ✔ later approval reuses same Composer identity (0.678313ms)
+  ✔ all three task branches have distinct result commits (0.18228ms)
+  ✔ later work is computed exactly once (0.16357ms)
+  ✔ final state has no approved work left (0.134619ms)
+  ✔ activation uses one persistent Composer (0.124613ms)
+  ✔ completion posts exact queue event to Composer (0.132784ms)
+  ✔ later approval posts queue event to same Composer (0.150907ms)
+  ✔ deterministic automatic model has no tool errors (0.122182ms)
+✖ B current persistent Composer continuation (932.966809ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 38
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 985.251063
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ Infra handoff persists in second result history (4.703833ms)
+  Error: Command failed: git -C /tmp/aleph-composer-continuation-Iz114z/missions show 579becde7afe1a14ab2b1ee6096cbddfbf505721:ALEPH_HANDOFF.md
+  fatal: path 'ALEPH_HANDOFF.md' does not exist in '579becde7afe1a14ab2b1ee6096cbddfbf505721'
+  
+      at genericNodeError (node:internal/errors:999:15)
+      at wrappedFn (node:internal/errors:544:14)
+      at checkExecSyncError (node:child_process:993:11)
+      at execFileSync (node:child_process:1029:15)
+      at git (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:12:27)
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:78:78
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17) {
+    status: 128,
+    signal: null,
+    output: [ null, '', "fatal: path 'ALEPH_HANDOFF.md' does not exist in '579becde7afe1a14ab2b1ee6096cbddfbf505721'\n" ],
+    pid: 537338,
+    stdout: '',
+    stderr: "fatal: path 'ALEPH_HANDOFF.md' does not exist in '579becde7afe1a14ab2b1ee6096cbddfbf505721'\n"
+  }

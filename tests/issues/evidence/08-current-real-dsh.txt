@@ -1,0 +1,218 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (0.672651ms)
+  ✔ current explicit Composer tool is registered (0.684435ms)
+  ✔ current mission approval is registered (0.394463ms)
+  ✔ initial project has no Composer records (0.446382ms)
+  ✔ proposal alone creates no batch (2.764205ms)
+  ✔ proposal alone starts no Composer (2.247948ms)
+  ✔ proposal alone runs no computation (0.228325ms)
+  ✔ first approval starts a Composer identity (0.31971ms)
+  ✖ Composer can access the Infra dispatch tool required by its prompt (10.659326ms)
+  ✔ first computation needs no Leader dispatch (1.110461ms)
+  ✔ first batch owns busy machine (0.253852ms)
+  ✔ unapproved second mission remains proposed (0.240503ms)
+  ✔ unapproved second computation has not started (0.202975ms)
+  ✔ approval while busy keeps second mission approved (0.428298ms)
+  ✔ busy approval preserves existing machine owner (0.184931ms)
+  ✔ busy approval does not duplicate Composer (0.14833ms)
+  ✔ busy approval does not start second calculation early (0.1299ms)
+  ✔ first mission finishes successfully (0.305855ms)
+  ✔ second queued mission finishes without Leader dispatch (0.173182ms)
+  ✔ distinct batches execute queued work (0.140323ms)
+  ✔ both finished batches retain done state (0.143927ms)
+  ✔ completion releases machine capacity (0.117623ms)
+  ✔ completion clears exact machine batch owner (0.183459ms)
+  ✔ first task computes once (0.181256ms)
+  ✔ second task computes once (0.149935ms)
+  ✔ first result belongs to first mission branch (5.078189ms)
+  ✔ second result belongs to second mission branch (4.643935ms)
+  ✔ third unapproved mission stays untouched (0.212926ms)
+  ✖ second dispatch uses an Infra activation (0.681342ms)
+  ✖ Infra static inspection completes successfully (0.681648ms)
+  ✖ Infra handoff persists in optimized batch history (4.36896ms)
+  ✔ later approval dispatches third work without Leader command (0.442222ms)
+  ✔ later approval reuses same Composer identity (0.97135ms)
+  ✔ all three task branches have distinct result commits (0.335297ms)
+  ✔ later work is computed exactly once (0.242165ms)
+  ✔ final state has no approved work left (0.198794ms)
+  ✖ actual Composer issues direct execution tools (0.753195ms)
+  ✖ actual Composer issues Infra execution tool (0.448722ms)
+  ✔ actual Composer receives queue change notifications (2.795762ms)
+  ✖ actual Infra calls bash (1.325787ms)
+✖ B current persistent Composer continuation (1100.0835ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 33
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1164.438587
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ Composer can access the Infra dispatch tool required by its prompt (10.659326ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok((await visibleFor(composer.childId)).includes('aleph_run_infra'))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:55:99
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:56)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:55:2)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ second dispatch uses an Infra activation (0.681342ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:77:68
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:77:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ Infra static inspection completes successfully (0.681648ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'done'
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:78:74
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:78:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'done',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ Infra handoff persists in optimized batch history (4.36896ms)
+  Error: Command failed: git -C /tmp/aleph-project-dsh-m7z71t7q/workspace/missions show batch/b-e3d7a5c1:ALEPH_HANDOFF.md
+  fatal: path 'ALEPH_HANDOFF.md' does not exist in 'batch/b-e3d7a5c1'
+  
+      at genericNodeError (node:internal/errors:999:15)
+      at wrappedFn (node:internal/errors:544:14)
+      at checkExecSyncError (node:child_process:993:11)
+      at execFileSync (node:child_process:1029:15)
+      at git (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:12:27)
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:79:80
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17) {
+    status: 128,
+    signal: null,
+    output: [ null, '', "fatal: path 'ALEPH_HANDOFF.md' does not exist in 'batch/b-e3d7a5c1'\n" ],
+    pid: 542216,
+    stdout: '',
+    stderr: "fatal: path 'ALEPH_HANDOFF.md' does not exist in 'batch/b-e3d7a5c1'\n"
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ actual Composer issues direct execution tools (0.753195ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 2
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:88:74
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:88:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ actual Composer issues Infra execution tool (0.448722ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:89:72
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:89:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-composer-continuation.test.mjs:21:32
+✖ actual Infra calls bash (1.325787ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(observed.states.find(s=>s.preset==='aleph-infra')?.commands.some(c=>c.name==='bash'))
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:91:52
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:21:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-composer-continuation.test.mjs:91:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,0 +1,504 @@
+{
+  "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": true,
+  "checks": [
+    {
+      "name": "old campaign dispatch tool is absent",
+      "passed": true
+    },
+    {
+      "name": "current explicit Composer tool is registered",
+      "passed": true
+    },
+    {
+      "name": "current mission approval is registered",
+      "passed": true
+    },
+    {
+      "name": "initial project has no Composer records",
+      "passed": true
+    },
+    {
+      "name": "proposal alone creates no batch",
+      "passed": true
+    },
+    {
+      "name": "proposal alone starts no Composer",
+      "passed": true
+    },
+    {
+      "name": "proposal alone runs no computation",
+      "passed": true
+    },
+    {
+      "name": "first approval starts a Composer identity",
+      "passed": true
+    },
+    {
+      "name": "first computation needs no Leader dispatch",
+      "passed": true
+    },
+    {
+      "name": "first batch owns busy machine",
+      "passed": true
+    },
+    {
+      "name": "unapproved second mission remains proposed",
+      "passed": true
+    },
+    {
+      "name": "unapproved second computation has not started",
+      "passed": true
+    },
+    {
+      "name": "approval while busy keeps second mission approved",
+      "passed": true
+    },
+    {
+      "name": "busy approval preserves existing machine owner",
+      "passed": true
+    },
+    {
+      "name": "busy approval does not duplicate Composer",
+      "passed": true
+    },
+    {
+      "name": "busy approval does not start second calculation early",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "first": {
+        "projectId": "p-94f24c5d",
+        "branch": "missions/first-54ec9c5a",
+        "worktree": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/missions/mw-1c0ca1a3",
+        "missionId": "first",
+        "missionDir": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/missions/mw-1c0ca1a3/missions/first",
+        "recordId": "m-69281b3e",
+        "name": "first",
+        "gate": "/tmp/aleph-project-dsh-snp2lhrk/workspace/first-release",
+        "counter": "/tmp/aleph-project-dsh-snp2lhrk/workspace/first-counter"
+      },
+      "second": {
+        "projectId": "p-94f24c5d",
+        "branch": "missions/second-acdcd85c",
+        "worktree": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/missions/mw-2873835a",
+        "missionId": "second",
+        "missionDir": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/missions/mw-2873835a/missions/second",
+        "recordId": "m-d23dd196",
+        "name": "second",
+        "gate": "/tmp/aleph-project-dsh-snp2lhrk/workspace/second-release",
+        "counter": "/tmp/aleph-project-dsh-snp2lhrk/workspace/second-counter"
+      },
+      "third": {
+        "projectId": "p-94f24c5d",
+        "branch": "missions/third-cf31d484",
+        "worktree": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/missions/mw-8ab660d7",
+        "missionId": "third",
+        "missionDir": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/missions/mw-8ab660d7/missions/third",
+        "recordId": "m-051edd9e",
+        "name": "third",
+        "gate": "/tmp/aleph-project-dsh-snp2lhrk/workspace/third-release",
+        "counter": "/tmp/aleph-project-dsh-snp2lhrk/workspace/third-counter"
+      }
+    },
+    {
+      "afterApproval": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:47:03.905Z",
+        "project": {
+          "id": "p-94f24c5d",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-snp2lhrk/workspace",
+          "research_root": "/tmp/aleph-project-dsh-snp2lhrk/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-snp2lhrk/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-69281b3e",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "approved",
+            "branch": "missions/first-54ec9c5a",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.704Z",
+            "approved_at": "2026-10-31T13:47:03.874Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-d23dd196",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "proposed",
+            "branch": "missions/second-acdcd85c",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.782Z",
+            "approved_at": null,
+            "finished_at": null
+          },
+          {
+            "id": "m-051edd9e",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "proposed",
+            "branch": "missions/third-cf31d484",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.851Z",
+            "approved_at": null,
+            "finished_at": null
+          }
+        ],
+        "batches": [],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "b4a65db3-3883-4ccb-9f59-74c02e3bb651",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:47:03.898Z"
+          }
+        ],
+        "counts": {
+          "queued": 3,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "running": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:47:04.034Z",
+        "project": {
+          "id": "p-94f24c5d",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-snp2lhrk/workspace",
+          "research_root": "/tmp/aleph-project-dsh-snp2lhrk/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-snp2lhrk/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-69281b3e",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "batched",
+            "branch": "missions/first-54ec9c5a",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-7e3b4422",
+            "pre_batch_tip": "d6d2426789af544d98fe23e705dc0c3ecabb36a1",
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.704Z",
+            "approved_at": "2026-10-31T13:47:03.874Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-d23dd196",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "proposed",
+            "branch": "missions/second-acdcd85c",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.782Z",
+            "approved_at": null,
+            "finished_at": null
+          },
+          {
+            "id": "m-051edd9e",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "proposed",
+            "branch": "missions/third-cf31d484",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.851Z",
+            "approved_at": null,
+            "finished_at": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-7e3b4422",
+            "machine_id": "local",
+            "status": "running",
+            "mission_ids": [
+              "m-69281b3e"
+            ],
+            "branch": "batch/b-7e3b4422",
+            "base_tip": "b73d427503495170c7d6bf3a953ea51365580b7b",
+            "created_at": "2026-10-31T13:47:03.963Z",
+            "started_at": "2026-10-31T13:47:03.980Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-69281b3e",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/batches/b-7e3b4422/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": null,
+            "summary": null
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-7e3b4422"
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "b4a65db3-3883-4ccb-9f59-74c02e3bb651",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:47:03.898Z"
+          }
+        ],
+        "counts": {
+          "queued": 3,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "queued": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:47:04.048Z",
+        "project": {
+          "id": "p-94f24c5d",
+          "title": "workspace",
+          "status": "running",
+          "workspace": "/tmp/aleph-project-dsh-snp2lhrk/workspace",
+          "research_root": "/tmp/aleph-project-dsh-snp2lhrk/workspace/research",
+          "mission_root": "/tmp/aleph-project-dsh-snp2lhrk/workspace/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-69281b3e",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "batched",
+            "branch": "missions/first-54ec9c5a",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-7e3b4422",
+            "pre_batch_tip": "d6d2426789af544d98fe23e705dc0c3ecabb36a1",
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.704Z",
+            "approved_at": "2026-10-31T13:47:03.874Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-d23dd196",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "approved",
+            "branch": "missions/second-acdcd85c",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.782Z",
+            "approved_at": "2026-10-31T13:47:04.042Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-051edd9e",
+            "owner_session": "session-d695fdbe-e87e-46d4-bb60-a3f61dee7a2e",
+            "status": "proposed",
+            "branch": "missions/third-cf31d484",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:47:03.851Z",
+            "approved_at": null,
+            "finished_at": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-7e3b4422",
+            "machine_id": "local",
+            "status": "running",
+            "mission_ids": [
+              "m-69281b3e"
+            ],
+            "branch": "batch/b-7e3b4422",
+            "base_tip": "b73d427503495170c7d6bf3a953ea51365580b7b",
+            "created_at": "2026-10-31T13:47:03.963Z",
+            "started_at": "2026-10-31T13:47:03.980Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-69281b3e",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-project-dsh-snp2lhrk/workspace/.aleph/batches/b-7e3b4422/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": null,
+            "summary": null
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-7e3b4422"
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "b4a65db3-3883-4ccb-9f59-74c02e3bb651",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:47:03.898Z"
+          }
+        ],
+        "counts": {
+          "queued": 3,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    }
+  ],
+  "boundary": "Automatic substitutes storage, sessions and model activations; Git, worktrees, runner and shell are real. Actual uses installed DSH original spawn, persistent state and real model tool execution with a local deterministic decision adapter. The adapter reads actual tool results and exercises direct dispatch, one explicit Infra static-inspection path, and subsequent dispatch; this verifies Host routing and queue continuation, not model judgment or research quality. No Leader dispatch calls after approvals.",
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-snp2lhrk",
+    "workspace": "/tmp/aleph-project-dsh-snp2lhrk/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "configuration_adaptation": "Composer tool-subagent provider=spawn; no product JavaScript changes."
+  },
+  "host": {
+    "pid": 538359,
+    "exit": 0,
+    "pid_exists": false
+  },
+  "launcher_exit": 1
+}

@@ -1,0 +1,8 @@
+▶ B current persistent Composer continuation
+  ✔ old campaign dispatch tool is absent (0.931613ms)
+  ✔ current explicit Composer tool is registered (0.213835ms)
+  ✔ current mission approval is registered (0.154547ms)
+  ✔ initial project has no Composer records (0.150002ms)
+  ✔ proposal alone creates no batch (0.742167ms)
+  ✔ proposal alone starts no Composer (0.307974ms)
+  ✔ proposal alone runs no computation (0.208475ms)

@@ -1,0 +1,1118 @@
+{
+  "source": "/tmp/aleph-current-migration-validation-source",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": false,
+  "checks": [
+    {
+      "name": "old campaign dispatch tool is absent",
+      "passed": true
+    },
+    {
+      "name": "current explicit Composer tool is registered",
+      "passed": true
+    },
+    {
+      "name": "current mission approval is registered",
+      "passed": true
+    },
+    {
+      "name": "initial project has no Composer records",
+      "passed": true
+    },
+    {
+      "name": "proposal alone creates no batch",
+      "passed": true
+    },
+    {
+      "name": "proposal alone starts no Composer",
+      "passed": true
+    },
+    {
+      "name": "proposal alone runs no computation",
+      "passed": true
+    },
+    {
+      "name": "first approval starts a Composer identity",
+      "passed": true
+    },
+    {
+      "name": "first computation needs no Leader dispatch",
+      "passed": true
+    },
+    {
+      "name": "first batch owns busy machine",
+      "passed": true
+    },
+    {
+      "name": "unapproved second mission remains proposed",
+      "passed": true
+    },
+    {
+      "name": "unapproved second computation has not started",
+      "passed": true
+    },
+    {
+      "name": "approval while busy keeps second mission approved",
+      "passed": true
+    },
+    {
+      "name": "busy approval preserves existing machine owner",
+      "passed": true
+    },
+    {
+      "name": "busy approval does not duplicate Composer",
+      "passed": true
+    },
+    {
+      "name": "busy approval does not start second calculation early",
+      "passed": true
+    },
+    {
+      "name": "first mission finishes successfully",
+      "passed": true
+    },
+    {
+      "name": "second queued mission finishes without Leader dispatch",
+      "passed": true
+    },
+    {
+      "name": "distinct batches execute queued work",
+      "passed": true
+    },
+    {
+      "name": "both finished batches retain done state",
+      "passed": true
+    },
+    {
+      "name": "completion releases machine capacity",
+      "passed": true
+    },
+    {
+      "name": "completion clears exact machine batch owner",
+      "passed": true
+    },
+    {
+      "name": "first task computes once",
+      "passed": true
+    },
+    {
+      "name": "second task computes once",
+      "passed": true
+    },
+    {
+      "name": "first result belongs to first mission branch",
+      "passed": true
+    },
+    {
+      "name": "second result belongs to second mission branch",
+      "passed": true
+    },
+    {
+      "name": "third unapproved mission stays untouched",
+      "passed": true
+    },
+    {
+      "name": "second dispatch uses an Infra activation",
+      "passed": true
+    },
+    {
+      "name": "Infra static inspection completes successfully",
+      "passed": true
+    },
+    {
+      "name": "Infra handoff persists in second result history",
+      "passed": false,
+      "error": "Command failed: git -C /tmp/aleph-composer-continuation-Iz114z/missions show 579becde7afe1a14ab2b1ee6096cbddfbf505721:ALEPH_HANDOFF.md\nfatal: path 'ALEPH_HANDOFF.md' does not exist in '579becde7afe1a14ab2b1ee6096cbddfbf505721'\n"
+    },
+    {
+      "name": "later approval dispatches third work without Leader command",
+      "passed": true
+    },
+    {
+      "name": "later approval reuses same Composer identity",
+      "passed": true
+    },
+    {
+      "name": "all three task branches have distinct result commits",
+      "passed": true
+    },
+    {
+      "name": "later work is computed exactly once",
+      "passed": true
+    },
+    {
+      "name": "final state has no approved work left",
+      "passed": true
+    },
+    {
+      "name": "activation uses one persistent Composer",
+      "passed": true
+    },
+    {
+      "name": "completion posts exact queue event to Composer",
+      "passed": true
+    },
+    {
+      "name": "later approval posts queue event to same Composer",
+      "passed": true
+    },
+    {
+      "name": "deterministic automatic model has no tool errors",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "first": {
+        "projectId": "p-0de0862b",
+        "branch": "missions/first-f36f44e1",
+        "worktree": "/tmp/aleph-composer-continuation-Iz114z/.aleph/missions/mw-0ec63d60",
+        "missionId": "first",
+        "missionDir": "/tmp/aleph-composer-continuation-Iz114z/.aleph/missions/mw-0ec63d60/missions/first",
+        "recordId": "m-56009a5f",
+        "name": "first",
+        "gate": "/tmp/aleph-composer-continuation-Iz114z/first-release",
+        "counter": "/tmp/aleph-composer-continuation-Iz114z/first-counter"
+      },
+      "second": {
+        "projectId": "p-0de0862b",
+        "branch": "missions/second-93746e88",
+        "worktree": "/tmp/aleph-composer-continuation-Iz114z/.aleph/missions/mw-6b54bf50",
+        "missionId": "second",
+        "missionDir": "/tmp/aleph-composer-continuation-Iz114z/.aleph/missions/mw-6b54bf50/missions/second",
+        "recordId": "m-29752796",
+        "name": "second",
+        "gate": "/tmp/aleph-composer-continuation-Iz114z/second-release",
+        "counter": "/tmp/aleph-composer-continuation-Iz114z/second-counter"
+      },
+      "third": {
+        "projectId": "p-0de0862b",
+        "branch": "missions/third-a46ce205",
+        "worktree": "/tmp/aleph-composer-continuation-Iz114z/.aleph/missions/mw-79e17efb",
+        "missionId": "third",
+        "missionDir": "/tmp/aleph-composer-continuation-Iz114z/.aleph/missions/mw-79e17efb/missions/third",
+        "recordId": "m-a2d3780c",
+        "name": "third",
+        "gate": "/tmp/aleph-composer-continuation-Iz114z/third-release",
+        "counter": "/tmp/aleph-composer-continuation-Iz114z/third-counter"
+      }
+    },
+    {
+      "afterApproval": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:46:35.403Z",
+        "project": {
+          "id": "p-0de0862b",
+          "title": "aleph-composer-continuation-Iz114z",
+          "status": "running",
+          "workspace": "/tmp/aleph-composer-continuation-Iz114z",
+          "research_root": "/tmp/aleph-composer-continuation-Iz114z/research",
+          "mission_root": "/tmp/aleph-composer-continuation-Iz114z/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-56009a5f",
+            "owner_session": "continuation-leader",
+            "status": "approved",
+            "branch": "missions/first-f36f44e1",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.211Z",
+            "approved_at": "2026-10-31T13:46:35.402Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-29752796",
+            "owner_session": "continuation-leader",
+            "status": "proposed",
+            "branch": "missions/second-93746e88",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.298Z",
+            "approved_at": null,
+            "finished_at": null
+          },
+          {
+            "id": "m-a2d3780c",
+            "owner_session": "continuation-leader",
+            "status": "proposed",
+            "branch": "missions/third-a46ce205",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.392Z",
+            "approved_at": null,
+            "finished_at": null
+          }
+        ],
+        "batches": [],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "composer-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:46:35.402Z"
+          }
+        ],
+        "counts": {
+          "queued": 3,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "running": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:46:35.478Z",
+        "project": {
+          "id": "p-0de0862b",
+          "title": "aleph-composer-continuation-Iz114z",
+          "status": "running",
+          "workspace": "/tmp/aleph-composer-continuation-Iz114z",
+          "research_root": "/tmp/aleph-composer-continuation-Iz114z/research",
+          "mission_root": "/tmp/aleph-composer-continuation-Iz114z/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-56009a5f",
+            "owner_session": "continuation-leader",
+            "status": "batched",
+            "branch": "missions/first-f36f44e1",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-4d61d936",
+            "pre_batch_tip": "c8aa56ea28385bc822c9c395783e3d2bb96b05c5",
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.211Z",
+            "approved_at": "2026-10-31T13:46:35.402Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-29752796",
+            "owner_session": "continuation-leader",
+            "status": "proposed",
+            "branch": "missions/second-93746e88",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.298Z",
+            "approved_at": null,
+            "finished_at": null
+          },
+          {
+            "id": "m-a2d3780c",
+            "owner_session": "continuation-leader",
+            "status": "proposed",
+            "branch": "missions/third-a46ce205",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.392Z",
+            "approved_at": null,
+            "finished_at": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-4d61d936",
+            "machine_id": "local",
+            "status": "running",
+            "mission_ids": [
+              "m-56009a5f"
+            ],
+            "branch": "batch/b-4d61d936",
+            "base_tip": "0fbcb5954d6337cc876b50e1434f194eb204d45d",
+            "created_at": "2026-10-31T13:46:35.435Z",
+            "started_at": "2026-10-31T13:46:35.443Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-56009a5f",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-composer-continuation-Iz114z/.aleph/batches/b-4d61d936/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": null,
+            "summary": null
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-4d61d936"
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "composer-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:46:35.402Z"
+          }
+        ],
+        "counts": {
+          "queued": 3,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "queued": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:46:35.481Z",
+        "project": {
+          "id": "p-0de0862b",
+          "title": "aleph-composer-continuation-Iz114z",
+          "status": "running",
+          "workspace": "/tmp/aleph-composer-continuation-Iz114z",
+          "research_root": "/tmp/aleph-composer-continuation-Iz114z/research",
+          "mission_root": "/tmp/aleph-composer-continuation-Iz114z/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-56009a5f",
+            "owner_session": "continuation-leader",
+            "status": "batched",
+            "branch": "missions/first-f36f44e1",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-4d61d936",
+            "pre_batch_tip": "c8aa56ea28385bc822c9c395783e3d2bb96b05c5",
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.211Z",
+            "approved_at": "2026-10-31T13:46:35.402Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-29752796",
+            "owner_session": "continuation-leader",
+            "status": "approved",
+            "branch": "missions/second-93746e88",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.298Z",
+            "approved_at": "2026-10-31T13:46:35.480Z",
+            "finished_at": null
+          },
+          {
+            "id": "m-a2d3780c",
+            "owner_session": "continuation-leader",
+            "status": "proposed",
+            "branch": "missions/third-a46ce205",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.392Z",
+            "approved_at": null,
+            "finished_at": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-4d61d936",
+            "machine_id": "local",
+            "status": "running",
+            "mission_ids": [
+              "m-56009a5f"
+            ],
+            "branch": "batch/b-4d61d936",
+            "base_tip": "0fbcb5954d6337cc876b50e1434f194eb204d45d",
+            "created_at": "2026-10-31T13:46:35.435Z",
+            "started_at": "2026-10-31T13:46:35.443Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-56009a5f",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-composer-continuation-Iz114z/.aleph/batches/b-4d61d936/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": null,
+            "summary": null
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "busy",
+            "batchId": "b-4d61d936"
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "composer-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:46:35.402Z"
+          }
+        ],
+        "counts": {
+          "queued": 3,
+          "running": 0,
+          "done": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "twoDone": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:46:35.784Z",
+        "project": {
+          "id": "p-0de0862b",
+          "title": "aleph-composer-continuation-Iz114z",
+          "status": "running",
+          "workspace": "/tmp/aleph-composer-continuation-Iz114z",
+          "research_root": "/tmp/aleph-composer-continuation-Iz114z/research",
+          "mission_root": "/tmp/aleph-composer-continuation-Iz114z/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-56009a5f",
+            "owner_session": "continuation-leader",
+            "status": "done",
+            "branch": "missions/first-f36f44e1",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-4d61d936",
+            "pre_batch_tip": "c8aa56ea28385bc822c9c395783e3d2bb96b05c5",
+            "result_commit": "aaf9f06583fc00dcc16bb426186e7b79a817f776",
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.211Z",
+            "approved_at": "2026-10-31T13:46:35.402Z",
+            "finished_at": "2026-10-31T13:46:35.583Z"
+          },
+          {
+            "id": "m-29752796",
+            "owner_session": "continuation-leader",
+            "status": "done",
+            "branch": "missions/second-93746e88",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-fffe31a0",
+            "pre_batch_tip": "30da972a422bf901a5e92e41159d1682086921e6",
+            "result_commit": "579becde7afe1a14ab2b1ee6096cbddfbf505721",
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.298Z",
+            "approved_at": "2026-10-31T13:46:35.480Z",
+            "finished_at": "2026-10-31T13:46:35.760Z"
+          },
+          {
+            "id": "m-a2d3780c",
+            "owner_session": "continuation-leader",
+            "status": "proposed",
+            "branch": "missions/third-a46ce205",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": null,
+            "pre_batch_tip": null,
+            "result_commit": null,
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.392Z",
+            "approved_at": null,
+            "finished_at": null
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-4d61d936",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-56009a5f"
+            ],
+            "branch": "batch/b-4d61d936",
+            "base_tip": "0fbcb5954d6337cc876b50e1434f194eb204d45d",
+            "created_at": "2026-10-31T13:46:35.435Z",
+            "started_at": "2026-10-31T13:46:35.443Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-56009a5f",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-composer-continuation-Iz114z/.aleph/batches/b-4d61d936/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:46:35.583Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-56009a5f",
+                  "manifestId": "first",
+                  "manifestPath": "missions/first/mission.json",
+                  "status": "done",
+                  "resultCommit": "aaf9f06583fc00dcc16bb426186e7b79a817f776"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b-fffe31a0",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-29752796"
+            ],
+            "branch": "batch/b-fffe31a0",
+            "base_tip": "0fbcb5954d6337cc876b50e1434f194eb204d45d",
+            "created_at": "2026-10-31T13:46:35.609Z",
+            "started_at": "2026-10-31T13:46:35.660Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-29752796",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-composer-continuation-Iz114z/.aleph/batches/b-fffe31a0/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:46:35.760Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-29752796",
+                  "manifestId": "second",
+                  "manifestPath": "missions/second/mission.json",
+                  "status": "done",
+                  "resultCommit": "579becde7afe1a14ab2b1ee6096cbddfbf505721"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "composer-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:46:35.402Z"
+          },
+          {
+            "role": "infra",
+            "childId": "composer-child-1",
+            "status": "done",
+            "summary": "Static inspection only; no safe optimization needed.",
+            "branch": "batch/b-fffe31a0",
+            "updatedAt": "2026-10-31T13:46:35.653Z"
+          }
+        ],
+        "counts": {
+          "queued": 1,
+          "running": 0,
+          "done": 2,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "final": {
+        "schema": 2,
+        "generated_at": "2026-10-31T13:46:35.986Z",
+        "project": {
+          "id": "p-0de0862b",
+          "title": "aleph-composer-continuation-Iz114z",
+          "status": "running",
+          "workspace": "/tmp/aleph-composer-continuation-Iz114z",
+          "research_root": "/tmp/aleph-composer-continuation-Iz114z/research",
+          "mission_root": "/tmp/aleph-composer-continuation-Iz114z/missions",
+          "template_branch": "template",
+          "eval_command": "python3 eval/run_eval.py",
+          "eval_root": null,
+          "best": null,
+          "evaluations": [],
+          "brief": "",
+          "researcher_count": 4,
+          "prepared": false,
+          "python_path": null,
+          "visible_data": null,
+          "testset_path": null,
+          "submission_python": null,
+          "violations": []
+        },
+        "missions": [
+          {
+            "id": "m-56009a5f",
+            "owner_session": "continuation-leader",
+            "status": "done",
+            "branch": "missions/first-f36f44e1",
+            "manifest_id": "first",
+            "manifest_path": "missions/first/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-4d61d936",
+            "pre_batch_tip": "c8aa56ea28385bc822c9c395783e3d2bb96b05c5",
+            "result_commit": "aaf9f06583fc00dcc16bb426186e7b79a817f776",
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.211Z",
+            "approved_at": "2026-10-31T13:46:35.402Z",
+            "finished_at": "2026-10-31T13:46:35.583Z"
+          },
+          {
+            "id": "m-29752796",
+            "owner_session": "continuation-leader",
+            "status": "done",
+            "branch": "missions/second-93746e88",
+            "manifest_id": "second",
+            "manifest_path": "missions/second/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-fffe31a0",
+            "pre_batch_tip": "30da972a422bf901a5e92e41159d1682086921e6",
+            "result_commit": "579becde7afe1a14ab2b1ee6096cbddfbf505721",
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.298Z",
+            "approved_at": "2026-10-31T13:46:35.480Z",
+            "finished_at": "2026-10-31T13:46:35.760Z"
+          },
+          {
+            "id": "m-a2d3780c",
+            "owner_session": "continuation-leader",
+            "status": "done",
+            "branch": "missions/third-a46ce205",
+            "manifest_id": "third",
+            "manifest_path": "missions/third/mission.json",
+            "entrypoint": "run.sh",
+            "batch_id": "b-7a81ce77",
+            "pre_batch_tip": "818f0f06381005ca6b570ab286241a0be14b6fba",
+            "result_commit": "b915cece165f5df267d052cc7a8b6d950c81b448",
+            "error": null,
+            "created_at": "2026-10-31T13:46:35.392Z",
+            "approved_at": "2026-10-31T13:46:35.804Z",
+            "finished_at": "2026-10-31T13:46:35.964Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-4d61d936",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-56009a5f"
+            ],
+            "branch": "batch/b-4d61d936",
+            "base_tip": "0fbcb5954d6337cc876b50e1434f194eb204d45d",
+            "created_at": "2026-10-31T13:46:35.435Z",
+            "started_at": "2026-10-31T13:46:35.443Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-56009a5f",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-composer-continuation-Iz114z/.aleph/batches/b-4d61d936/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:46:35.583Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-56009a5f",
+                  "manifestId": "first",
+                  "manifestPath": "missions/first/mission.json",
+                  "status": "done",
+                  "resultCommit": "aaf9f06583fc00dcc16bb426186e7b79a817f776"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b-fffe31a0",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-29752796"
+            ],
+            "branch": "batch/b-fffe31a0",
+            "base_tip": "0fbcb5954d6337cc876b50e1434f194eb204d45d",
+            "created_at": "2026-10-31T13:46:35.609Z",
+            "started_at": "2026-10-31T13:46:35.660Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-29752796",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-composer-continuation-Iz114z/.aleph/batches/b-fffe31a0/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:46:35.760Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-29752796",
+                  "manifestId": "second",
+                  "manifestPath": "missions/second/mission.json",
+                  "status": "done",
+                  "resultCommit": "579becde7afe1a14ab2b1ee6096cbddfbf505721"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b-7a81ce77",
+            "machine_id": "local",
+            "status": "done",
+            "mission_ids": [
+              "m-a2d3780c"
+            ],
+            "branch": "batch/b-7a81ce77",
+            "base_tip": "0fbcb5954d6337cc876b50e1434f194eb204d45d",
+            "created_at": "2026-10-31T13:46:35.842Z",
+            "started_at": "2026-10-31T13:46:35.849Z",
+            "infra": {
+              "cores": 12,
+              "threads": 10,
+              "missions": [
+                {
+                  "mission": "m-a2d3780c",
+                  "status": "no-pyproject"
+                }
+              ],
+              "runner": "python3",
+              "timeout_ms": 21600000,
+              "env": {
+                "ALEPH_THREADS": "10",
+                "OMP_NUM_THREADS": "10",
+                "OPENBLAS_NUM_THREADS": "10",
+                "MKL_NUM_THREADS": "10",
+                "NUMEXPR_NUM_THREADS": "10",
+                "UV_CACHE_DIR": "/tmp/aleph-composer-continuation-Iz114z/.aleph/batches/b-7a81ce77/.uv-cache",
+                "UV_PYTHON_DOWNLOADS": "never"
+              }
+            },
+            "finished_at": "2026-10-31T13:46:35.964Z",
+            "summary": {
+              "runnerError": null,
+              "missions": [
+                {
+                  "missionId": "m-a2d3780c",
+                  "manifestId": "third",
+                  "manifestPath": "missions/third/mission.json",
+                  "status": "done",
+                  "resultCommit": "b915cece165f5df267d052cc7a8b6d950c81b448"
+                }
+              ]
+            }
+          }
+        ],
+        "machines": [
+          {
+            "id": "local",
+            "kind": "local",
+            "status": "idle",
+            "batchId": null
+          }
+        ],
+        "agents": [
+          {
+            "role": "composer",
+            "childId": "composer-child-0",
+            "status": "running",
+            "summary": null,
+            "branch": null,
+            "worktree": null,
+            "updatedAt": "2026-10-31T13:46:35.402Z"
+          },
+          {
+            "role": "infra",
+            "childId": "composer-child-1",
+            "status": "done",
+            "summary": "Static inspection only; no safe optimization needed.",
+            "branch": "batch/b-fffe31a0",
+            "updatedAt": "2026-10-31T13:46:35.653Z"
+          }
+        ],
+        "counts": {
+          "queued": 0,
+          "running": 0,
+          "done": 3,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "model": {
+        "activations": [
+          {
+            "childId": "composer-child-0",
+            "preset": "aleph-composer",
+            "commands": [
+              "aleph_status",
+              "aleph_form_batch",
+              "aleph_run_batch",
+              "aleph_status",
+              "aleph_form_batch",
+              "aleph_run_infra",
+              "aleph_status",
+              "aleph_status",
+              "aleph_status",
+              "aleph_form_batch",
+              "aleph_run_batch",
+              "aleph_status",
+              "aleph_status"
+            ]
+          },
+          {
+            "childId": "composer-child-1",
+            "preset": "aleph-infra",
+            "commands": []
+          }
+        ],
+        "messages": [
+          {
+            "childId": "composer-child-0",
+            "content": [
+              {
+                "type": "text",
+                "text": "MissionQueue changed (mission approved: m-29752796). 1 mission(s) approved and waiting. Machine local is busy. Apply your dispatch policy: run approved work immediately when the machine is idle; only compose ahead and invoke InfraOptimizer while it is busy."
+              }
+            ]
+          },
+          {
+            "childId": "composer-child-0",
+            "content": [
+              {
+                "type": "text",
+                "text": "MissionQueue changed (batch finished: b-4d61d936). 1 mission(s) approved and waiting. Machine local is idle. Apply your dispatch policy: run approved work immediately when the machine is idle; only compose ahead and invoke InfraOptimizer while it is busy."
+              }
+            ]
+          },
+          {
+            "childId": "composer-child-0",
+            "content": [
+              {
+                "type": "text",
+                "text": "MissionQueue changed (batch finished: b-fffe31a0). 0 mission(s) approved and waiting. Machine local is idle. Apply your dispatch policy: run approved work immediately when the machine is idle; only compose ahead and invoke InfraOptimizer while it is busy."
+              }
+            ]
+          },
+          {
+            "childId": "composer-child-0",
+            "content": [
+              {
+                "type": "text",
+                "text": "MissionQueue changed (mission approved: m-a2d3780c). 1 mission(s) approved and waiting. Machine local is idle. Apply your dispatch policy: run approved work immediately when the machine is idle; only compose ahead and invoke InfraOptimizer while it is busy."
+              }
+            ]
+          },
+          {
+            "childId": "composer-child-0",
+            "content": [
+              {
+                "type": "text",
+                "text": "MissionQueue changed (batch finished: b-7a81ce77). 0 mission(s) approved and waiting. Machine local is idle. Apply your dispatch policy: run approved work immediately when the machine is idle; only compose ahead and invoke InfraOptimizer while it is busy."
+              }
+            ]
+          }
+        ],
+        "errors": []
+      }
+    }
+  ],
+  "boundary": "Automatic substitutes storage, sessions and model activations; Git, worktrees, runner and shell are real. Actual uses installed DSH original spawn, persistent state and real model tool execution with a local deterministic decision adapter. The adapter reads actual tool results and exercises direct dispatch, one explicit Infra static-inspection path, and subsequent dispatch; this verifies Host routing and queue continuation, not model judgment or research quality. No Leader dispatch calls after approvals.",
+  "complete": true,
+  "effective": 39,
+  "failed": 1
+}
