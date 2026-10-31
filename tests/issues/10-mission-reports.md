@@ -3,12 +3,14 @@ id: ALEPH-10
 status: dsh实测有问题
 type: 功能缺项
 remote_issue: https://github.com/hapenia/aleph-research/issues/11
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/28
 ---
 
 # 实验结果缺少可查询的报告和给 Leader 的评测反馈
 
 ## 自动完成反馈修复与正式验收（2026-10-31）
+
+修复已发布为 [PR #28](https://github.com/hapenia/aleph-research/pull/28)，当前开放且没有合并。本地管理状态保持原值，原议题保持关闭；公开修复链接与验收结果不代表上游已经发布。
 
 修复提交为 `b82a72217cc74c8a1dbbc8849c248ea241047082`，派生仓库分支为 `fix/aleph-10-parent-feedback`。修复以 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 为基线，将研究代理的结束投递选项改为 `parent`。DSH 原生管理器负责把最终文字送到创建该研究代理的准确 Leader；Host 没有额外发送重复通知。研究提示要求最终摘要引用实际评估返回的状态、分数、报告提交、源码提交和独立引用，评估未完成时如实说明。Composer 和 InfraOptimizer 的投递方式保持原值。
 
