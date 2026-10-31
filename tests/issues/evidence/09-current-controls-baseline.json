@@ -1,0 +1,1125 @@
+{
+  "source": "/home/paulus-chang/项目/aleph",
+  "source_sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "mode": "automatic registered tools",
+  "checks": [
+    {
+      "name": "project initialization creates current project identity",
+      "passed": true
+    },
+    {
+      "name": "research repository is real Git",
+      "passed": true
+    },
+    {
+      "name": "mission repository is real Git",
+      "passed": true
+    },
+    {
+      "name": "template branch is present",
+      "passed": true
+    },
+    {
+      "name": "registered status returns the actual project",
+      "passed": true
+    },
+    {
+      "name": "new project has no missions",
+      "passed": true
+    },
+    {
+      "name": "new project has no batches",
+      "passed": true
+    },
+    {
+      "name": "new project machine is idle",
+      "passed": true
+    },
+    {
+      "name": "mission workspace uses its own branch",
+      "passed": true
+    },
+    {
+      "name": "mission code is a committed Git object",
+      "passed": true
+    },
+    {
+      "name": "proposal persists proposed status",
+      "passed": true
+    },
+    {
+      "name": "proposal keeps actual caller ownership",
+      "passed": true
+    },
+    {
+      "name": "proposal retains branch tip",
+      "passed": true
+    },
+    {
+      "name": "pause formal registered tool availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+    },
+    {
+      "name": "pause formal HTTP operation availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "name": "resume formal registered tool availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+    },
+    {
+      "name": "resume formal HTTP operation availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "name": "finish formal registered tool availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+    },
+    {
+      "name": "finish formal HTTP operation availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "name": "queued mission cancel formal registered tool availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+    },
+    {
+      "name": "queued mission cancel formal HTTP operation availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "name": "running batch cancel formal registered tool availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+    },
+    {
+      "name": "running batch cancel formal HTTP operation availability",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "name": "queued cancellation attempt reports missing operation accurately",
+      "passed": true
+    },
+    {
+      "name": "failed cancellation does not silently remove proposed work",
+      "passed": true
+    },
+    {
+      "name": "normal approval remains operational",
+      "passed": true
+    },
+    {
+      "name": "approval preserves original mission code",
+      "passed": true
+    },
+    {
+      "name": "pause attempt cannot falsely claim success",
+      "passed": true
+    },
+    {
+      "name": "finish attempt cannot falsely claim success",
+      "passed": true
+    },
+    {
+      "name": "resume attempt cannot falsely claim success",
+      "passed": true
+    },
+    {
+      "name": "approved mission still forms a real batch",
+      "passed": true
+    },
+    {
+      "name": "batch links the proposed mission",
+      "passed": true
+    },
+    {
+      "name": "batch branch contains actual mission code",
+      "passed": true
+    },
+    {
+      "name": "machine is reserved by that batch",
+      "passed": true
+    },
+    {
+      "name": "actual Python computation is active",
+      "passed": true
+    },
+    {
+      "name": "public batch is running during actual computation",
+      "passed": true
+    },
+    {
+      "name": "active computation keeps machine busy",
+      "passed": true
+    },
+    {
+      "name": "running cancellation attempt reports absent operation",
+      "passed": true
+    },
+    {
+      "name": "missing cancellation leaves actual compute active",
+      "passed": true
+    },
+    {
+      "name": "normal registered run completes without tool error",
+      "passed": true
+    },
+    {
+      "name": "normal batch reaches done",
+      "passed": true
+    },
+    {
+      "name": "mission result remains queryable as done",
+      "passed": true
+    },
+    {
+      "name": "result commit is a real retained Git object",
+      "passed": true
+    },
+    {
+      "name": "delivered output artifact remains in result commit",
+      "passed": true
+    },
+    {
+      "name": "machine returns to idle after normal completion",
+      "passed": true
+    },
+    {
+      "name": "machine clears finished batch ownership",
+      "passed": true
+    },
+    {
+      "name": "research repository remains available",
+      "passed": true
+    }
+  ],
+  "events": [
+    {
+      "name": "definition pause",
+      "definitions": []
+    },
+    {
+      "name": "route pause",
+      "path": "/api/aleph/project/pause",
+      "result": {
+        "status": 404
+      }
+    },
+    {
+      "name": "definition resume",
+      "definitions": []
+    },
+    {
+      "name": "route resume",
+      "path": "/api/aleph/project/resume",
+      "result": {
+        "status": 404
+      }
+    },
+    {
+      "name": "definition finish",
+      "definitions": []
+    },
+    {
+      "name": "route finish",
+      "path": "/api/aleph/project/finish",
+      "result": {
+        "status": 404
+      }
+    },
+    {
+      "name": "definition queued mission cancel",
+      "definitions": []
+    },
+    {
+      "name": "route queued mission cancel",
+      "path": "/api/aleph/mission/cancel",
+      "result": {
+        "status": 404
+      }
+    },
+    {
+      "name": "definition running batch cancel",
+      "definitions": []
+    },
+    {
+      "name": "route running batch cancel",
+      "path": "/api/aleph/batch/cancel",
+      "result": {
+        "status": 404
+      }
+    },
+    {
+      "name": "actual queued cancellation attempt",
+      "result": {
+        "ok": false,
+        "error": "missing tool aleph_cancel_mission"
+      }
+    },
+    {
+      "name": "project control attempts",
+      "pause": {
+        "ok": false,
+        "error": "missing tool aleph_pause_project"
+      },
+      "finish": {
+        "ok": false,
+        "error": "missing tool aleph_finish_project"
+      },
+      "resume": {
+        "ok": false,
+        "error": "missing tool aleph_resume_project"
+      }
+    },
+    {
+      "name": "actual running cancellation attempt",
+      "result": {
+        "ok": false,
+        "error": "missing tool aleph_cancel_batch"
+      }
+    }
+  ],
+  "boundary": "Actual current registered tools and real Git/Python mission execution. Automatic replaces storage/session/preset/subagent services; actual uses original DSH sessions, persistent storage and tools, deterministic local model holds Composer only. Missing formal controls are observed separately from successful normal execution. No source edits or injected control state.",
+  "definitions": [
+    {
+      "name": "aleph_init_project",
+      "description": "Initialize the DSH project: research repo, mission template repo, machine registry and queues.",
+      "parameters": {
+        "workspace": {
+          "type": "string",
+          "description": "Absolute workspace path; defaults to the session cwd"
+        },
+        "eval_command": {
+          "type": "string",
+          "description": "Research evaluator command"
+        },
+        "eval_root": {
+          "type": "string",
+          "description": "Directory the evaluator runs from"
+        },
+        "visible_data": {
+          "type": "string"
+        },
+        "testset": {
+          "type": "string"
+        },
+        "submission_python": {
+          "type": "string"
+        },
+        "researchers": {
+          "type": "integer",
+          "description": "Default researcher count (default 4)"
+        },
+        "brief": {
+          "type": "string",
+          "description": "Research objective for researcher prompts"
+        }
+      }
+    },
+    {
+      "name": "aleph_list_missions",
+      "description": "List all missions with status, branch, result commit and result path; use before repeating analysis.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        }
+      }
+    },
+    {
+      "name": "aleph_status",
+      "description": "Return projects, missions, batches and machines.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "description": "Optional project id"
+        }
+      }
+    },
+    {
+      "name": "aleph_set_python",
+      "description": "Leader pins the shared Python executable used by researchers and missions.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "python": {
+          "type": "string",
+          "required": true,
+          "description": "Python executable path"
+        }
+      }
+    },
+    {
+      "name": "aleph_create_research_scaffold",
+      "description": "Leader creates the initial research project before any researcher starts.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "title": {
+          "type": "string",
+          "description": "Research project title"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Data sources to copy into the research project"
+        },
+        "python": {
+          "type": "string",
+          "description": "Shared Python executable for researchers and missions"
+        }
+      }
+    },
+    {
+      "name": "aleph_start_mission",
+      "description": "Create a mission branch from the template and return its worktree for the researcher to fill.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Short mission name"
+        }
+      }
+    },
+    {
+      "name": "aleph_propose_mission",
+      "description": "Register a mission branch created by the researcher; Leader approval is required before batching.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "branch": {
+          "type": "string",
+          "required": true,
+          "description": "Mission branch in the mission repo"
+        }
+      }
+    },
+    {
+      "name": "aleph_approve_mission",
+      "description": "Approve a proposed mission and move it to the approved queue.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "mission_id": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "aleph_form_batch",
+      "description": "MissionComposer entry: merge approved missions into a machine-bound batch branch.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "machine_id": {
+          "type": "string",
+          "description": "Machine id, default local"
+        }
+      }
+    },
+    {
+      "name": "aleph_evaluate",
+      "description": "Evaluate the research branch after all missions owned by this researcher are done; Host writes the report into the research commit message.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        }
+      }
+    },
+    {
+      "name": "aleph_run_researcher",
+      "description": "Start a researcher subagent in the research repo; it proposes missions and waits only for its own missions.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        }
+      }
+    },
+    {
+      "name": "aleph_run_researchers",
+      "description": "Start the project default number of researcher subagents, each with its own research worktree and branch.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Optional count; defaults to the project researcher count"
+        }
+      }
+    },
+    {
+      "name": "aleph_run_composer",
+      "description": "Start MissionComposer to inspect the approved queue and form a machine-bound batch.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        }
+      }
+    },
+    {
+      "name": "aleph_run_infra",
+      "description": "Start InfraOptimizer on a forming batch, then run the batch and deliver per-mission results.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "batch_id": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "aleph_run_batch",
+      "description": "Run a formed machine-bound batch, write per-mission result envelopes and cherry-pick results to pre-batch mission branches.",
+      "parameters": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "description": "Project id"
+        },
+        "batch_id": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  ],
+  "routes": [
+    "/api/aleph/snapshot",
+    "/api/aleph/projects",
+    "/api/aleph/init",
+    "/api/aleph/workspace",
+    "/api/aleph/health",
+    "/api/aleph/set-python",
+    "/api/aleph/scaffold",
+    "/api/aleph/approve",
+    "/api/aleph/batch",
+    "/api/aleph/select-best",
+    "/api/aleph/retry",
+    "/api/aleph/evaluate",
+    "/api/aleph/run"
+  ],
+  "project": {
+    "id": "p-bf898640",
+    "workspace": "/tmp/aleph-controls-A6lCcz",
+    "researchRoot": "/tmp/aleph-controls-A6lCcz/research",
+    "missionRoot": "/tmp/aleph-controls-A6lCcz/missions",
+    "templateBranch": "template",
+    "evalCommand": "python3 eval/run_eval.py",
+    "evalRoot": null,
+    "brief": "",
+    "researcherCount": 4,
+    "prepared": false,
+    "visibleData": null,
+    "testsetPath": null,
+    "submissionPython": null,
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "idle",
+        "batchId": null
+      }
+    ],
+    "agents": [],
+    "missions": [],
+    "batches": [],
+    "violations": [],
+    "createdAt": "2026-10-31T11:29:27.704Z",
+    "updatedAt": "2026-10-31T11:29:27.704Z"
+  },
+  "initial": {
+    "schema": 2,
+    "generated_at": "2026-10-31T11:29:27.726Z",
+    "project": {
+      "id": "p-bf898640",
+      "title": "aleph-controls-A6lCcz",
+      "status": "running",
+      "workspace": "/tmp/aleph-controls-A6lCcz",
+      "research_root": "/tmp/aleph-controls-A6lCcz/research",
+      "mission_root": "/tmp/aleph-controls-A6lCcz/missions",
+      "template_branch": "template",
+      "eval_command": "python3 eval/run_eval.py",
+      "eval_root": null,
+      "best": null,
+      "evaluations": [],
+      "brief": "",
+      "researcher_count": 4,
+      "prepared": false,
+      "python_path": null,
+      "visible_data": null,
+      "testset_path": null,
+      "submission_python": null,
+      "violations": []
+    },
+    "missions": [],
+    "batches": [],
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "idle",
+        "batchId": null
+      }
+    ],
+    "agents": [],
+    "counts": {
+      "queued": 0,
+      "running": 0,
+      "done": 0,
+      "failed": 0
+    }
+  },
+  "missionStart": {
+    "projectId": "p-bf898640",
+    "branch": "missions/work-98110f59",
+    "worktree": "/tmp/aleph-controls-A6lCcz/.aleph/missions/mw-d5fc3555",
+    "missionId": "work",
+    "missionDir": "/tmp/aleph-controls-A6lCcz/.aleph/missions/mw-d5fc3555/missions/work"
+  },
+  "proposed": {
+    "id": "p-bf898640",
+    "workspace": "/tmp/aleph-controls-A6lCcz",
+    "researchRoot": "/tmp/aleph-controls-A6lCcz/research",
+    "missionRoot": "/tmp/aleph-controls-A6lCcz/missions",
+    "templateBranch": "template",
+    "evalCommand": "python3 eval/run_eval.py",
+    "evalRoot": null,
+    "brief": "",
+    "researcherCount": 4,
+    "prepared": false,
+    "visibleData": null,
+    "testsetPath": null,
+    "submissionPython": null,
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "idle",
+        "batchId": null
+      }
+    ],
+    "agents": [],
+    "missions": [
+      {
+        "id": "m-6513d4d0",
+        "ownerSession": "controls-leader",
+        "branch": "missions/work-98110f59",
+        "manifestId": "work",
+        "manifestPath": "missions/work/mission.json",
+        "status": "proposed",
+        "entrypoint": "run.sh",
+        "outputs": [],
+        "resource": null,
+        "batchId": null,
+        "preBatchTip": null,
+        "resultCommit": null,
+        "error": null,
+        "createdAt": "2026-10-31T11:29:27.802Z",
+        "approvedAt": null,
+        "finishedAt": null
+      }
+    ],
+    "batches": [],
+    "violations": [],
+    "createdAt": "2026-10-31T11:29:27.704Z",
+    "updatedAt": "2026-10-31T11:29:27.802Z"
+  },
+  "approved": {
+    "id": "p-bf898640",
+    "workspace": "/tmp/aleph-controls-A6lCcz",
+    "researchRoot": "/tmp/aleph-controls-A6lCcz/research",
+    "missionRoot": "/tmp/aleph-controls-A6lCcz/missions",
+    "templateBranch": "template",
+    "evalCommand": "python3 eval/run_eval.py",
+    "evalRoot": null,
+    "brief": "",
+    "researcherCount": 4,
+    "prepared": false,
+    "visibleData": null,
+    "testsetPath": null,
+    "submissionPython": null,
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "idle",
+        "batchId": null
+      }
+    ],
+    "agents": [],
+    "missions": [
+      {
+        "id": "m-6513d4d0",
+        "ownerSession": "controls-leader",
+        "branch": "missions/work-98110f59",
+        "manifestId": "work",
+        "manifestPath": "missions/work/mission.json",
+        "status": "approved",
+        "entrypoint": "run.sh",
+        "outputs": [],
+        "resource": null,
+        "batchId": null,
+        "preBatchTip": null,
+        "resultCommit": null,
+        "error": null,
+        "createdAt": "2026-10-31T11:29:27.802Z",
+        "approvedAt": "2026-10-31T11:29:27.991Z",
+        "finishedAt": null
+      }
+    ],
+    "batches": [],
+    "violations": [],
+    "createdAt": "2026-10-31T11:29:27.704Z",
+    "updatedAt": "2026-10-31T11:29:27.991Z"
+  },
+  "formed": {
+    "id": "p-bf898640",
+    "workspace": "/tmp/aleph-controls-A6lCcz",
+    "researchRoot": "/tmp/aleph-controls-A6lCcz/research",
+    "missionRoot": "/tmp/aleph-controls-A6lCcz/missions",
+    "templateBranch": "template",
+    "evalCommand": "python3 eval/run_eval.py",
+    "evalRoot": null,
+    "brief": "",
+    "researcherCount": 4,
+    "prepared": false,
+    "visibleData": null,
+    "testsetPath": null,
+    "submissionPython": null,
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "busy",
+        "batchId": "b-9292fa6e"
+      }
+    ],
+    "agents": [
+      {
+        "role": "composer",
+        "childId": "held-composer",
+        "status": "running",
+        "summary": null,
+        "branch": null,
+        "worktree": null,
+        "updatedAt": "2026-10-31T11:29:27.992Z"
+      }
+    ],
+    "missions": [
+      {
+        "id": "m-6513d4d0",
+        "ownerSession": "controls-leader",
+        "branch": "missions/work-98110f59",
+        "manifestId": "work",
+        "manifestPath": "missions/work/mission.json",
+        "status": "batched",
+        "entrypoint": "run.sh",
+        "outputs": [],
+        "resource": null,
+        "batchId": "b-9292fa6e",
+        "preBatchTip": "e52d58b205fa1eaae042dee7358b0de1f4f3093d",
+        "resultCommit": null,
+        "error": null,
+        "createdAt": "2026-10-31T11:29:27.802Z",
+        "approvedAt": "2026-10-31T11:29:27.991Z",
+        "finishedAt": null
+      }
+    ],
+    "batches": [
+      {
+        "id": "b-9292fa6e",
+        "machineId": "local",
+        "status": "forming",
+        "missionIds": [
+          "m-6513d4d0"
+        ],
+        "branch": "batch/b-9292fa6e",
+        "baseTip": "1e1a157ca3578b092af17758c4a1331c96b23f72",
+        "createdAt": "2026-10-31T11:29:28.030Z"
+      }
+    ],
+    "violations": [],
+    "createdAt": "2026-10-31T11:29:27.704Z",
+    "updatedAt": "2026-10-31T11:29:28.030Z"
+  },
+  "started": {
+    "pid": 307984,
+    "cwd": "/tmp/aleph-controls-A6lCcz/.aleph/batches/b-9292fa6e/missions/work",
+    "output": "/tmp/aleph-controls-A6lCcz/.aleph/batches/b-9292fa6e/results/work"
+  },
+  "running": {
+    "schema": 2,
+    "generated_at": "2026-10-31T11:29:28.100Z",
+    "project": {
+      "id": "p-bf898640",
+      "title": "aleph-controls-A6lCcz",
+      "status": "running",
+      "workspace": "/tmp/aleph-controls-A6lCcz",
+      "research_root": "/tmp/aleph-controls-A6lCcz/research",
+      "mission_root": "/tmp/aleph-controls-A6lCcz/missions",
+      "template_branch": "template",
+      "eval_command": "python3 eval/run_eval.py",
+      "eval_root": null,
+      "best": null,
+      "evaluations": [],
+      "brief": "",
+      "researcher_count": 4,
+      "prepared": false,
+      "python_path": null,
+      "visible_data": null,
+      "testset_path": null,
+      "submission_python": null,
+      "violations": []
+    },
+    "missions": [
+      {
+        "id": "m-6513d4d0",
+        "owner_session": "controls-leader",
+        "status": "batched",
+        "branch": "missions/work-98110f59",
+        "manifest_id": "work",
+        "manifest_path": "missions/work/mission.json",
+        "entrypoint": "run.sh",
+        "batch_id": "b-9292fa6e",
+        "pre_batch_tip": "e52d58b205fa1eaae042dee7358b0de1f4f3093d",
+        "result_commit": null,
+        "error": null,
+        "created_at": "2026-10-31T11:29:27.802Z",
+        "approved_at": "2026-10-31T11:29:27.991Z",
+        "finished_at": null
+      }
+    ],
+    "batches": [
+      {
+        "id": "b-9292fa6e",
+        "machine_id": "local",
+        "status": "running",
+        "mission_ids": [
+          "m-6513d4d0"
+        ],
+        "branch": "batch/b-9292fa6e",
+        "base_tip": "1e1a157ca3578b092af17758c4a1331c96b23f72",
+        "created_at": "2026-10-31T11:29:28.030Z",
+        "started_at": "2026-10-31T11:29:28.048Z",
+        "infra": {
+          "cores": 12,
+          "threads": 10,
+          "missions": [
+            {
+              "mission": "m-6513d4d0",
+              "status": "no-pyproject"
+            }
+          ],
+          "runner": "python3",
+          "timeout_ms": 21600000,
+          "env": {
+            "ALEPH_THREADS": "10",
+            "OMP_NUM_THREADS": "10",
+            "OPENBLAS_NUM_THREADS": "10",
+            "MKL_NUM_THREADS": "10",
+            "NUMEXPR_NUM_THREADS": "10",
+            "UV_CACHE_DIR": "/tmp/aleph-controls-A6lCcz/.aleph/batches/b-9292fa6e/.uv-cache",
+            "UV_PYTHON_DOWNLOADS": "never"
+          }
+        },
+        "finished_at": null,
+        "summary": null
+      }
+    ],
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "busy",
+        "batchId": "b-9292fa6e"
+      }
+    ],
+    "agents": [
+      {
+        "role": "composer",
+        "childId": "held-composer",
+        "status": "running",
+        "summary": null,
+        "branch": null,
+        "worktree": null,
+        "updatedAt": "2026-10-31T11:29:27.992Z"
+      }
+    ],
+    "counts": {
+      "queued": 1,
+      "running": 0,
+      "done": 0,
+      "failed": 0
+    }
+  },
+  "run": {
+    "result": {
+      "id": "p-bf898640",
+      "workspace": "/tmp/aleph-controls-A6lCcz",
+      "researchRoot": "/tmp/aleph-controls-A6lCcz/research",
+      "missionRoot": "/tmp/aleph-controls-A6lCcz/missions",
+      "templateBranch": "template",
+      "evalCommand": "python3 eval/run_eval.py",
+      "evalRoot": null,
+      "brief": "",
+      "researcherCount": 4,
+      "prepared": false,
+      "visibleData": null,
+      "testsetPath": null,
+      "submissionPython": null,
+      "machines": [
+        {
+          "id": "local",
+          "kind": "local",
+          "status": "idle",
+          "batchId": null
+        }
+      ],
+      "agents": [
+        {
+          "role": "composer",
+          "childId": "held-composer",
+          "status": "running",
+          "summary": null,
+          "branch": null,
+          "worktree": null,
+          "updatedAt": "2026-10-31T11:29:27.992Z"
+        }
+      ],
+      "missions": [
+        {
+          "id": "m-6513d4d0",
+          "ownerSession": "controls-leader",
+          "branch": "missions/work-98110f59",
+          "manifestId": "work",
+          "manifestPath": "missions/work/mission.json",
+          "status": "done",
+          "entrypoint": "run.sh",
+          "outputs": [],
+          "resource": null,
+          "batchId": "b-9292fa6e",
+          "preBatchTip": "e52d58b205fa1eaae042dee7358b0de1f4f3093d",
+          "resultCommit": "1f1f9908edb5f55d1902fdbc13a2a6c22f52480d",
+          "error": null,
+          "createdAt": "2026-10-31T11:29:27.802Z",
+          "approvedAt": "2026-10-31T11:29:27.991Z",
+          "finishedAt": "2026-10-31T11:29:28.238Z"
+        }
+      ],
+      "batches": [
+        {
+          "id": "b-9292fa6e",
+          "machineId": "local",
+          "status": "done",
+          "missionIds": [
+            "m-6513d4d0"
+          ],
+          "branch": "batch/b-9292fa6e",
+          "baseTip": "1e1a157ca3578b092af17758c4a1331c96b23f72",
+          "createdAt": "2026-10-31T11:29:28.030Z",
+          "startedAt": "2026-10-31T11:29:28.048Z",
+          "infra": {
+            "cores": 12,
+            "threads": 10,
+            "missions": [
+              {
+                "mission": "m-6513d4d0",
+                "status": "no-pyproject"
+              }
+            ],
+            "runner": "python3",
+            "timeout_ms": 21600000,
+            "env": {
+              "ALEPH_THREADS": "10",
+              "OMP_NUM_THREADS": "10",
+              "OPENBLAS_NUM_THREADS": "10",
+              "MKL_NUM_THREADS": "10",
+              "NUMEXPR_NUM_THREADS": "10",
+              "UV_CACHE_DIR": "/tmp/aleph-controls-A6lCcz/.aleph/batches/b-9292fa6e/.uv-cache",
+              "UV_PYTHON_DOWNLOADS": "never"
+            }
+          },
+          "finishedAt": "2026-10-31T11:29:28.238Z",
+          "summary": {
+            "runnerError": null,
+            "missions": [
+              {
+                "missionId": "m-6513d4d0",
+                "manifestId": "work",
+                "manifestPath": "missions/work/mission.json",
+                "status": "done",
+                "resultCommit": "1f1f9908edb5f55d1902fdbc13a2a6c22f52480d"
+              }
+            ]
+          }
+        }
+      ],
+      "violations": [],
+      "createdAt": "2026-10-31T11:29:27.704Z",
+      "updatedAt": "2026-10-31T11:29:28.238Z"
+    }
+  },
+  "final": {
+    "schema": 2,
+    "generated_at": "2026-10-31T11:29:28.238Z",
+    "project": {
+      "id": "p-bf898640",
+      "title": "aleph-controls-A6lCcz",
+      "status": "running",
+      "workspace": "/tmp/aleph-controls-A6lCcz",
+      "research_root": "/tmp/aleph-controls-A6lCcz/research",
+      "mission_root": "/tmp/aleph-controls-A6lCcz/missions",
+      "template_branch": "template",
+      "eval_command": "python3 eval/run_eval.py",
+      "eval_root": null,
+      "best": null,
+      "evaluations": [],
+      "brief": "",
+      "researcher_count": 4,
+      "prepared": false,
+      "python_path": null,
+      "visible_data": null,
+      "testset_path": null,
+      "submission_python": null,
+      "violations": []
+    },
+    "missions": [
+      {
+        "id": "m-6513d4d0",
+        "owner_session": "controls-leader",
+        "status": "done",
+        "branch": "missions/work-98110f59",
+        "manifest_id": "work",
+        "manifest_path": "missions/work/mission.json",
+        "entrypoint": "run.sh",
+        "batch_id": "b-9292fa6e",
+        "pre_batch_tip": "e52d58b205fa1eaae042dee7358b0de1f4f3093d",
+        "result_commit": "1f1f9908edb5f55d1902fdbc13a2a6c22f52480d",
+        "error": null,
+        "created_at": "2026-10-31T11:29:27.802Z",
+        "approved_at": "2026-10-31T11:29:27.991Z",
+        "finished_at": "2026-10-31T11:29:28.238Z"
+      }
+    ],
+    "batches": [
+      {
+        "id": "b-9292fa6e",
+        "machine_id": "local",
+        "status": "done",
+        "mission_ids": [
+          "m-6513d4d0"
+        ],
+        "branch": "batch/b-9292fa6e",
+        "base_tip": "1e1a157ca3578b092af17758c4a1331c96b23f72",
+        "created_at": "2026-10-31T11:29:28.030Z",
+        "started_at": "2026-10-31T11:29:28.048Z",
+        "infra": {
+          "cores": 12,
+          "threads": 10,
+          "missions": [
+            {
+              "mission": "m-6513d4d0",
+              "status": "no-pyproject"
+            }
+          ],
+          "runner": "python3",
+          "timeout_ms": 21600000,
+          "env": {
+            "ALEPH_THREADS": "10",
+            "OMP_NUM_THREADS": "10",
+            "OPENBLAS_NUM_THREADS": "10",
+            "MKL_NUM_THREADS": "10",
+            "NUMEXPR_NUM_THREADS": "10",
+            "UV_CACHE_DIR": "/tmp/aleph-controls-A6lCcz/.aleph/batches/b-9292fa6e/.uv-cache",
+            "UV_PYTHON_DOWNLOADS": "never"
+          }
+        },
+        "finished_at": "2026-10-31T11:29:28.238Z",
+        "summary": {
+          "runnerError": null,
+          "missions": [
+            {
+              "missionId": "m-6513d4d0",
+              "manifestId": "work",
+              "manifestPath": "missions/work/mission.json",
+              "status": "done",
+              "resultCommit": "1f1f9908edb5f55d1902fdbc13a2a6c22f52480d"
+            }
+          ]
+        }
+      }
+    ],
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "idle",
+        "batchId": null
+      }
+    ],
+    "agents": [
+      {
+        "role": "composer",
+        "childId": "held-composer",
+        "status": "running",
+        "summary": null,
+        "branch": null,
+        "worktree": null,
+        "updatedAt": "2026-10-31T11:29:27.992Z"
+      }
+    ],
+    "counts": {
+      "queued": 0,
+      "running": 0,
+      "done": 1,
+      "failed": 0
+    }
+  },
+  "complete": true,
+  "defect_reproduced": false
+}

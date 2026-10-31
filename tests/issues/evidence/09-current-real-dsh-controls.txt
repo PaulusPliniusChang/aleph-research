@@ -1,0 +1,58 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-52l3fpmq", "url": "http://127.0.0.1:44139"}
+▶ ALEPH-09 current project mission batch formal control availability and real normal flow
+  ✔ project initialization creates current project identity (0.998927ms)
+  ✔ research repository is real Git (6.014348ms)
+  ✔ mission repository is real Git (6.243389ms)
+  ✔ template branch is present (5.392706ms)
+  ✔ registered status returns the actual project (0.4992ms)
+  ✔ new project has no missions (1.164763ms)
+  ✔ new project has no batches (0.302494ms)
+  ✔ new project machine is idle (0.214285ms)
+  ✔ mission workspace uses its own branch (3.881885ms)
+  ✔ mission code is a committed Git object (4.444365ms)
+  ✔ proposal persists proposed status (0.325032ms)
+  ✔ proposal keeps actual caller ownership (0.183043ms)
+  ✔ proposal retains branch tip (6.160193ms)
+  ✔ defect: pause formal registered tool availability (0.672243ms)
+  ✔ defect: pause formal HTTP operation availability (0.752128ms)
+  ✔ defect: resume formal registered tool availability (0.304961ms)
+  ✔ defect: resume formal HTTP operation availability (0.315724ms)
+  ✔ defect: finish formal registered tool availability (0.14357ms)
+  ✔ defect: finish formal HTTP operation availability (0.323709ms)
+  ✔ defect: queued mission cancel formal registered tool availability (0.215046ms)
+  ✔ defect: queued mission cancel formal HTTP operation availability (0.247808ms)
+  ✔ defect: running batch cancel formal registered tool availability (0.153587ms)
+  ✔ defect: running batch cancel formal HTTP operation availability (0.186886ms)
+  ✔ queued cancellation attempt reports missing operation accurately (0.241536ms)
+  ✔ failed cancellation does not silently remove proposed work (2.038216ms)
+  ✔ normal approval remains operational (0.583741ms)
+  ✔ approval preserves original mission code (5.415869ms)
+  ✔ pause attempt cannot falsely claim success (0.372198ms)
+  ✔ finish attempt cannot falsely claim success (0.23486ms)
+  ✔ resume attempt cannot falsely claim success (1.488056ms)
+  ✔ approved mission still forms a real batch (0.342658ms)
+  ✔ batch links the proposed mission (0.191522ms)
+  ✔ batch branch contains actual mission code (5.416184ms)
+  ✔ machine is reserved by that batch (0.27515ms)
+  ✔ actual Python computation is active (0.371998ms)
+  ✔ public batch is running during actual computation (0.240778ms)
+  ✔ active computation keeps machine busy (0.193109ms)
+  ✔ running cancellation attempt reports absent operation (0.318068ms)
+  ✔ missing cancellation leaves actual compute active (0.22252ms)
+  ✔ normal registered run completes without tool error (0.395086ms)
+  ✔ normal batch reaches done (0.288723ms)
+  ✔ mission result remains queryable as done (0.223684ms)
+  ✔ result commit is a real retained Git object (5.397648ms)
+  ✔ delivered output artifact remains in result commit (6.500545ms)
+  ✔ machine returns to idle after normal completion (0.488655ms)
+  ✔ machine clears finished batch ownership (0.379457ms)
+  ✔ research repository remains available (11.298416ms)
+✔ ALEPH-09 current project mission batch formal control availability and real normal flow (600.238569ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 713.480884

@@ -1,0 +1,184 @@
+{"phase": "actual-host-ready", "root": "/tmp/aleph-project-dsh-vpqn4ggk", "url": "http://127.0.0.1:32895"}
+▶ ALEPH-09 current project mission batch formal control availability and real normal flow
+  ✔ project initialization creates current project identity (0.671887ms)
+  ✔ research repository is real Git (4.639761ms)
+  ✔ mission repository is real Git (4.056391ms)
+  ✔ template branch is present (3.648349ms)
+  ✔ registered status returns the actual project (0.317186ms)
+  ✔ new project has no missions (0.592472ms)
+  ✔ new project has no batches (0.197942ms)
+  ✔ new project machine is idle (0.180841ms)
+  ✔ mission workspace uses its own branch (4.691446ms)
+  ✔ mission code is a committed Git object (5.702769ms)
+  ✔ proposal persists proposed status (0.554447ms)
+  ✔ proposal keeps actual caller ownership (0.307035ms)
+  ✔ proposal retains branch tip (8.026451ms)
+  ✔ defect: pause formal registered tool availability (0.451329ms)
+  ✖ defect: pause formal HTTP operation availability (1.937065ms)
+  ✔ defect: resume formal registered tool availability (0.327302ms)
+  ✖ defect: resume formal HTTP operation availability (0.631935ms)
+  ✔ defect: finish formal registered tool availability (0.270423ms)
+  ✖ defect: finish formal HTTP operation availability (0.395979ms)
+  ✔ defect: queued mission cancel formal registered tool availability (0.143906ms)
+  ✖ defect: queued mission cancel formal HTTP operation availability (0.332548ms)
+  ✔ defect: running batch cancel formal registered tool availability (0.149133ms)
+  ✖ defect: running batch cancel formal HTTP operation availability (0.369285ms)
+  ✔ queued cancellation attempt reports missing operation accurately (0.370249ms)
+  ✔ failed cancellation does not silently remove proposed work (2.146409ms)
+  ✔ normal approval remains operational (0.394845ms)
+  ✔ approval preserves original mission code (6.76701ms)
+  ✔ pause attempt cannot falsely claim success (0.384288ms)
+  ✔ finish attempt cannot falsely claim success (0.237607ms)
+  ✔ resume attempt cannot falsely claim success (0.312746ms)
+  ✔ approved mission still forms a real batch (0.482023ms)
+  ✔ batch links the proposed mission (0.300066ms)
+  ✔ batch branch contains actual mission code (7.108083ms)
+  ✔ machine is reserved by that batch (0.407729ms)
+  ✔ actual Python computation is active (0.684496ms)
+  ✔ public batch is running during actual computation (0.345524ms)
+  ✔ active computation keeps machine busy (0.247584ms)
+  ✔ running cancellation attempt reports absent operation (0.450947ms)
+  ✔ missing cancellation leaves actual compute active (0.385612ms)
+  ✔ normal registered run completes without tool error (0.629721ms)
+  ✔ normal batch reaches done (0.591377ms)
+  ✔ mission result remains queryable as done (0.413345ms)
+  ✔ result commit is a real retained Git object (8.347491ms)
+  ✔ delivered output artifact remains in result commit (9.118532ms)
+  ✔ machine returns to idle after normal completion (0.677595ms)
+  ✔ machine clears finished batch ownership (0.576017ms)
+  ✔ research repository remains available (9.064586ms)
+✖ ALEPH-09 current project mission batch formal control availability and real normal flow (675.843071ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 42
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 751.86424
+
+✖ failing tests:
+
+test at tests/issues/dsh/project-controls-acceptance.test.mjs:20:32
+✖ defect: pause formal HTTP operation availability (1.937065ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:93
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/project-controls-acceptance.test.mjs:20:32
+✖ defect: resume formal HTTP operation availability (0.631935ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:93
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/project-controls-acceptance.test.mjs:20:32
+✖ defect: finish formal HTTP operation availability (0.395979ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:93
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/project-controls-acceptance.test.mjs:20:32
+✖ defect: queued mission cancel formal HTTP operation availability (0.332548ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:93
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/project-controls-acceptance.test.mjs:20:32
+✖ defect: running batch cancel formal HTTP operation availability (0.369285ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:93
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:20:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/project-controls-acceptance.test.mjs:57:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+Traceback (most recent call last):
+  File "/home/paulus-chang/项目/aleph-tests/tests/issues/dsh/current-project-controls.py", line 66, in <module>
+    raise RuntimeError('actual controls observation failed; inspect saved evidence')
+RuntimeError: actual controls observation failed; inspect saved evidence

@@ -1,0 +1,18 @@
+{
+  "source_sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "automatic": {
+    "effective_checks": 47,
+    "passed": 37,
+    "failed": 10,
+    "verdict": "formal control functionality absent",
+    "raw_flag_note": "Raw defect_reproduced=false is the actual-mode switch, not the behavior verdict. Original raw report preserved."
+  },
+  "actual_dsh": {
+    "observations": 47,
+    "passed": 47,
+    "restart_observations": 8,
+    "restart_passed": 8,
+    "verdict": "control absence reproduced; ordinary results survive restart",
+    "composer_boundary": "Actual Composer startup failed with $.provider: missing required value. No Composer automatic dispatch verified; registered tools invoked directly. Deterministic adapter configuration is not proof of Composer execution."
+  }
+}
