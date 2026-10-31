@@ -1,0 +1,379 @@
+{
+  "environment": {
+    "root": "/tmp/aleph-project-dsh-xq_x4xk9",
+    "workspace": "/tmp/aleph-project-dsh-xq_x4xk9/workspace",
+    "runtime": "/opt/dsh-desktop-linux-bin/resources/app/dsh",
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "version": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "tests/issues/dsh/current-infra-preparation.py",
+    "--source",
+    "/home/paulus-chang/\u9879\u76ee/aleph",
+    "--output",
+    "tests/issues/evidence/13-current-real-dsh-preparation.json"
+  ],
+  "boundary": "Actual DSH registered tools, storage, sessions, real Git and filesystem. Exact first infra worktree-add response delayed after real Git creation. No source changes; local deterministic model configured. Inspect first activation outcome before claiming a real optimizer model ran.",
+  "events": [
+    {
+      "name": "host-ready",
+      "health": {
+        "ok": true,
+        "version": "0.3.0",
+        "storage": "aleph_project"
+      }
+    },
+    {
+      "name": "host-stopped",
+      "pid": 325121,
+      "exit": 0,
+      "pid_exists": false
+    }
+  ],
+  "probe_exit": 0,
+  "probe": {
+    "source": "/home/paulus-chang/\u9879\u76ee/aleph",
+    "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+    "actual": true,
+    "checks": [
+      {
+        "name": "new research repository has real Git objects",
+        "passed": true
+      },
+      {
+        "name": "new mission repository has real Git objects",
+        "passed": true
+      },
+      {
+        "name": "new project has one idle local machine",
+        "passed": true
+      },
+      {
+        "name": "new project has no stale infra record",
+        "passed": true
+      },
+      {
+        "name": "mission uses the returned owned worktree",
+        "passed": true
+      },
+      {
+        "name": "mission owns the expected branch",
+        "passed": true
+      },
+      {
+        "name": "mission script is committed before proposal",
+        "passed": true
+      },
+      {
+        "name": "proposal records actual owner",
+        "passed": true
+      },
+      {
+        "name": "proposal persists proposed status",
+        "passed": true
+      },
+      {
+        "name": "approval persists approved status",
+        "passed": true
+      },
+      {
+        "name": "approval retains committed mission tip",
+        "passed": true
+      },
+      {
+        "name": "composition creates forming batch",
+        "passed": true
+      },
+      {
+        "name": "composition associates selected mission",
+        "passed": true
+      },
+      {
+        "name": "composition records expected source tip",
+        "passed": true
+      },
+      {
+        "name": "composition reserves machine for the batch",
+        "passed": true
+      },
+      {
+        "name": "batch branch contains mission script",
+        "passed": true
+      },
+      {
+        "name": "first request really completed Git worktree creation",
+        "passed": true
+      },
+      {
+        "name": "first request has not returned during preparation",
+        "passed": true
+      },
+      {
+        "name": "first worktree points at the real batch tip",
+        "passed": true
+      },
+      {
+        "name": "preparing directory has a Git worktree identity",
+        "passed": true
+      },
+      {
+        "name": "preparing role is not yet recorded running",
+        "passed": true
+      },
+      {
+        "name": "defect: second request reaches stale Git registration",
+        "passed": true
+      },
+      {
+        "name": "second request explicitly returns an error",
+        "passed": true
+      },
+      {
+        "name": "first request remains pending when second fails",
+        "passed": true
+      },
+      {
+        "name": "defect: first directory was removed",
+        "passed": true
+      },
+      {
+        "name": "defect: first preparation marker was removed",
+        "passed": true
+      },
+      {
+        "name": "duplicate does not advance batch branch",
+        "passed": true
+      },
+      {
+        "name": "second Git attempt is independently recorded",
+        "passed": true
+      },
+      {
+        "name": "Git retains stale first worktree registration after directory removal",
+        "passed": true
+      },
+      {
+        "name": "failed duplicate leaves batch forming",
+        "passed": true
+      },
+      {
+        "name": "failed duplicate keeps machine busy",
+        "passed": true
+      },
+      {
+        "name": "defect: original request fails after directory loss",
+        "passed": true
+      },
+      {
+        "name": "no successful infra result was recorded",
+        "passed": true
+      },
+      {
+        "name": "mission receives no false result commit",
+        "passed": true
+      },
+      {
+        "name": "research repository remains intact",
+        "passed": true
+      },
+      {
+        "name": "original mission commit remains accessible",
+        "passed": true
+      }
+    ],
+    "events": [],
+    "boundary": "Only the first exact infra worktree-add response is delayed after real Git completes. Filesystem operations, subsequent Git commands and DSH tools/storage are real. Automatic substitutes storage/session/presets/activation services; actual starts a genuine researcher for a Git/session control, with deterministic model responses. The infra preparation failure happens before an infra model starts.",
+    "project": {
+      "id": "p-9d387367",
+      "workspace": "/tmp/aleph-project-dsh-xq_x4xk9/workspace",
+      "researchRoot": "/tmp/aleph-project-dsh-xq_x4xk9/workspace/research",
+      "missionRoot": "/tmp/aleph-project-dsh-xq_x4xk9/workspace/missions",
+      "templateBranch": "template",
+      "evalCommand": "python3 eval/run_eval.py",
+      "evalRoot": null,
+      "brief": "",
+      "researcherCount": 4,
+      "prepared": false,
+      "visibleData": null,
+      "testsetPath": null,
+      "submissionPython": null,
+      "machines": [
+        {
+          "id": "local",
+          "kind": "local",
+          "status": "idle",
+          "batchId": null
+        }
+      ],
+      "agents": [],
+      "missions": [],
+      "batches": [],
+      "violations": [],
+      "createdAt": "2026-10-31T11:43:29.581Z",
+      "updatedAt": "2026-10-31T11:43:29.581Z"
+    },
+    "mission": {
+      "projectId": "p-9d387367",
+      "branch": "missions/preparation-b70e063b",
+      "worktree": "/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/missions/mw-dbc8a0ed",
+      "missionId": "preparation",
+      "missionDir": "/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/missions/mw-dbc8a0ed/missions/preparation"
+    },
+    "batch": {
+      "id": "b-9958b48e",
+      "machineId": "local",
+      "status": "forming",
+      "missionIds": [
+        "m-66e77018"
+      ],
+      "branch": "batch/b-9958b48e",
+      "baseTip": "a59177d5b4a89c284cc15137c5fe181dadfdaa48",
+      "createdAt": "2026-10-31T11:43:30.044Z"
+    },
+    "firstGit": {
+      "args": [
+        "-C",
+        "/tmp/aleph-project-dsh-xq_x4xk9/workspace/missions",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e",
+        "batch/b-9958b48e"
+      ],
+      "ordinal": 1,
+      "returncode": 0,
+      "stdout": "HEAD is now at a3bd587 merge mission m-66e77018\n",
+      "stderr": "Preparing worktree (detached HEAD a3bd587)\n",
+      "git_completed_at": 1793447010.1289675
+    },
+    "preparedInode": 161875,
+    "second": {
+      "error": "{\"ok\":false,\"error\":\"Error: Command failed: git -C /tmp/aleph-project-dsh-xq_x4xk9/workspace/missions worktree add --detach /tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e batch/b-9958b48e\\nPreparing worktree (detached HEAD a3bd587)\\nfatal: '/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e' is a missing but already registered worktree;\\nuse 'add -f' to override, or 'prune' or 'remove' to clear\\n\",\"stack\":\"Error: Command failed: git -C /tmp/aleph-project-dsh-xq_x4xk9/workspace/missions worktree add --detach /tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e batch/b-9958b48e\\nPreparing worktree (detached HEAD a3bd587)\\nfatal: '/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e' is a missing but already registered worktree;\\nuse 'add -f' to override, or 'prune' or 'remove' to clear\\n\\n    at genericNodeError (node:internal/errors:999:15)\\n    at wrappedFn (node:internal/errors:544:14)\\n    at ChildProcess.exithandler (node:child_process:420:12)\\n    at ChildProcess.emit (node:events:514:20)\\n    at maybeClose (node:internal/child_process:1156:16)\\n    at ChildProcess._handle.onexit (node:internal/child_process:334:5)\"}"
+    },
+    "first": {
+      "error": "{\"ok\":false,\"error\":\"Error: working-directory: directory does not exist: \\\"/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e\\\"\",\"stack\":\"Error: working-directory: directory does not exist: \\\"/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e\\\"\\n    at Proxy.directory (file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-working-directory/lib/index.js:135:41)\\n    at async file:///opt/dsh-desktop-linux-bin/resources/app/dsh/node_modules/@deepseek-ai/dsh-working-directory/lib/index.js:120:22\"}"
+    },
+    "final": {
+      "schema": 2,
+      "generated_at": "2026-10-31T11:43:30.265Z",
+      "project": {
+        "id": "p-9d387367",
+        "title": "workspace",
+        "status": "running",
+        "workspace": "/tmp/aleph-project-dsh-xq_x4xk9/workspace",
+        "research_root": "/tmp/aleph-project-dsh-xq_x4xk9/workspace/research",
+        "mission_root": "/tmp/aleph-project-dsh-xq_x4xk9/workspace/missions",
+        "template_branch": "template",
+        "eval_command": "python3 eval/run_eval.py",
+        "eval_root": null,
+        "best": null,
+        "evaluations": [],
+        "brief": "",
+        "researcher_count": 4,
+        "prepared": false,
+        "python_path": null,
+        "visible_data": null,
+        "testset_path": null,
+        "submission_python": null,
+        "violations": []
+      },
+      "missions": [
+        {
+          "id": "m-66e77018",
+          "owner_session": "session-fc9ca7ef-7f71-4644-a374-659e7beb4357",
+          "status": "batched",
+          "branch": "missions/preparation-b70e063b",
+          "manifest_id": "preparation",
+          "manifest_path": "missions/preparation/mission.json",
+          "entrypoint": "run.sh",
+          "batch_id": "b-9958b48e",
+          "pre_batch_tip": "4462dba1c8cfbf9e1a3fdf01c68a9ba6fbd757df",
+          "result_commit": null,
+          "error": null,
+          "created_at": "2026-10-31T11:43:29.819Z",
+          "approved_at": "2026-10-31T11:43:29.877Z",
+          "finished_at": null
+        }
+      ],
+      "batches": [
+        {
+          "id": "b-9958b48e",
+          "machine_id": "local",
+          "status": "forming",
+          "mission_ids": [
+            "m-66e77018"
+          ],
+          "branch": "batch/b-9958b48e",
+          "base_tip": "a59177d5b4a89c284cc15137c5fe181dadfdaa48",
+          "created_at": "2026-10-31T11:43:30.044Z",
+          "started_at": null,
+          "infra": null,
+          "finished_at": null,
+          "summary": null
+        }
+      ],
+      "machines": [
+        {
+          "id": "local",
+          "kind": "local",
+          "status": "busy",
+          "batchId": "b-9958b48e"
+        }
+      ],
+      "agents": [
+        {
+          "role": "composer",
+          "childId": null,
+          "status": "failed",
+          "summary": "RemoteError: tool-subagent (@deepseek-ai/dsh-tool-subagent): invalid config:\n  - $.provider missing required value (at provider)",
+          "branch": null,
+          "worktree": null,
+          "updatedAt": "2026-10-31T11:43:29.887Z"
+        }
+      ],
+      "counts": {
+        "queued": 1,
+        "running": 0,
+        "done": 0,
+        "failed": 0
+      }
+    },
+    "complete": true
+  },
+  "scheduler": [
+    {
+      "args": [
+        "-C",
+        "/tmp/aleph-project-dsh-xq_x4xk9/workspace/missions",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e",
+        "batch/b-9958b48e"
+      ],
+      "ordinal": 1,
+      "returncode": 0,
+      "stdout": "HEAD is now at a3bd587 merge mission m-66e77018\n",
+      "stderr": "Preparing worktree (detached HEAD a3bd587)\n",
+      "git_completed_at": 1793447010.1289675,
+      "response_released_at": 1793447010.2205284
+    },
+    {
+      "args": [
+        "-C",
+        "/tmp/aleph-project-dsh-xq_x4xk9/workspace/missions",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e",
+        "batch/b-9958b48e"
+      ],
+      "ordinal": 2,
+      "returncode": 128,
+      "stdout": "",
+      "stderr": "Preparing worktree (detached HEAD a3bd587)\nfatal: '/tmp/aleph-project-dsh-xq_x4xk9/workspace/.aleph/infra/b-9958b48e' is a missing but already registered worktree;\nuse 'add -f' to override, or 'prune' or 'remove' to clear\n",
+      "git_completed_at": 1793447010.204109
+    }
+  ]
+}

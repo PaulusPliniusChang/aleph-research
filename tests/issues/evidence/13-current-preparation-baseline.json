@@ -1,0 +1,313 @@
+{
+  "source": "/home/paulus-chang/项目/aleph",
+  "sha": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "actual": false,
+  "checks": [
+    {
+      "name": "new research repository has real Git objects",
+      "passed": true
+    },
+    {
+      "name": "new mission repository has real Git objects",
+      "passed": true
+    },
+    {
+      "name": "new project has one idle local machine",
+      "passed": true
+    },
+    {
+      "name": "new project has no stale infra record",
+      "passed": true
+    },
+    {
+      "name": "mission uses the returned owned worktree",
+      "passed": true
+    },
+    {
+      "name": "mission owns the expected branch",
+      "passed": true
+    },
+    {
+      "name": "mission script is committed before proposal",
+      "passed": true
+    },
+    {
+      "name": "proposal records actual owner",
+      "passed": true
+    },
+    {
+      "name": "proposal persists proposed status",
+      "passed": true
+    },
+    {
+      "name": "approval persists approved status",
+      "passed": true
+    },
+    {
+      "name": "approval retains committed mission tip",
+      "passed": true
+    },
+    {
+      "name": "composition creates forming batch",
+      "passed": true
+    },
+    {
+      "name": "composition associates selected mission",
+      "passed": true
+    },
+    {
+      "name": "composition records expected source tip",
+      "passed": true
+    },
+    {
+      "name": "composition reserves machine for the batch",
+      "passed": true
+    },
+    {
+      "name": "batch branch contains mission script",
+      "passed": true
+    },
+    {
+      "name": "first request really completed Git worktree creation",
+      "passed": true
+    },
+    {
+      "name": "first request has not returned during preparation",
+      "passed": true
+    },
+    {
+      "name": "first worktree points at the real batch tip",
+      "passed": true
+    },
+    {
+      "name": "preparing directory has a Git worktree identity",
+      "passed": true
+    },
+    {
+      "name": "preparing role is not yet recorded running",
+      "passed": true
+    },
+    {
+      "name": "second request must reject before Git re-registration",
+      "passed": false,
+      "error": "The input was expected to not match the regular expression /already registered worktree|worktree add/. Input:\n\n'Command failed: git -C /tmp/aleph-current-infra-CqUGAH/missions worktree add --detach /tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8 batch/b-9665bca8\\n' +\n  'Preparing worktree (detached HEAD 2a18c9b)\\n' +\n  \"fatal: '/tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8' is a missing but already registered worktree;\\n\" +\n  \"use 'add -f' to override, or 'prune' or 'remove' to clear\\n\"\n"
+    },
+    {
+      "name": "second request explicitly returns an error",
+      "passed": true
+    },
+    {
+      "name": "first request remains pending when second fails",
+      "passed": true
+    },
+    {
+      "name": "first prepared directory must survive duplicate request",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "first preparation marker must survive duplicate request",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "duplicate does not advance batch branch",
+      "passed": true
+    },
+    {
+      "name": "second Git attempt is independently recorded",
+      "passed": true
+    },
+    {
+      "name": "Git retains stale first worktree registration after directory removal",
+      "passed": true
+    },
+    {
+      "name": "failed duplicate leaves batch forming",
+      "passed": true
+    },
+    {
+      "name": "failed duplicate keeps machine busy",
+      "passed": true
+    },
+    {
+      "name": "original request should remain usable after duplicate rejection",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'fixture activation cwd no longer exists'\n- undefined\n"
+    },
+    {
+      "name": "no successful infra result was recorded",
+      "passed": true
+    },
+    {
+      "name": "mission receives no false result commit",
+      "passed": true
+    },
+    {
+      "name": "research repository remains intact",
+      "passed": true
+    },
+    {
+      "name": "original mission commit remains accessible",
+      "passed": true
+    }
+  ],
+  "events": [],
+  "boundary": "Only the first exact infra worktree-add response is delayed after real Git completes. Filesystem operations, subsequent Git commands and DSH tools/storage are real. Automatic substitutes storage/session/presets/activation services; actual starts a genuine researcher for a Git/session control, with deterministic model responses. The infra preparation failure happens before an infra model starts.",
+  "project": {
+    "id": "p-fb98b26e",
+    "workspace": "/tmp/aleph-current-infra-CqUGAH",
+    "researchRoot": "/tmp/aleph-current-infra-CqUGAH/research",
+    "missionRoot": "/tmp/aleph-current-infra-CqUGAH/missions",
+    "templateBranch": "template",
+    "evalCommand": "python3 eval/run_eval.py",
+    "evalRoot": null,
+    "brief": "",
+    "researcherCount": 4,
+    "prepared": false,
+    "visibleData": null,
+    "testsetPath": null,
+    "submissionPython": null,
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "idle",
+        "batchId": null
+      }
+    ],
+    "agents": [],
+    "missions": [],
+    "batches": [],
+    "violations": [],
+    "createdAt": "2026-10-31T11:42:43.250Z",
+    "updatedAt": "2026-10-31T11:42:43.250Z"
+  },
+  "mission": {
+    "projectId": "p-fb98b26e",
+    "branch": "missions/preparation-f949dd68",
+    "worktree": "/tmp/aleph-current-infra-CqUGAH/.aleph/missions/mw-0008e5be",
+    "missionId": "preparation",
+    "missionDir": "/tmp/aleph-current-infra-CqUGAH/.aleph/missions/mw-0008e5be/missions/preparation"
+  },
+  "batch": {
+    "id": "b-9665bca8",
+    "machineId": "local",
+    "status": "forming",
+    "missionIds": [
+      "m-0151bc8f"
+    ],
+    "branch": "batch/b-9665bca8",
+    "baseTip": "d2a059fc5abe9eeb2814498278ffc7eac8e2c716",
+    "createdAt": "2026-10-31T11:42:43.653Z"
+  },
+  "firstGit": {
+    "args": [
+      "-C",
+      "/tmp/aleph-current-infra-CqUGAH/missions",
+      "worktree",
+      "add",
+      "--detach",
+      "/tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8",
+      "batch/b-9665bca8"
+    ],
+    "ordinal": 1,
+    "returncode": 0,
+    "stdout": "HEAD is now at 2a18c9b merge mission m-0151bc8f\n",
+    "stderr": "Preparing worktree (detached HEAD 2a18c9b)\n",
+    "git_completed_at": 1793446963.7105193
+  },
+  "preparedInode": 161541,
+  "second": {
+    "error": "Command failed: git -C /tmp/aleph-current-infra-CqUGAH/missions worktree add --detach /tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8 batch/b-9665bca8\nPreparing worktree (detached HEAD 2a18c9b)\nfatal: '/tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8' is a missing but already registered worktree;\nuse 'add -f' to override, or 'prune' or 'remove' to clear\n"
+  },
+  "first": {
+    "error": "fixture activation cwd no longer exists"
+  },
+  "final": {
+    "schema": 2,
+    "generated_at": "2026-10-31T11:42:43.825Z",
+    "project": {
+      "id": "p-fb98b26e",
+      "title": "aleph-current-infra-CqUGAH",
+      "status": "running",
+      "workspace": "/tmp/aleph-current-infra-CqUGAH",
+      "research_root": "/tmp/aleph-current-infra-CqUGAH/research",
+      "mission_root": "/tmp/aleph-current-infra-CqUGAH/missions",
+      "template_branch": "template",
+      "eval_command": "python3 eval/run_eval.py",
+      "eval_root": null,
+      "best": null,
+      "evaluations": [],
+      "brief": "",
+      "researcher_count": 4,
+      "prepared": false,
+      "python_path": null,
+      "visible_data": null,
+      "testset_path": null,
+      "submission_python": null,
+      "violations": []
+    },
+    "missions": [
+      {
+        "id": "m-0151bc8f",
+        "owner_session": "infra-leader",
+        "status": "batched",
+        "branch": "missions/preparation-f949dd68",
+        "manifest_id": "preparation",
+        "manifest_path": "missions/preparation/mission.json",
+        "entrypoint": "run.sh",
+        "batch_id": "b-9665bca8",
+        "pre_batch_tip": "88311b3cc96f4dd4d4d03f045f7db1e75db0acfd",
+        "result_commit": null,
+        "error": null,
+        "created_at": "2026-10-31T11:42:43.461Z",
+        "approved_at": "2026-10-31T11:42:43.514Z",
+        "finished_at": null
+      }
+    ],
+    "batches": [
+      {
+        "id": "b-9665bca8",
+        "machine_id": "local",
+        "status": "forming",
+        "mission_ids": [
+          "m-0151bc8f"
+        ],
+        "branch": "batch/b-9665bca8",
+        "base_tip": "d2a059fc5abe9eeb2814498278ffc7eac8e2c716",
+        "created_at": "2026-10-31T11:42:43.653Z",
+        "started_at": null,
+        "infra": null,
+        "finished_at": null,
+        "summary": null
+      }
+    ],
+    "machines": [
+      {
+        "id": "local",
+        "kind": "local",
+        "status": "busy",
+        "batchId": "b-9665bca8"
+      }
+    ],
+    "agents": [
+      {
+        "role": "composer",
+        "childId": "fixture-child",
+        "status": "running",
+        "summary": null,
+        "branch": null,
+        "worktree": null,
+        "updatedAt": "2026-10-31T11:42:43.515Z"
+      }
+    ],
+    "counts": {
+      "queued": 1,
+      "running": 0,
+      "done": 0,
+      "failed": 0
+    }
+  },
+  "complete": true
+}

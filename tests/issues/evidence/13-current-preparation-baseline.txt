@@ -1,0 +1,152 @@
+(node:324942) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ current upstream InfraOptimizer preparation exclusion and intact normal controls
+  ✔ new research repository has real Git objects (2.129542ms)
+  ✔ new mission repository has real Git objects (1.742633ms)
+  ✔ new project has one idle local machine (0.504039ms)
+  ✔ new project has no stale infra record (0.253662ms)
+  ✔ mission uses the returned owned worktree (1.501269ms)
+  ✔ mission owns the expected branch (1.414365ms)
+  ✔ mission script is committed before proposal (1.697917ms)
+  ✔ proposal records actual owner (0.407455ms)
+  ✔ proposal persists proposed status (0.247409ms)
+  ✔ approval persists approved status (0.253826ms)
+  ✔ approval retains committed mission tip (1.330363ms)
+  ✔ composition creates forming batch (0.383027ms)
+  ✔ composition associates selected mission (0.24397ms)
+  ✔ composition records expected source tip (0.176241ms)
+  ✔ composition reserves machine for the batch (0.463444ms)
+  ✔ batch branch contains mission script (1.650235ms)
+  ✔ first request really completed Git worktree creation (0.414717ms)
+  ✔ first request has not returned during preparation (0.212288ms)
+  ✔ first worktree points at the real batch tip (2.702464ms)
+  ✔ preparing directory has a Git worktree identity (0.247641ms)
+  ✔ preparing role is not yet recorded running (2.996589ms)
+  ✖ second request must reject before Git re-registration (1.500357ms)
+  ✔ second request explicitly returns an error (0.268689ms)
+  ✔ first request remains pending when second fails (0.193819ms)
+  ✖ first prepared directory must survive duplicate request (1.06742ms)
+  ✖ first preparation marker must survive duplicate request (0.360915ms)
+  ✔ duplicate does not advance batch branch (1.946285ms)
+  ✔ second Git attempt is independently recorded (0.436644ms)
+  ✔ Git retains stale first worktree registration after directory removal (1.510634ms)
+  ✔ failed duplicate leaves batch forming (0.416183ms)
+  ✔ failed duplicate keeps machine busy (0.626506ms)
+  ✖ original request should remain usable after duplicate rejection (0.747919ms)
+  ✔ no successful infra result was recorded (0.358434ms)
+  ✔ mission receives no false result commit (0.215269ms)
+  ✔ research repository remains intact (1.367559ms)
+  ✔ original mission commit remains accessible (1.439615ms)
+✖ current upstream InfraOptimizer preparation exclusion and intact normal controls (795.591216ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 32
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 868.429787
+
+✖ failing tests:
+
+test at tests/issues/dsh/current-infra-preparation.test.mjs:22:32
+✖ second request must reject before Git re-registration (1.500357ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /already registered worktree|worktree add/. Input:
+  
+  'Command failed: git -C /tmp/aleph-current-infra-CqUGAH/missions worktree add --detach /tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8 batch/b-9665bca8\n' +
+    'Preparing worktree (detached HEAD 2a18c9b)\n' +
+    "fatal: '/tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8' is a missing but already registered worktree;\n" +
+    "use 'add -f' to override, or 'prune' or 'remove' to clear\n"
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:59:213
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:59:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "Command failed: git -C /tmp/aleph-current-infra-CqUGAH/missions worktree add --detach /tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8 batch/b-9665bca8\nPreparing worktree (detached HEAD 2a18c9b)\nfatal: '/tmp/aleph-current-infra-CqUGAH/.aleph/infra/b-9665bca8' is a missing but already registered worktree;\nuse 'add -f' to override, or 'prune' or 'remove' to clear\n",
+    expected: /already registered worktree|worktree add/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-infra-preparation.test.mjs:22:32
+✖ first prepared directory must survive duplicate request (1.06742ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:62:129
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:62:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-infra-preparation.test.mjs:22:32
+✖ first preparation marker must survive duplicate request (0.360915ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:63:138
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:63:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/current-infra-preparation.test.mjs:22:32
+✖ original request should remain usable after duplicate rejection (0.747919ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'fixture activation cwd no longer exists'
+  - undefined
+  
+      at file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:71:186
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:62)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at point (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:22:32)
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/current-infra-preparation.test.mjs:71:8)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'fixture activation cwd no longer exists',
+    expected: undefined,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

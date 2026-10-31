@@ -1,0 +1,47 @@
+{"phase": "host-ready", "root": "/tmp/aleph-project-dsh-xq_x4xk9", "url": "http://127.0.0.1:57939"}
+▶ current upstream InfraOptimizer preparation exclusion and intact normal controls
+  ✔ new research repository has real Git objects (1.825423ms)
+  ✔ new mission repository has real Git objects (1.341933ms)
+  ✔ new project has one idle local machine (6.89061ms)
+  ✔ new project has no stale infra record (3.744312ms)
+  ✔ mission uses the returned owned worktree (1.289567ms)
+  ✔ mission owns the expected branch (1.115781ms)
+  ✔ mission script is committed before proposal (1.713304ms)
+  ✔ proposal records actual owner (0.373831ms)
+  ✔ proposal persists proposed status (0.169143ms)
+  ✔ approval persists approved status (0.283584ms)
+  ✔ approval retains committed mission tip (1.395926ms)
+  ✔ composition creates forming batch (0.224925ms)
+  ✔ composition associates selected mission (0.143275ms)
+  ✔ composition records expected source tip (0.109854ms)
+  ✔ composition reserves machine for the batch (3.963634ms)
+  ✔ batch branch contains mission script (1.507446ms)
+  ✔ first request really completed Git worktree creation (0.406262ms)
+  ✔ first request has not returned during preparation (0.235936ms)
+  ✔ first worktree points at the real batch tip (3.238524ms)
+  ✔ preparing directory has a Git worktree identity (0.294296ms)
+  ✔ preparing role is not yet recorded running (5.613094ms)
+  ✔ defect: second request reaches stale Git registration (0.240827ms)
+  ✔ second request explicitly returns an error (0.144497ms)
+  ✔ first request remains pending when second fails (0.102709ms)
+  ✔ defect: first directory was removed (0.110338ms)
+  ✔ defect: first preparation marker was removed (0.095505ms)
+  ✔ duplicate does not advance batch branch (1.200535ms)
+  ✔ second Git attempt is independently recorded (0.131717ms)
+  ✔ Git retains stale first worktree registration after directory removal (1.209706ms)
+  ✔ failed duplicate leaves batch forming (3.104642ms)
+  ✔ failed duplicate keeps machine busy (3.126145ms)
+  ✔ defect: original request fails after directory loss (0.293128ms)
+  ✔ no successful infra result was recorded (0.199109ms)
+  ✔ mission receives no false result commit (0.137404ms)
+  ✔ research repository remains intact (1.392853ms)
+  ✔ original mission commit remains accessible (1.249521ms)
+✔ current upstream InfraOptimizer preparation exclusion and intact normal controls (914.705069ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 962.217757

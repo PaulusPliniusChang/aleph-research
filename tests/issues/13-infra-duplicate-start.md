@@ -8,6 +8,40 @@ pull_request: https://github.com/hapenia/aleph-research/pull/15
 
 # 同一批次重复启动 InfraOptimizer 会删除正在使用的工作目录
 
+## 最新上游复核：准备阶段仍存在重复启动窗口
+
+本地“已解决”是先前人工维护状态，按状态规则继续保留；该字段不代表当前上游准备阶段已经修复。当前复核证据及待修复范围以下文为准。
+
+上游主分支现为 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf`。上游已关闭原 PR #15，未合并原方案，并以项目内同角色运行记录替代旧方案。原修复验收保留为历史，不能表示该上游实现已完整通过复核。
+
+新 `claimRole` 能拒绝已经保存 `running` 记录的重复请求，但首请求需要先完成 Git 工作区准备和代理启动，随后才写入该记录。B 已通过自动行为检查及实际 DSH 证实：首请求已经创建批次工作区、尚未登记代理时，重复的同批请求仍会删除首请求的目录，随后因 Git 保留了首工作区登记而失败。第一请求继续后，真实 DSH 因工作目录不存在而失败。批次仍为 `forming`，机器仍为 `busy`，任务没有结果提交。当前需要保护的是准备阶段；此次实测没有启动 InfraOptimizer 模型，也没有声称丢失模型已经编写的优化代码。
+
+### 精确调度与证据边界
+
+[Git 调度脚本](dsh/infra-preparation-git-scheduler.py)只匹配当前批次的完整 `git -C <missionRoot> worktree add --detach <infraWorktree> <batchBranch>` 参数。调度器先执行真实 Git，第一调用成功后延迟向 Host 返回结果，第二调用按原样执行。测试释放第一调用时，Host 继续原始流程。调度器没有修改源码、Git 输出、返回码、删除操作、存储或角色记录；最大等待时间为 25 秒。测试在首目录放置的标记只用于证明目录被删除，不属于代理生成的产物。
+
+实际记录中，首次 Git 创建成功；第二次 Git 返回 `128`，错误为 `missing but already registered worktree`，其完成时间早于首调用获准返回。首目录及标记均被删除，首请求仍在等待。释放首请求后，DSH 返回 `working-directory: directory does not exist`。该时序证明防护晚于目录准备，不能用代理已经运行后的顺序拒绝结果替代该场景。
+
+### 自动行为检查
+
+```bash
+PATH=/tmp/aleph-13-current-auto-gate/bin:$PATH ALEPH_INFRA_PREPARATION_GATE=/tmp/aleph-13-current-auto-gate ALEPH_INFRA_PREPARATION_OUTPUT=tests/issues/evidence/13-current-preparation-baseline.json node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs --test tests/issues/dsh/current-infra-preparation.test.mjs
+```
+
+运行前，测试创建空调度目录及 `bin/git` 链接，目标为上述 Git 调度脚本。[自动脚本](dsh/current-infra-preparation.test.mjs)覆盖实际项目初始化、独立任务工作区、真实提案和审批、批次编排、机器归属、准备目录、重复请求、Git 时序、首请求恢复及结果记录。自动模式明确替换存储、会话、预设和代理启动服务；Git、文件系统及原始注册工具函数真实执行。
+
+36 个有效行为点中，32 个通过、4 个失败；Node 连同父容器报告 37 项、32 项通过、5 项失败。失败涉及重复请求提前拒绝、首目录及标记保留，以及首请求继续可用。自动启动适配器在目录已丢失时返回明确的目录不存在错误；该错误属于适配器行为，真实 DSH 的同类错误由下一阶段独立证明。原始证据见[自动输出](evidence/13-current-preparation-baseline.txt)和[完整记录](evidence/13-current-preparation-baseline.json)。
+
+### 实际 DSH
+
+```bash
+python3 tests/issues/dsh/current-infra-preparation.py --source /home/paulus-chang/项目/aleph --output tests/issues/evidence/13-current-real-dsh-preparation.json
+```
+
+[启动脚本](dsh/current-infra-preparation.py)使用真实 DSH 会话、注册工具、持久化存储、Git 及目录验证服务，同样只调度上述真实 Git 响应。36 项观察全部符合复现条件；真实目录验证直接拒绝首请求，不依赖自动模式的启动适配器。模型适配器虽已配置，InfraOptimizer 没有成功进入模型执行。审批时 Composer 启动另报 `provider` 配置缺值，已保存在代理记录中；本场景手动调用正式批次及优化工具，不能声称已验证 Composer 自动派发。
+
+原始证据见[实际输出](evidence/13-current-real-dsh-preparation.txt)和[完整 Git 时序、错误及最终状态](evidence/13-current-real-dsh-preparation.json)。隔离 Host `325121` 已退出，进程编号不存在。此前已通过的旧组合修复证据保持原样，当前复核没有重开旧方案。新的控制修复如果同时关闭准备窗口，应在同一修复 PR 中关联本议题并补齐该窗口的修复验收。
+
 ## 组合修复与复测（2026-10-31）
 
 最终修复提交为 `be646b3`，派生仓库分支为 `fix/aleph-13-infra-recovery`，上游拉取请求为 [PR #15](https://github.com/hapenia/aleph-research/pull/15)。该请求依赖重启恢复 [PR #13](https://github.com/hapenia/aleph-research/pull/13)，当前分支包含前置提交 `f057a84`。主仓库尚未合并前置请求，因此本次没有另建独立原型的拉取请求。按现有规则，已经创建解决方案的拉取请求即可设置“已解决”；该状态不表示上游已经合并或发布。
@@ -90,13 +124,13 @@ B 对 C 冻结的组合内容串行独立验收，结果如下。提交后的内
 | 真实 DSH 单次正常调用 | 33 项检查全部通过，真实子会话通过实际 bash 工具写入修改和交接说明，Host 随后提交优化、执行批次并交付结果。 | [正常对照记录](evidence/13-real-dsh-normal.json) |
 | 真实 DSH 重复调用 | 36 项观测检查全部通过，确认活动工作目录被删除、两次调用最终失败以及状态未结束。此处通过表示成功复现缺陷。 | [缺陷复现记录](evidence/13-real-dsh-duplicate.json) |
 
-扩展自动基线另外覆盖优化完成后实际 runner 仍运行时重复调用，以及通过已注册 `aleph_run_batch` 绕过活动优化的路径。该基线实际执行 61 个行为点，45 个通过、16 个失败；Node 计入父测试容器后为 62 项、17 项失败。新增失败确认第二个优化代理仍会启动，直接运行工具也会提前执行计算。报告见[扩展基线](evidence/13-infra-duplicate-expanded-baseline.txt)与[结构化记录](evidence/13-infra-duplicate-expanded-baseline.json)。
+扩展自动基线另外覆盖优化完成后实际 runner 仍运行时重复调用，以及通过已注册 `aleph_run_batch` 绕过活动优化的路径。该基线实际执行 61 个行为点，45 个通过、16 个失败；Node 计入父测试容器后为 62 项、17 项失败。新增失败确认额外优化代理仍会启动，直接运行工具也会提前执行计算。报告见[扩展基线](evidence/13-infra-duplicate-expanded-baseline.txt)与[结构化记录](evidence/13-infra-duplicate-expanded-baseline.json)。
 
 扩展夹具在确认直接运行工具已经错误启动计算后，先放行该次计算完成，再拒绝仍在受控等待的测试激活以结束场景；该收尾不计作产品行为。直接运行工具正确拒绝时，夹具另外执行 4 个首流程正常交付断言，因此修复验收共执行 65 个行为点。首次扩展执行因原流程在 `finally` 异步清理期间产生暂未处理的拒绝而中止，[原始中止报告](evidence/13-infra-fixture-premature-direct-abort.txt)与[不完整结构化记录](evidence/13-infra-fixture-premature-direct-abort.json)单独保留，不使用其不完整计数代替上述完整基线。
 
 自动验收使用实际 `ProjectService`、Git 仓库与 runner，项目存储使用内存适配器；仅将代理激活和结果等待替换为可控制的确定性适配器。测试覆盖单次正常运行、活动代理期间的重复调用、已完成批次重复调用、无效输入，以及代理启动失败后的合法重试。
 
-真实 DSH 场景使用实际父会话、子会话、原始子代理提供程序、工具注册、持久存储、Git 与 runner。本地 `LlmAdapter` 只预定模型输出和等待时机，不连接外部模型；真实 InfraOptimizer 子会话通过实际 bash 工具写入优化文件，随后在受控等待期间接收第二个真实父会话的重复请求。子会话持久记录证明其来源为 `subagent`、配置为 `aleph-infra`，且关联首个父会话。该场景证明实际 DSH 会话与工具路径下的问题，不表示外部模型自主完成优化。
+真实 DSH 场景使用实际父会话、子会话、原始子代理提供程序、工具注册、持久存储、Git 与 runner。本地 `LlmAdapter` 只预定模型输出和等待时机，不连接外部模型；真实 InfraOptimizer 子会话通过实际 bash 工具写入优化文件，随后在受控等待期间接收另一真实父会话的重复请求。子会话持久记录证明其来源为 `subagent`、配置为 `aleph-infra`，且关联首个父会话。该场景证明实际 DSH 会话与工具路径下的问题，不表示外部模型自主完成优化。
 
 复现命令在 `aleph-tests` 工作区执行：
 
