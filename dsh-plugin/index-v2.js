@@ -346,6 +346,20 @@ class ProjectService {
     return { projectId, branch, worktree };
   }
 
+  async listMissions({ projectId }) {
+    const project = this.get(projectId);
+    if (!project) throw new Error(`project not found: ${projectId}`);
+    return project.missions.map((mission) => ({
+      id: mission.id,
+      status: mission.status,
+      branch: mission.branch,
+      ownerSession: mission.ownerSession,
+      resultCommit: mission.resultCommit,
+      resultPath: mission.manifestId ? `results/${mission.manifestId}/result.json` : null,
+      error: mission.error,
+    }));
+  }
+
   async propose({ projectId, branch, agent }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
@@ -602,6 +616,7 @@ class ProjectService {
       'Work only in the assigned research worktree and commit research changes to its branch when appropriate.',
       'You may inspect the complete git history of both repositories with git: use git log --all, git branch -a, git show and git diff in the research worktree and mission repo. Mission results are cherry-picked onto mission branches, so previous work is visible there.',
       'Before creating or proposing a mission, inspect the mission repo history and branches for an equivalent mission that already ran or is queued. Do not re-run a mission that already has a result; read its existing result commit or result envelope instead.',
+      'All missions are visible to every researcher. Before doing data analysis, call aleph_list_missions; if an equivalent mission already has a result, inspect it with git show in the mission repo and reuse it instead of repeating the analysis.',
       'Budget the exploration: keep schema and data sanity checks compact, then create a mission or commit a code increment instead of running exploratory scripts indefinitely.',
       'Small work can be done directly. For work with significant hardware cost, call aleph_start_mission to create a mission branch and worktree, work there, add missions/<id>/mission.json plus code and an uv project, commit the branch, then call aleph_propose_mission.',
       'After proposing, wait only for missions owned by you: call aleph_evaluate; if it returns status waiting, wait briefly and retry. Do not wait for other researchers missions.',
@@ -1031,6 +1046,12 @@ export async function apply(ctx) {
         agent: exec.agent,
       }),
     ), { when: ({ agent }) => isLeader(agent) }),
+    ctx.tools.register(tool(
+      'aleph_list_missions',
+      'List all missions with status, branch, result commit and result path; use before repeating analysis.',
+      { ...projectIdParam },
+      async (args) => service.listMissions({ projectId: args.project_id }),
+    ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
       'aleph_status',
       'Return projects, missions, batches and machines.',
