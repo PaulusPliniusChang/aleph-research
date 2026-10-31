@@ -637,6 +637,8 @@ class ProjectService {
       throw error;
     }
     await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'researcher', childId: activation.childId ?? null, status: 'running', summary: null, branch, worktree, updatedAt: now() }] }));
+    this.parentAgents ??= new Map();
+    if (activation.childId && agent) this.parentAgents.set(activation.childId, agent);
     activation.result.then(async (result) => {
       const summary = (result?.output ?? []).filter((block) => block?.type === 'text').map((block) => block.text).join('\n').trim().slice(0, 8000) || '(no summary)';
       await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running' ? { ...item, status: 'done', summary, updatedAt: now() } : item) })).catch(() => undefined);
@@ -662,6 +664,20 @@ class ProjectService {
       started.push(await this.startResearcher({ projectId, agent }));
     }
     return { projectId, requested, started };
+  }
+
+  nudgeForKill(project, cwd, reason) {
+    const agentRecord = (project.agents ?? []).find((item) => item.status === 'running' && item.worktree
+      && (cwd === item.worktree || cwd.startsWith(`${item.worktree}/`)));
+    if (!agentRecord?.childId || !this.subagents) return;
+    const parent = this.parentAgents?.get(agentRecord.childId);
+    if (!parent) return;
+    this.nudged ??= new Set();
+    if (this.nudged.has(agentRecord.childId)) return;
+    this.nudged.add(agentRecord.childId);
+    const text = `A local compute process was stopped (${reason}). Stop retrying local experiments. Create a mission with aleph_start_mission, fill its mission.json, code and uv project, commit the branch, and call aleph_propose_mission.`;
+    this.subagents.sendMessage(parent, agentRecord.childId, [{ type: 'text', text }], { signal: new AbortController().signal })
+      .catch(() => undefined);
   }
 
   checkProcesses() {
@@ -723,6 +739,7 @@ class ProjectService {
         const forbidden = /\/home\/hapenia\/Projects\/kunlungpt-comp|\/home\/hapenia\/Projects\/aleph-research|\/home\/hapenia\/\.dsh|problem\/data\.zip|\/testsets(?:\/|\b)|\/tmp\/aleph-case-lab\/(?:profiles|sessions|storages|home)\b/.test(cmd);
         if (nested && forbidden) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+          this.nudgeForKill(project, cwd, 'forbidden path access');
           this.mutate(project.id, (current) => ({
             ...current,
             violations: [...(current.violations ?? []), `${now()} killed forbidden-path access ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
@@ -731,6 +748,7 @@ class ProjectService {
         }
         if (nested && (cwd === workspace || (!underAllowed && !underMission))) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+          this.nudgeForKill(project, cwd, 'out-of-bounds command');
           this.mutate(project.id, (current) => ({
             ...current,
             violations: [...(current.violations ?? []), `${now()} killed command outside researcher/mission directories ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
@@ -766,6 +784,7 @@ class ProjectService {
           const ageSec = uptimeSec - startTicks / 100;
           if (nested && cwd.startsWith(join(workspace, '.aleph', 'researchers')) && ageSec > 90) {
             try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+            this.nudgeForKill(project, cwd, 'long local experiment');
             this.mutate(project.id, (current) => ({
               ...current,
               violations: [...(current.violations ?? []), `${now()} killed long local experiment ${pid} (${Math.round(ageSec)}s): ${cmd.slice(0, 160)}`].slice(-50),
@@ -780,6 +799,7 @@ class ProjectService {
             const delta = ticks - prior.ticks;
             if (delta > 1000) {
               process.kill(pid, 'SIGKILL');
+              this.nudgeForKill(project, cwd, 'sustained heavy compute');
               this.mutate(project.id, (current) => ({
                 ...current,
                 violations: [...(current.violations ?? []), `${now()} killed sustained heavy compute ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
