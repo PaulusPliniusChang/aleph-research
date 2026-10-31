@@ -578,6 +578,20 @@ class ProjectService {
   }
 
   checkProcesses() {
+    const hasBwrapAncestor = (pid) => {
+      let current = pid;
+      for (let depth = 0; depth < 12; depth += 1) {
+        try {
+          const status = readFileSync(`/proc/${current}/status`, 'utf8');
+          const ppid = Number((status.match(/^PPid:\s*(\d+)/m) ?? [])[1]);
+          if (!Number.isFinite(ppid) || ppid <= 1) return false;
+          const cmdline = readFileSync(`/proc/${ppid}/cmdline`).toString('utf8');
+          if (cmdline.includes('bwrap')) return true;
+          current = ppid;
+        } catch { return false; }
+      }
+      return false;
+    };
     const projects = this.list();
     const nowMs = Date.now();
     for (const project of projects) {
@@ -603,19 +617,20 @@ class ProjectService {
         } catch { continue; }
         const isPython = /\.venv|python|pip|uv pip|conda|lightgbm|catboost|xgboost|torch/i.test(cmd);
         const isCaseProcess = environ.includes('DSH_PROFILE=aleph-lab');
-        if (isCaseProcess && isPython && !cwd.startsWith(workspace)) {
+        if (!cwd.startsWith(workspace)) continue;
+        const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
+        const nested = isCaseProcess && hasBwrapAncestor(pid);
+        const isSearch = /(?:grep\s+-r|find\s+\/tmp|find\s+\/home|grep\s+-r.*\/home)/.test(cmd);
+        if (nested && !underAllowed && isSearch) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
           this.mutate(project.id, (current) => ({
             ...current,
-            violations: [...(current.violations ?? []), `${now()} killed out-of-project compute ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
+            violations: [...(current.violations ?? []), `${now()} killed out-of-scope search ${pid}: ${cmd.slice(0, 160)}`].slice(-50),
           })).catch(() => undefined);
           continue;
         }
-        if (!cwd.startsWith(workspace)) continue;
         if (!isPython) continue;
-        const underAllowed = allowed.some((path) => cwd === path || cwd.startsWith(`${path}/`));
-        if (!underAllowed) {
-          if (cwd === workspace) continue; // Host-side evaluation runs in the workspace root.
+        if (nested && !underAllowed) {
           try { process.kill(pid, 'SIGKILL'); } catch { continue; }
           this.mutate(project.id, (current) => ({
             ...current,
@@ -623,6 +638,7 @@ class ProjectService {
           })).catch(() => undefined);
           continue;
         }
+        if (!underAllowed) continue;
         // Inside a researcher worktree, kill sustained multi-core compute.
         try {
           const stat = readFileSync(`/proc/${entry}/stat`, 'utf8');
