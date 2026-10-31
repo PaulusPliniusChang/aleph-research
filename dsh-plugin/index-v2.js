@@ -582,6 +582,12 @@ class ProjectService {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const requested = Math.max(1, Math.min(16, Number(count) || project.researcherCount || 4));
+    await this.mutate(projectId, (current) => ({
+      ...current,
+      agents: (current.agents ?? []).map((item) => item.role === 'researcher' && item.status === 'running'
+        ? { ...item, status: 'failed', summary: 'superseded by a new researcher batch', updatedAt: now() }
+        : item),
+    }));
     const started = [];
     for (let index = 0; index < requested; index += 1) {
       started.push(await this.startResearcher({ projectId, agent }));
