@@ -3,13 +3,15 @@ id: ALEPH-05
 status: 已解决
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/6
-pull_request: https://github.com/hapenia/aleph-research/pull/13
+pull_request: https://github.com/hapenia/aleph-research/pull/29
 ---
 
 # DSH 重启后未完成任务缺少后续处理
 
 
 ## 最新残留修复与正式验收（2026-10-31）
+
+当前修复已发布为 [PR #29](https://github.com/hapenia/aleph-research/pull/29)，开放且尚未合并。原 PR #13 保留为历史，不将关闭解释为已经合并。
 
 修复提交为 `96226147cd18f67ea9920f0e714532259295bdce`，派生仓库分支为 `fix/aleph-05-restart-followup`。本轮修复以 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 为基线，保留合法 `forming` 批次的机器占用，并只跟踪首次启动时发现的 `running` 遗留批次。当前五秒监控在真实计算退出后将遗留批次明确标为中断，保留结果及工作树，释放仍然属于原批次的机器。后续新启动的代理不进入原有启动快照，定时器不会反复关闭所有运行代理。已经完成但未交付的结果仍按允许的中断契约处理，没有恢复旧版监督程序或强制自动交付。
 
