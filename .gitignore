@@ -5,3 +5,6 @@ __pycache__/
 cases/
 dsh-plugin/node_modules/
 .case-templates/
+cookie.txt
+host.pid
+host.log
