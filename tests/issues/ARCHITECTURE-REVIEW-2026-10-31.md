@@ -37,7 +37,7 @@
 
 PR30 的准确提交为 `a85ccea4a6e7da7f2c56708627cbd1a873b7493a`，产品 Node 测试 262 项通过，其中有效行为点 232 个、父容器 30 个；B 独立自动和实际 DSH 各 105 个有效点通过。实际检查包括强制停止 Host 后保留原计算、原有定时器观察自然结束、准确释放及明确取消，支持范围继续限定为单 Host 写入。
 
-PR31 的准确提交为 `12325013bec147895a6b8e58c3b910bc239b78f9`，解决 #9 的 Composer 工具权限缺口。当前仍需交付汇总最新架构差异的迁移说明拉取请求。迁移说明将记录已移除的旧接口、当前替代流程及尚未覆盖的需求，不以文档代替功能实现。上游关闭议题、关闭旧拉取请求或本轮通过测试，均不能自动表示全部需求已经解决。
+PR31 的准确提交为 `12325013bec147895a6b8e58c3b910bc239b78f9`，解决 #9 的 Composer 工具权限缺口。[PR32](https://github.com/hapenia/aleph-research/pull/32) 已发布架构迁移说明，准确提交为 `45a56fb590c9db67bd7a47d5060259e38349fac8`，唯一新增文件为 `docs/architecture-migration.md`，尚未合并。文档记录已移除的旧接口、当前替代流程及尚未覆盖的需求。该轮执行引用、映射、冻结哈希与发布回读核对，没有新增产品行为测试或实际 DSH 运行；原始交接与核对见[冻结清单](evidence/architecture-migration-final-manifest.json)、[文档引用核对](evidence/architecture-migration-final-reference-review.json)、[正式发布记录](evidence/architecture-migration-publication.json)及[公开文档副本](evidence/architecture-migration-published.md)。上游关闭议题、关闭旧拉取请求或本轮通过测试，均不能自动表示全部需求已经解决。
 
 ## 状态与历史维护
 

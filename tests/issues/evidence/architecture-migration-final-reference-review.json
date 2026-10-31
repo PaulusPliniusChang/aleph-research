@@ -1,0 +1,509 @@
+{
+  "kind": "documentation reference and mapping verification, not product behavior testing",
+  "source": "/tmp/aleph-migration-latest-source/docs/architecture-migration.md",
+  "sha256": "d83687ac093a340e1f6da390ddbec5456f7e5b3ab5edb1ff067846f6e338ac91",
+  "checked": 67,
+  "passed": 67,
+  "failed": [],
+  "checks": [
+    {
+      "reference": "tests/issues/01-run-next-concurrency.md",
+      "expanded": "01-run-next-concurrency.md",
+      "passed": true,
+      "matches": [
+        "01-run-next-concurrency.md"
+      ]
+    },
+    {
+      "reference": "05-restart-recovery.md",
+      "expanded": "05-restart-recovery.md",
+      "passed": true,
+      "matches": [
+        "05-restart-recovery.md"
+      ]
+    },
+    {
+      "reference": "09-campaign-controls.md",
+      "expanded": "09-campaign-controls.md",
+      "passed": true,
+      "matches": [
+        "09-campaign-controls.md"
+      ]
+    },
+    {
+      "reference": "13-infra-duplicate-start.md",
+      "expanded": "13-infra-duplicate-start.md",
+      "passed": true,
+      "matches": [
+        "13-infra-duplicate-start.md"
+      ]
+    },
+    {
+      "reference": "evidence/09-combined-independent.{json,txt}",
+      "expanded": "evidence/09-combined-independent.json",
+      "passed": true,
+      "matches": [
+        "evidence/09-combined-independent.json"
+      ]
+    },
+    {
+      "reference": "evidence/09-combined-independent.{json,txt}",
+      "expanded": "evidence/09-combined-independent.txt",
+      "passed": true,
+      "matches": [
+        "evidence/09-combined-independent.txt"
+      ]
+    },
+    {
+      "reference": "09-combined-product.txt",
+      "expanded": "09-combined-product.txt",
+      "passed": true,
+      "matches": [
+        "evidence/09-combined-product.txt"
+      ]
+    },
+    {
+      "reference": "09-combined-source-manifest.json",
+      "expanded": "09-combined-source-manifest.json",
+      "passed": true,
+      "matches": [
+        "evidence/09-combined-source-manifest.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/02-run-next-budget.md",
+      "expanded": "02-run-next-budget.md",
+      "passed": true,
+      "matches": [
+        "02-run-next-budget.md"
+      ]
+    },
+    {
+      "reference": "07-research-strategy-instructions.md",
+      "expanded": "07-research-strategy-instructions.md",
+      "passed": true,
+      "matches": [
+        "07-research-strategy-instructions.md"
+      ]
+    },
+    {
+      "reference": "evidence/02-07-current-automatic.{json,txt}",
+      "expanded": "evidence/02-07-current-automatic.json",
+      "passed": true,
+      "matches": [
+        "evidence/02-07-current-automatic.json"
+      ]
+    },
+    {
+      "reference": "evidence/02-07-current-automatic.{json,txt}",
+      "expanded": "evidence/02-07-current-automatic.txt",
+      "passed": true,
+      "matches": [
+        "evidence/02-07-current-automatic.txt"
+      ]
+    },
+    {
+      "reference": "tests/issues/04-sota-promotion-race.md",
+      "expanded": "04-sota-promotion-race.md",
+      "passed": true,
+      "matches": [
+        "04-sota-promotion-race.md"
+      ]
+    },
+    {
+      "reference": "10-mission-reports.md",
+      "expanded": "10-mission-reports.md",
+      "passed": true,
+      "matches": [
+        "10-mission-reports.md"
+      ]
+    },
+    {
+      "reference": "evidence/04-10-current-evaluation-history.{json,txt}",
+      "expanded": "evidence/04-10-current-evaluation-history.json",
+      "passed": true,
+      "matches": [
+        "evidence/04-10-current-evaluation-history.json"
+      ]
+    },
+    {
+      "reference": "evidence/04-10-current-evaluation-history.{json,txt}",
+      "expanded": "evidence/04-10-current-evaluation-history.txt",
+      "passed": true,
+      "matches": [
+        "evidence/04-10-current-evaluation-history.txt"
+      ]
+    },
+    {
+      "reference": "04-10-current-mapping.json",
+      "expanded": "04-10-current-mapping.json",
+      "passed": true,
+      "matches": [
+        "evidence/04-10-current-mapping.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/10-mission-reports.md",
+      "expanded": "10-mission-reports.md",
+      "passed": true,
+      "matches": [
+        "10-mission-reports.md"
+      ]
+    },
+    {
+      "reference": "evidence/10-fixed-parent-delivery.{json,txt}",
+      "expanded": "evidence/10-fixed-parent-delivery.json",
+      "passed": true,
+      "matches": [
+        "evidence/10-fixed-parent-delivery.json"
+      ]
+    },
+    {
+      "reference": "evidence/10-fixed-parent-delivery.{json,txt}",
+      "expanded": "evidence/10-fixed-parent-delivery.txt",
+      "passed": true,
+      "matches": [
+        "evidence/10-fixed-parent-delivery.txt"
+      ]
+    },
+    {
+      "reference": "10-fixed-parent-feedback-source-manifest.json",
+      "expanded": "10-fixed-parent-feedback-source-manifest.json",
+      "passed": true,
+      "matches": [
+        "evidence/10-fixed-parent-feedback-source-manifest.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/06-mission-base-consistency.md",
+      "expanded": "06-mission-base-consistency.md",
+      "passed": true,
+      "matches": [
+        "06-mission-base-consistency.md"
+      ]
+    },
+    {
+      "reference": "evidence/06-latest-base-consistency.{json,txt}",
+      "expanded": "evidence/06-latest-base-consistency.json",
+      "passed": true,
+      "matches": [
+        "evidence/06-latest-base-consistency.json"
+      ]
+    },
+    {
+      "reference": "evidence/06-latest-base-consistency.{json,txt}",
+      "expanded": "evidence/06-latest-base-consistency.txt",
+      "passed": true,
+      "matches": [
+        "evidence/06-latest-base-consistency.txt"
+      ]
+    },
+    {
+      "reference": "06-latest-real-dsh-base.json",
+      "expanded": "06-latest-real-dsh-base.json",
+      "passed": true,
+      "matches": [
+        "evidence/06-latest-real-dsh-base.json"
+      ]
+    },
+    {
+      "reference": "06-latest-real-dsh-post-batch.json",
+      "expanded": "06-latest-real-dsh-post-batch.json",
+      "passed": true,
+      "matches": [
+        "evidence/06-latest-real-dsh-post-batch.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/08-continuous-research.md",
+      "expanded": "08-continuous-research.md",
+      "passed": true,
+      "matches": [
+        "08-continuous-research.md"
+      ]
+    },
+    {
+      "reference": "evidence/08-current-automatic.{json,txt}",
+      "expanded": "evidence/08-current-automatic.json",
+      "passed": true,
+      "matches": [
+        "evidence/08-current-automatic.json"
+      ]
+    },
+    {
+      "reference": "evidence/08-current-automatic.{json,txt}",
+      "expanded": "evidence/08-current-automatic.txt",
+      "passed": true,
+      "matches": [
+        "evidence/08-current-automatic.txt"
+      ]
+    },
+    {
+      "reference": "08-fixed-composer-product.txt",
+      "expanded": "08-fixed-composer-product.txt",
+      "passed": true,
+      "matches": [
+        "evidence/08-fixed-composer-product.txt"
+      ]
+    },
+    {
+      "reference": "tests/issues/14-researcher-callback-ownership.md",
+      "expanded": "14-researcher-callback-ownership.md",
+      "passed": true,
+      "matches": [
+        "14-researcher-callback-ownership.md"
+      ]
+    },
+    {
+      "reference": "evidence/14-latest-researcher-ownership.{json,txt}",
+      "expanded": "evidence/14-latest-researcher-ownership.json",
+      "passed": true,
+      "matches": [
+        "evidence/14-latest-researcher-ownership.json"
+      ]
+    },
+    {
+      "reference": "evidence/14-latest-researcher-ownership.{json,txt}",
+      "expanded": "evidence/14-latest-researcher-ownership.txt",
+      "passed": true,
+      "matches": [
+        "evidence/14-latest-researcher-ownership.txt"
+      ]
+    },
+    {
+      "reference": "14-latest-real-dsh-ownership.json",
+      "expanded": "14-latest-real-dsh-ownership.json",
+      "passed": true,
+      "matches": [
+        "evidence/14-latest-real-dsh-ownership.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/12-console-no-campaign-empty-state.md",
+      "expanded": "12-console-no-campaign-empty-state.md",
+      "passed": true,
+      "matches": [
+        "12-console-no-campaign-empty-state.md"
+      ]
+    },
+    {
+      "reference": "evidence/12-current-automatic-observations.json",
+      "expanded": "evidence/12-current-automatic-observations.json",
+      "passed": true,
+      "matches": [
+        "evidence/12-current-automatic-observations.json"
+      ]
+    },
+    {
+      "reference": "12-current-automatic.txt",
+      "expanded": "12-current-automatic.txt",
+      "passed": true,
+      "matches": [
+        "evidence/12-current-automatic.txt"
+      ]
+    },
+    {
+      "reference": "12-current-empty-desktop.png",
+      "expanded": "12-current-empty-desktop.png",
+      "passed": true,
+      "matches": [
+        "evidence/12-current-empty-desktop.png"
+      ]
+    },
+    {
+      "reference": "12-current-empty-mobile.png",
+      "expanded": "12-current-empty-mobile.png",
+      "passed": true,
+      "matches": [
+        "evidence/12-current-empty-mobile.png"
+      ]
+    },
+    {
+      "reference": "tests/issues/11-sota-selection-rollback.md",
+      "expanded": "11-sota-selection-rollback.md",
+      "passed": true,
+      "matches": [
+        "11-sota-selection-rollback.md"
+      ]
+    },
+    {
+      "reference": "evidence/11-current-select-best.{json,txt}",
+      "expanded": "evidence/11-current-select-best.json",
+      "passed": true,
+      "matches": [
+        "evidence/11-current-select-best.json"
+      ]
+    },
+    {
+      "reference": "evidence/11-current-select-best.{json,txt}",
+      "expanded": "evidence/11-current-select-best.txt",
+      "passed": true,
+      "matches": [
+        "evidence/11-current-select-best.txt"
+      ]
+    },
+    {
+      "reference": "11-fixed-product.txt",
+      "expanded": "11-fixed-product.txt",
+      "passed": true,
+      "matches": [
+        "evidence/11-fixed-product.txt"
+      ]
+    },
+    {
+      "reference": "11-fixed-source-manifest.json",
+      "expanded": "11-fixed-source-manifest.json",
+      "passed": true,
+      "matches": [
+        "evidence/11-fixed-source-manifest.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/15-evaluation-report-attribution.md",
+      "expanded": "15-evaluation-report-attribution.md",
+      "passed": true,
+      "matches": [
+        "15-evaluation-report-attribution.md"
+      ]
+    },
+    {
+      "reference": "evidence/15-current-owned-baseline.{json,txt}",
+      "expanded": "evidence/15-current-owned-baseline.json",
+      "passed": true,
+      "matches": [
+        "evidence/15-current-owned-baseline.json"
+      ]
+    },
+    {
+      "reference": "evidence/15-current-owned-baseline.{json,txt}",
+      "expanded": "evidence/15-current-owned-baseline.txt",
+      "passed": true,
+      "matches": [
+        "evidence/15-current-owned-baseline.txt"
+      ]
+    },
+    {
+      "reference": "15-fixed-owned-product.txt",
+      "expanded": "15-fixed-owned-product.txt",
+      "passed": true,
+      "matches": [
+        "evidence/15-fixed-owned-product.txt"
+      ]
+    },
+    {
+      "reference": "15-fixed-owned-source-manifest.json",
+      "expanded": "15-fixed-owned-source-manifest.json",
+      "passed": true,
+      "matches": [
+        "evidence/15-fixed-owned-source-manifest.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/16-console-agent-records.md",
+      "expanded": "16-console-agent-records.md",
+      "passed": true,
+      "matches": [
+        "16-console-agent-records.md"
+      ]
+    },
+    {
+      "reference": "evidence/16-console-agents-fixed-independent.{json,txt}",
+      "expanded": "evidence/16-console-agents-fixed-independent.json",
+      "passed": true,
+      "matches": [
+        "evidence/16-console-agents-fixed-independent.json"
+      ]
+    },
+    {
+      "reference": "evidence/16-console-agents-fixed-independent.{json,txt}",
+      "expanded": "evidence/16-console-agents-fixed-independent.txt",
+      "passed": true,
+      "matches": [
+        "evidence/16-console-agents-fixed-independent.txt"
+      ]
+    },
+    {
+      "reference": "16-fixed-real-dsh-console-agents.json",
+      "expanded": "16-fixed-real-dsh-console-agents.json",
+      "passed": true,
+      "matches": [
+        "evidence/16-fixed-real-dsh-console-agents.json"
+      ]
+    },
+    {
+      "reference": "tests/issues/17-evaluation-timeout-processes.md",
+      "expanded": "17-evaluation-timeout-processes.md",
+      "passed": true,
+      "matches": [
+        "17-evaluation-timeout-processes.md"
+      ]
+    },
+    {
+      "reference": "evidence/15-fixed-owned-timeout-independent.{json,txt}",
+      "expanded": "evidence/15-fixed-owned-timeout-independent.json",
+      "passed": true,
+      "matches": [
+        "evidence/15-fixed-owned-timeout-independent.json"
+      ]
+    },
+    {
+      "reference": "evidence/15-fixed-owned-timeout-independent.{json,txt}",
+      "expanded": "evidence/15-fixed-owned-timeout-independent.txt",
+      "passed": true,
+      "matches": [
+        "evidence/15-fixed-owned-timeout-independent.txt"
+      ]
+    },
+    {
+      "reference": "tests/issues/ARCHITECTURE-REVIEW-2026-10-31.md",
+      "expanded": "ARCHITECTURE-REVIEW-2026-10-31.md",
+      "passed": true,
+      "matches": [
+        "ARCHITECTURE-REVIEW-2026-10-31.md"
+      ]
+    },
+    {
+      "reference": "upstream review",
+      "expanded": "STATUS.md#upstream-review",
+      "passed": true
+    },
+    {
+      "reference": "architecture.md",
+      "expanded": "architecture.md",
+      "passed": true
+    },
+    {
+      "reference": "README",
+      "expanded": "../README.md",
+      "passed": true
+    },
+    {
+      "reference": "16 unique independent issue mappings",
+      "passed": true
+    },
+    {
+      "reference": "8 published repair mappings PR24 through PR31",
+      "passed": true
+    },
+    {
+      "reference": "mainline source revision",
+      "passed": true
+    },
+    {
+      "reference": "PR31 official revision",
+      "passed": true
+    },
+    {
+      "reference": "PR31 official branch",
+      "passed": true
+    },
+    {
+      "reference": "new document absent from baseline",
+      "passed": true
+    },
+    {
+      "reference": "stale pending full-investigation and publication claims absent",
+      "passed": true
+    }
+  ]
+}

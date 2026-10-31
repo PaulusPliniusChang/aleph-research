@@ -1,0 +1,32 @@
+{
+  "status": "FROZEN",
+  "base": "785a7e9ce6420f62c5187662a3e8ba7b6d5977bf",
+  "source": "/tmp/aleph-migration-latest-source",
+  "files": [
+    {
+      "path": "docs/architecture-migration.md",
+      "baseline_sha256": null,
+      "sha256": "d83687ac093a340e1f6da390ddbec5456f7e5b3ab5edb1ff067846f6e338ac91"
+    }
+  ],
+  "review": {
+    "kind": "documentation reference and mapping verification, not product behavior testing",
+    "checked": 67,
+    "passed": 67,
+    "log": "/tmp/aleph-migration-final-reference-review.json"
+  },
+  "public_evidence": "f29705de3c32efb04512c720bc8b8799b4559e90",
+  "repair_prs": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "patch": "/tmp/aleph-migration-final-changes.patch",
+  "patch_sha256": "8e429ea1d05b345bf1b5636b9cf4983b1f6d0ba106ef38940c4fa16149513aba",
+  "boundary": "Documentation only. No product code, new product tests or actual DSH runs performed for this revision. Cited existing independent records belong to their exact source snapshots. B owns Git/GitHub publication."
+}
