@@ -408,6 +408,10 @@ class ProjectService {
     return { projectId, branch, worktree, missionId: slug, missionDir };
   }
 
+  async mutateProject(projectId, updater) {
+    return this.mutate(projectId, updater);
+  }
+
   async listMissions({ projectId }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
@@ -1563,6 +1567,47 @@ export async function apply(ctx) {
         return sendJson(res, 200, { ok: true, batch: { id: batch.id, mission_ids: batch.missionIds, branch: batch.branch } });
       } catch (error) {
         return sendJson(res, 500, { ok: false, error: { code: 'aleph/batch-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+  // Retry a terminal batch: failed missions go back to the approved queue and a fresh
+  // batch is formed from the same mission branches.
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/retry',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const projectId = args.project_id ?? args.projectId;
+        const project = service.get(projectId);
+        if (!project) return sendJson(res, 404, { ok: false, error: { code: 'aleph/no-project' } });
+        const batch = project.batches.find((item) => item.id === (args.batch_id ?? args.batchId));
+        if (!batch) return sendJson(res, 404, { ok: false, error: { code: 'aleph/no-batch' } });
+        if (batch.status === 'forming' || batch.status === 'running') {
+          return sendJson(res, 409, { ok: false, error: { code: 'aleph/batch-active', message: `batch ${batch.id} is ${batch.status}` } });
+        }
+        const doneBranches = new Set(project.missions.filter((mission) => mission.status === 'done').map((mission) => mission.branch));
+        const reopened = [];
+        for (const missionId of batch.missionIds) {
+          const mission = project.missions.find((item) => item.id === missionId);
+          if (!mission || mission.status !== 'failed' || doneBranches.has(mission.branch)) continue;
+          await service.mutateProject(projectId, (current) => ({
+            ...current,
+            missions: current.missions.map((item) => (item.id === missionId
+              ? { ...item, status: 'approved', batchId: null, preBatchTip: null, resultCommit: null, error: null, approvedAt: now(), finishedAt: null }
+              : item)),
+          }));
+          reopened.push({ id: missionId, branch: mission.branch });
+        }
+        if (reopened.length === 0) return sendJson(res, 409, { ok: false, error: { code: 'aleph/nothing-to-retry' } });
+        const formed = await service.formBatch({ projectId, machineId: batch.machineId ?? 'local' });
+        const next = formed.batches[formed.batches.length - 1];
+        return sendJson(res, 200, { ok: true, reopened, batch: { id: next.id, mission_ids: next.missionIds, branch: next.branch } });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/retry-failed', message: String(error?.message ?? error) } });
       }
     },
   });

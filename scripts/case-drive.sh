@@ -4,7 +4,7 @@
 # them needs a live Leader agent.
 #
 # Usage: scripts/case-drive.sh <run-root> [step]
-#   step: scaffold | approve | batch | run | evaluate | all (default all)
+#   step: scaffold | approve | batch | run | retry | evaluate | all (default all)
 set -euo pipefail
 run_root="${1:?usage: case-drive.sh <run-root> [step]}"
 step="${2:-all}"
@@ -40,6 +40,10 @@ case "$step" in
   run)
     batch_id="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["batch"]["id"])' "$run_root/batch.json")"
     post /api/aleph/run "{\"project_id\":\"$project\",\"batch_id\":\"$batch_id\"}" | tee "$run_root/run-result.json"
+    ;;
+  retry)
+    batch_id="${ALEPH_BATCH_ID:-$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["id"])' "$run_root/batch.json" 2>/dev/null || true)}"
+    post /api/aleph/retry "{\"project_id\":\"$project\",\"batch_id\":\"$batch_id\"}" | tee "$run_root/retry.json"
     ;;
   evaluate)
     # ALEPH_BRANCH evaluates a named research branch; otherwise the owner session worktree is used.
