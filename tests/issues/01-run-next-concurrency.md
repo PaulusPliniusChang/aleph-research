@@ -3,12 +3,14 @@ id: ALEPH-01
 status: dsh实测有问题
 type: 缺陷
 remote_issue: https://github.com/hapenia/aleph-research/issues/3
-pull_request: null
+pull_request: https://github.com/hapenia/aleph-research/pull/17
 ---
 
 # 单任务派发可以绕过并发上限
 
 ## 当前并发修复与独立验收（2026-10-31）
+
+修复已通过独立自动验收和实际 DSH 核查，并已提交上游[拉取请求 #17](https://github.com/hapenia/aleph-research/pull/17)。该请求仍未合并；本地管理状态保留已有缺陷实测记录，没有代替用户设置“已解决”。修复证据固定于[公开提交 `e641dc8b41956aeb95a1a27fdf189d0cf6121480`](https://github.com/PaulusPliniusChang/aleph-research/tree/e641dc8b41956aeb95a1a27fdf189d0cf6121480/tests/issues)。
 
 修复提交为 `06c4d3d709f8125260162b032b1631bb4bd64187`，派生仓库分支为 `fix/aleph-01-machine-capacity`。B 在正式工作树中导入 C 冻结的产品和行为测试文件，提交内容与[冻结内容摘要](evidence/01-fixed-frozen-content.json)一致。提交前最后一次同步于北京时间 `2026-10-31T17:05:53+08:00` 完成，上游主分支仍为 `66885994ceadad83a237a27c1fc7de6419889c14`。
 
