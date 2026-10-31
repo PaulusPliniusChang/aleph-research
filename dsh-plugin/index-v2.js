@@ -307,6 +307,14 @@ class ProjectService {
     return project;
   }
 
+  async setPython({ projectId, pythonPath }) {
+    if (!pythonPath) throw new Error('python path is required');
+    const resolved = resolve(pythonPath);
+    if (!(await pathExists(resolved))) throw new Error(`python path does not exist: ${resolved}`);
+    await this.mutate(projectId, (current) => ({ ...current, pythonPath: resolved }));
+    return { projectId, pythonPath: resolved };
+  }
+
   async scaffoldResearch({ projectId, title = 'Research project', dataSources = [], pythonPath = null }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
@@ -1089,6 +1097,12 @@ export async function apply(ctx) {
       { project_id: { type: 'string', description: 'Optional project id' } },
       async (args) => (args.project_id ? [service.get(args.project_id)].filter(Boolean) : service.list()).map(snapshot),
     ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_set_python',
+      'Leader pins the shared Python executable used by researchers and missions.',
+      { ...projectIdParam, python: { type: 'string', required: true, description: 'Python executable path' } },
+      async (args) => service.setPython({ projectId: args.project_id, pythonPath: args.python }),
+    ), { when: ({ agent }) => isLeader(agent) }),
     ctx.tools.register(tool(
       'aleph_create_research_scaffold',
       'Leader creates the initial research project before any researcher starts.',
