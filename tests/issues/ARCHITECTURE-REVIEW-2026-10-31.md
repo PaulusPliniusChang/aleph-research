@@ -16,7 +16,7 @@
 | ALEPH-02 | [#4](https://github.com/hapenia/aleph-research/issues/4) | 旧预算模型未沿用；当前预算需求需要重新确认。 |
 | ALEPH-04 | [#5](https://github.com/hapenia/aleph-research/issues/5) | 旧 SOTA 晋升路径未沿用；旧竞态证据不适用于当前结果交付路径。 |
 | ALEPH-05 | [#6](https://github.com/hapenia/aleph-research/issues/6) | 当前版本已经独立复现；修复 [PR #13](https://github.com/hapenia/aleph-research/pull/13) 已创建，67 个独立验收点、52 项产品测试与真实 DSH 完成后重启、活跃计算重启检查均通过。详见独立议题文档。 |
-| ALEPH-06 | [#7](https://github.com/hapenia/aleph-research/issues/7) | 当前主仓库的 76 个自动行为测试点与真实 DSH 的 61 项检查全部通过。独立任务在编排前推进时，记录、组合源码与交付父节点保持一致；当前已测范围没有复现历史问题，议题保持开放，详见独立文档。 |
+| ALEPH-06 | [#7](https://github.com/hapenia/aleph-research/issues/7) | 最新主分支 `785a7e9` 已正式通过 159 个独立自动行为点与 149 项实际 DSH 观察。编排前合法推进正确捕获；编排后或计算中推进明确拒绝不安全交付，后续提交和文件保持。当前已测范围不复现旧缺陷，旧 PR21 保持关闭，管理状态保留。 |
 | ALEPH-07 | [#8](https://github.com/hapenia/aleph-research/issues/8) | 旧 L0 至 L3 策略模型未沿用，旧验收条件需要重新确认。 |
 | ALEPH-08 | [#9](https://github.com/hapenia/aleph-research/issues/9) | 当前审批与编排流程不同，自动推进需求需要重新确认。 |
 | ALEPH-09 | [#10](https://github.com/hapenia/aleph-research/issues/10) | 旧 campaign 控制范围已经变化，当前控制需求需要分别确认。 |

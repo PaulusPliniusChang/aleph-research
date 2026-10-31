@@ -8,7 +8,46 @@ pull_request: https://github.com/hapenia/aleph-research/pull/21
 
 # 任务记录的代码起点可能与实际起点不一致
 
-当前新增场景已在版本 `66885994` 复现：任务分支在批次形成后推进，结果交付会把分支强制指回旧起点生成的结果提交。新增自动核查包含 83 个有效行为检查点，77 个通过、6 个失败；实际 DSH 的 84 项观察均符合缺陷复现及对照预期。原有编排前变更范围的 76 个自动检查点和 61 项实际 DSH 检查仍然通过，具体范围分别保留在下文。
+## 最新主分支正式核查（2026-10-31）
+
+本次以最新主分支 `785a7e9ce6420f62c5187662a3e8ba7b6d5977bf` 重新核查提案后推进、审批后推进、批次形成后推进、计算期间推进及任务分支仍被检出的情况。最新实现使用已经记录的任务起点生成结果提交，并通过 `git update-ref` 检查任务分支是否仍指向该起点；交付前发生分支推进时，Host 明确拒绝更新，保留后续提交及修正文件。
+
+本次正式核查没有复现旧版的静默覆盖。分支保持不变时，任务执行批次形成时捕获的源码，正常交付；提案或审批后、编排前产生的合法修改被实际批次包含。批次形成后、启动前或计算期间推进任务分支时，计算仍使用已捕获的批次源码，结果提交独立保留，任务与批次明确标记交付失败，分支保持较新提交。任务分支仍被检出时，Host 明确记录拒绝原因并保留分支内容。
+
+| 核查范围 | 独立自动行为检查 | 实际 DSH 核查 |
+| --- | --- | --- |
+| 编排前的合法任务分支推进与结果起点一致性 | 76 个有效行为点全部通过；含父测试容器的 Node 报告为 77 项。 | 61 项观察全部通过。 |
+| 编排后的任务分支推进与拒绝不安全交付 | 83 个有效行为点全部通过；含父测试容器的 Node 报告为 84 项。 | 88 项保护观察全部通过。 |
+
+上述范围合计 159 个不同的自动行为点与 149 项实际 DSH 观察；父测试容器单独计数。自动检查使用真实 `ProjectService`、Git、批次运行器及 shell 任务，磁盘存储适配器与加载器替代 DSH 依赖。实际核查使用已安装的 DSH `0.2.2-alpha.2`、真实注册工具、持久存储、任务分支和批次运行器，直接调用工具，不调用模型。实际任务仅在需要真实修改任务分支时通过文件信号暂停，没有替换 Git 或修改产品源码。隔离 Host `493451` 与 `494761` 均正常退出，进程已经不存在。
+
+当前结果交付还包含任务产物和运行日志。编排前核查的旧夹具曾假设只有结果信封会被保存，导致 4 个隔离断言失败；这些失败属于旧夹具契约，已单独保留[原始报告](evidence/06-latest-base-artifact-contract-fixture-attempt.txt)及[结构化记录](evidence/06-latest-base-artifact-contract-fixture-attempt.json)。本次更新后的隔离断言要求只有对应任务的产物、日志和信封进入其结果提交，仍严格核对任务源码和父提交，没有放宽分支保护要求。
+
+证据包括[编排前自动报告](evidence/06-latest-base-consistency.txt)、[编排前自动记录](evidence/06-latest-base-consistency.json)、[编排前实际记录](evidence/06-latest-real-dsh-base.json)、[编排后自动报告](evidence/06-latest-post-batch-branch.txt)、[编排后自动记录](evidence/06-latest-post-batch-branch.json)和[编排后实际记录](evidence/06-latest-real-dsh-post-batch.json)。对应脚本为[编排前自动核查](dsh/latest-base-consistency.test.mjs)、[编排前实际核查](dsh/latest-base-consistency.py)、[编排后自动核查](dsh/post-batch-branch-acceptance.test.mjs)和[编排后实际核查](dsh/latest-post-batch-branch.py)。
+
+旧拉取请求 #21 已关闭且未合并，最新主分支已经包含独立实现的引用保护。此次没有新增产品修改，没有重新打开旧请求，也没有代替用户更改本地管理状态。下文保留旧版本的缺陷记录与修复历史，当前结论仅限于本节已经实际核查的范围，不恢复旧 campaign 架构中的最优任务起点继承规则。
+
+复现命令如下：
+
+```bash
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph \
+ALEPH_BASE_OBSERVATIONS=tests/issues/evidence/06-latest-base-consistency.json \
+node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/latest-base-consistency.test.mjs
+
+ALEPH_CURRENT_SOURCE=/home/paulus-chang/项目/aleph \
+ALEPH_POST_BATCH_OBSERVATIONS=tests/issues/evidence/06-latest-post-batch-branch.json \
+node --experimental-loader /home/paulus-chang/项目/aleph/dsh-plugin/test/loader.mjs \
+  --test tests/issues/dsh/post-batch-branch-acceptance.test.mjs
+
+python3 tests/issues/dsh/latest-base-consistency.py \
+  --source /home/paulus-chang/项目/aleph \
+  --output tests/issues/evidence/06-latest-real-dsh-base.json
+
+python3 tests/issues/dsh/latest-post-batch-branch.py \
+  --source /home/paulus-chang/项目/aleph --expect-protection \
+  --output tests/issues/evidence/06-latest-real-dsh-post-batch.json
+```
 
 ## 原有编排前变更范围的适用性复核（2026-10-31）
 

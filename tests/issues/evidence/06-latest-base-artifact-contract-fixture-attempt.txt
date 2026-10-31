@@ -1,0 +1,195 @@
+(node:490402) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./")); register("/home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph/dsh-plugin/test/loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ ALEPH-06 current mission record, composition, runtime and delivery commit consistency
+  ✔ unchanged single mission/unchanged/proposal: records the actual named mission branch (0.581246ms)
+  ✔ unchanged single mission/unchanged/proposal: does not claim an execution baseline before composition (0.10149ms)
+  ✔ unchanged single mission/composition: records the actual template baseline of the batch (0.252313ms)
+  ✔ unchanged single mission/composition: batch contains precisely the approved mission identities (0.592978ms)
+  ✔ unchanged single mission/unchanged/formed: captures the current branch tip rather than an earlier proposal tip (0.099956ms)
+  ✔ unchanged single mission/unchanged/formed: public snapshot exposes the same captured commit (0.083818ms)
+  ✔ unchanged single mission/unchanged/formed: actual composed batch descends from captured mission tip (4.985541ms)
+  ✔ unchanged single mission/unchanged/formed: actual composed source matches captured mission source (5.656194ms)
+  ✔ unchanged single mission/finished: batch finishes successfully (0.244067ms)
+  ✔ unchanged single mission/finished: machine is released after result delivery (0.124981ms)
+  ✔ unchanged single mission/unchanged/delivery: real task ran the actual composed commit (0.206654ms)
+  ✔ unchanged single mission/unchanged/delivery: real task read the expected current mission source (0.098034ms)
+  ✔ unchanged single mission/unchanged/delivery: delivery commit parent equals recorded pre-batch commit (0.047711ms)
+  ✔ unchanged single mission/unchanged/delivery: recorded pre-batch commit remains the composed mission tip (0.054792ms)
+  ✔ unchanged single mission/unchanged/delivery: recorded result commit equals actual mission branch tip (6.05086ms)
+  ✔ unchanged single mission/unchanged/delivery: public result record names that same delivered commit (0.22248ms)
+  ✔ unchanged single mission/unchanged/delivery: delivered branch retains the source used by the task (6.378617ms)
+  ✖ unchanged single mission/unchanged/delivery: delivery adds only this mission result envelope to its baseline (8.414815ms)
+  ✔ unchanged single mission/unchanged/delivery: actual result envelope identifies the composed batch and mission (0.121195ms)
+  ✔ unchanged single mission/unchanged/delivery: actual task executed once (0.197978ms)
+  ✔ mission advances after proposal/proposed/proposal: records the actual named mission branch (0.134672ms)
+  ✔ mission advances after proposal/proposed/proposal: does not claim an execution baseline before composition (0.037659ms)
+  ✔ mission advances after proposal/composition: records the actual template baseline of the batch (0.12881ms)
+  ✔ mission advances after proposal/composition: batch contains precisely the approved mission identities (0.042709ms)
+  ✔ mission advances after proposal/proposed/formed: captures the current branch tip rather than an earlier proposal tip (0.022703ms)
+  ✔ mission advances after proposal/proposed/formed: public snapshot exposes the same captured commit (0.018665ms)
+  ✔ mission advances after proposal/proposed/formed: actual composed batch descends from captured mission tip (3.84683ms)
+  ✔ mission advances after proposal/proposed/formed: actual composed source matches captured mission source (4.431504ms)
+  ✔ mission advances after proposal/finished: batch finishes successfully (0.196996ms)
+  ✔ mission advances after proposal/finished: machine is released after result delivery (0.074815ms)
+  ✔ mission advances after proposal/proposed/delivery: real task ran the actual composed commit (0.119072ms)
+  ✔ mission advances after proposal/proposed/delivery: real task read the expected current mission source (0.045185ms)
+  ✔ mission advances after proposal/proposed/delivery: delivery commit parent equals recorded pre-batch commit (0.022033ms)
+  ✔ mission advances after proposal/proposed/delivery: recorded pre-batch commit remains the composed mission tip (0.017942ms)
+  ✔ mission advances after proposal/proposed/delivery: recorded result commit equals actual mission branch tip (7.486459ms)
+  ✔ mission advances after proposal/proposed/delivery: public result record names that same delivered commit (0.156028ms)
+  ✔ mission advances after proposal/proposed/delivery: delivered branch retains the source used by the task (5.251365ms)
+  ✖ mission advances after proposal/proposed/delivery: delivery adds only this mission result envelope to its baseline (5.709893ms)
+  ✔ mission advances after proposal/proposed/delivery: actual result envelope identifies the composed batch and mission (0.093944ms)
+  ✔ mission advances after proposal/proposed/delivery: actual task executed once (0.137229ms)
+  ✔ independent approved missions advance before composition/alpha/proposal: records the actual named mission branch (0.211054ms)
+  ✔ independent approved missions advance before composition/alpha/proposal: does not claim an execution baseline before composition (0.058242ms)
+  ✔ independent approved missions advance before composition/beta/proposal: records the actual named mission branch (0.110531ms)
+  ✔ independent approved missions advance before composition/beta/proposal: does not claim an execution baseline before composition (0.056021ms)
+  ✔ independent approved missions advance before composition/composition: records the actual template baseline of the batch (0.341542ms)
+  ✔ independent approved missions advance before composition/composition: batch contains precisely the approved mission identities (0.123086ms)
+  ✔ independent approved missions advance before composition/alpha/formed: captures the current branch tip rather than an earlier proposal tip (0.076239ms)
+  ✔ independent approved missions advance before composition/alpha/formed: public snapshot exposes the same captured commit (0.037922ms)
+  ✔ independent approved missions advance before composition/alpha/formed: actual composed batch descends from captured mission tip (5.459955ms)
+  ✔ independent approved missions advance before composition/alpha/formed: actual composed source matches captured mission source (6.908277ms)
+  ✔ independent approved missions advance before composition/beta/formed: captures the current branch tip rather than an earlier proposal tip (0.086268ms)
+  ✔ independent approved missions advance before composition/beta/formed: public snapshot exposes the same captured commit (0.04454ms)
+  ✔ independent approved missions advance before composition/beta/formed: actual composed batch descends from captured mission tip (4.669509ms)
+  ✔ independent approved missions advance before composition/beta/formed: actual composed source matches captured mission source (5.054695ms)
+  ✔ independent approved missions advance before composition/finished: batch finishes successfully (0.153194ms)
+  ✔ independent approved missions advance before composition/finished: machine is released after result delivery (0.107534ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: real task ran the actual composed commit (0.118965ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: real task read the expected current mission source (0.05508ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: delivery commit parent equals recorded pre-batch commit (0.031364ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: recorded pre-batch commit remains the composed mission tip (0.026634ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: recorded result commit equals actual mission branch tip (3.601576ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: public result record names that same delivered commit (0.067294ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: delivered branch retains the source used by the task (3.71997ms)
+  ✖ independent approved missions advance before composition/alpha/delivery: delivery adds only this mission result envelope to its baseline (4.328473ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: actual result envelope identifies the composed batch and mission (0.054775ms)
+  ✔ independent approved missions advance before composition/alpha/delivery: actual task executed once (0.09327ms)
+  ✔ independent approved missions advance before composition/beta/delivery: real task ran the actual composed commit (0.128462ms)
+  ✔ independent approved missions advance before composition/beta/delivery: real task read the expected current mission source (0.064724ms)
+  ✔ independent approved missions advance before composition/beta/delivery: delivery commit parent equals recorded pre-batch commit (0.036543ms)
+  ✔ independent approved missions advance before composition/beta/delivery: recorded pre-batch commit remains the composed mission tip (0.026467ms)
+  ✔ independent approved missions advance before composition/beta/delivery: recorded result commit equals actual mission branch tip (4.707372ms)
+  ✔ independent approved missions advance before composition/beta/delivery: public result record names that same delivered commit (0.064124ms)
+  ✔ independent approved missions advance before composition/beta/delivery: delivered branch retains the source used by the task (3.829751ms)
+  ✖ independent approved missions advance before composition/beta/delivery: delivery adds only this mission result envelope to its baseline (8.462435ms)
+  ✔ independent approved missions advance before composition/beta/delivery: actual result envelope identifies the composed batch and mission (0.075776ms)
+  ✔ independent approved missions advance before composition/beta/delivery: actual task executed once (0.095237ms)
+✖ ALEPH-06 current mission record, composition, runtime and delivery commit consistency (1239.514094ms)
+ℹ tests 77
+ℹ suites 0
+ℹ pass 72
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1402.921037
+
+✖ failing tests:
+
+test at tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89
+✖ unchanged single mission/unchanged/delivery: delivery adds only this mission result envelope to its baseline (8.414815ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'results/unchanged/completed.txt\n' +
+  +   'results/unchanged/result.json\n' +
+  +   'results/unchanged/run.log'
+  - 'results/unchanged/result.json'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:112:90)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:104:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'results/unchanged/completed.txt\nresults/unchanged/result.json\nresults/unchanged/run.log',
+    expected: 'results/unchanged/result.json',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89
+✖ mission advances after proposal/proposed/delivery: delivery adds only this mission result envelope to its baseline (5.709893ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'results/proposed/completed.txt\n' +
+  +   'results/proposed/result.json\n' +
+  +   'results/proposed/run.log'
+  - 'results/proposed/result.json'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:112:90)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:104:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'results/proposed/completed.txt\nresults/proposed/result.json\nresults/proposed/run.log',
+    expected: 'results/proposed/result.json',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89
+✖ independent approved missions advance before composition/alpha/delivery: delivery adds only this mission result envelope to its baseline (4.328473ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'results/alpha/completed.txt\nresults/alpha/result.json\nresults/alpha/run.log'
+  - 'results/alpha/result.json'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:112:90)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:104:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'results/alpha/completed.txt\nresults/alpha/result.json\nresults/alpha/run.log',
+    expected: 'results/alpha/result.json',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89
+✖ independent approved missions advance before composition/beta/delivery: delivery adds only this mission result envelope to its baseline (8.462435ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'results/beta/completed.txt\nresults/beta/result.json\nresults/beta/run.log'
+  - 'results/beta/result.json'
+  
+      at TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:112:90)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at TestContext.test (node:internal/test_runner/test:400:20)
+      at points (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:58:89)
+      at async TestContext.<anonymous> (file:///home/paulus-chang/%E9%A1%B9%E7%9B%AE/aleph-tests/tests/issues/dsh/base-consistency-acceptance.test.mjs:104:7)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'results/beta/completed.txt\nresults/beta/result.json\nresults/beta/run.log',
+    expected: 'results/beta/result.json',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

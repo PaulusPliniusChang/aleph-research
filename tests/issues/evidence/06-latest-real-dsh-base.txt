@@ -1,0 +1,9 @@
+Switched to a new branch 'mission/alpha'
+Switched to branch 'template'
+Switched to branch 'mission/alpha'
+Switched to branch 'template'
+Switched to a new branch 'mission/beta'
+Switched to branch 'template'
+Switched to branch 'mission/beta'
+Switched to branch 'template'
+{"output": "tests/issues/evidence/06-latest-real-dsh-base.json", "root": "/tmp/aleph-project-dsh-kkkp4waw", "checks": 61, "current_scope_validated": true}
