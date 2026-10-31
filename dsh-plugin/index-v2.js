@@ -737,11 +737,23 @@ class ProjectService {
           continue;
         }
         if (!underAllowed) continue;
-        // Inside a researcher worktree, kill sustained multi-core compute.
+        // Inside a researcher worktree, kill long-running local experiments.
         try {
           const stat = readFileSync(`/proc/${entry}/stat`, 'utf8');
           const fields = stat.split(' ');
           const ticks = Number(fields[13]) + Number(fields[14]);
+          const startTicks = Number(fields[21]);
+          const uptimeSec = Number(readFileSync('/proc/uptime', 'utf8').split(' ')[0]);
+          const ageSec = uptimeSec - startTicks / 100;
+          if (nested && cwd.startsWith(join(workspace, '.aleph', 'researchers')) && ageSec > 90) {
+            try { process.kill(pid, 'SIGKILL'); } catch { continue; }
+            this.mutate(project.id, (current) => ({
+              ...current,
+              violations: [...(current.violations ?? []), `${now()} killed long local experiment ${pid} (${Math.round(ageSec)}s): ${cmd.slice(0, 160)}`].slice(-50),
+            })).catch(() => undefined);
+            this.cpuSamples.delete(`${project.id}:${pid}`);
+            continue;
+          }
           const key = `${project.id}:${pid}`;
           const prior = this.cpuSamples?.get?.(key);
           this.cpuSamples ??= new Map();
