@@ -654,7 +654,9 @@ class ProjectService {
     let stdout = '';
     let stderr = '';
     try {
-      const result = await run('bash', ['-lc', project.evalCommand], { cwd: worktree, env, timeout: 600_000 });
+      // The evaluator lives with the project, not inside the research worktree; it reads the
+      // branch under test through ALEPH_SOLUTION_DIR.
+      const result = await run('bash', ['-lc', project.evalCommand], { cwd: project.workspace, env, timeout: 600_000 });
       stdout = result.stdout;
       stderr = result.stderr;
       const parsed = parseScore(stdout);
@@ -1431,6 +1433,24 @@ export async function apply(ctx) {
         return sendJson(res, 200, { ok: true, batch: { id: batch.id, mission_ids: batch.missionIds, branch: batch.branch } });
       } catch (error) {
         return sendJson(res, 500, { ok: false, error: { code: 'aleph/batch-failed', message: String(error?.message ?? error) } });
+      }
+    },
+  });
+  ctx.webServer.register({
+    kind: 'exact',
+    path: '/api/aleph/evaluate',
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      let body = '';
+      for await (const chunk of req) body += chunk;
+      try {
+        const args = body ? JSON.parse(body) : {};
+        const projectId = args.project_id ?? args.projectId;
+        const agent = args.session_id ? { id: args.session_id } : null;
+        const result = await service.evaluate({ projectId, agent });
+        return sendJson(res, 200, result);
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: { code: 'aleph/evaluate-failed', message: String(error?.message ?? error) } });
       }
     },
   });
