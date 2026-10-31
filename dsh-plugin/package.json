@@ -19,6 +19,9 @@
   },
   "files": [
     "index-v2.js",
+    "project-controls.mjs",
+    "execution-owner.mjs",
+    "execution-launcher.mjs",
     "client.js",
     "cordis.patch.yml",
     "locale/*.json",

@@ -7,6 +7,7 @@
  * optimized and run by InfraOptimizer, and their results are cherry-picked
  * back to the pre-batch mission branch.
  */
+import { ProjectControls, controlOf, conflict } from './project-controls.mjs';
 import { execFile } from 'node:child_process';
 import { readdirSync, readFileSync, readlinkSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
@@ -31,7 +32,7 @@ const missionSchema = z.object({
   branch: z.string(),
   manifestId: z.string().nullable().optional(),
   manifestPath: z.string().nullable().optional(),
-  status: z.enum(['proposed', 'approved', 'batched', 'running', 'done', 'failed']),
+  status: z.enum(['proposed', 'approved', 'batched', 'running', 'done', 'failed', 'cancelled']),
   entrypoint: z.string().nullable().optional(),
   outputs: z.array(z.unknown()).optional(),
   resource: z.unknown().nullable().optional(),
@@ -41,14 +42,19 @@ const missionSchema = z.object({
   error: z.string().nullable().optional(),
   createdAt: z.string(),
   approvedAt: z.string().nullable().optional(),
+  cancelledAt: z.string().optional(),
+  cancelReason: z.string().optional(),
+  cancelOperationId: z.string().optional(),
   finishedAt: z.string().nullable().optional(),
 });
 
 const batchSchema = z.object({
   id: z.string(),
   machineId: z.string(),
-  status: z.enum(['forming', 'running', 'done', 'failed']),
+  status: z.enum(['forming', 'running', 'done', 'failed', 'cancelling', 'cancelled']),
   infra: z.any().optional(),
+  execution: z.any().optional(),
+  cancellation: z.any().optional(),
   missionIds: z.array(z.string()),
   branch: z.string(),
   baseTip: z.string().nullable().optional(),
@@ -61,6 +67,7 @@ const batchSchema = z.object({
 const machineSchema = z.object({
   id: z.string(),
   kind: z.enum(['local']),
+  executionId: z.string().nullable().optional(),
   status: z.enum(['idle', 'busy']),
   batchId: z.string().nullable(),
 });
@@ -68,6 +75,7 @@ const machineSchema = z.object({
 const projectSchema = z.object({
   id: z.string(),
   workspace: z.string(),
+  control: z.any().optional(),
   researchRoot: z.string(),
   missionRoot: z.string(),
   templateBranch: z.string(),
@@ -239,6 +247,12 @@ class ProjectService {
     this.subagents = deps.subagents;
     this.agentPresets = deps.agentPresets;
     this.writeChain = Promise.resolve();
+    this.controls = new ProjectControls(this);
+    // Serial admission covers bounded Git transactions, never batch compute.
+    for (const name of ['startMission', 'propose', 'formBatch', 'startResearcher', 'runComposer']) {
+      const original = this[name].bind(this);
+      this[name] = args => this.controls.admitted(args.projectId, name, () => original(args));
+    }
   }
 
   list() {
@@ -488,15 +502,13 @@ class ProjectService {
   }
 
   async approve({ projectId, missionId, agent = null }) {
-    const updated = await this.mutate(projectId, (project) => ({
-      ...project,
-      missions: project.missions.map((mission) => (
-        mission.id === missionId && mission.status === 'proposed'
-          ? { ...mission, status: 'approved', approvedAt: now() }
-          : mission
-      )),
-    }));
-    await this.notifyComposer({ projectId, agent, event: 'mission approved', detail: missionId }).catch(() => undefined);
+    const updated = await this.controls.admitted(projectId, 'approve', () => this.mutate(projectId, project => ({
+      ...project, missions: project.missions.map(mission => mission.id === missionId && mission.status === 'proposed'
+        ? { ...mission, status: 'approved', approvedAt: now() } : mission),
+    })));
+    if (controlOf(this.get(projectId)).state === 'running') {
+      await this.notifyComposer({ projectId, agent, event: 'mission approved', detail: missionId }).catch(() => undefined);
+    }
     return updated;
   }
 
@@ -518,7 +530,7 @@ class ProjectService {
     return killed;
   }
 
-  async prepareBatchRuntime({ project, batch, missionRecords, batchWorktree }) {
+  async prepareBatchRuntime({ project, batch, missionRecords, batchWorktree, owner }) {
     const cores = Math.max(1, Number(os.cpus().length) || 1);
     // One mission runs at a time, so it may use most of the machine without starving the desktop.
     const threads = Math.max(1, Math.min(cores - 2, 16));
@@ -540,9 +552,10 @@ class ProjectService {
       if (!(await pathExists(manifest))) { prepared.push({ mission: mission.id, status: 'no-pyproject' }); continue; }
       try {
         // Dependencies come from the mission's own pyproject; the shared runtime is the fallback.
-        await run('uv', ['sync', '--quiet', '--project', dir], { cwd: batchWorktree, env, timeout: 300_000 });
+        await this.controls.command(owner, 'uv', ['sync', '--quiet', '--project', dir], { cwd: batchWorktree, env, timeout: 300_000 });
         prepared.push({ mission: mission.id, status: 'synced' });
       } catch (error) {
+        if (error.code === 'ALEPH_CANCELLED' || error.executionStopped === false) throw error;
         prepared.push({ mission: mission.id, status: 'sync-failed', error: String(error?.message ?? error).slice(0, 400) });
       }
     }
@@ -552,6 +565,29 @@ class ProjectService {
   }
 
   async runBatch({ projectId, batchId }) {
+    const owner = await this.controls.reserve(projectId, batchId, 'batch');
+    try { await this.executeBatch({ projectId, batchId, owner }); }
+    catch (error) {
+      if (error.executionStopped === false) { owner.stopped = false; owner.cleanupError = error; }
+      await this.controls.lock(projectId, () => this.mutate(projectId, project => ({ ...project,
+        batches: project.batches.map(batch => batch.id === batchId && batch.execution?.id === owner.executionId
+          && !['cancelling', 'cancelled'].includes(batch.status)
+          ? { ...batch, status: owner.stopped ? 'failed' : 'cancelling', finishedAt: owner.stopped ? now() : null,
+            summary: { ...batch.summary, runnerError: String(error) },
+            ...(!owner.stopped ? { cancellation: { operationId: newId('cleanup'), requestedAt: now(), reason: 'cleanup uncertain', complete: false, cleanupError: String(error) } } : {}) } : batch),
+        missions: project.missions.map(mission => mission.batchId === batchId && !['done', 'failed', 'cancelled'].includes(mission.status)
+          && error.code !== 'ALEPH_CANCELLED' && owner.stopped ? { ...mission, status: 'failed', error: String(error), finishedAt: now() } : mission),
+        machines: project.machines.map(machine => owner.stopped && error.code !== 'ALEPH_CANCELLED'
+          && machine.batchId === batchId && machine.executionId === owner.executionId
+          ? { ...machine, status: 'idle', batchId: null, executionId: null } : machine),
+      })));
+      if (error.code === 'ALEPH_CANCELLED') return this.get(projectId);
+      throw error;
+    } finally { await this.controls.end(owner); }
+    return this.get(projectId);
+  }
+
+  async executeBatch({ projectId, batchId, owner }) {
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     const batch = project.batches.find((item) => item.id === batchId);
@@ -561,7 +597,8 @@ class ProjectService {
     const worktreesRoot = join(project.workspace, '.aleph', 'batches');
     const batchWorktree = join(worktreesRoot, batchId);
     await mkdir(worktreesRoot, { recursive: true });
-    await rm(batchWorktree, { recursive: true, force: true });
+    if (await pathExists(batchWorktree)) throw conflict(`retained batch worktree exists: ${batchWorktree}`);
+    this.controls.check(owner);
     await git(project.missionRoot, ['worktree', 'add', '--detach', batchWorktree, batch.branch]);
     // The Host owns the runner so runner upgrades do not depend on each mission repo copy.
     await writeFile(join(batchWorktree, '.aleph_batch_runner.py'), TEMPLATE_BATCH_RUNNER, 'utf8');
@@ -569,15 +606,20 @@ class ProjectService {
     const batchTimeoutMs = Number(process.env.ALEPH_BATCH_TIMEOUT_MS) > 0
       ? Number(process.env.ALEPH_BATCH_TIMEOUT_MS)
       : 6 * 60 * 60 * 1000;
-    const infra = await this.prepareBatchRuntime({ project, batch, missionRecords, batchWorktree });
+    this.controls.check(owner);
+    const infra = await this.prepareBatchRuntime({ project, batch, missionRecords, batchWorktree, owner });
+    this.controls.check(owner);
     const startedAt = now();
-    await this.mutate(projectId, (current) => ({
-      ...current,
-      batches: current.batches.map((item) => (item.id === batch.id ? { ...item, status: 'running', startedAt, infra } : item)),
-    }));
+    await this.controls.lock(projectId, () => {
+      this.controls.check(owner);
+      return this.mutate(projectId, current => ({ ...current,
+        batches: current.batches.map(item => item.id === batch.id ? { ...item, status: 'running', startedAt, infra } : item),
+        missions: current.missions.map(mission => mission.batchId === batchId && mission.status === 'batched' ? { ...mission, status: 'running' } : mission),
+      }));
+    });
     let runnerError = null;
     try {
-      await run(project.pythonPath || 'python3', ['.aleph_batch_runner.py'], {
+      await this.controls.command(owner, project.pythonPath || 'python3', ['.aleph_batch_runner.py'], {
         cwd: batchWorktree,
         timeout: batchTimeoutMs,
         env: {
@@ -591,11 +633,13 @@ class ProjectService {
       });
       runnerError = null;
     } catch (error) {
+      if (error.code === 'ALEPH_CANCELLED' || error.executionStopped === false) throw error;
       runnerError = error instanceof Error ? error.message : String(error);
     }
 
     const outcomes = [];
     for (const mission of missionRecords) {
+      this.controls.check(owner);
       let manifestPath = mission.manifestPath;
       let manifestId = mission.manifestId;
       if (!manifestPath) {
@@ -687,8 +731,15 @@ class ProjectService {
         if (occupied) throw new Error(`cannot deliver result: mission branch ${mission.branch} is checked out in a worktree`);
         // Compare-and-swap instead of branch -f: a commit pushed to the mission branch after
         // the batch was formed is never discarded by result delivery.
-        await git(project.missionRoot, ['update-ref', '-m', `mission result ${mission.id}`, missionRef, newTip, expectedTip]);
+        await this.controls.lock(projectId, async () => {
+          this.controls.check(owner);
+          await git(project.missionRoot, ['update-ref', '-m', `mission result ${mission.id}`, missionRef, newTip, expectedTip]);
+          await this.mutate(projectId, current => ({ ...current, missions: current.missions.map(item => item.id === mission.id
+            ? { ...item, manifestId, manifestPath, status: envelope.status === 'done' ? 'done' : 'failed',
+              resultCommit, error: envelope.error ?? null, finishedAt: now() } : item) }));
+        });
       } catch (error) {
+        if (error.code === 'ALEPH_CANCELLED') throw error;
         envelope.status = 'failed';
         envelope.error = error instanceof Error ? error.message : String(error);
       } finally {
@@ -700,41 +751,29 @@ class ProjectService {
       outcomes.push({ missionId: mission.id, manifestId, manifestPath, status: envelope.status, resultCommit, envelope });
     }
 
-    // A timed-out runner leaves its mission children behind; never leave them consuming the machine.
-    const orphans = this.killUnder(batchWorktree);
+    const settled = await this.controls.lock(projectId, () => {
+      this.controls.check(owner);
+      return this.mutate(projectId, current => ({ ...current,
+        machines: current.machines.map(item => item.batchId === batch.id && item.executionId === owner.executionId
+          ? { ...item, status: 'idle', batchId: null, executionId: null } : item),
+        missions: current.missions.map(mission => {
+          const outcome = outcomes.find(item => item.missionId === mission.id);
+          if (!outcome || ['done', 'cancelled'].includes(mission.status)) return mission;
+          return { ...mission, manifestId: outcome.manifestId, manifestPath: outcome.manifestPath,
+            status: outcome.status === 'done' ? 'done' : 'failed', resultCommit: outcome.resultCommit,
+            error: outcome.envelope.error ?? null, finishedAt: now() };
+        }),
+        batches: current.batches.map(item => item.id === batch.id && item.execution?.id === owner.executionId ? {
+          ...item, status: runnerError ? 'failed' : (outcomes.every(outcome => outcome.status === 'done') ? 'done' : 'failed'),
+          startedAt, finishedAt: now(), summary: { runnerError, missions: outcomes.map(({ envelope, ...rest }) => rest) },
+        } : item),
+      }));
+    });
     await git(project.missionRoot, ['worktree', 'remove', '--force', batchWorktree]).catch(() => undefined);
     await rm(batchWorktree, { recursive: true, force: true }).catch(() => undefined);
-    if (orphans > 0) {
-      await this.mutate(projectId, (current) => ({
-        ...current,
-        violations: [...(current.violations ?? []), `${now()} killed ${orphans} orphan process(es) left by batch ${batch.id}`].slice(-50),
-      })).catch(() => undefined);
+    if (controlOf(this.get(projectId)).state === 'running') {
+      await this.notifyComposer({ projectId, agent: null, event: 'batch finished', detail: batch.id }).catch(() => undefined);
     }
-    const settled = await this.mutate(projectId, (current) => ({
-      ...current,
-      machines: current.machines.map((item) => item.id === batch.machineId ? { ...item, status: 'idle', batchId: null } : item),
-      missions: current.missions.map((mission) => {
-        const outcome = outcomes.find((item) => item.missionId === mission.id);
-        if (!outcome) return mission;
-        return {
-          ...mission,
-          manifestId: outcome.manifestId,
-          manifestPath: outcome.manifestPath,
-          status: outcome.status === 'done' ? 'done' : 'failed',
-          resultCommit: outcome.resultCommit,
-          error: outcome.envelope.error ?? null,
-          finishedAt: now(),
-        };
-      }),
-      batches: current.batches.map((item) => item.id === batch.id ? {
-        ...item,
-        status: runnerError ? 'failed' : (outcomes.every((outcome) => outcome.status === 'done') ? 'done' : 'failed'),
-        startedAt,
-        finishedAt: now(),
-        summary: { runnerError, missions: outcomes.map(({ envelope, ...rest }) => rest) },
-      } : item),
-    }));
-    await this.notifyComposer({ projectId, agent: null, event: 'batch finished', detail: batch.id }).catch(() => undefined);
     return settled;
   }
 
@@ -903,6 +942,7 @@ class ProjectService {
   }
 
   async startResearchers({ projectId, count = null, agent }) {
+    this.controls.gate(projectId, 'researchers');
     const project = this.get(projectId);
     if (!project) throw new Error(`project not found: ${projectId}`);
     if (!project.prepared) throw new Error('research project not prepared; Leader must call aleph_create_research_scaffold first');
@@ -964,49 +1004,7 @@ class ProjectService {
    * A Host restart ends every live activation and any batch runner, but storage still
    * describes them as running. Reconcile that once at startup so the machine is usable.
    */
-  async recoverAfterRestart() {
-    const nowText = now();
-    for (const project of this.list()) {
-      const batchesRoot = join(project.workspace, '.aleph', 'batches');
-      const running = (project.batches ?? []).filter((batch) => batch.status === 'running');
-      const interrupted = new Set();
-      for (const batch of running) {
-        const live = this.hasProcessUnder(join(batchesRoot, batch.id));
-        if (live) continue;
-        interrupted.add(batch.id);
-      }
-      const idleMachine = (project.machines ?? []).every((machine) => machine.status === 'idle');
-      if (interrupted.size === 0 && idleMachine) {
-        // Nothing was left mid-flight; only stale agent records may need closing.
-        const staleAgents = (project.agents ?? []).filter((item) => item.status === 'running');
-        if (staleAgents.length === 0) continue;
-      }
-      await this.mutate(project.id, (current) => ({
-        ...current,
-        machines: (current.machines ?? []).map((machine) => (
-          interrupted.has(machine.batchId ?? '') || (machine.status === 'busy' && !(current.batches ?? []).some((batch) => batch.id === machine.batchId && batch.status === 'running' && !interrupted.has(batch.id)))
-            ? { ...machine, status: 'idle', batchId: null }
-            : machine
-        )),
-        batches: (current.batches ?? []).map((batch) => (
-          interrupted.has(batch.id)
-            ? { ...batch, status: 'failed', finishedAt: nowText, summary: { ...(batch.summary ?? {}), runnerError: 'interrupted by Host restart' } }
-            : batch
-        )),
-        missions: (current.missions ?? []).map((mission) => (
-          mission.batchId && interrupted.has(mission.batchId) && ['batched', 'running'].includes(mission.status)
-            ? { ...mission, status: 'failed', error: 'interrupted by Host restart', finishedAt: nowText }
-            : mission
-        )),
-        agents: (current.agents ?? []).map((item) => (
-          item.status === 'running'
-            ? { ...item, status: 'failed', summary: 'interrupted by Host restart', updatedAt: nowText }
-            : item
-        )),
-        violations: [...(current.violations ?? []), `${nowText} recovered from restart: ${interrupted.size} interrupted batch(es)`].slice(-50),
-      })).catch(() => undefined);
-    }
-  }
+  async recoverAfterRestart() { return this.controls.recover(); }
 
   hasProcessUnder(rootPath) {
     const root = resolve(rootPath);
@@ -1210,6 +1208,7 @@ class ProjectService {
   async notifyComposer({ projectId, agent, event, detail }) {
     const project = this.get(projectId);
     if (!project) return { delivered: false, reason: 'no project' };
+    if (controlOf(project).state !== 'running') return { delivered: false, reason: `project is ${controlOf(project).state}` };
     const record = (project.agents ?? []).filter((item) => item.role === 'composer' && item.childId).pop();
     if (!record?.childId) {
       const ensured = await this.ensureComposer({ projectId, agent }).catch(() => null);
@@ -1278,6 +1277,7 @@ class ProjectService {
       await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'composer', childId: null, status: 'failed', summary: String(error), branch: null, worktree: null, updatedAt: now() }] }));
       throw error;
     }
+    this.controls.composers.set(projectId, { receipt: activation, parent: agent });
     const childId = activation.childId ?? null;
     await this.mutate(projectId, (current) => ({
       ...current,
@@ -1305,20 +1305,21 @@ class ProjectService {
   }
 
   async runInfra({ projectId, batchId, agent }) {
-    if (!agent) throw new Error('a calling Agent is required to start InfraOptimizer');
-    if (!this.subagents) throw new Error('subagent service is unavailable');
+    if (!agent || !this.subagents) throw new Error('a calling Agent and subagent service are required');
+    const owner = await this.controls.reserve(projectId, batchId, 'infra');
     const project = this.get(projectId);
-    if (!project) throw new Error(`project not found: ${projectId}`);
-    const batch = project.batches.find((item) => item.id === batchId);
-    if (!batch) throw new Error(`batch not found: ${batchId}`);
-    if (batch.status !== 'forming') throw new Error(`batch ${batchId} is not forming`);
-    await this.claimRole(projectId, 'infra');
-    const worktreeRoot = join(project.workspace, '.aleph', 'infra');
-    const worktree = join(worktreeRoot, batchId);
-    await mkdir(worktreeRoot, { recursive: true });
-    await rm(worktree, { recursive: true, force: true });
-    const baseTip = (await git(project.missionRoot, ['rev-parse', batch.branch])).stdout.trim();
-    await git(project.missionRoot, ['worktree', 'add', '--detach', worktree, batch.branch]);
+    const batch = project.batches.find(item => item.id === batchId);
+    const worktree = owner.worktree;
+    let ready = false;
+    let childId;
+    try {
+      this.assertWorkspace(agent, project.workspace);
+      await mkdir(dirname(worktree), { recursive: true });
+      // A retained worktree is diagnostic evidence, never an implicit deletion target.
+      if (await pathExists(worktree)) throw conflict(`retained InfraOptimizer worktree exists: ${worktree}`);
+      this.controls.check(owner);
+      const baseTip = (await git(project.missionRoot, ['rev-parse', batch.branch])).stdout.trim();
+      await git(project.missionRoot, ['worktree', 'add', '--detach', worktree, batch.branch]);
     const prompt = [
       'You are InfraOptimizer for AlephResearch.',
       `Batch: ${batch.id}. Machine: ${batch.machineId}. Work only inside this worktree: ${worktree}.`,
@@ -1327,39 +1328,58 @@ class ProjectService {
       'Use at most six shell commands total. If no safe improvement is justified, write ALEPH_HANDOFF.md and stop without changing code.',
       'Write ALEPH_HANDOFF.md with changes and before/after measurements. Do not change project budget, queue or scheduling constraints. The Host commits the batch branch and runs the single batch entrypoint.',
     ].join('\n');
-    const abort = new AbortController();
-    let activation;
-    try {
-      activation = await this.subagents.startActivation({
-        provider: 'spawn', label: `aleph infra ${batch.id}`, delivery: 'caller', signal: abort.signal,
+      this.controls.check(owner);
+      const activation = await this.subagents.startActivation({
+        provider: 'spawn', label: `aleph infra ${batch.id}`, delivery: 'caller', signal: owner.abort.signal,
         request: { parent: agent, cwd: worktree, agentPreset: 'aleph-infra', prompt: [{ type: 'text', text: prompt }] },
       });
-    } catch (error) {
-      await git(project.missionRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
-      throw error;
-    }
-    await this.mutate(projectId, (current) => ({ ...current, agents: [...(current.agents ?? []), { role: 'infra', childId: activation.childId ?? null, status: 'running', summary: null, branch: batch.branch, updatedAt: now() }] }));
-    try {
+      owner.receipt = activation;
+      childId = activation.childId;
+      // Cancellation may precede publication of the activation receipt.
+      if (owner.abort.signal.aborted) { await activation.dispose(); throw Object.assign(new Error('infra cancelled'), { code: 'ALEPH_CANCELLED' }); }
+      await this.mutate(projectId, current => ({ ...current, agents: [...(current.agents ?? []), {
+        role: 'infra', childId, status: 'running', summary: null, branch: batch.branch, worktree, updatedAt: now(),
+      }] }));
       const result = await activation.result;
-      const handoff = await readFile(join(worktree, 'ALEPH_HANDOFF.md'), 'utf8').catch(() => '');
-      const summary = (handoff || (result?.output ?? []).filter((block) => block?.type === 'text').map((block) => block.text).join('\n') || '(no summary)').trim().slice(0, 8000);
-      const dirty = (await git(worktree, ['status', '--porcelain'])).stdout.trim();
-      if (dirty) {
-        await git(worktree, ['add', '-A']);
-        await git(worktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', `infra optimization for ${batch.id}\n\n${summary.slice(0, 4000)}`]);
+      await this.controls.lock(projectId, async () => {
+        this.controls.check(owner);
+        const handoff = await readFile(join(worktree, 'ALEPH_HANDOFF.md'), 'utf8').catch(() => '');
+        const summary = (handoff || (result?.output ?? []).filter(block => block?.type === 'text').map(block => block.text).join('\n') || '(no summary)').trim().slice(0, 8000);
+        if ((await git(worktree, ['status', '--porcelain'])).stdout.trim()) {
+          await git(worktree, ['add', '-A']);
+          await git(worktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '-m', `infra optimization for ${batch.id}\n\n${summary.slice(0, 4000)}`]);
+        }
         const tip = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
-        await git(project.missionRoot, ['branch', '-f', batch.branch, tip]);
-      }
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'infra' && item.status === 'running' ? { ...item, status: 'done', summary, branch: batch.branch, updatedAt: now() } : item) }));
-      return this.runBatch({ projectId, batchId });
+        const ref = batch.branch.startsWith('refs/heads/') ? batch.branch : `refs/heads/${batch.branch}`;
+        await git(project.missionRoot, ['update-ref', ref, tip, baseTip]);
+        await this.mutate(projectId, current => ({ ...current, agents: (current.agents ?? []).map(item =>
+          item.role === 'infra' && item.childId === childId && item.status === 'running'
+            ? { ...item, status: 'done', summary, updatedAt: now() } : item) }));
+        ready = true;
+      });
     } catch (error) {
-      await this.mutate(projectId, (current) => ({ ...current, agents: (current.agents ?? []).map((item) => item.role === 'infra' && item.status === 'running' ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) }));
-      throw error;
+      // Successful result alone cannot prove activation disposal succeeded.
+      if (owner.abort.signal.aborted && owner.receipt) {
+        try { await owner.receipt.dispose(); }
+        catch (cleanupError) { owner.stopped = false; owner.cleanupError = cleanupError; }
+      }
+      await this.mutate(projectId, current => ({ ...current, agents: (current.agents ?? []).map(item =>
+        item.role === 'infra' && item.childId === childId && item.status === 'running'
+          ? { ...item, status: 'failed', summary: String(error), updatedAt: now() } : item) }));
+      if (error.code !== 'ALEPH_CANCELLED' && !owner.abort.signal.aborted) throw error;
     } finally {
-      await git(project.missionRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
-      await rm(worktree, { recursive: true, force: true }).catch(() => undefined);
-      this.activations?.delete?.(abort);
+      const latest = this.get(projectId).batches.find(item => item.id === batchId);
+      if (ready && !['cancelling', 'cancelled'].includes(latest.status)) {
+        await git(project.missionRoot, ['worktree', 'remove', '--force', worktree]).catch(() => undefined);
+        await rm(worktree, { recursive: true, force: true }).catch(() => undefined);
+      }
+      await this.controls.end(owner);
     }
+    if (ready && controlOf(this.get(projectId)).state === 'running'
+      && this.get(projectId).batches.find(item => item.id === batchId)?.status === 'forming') {
+      return this.runBatch({ projectId, batchId });
+    }
+    return this.get(projectId);
   }
 
   async formBatch({ projectId, machineId = 'local' }) {
@@ -1464,7 +1484,8 @@ function snapshot(project) {
     project: {
       id: project.id,
       title: project.workspace.split('/').pop() || 'Aleph project',
-      status: 'running',
+      status: controlOf(project).state,
+      control: controlOf(project),
       workspace: project.workspace,
       research_root: project.researchRoot,
       mission_root: project.missionRoot,
@@ -1494,6 +1515,8 @@ function snapshot(project) {
       pre_batch_tip: mission.preBatchTip ?? null,
       result_commit: mission.resultCommit ?? null,
       error: mission.error ?? null,
+      cancelled_at: mission.cancelledAt ?? null,
+      cancel_reason: mission.cancelReason ?? null,
       created_at: mission.createdAt,
       approved_at: mission.approvedAt ?? null,
       finished_at: mission.finishedAt ?? null,
@@ -1510,6 +1533,8 @@ function snapshot(project) {
       infra: batch.infra ?? null,
       finished_at: batch.finishedAt ?? null,
       summary: batch.summary ?? null,
+      execution: batch.execution ?? null,
+      cancellation: batch.cancellation ?? null,
     })),
     machines: project.machines,
     agents: project.agents ?? [],
@@ -1519,6 +1544,7 @@ function snapshot(project) {
       running: project.missions.filter((mission) => mission.status === 'running').length,
       done: project.missions.filter((mission) => mission.status === 'done').length,
       failed: project.missions.filter((mission) => mission.status === 'failed').length,
+      cancelled: project.missions.filter(mission => mission.status === 'cancelled').length,
     },
   };
 }
@@ -1534,7 +1560,8 @@ export async function apply(ctx) {
   const workspaceRegistry = ctx.get('workspaceRegistry');
   const service = new ProjectService(ctx, domain, { sessions, subagents, agentPresets });
   ctx.effect(() => { const timer = setInterval(() => service.checkProcesses(), 5000); timer.unref?.(); return () => clearInterval(timer); });
-  service.recoverAfterRestart().catch(() => undefined);
+  // Do not expose write tools/routes until persistent intent has been reconciled.
+  await service.recoverAfterRestart();
 
   const presetOf = (agent) => {
     if (!sessions || !agentPresets) return null;
@@ -1544,6 +1571,23 @@ export async function apply(ctx) {
   const isAleph = (agent) => ['aleph', 'aleph-researcher', 'aleph-composer', 'aleph-infra'].includes(presetOf(agent));
   const isLeader = (agent) => presetOf(agent) === 'aleph';
   const projectIdParam = { project_id: { type: 'string', required: true, description: 'Project id' } };
+
+  const authorizeControl = (agent, projectId) => {
+    const project = service.controls.project(projectId);
+    if (!isLeader(agent) || !sessions?.get(agent?.id)?.header?.cwd) {
+      throw Object.assign(new Error('project controls require an active Leader session'), { status: 403 });
+    }
+    service.assertWorkspace(agent, project.workspace);
+  };
+  const controls = [
+    ['aleph_pause_project', '/api/aleph/project/pause', 'Pause new project dispatch; running work continues.', (args, agent) => service.controls.change({ ...args, operation: 'pause', agent })],
+    ['aleph_resume_project', '/api/aleph/project/resume', 'Resume a paused project.', (args, agent) => service.controls.change({ ...args, operation: 'resume', agent })],
+    ['aleph_finish_project', '/api/aleph/project/finish', 'Close new dispatch permanently and drain existing work.', (args, agent) => service.controls.change({ ...args, operation: 'finish', agent })],
+    ['aleph_cancel_mission', '/api/aleph/mission/cancel', 'Cancel a proposed or approved mission and preserve its branch.', args => service.controls.cancelMission(args)],
+    ['aleph_cancel_batch', '/api/aleph/batch/cancel', 'Cancel an entire batch; confirm owned execution stopped before releasing its machine.', args => service.controls.cancelBatch(args)],
+  ];
+  const controlArgs = args => ({ projectId: args.project_id ?? args.projectId,
+    missionId: args.mission_id ?? args.missionId, batchId: args.batch_id ?? args.batchId, reason: args.reason ?? '' });
 
   const disposers = [
     ctx.tools.register(tool(
@@ -1659,6 +1703,15 @@ export async function apply(ctx) {
       async (args) => service.runBatch({ projectId: args.project_id, batchId: args.batch_id }),
     ), { when: ({ agent }) => isAleph(agent) }),
   ];
+  for (const [name, , description, execute] of controls) {
+    const parameters = { ...projectIdParam, reason: { type: 'string' } };
+    if (name === 'aleph_cancel_mission') parameters.mission_id = { type: 'string', required: true };
+    if (name === 'aleph_cancel_batch') parameters.batch_id = { type: 'string', required: true };
+    disposers.push(ctx.tools.register(tool(name, description, parameters, async (args, exec) => {
+      authorizeControl(exec.agent, args.project_id);
+      return execute(controlArgs(args), exec.agent);
+    }), { when: ({ agent }) => isLeader(agent) }));
+  }
   ctx.effect(() => () => { for (const dispose of disposers) dispose(); });
 
   const sendJson = (res, status, body) => {
@@ -1666,6 +1719,25 @@ export async function apply(ctx) {
     res.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'content-length': Buffer.byteLength(text), 'cache-control': 'no-store' });
     res.end(text);
   };
+  // DSH's outer browser authentication protects operator routes. These requests
+  // have no Agent authority; never accept a session_id as proof of Leader role.
+  for (const [, path, , execute] of controls) ctx.webServer.register({
+    kind: 'exact', path,
+    async handler(req, res) {
+      if (req.method !== 'POST') return sendJson(res, 405, { ok: false });
+      try {
+        let body = '';
+        for await (const chunk of req) {
+          body += chunk;
+          if (Buffer.byteLength(body) > 65536) return sendJson(res, 413, { ok: false });
+        }
+        const result = await execute(controlArgs(body ? JSON.parse(body) : {}), null);
+        return sendJson(res, result.complete === false ? 202 : 200, { ok: true, ...result });
+      } catch (error) {
+        return sendJson(res, error.status ?? 400, { ok: false, error: { code: error.code ?? 'aleph/control-failed', message: String(error.message ?? error) } });
+      }
+    },
+  });
   ctx.webServer.register({
     kind: 'exact',
     path: '/api/aleph/snapshot',
@@ -1854,9 +1926,10 @@ export async function apply(ctx) {
         const projectId = args.project_id ?? args.projectId;
         const project = service.get(projectId);
         if (!project) return sendJson(res, 404, { ok: false, error: { code: 'aleph/no-project' } });
+        service.controls.gate(projectId, 'retry');
         const batch = project.batches.find((item) => item.id === (args.batch_id ?? args.batchId));
         if (!batch) return sendJson(res, 404, { ok: false, error: { code: 'aleph/no-batch' } });
-        if (batch.status === 'forming' || batch.status === 'running') {
+        if (batch.status !== 'failed') {
           return sendJson(res, 409, { ok: false, error: { code: 'aleph/batch-active', message: `batch ${batch.id} is ${batch.status}` } });
         }
         const doneBranches = new Set(project.missions.filter((mission) => mission.status === 'done').map((mission) => mission.branch));
@@ -1864,12 +1937,12 @@ export async function apply(ctx) {
         for (const missionId of batch.missionIds) {
           const mission = project.missions.find((item) => item.id === missionId);
           if (!mission || mission.status !== 'failed' || doneBranches.has(mission.branch)) continue;
-          await service.mutateProject(projectId, (current) => ({
+          await service.controls.admitted(projectId, 'retry', () => service.mutateProject(projectId, (current) => ({
             ...current,
             missions: current.missions.map((item) => (item.id === missionId
               ? { ...item, status: 'approved', batchId: null, preBatchTip: null, resultCommit: null, error: null, approvedAt: now(), finishedAt: null }
               : item)),
-          }));
+          })));
           reopened.push({ id: missionId, branch: mission.branch });
         }
         if (reopened.length === 0) return sendJson(res, 409, { ok: false, error: { code: 'aleph/nothing-to-retry' } });

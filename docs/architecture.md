@@ -73,3 +73,36 @@ evaluation report into the research commit message and the researcher finishes.
 - The core project/mission/batch/result/evaluate path has an automated
   integration test in `dsh-plugin/test`; multi-machine and richer conflict
   handling remain future work.
+
+## Persistent dispatch and cancellation
+
+Projects carry optional persistent `control` state. Legacy records default to
+`running`; pause, resume and finish increment the control revision and retain an
+operation identifier. `finishing` drains existing batch/InfraOptimizer owners,
+then becomes `finished`. Queued work remains available for inspection. An
+existing evaluation is independent of dispatch admission.
+
+`ProjectControls` serializes bounded admission, Git publication, cancellation
+intent and final settlement per project. Long compute and activation disposal
+run outside the lock. A batch reservation precedes worktree creation, including
+the InfraOptimizer preparation window. The reservation prevents duplicate
+requests from deleting or reusing the same directory. Result publication and the
+mission's persisted terminal state share the lock: cancellation either preserves
+an already delivered result or prevents the later branch update.
+
+Host batch/dependency commands run through `execution-owner.mjs` and a small
+launcher. The launcher atomically records Linux boot/session/group/start
+identity, then waits for Host admission. Durable stop fences close recovery's
+pre-spawn gap. Recovery finishes before tools and routes are registered. Exact
+activation receipts own InfraOptimizer disposal; a resolved result does not
+substitute for successful disposal. Unknown cleanup retains `cancelling`, the
+machine assignment and the worktree.
+
+Machine release checks batch and execution ownership. Late callbacks cannot
+publish results for a cancelled or replaced execution. Composer cleanup is
+scheduled independently of the finishing Host tool to avoid disposal waiting on
+its own caller; cleanup status is reported separately. This is a single Host,
+Linux process-group protocol, not a multi-Host transaction or a guarantee over
+processes that create independent sessions. Operator routes rely on the DSH
+browser authentication boundary; model tools additionally enforce Leader and
+workspace authority. Frontend controls remain a separate change.

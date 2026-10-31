@@ -1,0 +1,55 @@
+import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { mkdtemp, mkdir, readFile, writeFile, rm, access } from 'node:fs/promises';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { fileURLToPath } from 'node:url';
+import test from 'node:test';
+import { runOwnedCommand, stopRecordedExecution } from '../execution-owner.mjs';
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const exists = async path => access(path).then(() => true, () => false);
+const wait = async fn => { const deadline = Date.now()+5000; while (!await fn()) { if(Date.now()>deadline)throw new Error('fixture timeout');await delay(10); } };
+const launcher = fileURLToPath(new URL('../execution-launcher.mjs', import.meta.url));
+const alive = async pid => {try { return !['Z','X'].includes((await readFile(`/proc/${pid}/stat`,'utf8')).split(') ')[1][0]); }catch{return false;} };
+
+test('owned batch commands: real processes, signals, durable receipts and launch fences', async t => {
+ const root=await mkdtemp(join(tmpdir(),'aleph-owner-'));
+ let ordinal=0;
+ const opts=extra=>({receiptPath:join(root,`${++ordinal}.json`),executionId:`execution-${ordinal}`,timeout:3000,...extra});
+ const node=(code,options)=>runOwnedCommand(process.execPath,['-e',code],options);
+ const point=(name,fn)=>t.test(name,fn);
+ try {
+  await point('stdout is captured',async()=>assert.equal((await node('process.stdout.write("ok")',opts())).stdout,'ok'));
+  await point('stderr is captured independently',async()=>assert.equal((await node('process.stderr.write("warning")',opts())).stderr,'warning'));
+  await point('UTF8 stdout survives byte boundaries',async()=>assert.equal((await node('process.stdout.write("结果😀")',opts())).stdout,'结果😀'));
+  await point('custom environment reaches user command',async()=>assert.equal((await node('console.log(process.env.OWNER_TEST)',opts({env:{OWNER_TEST:'value'}}))).stdout,'value\n'));
+  await point('cwd is honored',async()=>assert.equal((await node('console.log(process.cwd())',opts({cwd:root}))).stdout,root+'\n'));
+  await point('nonzero exit remains an error',async()=>assert.rejects(node('process.exit(7)',opts()),e=>e.code===7&&e.executionStopped));
+  await point('failing command retains stderr',async()=>assert.rejects(node('console.error("detail");process.exit(4)',opts()),e=>e.stderr.includes('detail')));
+  await point('missing user executable fails cleanly',async()=>assert.rejects(runOwnedCommand('/does-not-exist',[],opts()),e=>e.code===127&&e.executionStopped));
+  await point('missing cwd fails without unknown ownership',async()=>assert.rejects(node('',opts({cwd:join(root,'absent')})),e=>e.executionStopped===true));
+  await point('timeout terminates real running command',async()=>assert.rejects(node('setInterval(()=>{},1000)',opts({timeout:150})),e=>e.code==='ETIMEDOUT'&&e.executionStopped));
+  await point('pre-aborted request never runs code',async()=>{const c=new AbortController();c.abort();const marker=join(root,'pre');await assert.rejects(node(`require('fs').writeFileSync(${JSON.stringify(marker)},'bad')`,opts({signal:c.signal})),e=>e.code==='ALEPH_CANCELLED');assert.equal(await exists(marker),false);});
+  await point('running abort stops owned command',async()=>{const c=new AbortController(),o=opts({signal:c.signal});const p=node('setInterval(()=>{},1000)',o).catch(e=>e);await wait(()=>exists(o.receiptPath+'.go'));c.abort();assert.equal((await p).code,'ALEPH_CANCELLED');});
+  await point('repeated abort remains one cleanup',async()=>{const c=new AbortController(),o=opts({signal:c.signal});const p=node('setInterval(()=>{},1000)',o).catch(e=>e);await wait(()=>exists(o.receiptPath+'.go'));c.abort();c.abort();assert.equal((await p).executionStopped,true);});
+  await point('stdout overflow is bounded and stops computation',async()=>assert.rejects(node('process.stdout.write("x".repeat(10000));setInterval(()=>{},100)',opts({maxBuffer:100})),e=>e.code==='ERR_CHILD_PROCESS_STDIO_MAXBUFFER'&&e.stdout.length===100&&e.executionStopped));
+  await point('stderr overflow is bounded independently',async()=>assert.rejects(node('process.stderr.write("x".repeat(10000))',opts({maxBuffer:100})),e=>e.code==='ERR_CHILD_PROCESS_STDIO_MAXBUFFER'&&e.stderr.length===100));
+  await point('successful receipt records detached group and session',async()=>{const o=opts();await node('',o);const r=JSON.parse(await readFile(o.receiptPath));assert.equal(r.pid,r.group);assert.equal(r.session,r.group);assert.equal(r.executionId,o.executionId);});
+  await point('successful receipt records boot and start identity',async()=>{const o=opts();await node('',o);const r=JSON.parse(await readFile(o.receiptPath));assert.equal(r.boot,(await readFile('/proc/sys/kernel/random/boot_id','utf8')).trim());assert.match(r.start,/^\d+$/);});
+  await point('recovery after ordinary exit confirms stopped',async()=>{const o=opts();await node('',o);assert.equal((await stopRecordedExecution(o.receiptPath,o.executionId)).stopped,true);});
+  await point('recovery stops a currently live owned group',async()=>{const o=opts(),p=node('setInterval(()=>{},100)',o).catch(e=>e);await wait(()=>exists(o.receiptPath+'.go'));const r=JSON.parse(await readFile(o.receiptPath));await stopRecordedExecution(o.receiptPath,o.executionId);await p;assert.equal(await alive(r.pid),false);});
+  await point('wrong execution identity refuses recovery signal',async()=>{const o=opts(),p=node('setInterval(()=>{},100)',o).catch(e=>e);await wait(()=>exists(o.receiptPath+'.go'));const r=JSON.parse(await readFile(o.receiptPath));await assert.rejects(stopRecordedExecution(o.receiptPath,'other'),/another execution/);assert.equal(await alive(r.pid),true);await stopRecordedExecution(o.receiptPath,o.executionId);await p;});
+  await point('reused PID start identity fails closed',async()=>{const o=opts(),p=node('setInterval(()=>{},100)',o).catch(e=>e);await wait(()=>exists(o.receiptPath+'.go'));const r=JSON.parse(await readFile(o.receiptPath));await writeFile(o.receiptPath,JSON.stringify({...r,start:'0'}));await assert.rejects(stopRecordedExecution(o.receiptPath,o.executionId),/identity changed/);assert.equal(await alive(r.pid),true);await writeFile(o.receiptPath,JSON.stringify(r));await stopRecordedExecution(o.receiptPath,o.executionId);await p;});
+  await point('previous boot receipt requires no signal',async()=>{const o=opts();await writeFile(o.receiptPath,JSON.stringify({executionId:o.executionId,boot:'previous'}));assert.equal((await stopRecordedExecution(o.receiptPath,o.executionId)).previousBoot,true);});
+  await point('invalid group receipt fails closed',async()=>{const o=opts();await node('',o);const r=JSON.parse(await readFile(o.receiptPath));await writeFile(o.receiptPath,JSON.stringify({...r,session:1}));await assert.rejects(stopRecordedExecution(o.receiptPath,o.executionId),/invalid execution/);});
+  await point('missing receipt before spawn is fenced without claiming an unknown PID',async()=>{const o=opts();const result=await stopRecordedExecution(o.receiptPath,o.executionId);assert.equal(result.neverAdmitted,true);assert.equal(await exists(o.receiptPath+'.stop'),true);});
+  await point('go without receipt is inconsistent and fails closed',async()=>{const o=opts();await writeFile(o.receiptPath+'.go','go');await assert.rejects(stopRecordedExecution(o.receiptPath,o.executionId),/without ownership/);});
+  await point('delayed launcher after recovery fence cannot run user code',async()=>{const o=opts(),marker=join(root,'delayed');await stopRecordedExecution(o.receiptPath,o.executionId);await writeFile(o.receiptPath+'.go','go');const child=spawn(process.execPath,[launcher,o.receiptPath,o.executionId,process.execPath,'-e',`require('fs').writeFileSync(${JSON.stringify(marker)},'bad')`],{detached:true,stdio:'ignore'});await new Promise(resolve=>child.once('exit',resolve));assert.equal(await exists(marker),false);});
+  await point('launcher writes receipt but never starts without Host go',async()=>{const o=opts(),marker=join(root,'no-go');const child=spawn(process.execPath,[launcher,o.receiptPath,o.executionId,process.execPath,'-e',`require('fs').writeFileSync(${JSON.stringify(marker)},'bad')`],{detached:true,stdio:'ignore'});const exit=new Promise(resolve=>child.once('exit',resolve));await wait(()=>exists(o.receiptPath));assert.equal(await exists(marker),false);await stopRecordedExecution(o.receiptPath,o.executionId);await exit;assert.equal(await exists(marker),false);});
+  await point('TERM-ignoring descendants receive escalation',async()=>{const o=opts({timeout:250}),marker=join(root,'ignore-pid');const p=node(`require('child_process').spawn(process.execPath,['-e',${JSON.stringify(`process.on('SIGTERM',()=>{});require('fs').writeFileSync(${JSON.stringify(marker)},String(process.pid));setInterval(()=>{},100)`)}],{stdio:'inherit'});setInterval(()=>{},100)`,o).catch(e=>e);await wait(()=>exists(marker));const pid=Number(await readFile(marker));assert.equal((await p).executionStopped,true);assert.equal(await alive(pid),false);});
+  await point('entry exit still cleans ordinary background descendants',async()=>{const marker=join(root,'background');await node(`const c=require('child_process').spawn(process.execPath,['-e',${JSON.stringify(`process.on('SIGTERM',()=>{});require('fs').writeFileSync(${JSON.stringify(marker)},String(process.pid));setInterval(()=>{},100)`)}],{stdio:'inherit'});c.unref();setTimeout(()=>process.exit(0),100)`,opts());const pid=Number(await readFile(marker));assert.equal(await alive(pid),false);});
+  await point('same-directory unrelated process survives managed timeout',async()=>{const child=spawn(process.execPath,['-e','setInterval(()=>{},100)'],{cwd:root,stdio:'ignore'});try{await assert.rejects(node('setInterval(()=>{},100)',opts({cwd:root,timeout:100})));assert.equal(await alive(child.pid),true);}finally{child.kill('SIGKILL');await new Promise(r=>child.once('exit',r));}});
+  await point('one owned group survives cancellation of another',async()=>{const c=new AbortController(),a=opts({signal:c.signal}),b=opts();const pa=node('setInterval(()=>{},100)',a).catch(e=>e),pb=node('setInterval(()=>{},100)',b).catch(e=>e);await wait(()=>exists(a.receiptPath+'.go'));await wait(()=>exists(b.receiptPath+'.go'));c.abort();await pa;const r=JSON.parse(await readFile(b.receiptPath));assert.equal(await alive(r.pid),true);await stopRecordedExecution(b.receiptPath,b.executionId);await pb;});
+  await point('missing execution identity is rejected before spawn',async()=>assert.rejects(runOwnedCommand(process.execPath,[],{receiptPath:join(root,'invalid')}),/identity are required/));
+ } finally {await rm(root,{recursive:true,force:true});}
+});
