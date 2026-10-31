@@ -70,12 +70,15 @@ id, error and reclamation flag.
 
 Composer and InfraOptimizer are DSH agents, not Host helper functions:
 
-- `aleph_run_composer` starts an `aleph-composer` child. The child inspects
-  campaign status and capacity, then calls `aleph_compose_batch` to create a
-  strategy-mixed batch.
-- `aleph_run_infra` starts an `aleph-infra` child. The child calls
-  `aleph_infra_status`, `aleph_set_parallel` and `aleph_set_budget` to choose a
-  safe capacity and budget.
+- `aleph_run_composer` starts an `aleph-composer` child. Composer owns batch
+  orchestration, VRAM profiling, queue-head priority and backfill. It calls
+  `aleph_compose_batch` with explicit per-mission priorities and VRAM
+  estimates.
+- `aleph_run_infra` starts an `aleph-infra` child. InfraOptimizer owns
+  cross-task execution efficiency: cost profiling, evaluation caching,
+  evaluator environment/runtime settings, the cost budget vector and the
+  shared-hardware queue. It calls `aleph_infra_status`, `aleph_set_parallel`,
+  `aleph_set_budget_vector` and `aleph_set_runtime`.
 - Both runs are recorded in `campaign.agents` with role, child session id,
   status and summary, and shown in the console.
 
@@ -83,8 +86,10 @@ Composer and InfraOptimizer are DSH agents, not Host helper functions:
 
 `aleph_compose_batch` creates one batch record and several queued missions that
 share a brief but rotate through L0 to L3. A batch is visible in the console and
-on each mission as a `batch` id. The Composer agent supplies the brief; the tool
-handles queue composition and budget guarding.
+on each mission as a `batch` id. The Composer agent supplies the brief,
+priorities and per-mission VRAM estimates. `aleph_run_available` sorts queued
+missions by priority, then skips a mission that does not fit the remaining GPU
+memory and attempts the next one, so lower-priority work backfills free slots.
 
 ## InfraOptimizer
 
@@ -94,8 +99,12 @@ sets a concurrency limit (`ALEPH_MAX_PARALLEL` can override it).
 queued missions only while the number of running missions is below the limit,
 so a Composer batch cannot oversubscribe the host.
 
-This is capacity-aware scheduling, not a full cost model: budget is counted in
-missions, and there is no GPU-time or token accounting in this version.
+InfraOptimizer maintains a cumulative cost profile (GPU seconds, evaluation
+seconds, artifact bytes), a per-commit evaluation cache, and evaluator runtime
+settings (`OMP_NUM_THREADS`, timeout). Evaluations run through a serialized
+queue to avoid training/evaluation contention on the shared GPU. A budget
+vector can cap missions, GPU seconds and artifact bytes; token accounting is
+not yet available.
 
 ## Evaluation
 

@@ -39,6 +39,12 @@ const missionSchema = z.object({
   reclaimed: z.boolean(),
   batch: z.string().nullable().optional(),
   promoted: z.boolean().optional(),
+  priority: z.number().optional(),
+  vramMb: z.number().nullable().optional(),
+  startedAt: z.string().nullable().optional(),
+  gpuSeconds: z.number().nullable().optional(),
+  evalSeconds: z.number().nullable().optional(),
+  diskBytes: z.number().nullable().optional(),
 });
 
 const campaignSchema = z.object({
@@ -70,6 +76,8 @@ const campaignSchema = z.object({
     cpuCount: z.number().int(),
     gpuCount: z.number().int(),
     gpuNames: z.array(z.string()),
+    gpuMemoryTotalMb: z.number().nullable().optional(),
+    gpuMemoryFreeMb: z.number().nullable().optional(),
     maxParallel: z.number().int(),
     diskFreeBytes: z.number().nullable(),
     diskTotalBytes: z.number().nullable(),
@@ -83,6 +91,26 @@ const campaignSchema = z.object({
     summary: z.string().nullable(),
     updatedAt: z.string(),
   })).optional(),
+  runtime: z.object({
+    ompThreads: z.number().int(),
+    evalTimeoutMs: z.number().int(),
+  }).optional(),
+  cache: z.object({
+    hits: z.number().int(),
+    misses: z.number().int(),
+    entries: z.record(z.string(), z.number()),
+  }).optional(),
+  costProfile: z.object({
+    missions: z.number().int(),
+    gpuSeconds: z.number(),
+    evalSeconds: z.number(),
+    diskBytes: z.number(),
+  }).optional(),
+  budgetVector: z.object({
+    missions: z.number().nullable(),
+    gpuSeconds: z.number().nullable(),
+    diskBytes: z.number().nullable(),
+  }).optional(),
 });
 
 const campaignDomain = defineDomain({
@@ -130,6 +158,16 @@ function baseBranch(campaign) {
   return campaign.sotaBranch || 'initialize';
 }
 
+function strategyPriority(strategy) {
+  return { L3: 3, L2: 2, L1: 1, L0: 0 }[strategy] ?? 0;
+}
+
+function defaultVramMb(campaign) {
+  const total = campaign.infra?.gpuMemoryTotalMb;
+  if (typeof total !== 'number' || total <= 0) return null;
+  return Math.max(1024, Math.floor((total * 0.8) / Math.max(1, campaign.maxParallel ?? 1)));
+}
+
 function countStatuses(missions) {
   const counts = { queued: 0, running: 0, done: 0, failed: 0 };
   for (const mission of missions) counts[mission.status] = (counts[mission.status] ?? 0) + 1;
@@ -175,6 +213,10 @@ function snapshot(campaign) {
       infra: campaign.infra ?? null,
       batches: campaign.batches ?? [],
       agents: campaign.agents ?? [],
+      runtime: campaign.runtime ?? null,
+      cache: campaign.cache ?? { hits: 0, misses: 0, entries: {} },
+      cost_profile: campaign.costProfile ?? { missions: 0, gpuSeconds: 0, evalSeconds: 0, diskBytes: 0 },
+      budget_vector: campaign.budgetVector ?? { missions: null, gpuSeconds: null, diskBytes: null },
     },
     missions: campaign.missions.map((mission) => ({
       id: mission.id,
@@ -185,6 +227,10 @@ function snapshot(campaign) {
       description: mission.description,
       batch: mission.batch ?? null,
       promoted: mission.promoted === true,
+      priority: mission.priority ?? 0,
+      vram_mb: mission.vramMb ?? null,
+      gpu_seconds: mission.gpuSeconds ?? null,
+      eval_seconds: mission.evalSeconds ?? null,
       created_at: mission.createdAt,
       finished_at: mission.finishedAt,
     })),
@@ -234,10 +280,16 @@ async function pathExists(path) {
 async function detectInfra(workspace) {
   const cpuCount = Math.max(1, cpus().length);
   const gpuNames = [];
+  let gpuMemoryTotalMb = null;
+  let gpuMemoryFreeMb = null;
   try {
-    const result = await run('nvidia-smi', ['--query-gpu=name', '--format=csv,noheader'], { timeout: 5_000 });
+    const result = await run('nvidia-smi', ['--query-gpu=name,memory.total,memory.free', '--format=csv,noheader,nounits'], { timeout: 5_000 });
     for (const line of result.stdout.split(/\r?\n/)) {
-      if (line.trim()) gpuNames.push(line.trim());
+      const [name, total, free] = line.split(',').map((part) => part.trim());
+      if (!name) continue;
+      gpuNames.push(name);
+      if (Number.isFinite(Number(total)) && gpuMemoryTotalMb === null) gpuMemoryTotalMb = Number(total);
+      if (Number.isFinite(Number(free)) && gpuMemoryFreeMb === null) gpuMemoryFreeMb = Number(free);
     }
   } catch {
     // CPU-only hosts are the common case.
@@ -259,6 +311,8 @@ async function detectInfra(workspace) {
     cpuCount,
     gpuCount: gpuNames.length,
     gpuNames,
+    gpuMemoryTotalMb,
+    gpuMemoryFreeMb,
     maxParallel,
     diskFreeBytes,
     diskTotalBytes,
@@ -278,6 +332,7 @@ class AlephService {
     this.agentPresets = deps.agentPresets;
     this.writeChain = Promise.resolve();
     this.dispatchChain = Promise.resolve();
+    this.evalChain = Promise.resolve();
     this.activations = new Set();
   }
 
@@ -365,12 +420,16 @@ class AlephService {
       batches: [],
       infra,
       agents: [],
+      runtime: { ompThreads: 0, evalTimeoutMs: 180_000 },
+      cache: { hits: 0, misses: 0, entries: {} },
+      costProfile: { missions: 0, gpuSeconds: 0, evalSeconds: 0, diskBytes: 0 },
+      budgetVector: { missions: null, gpuSeconds: null, diskBytes: null },
     };
     await this.table.put(campaignId, campaign);
     return campaign;
   }
 
-  newMission(campaign, description, strategy, batch = null) {
+  newMission(campaign, description, strategy, batch = null, options = {}) {
     const branch = baseBranch(campaign);
     return {
       id: newId('m'),
@@ -388,6 +447,12 @@ class AlephService {
       finishedAt: null,
       reclaimed: false,
       batch,
+      priority: Number.isFinite(options.priority) ? options.priority : strategyPriority(strategy),
+      vramMb: Number.isFinite(options.vramMb) ? options.vramMb : defaultVramMb(campaign),
+      startedAt: null,
+      gpuSeconds: null,
+      evalSeconds: null,
+      diskBytes: null,
     };
   }
 
@@ -400,12 +465,13 @@ class AlephService {
     });
   }
 
-  async compose({ campaignId, brief, count = 2, strategies = null }) {
+  async compose({ campaignId, brief, count = 2, strategies = null, priorities = null, vramMb = null }) {
     const requested = Math.max(1, Math.min(4, Number(count) || 1));
     return this.mutate(campaignId, (campaign) => {
       const pending = campaign.missions.filter((mission) => mission.status === 'queued').length;
-      if (campaign.budget != null && campaign.spent + pending + requested > campaign.budget) {
-        throw new Error(`campaign budget ${campaign.budget} would be exceeded`);
+      const missionLimit = campaign.budgetVector?.missions ?? campaign.budget;
+      if (missionLimit != null && campaign.spent + pending + requested > missionLimit) {
+        throw new Error(`campaign mission budget ${missionLimit} would be exceeded`);
       }
       const batchId = newId('b');
       const chosen = Array.isArray(strategies) && strategies.length > 0
@@ -414,7 +480,13 @@ class AlephService {
       const missions = [];
       for (let index = 0; index < requested; index += 1) {
         const strategy = chosen[index % chosen.length] ?? sampleStrategy(campaign.exploration, Date.now() + index);
-        missions.push(this.newMission(campaign, `${brief} [${batchId} #${index + 1}]`, strategy, batchId));
+        const priority = Array.isArray(priorities) && Number.isFinite(Number(priorities[index]))
+          ? Number(priorities[index])
+          : strategyPriority(strategy);
+        const vram = Array.isArray(vramMb) && Number.isFinite(Number(vramMb[index]))
+          ? Number(vramMb[index])
+          : defaultVramMb(campaign);
+        missions.push(this.newMission(campaign, `${brief} [${batchId} #${index + 1}]`, strategy, batchId, { priority, vramMb: vram }));
       }
       const batch = { id: batchId, brief, count: requested, createdAt: now() };
       return {
@@ -423,6 +495,23 @@ class AlephService {
         batches: [...(campaign.batches ?? []), batch],
       };
     });
+  }
+
+  async setBudgetVector({ campaignId, missions = null, gpuSeconds = null, diskBytes = null }) {
+    const value = (input) => (input === null || input === undefined ? null : Math.max(0, Number(input)));
+    return this.mutate(campaignId, (campaign) => ({
+      ...campaign,
+      budgetVector: { missions: value(missions), gpuSeconds: value(gpuSeconds), diskBytes: value(diskBytes) },
+    }));
+  }
+
+  async setRuntime({ campaignId, ompThreads = 0, evalTimeoutMs = 180_000 }) {
+    const threads = Math.max(0, Math.floor(Number(ompThreads) || 0));
+    const timeout = Math.max(10_000, Math.floor(Number(evalTimeoutMs) || 180_000));
+    return this.mutate(campaignId, (campaign) => ({
+      ...campaign,
+      runtime: { ompThreads: threads, evalTimeoutMs: timeout },
+    }));
   }
 
   async setParallel({ campaignId, maxParallel }) {
@@ -449,16 +538,16 @@ class AlephService {
           `Campaign: ${campaign.id} "${campaign.title}" in ${campaign.workspace}.`,
           `Current SOTA: ${campaign.sotaBranch ?? 'none'} (${campaign.sotaScore}). Exploration: ${campaign.exploration}. Budget: ${campaign.budget ?? 'unset'}. Spent: ${campaign.spent}.`,
           'Inspect status and infrastructure, then compose the next batch of at most 4 missions with mixed L0 to L3 strategies.',
-          'Use aleph_status, aleph_infra_status and aleph_compose_batch. Do not start researchers and do not edit research files.',
-          'Return a short batch plan: mission count, strategy mix, rationale and the created batch id.',
+          'Use aleph_status, aleph_infra_status and aleph_compose_batch. Assign each mission a priority and a VRAM estimate; high-priority work runs first and lower-priority work backfills free GPU memory.',
+          'Do not start researchers and do not edit research files. Return a short batch plan: mission count, strategy mix, priorities, VRAM estimates, rationale and the created batch id.',
         ].join('\n')
       : [
           'You are InfraOptimizer, an AlephResearch resource agent.',
           `Campaign: ${campaign.id} "${campaign.title}" in ${campaign.workspace}.`,
           `Current concurrency limit: ${campaign.maxParallel ?? 1}. Budget: ${campaign.budget ?? 'unset'}. Spent: ${campaign.spent}.`,
-          'Inspect current CPU, GPU, memory and disk capacity with aleph_infra_status.',
-          'Choose a safe concurrency limit and, when useful, set a budget with aleph_set_parallel and aleph_set_budget. Do not start researchers.',
-          'Return a short capacity decision: concurrency, budget, bottleneck and rationale.',
+          'Inspect current CPU, GPU, memory, disk, cost profile, evaluation cache and runtime settings with aleph_infra_status.',
+          'Optimize across tasks: choose a safe concurrency limit, set a cost budget vector, and tune evaluation runtime with aleph_set_parallel, aleph_set_budget_vector, aleph_set_runtime.',
+          'Evaluation runs are serialized on the shared GPU; do not start researchers. Return a short efficiency decision: concurrency, budget, runtime, cache/cost observation, bottleneck and rationale.',
         ].join('\n');
     const abort = new AbortController();
     this.activations.add(abort);
@@ -561,22 +650,36 @@ class AlephService {
     for (;;) {
       const campaign = this.table.get(campaignId);
       if (!campaign) throw new Error(`campaign not found: ${campaignId}`);
-      const active = campaign.missions.filter((mission) => mission.status === 'running').length;
+      const running = campaign.missions.filter((mission) => mission.status === 'running');
       const limit = campaign.maxParallel ?? 1;
-      if (active >= limit) break;
-      if (!campaign.missions.some((mission) => mission.status === 'queued')) break;
-      results.push(await this.runNext({ campaignId, agent }));
+      if (running.length >= limit) break;
+      if (campaign.budgetVector?.gpuSeconds != null && (campaign.costProfile?.gpuSeconds ?? 0) >= campaign.budgetVector.gpuSeconds) break;
+      if (campaign.budgetVector?.diskBytes != null && (campaign.costProfile?.diskBytes ?? 0) >= campaign.budgetVector.diskBytes) break;
+      const gpuTotal = campaign.infra?.gpuMemoryTotalMb;
+      const usedVram = running.reduce((sum, mission) => sum + (mission.vramMb ?? defaultVramMb(campaign) ?? 0), 0);
+      const queued = campaign.missions
+        .filter((mission) => mission.status === 'queued')
+        .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0) || a.createdAt.localeCompare(b.createdAt));
+      const mission = queued.find((item) => {
+        if (typeof gpuTotal !== 'number' || gpuTotal <= 0) return true;
+        const need = item.vramMb ?? defaultVramMb(campaign) ?? 0;
+        return usedVram + need <= gpuTotal * 0.9;
+      });
+      if (!mission) break;
+      results.push(await this.runNext({ campaignId, agent, missionId: mission.id }));
     }
     return results;
   }
 
-  async _runNext({ campaignId, agent }) {
+  async _runNext({ campaignId, agent, missionId = null }) {
     if (!agent) throw new Error('a calling Agent is required to dispatch a researcher');
     if (!this.subagents) throw new Error('subagent service is unavailable');
     const campaign = this.table.get(campaignId);
     if (!campaign) throw new Error(`campaign not found: ${campaignId}`);
     this.assertWorkspace(agent, campaign.workspace);
-    const mission = campaign.missions.find((item) => item.status === 'queued');
+    const mission = missionId
+      ? campaign.missions.find((item) => item.id === missionId && item.status === 'queued')
+      : campaign.missions.find((item) => item.status === 'queued');
     if (!mission) throw new Error('no queued mission');
 
     const worktreeRoot = join(campaign.workspace, '.aleph', 'worktrees', campaign.id);
@@ -592,6 +695,7 @@ class AlephService {
       status: 'running',
       baseBranch: base,
       baseCommit,
+      startedAt: now(),
     })));
 
     const handoffPath = join(worktree, HANDOFF_FILE);
@@ -656,10 +760,33 @@ class AlephService {
       const message = `${mission.description}\n\nHandoff:\n${report}\n\nAleph-Mission: ${mission.id}\nAleph-Campaign: ${campaign.id}\nAleph-Strategy: ${mission.strategy}\nAleph-Base-Commit: ${baseCommit}`;
       await git(worktree, ['-c', 'user.name=AlephResearch', '-c', 'user.email=aleph@localhost', 'commit', '--allow-empty', '-m', message]);
       const commit = (await git(worktree, ['rev-parse', 'HEAD'])).stdout.trim();
-      const evaluation = await this.evaluate(campaign, worktree, commit);
-      const score = Number(evaluation.score);
-      if (!Number.isFinite(score)) throw new Error('evaluator did not return a numeric score');
+      const cache = campaign.cache
+        ? { hits: campaign.cache.hits, misses: campaign.cache.misses, entries: { ...campaign.cache.entries } }
+        : { hits: 0, misses: 0, entries: {} };
+      let score;
+      let evalSeconds = 0;
+      if (typeof cache.entries?.[commit] === 'number') {
+        score = cache.entries[commit];
+        cache.hits += 1;
+      } else {
+        const evalStarted = Date.now();
+        const evaluation = await this.serializeEval(() => this.evaluate(campaign, worktree, commit));
+        evalSeconds = (Date.now() - evalStarted) / 1000;
+        score = Number(evaluation.score);
+        if (!Number.isFinite(score)) throw new Error('evaluator did not return a numeric score');
+        cache.misses += 1;
+        cache.entries = { ...(cache.entries ?? {}), [commit]: score };
+      }
       const finishedAt = now();
+      const startedAt = mission.startedAt ? Date.parse(mission.startedAt) : Date.now();
+      const gpuSeconds = Math.max(0, (Date.now() - startedAt) / 1000);
+      let diskBytes = 0;
+      try {
+        const usage = await run('du', ['-sb', worktree], { timeout: 15_000 });
+        diskBytes = Number(usage.stdout.trim().split(/\s+/)[0]) || 0;
+      } catch {
+        diskBytes = 0;
+      }
       const branch = `exp/${campaign.id}/${mission.id}`;
       await git(campaign.researchRoot, ['branch', '-f', branch, commit]);
       let promoted = false;
@@ -667,11 +794,23 @@ class AlephService {
         promoted = score > current.sotaScore;
         let next = this.missionUpdate(current, missionId, (item) => ({
           ...item, status: 'done', score, commit, branch, finishedAt, error: null, reclaimed: true, promoted,
+          gpuSeconds, evalSeconds, diskBytes,
         }));
         if (promoted) {
           next = { ...next, sotaBranch: 'sota/main', sotaScore: score };
         }
-        return { ...next, spent: next.spent + 1 };
+        const priorCost = next.costProfile ?? { missions: 0, gpuSeconds: 0, evalSeconds: 0, diskBytes: 0 };
+        return {
+          ...next,
+          spent: next.spent + 1,
+          cache,
+          costProfile: {
+            missions: priorCost.missions + 1,
+            gpuSeconds: priorCost.gpuSeconds + gpuSeconds,
+            evalSeconds: priorCost.evalSeconds + evalSeconds,
+            diskBytes: priorCost.diskBytes + diskBytes,
+          },
+        };
       });
       if (promoted) {
         await git(campaign.researchRoot, ['branch', '-f', 'sota/main', commit]);
@@ -683,6 +822,12 @@ class AlephService {
     await cleanupWorktree(campaign, worktree);
   }
 
+  async serializeEval(operation) {
+    const queued = this.evalChain.then(operation, operation);
+    this.evalChain = queued.catch(() => undefined);
+    return queued;
+  }
+
   async evaluate(campaign, worktree, commit) {
     const env = {
       ALEPH_WORKSPACE: campaign.workspace,
@@ -691,10 +836,12 @@ class AlephService {
       ...(campaign.visibleData ? { ALEPH_VISIBLE_DATA: campaign.visibleData } : {}),
       ...(campaign.testsetPath ? { ALEPH_TESTSET: campaign.testsetPath } : {}),
       ...(campaign.submissionPython ? { ALEPH_SUBMISSION_PYTHON: campaign.submissionPython } : {}),
+      ...(campaign.runtime?.ompThreads ? { OMP_NUM_THREADS: String(campaign.runtime.ompThreads) } : {}),
     };
     const result = await run('bash', ['-lc', campaign.evalCommand], {
       cwd: campaign.workspace,
       env,
+      timeout: campaign.runtime?.evalTimeoutMs ?? 180_000,
     });
     const parsed = parseScore(result.stdout);
     if (!parsed) throw new Error('evaluator did not emit a JSON score');
@@ -817,12 +964,16 @@ export async function apply(ctx) {
         brief: { type: 'string', required: true, description: 'Shared research brief for the batch' },
         count: { type: 'integer', description: 'Batch size, 1 to 4' },
         strategies: { type: 'array', items: { type: 'string' }, description: 'Optional strategy order, e.g. L0, L3, L2' },
+        priorities: { type: 'array', items: { type: 'number' }, description: 'Optional per-mission priority; higher runs first' },
+        vram_mb: { type: 'array', items: { type: 'number' }, description: 'Optional per-mission VRAM estimate' },
       },
       async (args) => service.compose({
         campaignId: args.campaign_id,
         brief: args.brief,
         count: args.count ?? 2,
         strategies: args.strategies,
+        priorities: args.priorities,
+        vramMb: args.vram_mb,
       }),
     ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
@@ -849,6 +1000,36 @@ export async function apply(ctx) {
       campaignParameter,
       async (args, exec) => service.runAgent({ campaignId: args.campaign_id, role: 'infra', agent: exec.agent }),
     ), { when: ({ agent }) => isLeader(agent) }),
+    ctx.tools.register(tool(
+      'aleph_set_runtime',
+      'Tune evaluation runtime parameters selected by InfraOptimizer.',
+      {
+        ...campaignParameter,
+        omp_threads: { type: 'integer', description: 'OMP_NUM_THREADS for the evaluator; 0 uses the host default' },
+        eval_timeout_ms: { type: 'integer', description: 'Evaluator timeout in milliseconds' },
+      },
+      async (args) => service.setRuntime({
+        campaignId: args.campaign_id,
+        ompThreads: args.omp_threads ?? 0,
+        evalTimeoutMs: args.eval_timeout_ms ?? 180_000,
+      }),
+    ), { when: ({ agent }) => isAleph(agent) }),
+    ctx.tools.register(tool(
+      'aleph_set_budget_vector',
+      'Set the cost budget vector (missions, GPU seconds, disk bytes) chosen by InfraOptimizer.',
+      {
+        ...campaignParameter,
+        missions: { type: 'number', description: 'Mission count cap' },
+        gpu_seconds: { type: 'number', description: 'Cumulative GPU seconds cap' },
+        disk_bytes: { type: 'number', description: 'Cumulative artifact bytes cap' },
+      },
+      async (args) => service.setBudgetVector({
+        campaignId: args.campaign_id,
+        missions: args.missions ?? null,
+        gpuSeconds: args.gpu_seconds ?? null,
+        diskBytes: args.disk_bytes ?? null,
+      }),
+    ), { when: ({ agent }) => isAleph(agent) }),
     ctx.tools.register(tool(
       'aleph_set_parallel',
       'Set the campaign concurrency limit chosen by InfraOptimizer.',

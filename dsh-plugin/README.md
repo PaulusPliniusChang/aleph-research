@@ -26,11 +26,13 @@ from a source directory.
 | `aleph_status` | Read campaigns and missions from the storage domain. |
 | `aleph_enqueue_mission` | Queue one mission with an L0 to L3 strategy. |
 | `aleph_run_next` | Start the next queued researcher subagent. |
-| `aleph_compose_batch` | Compose a multi-mission batch with mixed strategies. |
+| `aleph_compose_batch` | Compose a multi-mission batch with mixed strategies, priorities and VRAM estimates. |
 | `aleph_run_available` | Dispatch queued missions up to the concurrency limit. |
 | `aleph_run_composer` | Start the Composer role agent. |
 | `aleph_run_infra` | Start the InfraOptimizer role agent. |
 | `aleph_set_parallel` | Set the concurrency limit chosen by InfraOptimizer. |
+| `aleph_set_runtime` | Set evaluator threads and timeout. |
+| `aleph_set_budget_vector` | Set mission, GPU-second and disk-byte caps. |
 | `aleph_infra_status` | Refresh CPU, GPU, memory, disk and concurrency capacity. |
 | `aleph_set_exploration` | Change the campaign exploration level. |
 | `aleph_set_budget` | Set or clear the campaign mission budget. |

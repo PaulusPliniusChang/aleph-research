@@ -12,9 +12,14 @@ a separate `~/.aleph` directory or an external daemon.
 - Leader tools: campaign lifecycle, single missions, Composer batches,
   parallel dispatch, InfraOptimizer capacity and exploration/budget controls.
 - Multi-agent execution: Composer and InfraOptimizer are separate DSH agents
-  with their own presets and child sessions. Composer batches mix L0 to L3
-  strategies; InfraOptimizer chooses concurrency and budget;
-  `aleph_run_available` dispatches researchers up to that limit.
+  with their own presets and child sessions.
+  - Composer owns batch orchestration, VRAM profiling, queue-head priority and
+    backfill.
+  - InfraOptimizer owns cost profiling, evaluation caching, evaluator
+    environment/runtime settings, the cost budget vector, and hardware
+    queueing.
+  - `aleph_run_available` dispatches by priority and fills free GPU memory with
+    lower-priority work.
 - Modes: `Aleph Research` for the Leader and `Aleph Researcher` for one mission.
 - Console: a read-only `Aleph` sidebar panel reading the Host API.
 - Persistence: the `aleph_research` domain opened through `ctx.storageDomain`.
